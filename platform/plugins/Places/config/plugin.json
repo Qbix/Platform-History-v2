@@ -45,6 +45,7 @@
 		},
 		"types": {
 			"Places/locations": {
+				"emoji": "🗺️",
 				"create": true,
 				"edit": true,
 				"defaults": {
@@ -53,6 +54,7 @@
 				}
 			},
 			"Places/location": {
+				"emoji": "📍",
 				"create": true,
 				"edit": true,
 				"messages": {
@@ -71,6 +73,7 @@
 				"participating": ["Places/participating"]
 			},
 			"Places/area": {
+				"emoji": "🏢",
 				"create": true,
 				"edit": true,
 				"messages": {
@@ -89,6 +92,7 @@
 				"participating": ["Places/participating"]
 			},
 			"Places/floor": {
+				"emoji": "🏗️",
 				"edit": true,
 				"defaults": {
 					"icon": "{{Places}}/img/icons/floor",
@@ -102,6 +106,7 @@
 				"participating": ["Places/participating"]
 			},
 			"Places/column": {
+				"emoji": "🏬",
 				"edit": true,
 				"defaults": {
 					"icon": "{{Places}}/img/icons/column",
@@ -115,6 +120,7 @@
 				"participating": ["Places/participating"]
 			},
 			"Places/nearby": {
+				"emoji": "🎯",
 				"defaults": {
 					"title": "Nearby Timeslot"
 				},
@@ -125,6 +131,7 @@
 				}
 			},
 			"Places/interest": {
+				"emoji": "💘",
 				"defaults": {
 					"title": "Nearby Interest"
 				},

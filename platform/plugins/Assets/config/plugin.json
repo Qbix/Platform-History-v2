@@ -248,6 +248,7 @@
 		},
 		"types": {
 			"Assets/credits": {
+				"emoji": "💳",
 				"create": false,
 				"edit": false,
 				"defaults": {
@@ -266,6 +267,7 @@
 				}
 			},
 			"Assets/plan": {
+				"emoji": "📊",
 				"create": true, 
 				"edit": true,
 				"canCreate": ["Users/admins", "Users/owners", "Assets/admins"],
@@ -277,6 +279,7 @@
 				}
 			},
 			"Assets/subscription": {
+				"emoji": "🔄",
 				"create": false, 
 				"edit": false,
 				"defaults": {
@@ -287,6 +290,7 @@
 				}
 			},
 			"Assets/product": {
+				"emoji": "🛍️",
 				"create": true, 
 				"edit": true,
 				"defaults": {
@@ -297,6 +301,7 @@
 				}
 			},
 			"Assets/service": {
+				"emoji": "🛠️",
 				"create": true,
 				"edit": true,
 				"defaults": {
@@ -307,6 +312,7 @@
 				}
 			},
 			"Assets/NFT": {
+				"emoji": "🎴",
 				"create": true,
 				"close": true,
 				"edit": true,
@@ -316,6 +322,7 @@
 				}
 			},
 			"Assets/NFT/series": {
+				"emoji": "🃏",
 				"create": true,
 				"close": true,
 				"edit": true,
@@ -325,6 +332,7 @@
 				}
 			},
 			"Assets/NFT/contract": {
+				"emoji": "📜",
 				"create": true,
 				"close": true,
 				"edit": true,
@@ -337,6 +345,7 @@
 				}
 			},
 			"Assets/NFT/pointer": {
+				"emoji": "↩",
 				"create": true,
 				"close": true,
 				"edit": true,
@@ -346,15 +355,7 @@
 				}
 			},
 			"Assets/NFT/collection": {
-				"create": true,
-				"close": true,
-				"edit": true,
-				"defaults": {
-					"title": "",
-					"icon": "Streams/category"
-				}
-			},
-			"Assets/collection/round": {
+				"emoji": "🗃️",
 				"create": true,
 				"close": true,
 				"edit": true,
@@ -364,6 +365,7 @@
 				}
 			},
 			"Assets/fundraise": {
+				"emoji": "💸",
 				"create": true,
 				"close": true,
 				"edit": ["content", "icon"],
@@ -373,6 +375,7 @@
 				}
 			},
 			"Assets/invoice": {
+				"emoji": "🧾",
 				"create": true, 
 				"edit": true,
 				"defaults": {

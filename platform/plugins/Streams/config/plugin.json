@@ -290,6 +290,7 @@
 				"participating": ["Streams/participating"]
 			},
 			"Streams/invited": {
+				"emoji": "💌",
 				"create": false,
 				"subscriptions": {
 					"filter": {
@@ -299,6 +300,7 @@
 				}
 			},
 			"Streams/mentioned": {
+				"emoji": "📧",
 				"create": false,
 				"subscriptions": {
 					"filter": {
@@ -314,6 +316,7 @@
 				}
 			},
 			"Streams/access": {
+				"emoji": "🔑",
 				"create": false,
 				"edit": false,
 				"defaults": {
@@ -321,6 +324,8 @@
 				}
 			},
 			"Streams/task": {
+				"emoji": "📌",
+				"create": "true",
 				"messages": {
 					"Streams/task/progress": {
 						"description": "Progress has been made",
@@ -352,6 +357,8 @@
 				"participating": ["Streams/participating/tasks"]
 			},
 			"Streams/tasks": {
+				"emoji": "📋",
+				"create": true,
 				"attributes": {
 					"completed": "double"
 				},
@@ -361,6 +368,7 @@
 				}
 			},
 			"Streams/question": {
+				"emoji": "❓",
 				"create": true,
 				"edit": true,
 				"defaults": {
@@ -370,6 +378,7 @@
 				}
 			},
 			"Streams/answer": {
+				"emoji": "❗",
 				"create": true,
 				"edit": false,
 				"defaults": {
@@ -382,6 +391,7 @@
 				}
 			},
 			"Streams/topic": {
+				"emoji": "#️⃣",
 				"create": true,
 				"edit": true,
 				"defaults": {
@@ -393,10 +403,12 @@
 				}
 			},
 			"Streams/text": {
+				"emoji": "✍️",
 				"create": true, 
 				"edit": true
 			},
 			"Streams/text/small": {
+				"emoji": "✏️",
 				"create": true,
 				"edit": true,
 				"messages": {
@@ -405,23 +417,24 @@
 					}
 				}
 			},
-			"Streams/text/medium": {"create": true, "edit": true},
-			"Streams/text/name": {"create": true, "edit": true},
-			"Streams/text/url": {"create": true, "edit": true},
-			"Streams/text/emailAddress": {"create": true, "edit": true},
-			"Streams/text/mobileNumber": {"create": true, "edit": true},
-			"Streams/date": {"create": true, "edit": true},
-			"Streams/number": {"create": true, "edit": true},
-			"Streams/xid/web3": {"create": true, "edit": true},
-			"Streams/enum/gender": {"create": true, "edit": true},
-			"Streams/enum/presence": {"create": true, "edit": true},
-			"Streams/number/timezone": {"create": true, "edit": true},
-			"Streams/date/height": {"create": true, "edit": true},
-			"Streams/date/birthday": {"create": true, "edit": true},
-			"Streams/number/age": {"create": true, "edit": true},
-			"Streams/text/affiliation": {"create": true, "edit": true},
-			"Streams/enum/dating": {"create": true, "edit": true},
+			"Streams/text/medium": {"emoji": "✏️", "create": true, "edit": true},
+			"Streams/text/name": {"emoji": "🏷️", "create": true, "edit": true},
+			"Streams/text/url": {"emoji": "🔗", "create": true, "edit": true},
+			"Streams/text/emailAddress": {"emoji": "📧", "create": true, "edit": true},
+			"Streams/text/mobileNumber": {"emoji": "📱", "create": true, "edit": true},
+			"Streams/date": {"emoji": "📆", "create": true, "edit": true},
+			"Streams/number": {"emoji": "🔢", "create": true, "edit": true},
+			"Streams/xid/web3": {"emoji": "🆔", "create": true, "edit": true},
+			"Streams/enum/gender": {"emoji": "🚺", "create": true, "edit": true},
+			"Streams/enum/presence": {"emoji": "👻", "create": true, "edit": true},
+			"Streams/number/timezone": {"emoji": "🌐", "create": true, "edit": true},
+			"Streams/height": {"emoji": "🪜", "create": true, "edit": true},
+			"Streams/date/birthday": {"emoji": "🎂", "create": true, "edit": true},
+			"Streams/number/age": {"emoji": "⏳", "create": true, "edit": true},
+			"Streams/text/affiliation": {"emoji": "🫶🏼", "create": true, "edit": true},
+			"Streams/enum/dating": {"emoji": "💍", "create": true, "edit": true},
 			"Streams/image": {
+				"emoji": "🖼️",
 				"create": true,
 				"edit": true,
 				"defaults": {
@@ -430,6 +443,7 @@
 				}
 			},
 			"Streams/images": {
+				"emoji": "🎞️",
 				"create": true,
 				"edit": true,
 				"defaults": { 
@@ -437,6 +451,7 @@
 				}
 			},
 			"Streams/album": {
+				"emoji": "📒",
 				"create": true,
 				"edit": true,
 				"defaults": {
@@ -445,6 +460,7 @@
 				}
 			},
 			"Streams/file": {
+				"emoji": "📄",
 				"create": true,
 				"edit": true,
 				"defaults": {
@@ -455,6 +471,7 @@
 				"updateIcon": true
 			},
 			"Streams/audio": {
+				"emoji": "🔊",
 				"create": true,
 				"edit": true,
 				"defaults": {
@@ -469,6 +486,7 @@
 				"updateTitle": true
 			},
 			"Streams/video": {
+				"emoji": "▶️",
 				"create": true,
 				"edit": true,
 				"defaults": {
@@ -483,6 +501,7 @@
 				"updateTitle": true
 			},
 			"Streams/pdf": {
+				"emoji": "📑",
 				"create": true,
 				"edit": true,
 				"defaults": {
@@ -496,6 +515,7 @@
 				"updateTitle": true
 			},
 			"Streams/live": {
+				"emoji": "🎦",
 				"create": true,
 				"edit": true,
 				"defaults": {
@@ -505,6 +525,7 @@
 				"updateTitle": true
 			},
 			"Streams/category": {
+				"emoji": "📁",
 				"create": true,
 				"edit": true,
 				"defaults": {
@@ -514,6 +535,7 @@
 				"see": ["relatedTo"]
 			},
 			"Streams/participating": {
+				"emoji": "🗣️",
 				"create": true,
 				"edit": true,
 				"defaults": {
@@ -522,6 +544,7 @@
 				}
 			},
 			"Streams/interest": {
+				"emoji": "💟",
 				"create": true,
 				"edit": true,
 				"defaults": {
@@ -530,6 +553,7 @@
 				}
 			},
 			"Streams/incoming": {
+				"emoji": "📥",
 				"create": true,
 				"messages": {
 					"Streams/incoming/message": {"post": true},
@@ -539,6 +563,7 @@
 				}
 			},
 			"Streams/chat": {
+				"emoji": "💬",
 				"create": true,
 				"edit": ["icon", "title", "content"],
 				"subscriptions": {
@@ -562,15 +587,18 @@
 				}
 			},
 			"Streams/greeting": {
+				"emoji": "👋",
 				"edit": true,
 				"defaults": {
 					"title": "Community Greeting"
 				}
 			},
 			"Streams/user/profile": {
+				"emoji": "👤",
 				"url": "{{baseUrl}}/profile/{{publisherId}}"
 			},
 			"Streams/external/post": {
+				"emoji": "🛸",
 				"defaults": {
 					"title": "External Post",
 					"icon": "Streams/external/post"

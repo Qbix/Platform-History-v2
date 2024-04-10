@@ -96,6 +96,7 @@
 				}
 			},
 			"Websites/metadata": {
+				"emoji": "🔎",
 				"create": true,
 				"canCreate": ["Websites/admins"],
 				"edit": true,
@@ -104,6 +105,7 @@
 				}
 			},
 			"Websites/article": {
+				"emoji": "📰 ",
 				"create": true,
 				"edit": true,
 				"defaults": {
@@ -115,6 +117,7 @@
 				"extend": ["Websites_Article"]
 			},
 			"Websites/advert/unit": {
+				"emoji": "🇦",
 				"create": true,
 				"edit": true,
 				"defaults": {
@@ -126,6 +129,7 @@
 				}
 			},
 			"Websites/advert/placement": {
+				"emoji": "🔲",
 				"create": true,
 				"edit": true,
 				"defaults": {
@@ -137,6 +141,7 @@
 				}
 			},
 			"Websites/advert/creative": {
+				"emoji": "✨",
 				"create": true,
 				"edit": true,
 				"defaults": {
@@ -148,6 +153,7 @@
 				}
 			},
 			"Websites/advert/campaign": {
+				"emoji": "📣",
 				"create": true,
 				"edit": true,
 				"defaults": {
@@ -159,6 +165,7 @@
 				}
 			},
 			"Websites/webpage": {
+				"emoji": "🌐",
 				"create": true, /* only PHP scrape method can create it */
 				"edit": ["title", "content"], /* cannot edit everything */
 				"participating": ["Websites/participating/webpages"],
