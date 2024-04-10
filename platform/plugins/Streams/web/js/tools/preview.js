@@ -377,8 +377,8 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 			var size = si.saveSizeName[si.showSize];
 			var attributes = options.attributes || fields.attributes;
 			attributes = (attributes && JSON.parse(attributes)) || {};
-			if (attributes.sizes
-			&& attributes.sizes[state.imagepicker.showSize]) {
+			if (attributes.sizes) {
+				// try to find the first size that's larger than showSize
 				for (size in attributes.sizes) {
 					var parts1 = attributes.sizes[size].toString().split('x');
 					var parts2 = si.showSize.toString().split('x');
@@ -388,6 +388,10 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 					 && parseInt(parts1[1]||0) >= parseInt(parts2[1]||0)) {
 						break;
 					}
+					// otherwise it will take the largest size
+					// because ECMA2015 spec has browsers iterate keys
+					// in the order the keys were defined,
+					// or in increasing numeric size for numeric keys
 				}
 			}
 			var file = (oss && (oss[sfi] || oss['']))

@@ -7,11 +7,13 @@ function Streams_invite_put () {
 		$request = Q::take($_REQUEST, array('relate', 'subpath'));
 		$request["relate"]["type"] = "Streams/invite/image";
 
+		$sizes = Q_Image::getSizes('Streams/invite/groupPhoto', $maxStretch, $defaultSize);
 		$stream = Streams::fetchOneOrCreate($publisherId, $publisherId, $streamName, array(
 			"type" => "Streams/image",
 			"fields" => array(
 				"title" => "Group Photo",
-				"icon" => "{{baseUrl}}/Q/uploads/Streams/".$request['subpath']
+				"icon" => "{{baseUrl}}/Q/uploads/Streams/".$request['subpath'],
+				"attributes" => compact("sizes")
 			),
 			"relate" => $request["relate"]
 		));
