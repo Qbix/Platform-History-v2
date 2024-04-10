@@ -379,19 +379,17 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 			attributes = (attributes && JSON.parse(attributes)) || {};
 			if (attributes.sizes) {
 				// try to find the first size that's larger than showSize
-				for (size in attributes.sizes) {
+				for (var i; i<attributes.sizes.length; ++i) {
+					size = attributes.sizes[k];
 					var parts1 = attributes.sizes[size].toString().split('x');
 					var parts2 = si.showSize.toString().split('x');
 					if (parts1.length === 1) parts1[1] = parts1[0];
-					if (parts2.length === 2) parts2[1] = parts2[0];
+					if (parts2.length === 1) parts2[1] = parts2[0];
 					if (parseInt(parts1[0]||0) >= parseInt(parts2[0]||0)
 					 && parseInt(parts1[1]||0) >= parseInt(parts2[1]||0)) {
 						break;
 					}
-					// otherwise it will take the largest size
-					// because ECMA2015 spec has browsers iterate keys
-					// in the order the keys were defined,
-					// or in increasing numeric size for numeric keys
+					// otherwise it will leave size = the largest size
 				}
 			}
 			var file = (oss && (oss[sfi] || oss['']))
