@@ -1,6 +1,6 @@
 module.exports = function (options, callback) {
 	var Q = require('Q');
-	var p, f = options.fields;
+	var f = options.fields;
 	f.streamTitleEmojiPrefix = Q.Config.get([
 		'Streams', 'types', f.stream.fields.type, 'emoji'
 	], null) || '';

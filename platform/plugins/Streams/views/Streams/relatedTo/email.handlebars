@@ -1,6 +1,6 @@
 <html>
 {{#if (call 'message.getInstruction' 'toUrl')}}
-	<h2><a href="{{toUrl}}">{{stream.fields.title}}</a></h2>
+	<h2>{{streamTitleEmojiPrefix}}<a href="{{toUrl}}">{{stream.fields.title}}</a></h2>
 {{else}}
 	<h2>{{streamTitleEmojiPrefix}}{{stream.fields.title}}</h2>
 {{/if}}
@@ -8,7 +8,7 @@
 {{interpolate messages.text.relatedTo.hasANew}}:
 </div>
 {{#if (call 'message.getInstruction' 'fromUrl')}}
-	<h2><a href="{{fromUrl}}">{{fromTitle}}</a></h2>
+	<h2>{{fromTitleEmojiPrefix}}<a href="{{fromUrl}}">{{fromTitle}}</a></h2>
 {{else}}
 	<h2>{{fromTitleEmojiPrefix}}{{fromTitle}}</h2>
 {{/if}}
