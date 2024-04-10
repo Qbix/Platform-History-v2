@@ -380,7 +380,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 			if (attributes.sizes) {
 				// try to find the first size that's larger than showSize
 				for (var i = 0; i<attributes.sizes.length; ++i) {
-					size = attributes.sizes[k];
+					size = attributes.sizes[i];
 					var parts1 = attributes.sizes[size].toString().split('x');
 					var parts2 = si.showSize.toString().split('x');
 					if (parts1.length === 1) parts1[1] = parts1[0];
