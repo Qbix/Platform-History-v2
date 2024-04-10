@@ -24,12 +24,9 @@ function Streams_after_Q_image_save($params)
 	$stream->icon = Q_Valid::url($url) ? $url : '{{baseUrl}}/'.$url;
 
 	if (is_array($save) && !empty($save)) {
-		$sizes = array();
-		foreach ($save as $k => $v) {
-			$sizes[] = "$k";
-		}
-		sort($sizes);
-		$stream->setAttribute('sizes', $sizes);
+		$sizes = $save;
+		Q_Utils::sortKeysNumerically($sizes);
+		$stream->setAttribute('sizes', array_keys($sizes));
 	}
 
 	if (empty(Streams::$beingSavedQuery)) {
