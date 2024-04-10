@@ -3668,7 +3668,6 @@ Q.onLayout = function (element) {
 }
 Q.onLayout.debounce = 100;
 Q.onLayout().set(function () {
-	_detectOrientation.apply(this, arguments);
 	Q.Masks.update();
 }, 'Q');
 
@@ -7377,6 +7376,7 @@ Q.init = function _Q_init(options) {
 	Q.loadUrl.options.slotNames = Q.info.slotNames;
 	_startCachingWithServiceWorker();
 	_detectOrientation();
+	Q.addEventListener(root, 'orientationchange', _detectOrientation);
 	Q.addEventListener(root, 'unload', Q.onUnload.handle);
 	Q.addEventListener(root, 'online', Q.onOnline.handle);
 	Q.addEventListener(root, 'offline', Q.onOffline.handle);
