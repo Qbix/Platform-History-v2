@@ -136,7 +136,8 @@ Q.Tool.define("Streams/access", function(options) {
 		var labelAccessDiv = $('<div class="Streams_access_for_item"/>');
 		if (userId !== "") {
 			var label = state.labels[contactLabel];
-			var icon = $('<img />').attr('src', avatar.iconUrl(true)).css('width', 20)
+			var src = Q.interpolateUrl(state.icons[contactLabel]);
+			var icon = $('<img />').attr('src', src).css('width', 20)
 
 			labelAccessDiv.append(
 				$('<div class="Streams_access_for_text"/>')
@@ -150,9 +151,8 @@ Q.Tool.define("Streams/access", function(options) {
 
 		} else {
 			var label = state.labels[contactLabel];
-			var icon = $('<img />').attr('src', 
-				Q.Streams.iconUrl(state.icons[contactLabel], true)
-			);
+			var src = Q.interpolateUrl(state.icons[contactLabel]);
+			var icon = $('<img />').attr('src', src);
 			labelAccessDiv.append(
 				$('<div class="Streams_access_for_text"/>')
 				.append($('<div class="Streams_access_for_icon"/>').append(icon))

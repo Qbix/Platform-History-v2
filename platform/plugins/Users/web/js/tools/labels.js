@@ -296,14 +296,10 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                                 var label = $item.data('label');
                                 var title = $inputTitle.val();
                                 var iconUrlBeforeEdit = $item.data('icon');
-                                var iconUrl;
+                                var iconUrl = subpath
+                                    ? '{{baseUrl}}/Q/uploads/Users/'+subpath
+                                    : iconUrlBeforeEdit;
                                 var description = '';
-
-                                if (subpath) {
-                                    iconUrl = '{{baseUrl}}/Q/uploads/Users/'+subpath;
-                                } else {
-                                    iconUrl = iconUrlBeforeEdit;
-                                }
                                 
                                 // web2 update callback
                                 function _labelUpdate(label, title, iconUrl, description) {

@@ -68,7 +68,7 @@ function Streams_access_tool($options)
 	$icons = array();
 	foreach ($labelRows as $label => $row) {
 		$labels[$label] = $row->title;
-		$icons[$label] = "labels/$label";
+		$icons[$label] = $row->icon;
 	}
 	
 	$userId_list = array();
