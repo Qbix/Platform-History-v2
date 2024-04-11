@@ -291,7 +291,8 @@ class Q_Valid
 	 * @static
 	 * @param {boolean} [$throwIfInvalid=false] If true, throws an exception if the nonce is invalid.
 	 * @param {array} [$data=$_REQUEST] The data to check the signature of
-	 * @param {array|string} [$fieldKeys] Path of the key under which signature is stored
+	 * @param {array|string} [$fieldKeys] Path of the key under which signature is stored.
+	 *   You can pass a string here instead, which would be the actual signature to test.
 	 * @param {string} [$secret] A different secret to use for generating the signature
 	 * @return {boolean} Whether the phone number seems like it could be valid
 	 * @throws {Q_Exception_FailedValidation}
@@ -381,24 +382,35 @@ class Q_Valid
 	 * and must also be signed with Q_Utils::sign() or equivalent implementation.
 	 * @method capability
 	 * @static
+	 * @param {Q_Capability|array} $capability
 	 * @param {array|string} $permissions
 	 * @return {bool}
 	 */
 	static function capability($capability, $permissions)
 	{
 		$now = time();
-		if (!$capability || !Q_Valid::signature($capability)
-		|| empty(Q::ifset($capability, 'permissions', array()))
+		$cp = Q::ifset($capability, 'permissions', array());
+		if (!$capability
+		|| !Q_Valid::signature(false, $capability)
+		|| empty($cp)
 		|| Q::ifset($capability, 'startTime', 0) > $now
 		|| Q::ifset($capability, 'endTime', 33226225269) < $now) {
 			return false;
 		}
 		if (is_string($permissions)) {
-			$permissions = [$permissions];
+			$permissions = array($permissions);
 		}
-		$cp = Q::ifset($capability, 'permissions', array());
+		$config = Q_Config::get('Q', 'capability', 'permissions', array());
+		$search = array();
+		foreach ($cp as $p) {
+			$search[$p] = true;
+			if (!empty($config[$p])) {
+				// add also long-form permission name
+				$search[$config[$p]] = true;
+			}
+		}
 		foreach ($permissions as $p) {
-			if (!in_array($p, $cp)) {
+			if (empty($search[$p])) {
 				return false;
 			}
 		}

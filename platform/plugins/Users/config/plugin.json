@@ -144,6 +144,11 @@
 					"Users/admins": 100
 				}
 			}
+		},
+		"capability": {
+			"permissions": {
+				"u": "Users/socket"
+			}
 		}
 	},
 	"Users": {

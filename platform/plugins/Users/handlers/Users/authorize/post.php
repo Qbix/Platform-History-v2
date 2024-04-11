@@ -28,7 +28,7 @@ function Users_authorize_post($params = array())
 	
 	$platform = Q_Request::platform();
 	list($appId, $info) = Users::appInfo($platform, $appId);
-	$scope = implode(' ', Users_OAuth::requestedScope($appId, true));
+	$permissions = implode(' ', Users_OAuth::requestedScope($appId, true));
 	
 	$client = Users_User::fetch($appId, true);
 	$paths = Q::ifset($info, 'paths', false);
@@ -54,7 +54,7 @@ function Users_authorize_post($params = array())
 		$sessionFields['deviceId'] = $_REQUEST['deviceId'];
 	}
 	$currentTimestamp = Users::db()->getCurrentTimestamp();
-	$sessionFields['scope'] = $scope;
+	$sessionFields['permissions'] = $permissions;
 	$accessToken = Users_Session::copyToNewSession($sessionFields, $duration);
 	$externalTo->accessToken = $accessToken; // the session token
 	$externalTo->expires = $currentTimestamp + $duration; // session actually expires after $duration seconds of inactivity

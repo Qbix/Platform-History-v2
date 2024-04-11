@@ -311,6 +311,9 @@
 		"urls": {
 			"ignore": ["Q/urls", "Q/uploads"]
 		},
+		"capability": {
+			"permissions": {}
+		},
 		"composer": {
 			"autoload": "*"
 		}

@@ -125,8 +125,10 @@ Utils.validateRequest = function (req, res, next) {
  */
 Utils.validateCapability = function (capability, permissions) {
 	var now = Date.now() / 1000;
-	if (!capability || !Utils.validate(capability)
-	|| Q.isEmpty(capability.permissions)
+	var cp = capability.permissions || [];
+	if (!capability
+	|| !Utils.validate(capability)
+	|| Q.isEmpty(cp)
 	|| capability.startTime > now
 	|| capability.endTime < now) {
 		return false;
@@ -134,8 +136,17 @@ Utils.validateCapability = function (capability, permissions) {
 	if (typeof permissions === 'string') {
 		permissions = [permissions];
 	}
+	var config = Q.Config.get(['Q', 'capability', 'permissions'], []);
+	var search = {};
+	cp.forEach(function (p) {
+		search[p] = true;
+		if (config[p]) {
+			// add also long-form permission name
+			search[config[p]] = true;
+		}
+	});
 	for (var i=0, l=permissions.length; i<l; ++i) {
-		if (capability.permissions.indexOf(permissions[i]) < 0) {
+		if (!cp[permissions[i]]) {
 			return false;
 		}
 	}

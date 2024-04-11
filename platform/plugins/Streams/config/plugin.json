@@ -118,6 +118,11 @@
 		},
 		"urls": {
 			"skip": ["Q/plugins/Streams/img/icons/Streams/interest"]
+		},
+		"capability": {
+			"permissions": {
+				"s": "Streams/observe"
+			}
 		}
 	},
 	"Users": {

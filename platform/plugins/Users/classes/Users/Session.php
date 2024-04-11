@@ -146,7 +146,7 @@ class Users_Session extends Base_Users_Session
 	 * @method copyToNewSession
 	 * @static
 	 * @param {array} $sessionFields Pass an array with keys such as
-	 *   "platform", "appId", "version", "deviceId", "formFactor" and "scope"
+	 *   "platform", "appId", "version", "deviceId", "formFactor" and "permissions"
 	 *   and they will go into the session data under the "Q" key
 	 * @param {string|integer} [$duration='year'] The key in the Q/session/durations config field
 	 *   or number of seconds. Pass 0 to expire at the end of browser session.
