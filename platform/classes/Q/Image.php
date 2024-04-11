@@ -36,8 +36,9 @@ class Q_Image
 	 * @param {string} $type The type of image
 	 * @param {number} [$maxStretch=null] Can pass reference to a variable that will be filled
 	 *   with a number from the config, or 1 if nothing is found
-	 * @param {number} [$defaultSize=null] Set to default size from config
-	 * @return {array} The sizes, sorted by key (e.g. "30" comes before "20x80")
+	 * @param {number} [$defaultSize=null] Can pass reference to variable that will be filled
+	 *   with the default size from config
+	 * @return {array} The sizes, sorted numerically by key (e.g. "30" comes before "200x80")
 	 * @throws {Q_Exception_MissingConfig} if the config field is missing.
 	 */
 	static function getSizes($type, &$maxStretch = null, &$defaultSize = null)

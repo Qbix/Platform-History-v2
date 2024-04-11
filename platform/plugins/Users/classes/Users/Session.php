@@ -146,7 +146,8 @@ class Users_Session extends Base_Users_Session
 	 * @method copyToNewSession
 	 * @static
 	 * @param {array} $sessionFields Pass an array with keys such as
-	 *   "platform", "appId", "version", "deviceId", "formFactor"
+	 *   "platform", "appId", "version", "deviceId", "formFactor" and "scope"
+	 *   and they will go into the session data under the "Users" key
 	 * @param {string|integer} [$duration='year'] The key in the Q/session/durations config field
 	 *   or number of seconds. Pass 0 to expire at the end of browser session.
 	 * @param {string} [$sessionId] Pass an existing valid (signed) sessionId here
@@ -163,10 +164,10 @@ class Users_Session extends Base_Users_Session
 			? Q_Config::expect('Q', 'session', 'durations', $duration)
 			: $duration;
 
-		$arr = isset($_SESSION['Q']) ? $_SESSION['Q'] : null;
+		$arr = isset($_SESSION['Users']) ? $_SESSION['Users'] : null;
 		if (isset($arr)) {
 			$fields = Q_Config::get('Q', 'session', 'userAgentInfo', array());
-			$_SESSION['Q'] = Q::take($sessionFields, $fields, $arr);
+			$_SESSION['Users'] = Q::take($sessionFields, $fields, $arr);
 		}
 		$_SESSION['Q']['fromSessionId'] = $id;
 

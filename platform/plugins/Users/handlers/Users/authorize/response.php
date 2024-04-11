@@ -61,6 +61,7 @@ function Users_authorize_response()
 	}
 
 	if ($externalTo and $externalTo->wasRetrieved()) {
+		$currentTimestamp = Users::db()->getCurrentTimestamp();
 		// User is logged in and already has a token for this client_id and state
 		$p = array(
 			'Q.Users.platform' => $platform,
@@ -68,7 +69,7 @@ function Users_authorize_response()
 			'response_type' => $response_type,
 			'token_type' => $token_type,
 			'access_token' => $externalTo->accessToken,
-			'expires_in' => $externalTo->expires,
+			'expires_in' => $externalTo->expires - $currentTimestamp,
 			'scope' => implode(' ', $scope),
 			'state' => $state
 		);

@@ -53,9 +53,11 @@ function Users_authorize_post($params = array())
 	if (isset($_REQUEST['deviceId'])) {
 		$sessionFields['deviceId'] = $_REQUEST['deviceId'];
 	}
+	$currentTimestamp = Users::db()->getCurrentTimestamp();
+	$sessionFields['scope'] = $scope;
 	$accessToken = Users_Session::copyToNewSession($sessionFields, $duration);
-	$externalTo->$accessToken = $accessToken; // the session token
-	$externalTo->token_expires_seconds = $duration; // session actually expires after $duration seconds of inactivity
+	$externalTo->accessToken = $accessToken; // the session token
+	$externalTo->expires = $currentTimestamp + $duration; // session actually expires after $duration seconds of inactivity
 	$externalTo->save();
 	
 	Q::event('Users/authorize/success', @compact('externalTo', 'duration'), 'after');
