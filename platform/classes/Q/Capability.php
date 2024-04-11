@@ -59,8 +59,17 @@ class Q_Capability
 	}
 
 	function __toString() {
+		$p = implode('+', $this->permissions);
+		$startTime = $this->startTime ? $this->startTime : '';
+		$endTime = $this->endTime ? $this->endTime : '';
+		$core = "$p,$startTime,$endTime";
+		$data = Q_Utils::serialize($this->data);
 		$arr = $this->exportArray();
-		// "uv,120398907,123980989,z09098z0c98z9c0z283947234"
+		$sf = Q_Config::get('Q', 'internal', 'sigField', 'sig');
+		$sig = $arr["Q.$sf"];
+		$core = str_replace(";", "\;", $core);
+		$data = str_replace(";", "\;", $data);
+		return "$core;$data;$sig";
 	}
 
 	private function _permissions($permission) {
@@ -68,7 +77,7 @@ class Q_Capability
 		$permissions = is_array($permission)
 			? $permission
 			: array($permission);
-		foreach ($permission as $i => $p) {
+		foreach ($permissions as $i => $p) {
 			$k = array_search($p, $config);
 			if ($k !== false) {
 				$permissions[$i] = $k;
