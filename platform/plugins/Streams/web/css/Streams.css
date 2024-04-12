@@ -242,6 +242,8 @@
 
 .Streams_participants_tool .Users_avatar_icon_blank {
 	box-shadow: none;
+	border-radius: 50%;
+    border: 1px dashed rgba(100, 100, 100, 0.2);
 }
 
 .Streams_participants_tool .Streams_participants_summary {
