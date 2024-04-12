@@ -82,7 +82,10 @@ Q.Tool.define("Q/tabs", function(options) {
 	}, 100);
 	Q.handle(state.onActivate, tool, [state.tab, tool.getName(state.tab)]);
 
-	tool.originalWindowThemeColor = tool.originalWindowThemeColor || Q.Color.getWindowTheme();
+	Q.addScript('{{Q}}/js/Color.js', function () {
+		// NOTE: if someone else changes color in the meantime, we still remember this one:
+		tool.originalWindowThemeColor = tool.originalWindowThemeColor || Q.Color.getWindowTheme();
+	});
 },
 
 {
@@ -444,7 +447,6 @@ Q.Tool.define("Q/tabs", function(options) {
 
 		var color = Q.getObject(['windowThemeColors', state.tabName], state);
 		Q.addScript('{{Q}}/js/Color.js', function () {
-			// NOTE: if someone else changes color in the meantime, we still remember this one:
 			Q.Color.setWindowTheme(color || tool.originalWindowThemeColor);
 		});
 	},
