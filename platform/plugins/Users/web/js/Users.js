@@ -192,16 +192,18 @@
 
 		function _init() {
 			if (!Users.init.facebook.completed[appId] && platformAppId) {
-				FB.init(Q.extend({
-					version: 'v8.0',
-					status: true,
-					cookie: true,
-					oauth: true,
-					xfbml: true
-				}, Users.init.facebook.options, options, {
-					appId: platformAppId
-				}));
-				Users.init.facebook.onInit.handle(Users, window.FB, [appId]);
+				if (window.FB) {
+					FB.init(Q.extend({
+						version: 'v8.0',
+						status: true,
+						cookie: true,
+						oauth: true,
+						xfbml: true
+					}, Users.init.facebook.options, options, {
+						appId: platformAppId
+					}));
+					Users.init.facebook.onInit.handle(Users, window.FB, [appId]);	
+				}
 			}
 			Users.init.facebook.completed[appId] = true;
 			Q.handle(callback);
@@ -1057,7 +1059,7 @@
 	 * @param {Number|false} [size=40] The last part after the slash, such as "50.png" or "50". Setting it to false skips appending "/size"
 	 * @return {String} the url
 	 */
-	Lp.iconUrl = function Users_User_iconUrl(size) {
+	Lp.iconUrl = function Users_Label_iconUrl(size) {
 		return Users.iconUrl(this.icon.interpolate({
 			userId: this.userId.splitId()
 		}), size);
