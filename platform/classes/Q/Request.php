@@ -565,8 +565,7 @@ class Q_Request
 	 *  Set to true, to ignore Q_formFactor cookie
 	 * @return {boolean}
 	 */
-	static function isMobile($ignore
-	 = false)
+	static function isMobile($ignoreCookie = false)
 	{
 		static $result;
 		if (isset($result)) {
