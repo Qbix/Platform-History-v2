@@ -37,6 +37,13 @@
 				"mobile": "MyApp/layout/mobile.php",
 				"sidebar": true
 			},
+			"tabs": {
+				"mobile": {
+					"windowThemeColors": {
+						
+					}
+				} 
+			},
 			"cacheBaseUrl": "https://myapp.intercept"
 		},
 		"exception": {
