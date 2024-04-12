@@ -45,6 +45,7 @@ function Q_before_Q_responseExtras()
 				'slotNames' => Q_Config::get("Q", "response", "slotNames", array(
 					'content', 'dashboard', 'title', 'notices'
 				)),
+				'timestamp' => time()
 			)
 		);
 	}
