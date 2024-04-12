@@ -114,5 +114,6 @@
 
 <?php Q_Response::addScript('{{Q}}/js/Q.js', 'Q'); ?>
 <?php Q_Response::setScriptData('Q.plugins.Users.pages.activate', compact("salt_json", "verb_ue", "noun_ue")); ?>
+<?php Q_Response::addScript('{{Users}}/js/pages/activate.js') ?>
 
 </div>
