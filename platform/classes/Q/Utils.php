@@ -73,7 +73,7 @@ class Q_Utils
 
 	/**
 	 * Encodes some data in base64
-	 * @method encodeToken
+	 * @method toBase64
 	 * @static
 	 * @param {array|string} $data
 	 * @return {string}
@@ -89,6 +89,46 @@ class Q_Utils
 			array('zz', 'za', 'zb', 'zc'),
 			$data
 		);
+	}
+
+	/**
+	 * Decodes some data from base64
+	 * @method fromBase64
+	 * @static
+	 * @param {array|string} $encoded
+	 * @return {string}
+	 */
+	static function fromBase64($encoded)
+	{
+		if (!$encoded) {
+			return '';
+		}
+		$result = '';
+		$len = strlen($encoded);
+		$i = 0;
+		$replacements = array(
+			'z' => 'z',
+			'a' => '+',
+			'b' => '/',
+			'c' => '='
+		);
+		while ($i < $len-1) {
+			$r = $encoded[$i];
+			$c1 = $encoded[$i];
+			++$i;
+			if ($c1 == 'z') {
+				$c2 = $encoded[$i];
+				if (isset($replacements[$c2])) {
+					$r = $replacements[$c2];
+					++$i;
+				}
+			}
+			$result .= $r;
+		}
+		if ($i < $len) {
+			$result .= $encoded[$i];
+		}
+		return base64_decode($result);
 	}
 
 	/**
@@ -179,46 +219,6 @@ class Q_Utils
 		$last = substr($hex, -1);
 		return bcadd(bcmul(16, self::hex2dec($remain)), hexdec($last));
 	 }
-	
-	/**
-	 * Decodes some data from base64
-	 * @method encodeToken
-	 * @static
-	 * @param {array|string} $encoded
-	 * @return {string}
-	 */
-	static function fromBase64($encoded)
-	{
-		if (!$encoded) {
-			return '';
-		}
-		$result = '';
-		$len = strlen($encoded);
-		$i = 0;
-		$replacements = array(
-			'z' => 'z',
-			'a' => '+',
-			'b' => '/',
-			'c' => '='
-		);
-		while ($i < $len-1) {
-			$r = $encoded[$i];
-			$c1 = $encoded[$i];
-			++$i;
-			if ($c1 == 'z') {
-				$c2 = $encoded[$i];
-				if (isset($replacements[$c2])) {
-					$r = $replacements[$c2];
-					++$i;
-				}
-			}
-			$result .= $r;
-		}
-		if ($i < $len) {
-			$result .= $encoded[$i];
-		}
-		return base64_decode($result);
-	}
 
 	static function urlencodeNonAscii($text) {
 		$arr = preg_split('//u', $text, -1, PREG_SPLIT_NO_EMPTY);
