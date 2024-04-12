@@ -10,11 +10,17 @@ class Q_Capability
 	 * @class Q_Capability
 	 * @constructor
 	 * @param {array} $permissions Array of strings
-	 * @param {integer} $startTime a timestamp
-	 * @param {integer} $endTime a timestamp
+	 * @param {array} [$data=array()] 
+	 * @param {integer} [$startTime=null] a timestamp
+	 * @param {integer} [$endTime=null] a timestamp
 	 */
-	function __construct($permissions, $startTime, $endTime)
-	{
+	function __construct(
+		$permissions, 
+		$data = array(), 
+		$startTime = null, 
+		$endTime = null
+	) {
+		$permissions = self::_permissions($permissions);
 		$this->permissions = $permissions;
 		$this->startTime = $startTime;
 		$this->endTime = $endTime;
@@ -26,6 +32,7 @@ class Q_Capability
 		$this->permissions = array_unique(
 			array_merge($this->permissions, $permissions)
 		);
+		sort($this->permissions);
 		return $this;
 	}
 	
@@ -33,6 +40,7 @@ class Q_Capability
 	{
 		$permissions = self::_permissions($permission);
 		$this->permissions = array_diff($this->permissions, array($permission));
+		sort($this->permissions);
 	}
 
 	function validate($permissions)
@@ -47,15 +55,12 @@ class Q_Capability
 	
 	function exportArray()
 	{
-		$permissions = array();
-		$arr = array('permissions' => $this->permissions);
-		if (isset($this->startTime)) {
-			$arr['startTime'] = $this->startTime;
-		}
-		if (isset($this->endTime)) {
-			$arr['endTime'] = $this->endTime;
-		}
-		return Q_Utils::sign(array_merge($arr, $this->data));
+		return Q_Utils::sign($this->_toArray());
+	}
+
+	function signature()
+	{
+		return Q_Utils::signature($this->_toArray());
 	}
 
 	function __toString() {
@@ -72,7 +77,20 @@ class Q_Capability
 		return "$core;$data;$sig";
 	}
 
-	private function _permissions($permission) {
+	private function _toArray()
+	{
+		$permissions = array();
+		$arr = array('permissions' => $this->permissions);
+		if (isset($this->startTime)) {
+			$arr['startTime'] = $this->startTime;
+		}
+		if (isset($this->endTime)) {
+			$arr['endTime'] = $this->endTime;
+		}
+		return array_merge($arr, $this->data);
+	}
+
+	private static function _permissions($permission) {
 		$config = Q_Config::get('Q', 'capability', 'permissions', array());
 		$permissions = is_array($permission)
 			? $permission

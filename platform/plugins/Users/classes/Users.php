@@ -2095,7 +2095,7 @@ abstract class Users extends Base_Users
 		if (!isset($c)) {
 			$duration = Q_Config::expect('Users', 'capability', 'duration');
 			$time = floor(Q::millisecondsStarted() / 1000);
-			$c = new Q_Capability(array(), $time, $time + $duration);
+			$c = new Q_Capability(array(), array(), $time, $time + $duration);
 		}
 		return $c;
 	}
