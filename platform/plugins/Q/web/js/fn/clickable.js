@@ -89,8 +89,8 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 			$this[0].preventSelections(true);
 		}
 		// var rect = $this[0].getBoundingClientRect();
-		var bw = parseInt($this.css('border-left-width')) + parseInt($($0).css('border-right-width'));
-		var bh = parseInt($this.css('border-top-width')) + parseInt($($0).css('border-bottom-width'));
+		var bw = parseInt($this.css('border-left-width')) + parseInt($this.css('border-right-width'));
+		var bh = parseInt($this.css('border-top-width')) + parseInt($this.css('border-bottom-width'));
 		var csw = Math.ceil($this[0].offsetWidth + bw);
 		var csh = Math.ceil($this[0].offsetHeight + bh);
 		// $this.css('height', $this.height()+'px');
@@ -242,8 +242,8 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 					return;
 				}
 				$stretcher.removeClass('Q_clickable_sized');
-				var bw = parseInt($this.css('border-left-width')) + parseInt($($0).css('border-right-width'));
-				var bh = parseInt($this.css('border-top-width')) + parseInt($($0).css('border-bottom-width'));
+				var bw = parseInt($this.css('border-left-width')) + parseInt($this.css('border-right-width'));
+				var bh = parseInt($this.css('border-top-width')) + parseInt($this.css('border-bottom-width'));
 				var csw = Math.ceil($this[0].offsetWidth + bw);
 				var csh = Math.ceil($this[0].offsetHeight + bh);
 				if (csw2 != csw || csh2 != csh) {
