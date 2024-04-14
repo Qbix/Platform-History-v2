@@ -146,7 +146,7 @@ Utils.validateCapability = function (capability, permissions) {
 		}
 	});
 	for (var i=0, l=permissions.length; i<l; ++i) {
-		if (!cp[permissions[i]]) {
+		if (!search[permissions[i]]) {
 			return false;
 		}
 	}
