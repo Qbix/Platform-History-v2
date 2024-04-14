@@ -1835,7 +1835,7 @@ class Q_Utils
 	static function joinId(
 		$splitId,
 		$lengths = 3,
-		$delimiter = DIRECTORY_SEPARATOR,
+		$delimiter = DIRECTORY_SEPARATOR
 	) {
 		return implode('', explode($delimiter, $splitId));
 	}
