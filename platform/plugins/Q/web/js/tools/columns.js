@@ -936,7 +936,7 @@ Q.Tool.define("Q/columns", function(options) {
 				var h = Q.Visual.windowHeight() - Q.fixedOffset('top') - Q.fixedOffset('bottom');
 				$te.add($container).height(h);
 				$columns.each(function () {
-					$(this).height(h + parseInt($(this).css('top')));
+					$(this).height(h - parseInt($(this).css('top')));
 				});
 			}
 		}
