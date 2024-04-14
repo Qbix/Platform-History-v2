@@ -1791,12 +1791,12 @@ class Q_Utils
 	 * Consider using Amazon S3 or another service for uploading files in production.
 	 * @method splitId
 	 * @static
-	 * @param {string} $id the id to split
+	 * @param {string} $id the id to split, this can also be a path ending in a userId
 	 * @param {integer} [$lengths=3] the lengths of each segment (the last one can be smaller)
 	 * @param {string} [$delimiter=DIRECTORY_SEPARATOR] the delimiter to put between segments
 	 * @param {string} [$internalDelimiter='/'] the internal delimiter, if it is set then only the last part is split, and instances of internalDelimiter are replaced by delimiter
 	 * @param {string} [$checkRegEx] The RegEx to check and throw an exception if id doesn't match. Pass null here to skip the RegEx check.
-	 * @return {string} the segments, delimited by the delimiter
+	 * @return {string} containing the segments, delimited by the delimiter
 	 * @throw {Q_Exception_WrongValue} 
 	 */
 	static function splitId(
@@ -1821,6 +1821,23 @@ class Q_Utils
 		$last = array_pop($parts);
 		$prefix = $parts ? (implode($delimiter, $parts) . $delimiter) : '';
 		return $prefix . implode($delimiter, str_split($last, $lengths));
+	}
+
+	/**
+	 * Used to join a string that was previously produced by Q_Utils::splitId()
+	 * @method joinId
+	 * @static
+	 * @param {string} $id the id to split, this can also be a path ending in a userId
+	 * @param {integer} [$lengths=3] the lengths of each segment (the last one can be smaller)
+	 * @param {string} [$delimiter=DIRECTORY_SEPARATOR] the delimiter to put between segments
+	 * @return {string} the original userId
+	 */
+	static function joinId(
+		$splitId,
+		$lengths = 3,
+		$delimiter = DIRECTORY_SEPARATOR,
+	) {
+		return implode('', explode($delimiter, $splitId));
 	}
 
 	/**

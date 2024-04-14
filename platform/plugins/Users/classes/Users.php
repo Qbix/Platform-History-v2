@@ -159,6 +159,7 @@ abstract class Users extends Base_Users
 			->fetchDbRows(null, null, 'label');
 		return $contacts;
 	}
+	
 	/**
 	 * Return an array of users_contact rows where user assigned by labels
 	 * @method byRoles

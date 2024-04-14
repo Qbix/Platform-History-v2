@@ -187,7 +187,7 @@ class Users_ExternalTo extends Base_Users_ExternalTo
 		$primaryKeyValues = Q_Utils::arrayUnique($primaryKeyValues);
 		$xidsByUserIds = array();
 		$userIdsByXids = array();
-		if (!empty($options['contactUserId'])) {
+		if (!empty($options['contactUserId']) and $primaryKeyValues) {
 			$externalTos = Users_ExternalTo::select()
 			->where(array(
 				'userId,platform,appId' => $primaryKeyValues

@@ -20,35 +20,30 @@ function Users_before_Q_Utils_canWriteToPath($params, &$result)
 		'files/{{app}}/uploads/Users/{{userId}}' => true
 	));
 
-	// user ids for which have permissions to save files
-	// first user is self
+	// ids of users for whom can save files, starting with logged-in user
 	$usersCanHandle = array($user->id);
-	// get labels which can manage icons
-	if ($labelsCanManage = Q_Config::get("Users", "icon", "canManage", array())) {
-		// if founded labels which can manage icons, collect users who can edit logged user
-		$usersCanHandle = array_merge($usersCanHandle, array_keys(Users::byRoles($labelsCanManage)));
-	}
 
-	// collect also invited users if icon not custom
-	$invitedByMe = Users_Contact::select()->where(array(
-		"contactUserId" => $user->id,
-		"label" => "Streams/invitedMe"
-	))->fetchDbRows();
-	foreach ($invitedByMe as $invite) {
-		if ($invite->userId == $user->id) {
-			continue;
+	$matches = array();
+	if (preg_match("#files/$app/uploads/Users/(.*)/icon#", $path, $matches)) {
+		if (!empty($matches[1])) {
+			if ($userIdForIcon = Q_Utils::joinId($matches[1])
+			and $userIdForIcon !== $user->id) {
+				// check labels which can manage the user's icon
+				if ($labels = Q_Config::get("Users", "icon", "canManage", array())
+				and Users_Contact::fetch($userIdForIcon, $labels, array(
+					'contactUserId' => $user->id,
+					'skipAccess' => true
+				))) {
+					$usersCanHandle[] = $userIdForIcon;
+				} else if ($labels = Q_Config::get("Users", "icon", "canSetInitialCustom", array())
+				and Users_Contact::fetch($userIdForIcon, $labels, array(
+					'contactUserId' => $user->id,
+					'skipAccess' => true
+				))) {
+					$usersCanHandle[] = $userIdForIcon;
+				}
+			}
 		}
-
-		$invitedUser = Users::fetch($invite->userId, false);
-		if (empty($invitedUser)) {
-			continue;
-		}
-
-		if (Users::isCustomIcon($invitedUser->icon, true)) {
-			continue;
-		}
-
-		$usersCanHandle[] = $invitedUser->id;
 	}
 
 	$paths = array();
@@ -102,7 +97,7 @@ function Users_before_Q_Utils_canWriteToPath($params, &$result)
 					umask($mask);
 					$dir3 = $path;
 					do {
-						chmod($dir3, $mode);
+						@chmod($dir3, $mode);
 						$dir3 = dirname($dir3);
 					} while ($dir3 and $dir3 != $p and $dir3.DS != $p);
 				}
