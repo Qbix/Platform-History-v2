@@ -91,7 +91,7 @@ Q.Tool.define("Q/columns", function(options) {
 		}, 100), tool);
 
 		if (Q.info.isAndroidStock) {
-			var w = Q.Pointer.windowWidth();
+			var w = Q.Visual.windowWidth();
 			$toolElement.parents().andSelf().each(function () {
 				$(this).data('Q/columns maxWidth', this.style.maxWidth)
 					.css('max-width', w);
@@ -617,7 +617,7 @@ Q.Tool.define("Q/columns", function(options) {
 			$div.css('position', 'absolute');
 			if (Q.info.isMobile) {
 				var h = expandBottom
-					? Q.Pointer.windowHeight() - containerRect.top - top
+					? Q.Visual.windowHeight() - containerRect.top - top
 					: state.container.clientHeight;
 				show.width = tool.element.clientWidth;
 				show.height = h;
@@ -933,9 +933,11 @@ Q.Tool.define("Q/columns", function(options) {
 		if (Q.info.isMobile) {
 			$te.css('top', top + 'px');
 			if (!state.fullscreen) {
-				$te.add($container)
-					.add($columns)
-					.height(Q.Pointer.windowHeight() - Q.fixedOffset('top') - Q.fixedOffset('bottom'));
+				var h = Q.Visual.windowHeight() - Q.fixedOffset('top') - Q.fixedOffset('bottom');
+				$te.add($container).height(h);
+				$columns.each(function () {
+					$(this).height(h + parseInt($(this).css('top')));
+				});
 			}
 		}
 		$columns.each(function () {
