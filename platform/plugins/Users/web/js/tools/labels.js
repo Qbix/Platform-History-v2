@@ -51,13 +51,10 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
             state.userId = Users.loggedInUserId();
     }
     if (state.canAdd === true) {
-    //state.canAdd = tool.text.addLabel2;
-    state.canAdd = Users.isCommunityId(state.userId) ?
-        tool.text.newRole
-        :
-        tool.text.addLabel
-        ;    
-
+        //state.canAdd = tool.text.addLabel2;
+        state.canAdd = Users.isCommunityId(state.userId)
+            ? tool.text.newRole
+            : tool.text.addLabel;    
     }
 
     if (Users.isCommunityId(state.userId)) {
@@ -145,7 +142,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
     /**
      * 
      * @param {String} title label's title
-     * @param {String} label label. can be null, then back-side genererate like Users/+normalize($title)
+     * @param {String} label label. can be null, then back-side genererate pattern 'Users/'+Q.normalize(title)
      */
     _addWeb2: function(title, label, closeHandler) {
         var tool = this;
@@ -160,7 +157,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                     return $(this).data('label') === obj.label
                 });
                 if ($newlyAdded.length != 0) {
-                    tool.onClickHandler($newlyAdded);
+                    tool.onClickHandler($newlyAdded); // start to edit it
                 }
             });
         });
@@ -520,7 +517,9 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                             showSize: state.icon || $img.width(),
                             path: 'Q/uploads/Users',
                             preprocess: function (callback) {
-                                subpath = state.userId.splitId()+'/labels/'+ Math.floor(Date.now()/1000);
+                                var label = $('.Users_labels_editdialog', dialog).attr('data-label');
+                                subpath = state.userId.splitId() + '/labels/'
+                                    + label + '/' + Math.floor(Date.now()/1000);
                                 callback({
                                     subpath: subpath,
                                     save: "Users/labels"
@@ -968,7 +967,7 @@ Q.Template.set('Users/labels/manage/add', `
 );
 
 Q.Template.set('Users/labels/manage/edit', `
-<div class="Users_labels_editdialog Q_messagebox Q_big_prompt">
+<div class="Users_labels_editdialog Q_messagebox Q_big_prompt" data-label="{{label}}">
     <div class="Users_labels_form_group">
         <img src={{src}}>
     </div>
