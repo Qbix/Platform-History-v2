@@ -49,7 +49,7 @@ function Users_before_Q_Utils_canWriteToPath($params, &$result)
 		and $userIdForIcon = Q_Utils::joinId($matches[1])
 		and $userIdForIcon !== $user->id
 		and Users::canManageLabels($user->id, $userIdForIcon, $label)) {
-			$userCanHandle[] = $userIdForIcon;
+			$usersCanHandle[] = $userIdForIcon;
 		}
 	}
 
