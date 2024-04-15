@@ -6,7 +6,7 @@ self.addEventListener('activate', function (event) {
 
 self.addEventListener('push', function (event) {
 	let data = JSON.parse(event.data.text());
-	console.log('[Service Worker] Push received');
+	console.log('[Service Worker] Push received', data);
 	if (data.update) {
 		// force service worker to update via push
 		self.registration.update().then(() => console.log('[Service Worker] Updated'));

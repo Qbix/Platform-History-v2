@@ -27,7 +27,9 @@ var Q = {
 	self.addEventListener('fetch', function (event) {
 		// if request is not for same origin, then just send it
 		var url = new URL(event.request.url);
-		if (url.origin !== self.location.origin) {
+		var ext = url.split('?')[0].split('.').pop().toLowerCase();
+		if (url.origin !== self.location.origin
+		|| ['js', '.css'].indexOf(ext) >= 0) {
 			return; // let the browser do its usual fetch
 		}
 		if (url.toString() === Q.info.serviceWorkerUrl) {
