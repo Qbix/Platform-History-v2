@@ -17,6 +17,10 @@ function Assets_after_Assets_charge($params)
 		"charge" => @compact("amount", "currency"),
 		"token" => Q::ifset($options, 'token', null)
 	));
+	// check Assets/credits/bonus
+	if ($reason == 'BoughtCredits') {
+		Assets_Credits::payBonus($amount, $userId);
+	}
 
 	$text = Q_Text::get('Assets/content', array('language' => Users::getLanguage($user->id)));
 	$description = Q::interpolate(Q::ifset($text, 'credits', 'forMessages', 'BoughtCredits', Q::ifset($text, 'credits', 'BoughtCredits', 'Bought {{amount}} credits')), array('amount' => $credits));
