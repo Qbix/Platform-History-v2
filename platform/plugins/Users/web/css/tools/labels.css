@@ -68,4 +68,6 @@
     width:100%;
     margin-bottom:10px;
 }
-
+.Users_labels_form_group img {
+    border-radius: 5%;
+}

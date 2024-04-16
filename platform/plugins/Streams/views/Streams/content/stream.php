@@ -2,7 +2,8 @@
 	<style type="text/css">
 		#Users_avatar-publisher_tool .Users_avatar_icon { width: 30px; height: 30px; margin-right: 5px; }
 		.Streams_stream_header { padding-bottom: 10px; border-bottom: 1px solid #aaa; }
-		.Streams_stream_icon { float: left; width: 80px; }
+		.Streams_stream_icon { float: left; width: 80px; padding: 10px; }
+		.Streams_stream_icon img { width: 100%; }
 		.Streams_stream_title { line-height: 60px; font-size: 40px;  }
 		.Streams_stream_publisher { margin-top: -10px; }
 		.Streams_stream_player { clear: both; }

@@ -289,10 +289,9 @@ class Assets_Credits extends Base_Assets_Credits
 			'instructions' => Q::json_encode($instructions)
 		));
 
-		// check Assets/credits/bonus
-		if ($reason == 'BoughtCredits') {
-			self::payBonus($amount, $userId);
-		}
+		// TODO: take commissions out of the grant and give to user who invited this user
+		// $commission = Q_Config::expect("Assets", "credits", "commissions", "watching");
+
 		return true;
 	}
 	

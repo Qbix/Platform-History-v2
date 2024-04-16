@@ -521,7 +521,13 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 				toUserId, 
 				{
 					alert: { title: o.subject },
-					payload: instructions,
+					payload: Q.extend({
+						"@publisherId": stream.fields.publisherId,
+						"@streamName": stream.fields.name,
+						"@streamType": stream.fields.type,
+						"@ordinal": message.fields.ordinal,
+						"@type": message.fields.type,
+					},	instructions),
 					url: o.url,
 					icon: o.icon
 				},
