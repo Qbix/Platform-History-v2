@@ -57,12 +57,12 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
 		var $toolElement = $(tool.element);
 
         var chains = [];
-        Q.each(chains, function (i, chain) {
-            if (tool.getFactoryAddress(selectedChainId)) {
+        Q.each(state.chains, function (i, chain) {
+            if (tool.getFactoryAddress(chain.chainId)) {
                 chains.push(chain);
             }
         });
-		
+        
         Q.Template.render('Users/web3/community/list', {
 		    chains: chains,
             
