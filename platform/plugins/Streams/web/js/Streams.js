@@ -674,6 +674,14 @@ Streams.onRelease = Q.Event.factory(priv._refreshHandlers, [""]);
 Streams.onAvatar = Q.Event.factory(priv._avatarHandlers, [""]);
 
 /**
+ * This event is fired when preloaded streams were constructed.
+ * Wait for it whenever you want to give a chance for
+ * preloaded streams to fill Q.Streams.get cache.
+ * @event onPreloaded
+ */
+Streams.onPreloaded = new Q.Event();
+
+/**
  * This event is fired when a dialog is presented to a newly invited user.
  * @event onInvitedDialog
  */
@@ -4995,11 +5003,16 @@ Q.Page.beforeUnload("").set(function () {
 }, 'Stream');
 
 function _preloaded(elem) {
-	// Every time before anything is activated,
+	// Every time we get an HTTP response to a request,
 	// process any preloaded streams and avatars data we find
-	Q.each(Stream._preloaded, function (i, fields) {
-		Stream.construct(fields, {}, null, true);
+	var pns = Object.keys(Stream._preloaded || {});
+	var pipe = new Q.Pipe(pns, 1, function () {
+		Q.handle(Streams.onPreloaded, Streams, [p]);
 	});
+	Q.each(Stream._preloaded, function (pn, fields) {
+		Stream.construct(fields, {}, pipe.fill(pn), true);
+	});
+	var p = Stream._preloaded;
 	Stream._preloaded = null;
 	Q.each(Avatar._preloaded, function (i, fields) {
 		var avatar = new Avatar(fields);

@@ -10,7 +10,7 @@ function Streams_after_Users_setLoggedInUser($params)
 			'access' => true,
 			'subscribe' => true
 		))) {
-			unset($_SESSION['Streams']['invite']['token']);
+			unset($_SESSION['Streams']['invite']);
 
 			$splitId = Q_Utils::splitId($invite->invitingUserId, 3, "/");
 			$path = 'Q/uploads/Users';

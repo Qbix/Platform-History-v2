@@ -1403,6 +1403,31 @@ class Streams_Stream extends Base_Streams_Stream
 		}
 		return $this->publishedByFetcher;
 	}
+
+	/**
+	 * Gets the read level on the stream, taking into account any invite
+	 * that may have been followed
+	 * @method getReadLevel
+	 * @param {array} [$options]
+	 * @param {array} [$options.ignoreInvite] Do not check Streams::$followedInvite
+	 * @return {integer}
+	 */
+	function getReadLevel($options)
+	{
+		$readLevel = $this->get('readLevel', 0);
+		$fields = Q::ifset($_SESSION, 'Streams', 'invite', array());
+		$invite = $fields ? new Streams_Invite($fields) : Streams::$followedInvite;
+		if (empty($options['ignoreInvite'])
+		and $invite
+		and $invite->publisherId == $this->publisherId
+		and $invite->streamName == $this->name
+		and $invite->readLevel >= 0
+		and !Users::loggedInUser(false, false)) {
+			// set the readLevel, but not writeLevel or adminLevel
+			$readLevel = max($readLevel, $invite->readLevel);
+		}
+		return $readLevel;
+	}
 	
 	/**
 	 * Verifies whether the user has at least a certain read level for the Stream
@@ -1426,15 +1451,7 @@ class Streams_Stream extends Base_Streams_Stream
 		}
 
 		$numeric = Streams_Stream::numericReadLevel($level);
-		$readLevel = $this->get('readLevel', 0);
-		if ($invite = Streams::$followedInvite
-		and $invite->publisherId == $this->publisherId
-		and $invite->streamName == $this->name
-		and $invite->readLevel >= 0
-		and !Users::loggedInUser(false, false)) {
-			// set the readLevel, but not writeLevel or adminLevel
-			$readLevel = max($readLevel, $invite->readLevel);
-		}
+		$readLevel = $this->getReadLevel($options);
 		if ($readLevel >= 0 and $readLevel >= $numeric) {
 			return true;
 		}
@@ -1909,6 +1926,7 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @param {array} [$options.fields=null] By default, all fields from tables used to "extend" the
 	 *  stream are returned. You can indicate here an array consisting of only the names of
 	 *  fields to export. An empty array means no extended fields will be exported.
+	 * @param {array} [$options.ignoreInvite] Do not check Streams::$followedInvite
 	 * @return {array}
 	 */
 	function exportArray($options = null)
@@ -1926,7 +1944,7 @@ class Streams_Stream extends Base_Streams_Stream
 			$skip = false;
 		}
 
-		if ($skip or $this->testReadLevel('content')) {
+		if ($skip or $this->testReadLevel('content', $options)) {
 			$readLevelAtLeastContent = true;
 			$result = $this->toArray();
 		} else {
@@ -1989,7 +2007,7 @@ class Streams_Stream extends Base_Streams_Stream
 			$result['attributes'] = Q::json_encode(Q::take($attributes, $canSeeAttributes));
 		}
 		$result['access'] = array(
-			'readLevel' => $this->get('readLevel', $this->readLevel),
+			'readLevel' => $this->getReadLevel($options),
 			'writeLevel' => $this->get('writeLevel', $this->writeLevel),
 			'adminLevel' => $this->get('adminLevel', $this->adminLevel),
 			'permissions' => $this->get('permissions', $this->getAllPermissions())
