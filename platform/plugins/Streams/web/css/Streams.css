@@ -253,7 +253,6 @@
 	width: 40px;
 	height: 25px;
 	line-height: 25px;
-	border: groove;
     border-radius: 5px;
 	font-size: 14px;
 	background: rgba(50, 50, 50, 0.4);
@@ -262,6 +261,8 @@
 	text-align: center;
 	overflow: hidden;
 	margin-right: 2%;
+	box-shadow: 0 0 5px rgba(100, 100, 100, 0.5);
+	outline: 1px dotted rgba(100, 100, 100, 0.5);
 }
 
 .Streams_participants_tool .Streams_participants_controls {
