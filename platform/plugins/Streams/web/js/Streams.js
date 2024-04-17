@@ -4973,6 +4973,7 @@ Q.onInit.add(function _Streams_onInit() {
 		});
 	}
 
+	_preloaded();
 	Q.request.options.onResponse.add(_preloaded, 'Streams.preloaded');
 
 	Q.addEventListener(window, Streams.refresh.options.duringEvents, Streams.refresh);
