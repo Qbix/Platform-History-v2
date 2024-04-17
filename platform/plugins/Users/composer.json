@@ -6,7 +6,6 @@
 		}
 	],
 	"require": {
-		"lordelph/icofileloader": "1.*",
 		"google/apiclient": "^2.8.1",
         "intercoin/simple-web3-php": "dev-master",
 		"minishlink/web-push": "^6.0.0",

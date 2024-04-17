@@ -137,7 +137,8 @@ class Websites_Webpage extends Base_Websites_Webpage
 		$doc = new DOMDocument();
 		// set error level
 		$internalErrors = libxml_use_internal_errors(true);
-		$doc->loadHTML(mb_convert_encoding($document, 'HTML-ENTITIES', 'UTF-8'));
+		$encoded = mb_encode_numericentity($document, array(0x80, 0x10FFFF, 0, ~0), 'UTF-8' );
+		$doc->loadHTML($encoded);
 		// Restore error level
 		libxml_use_internal_errors($internalErrors);
 
@@ -190,7 +191,8 @@ class Websites_Webpage extends Base_Websites_Webpage
 		}
 
 		// get title
-		$result['title'] = $xpath->query('//title')->item(0)->textContent;
+		$titleNode = $xpath->query('//title')->item(0);
+		$result['title'] = $titleNode ? $titleNode->textContent : 'Untitled Webpage';
 
 		$elements = $xpath->query('//*/link');
 		$icons = array();
