@@ -309,7 +309,7 @@ abstract class Streams extends Base_Streams
 		'direct' => 2,
 		'inherited_public' => 3,
 		'inherited_contact' => 4,
-		'inherited_direct' => 5
+		'inherited_direct' => 5,
 	);
 
 	/**
