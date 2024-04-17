@@ -430,26 +430,26 @@ class Websites_Webpage extends Base_Websites_Webpage
 			return false;
 		}
 
-		$webpageCahe = new Websites_Webpage();
-		$webpageCahe->url = $url;
-		if (!$webpageCahe->retrieve()) {
+		$webpageCache = new Websites_Webpage();
+		$webpageCache->url = $url;
+		if (!$webpageCache->retrieve()) {
 			// if not retrieved try to find url ended with slash (to avoid duplicates of save source)
-			$webpageCahe->url = $url.'/';
-			$webpageCahe->retrieve();
+			$webpageCache->url = $url.'/';
+			$webpageCache->retrieve();
 		}
 
-		if ($webpageCahe->retrieved) {
-			$updatedTime = $webpageCahe->updatedTime;
+		if ($webpageCache->retrieved) {
+			$updatedTime = $webpageCache->updatedTime;
 			if (isset($updatedTime)) {
-				$db = $webpageCahe->db();
+				$db = $webpageCache->db();
 				$updatedTime = $db->fromDateTime($updatedTime);
 				$currentTime = $db->getCurrentTimestamp();
-				$cacheDuration = $webpageCahe->duration; // default 1 month
+				$cacheDuration = $webpageCache->duration; // default 1 month
 				if ($currentTime - $updatedTime < $cacheDuration) {
 					// there are cached webpage results that are still viable
-					return json_decode($webpageCahe->results, true);
+					return json_decode($webpageCache->results, true);
 				} else {
-					$webpageCahe->remove();
+					$webpageCache->remove();
 				}
 			}
 		}
@@ -470,11 +470,11 @@ class Websites_Webpage extends Base_Websites_Webpage
 			return;
 		}
 
-		$webpageCahe = new Websites_Webpage();
-		$webpageCahe->url = $url;
+		$webpageCache = new Websites_Webpage();
+		$webpageCache->url = $url;
 
 		if ($duration) {
-			$webpageCahe->duration = $duration;
+			$webpageCache->duration = $duration;
 		}
 
 		// dummy interest block for cache
@@ -482,8 +482,8 @@ class Websites_Webpage extends Base_Websites_Webpage
 			'title' => $url,
 			'icon' => Q::ifset($result, "iconSmall", Q::ifset($result, "icon", Q::ifset($result, "iconBig", null)))
 		);
-		$webpageCahe->results = json_encode($result);
-		$webpageCahe->save();
+		$webpageCache->results = json_encode($result);
+		$webpageCache->save();
 	}
 	/**
 	 * Normalize href like '//path/to' or '/path/to' to valid URL
@@ -633,7 +633,8 @@ class Websites_Webpage extends Base_Websites_Webpage
             throw new Q_Exception('Error opening URL for reading');
         }
         $file = tmpfile();
-        $path = stream_get_meta_data($file)['uri'];
+        $data = stream_get_meta_data($file);
+		$path = $data['uri'];
         try {
             $chunk_size = 4096; // Haven't bothered to tune this, maybe other values would work better??
             $got = 0; $data = null;
