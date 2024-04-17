@@ -1355,12 +1355,7 @@ Q.Tool.define('Streams/chat', function(options) {
 					withParticipant: true
 				});
 			}
-			var get = Q.Streams.retainWith(tool).get;
-			get = useCached ? get : get.force;
-			var options = useCached ? undefined : {
-				withParticipant: true
-			};
-			get(state.publisherId, state.streamName, function (err) {
+			function _continue(err) {
 				state.stream = err ? null : this;
 				tool.more(function () {
 					_render.apply(this, arguments);
@@ -1371,7 +1366,7 @@ Q.Tool.define('Streams/chat', function(options) {
 						evenIfNotRetained: true
 					});
 				});
-			}, options);
+			}
 		});
 	}
 });
