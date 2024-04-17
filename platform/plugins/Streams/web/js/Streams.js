@@ -5007,13 +5007,16 @@ function _preloaded(elem) {
 	// Every time we get an HTTP response to a request,
 	// process any preloaded streams and avatars data we find
 	var pns = Object.keys(Stream._preloaded || {});
+	var p = Stream._preloaded;
+	if (pns.length == 0) {
+		return Q.handle(Streams.onPreloaded, Streams, [p]);
+	}
 	var pipe = new Q.Pipe(pns, 1, function () {
 		Q.handle(Streams.onPreloaded, Streams, [p]);
 	});
 	Q.each(Stream._preloaded, function (pn, fields) {
 		Stream.construct(fields, {}, pipe.fill(pn), true);
 	});
-	var p = Stream._preloaded;
 	Stream._preloaded = null;
 	Q.each(Avatar._preloaded, function (i, fields) {
 		var avatar = new Avatar(fields);
