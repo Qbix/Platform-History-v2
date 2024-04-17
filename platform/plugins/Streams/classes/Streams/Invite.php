@@ -297,6 +297,9 @@ class Streams_Invite extends Base_Streams_Invite
 		Users_Contact::addContact($userId, "Streams/invitedMe", $this->invitingUserId, null, false, true);
 		Users_Contact::addContact($userId, "Streams/invitedMe/{$stream->type}", $this->invitingUserId, null, false, true);
 
+		// recalculate access based on the new Contact and Access rows
+		$stream->calculateAccess($userId, true);
+
 		// subscribe or join, if needed
 		$onInviteAccepted = Streams_Stream::getConfigField($stream->type, "onInviteAccepted", null);
 		if ($onInviteAccepted) {

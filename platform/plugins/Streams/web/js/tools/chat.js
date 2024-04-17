@@ -76,7 +76,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		tool.cache = Q.Cache.local('Streams/chat');
 	}
 
-	tool.refresh();
+	tool.refresh(null, true); // use cached stream first time, if available
 	Q.Streams.refresh.beforeRequest.add(function () {
 		if (state.stream && state.stream.refresh) {
 			state.stream.refresh(null, {messages: true});
@@ -1288,7 +1288,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		state.hadFocus = false;
 	},
 
-	refresh: function (callback) {
+	refresh: function (callback, useCached) {
 		var tool = this;
 		var state = tool.state;
 		tool.menuItems = {};
@@ -1343,19 +1343,30 @@ Q.Tool.define('Streams/chat', function(options) {
 			});
 		}
 
-		Q.Streams.retainWith(this).get.force(state.publisherId, state.streamName, function (err) {
-			state.stream = err ? null : this;
-			tool.more(function () {
-				_render.apply(this, arguments);
-
-				state.stream && state.stream.refresh(null, {
-					messages: true,
-					unlessSocket: true,
-					evenIfNotRetained: true
+		Q.Streams.onPreloaded.addOnce(function () {
+			if (useCached) {
+				// Won't be able to set participant.
+				// This is typically used for logged-out users.
+				Q.Streams.retainWith(tool)
+				.get(state.publisherId, state.streamName, _continue);
+			} else {
+				Q.Streams.retainWith(tool)
+				.get.force(state.publisherId, state.streamName, _continue, {
+					withParticipant: true
 				});
-			});
-		}, {
-			withParticipant: true
+			}
+			function _continue(err) {
+				state.stream = err ? null : this;
+				tool.more(function () {
+					_render.apply(this, arguments);
+	
+					state.stream && state.stream.refresh(null, {
+						messages: true,
+						unlessSocket: true,
+						evenIfNotRetained: true
+					});
+				});
+			}
 		});
 	}
 });

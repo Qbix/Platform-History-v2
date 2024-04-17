@@ -39,26 +39,26 @@ class Websites_File extends Base_Websites_Webpage
 		);
 
         // try to get cache
-		$webpageCahe = null;
+		$webpageCache = null;
 		if (Q_Config::get('Websites', 'cache', 'webpage', true)) {
-			$webpageCahe = new Websites_Webpage();
-			$webpageCahe->url = $url;
-			if (!$webpageCahe->retrieve()) {
+			$webpageCache = new Websites_Webpage();
+			$webpageCache->url = $url;
+			if (!$webpageCache->retrieve()) {
 				// if not retrieved try to find url ended with slash (to avoid duplicates of save source)
-				$webpageCahe->url = $url.'/';
-				$webpageCahe->retrieve();
+				$webpageCache->url = $url.'/';
+				$webpageCache->retrieve();
 			}
 
-			if ($webpageCahe->retrieved) {
-				$updatedTime = $webpageCahe->updatedTime;
+			if ($webpageCache->retrieved) {
+				$updatedTime = $webpageCache->updatedTime;
 				if (isset($updatedTime)) {
-					$db = $webpageCahe->db();
+					$db = $webpageCache->db();
 					$updatedTime = $db->fromDateTime($updatedTime);
 					$currentTime = $db->getCurrentTimestamp();
 					$cacheDuration = Q_Config::get('Websites', 'cache', 'duration', 60*60*24*30); // default 1 month
 					if ($currentTime - $updatedTime < $cacheDuration) {
 						// there are cached webpage results that are still viable
-						return json_decode($webpageCahe->results, true);
+						return json_decode($webpageCache->results, true);
 					}
 				}
 			}
@@ -117,18 +117,18 @@ class Websites_File extends Base_Websites_Webpage
 			'streamType' => "Streams/".$extension
 		));
 
-		if ($webpageCahe) {
-			$webpageCahe->url = $url;
+		if ($webpageCache) {
+			$webpageCache->url = $url;
 
-			$webpageCahe->cache = str_replace(self::getCachePath(), "", $destinationPath);
+			$webpageCache->cache = str_replace(self::getCachePath(), "", $destinationPath);
 
 			// dummy interest block for cache
 			$result['interest'] = array(
 				'title' => $url,
 				'icon' => $streamIcon
 			);
-			$webpageCahe->results = json_encode($result);
-			$webpageCahe->save();
+			$webpageCache->results = json_encode($result);
+			$webpageCache->save();
 		}
 
 		// set quota
@@ -477,7 +477,7 @@ class Websites_File extends Base_Websites_Webpage
 
 		$fileName = basename($path);
 
-		$streamDir = APP_FILES_DIR.'/'.Q::app().'/'.implode('/', $parts);
+		$streamDir = APP_FILES_DIR.DS.Q::app().DS.implode(DS, $parts);
 		$oldumask = umask(0);
 		mkdir($streamDir, $mode,true);
 		umask($oldumask);

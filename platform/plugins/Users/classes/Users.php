@@ -998,7 +998,7 @@ abstract class Users extends Base_Users
 		}
 		
 		if ($loggedInUserId) {
-			// Set a notice for the user to alert them that the account has changed
+			// Set a notice for the user, to alert the user that the account has changed
 			$template = Q_Config::expect('Users', 'login', 'notice');
 			$displayName = $user->displayName();
 			$html = Q_Handlebars::renderSource($template, @compact(

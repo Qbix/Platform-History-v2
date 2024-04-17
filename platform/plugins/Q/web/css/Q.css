@@ -883,6 +883,14 @@ html body .Q_columns_containsExpanded {
 	overflow: visible !important;
 	z-index: 100 !important;
 }
+.Q_errors #content {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.Q_errors #content span.url {
+	padding: 0 1em;
+}
 #content.Q_columns_containsExpanded {
 	padding: 0;
 }

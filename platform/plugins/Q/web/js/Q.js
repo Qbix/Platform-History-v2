@@ -12167,9 +12167,11 @@ function _connectSocketNS(ns, url, callback, earlyCallback, forceNew) {
 		// connect to (ns, url)
 		if (!root.io) return;
 		var qs = _qsockets[ns] && _qsockets[ns][url];
-		var o = forceNew ? {
+		var o = Q.extend(forceNew ? {
 			forceNew: true
-		} : {};
+		} : {}, {
+			transports: ['websocket']
+		});
 		if (!qs) {
 			var parsed = url.parseUrl();
 			var host = parsed.scheme + '://' + parsed.host 

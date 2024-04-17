@@ -208,6 +208,7 @@ class Q_Response
 	static function addError(
 	 $exception)
 	{
+		Q_Response::addHtmlCssClass('Q_errors');
 		if (is_array($exception)) {
 			self::$errors = array_merge(self::$errors, $exception);
 		} else {
