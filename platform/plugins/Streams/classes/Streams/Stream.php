@@ -1409,11 +1409,13 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @method testReadLevel
 	 * @param {string|integer} $level
 	 *	String describing the level (see Streams::$READ_LEVEL) or integer
+	 * @param {array} [$options]
+	 * @param {array} [$options.ignoreInvite] Do not check Streams::$followedInvite
 	 * @return {boolean}
 	 * @throws {Q_Exception_WrongValue}
 	 *	If string is not referring to Streams::$READ_LEVEL
 	 */
-	function testReadLevel($level)
+	function testReadLevel($level, $options = array())
 	{
 		if ($this->publishedByFetcher) {
 			return true;
@@ -1425,6 +1427,14 @@ class Streams_Stream extends Base_Streams_Stream
 
 		$numeric = Streams_Stream::numericReadLevel($level);
 		$readLevel = $this->get('readLevel', 0);
+		if ($invite = Streams::$followedInvite
+		and $invite->publisherId == $this->publisherId
+		and $invite->streamName == $this->name
+		and $invite->readLevel >= 0
+		and !Users::loggedInUser(false, false)) {
+			// set the readLevel, but not writeLevel or adminLevel
+			$readLevel = max($readLevel, $invite->readLevel);
+		}
 		if ($readLevel >= 0 and $readLevel >= $numeric) {
 			return true;
 		}
