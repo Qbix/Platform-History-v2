@@ -1590,11 +1590,18 @@ Q.firstKey = function _Q_firstKey(container, options) {
 
 /**
  * Find an index with the largest width or height
- * @param {Object|Array} sizes If an object, it will use Object.keys()
+ * @param {Object|Array|String} sizes If an object, it will use Object.keys().
+ *   If it is a string, it will load it by that key from Q.image.sizes object.
  * @param {Boolean} [useHeight=false] by default, uses width
  * @returns 
  */
 Q.largestSize = function (sizes, useHeight) {
+	if (typeof sizes === 'string') {
+		if (!Q.image.sizes[sizes]) {
+			throw new Q.Exception("Q.largestSize: Q.image.sizes missing " + sizes);
+		}
+		sizes = Q.image.sizes[sizes];
+	}
 	var size, w, h, wMax = 0, hMax = 0, parts, largestIndex;
 	if (!Q.isArrayLike(sizes)) {
 		sizes = Object.keys(sizes);

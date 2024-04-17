@@ -401,7 +401,7 @@ Streams.iconUrl = function(icon, size) {
 		size = '40';
 	}
 	if (size === 'largestWidth' || size === 'largestHeight') {
-		size = Q.largestSize(Streams.image.sizes, size === 'largestHeight');
+		size = Q.largestSize(Q.image.sizes['Streams/image'], size === 'largestHeight');
 	}
 	size = (String(size).match(/\.\w+$/g)) ? size : size+'.png';
 	icon = icon.match(/\.\w+$/g) ? icon : icon + (size ? '/' + size : '');
@@ -2224,7 +2224,7 @@ function _disconnectStreamNode(publisherId, streamName, ps) {
  */
 Sp.iconUrl = function _Stream_prototype_iconUrl (size) {
 	if (size === 'largestWidth' || size === 'largestHeight') {
-		var sizes = this.getAttribute('sizes') || Streams.image.sizes;
+		var sizes = this.getAttribute('sizes') || Q.image.sizes['Streams/image'];
 		size = Q.largestSize(sizes, size === 'largestHeight');
 	}
 	return Streams.iconUrl(this.fields.icon, size);

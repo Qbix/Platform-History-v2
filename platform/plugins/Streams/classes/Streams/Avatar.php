@@ -573,6 +573,20 @@ class Streams_Avatar extends Base_Streams_Avatar
 			'showToUserIds', 'updateToPublicValue'
 		));
 	}
+
+	/**
+	 * Get the icon sizes for avatar of a particular user.
+	 * @param {string} $userId
+	 * @return {array} The array of all sizes.
+	 * You can get the largest one by calling end() and key() on it.
+	 */
+	static function iconSizes($userId)
+	{
+		$stream = Streams_Stream::fetch($userId, $userId, 'Streams/user/icon');
+		$sizes = $stream->getAttribute('sizes', array());
+		Q_Utils::sortKeysNumerically($sizes);
+		return $sizes;
+	}
 	
 	static function streamNames()
 	{

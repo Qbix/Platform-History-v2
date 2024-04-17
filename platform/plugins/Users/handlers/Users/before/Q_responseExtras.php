@@ -12,6 +12,13 @@ function Users_before_Q_responseExtras()
 		'Q.plugins.Users.authenticate.expires',
 		Q_Config::get('Users', 'authenticate', 'expires', null)
 	);
+	$types = array('Users/icon', 'Users/cover', 'Users/labels');
+	foreach ($types as $type) {
+		if ($sizes = Q_Image::getSizes($type, $maxStretch)) {
+			Q_Response::setScriptData("Q.image.sizes.$type", $sizes);
+			Q_Response::setScriptData("Q.image.maxStretch.$type", $maxStretch);
+		}
+	}
 	$requireLogin = Q_Config::get('Users', 'requireLogin', array());
 	$rl_array = array();
 	foreach ($requireLogin as $rl => $value) {
