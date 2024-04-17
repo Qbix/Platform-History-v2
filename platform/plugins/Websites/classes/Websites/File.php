@@ -303,7 +303,7 @@ class Websites_File extends Base_Websites_Webpage
 
 		// add scheme to url if not exist
 		if (parse_url($url, PHP_URL_SCHEME) === null) {
-			$url = 'http://'.$url;
+			$url = 'https://'.$url;
 		}
 
 		if (!Q_Valid::url($url)) {

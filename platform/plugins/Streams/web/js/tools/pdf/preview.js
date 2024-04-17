@@ -218,7 +218,7 @@
 							attributes: {
 								host: siteData.host,
 								port: siteData.port,
-								url: url,
+								url: siteData.url,
 								clipStart: clipStart,
 								clipEnd: clipEnd
 							}
