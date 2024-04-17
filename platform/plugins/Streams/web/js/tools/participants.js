@@ -200,6 +200,7 @@ function _Streams_participants(options) {
 
 		$te.addClass('Streams_participants_loading');
 		Q.Streams.get(state.publisherId, state.streamName, function (err, stream, extra) {
+			$te.removeClass('Streams_participants_loading');
 			var fem = Q.firstErrorMessage(err);
 			if (fem) {
 				return console.warn("Streams/participants: " + fem);
@@ -211,7 +212,6 @@ function _Streams_participants(options) {
 			Q.Streams.Stream.onRefresh(state.publisherId, state.streamName)
 			.set(tool.refresh.bind(tool), tool);
 			var i = 0, c = 0;
-			$te.removeClass('Streams_participants_loading');
 			Q.Tool.clear(tool.$avatars[0]);
 			Q.Tool.clear(tool.$blanks[0]);
 			tool.$avatars.empty();
