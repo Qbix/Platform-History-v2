@@ -352,7 +352,7 @@ telegram
 	width: 30px;
 	height: 30px;
 	font-size: 24px;
-	color: #00ad00;
+	color: var(--button-text-color);
 	line-height: 30px;
 	top: 50%;
 	transform: translateY(-50%);
