@@ -23,12 +23,17 @@ function Socket (server, options) {
 		(options && options.baseUrl)
 		|| Q.Config.get(['Q', 'web', 'appRootUrl']
 	));
-	this.io = io.listen(server, options || {
+	var o = options || {
 		cors: {
 			origin: url.origin,
 			methods: ["GET", "POST"]
 		}
-	});
+	};
+	if (io.listen) {
+		this.io = io.listen(server, o);
+	} else {
+		this.io = new io.Server(server, o);
+	}
 }
 
 var _listening = false;
