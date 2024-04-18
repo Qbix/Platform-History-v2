@@ -2048,6 +2048,18 @@ class Q_Utils
 		return uksort($arr, array('Q_Utils', 'compareKeysNumerically'));
 	}
 
+	/**
+	 * Sorts keys such as "4x8x9" numerically by dimensions
+	 * @method sortKeysNumerically
+	 * @static
+	 * @param {array&} $arr Reference to an array
+	 * @return 
+	 */
+	static function sortKeysByLargestNumber(&$arr)
+	{
+		return uksort($arr, array('Q_Utils', 'compareKeysByLargestNumber'));
+	}
+
 	private static function compareKeysNumerically($a, $b)
 	{
 		$ap = preg_split('/\D/', $a, -1);
@@ -2062,6 +2074,21 @@ class Q_Utils
 			}
 		}
 		return 0;
+	}
+
+	private static function compareKeysByLargestNumber($a, $b)
+	{
+		$ap = preg_split('/\D/', $a, -1);
+		$bp = preg_split('/\D/', $b, -1);
+		if (!$ap) {
+			$ap = array();
+		}
+		if (!$bp) {
+			$bp = array();
+		}
+		$am = max($ap);
+		$bm = max($bp);
+		return $am > $bm ? 1 : ($bm > $am ? -1 : 0);
 	}
 
 	protected static $urand;

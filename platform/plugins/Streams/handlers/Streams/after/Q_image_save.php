@@ -25,7 +25,7 @@ function Streams_after_Q_image_save($params)
 
 	if (is_array($save) && !empty($save)) {
 		$sizes = $save;
-		Q_Utils::sortKeysNumerically($sizes);
+		Q_Utils::sortKeysByLargestNumber($sizes);
 		$stream->setAttribute('sizes', array_keys($sizes));
 	}
 

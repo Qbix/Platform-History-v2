@@ -43,7 +43,7 @@
  *   @uses Q imagepicker
  *   @param {Object} [options.actions] Any options to pass to the Q/actions jquery plugin -- see its options.
  *   @uses Q actions
- *   @param {Object} [options.sizes] If passed, uses this instead of Q.Streams.image.sizes for the sizes
+ *   @param {Object} [options.sizes] If passed, uses this instead of Q.image.sizes['Streams/image'] for the sizes
  *   @param {Object} [options.overrideShowSize]  A hash of {icon: size} pairs to override imagepicker.showSize when the icon is a certain string. The empty string matches all icons.
  *   @param {String} [options.throbber=Q.info.imgLoading] The url of an image to use as an activity indicator when the image is loading
  *   @param {Number} [options.cacheBust=null] Number of milliseconds to use for combating the re-use of cached images when they are first loaded.
@@ -77,10 +77,10 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 		throw new Q.Error("Streams/preview tool: missing options.imagepicker.showSize");
 	}
 	if (!si.saveSizeName) {
-		si.saveSizeName = Q.extend({}, state.sizes || Q.Streams.image.sizes);
+		si.saveSizeName = Q.extend({}, state.sizes || Q.image.sizes['Streams/image']);
 	}
 	if (!si.maxStretch) {
-		si.maxStretch = Q.Streams.image.maxStretch;
+		si.maxStretch = Q.image.maxStretch['Streams/image'];
 	}
 	var $te = $(tool.element);
 	$te.addClass('Streams_preview');
@@ -132,7 +132,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 
 	imagepicker: {
 		showSize: "50",
-		fullSize: "400x",
+		fullSize: Q.largestSize(Q.image.sizes['Streams/image']) || '1000x',
 		save: "Streams/image"
 	},
 	sizes: null,

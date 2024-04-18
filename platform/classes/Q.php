@@ -1660,7 +1660,17 @@ class Q
 				'message' => 'Invalid JSON'
 			), null, -1);
 		}
+		$result = preg_replace_callback(
+			'/^(?: {4})+/m',
+			array('Q', 'json_replace'),
+			$result
+		);
 		return str_replace("\\/", '/', $result);
+	}
+
+	private static function json_replace($m)
+	{
+		return str_repeat("\t", strlen($m[0]) / 4);
 	}
 
 	/**

@@ -47,7 +47,7 @@ class Q_Image
 		$maxStretch = Q_Config::get("Q", "images", $type, 'maxStretch', 1);
 		$defaultSize = Q_Config::get("Q", "images", $type, 'defaultSize', 40);
 		if (Q::isAssociative($sizes)) {
-			Q_Utils::sortKeysNumerically($sizes);
+			Q_Utils::sortKeysByLargestNumber($sizes);
 			return $sizes;
 		}
 
@@ -56,7 +56,7 @@ class Q_Image
 			$sizes2[$size] = "$size.png";
 		}
 
-		Q_Utils::sortKeysNumerically($sizes2);
+		Q_Utils::sortKeysByLargestNumber($sizes2);
 		return $sizes2;
 	}
 
@@ -123,7 +123,7 @@ class Q_Image
 				$parts[0] = $parts[1];
 			}
 			$diff = $scaled - min($parts[0], $parts[1]);
-			if ($diff >= 0 and $diff < $closest) {
+			if ($closest >= 0 and $diff < $closest) {
 				$closest = $diff;
 				$index = $k;
 			}

@@ -511,7 +511,7 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 										},
 										width: rsw2,
 										height: rsh2,
-										maxScale: maxScale
+										maxScale: state.useAnySize ? 5 : maxScale
 									}, function () {
 										$croppingElement.css({'visibility': 'visible'});
 										Q.handle(state.onCropping, $this, [

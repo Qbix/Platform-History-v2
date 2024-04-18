@@ -80,12 +80,12 @@
 		},
 		"images": {
 			"Streams/image": {
-				"sizes": ["40", "50", "80", "200", "400", "x400", "400x"],
+				"sizes": ["40", "50", "80", "200x", "1000x"],
 				"defaultSize": "400",
 				"maxStretch": 2
 			},
 			"Streams/album": {
-				"sizes": ["40", "50", "80", "200", "400"],
+				"sizes": ["40", "50", "80", "400"],
 				"defaultSize": "400",
 				"maxStretch": 2
 			},

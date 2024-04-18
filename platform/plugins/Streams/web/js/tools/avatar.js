@@ -145,7 +145,9 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 		}
 	},
 	editable: false,
-	imagepicker: {},
+	imagepicker: {
+		useAnySize: true
+	},
 	inplaces: {},
 	cacheBust: null,
 	cacheBustOnUpdate: 1000,

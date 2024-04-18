@@ -62,6 +62,10 @@ function Users_avatar_tool($options)
 		}
 		$sizes = Q_Image::getSizes('Users/icon');
 		$icon2 = Q_Image::calculateSize($icon, $sizes);
+		$filename = Q_Html::themedFilename($avatar->icon . "/$icon2.png");
+		if (!$filename or !file_exists($filename)) {
+			$icon2 = $icon;
+		}
 		$attributes = isset($options['iconAttributes'])
 			? $options['iconAttributes']
 			: array();

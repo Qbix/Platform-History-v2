@@ -184,9 +184,10 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
                     publisherId: tool.stream.fields.publisherId,
                     streamName: tool.stream.fields.name
                 }).activate(function () {
+                    var size = Q.largestSize(Q.image.sizes['Streams/image']);
                     this.icon($icon[0], null, {
                         overrideShowSize: {
-                            "": "400.png"
+                            "": Q.image.sizes['Streams/image'][size]
                         }
                     });
                     $(".Streams_topic_composer_form_group[data-type=icon] label", dialog).on(Q.Pointer.fastclick, function () {

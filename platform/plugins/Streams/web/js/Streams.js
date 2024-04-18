@@ -401,7 +401,7 @@ Streams.iconUrl = function(icon, size) {
 		size = '40';
 	}
 	if (size === 'largestWidth' || size === 'largestHeight') {
-		size = Q.largestSize(Streams.image.sizes, size === 'largestHeight');
+		size = Q.largestSize(Q.image.sizes['Streams/image'], size === 'largestHeight');
 	}
 	size = (String(size).match(/\.\w+$/g)) ? size : size+'.png';
 	icon = icon.match(/\.\w+$/g) ? icon : icon + (size ? '/' + size : '');
@@ -2224,7 +2224,7 @@ function _disconnectStreamNode(publisherId, streamName, ps) {
  */
 Sp.iconUrl = function _Stream_prototype_iconUrl (size) {
 	if (size === 'largestWidth' || size === 'largestHeight') {
-		var sizes = this.getAttribute('sizes') || Streams.image.sizes;
+		var sizes = this.getAttribute('sizes') || Q.image.sizes['Streams/image'];
 		size = Q.largestSize(sizes, size === 'largestHeight');
 	}
 	return Streams.iconUrl(this.fields.icon, size);
@@ -5007,13 +5007,16 @@ function _preloaded(elem) {
 	// Every time we get an HTTP response to a request,
 	// process any preloaded streams and avatars data we find
 	var pns = Object.keys(Stream._preloaded || {});
+	var p = Stream._preloaded;
+	if (pns.length == 0) {
+		return Q.handle(Streams.onPreloaded, Streams, [p]);
+	}
 	var pipe = new Q.Pipe(pns, 1, function () {
 		Q.handle(Streams.onPreloaded, Streams, [p]);
 	});
 	Q.each(Stream._preloaded, function (pn, fields) {
 		Stream.construct(fields, {}, pipe.fill(pn), true);
 	});
-	var p = Stream._preloaded;
 	Stream._preloaded = null;
 	Q.each(Avatar._preloaded, function (i, fields) {
 		var avatar = new Avatar(fields);

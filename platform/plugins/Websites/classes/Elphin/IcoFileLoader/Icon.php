@@ -136,6 +136,7 @@ class Icon implements \ArrayAccess, \Countable, \Iterator
     /**
      * Implements \Iterator allowing foreach($icon as $image){}
      */
+    #[\ReturnTypeWillChange]
     public function current()
     {
         return $this->images[$this->position];
@@ -144,6 +145,7 @@ class Icon implements \ArrayAccess, \Countable, \Iterator
     /**
      * Implements \Iterator allowing foreach($icon as $image){}
      */
+    #[\ReturnTypeWillChange]
     public function key()
     {
         return $this->position;

@@ -705,7 +705,7 @@
 			size = '40';
 		}
 		if (size === 'largestWidth' || size === 'largestHeight') {
-			size = Q.largestSize(Streams.image.sizes, size === 'largestHeight');
+			size = Q.largestSize(Q.image.sizes['Users/icon'], size === 'largestHeight');
 		}
 		size = (String(size).indexOf('.') >= 0) ? size : size + '.png';
 		var src = Q.interpolateUrl(icon + (size ? '/' + size : ''));
