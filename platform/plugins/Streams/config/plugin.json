@@ -80,7 +80,7 @@
 		},
 		"images": {
 			"Streams/image": {
-				"sizes": ["40", "50", "80", "200x", "1000", "x1000", "1000x"],
+				"sizes": ["40", "50", "80", "200x", "1000x"],
 				"defaultSize": "400",
 				"maxStretch": 2
 			},
