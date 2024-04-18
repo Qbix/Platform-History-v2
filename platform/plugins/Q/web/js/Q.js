@@ -1593,9 +1593,12 @@ Q.firstKey = function _Q_firstKey(container, options) {
  * @param {Object|Array|String} sizes If an object, it will use Object.keys().
  *   If it is a string, it will load it by that key from Q.image.sizes object.
  * @param {Boolean} [useHeight=false] by default, uses width
- * @returns 
+ * @param {Object} [options]
+ * @param {String} [options.minimumDimensions] set e.g. "400x400" to return the smallest size
+ *   that's larger than these dimensions (despite name of function)
+ * @returns {String} the size entry
  */
-Q.largestSize = function (sizes, useHeight) {
+Q.largestSize = function (sizes, useHeight, options) {
 	if (typeof sizes === 'string') {
 		if (!Q.image.sizes[sizes]) {
 			throw new Q.Exception("Q.largestSize: Q.image.sizes missing " + sizes);
@@ -1606,7 +1609,9 @@ Q.largestSize = function (sizes, useHeight) {
 	if (!Q.isArrayLike(sizes)) {
 		sizes = Object.keys(sizes);
 	}
-	if (sizes.indexOf('x') >= 0) {
+	var m = options && options.minimumDimensions
+		? options.minimumDimensions.split('x') : null;
+	if (sizes.indexOf('x') >= 0 && !m) {
 		return 'x';
 	}
 	for (var i = 0; i<sizes.length; ++i) {
@@ -1629,8 +1634,13 @@ Q.largestSize = function (sizes, useHeight) {
 			hMax = h;
 			largestIndex = i;
 		}
+		if (m && w >= m[0] && w >= m[1]) {
+			return sizes[largestIndex];
+		}
 	}
-	return largestIndex !== undefined ? sizes[largestIndex] : null;
+	return largestIndex !== undefined
+		? sizes[largestIndex]
+		: (sizes.indexOf('x') >= 0 ? 'x' : null);
 };
 
 /**
