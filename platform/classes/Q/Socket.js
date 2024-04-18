@@ -34,6 +34,19 @@ function Socket (server, options) {
 	} else {
 		this.io = new io.Server(server, o);
 	}
+
+	// for backwards compatibility
+	var BA = this.io.of('a').to('b').constructor;
+	var util = require('util');
+	if (!BA.prototype.allSockets) {
+		BA.prototype.allSockets = util.promisify(BA.prototype.clients);
+	}
+	var NA = this.io.of('a').constructor;
+	if (!NA.prototype.allSockets) {
+		NA.prototype.allSockets = util.promisify(function (callback) {
+			callback(null, this.connected);
+		});
+	}
 }
 
 var _listening = false;
