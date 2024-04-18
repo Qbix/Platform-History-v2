@@ -113,7 +113,7 @@ Q.Tool.define("Q/pdf", function (options) {
 		}
 
 		// wait till lib loaded
-		if (Q.typeOf(window.pdfjsLib) === "undefined") {
+		if (Q.typeOf(window.pdfjsLib) === "undefined" || Q.typeOf(window.canvasSize) === "undefined") {
 			return setTimeout(tool.implement.bind(tool), 500);
 		}
 
@@ -130,22 +130,23 @@ Q.Tool.define("Q/pdf", function (options) {
 			Q.handle(state.onSlide, tool, [slideIndex]);
 		});
 
-		var loadingTask = pdfjsLib.getDocument(state.url);
+		window.canvasSize.maxArea({onSuccess({ width, height, testTime, totalTime }) {
+			state.maxCanvas = width * height;
+			pdfjsLib.getDocument(state.url).promise.then(function(pdf) {
+				state.pdf = pdf;
 
-		loadingTask.promise.then(function(pdf) {
-			state.pdf = pdf;
+				pdf.getMetadata().then(function(stuff) {
+					state.pdfInfo.title = Q.getObject("info.Title", stuff) || Q.getObject("contentDispositionFilename", stuff);
+					state.pdfInfo.description = Q.getObject("info.Subject", stuff);
+					state.pdfInfo.author = Q.getObject("info.Author", stuff);
+				}).catch(function(err) {
+					console.log('Q/pdf: Error getting meta data');
+					console.log(err);
+				});
 
-			pdf.getMetadata().then(function(stuff) {
-				state.pdfInfo.title = Q.getObject("info.Title", stuff) || Q.getObject("contentDispositionFilename", stuff);
-				state.pdfInfo.description = Q.getObject("info.Subject", stuff);
-				state.pdfInfo.author = Q.getObject("info.Author", stuff);
-			}).catch(function(err) {
-				console.log('Q/pdf: Error getting meta data');
-				console.log(err);
+				tool.renderPage();
 			});
-
-			tool.renderPage();
-		});
+		}});
 	},
 	/**
 	 * Render pdf page
@@ -166,6 +167,13 @@ Q.Tool.define("Q/pdf", function (options) {
 		var viewport = page.getViewport({
 			scale: $toolElement.width()/page.getViewport({scale: state.scale}).width
 		});
+		var i = 1;
+		while (viewport.width * viewport.height > state.maxCanvas) {
+			viewport = page.getViewport({
+				scale: $toolElement.width()/page.getViewport({scale: state.scale + i*0.1}).width
+			});
+			i++;
+		}
 
 		//We'll create a canvas for each page to draw it on
 		var canvas = document.createElement("canvas");
