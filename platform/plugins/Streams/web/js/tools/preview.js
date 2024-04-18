@@ -132,7 +132,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 
 	imagepicker: {
 		showSize: "50",
-		fullSize: "400x",
+		fullSize: Q.largestSize(Q.image.sizes['Streams/image']) || '1000x',
 		save: "Streams/image"
 	},
 	sizes: null,

@@ -50,12 +50,17 @@
 
 			tool.$previewElement && Q.Tool.remove(tool.$previewElement[0], true, true);
 
-			tool.$previewElement = $("<div>").css("display", "none").appendTo(tool.chatTool.element.parentElement).tool("Streams/preview", {
+			tool.$previewElement = $("<div>").css("display", "none")
+			.appendTo(tool.chatTool.element.parentElement)
+			.tool("Streams/preview", {
 				publisherId: userId,
 				related: {
 					publisherId: tool.chatTool.state.publisherId,
 					streamName: tool.chatTool.state.streamName,
 					type: "Streams/image"
+				},
+				imagepicker: {
+					useAnySize: true
 				},
 				onRefresh: function () {
 					tool.refresh();

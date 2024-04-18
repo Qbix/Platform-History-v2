@@ -164,7 +164,7 @@ Q.Tool.define("Assets/plan", function(options) {
 				tool.preview = this;
 				tool.preview.icon($("img.Assets_plan_image", tool.element)[0], null, {
 					overrideShowSize: {
-						'': Q.image.sizes['Streams/image']['size']
+						'': Q.image.sizes['Streams/image'][size]
 					}
 				});
 			});

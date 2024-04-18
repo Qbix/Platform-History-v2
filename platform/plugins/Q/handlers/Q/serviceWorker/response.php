@@ -41,15 +41,17 @@ var Q = {
 				}
 			));
 		}
-		return caches.match(event.request)
-		.then(function (response) {
-			if (response) {
-				console.log('cached: ' + event.request.url);
-				return event.respondWith(response);
-			}
-			// otherwise, attach some headers
-			// return event.respondWith(fetch(event.request));
-		})
+		return event.respondWith(
+			caches.match(event.request)
+			.then(function (response) {
+				if (response !== undefined) {
+					console.log('cached: ' + event.request.url);
+					return response;
+				}
+				// otherwise, attach some headers
+				return fetch(event.request);
+			})
+		);
 	});
 	self.addEventListener("install", (event) => {
 		self.skipWaiting();
