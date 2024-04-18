@@ -160,10 +160,11 @@ Q.Tool.define("Assets/plan", function(options) {
 				streamName: state.streamName,
 				editable: true
 			}).activate(function () {
+				var size = Q.largestSize(Q.image.sizes['Streams/image']);
 				tool.preview = this;
 				tool.preview.icon($("img.Assets_plan_image", tool.element)[0], null, {
 					overrideShowSize: {
-						'': 400
+						'': Q.image.sizes['Streams/image']['size']
 					}
 				});
 			});
