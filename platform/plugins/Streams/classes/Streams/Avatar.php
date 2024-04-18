@@ -584,7 +584,7 @@ class Streams_Avatar extends Base_Streams_Avatar
 	{
 		$stream = Streams_Stream::fetch($userId, $userId, 'Streams/user/icon');
 		$sizes = $stream->getAttribute('sizes', array());
-		Q_Utils::sortKeysNumerically($sizes);
+		Q_Utils::sortKeysByLargestNumber($sizes);
 		return $sizes;
 	}
 	
