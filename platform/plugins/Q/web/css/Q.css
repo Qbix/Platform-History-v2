@@ -1110,5 +1110,7 @@ body.Q_columns_animationFX {
 		background: url(../img/bg/overlay-dark.png);
 		color: white;
 		fill: white;
+		--dialog-bg-color: #444;
+		--dialog-color: #white;
 	}
 }
