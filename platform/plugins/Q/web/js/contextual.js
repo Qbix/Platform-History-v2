@@ -645,8 +645,9 @@
 			}
 		
 			// temporary showing contextual but making it invisible, it's only needed for getting correct height of contextual
-			contextual.css({ 'visibility': 'hidden' });
-			contextual.show();
+			contextual.css({ 'visibility': 'hidden' })
+				.css("z-index", Q.zIndexTopmost())
+				.show();
 		
 			var listingWrapper = contextual.children('.Q_listing_wrapper');
 			listingWrapper.children('.Q_scroller_wrapper').children().unwrap();

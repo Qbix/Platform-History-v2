@@ -132,7 +132,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 
 	imagepicker: {
 		showSize: "50",
-		fullSize: Q.largestSize(Q.image.sizes['Streams/image']) || '1000x',
+		fullSize: null,
 		save: "Streams/image"
 	},
 	sizes: null,
@@ -373,6 +373,9 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 			var oss = Q.extend({}, state.overrideShowSize, options.overrideShowSize);
 			var fields = this.fields;
 			var si = state.imagepicker;
+			if (si.fullSize == null) {
+				si.fullSize = Q.largestSize(Q.image.sizes['Streams/image']) || '1000x';
+			}
 			var sfi = options.icon || fields.icon;
 			var size = si.saveSizeName[si.showSize];
 			var attributes = options.attributes || fields.attributes;
