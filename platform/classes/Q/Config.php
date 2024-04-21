@@ -35,13 +35,17 @@ class Q_Config
 	 * Saves the configuration to a file
 	 * @method save
 	 * @static
-	 * @param {string} $file The file to save into
-	 * @param {array} [$array_path=array()] Array of keys identifying the path of the config subtree to save
+	 * @param {string} $filename Name of file to save to. If tree was loaded, you can leave this blank to update that file.
+	 * @param {array} [$array_path=array()] Array of keys identifying the path of the subtree to save
+	 * @param {array} [$prefix_path=array()] The JSON path to save the data under, defaults to array_path
+	 * @param {integer} [$flags=0] Any additional flags for json_encode, such as JSON_PRETTY_PRINT
 	 * @return {boolean} Returns true if saved, otherwise false.
 	 */
 	static function save(
 	 $filename, 
-	 $array_path = array(), $prefix_path = null)
+	 $array_path = array(),
+	 $prefix_path = null,
+	 $flags = 0)
 	{
 		$args = func_get_args();
 		if (!isset(self::$tree)) {

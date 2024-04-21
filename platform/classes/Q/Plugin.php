@@ -241,7 +241,7 @@ class Q_Plugin
 			// are still what they used to be. PHP code has to handle such discrepancies
 			// in case the installer fails midway.
 			Q_Config::set('Q', $localField, $name, $conf);
-			Q_Config::save($local_file, array('Q', $localField));
+			Q_Config::save($local_file, array('Q', $localField), null, JSON_PRETTY_PRINT);
 			echo PHP_EOL;
 		}
 		if (Q::compareVersion($version, $current_version) > 0) {
@@ -739,14 +739,14 @@ class Q_Plugin
 		$app_web_text_app_dir = APP_WEB_DIR.DS.'Q'.DS.'text'.DS.$app_name;
 		if (!file_exists($app_web_text_app_dir)
 		and file_exists($app_text_dir)) {
-			echo '  '.$app_web_text_app_dir.PHP_EOL;
+			echo 'Created symlink: web/Q/text'.PHP_EOL;
 			Q_Utils::symlink($app_text_dir, $app_web_text_app_dir);
 		}
 
 		// Save info about app
 		echo 'Registering app'.PHP_EOL;
 		Q_Config::set('Q', 'appLocal', $app_conf);
-		Q_Config::save($app_installed_file, array('Q', 'appLocal'));
+		Q_Config::save($app_installed_file, array('Q', 'appLocal'), null, JSON_PRETTY_PRINT);
 
 		// Create .htaccess file if it doesn't exist
 		if (!file_exists(APP_WEB_DIR.DS.'.htaccess')) {
@@ -880,17 +880,17 @@ EOT;
 		self::composerInstall($plugin_dir, !empty($options['composer']));
 
 		// Symbolic links
-		echo 'Creating symbolic links'.PHP_EOL;
+		$pluginsPrefix = 'Q'.DS.'plugins'.DS;
 		if (!file_exists($app_web_plugins_dir.DS.$plugin_name)) {
 			$p = $app_web_plugins_dir.DS.$plugin_name;
-			echo '  '.$p.PHP_EOL;
+			echo 'created symlink: web/Q/plugins/'.$plugin_name.PHP_EOL;
 			Q_Utils::symlink($plugin_dir.DS.'web', $p);
 		}
 		
 		if (!file_exists($app_text_plugin_dir)
 		and file_exists($plugin_text_dir)) {
 			$p = $app_text_plugin_dir;
-			echo '  '.$p.PHP_EOL;
+			echo 'created symlink: web/Q/text/'.$plugin_name.PHP_EOL;
 			Q_Utils::symlink($plugin_text_dir, $p);
 		}
 
@@ -921,7 +921,7 @@ EOT;
 		// Save info about plugin
 		echo 'Registering plugin'.PHP_EOL;
 		Q_Config::set('Q', 'pluginLocal', $plugin_name, $plugin_conf);
-		Q_Config::save($app_plugins_file, array('Q', 'pluginLocal'));
+		Q_Config::save($app_plugins_file, array('Q', 'pluginLocal'), null, JSON_PRETTY_PRINT);
 
 		/**
 		 * @event Q/Plugin/install {after}

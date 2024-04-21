@@ -402,7 +402,8 @@ class Q_Tree
 	 * Saves parameters to a file
 	 * @method save
 	 * @param {string} $filename Name of file to save to. If tree was loaded, you can leave this blank to update that file.
-	 * @param {array} [$array_path=array()] Array of keys identifying the path of the config subtree to save
+	 * @param {array} [$array_path=array()] Array of keys identifying the path of the subtree to save
+	 * @param {array} [$prefix_path=array()] The JSON path to save the data under, defaults to array_path
 	 * @param {integer} [$flags=0] Any additional flags for json_encode, such as JSON_PRETTY_PRINT
 	 * @return {boolean} Returns true if saved, otherwise false;
 	 **/
@@ -433,9 +434,9 @@ class Q_Tree
 
 		$prefix_path = array_reverse($prefix_path);
 
-		foreach($prefix_path as $ap) {
-			if($ap) {
-				$toSave = array($ap=>$toSave);
+		foreach ($prefix_path as $ap) {
+			if ($ap) {
+				$toSave = array( $ap => $toSave);
 			}
 		}
 
