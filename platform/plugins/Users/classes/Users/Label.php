@@ -319,7 +319,7 @@ class Users_Label extends Base_Users_Label
     static function operateLabelAction($label_1, $label_2, $actionKey, $roles)
     {
 		if (empty($roles)) {
-			$roles = Q_Config::expect("Users", "communities", "roles");
+			$roles = Q_Config::expect("Users", "roles");
 		}
         $keyRoles = array_keys($roles);
 		
@@ -408,7 +408,7 @@ class Users_Label extends Base_Users_Label
 	 */
 	static function ofCommunities()
 	{
-		$roles = Q_Config::expect("Users", "communities", "roles");
+		$roles = Q_Config::expect("Users", "roles");
 		return array_keys($roles);
 	}
     
