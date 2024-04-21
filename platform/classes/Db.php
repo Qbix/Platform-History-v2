@@ -606,7 +606,14 @@ abstract class Db
 		// Make a new connection to a database!
 		try {
 			self::$pdo_array[$key] = @new PDO($dsn, $username, $password, $driver_options);
-			if (!isset($driver_options['exec'])) {
+			$alreadySetCharset = false;
+			if (version_compare(PHP_VERSION, '5.3.6', '>=')) {
+				$parts = Db::parseDsnString($dsn);
+				if (isset($parts['charset'])) {
+					$alreadySetCharset = true;
+				}
+			}
+			if (!$alreadySetCharset && !isset($driver_options['exec'])) {
 				$driver_options['exec'] = 'set names utf8mb4';
 			}
 			if (!empty($driver_options['exec'])) {
