@@ -9,6 +9,14 @@ function Users_after_Q_Plugin_install($params)
 	// get label need to install
 	$labelsToInstall = Q_Config::get('Users', 'onInsert', 'labels', array());
     $rolesToInstall = Q_Config::get('Users', 'onInsert', 'roles', array());
+	
+	// for backwards compatibility
+	if (Q::isAssociative($labelsToInstall)) {
+		$labelsToInstall = array_keys($labelsToInstall);
+	}
+	if (Q::isAssociative($rolesToInstall)) {
+		$rolesToInstall = array_keys($rolesToInstall);
+	}
 
 	// get labels already installed
     $extra = Q_Plugin::extra('Users', 'plugin', 'Users');
