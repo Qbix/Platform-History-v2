@@ -5474,7 +5474,7 @@ Tp.remove = function _Q_Tool_prototype_remove(removeCached, removeElementAfterLa
 	
 	// remove immediate children first, and so on recursively
 	var childId, childName;
-	var children = this.children(null, 1)
+	var children = this.children('', 1)
 	for (childId in children) {
 		for (childName in children[childId]) {
 			children[childId][childName].remove();
@@ -5566,8 +5566,12 @@ Tp.forEachChild = function _Q_Tool_prototype_forEachChild(name, levels, withSibl
 	var tool = this;
 	var children = tool.children(name, levels);
 	for (id in children) {
-		for (n in children[id]) {
-			Q.handle(callback, children[id][n]);
+		if (name) {
+			Q.handle(callback, children[id]);
+		} else {
+			for (n in children[id]) {
+				Q.handle(callback, children[id][n]);
+			}
 		}
 	}
 	var onActivate = Q.Tool.onActivate(name);
