@@ -1981,7 +1981,10 @@ Q.extend = function _Q_extend(target /* [[deep,] [levels,] anotherObject], ... *
 			}
 		}
 		if (Q.isArrayLike(target) && Q.isArrayLike(arg)) {
-			target = target.concat(arg);
+			target = target.concat(arg)
+				.filter(function (item, i, ar) {
+					return ar.indexOf(item) === i;
+				});
 		} else {
 			for (var k in arg) {
 				if (deep !== true 

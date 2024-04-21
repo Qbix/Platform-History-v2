@@ -1922,7 +1922,10 @@ Q.extend = function _Q_extend(target /* [[deep,] [levels,] anotherObject], ... [
 			continue;
 		}
 		if (type === 'array' && Q.isArrayLike(arg)) {
-			target = Array.prototype.concat.call(target, arg);
+			target = Array.prototype.concat.call(target, arg)
+			.filter(function (item, i, ar) {
+				return ar.indexOf(item) === i;
+			});
 		} else {
 			for (k in arg) {
 				if (deep !== true 
