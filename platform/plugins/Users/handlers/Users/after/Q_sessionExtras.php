@@ -12,7 +12,7 @@ function Users_after_Q_sessionExtras() {
 		Q_Response::addHtmlCssClass('Users_role-'.ucfirst(Q_Utils::normalize($role->label)));
 		Q_Response::setScriptData('Q.plugins.Users.roles.'.$label, $role->exportArray());
 	}
-	$config = Q_Config::get('Users', 'communities', 'roles', array());
+	$config = Q_Config::get('Users', 'roles', array());
 	foreach (array('canGrant', 'canRevoke', 'canSee') as $can) {
 		$results = array();
 		foreach ($roles as $r => $contact) {

@@ -22,12 +22,7 @@ function Streams_after_Q_Plugin_install($params)
     $extra[$key] = Q::ifset($extra, $key, array());
     $streamsInstalled = $extra[$key];
 
-	$streamsNeedToInstall = array();
-	foreach ($streamsToInstall as $streamToInstall) {
-		if (!in_array($streamToInstall, $streamsInstalled)) {
-			$streamsNeedToInstall[] = $streamToInstall;
-		}
-	}
+	$streamsNeedToInstall = array_values(array_diff($streamsToInstall, $streamsInstalled));
 
 	// if all streams already inserted - exit
 	if (!count($streamsNeedToInstall)) {
@@ -61,7 +56,9 @@ function Streams_after_Q_Plugin_install($params)
 			echo "\033[100D";
 			echo "$plugin_name: processed streams for ".($j + $offset + 1)." of $c users"
 				. str_repeat(' ', 20);
-			gc_collect_cycles();
+			if (is_callable('gc_collect_cycles')) {
+				gc_collect_cycles();
+			}
 		}
 		$offset += $batch;
 	}

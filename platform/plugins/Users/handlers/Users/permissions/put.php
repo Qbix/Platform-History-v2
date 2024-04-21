@@ -28,7 +28,7 @@ function Users_permissions_put($params = array())
 	$perm = new Users_Permission();
 	$perm->userId = $req['userId'];
 	$perm->label = $req['label'];
-	$perm->permission = implode('/', array('Users', 'communities', 'roles'));//Users/communities/roles
+	$perm->permission = implode('/', array('Users', 'roles'));//Users/communities/roles
 	$result = $perm->retrieve();
 	
 	$extras = $perm->getAllExtras();

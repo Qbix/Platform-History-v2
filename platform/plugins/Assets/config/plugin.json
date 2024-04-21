@@ -227,18 +227,16 @@
 				}
 			}
 		},
-		"communities": {
-			"roles": {
-				"Users/owners": {
-					"canManageLabels": [
-						"Assets/"
-					]
-				},
-				"Users/admins": {
-					"canManageLabels": [
-						"Assets/"
-					]
-				}
+		"roles": {
+			"Users/owners": {
+				"canManageLabels": [
+					"Assets/"
+				]
+			},
+			"Users/admins": {
+				"canManageLabels": [
+					"Assets/"
+				]
 			}
 		}
 	},

@@ -69,11 +69,11 @@ class Users_Label extends Base_Users_Label
 	 * Add a label / role
 	 * @method {boolean} addLabel
 	 * @static
-	 * @param {string|array} $label A label or array of ($label => $title)
-	 *   or ($label => array($title, $icon)) pairs.
-	 * @param {string} [$userId=null] The logged-in user if not provided
+	 * @param {string|array} $label A label or array whose keys are labels,
+	 *   and values may include a string ($title) or array($title, $icon).
+	 * @param {string} [$userId=null] Defaults to the logged-in user
 	 * @param {string} [$title=''] specify the title, otherwise a default one is generated
-	 * @param {string} [$icon='labels/default']
+	 * @param {string} [$icon=null] defaults to what's in config, falling back to "labels/default"
 	 * @param {string|false} [$asUserId=null] The user to do this operation as.
 	 *   Defaults to the logged-in user. Pass false to skip access checks and set Q::app() as the user.
 	 * @param boolean [$updateIfExists=false] If true, updates the label if it already exists
@@ -85,7 +85,7 @@ class Users_Label extends Base_Users_Label
 		$label, 
 		$userId = null, 
 		$title = null, 
-		$icon = 'labels/default',
+		$icon = null,
 		$asUserId = null,
 		$updateIfExists = false,
 		$skipAccess = false)
@@ -101,22 +101,41 @@ class Users_Label extends Base_Users_Label
 				return;
 			}
 			foreach ($label as $l => $title) {
-				if (is_array($title)) {
-					$icon = $title[1];
-					$title = $title[0];
-				} else {
-					$icon = 'labels/default';
-				}
 				Users_Label::addLabel($l, $userId, $title, $icon, $asUserId, $updateIfExists);
 			}
 			return;
 		}
-		if (empty($title)) {
-			$parts = explode('/', $label);
-			$title = ucfirst(end($parts));
+		if (is_array($title)) {
+			$icon = $title[1];
+			$title = $title[0];
 		}
-		if (!isset($icon)) {
-			$icon = 'labels/default';
+		if (empty($title) or empty($icon)) {
+			$info = Users::isCommunityId($userId)
+				? Q_Config::get('Users', 'roles', $label, array())
+				: Q_Config::get('Users', 'labels', $label, array());
+			if (empty($title)) {
+				$title = Q::ifset($info, 'title', null);
+				// if still empty, then will be calculated from label
+			}
+			if (empty($icon)) {
+				$icon = Q::ifset($info, 'icon', 'labels/default');
+			}
+		}
+		if (is_array($title)) {
+			// can specify text file entries directly
+			$title = Q::interpolate($title);
+		} else {
+			$parts = explode('/', $label);
+			$module = reset($parts);
+			if (empty($title)) {
+				$title = ucfirst(end($parts));
+			}
+			$text = Q_Text::get("$module/content");
+			if (!empty($text['labels']['titles'][$label])) {
+				$title = $text['labels']['titles'][$label];
+			} else if (!empty($text['labels']['titles'][$title])) {
+				$title = $text['labels']['titles'][$title];
+			}
 		}
 		if (!isset($userId)) {
 			$user = Users::loggedInUser(true);
@@ -139,7 +158,7 @@ class Users_Label extends Base_Users_Label
 				$perm = new Users_Permission();
 				$perm->userId = $userId;
 				$perm->label = 'Users/owners';
-				$perm->permission = implode('/', array('Users', 'communities', 'roles'));//Users/communities/roles
+				$perm->permission = implode('/', array('Users', 'roles'));//Users/communities/roles
 				$result = $perm->retrieve();
 				// set extras
 				$perm->setExtra(array(
@@ -152,7 +171,7 @@ class Users_Label extends Base_Users_Label
 				$perm = new Users_Permission();
 				$perm->userId = $userId;
 				$perm->label = 'Users/admins';
-				$perm->permission = implode('/', array('Users', 'communities', 'roles'));//Users/communities/roles
+				$perm->permission = implode('/', array('Users', 'roles'));//Users/communities/roles
 				$result = $perm->retrieve();
 				// set extras
 				$perm->setExtra(array(
@@ -167,10 +186,6 @@ class Users_Label extends Base_Users_Label
 
 		if (!$skipAccess) {
 			Users::canManageLabels($asUserId, $userId, $label, true);
-		}
-		if (empty($title)) {
-			$parts = explode("/", $label);
-			$title = ucfirst(end($parts));
 		}
 		self::_icon($l, $icon, $userId);
 		$l->title = $title;
@@ -405,7 +420,7 @@ class Users_Label extends Base_Users_Label
 	 */
     static function ofCommunity($communityId) 
     {
-		$roles = Q_Config::get('Users', 'communities', 'roles', array());
+		$roles = Q_Config::get('Users', 'roles', array());
         $rows = Users_Permission::ofCommunity($communityId);
 		$tree = new Q_Tree($roles);
 		foreach ($rows as $row) {
@@ -419,16 +434,27 @@ class Users_Label extends Base_Users_Label
 		}
 		return $tree->getAll();
     }
+
+	/**
+	 * Get array of labels from both "canGrant" and "canRevoke"
+	 * which can manage a given label.
+	 * @method canManage
+	 * @static
+	 * @param {string} $communityid
+	 * @param {string} $label
+	 * @return {array} with keys "labels" (from all roles) and "locked" (from config roles)
+	 */
 	static function canManage($communityId, $label) 
 	{
 		$ret = array();
 		$labels = Users_Label::ofCommunity($communityId);
-		$roles = Q_Config::get('Users', 'communities', 'roles', array());	
+		$roles = Q_Config::get('Users', 'roles', array());	
 		
 		$ret['labels'] = Users_Label::_canManage($labels, $label);
 		$ret['locked'] = Users_Label::_canManage($roles, $label);
 		return $ret;
 	}
+
 	/**
 	 * return array of labels which contain labels in both array `canGrant` and `canRevoke`
 	 */

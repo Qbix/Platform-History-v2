@@ -921,7 +921,7 @@ Q.Template.set('Users/labels', `
 {{/if}}
 {{#each labels}}
     <li class="Users_labels_label" data-label="{{this.label}}" data-icon="{{this.icon}}" data-title="{{this.title}}" data-description="{{this.description}}">
-      <img class="Users_labels_icon" src="{{call "iconUrl" 80}}" alt="label icon">
+      <img class="Users_labels_icon" src="{{call "iconUrl" 400}}" alt="label icon">
       <div class="Users_labels_title">{{this.title}}</div>
     </li>
 {{/each}}

@@ -2,6 +2,8 @@
 
 /**
  * Returns a vote or value, if one is there
+ * @class Users vote
+ * @method GET
  * @param {string} forType the type of thing to vote for
  * @param {string} forId string uniquely identifying that thing among others of its type
  */

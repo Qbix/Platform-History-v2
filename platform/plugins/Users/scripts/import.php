@@ -38,6 +38,10 @@ Script to import users from a Discourse installation.
    When the script is restarted afterwards, it skips users that have
    already been imported, even if partially.
 
+3) When done, please set config Users/login/alsoSendUnhashedPassphrase
+   to true, so users can log in using the same password they had been
+   using to log into Discourse.
+
 $usage
 
 EOT;

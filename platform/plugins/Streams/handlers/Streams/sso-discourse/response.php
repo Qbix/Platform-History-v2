@@ -26,6 +26,5 @@ function Streams_sso_discourse_response()
         $parts = explode('=', $segment);
         $fields[urldecode($parts[0])] = urldecode($parts[1]);
     }
-    Q::var_dump($fields);exit;
     return true;
 }

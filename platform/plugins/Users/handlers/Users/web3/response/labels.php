@@ -2,12 +2,12 @@
 
 /**
  * @module Users
+  * @class HTTP Users web3
  */
 
 /**
  * Used by HTTP clients to fetch one more more labels
- * @class HTTP Users label
- * @method GET/labels
+ * @method GET
  * @param {array} [$params] Parameters that can come from the request
  *   @param {string|array} [$params.userIds] The users whose labels to fetch. Can be a comma-separated string
  *   @param {string|array} [$params.filter] Optionally filter by specific labels, or label prefixes ending in "/". Can be a comma-separated string

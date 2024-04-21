@@ -2,6 +2,8 @@
 
 /**
  * Votes for something
+ * @class Users vote
+ * @method POST
  * @param {string} forType the type of thing to vote for
  * @param {string} forId string uniquely identifying that thing among others of its type
  * @param {integer} value the value the user has voted for, such as a rating etc.

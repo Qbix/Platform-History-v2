@@ -146,12 +146,16 @@
         "doAuth": "Log in with this account",
         "doSwitch": "Switch to this account"
     },
-    "roles": {
-        "Owner": "Owner",
-        "Admin": "Admin",
-        "Member": "Member",
-        "Guest": "Guest",
-        "Host": "Host"
+    "labels": {
+        "titles": {
+            "Users/owners": "Owner",
+            "Users/admins": "Admin",
+            "Users/members": "Member",
+            "Users/guests": "Guest",
+            "Users/hosts": "Host",
+            "Users/testers": "Tester",
+            "Users/speakers": "Speaker"
+        }
     },
     "web3": {
         "WrongMethod": "Wrong contract method {{methodName}}",

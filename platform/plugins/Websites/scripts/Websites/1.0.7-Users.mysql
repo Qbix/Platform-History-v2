@@ -1,0 +1,2 @@
+UPDATE {{prefix}}label
+SET icon = REPLACE(icon, "/Websites/roles/", "/labels/Websites/");
