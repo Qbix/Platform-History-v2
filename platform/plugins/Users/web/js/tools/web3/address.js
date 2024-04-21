@@ -10,8 +10,11 @@
      * @class Users/web3/address
      * @constructor
      * @param {Object} options Override various options for this tool
-     * @param {Object} userChooser Override any options for userChooser child tool
-     * @param {String} [chosen.address] You can pass an initial address here, that may be changed by the tool UX
+     * @param {Object} [options.userChooser] Override any options for userChooser child tool
+     * @param {Object} [options.chosen]
+     * @param {String} [options.chosen.address] You can pass an initial address here, that may be changed by the tool UX
+     * @param {Event} [onAddress] fired when an address is selected, check state.chosen.address
+     * @param {Event} [onRefresh] fired when tool is refreshed
      */
     
     Q.Tool.define("Users/web3/address", function (options) {

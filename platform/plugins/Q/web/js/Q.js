@@ -5270,7 +5270,8 @@ Tp.rendering = function (fields, callback, key, dontWaitForAnimationFrame) {
 /**
  * Gets child tools contained in the tool, as determined by their ids.
  * @method children
- * @param {String} [name=""] Filter children by their tool name, such as "Q/inplace"
+ * @param {String} [name=""] Filter children by their tool name, such as "Q/inplace".
+ *   If this is not empty, then returns an object of {toolId: tool} pairs.
  * @param {number} [levels=null] Pass 1 here to get only the immediate children, 2 for immediate children and grandchildren, etc.
  * @return {Object} A two-level hash of pairs like {id: {name: Tool}}
  */
@@ -5287,14 +5288,22 @@ Tp.children = function Q_Tool_prototype_children(name, levels) {
 			}
 			var tool = Q.Tool.active[id][n];
 			if (!levels) {
-				Q.setObject([id, n], tool, result);
+				if (name) {
+					result[id] = tool;
+				} else {
+					Q.setObject([id, n], tool, result);
+				}
 				continue;
 			}
 			ids = tool.parentIds();
 			var l = Math.min(levels, ids.length);
 			for (i=0; i<l; ++i) {
 				if (ids[i] === this.id) {
-					Q.setObject([id, n], tool, result);
+					if (name) {
+						result[id] = tool;
+					} else {
+						Q.setObject([id, n], tool, result);
+					}
 					continue;
 				}
 			}
@@ -11768,6 +11777,8 @@ Q.Template.onError = new Q.Event(function (err) {
  * @param {String} [options.dir] the folder under project web folder where templates are located
  * @param {String} [options.name] option to override the name of the template
  * @param {String} [options.tool] if the rendered HTML will be placed inside a tool, pass it here so that its prefix will be used
+ * @param {String} [options.activateInContainer] if passed, the html will be inserted into the container and activated
+ * @param {Function} [options.onActivate] if activateInContainer is passed, then you can pass a callback here to be called after activate
  * @return {Promise} can use this instead of callback
  */
 Q.Template.render = Q.promisify(function _Q_Template_render(name, fields, callback, options) {
@@ -11786,8 +11797,9 @@ Q.Template.render = Q.promisify(function _Q_Template_render(name, fields, callba
 			);
 		});
 	}
-	var templateName = (options && options.name) ? options.name : name;
-	var tba = (options && options.tool) || Q.Tool.beingActivated;
+	var o = options || {};
+	var templateName = (o.name) ? o.name : name;
+	var tba = (o && o.tool) || Q.Tool.beingActivated;
 	var pba = Q.Page.beingActivated;
 	Q.loadHandlebars(function () {
 		// load the template and its associated info
@@ -11808,9 +11820,9 @@ Q.Template.render = Q.promisify(function _Q_Template_render(name, fields, callba
 			Q.Page.beingActivated = pba;
 			var err;
 			try {
-				var type = (info && info.type) || (options && options.type);
-				var compiled = Q.Template.compile(params.template[1], type, options);
-				var result = compiled(fields, options || {});
+				var type = (info && info.type) || (o && o.type);
+				var compiled = Q.Template.compile(params.template[1], type, o);
+				var result = compiled(fields, o);
 			} catch (e) {
 				err = e;
 				console.warn(e);
@@ -11818,13 +11830,19 @@ Q.Template.render = Q.promisify(function _Q_Template_render(name, fields, callba
 			if (err) {
 				callback(err);
 			} else {
+				var container = o.activateInContainer;
+				if (container) {
+					Q.replace(container, result);
+					Q.activate(container, o.onActivate);
+				}
 				callback(null, result);
 			}
 			Q.Tool.beingActivated = tbaOld;
 			Q.Page.beingActivated = pbaOld;
 		});
-		var o = Q.copy(options, ['type', 'dir', 'name']);
-		Q.Template.load(templateName, p.fill('template'), o);
+		Q.Template.load(templateName, p.fill('template'), Q.copy(
+			o, ['type', 'dir', 'name']
+		));
 		Q.each(['partials', 'helpers', 'text'], function (j, aspect) {
 			if (!info) {
 				// template was not defined yet, so no partials/helpers/text to load
