@@ -1,5 +1,5 @@
 <?php
-function Streams_1_0_6_Websites () {
+function Websites_1_0_6_Streams () {
 	$communityId = Users::communityId();
 
 	// access stream for managing community roles
@@ -25,4 +25,4 @@ function Streams_1_0_6_Websites () {
 	}
 	echo "\n";
 }
-Streams_1_0_6_Websites();
+Websites_1_0_6_Streams();
