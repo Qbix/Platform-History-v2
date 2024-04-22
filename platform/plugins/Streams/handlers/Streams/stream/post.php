@@ -76,9 +76,10 @@ function Streams_stream_post($params = array())
 
 	// Should this stream be related to another stream?
 	$relate = array();
-	$relate['streamName'] = Q_Request::special("Streams.related.streamName", null, $req);
-	if (isset($relate['streamName'])) {
+	$relateStreamName = Q_Request::special("Streams.related.streamName", null, $req);
+	if (isset($relateStreamName)) {
 		$relate['publisherId'] = Q_Request::special("Streams.related.publisherId", $publisherId, $req);
+		$relate['name'] = $relateStreamName;
 		$relate['type'] = Q_Request::special("Streams.related.type", null, $req);
 		$relate['weight'] = Q_Request::special("Streams.related.weight", "+1", $req); // TODO: introduce ways to have "1" and "+1" for some admins etc.
 		Q_Valid::requireFields(array('publisherId', 'type'), $relate, true);
@@ -154,7 +155,7 @@ function Streams_stream_post($params = array())
 
 	// if $stream is null - Create new stream
 	if (!$stream instanceOf Streams_Stream) {
-		$stream =  Streams::create($user->id, $publisherId, $type, $fields, $relate, $result);
+		$stream =  Streams::create($user->id, $publisherId, $type, $fields, null, $result);
 	}
 	$messageTo = false;
 	if (isset($result['messagesTo']) && !empty($result['messagesTo'])) {
@@ -214,6 +215,13 @@ function Streams_stream_post($params = array())
 	if (empty($req['dontSubscribe'])) {
 		// autosubscribe to streams you yourself create, using templates
 		$stream->subscribe();
+	}
+
+	// relate stream to category after all other actions (like save icon, file etc) complete
+	if (!empty($relate)) {
+		$stream->relateTo((object)$relate, $relate['type'], null, array(
+			'weight' => $relate['weight']
+		));
 	}
 
 	Streams::$cache['stream'] = $stream;

@@ -1828,13 +1828,11 @@ class Q_Utils
 	 * @method joinId
 	 * @static
 	 * @param {string} $id the id to split, this can also be a path ending in a userId
-	 * @param {integer} [$lengths=3] the lengths of each segment (the last one can be smaller)
 	 * @param {string} [$delimiter=DIRECTORY_SEPARATOR] the delimiter to put between segments
 	 * @return {string} the original userId
 	 */
 	static function joinId(
 		$splitId,
-		$lengths = 3,
 		$delimiter = DIRECTORY_SEPARATOR
 	) {
 		return implode('', explode($delimiter, $splitId));

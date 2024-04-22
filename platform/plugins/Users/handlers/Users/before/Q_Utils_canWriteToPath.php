@@ -24,9 +24,10 @@ function Users_before_Q_Utils_canWriteToPath($params, &$result)
 	$usersCanHandle = array($user->id);
 
 	$matches = array();
-	if (preg_match("#files/$app/uploads/Users/(.*)/icon#", $path, $matches)
+	$pregNormalizedPath = preg_replace("#\\\+#", "/", $path);
+	if (preg_match("#files/$app/uploads/Users/(.*)/icon#", $pregNormalizedPath, $matches)
 	and !empty($matches[1])) {
-		if ($userIdForIcon = Q_Utils::joinId($matches[1])
+		if ($userIdForIcon = Q_Utils::joinId($matches[1], '/')
 		and $userIdForIcon !== $user->id) {
 			// check labels which can manage the user's icon
 			if ($labels = Q_Config::get("Users", "icon", "canManage", array())
@@ -43,10 +44,10 @@ function Users_before_Q_Utils_canWriteToPath($params, &$result)
 				$usersCanHandle[] = $userIdForIcon;
 			}
 		}
-	} else if (preg_match("#files/$app/uploads/Users/(.*)/labels/(.*)/#", $path, $matches)
+	} else if (preg_match("#files/$app/uploads/Users/(.*)/labels/(.*)/#", $pregNormalizedPath, $matches)
 	and !empty($matches[1]) and !empty($matches[2])) {
 		if ($label = $matches[2]
-		and $userIdForIcon = Q_Utils::joinId($matches[1])
+		and $userIdForIcon = Q_Utils::joinId($matches[1], '/')
 		and $userIdForIcon !== $user->id
 		and Users::canManageLabels($user->id, $userIdForIcon, $label)) {
 			$usersCanHandle[] = $userIdForIcon;
