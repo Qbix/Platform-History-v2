@@ -31,7 +31,7 @@ Q.exports(function(priv){
     */
     return function _Streams_create(fields, callback, related, options) {
         var slotNames = ['stream'];
-        var options = options || {};
+        options = options || {};
         fields = Q.copy(fields);
         if (options.fields) {
             Q.extend(fields, 10, options.fields);

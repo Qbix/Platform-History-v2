@@ -7190,7 +7190,7 @@ Q.IndexedDB.open = Q.promisify(function (dbName, storeName, params, callback) {
 	};
 	open.onsuccess = function() {
 		var db = this.result;
-		version = db.version;
+		var version = db.version;
 		if (!db.objectStoreNames.contains(storeName)) {
 			// need to upgrade version and add this store
 			++version;
@@ -16069,7 +16069,7 @@ Q.Tool.define({
 		css: ["{{Q}}/css/videojs.css", "{{Q}}/css/tools/video.css"]
 	},
 	"Q/pdf": {
-		js: ["{{Q}}/js/pdfjs/build/pdf.js", "{{Q}}/js/tools/pdf.js"],
+		js: ["{{Q}}/js/pdfjs/build/pdf.js", "{{Q}}/js/pdfjs/canvasSize.js", "{{Q}}/js/tools/pdf.js"],
 		css: "{{Q}}/css/tools/pdf.css"
 	},
 	"Q/image": "{{Q}}/js/tools/image.js",
