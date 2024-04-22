@@ -113,8 +113,5 @@ function Users_before_Q_Utils_canWriteToPath($params, &$result)
 			}
 		}
 	}
-	if ($throwIfNotWritable) {
-		throw new Q_Exception_CantWriteToPath();
-	}
 	$result = false;
 }

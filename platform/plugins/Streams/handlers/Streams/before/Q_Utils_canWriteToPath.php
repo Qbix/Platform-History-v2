@@ -10,6 +10,11 @@ function Streams_before_Q_Utils_canWriteToPath($params, &$result)
 	 */
 	
 	// Assume that Users/before/Q/Utils/canWriteToPath already executed
+	// and it has set $result = true if it's under the user
+	// or one of the authorized users is trying to manage the user's
+	// icon or labels. Otherwise $result = false.
+	// Now we will check things using the Streams plugin path and rules.
+	// The Streams plugin may set $result = true even if it was false before.
 
 	$user = Users::loggedInUser();
 	$userId = $user ? $user->id : "";
@@ -54,7 +59,5 @@ function Streams_before_Q_Utils_canWriteToPath($params, &$result)
 			}
 		}
 	}
-	if (!$result and $throwIfNotWritable) {
-		throw new Q_Exception_CantWriteToPath();
-	}
+	$result = false;
 }
