@@ -71,7 +71,7 @@
 				"canSee": ["Users/owners", "Users/admins", "Users/members", "Users/guests", "Websites/admins"]
 			},
 			"Websites/admins": {
-				"title": "Websites Admin",
+				"title": "Websites Admins",
 				"icon": "{{baseUrl}}/Q/plugins/Websites/img/icons/Websites/labels/admins",
 				"canGrant": ["Websites/admins"],
 				"canRevoke": ["Websites/admins"],

@@ -148,13 +148,13 @@
     },
     "labels": {
         "titles": {
-            "Users/owners": "Owner",
-            "Users/admins": "Admin",
-            "Users/members": "Member",
-            "Users/guests": "Guest",
-            "Users/hosts": "Host",
-            "Users/testers": "Tester",
-            "Users/speakers": "Speaker"
+            "Users/owners": "Owners",
+            "Users/admins": "Admins",
+            "Users/members": "Members",
+            "Users/guests": "Guests",
+            "Users/hosts": "Hosts",
+            "Users/testers": "Testers",
+            "Users/speakers": "Speakers"
         }
     },
     "web3": {

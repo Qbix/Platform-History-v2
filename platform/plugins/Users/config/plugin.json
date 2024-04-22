@@ -350,7 +350,7 @@
 		},
 		"roles": {
 			"Users/owners": {
-				"title": "Owner",
+				"title": "Owners",
 				"icon": "{{baseUrl}}/Q/plugins/Users/img/icons/labels/Users/owners",
 				"canGrant": ["Users/admins", "Users/members", "Users/guests", "Users/testers" ,"Users/speakers"],
 				"canRevoke": ["Users/admins", "Users/members", "Users/guests", "Users/testers" ,"Users/speakers"],
@@ -358,35 +358,35 @@
 				"canManageLabels": ["Users/"]
 			},
 			"Users/admins": {
-				"title": "Admin",
+				"title": "Admins",
 				"icon": "{{baseUrl}}/Q/plugins/Users/img/icons/labels/Users/admins",
 				"canGrant": ["Users/members", "Users/guests", "Users/testers" ,"Users/speakers"],
 				"canRevoke": ["Users/members", "Users/guests", "Users/testers" ,"Users/speakers"],
 				"canSee": ["Users/owners", "Users/admins", "Users/members", "Users/guests", "Users/testers" ,"Users/speakers"]
 			},
 			"Users/members": {
-				"title": "Member",
+				"title": "Members",
 				"icon": "{{baseUrl}}/Q/plugins/Users/img/icons/labels/Users/members",
 				"canGrant": ["Users/guests"],
 				"canRevoke": ["Users/guests"],
 				"canSee": ["Users/members", "Users/guests" ,"Users/speakers"]
 			},
 			"Users/guests": {
-				"title": "Guest",
+				"title": "Guests",
 				"icon": "{{baseUrl}}/Q/plugins/Users/img/icons/labels/Users/guests",
 				"canGrant": [],
 				"canRevoke": [],
 				"canSee": ["Users/speakers"]
 			},
 			"Users/testers": {
-				"title": "Tester",
+				"title": "Testers",
 				"icon": "{{baseUrl}}/Q/plugins/Users/img/icons/labels/Users/testers",
 				"canGrant": [],
 				"canRevoke": [],
 				"canSee": ["Users/speakers", "Users/members", "Users/speakers"]
 			},
 			"Users/speakers": {
-				"title": "Speaker",
+				"title": "Speakers",
 				"icon": "{{baseUrl}}/Q/plugins/Users/img/icons/labels/Users/speakers",
 				"canGrant": ["Users/members", "Users/guests"],
 				"canRevoke": ["Users/members", "Users/guests"],
