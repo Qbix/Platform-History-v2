@@ -59,5 +59,4 @@ function Streams_before_Q_Utils_canWriteToPath($params, &$result)
 			}
 		}
 	}
-	$result = false;
 }
