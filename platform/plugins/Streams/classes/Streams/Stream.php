@@ -338,6 +338,10 @@ class Streams_Stream extends Base_Streams_Stream
 		if (!isset($priv)) {
 			$priv = $this->getAttribute('private');
 		}
+		if (!isset($priv)) {
+			$attr = $this->getAttribute('Streams');
+			$priv = Q::ifset($attr, 'private', null);
+		}
 		return !$priv || (is_array($priv) && in_array('invite', $priv));
 	}
 

@@ -3170,6 +3170,10 @@ Sp.inviteIsAllowed = function() {
 	if (priv === undefined) {
 		priv = this.getAttribute('private');
 	}
+	if (priv == undefined) {
+		var attr = this.getAttribute('Streams');
+		priv = attr && attr.private;
+	}
 	return !priv || (priv instanceof Array && priv.indexOf('invite') >= 0);
 };
 
