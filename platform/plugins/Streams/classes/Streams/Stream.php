@@ -334,7 +334,10 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @return {boolean}
 	 */
 	function inviteIsAllowed() {
-		$priv = $this->getAttribute('Streams', 'private', $this->getAttribute('private'));
+		$priv = $this->getAttribute('Streams/private');
+		if (!isset($priv)) {
+			$priv = $this->getAttribute('private');
+		}
 		return !$priv || (is_array($priv) && in_array('invite', $priv));
 	}
 
