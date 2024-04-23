@@ -66,7 +66,7 @@
 					return;
 				}
 
-				$te.on(Q.Pointer.click, tool, function () {
+				$te.off([Q.Pointer.click, "Streams_chat"]).on([Q.Pointer.click, "Streams_chat"], tool, function () {
 					Q.handle(tool.state.onInvoke, tool, [tool.preview]);
 				});
 

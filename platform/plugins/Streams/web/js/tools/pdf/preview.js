@@ -103,7 +103,7 @@
 			var pdfUrl = state.url;
 			var inplace = null;
 
-			$toolElement.on(Q.Pointer.fastclick, function () {
+			$toolElement.off([Q.Pointer.fastclick, "Streams_pdf_preview"]).on([Q.Pointer.fastclick, "Streams_pdf_preview"], function () {
 				Q.handle(state.onInvoke, tool, [stream]);
 			});
 

@@ -103,7 +103,7 @@
 
 				stream.retain(tool);
 
-				$toolElement.on(Q.Pointer.fastclick, function () {
+				$toolElement.off([Q.Pointer.fastclick, 'Streams_video_preview']).on([Q.Pointer.fastclick, 'Streams_video_preview'], function () {
 					// if vimeo check status
 					if (stream.getAttribute("provider") === "vimeo" && !stream.getAttribute("available")) {
 						$toolElement.addClass("Q_working");

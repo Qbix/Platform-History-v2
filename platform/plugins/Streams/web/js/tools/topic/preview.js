@@ -8,7 +8,6 @@
  */
 Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, preview) {
     var tool = this;
-    var $toolElement = $(tool.element);
     var state = this.state;
     tool.preview = preview;
 
@@ -22,13 +21,6 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
             }
         });
     };
-
-
-    if (preview.state.streamName) {
-        $toolElement.on(Q.Pointer.fastclick, function () {
-            Q.handle(state.onInvoke, tool, [tool.stream]);
-        });
-    }
 },
 {
     imagepicker: {
@@ -109,6 +101,12 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
                     });
                 };
             }
+
+            $toolElement
+            .off([Q.Pointer.fastclick, "Streams_topic_preview"])
+            .on([Q.Pointer.fastclick, "Streams_topic_preview"], function () {
+                Q.handle(state.onInvoke, tool, [stream]);
+            });
         });
     },
     /**

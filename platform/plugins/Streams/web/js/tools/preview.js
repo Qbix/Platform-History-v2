@@ -91,7 +91,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 		state.editable = false;
 	}
 
-	$(tool.element).on(Q.Pointer.fastclick, function () {
+	$(tool.element).off([Q.Pointer.fastclick, "Streams_preview"]).on([Q.Pointer.fastclick, "Streams_preview"], function () {
 		Q.handle(tool.state.onInvoke, tool, []);
 	});
 

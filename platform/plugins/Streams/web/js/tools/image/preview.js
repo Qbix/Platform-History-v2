@@ -76,7 +76,8 @@ Q.Tool.define("Streams/image/preview", "Streams/preview", function(options, prev
 			name: 'Streams/image/preview/edit',
 			fields: { alt: 'icon', titleClass: '', titleTag: 'h3' }
 		}
-	}
+	},
+	onInvoke: new Q.Event()
 },
 
 {
@@ -85,7 +86,6 @@ Q.Tool.define("Streams/image/preview", "Streams/preview", function(options, prev
 		var state = tool.state;
 		var ps = tool.preview.state;
 		var sf = stream.fields;
-		var attributes = sf.attributes && JSON.parse(sf.attributes);
 
 		// set up a pipe to know when the icon has loaded
 		var p = Q.pipe(['inplace', 'icon'], function () {
@@ -122,7 +122,7 @@ Q.Tool.define("Streams/image/preview", "Streams/preview", function(options, prev
 			fields,
 			function (err, html) {
 				if (err) return;
-				Q.replace(tool.element, html);;
+				Q.replace(tool.element, html);
 				var $img = tool.$('.Streams_image_preview_icon');
 				var src = tool.element.getAttribute('data-icon-src');
 				if (src) {
@@ -156,6 +156,11 @@ Q.Tool.define("Streams/image/preview", "Streams/preview", function(options, prev
 							$img.height(parts[1]);
 						}
 					}
+				});
+
+				$(tool.element).off([Q.Pointer.fastclick, '.Streams_image_preview'])
+				.on([Q.Pointer.fastclick, '.Streams_image_preview'], function () {
+					Q.handle(state.onInvoke, tool, [stream]);
 				});
 			},
 			state.templates[tpl]
@@ -267,10 +272,10 @@ Q.Tool.define("Streams/image/preview", "Streams/preview", function(options, prev
 		.plugin('Q/imagepicker', ipo, p.fill('imagepicker'));
 		$element.off('load.Streams-preview')
 		.on('load.Streams-preview', p.fill('load'));
-		var container = this.$('.Streams_preview_container');
+		var $container = this.$('.Streams_preview_container');
 		// override the fastclick handler that the Streams/preview tool set
-		container.off([Q.Pointer.fastclick, '.Streams_preview']);	
-		container.on([Q.Pointer.fastclick, '.Streams_image_preview'], function () {
+		$container.off([Q.Pointer.fastclick, '.Streams_image_preview']);
+		$container.on([Q.Pointer.fastclick, '.Streams_image_preview'], function () {
 			return;
 			tool.create.bind(tool);
 		});	

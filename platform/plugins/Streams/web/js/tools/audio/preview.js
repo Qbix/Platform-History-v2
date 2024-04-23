@@ -123,7 +123,7 @@
 				var audioUrl = state.url;
 				var inplace = null;
 
-				$toolElement.on(Q.Pointer.fastclick, function () {
+				$toolElement.off([Q.Pointer.fastclick, "Streams_audio_preview"]).on([Q.Pointer.fastclick, "Streams_audio_preview"], function () {
 					Q.handle(state.onInvoke, tool, [stream]);
 				});
 
