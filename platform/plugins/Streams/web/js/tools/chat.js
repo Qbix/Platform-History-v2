@@ -563,10 +563,6 @@ Q.Tool.define('Streams/chat', function(options) {
 					var $toolElement = $(this.element);
 					var $chatItem = $toolElement.closest(".Streams_chat_item");
 
-					if (!(previewState.publisherId && previewState.streamName)) {
-						return;
-					}
-
 					this.state.onError && this.state.onError.set(function () {
 						$chatItem.remove();
 					}, tool);
@@ -574,59 +570,56 @@ Q.Tool.define('Streams/chat', function(options) {
 						$chatItem.remove();
 					}, tool);
 
-					Q.Streams.get(previewState.publisherId, previewState.streamName, function (err) {
-						if (err) {
-							return console.warn(err);
+					previewState.onInvoke && previewState.onInvoke.set(function (stream) {
+						if (!Q.Streams.isStream(stream)) {
+							return;
 						}
 
-						var stream = this;
-						var streamType = stream && stream.fields.type;
-
-						if (state.handleTheirOwnClicks.includes(streamType)) {
+						if (state.handleTheirOwnClicks.includes(stream.fields.type)) {
 							// let the tool handle click event itself
 							return;
 						}
 
-						$toolElement.off([Q.Pointer.fastclick, 'Streams_chat'])
-						.on([Q.Pointer.fastclick, 'Streams_chat'], function () {
-							// need to request stream again, because stream may be modified since it requested when message created
-							Q.Streams.get(previewState.publisherId, previewState.streamName, function (err) {
-								var stream = err ? null :this;
-								if (!stream) {
-									return;
-								}
-								// possible tool names like ["Streams/audio", "Q/audio", "Streams/audio/preview"]
-								var possibleToolNames = [streamType, streamType.replace(/(.*)\//, "Q/"), streamType + '/preview'];
-								var toolName = null;
-								for (var i=0, l=possibleToolNames.length; i<l; ++i) {
-									if (Q.Tool.defined(possibleToolNames[i])) {
-										toolName = possibleToolNames[i];
-										break;
-									}
-								}
+						// need to request stream again, because stream may be modified since it requested when message created
+						Q.Streams.get(stream.fields.publisherId, stream.fields.name, function (err) {
+							var stream = err ? null :this;
+							if (!stream) {
+								return;
+							}
 
-								var element = "div";
-								// if tool is preview, apply Streams/preview tool first, because it may be required
-								if (toolName && toolName.endsWith("/preview")) {
-									element = Q.Tool.setUpElement(element, "Streams/preview", previewState);
+							var streamType = stream.fields.type;
+
+							// possible tool names like ["Streams/audio", "Q/audio", "Streams/audio/preview"]
+							var possibleToolNames = [streamType, streamType.replace(/(.*)\//, "Q/"), streamType + '/preview'];
+							var toolName = null;
+							for (var i=0, l=possibleToolNames.length; i<l; ++i) {
+								if (Q.Tool.defined(possibleToolNames[i])) {
+									toolName = possibleToolNames[i];
+									break;
 								}
+							}
 
-								var fields = Q.extend({}, stream.getAllAttributes(), {
-									publisherId: stream.fields.publisherId,
-									streamName: stream.fields.name,
-									url: stream.fileUrl() || stream.iconUrl('400')
-								});
+							var element = "div";
+							// if tool is preview, apply Streams/preview tool first, because it may be required
+							if (toolName && toolName.endsWith("/preview")) {
+								element = Q.Tool.setUpElement(element, "Streams/preview", Q.Tool.from($toolElement[0], "Streams/preview").state);
+							}
 
-								element = Q.Tool.setUpElement(element, toolName, fields);
-								Q.invoke({
-									title: stream.fields.title,
-									content: element,
-									trigger: $toolElement[0],
-									columnIndex: state.openInSameColumn.includes(stream.fields.type) ? "current" : null
-								});
+							var fields = Q.extend({}, stream.getAllAttributes(), {
+								publisherId: stream.fields.publisherId,
+								streamName: stream.fields.name,
+								url: stream.fileUrl() || stream.iconUrl('1000x')
+							});
+
+							element = Q.Tool.setUpElement(element, toolName, fields);
+							Q.invoke({
+								title: stream.fields.title,
+								content: element,
+								trigger: $toolElement[0],
+								columnIndex: state.openInSameColumn.includes(stream.fields.type) ? "current" : null
 							});
 						});
-					});
+					}, tool);
 				}, tool);
 
 				items[ordinal] = $element;
