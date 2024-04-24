@@ -816,13 +816,19 @@ Q.Tool.define("Q/video", function (options) {
 	 * @method play
 	 */
 	play: function () {
-		this.state.player && this.state.player.play();
+		var tool = this;
+		var state = this.state;
+		state.player && state.player.play();
+		Q.handle(state.onPlay, tool, [state.currentPosition || tool.getCurrentPosition()]);
 	},
 	/**
 	 * @method pause
 	 */
 	pause: function () {
-		this.state.player && this.state.player.pause();
+		var tool = this;
+		var state = this.state;
+		state.player && state.player.pause();
+		Q.handle(state.onPause, tool, [state.currentPosition || tool.getCurrentPosition()]);
 	},
 	/**
 	 * Add clip pointer to timeline
