@@ -73,19 +73,19 @@ Q.Tool.define("Q/audio", function (options) {
 					var $iframe = tool.$("iframe[name=soundcloud]");
 					state.audio = SC.Widget($iframe[0]);
 					var onPlay = Q.throttle(function (position) {
-						console.log("Started at position " + position + " milliseconds");
+						//console.log("Started at position " + position + " milliseconds");
 						Q.handle(state.onPlay, tool, [position]);
 					}, 100);
 					var onPause = Q.throttle(function (position) {
-						console.log("Paused at position " + position + " milliseconds");
+						//console.log("Paused at position " + position + " milliseconds");
 						Q.handle(state.onPause, tool, [position]);
 					}, 100);
 					var onFinish = Q.throttle(function (position) {
-						console.log("Finished at position " + position + " milliseconds");
+						//console.log("Finished at position " + position + " milliseconds");
 						Q.handle(state.onEnded, tool, [position]);
 					}, 100);
 					var onSeek = Q.throttle(function (position) {
-						console.log("Seeked at position " + position + " milliseconds");
+						//console.log("Seeked at position " + position + " milliseconds");
 						Q.handle(state.onSeek, tool, [position]);
 					}, 100);
 					state.audio.bind(SC.Widget.Events.READY, function() {
@@ -105,7 +105,6 @@ Q.Tool.define("Q/audio", function (options) {
 						state.audio.bind(SC.Widget.Events.SEEK, function() {
 							onPause(state.currentPosition);
 							// get current sound position in milliseconds
-							console.log("onSeek");
 							state.audio.getPosition(onSeek);
 						});
 						state.audio.bind(SC.Widget.Events.PLAY_PROGRESS, function() {
@@ -708,7 +707,7 @@ Q.Tool.define("Q/audio", function (options) {
 
 		tool.audioElement.addEventListener('play', function () {
 			state.currentPosition = Math.trunc(this.currentTime * 1000);
-			console.log("Started at position " + state.currentPosition + " milliseconds");
+			//console.log("Started at position " + state.currentPosition + " milliseconds");
 			Q.handle(state.onPlay, tool, [state.currentPosition]);
 		});
 
@@ -749,12 +748,12 @@ Q.Tool.define("Q/audio", function (options) {
 			}
 
 			var time = Math.trunc(this.currentTime * 1000);
-			console.log("Ended at position " + time + " milliseconds");
+			//console.log("Ended at position " + time + " milliseconds");
 			Q.handle(state.onEnded, tool, [time]);
 		});
 		tool.audioElement.addEventListener("pause", function(){
 			var time = Math.trunc(this.currentTime * 1000);
-			console.log("Paused at position " + time + " milliseconds");
+			//console.log("Paused at position " + time + " milliseconds");
 			Q.handle(state.onPause, tool, [time]);
 		});
 	},
@@ -820,7 +819,7 @@ Q.Tool.define("Q/audio", function (options) {
 			}).mousemove(function(e) {
 				if (isDragging) {
 					$trackCurrent.css("left", e.offsetX);
-					console.log(e.offsetX);
+					//console.log(e.offsetX);
 				}
 			}).mouseup(function() {
 				isDragging = false;
