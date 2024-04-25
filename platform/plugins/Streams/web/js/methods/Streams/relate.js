@@ -23,21 +23,18 @@ Q.exports(function(priv){
             "type": relationType,
             "fromPublisherId": fromPublisherId,
             "fromStreamName": fromStreamName,
-            "inheritAccess": (options && inheritAccess) || undefined,
+            "inheritAccess": Q.getObject("inheritAccess", options),
             "Q.clientId": Q.clientId()
         };
         // TODO: When we refactor Streams to support multiple hosts,
         // the client will have to post this request to both hosts if they are different
         // or servers will have tell each other on their own
-        var baseUrl = Q.baseUrl({
-            publisherId: publisherId,
-            streamName: streamName
-        });
+        var baseUrl = Q.baseUrl({publisherId, streamName});
         Q.req('Streams/related', [slotName], function (err, data) {
             callback && callback.call(this, err, Q.getObject('slots.result', data) || null);
             priv._refreshUnlessSocket(publisherId, streamName);
             priv._refreshUnlessSocket(fromPublisherId, fromStreamName);
-        }, { method: 'post', fields: fields, baseUrl: baseUrl });
+        }, { method: 'post', fields, baseUrl });
         priv._retain = undefined;
     };
 });
