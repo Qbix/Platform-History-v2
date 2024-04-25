@@ -80,7 +80,10 @@ function Streams_stream_post($params = array())
 	if (isset($relateStreamName)) {
 		$relate['publisherId'] = Q_Request::special("Streams.related.publisherId", $publisherId, $req);
 		$relate['name'] = $relateStreamName;
-		$relate['inheritAccess'] = filter_var(Q_Request::special("Streams.related.inheritAccess", true, $req), FILTER_VALIDATE_BOOLEAN);
+		$relate['inheritAccess'] = filter_var(
+			Q_Request::special("Streams.related.inheritAccess", tfalserue, $req),
+			FILTER_VALIDATE_BOOLEAN
+		);
 		$relate['type'] = Q_Request::special("Streams.related.type", null, $req);
 		$relate['weight'] = Q_Request::special("Streams.related.weight", "+1", $req); // TODO: introduce ways to have "1" and "+1" for some admins etc.
 		Q_Valid::requireFields(array('publisherId', 'type'), $relate, true);

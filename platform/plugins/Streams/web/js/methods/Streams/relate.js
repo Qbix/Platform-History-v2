@@ -8,9 +8,11 @@ Q.exports(function(priv){
     * @param {String} fromPublisherId the publisher id of the stream to relate from
     * @param {String} fromStreamName the name of the stream to relate from
     * @param {Function} [callback] callback to call with the results
+    * @param {Object} [options]
+    * @param {Object} options.inheritAccess whether to inherit access as well as relate
     *  First parameter is the error, the second will be relations data
     */
-    return function Streams_relate (publisherId, streamName, relationType, fromPublisherId, fromStreamName, callback) {
+    return function Streams_relate (publisherId, streamName, relationType, fromPublisherId, fromStreamName, callback, options) {
         if (!Q.plugins.Users.loggedInUser) {
             throw new Q.Error("Streams.relate: Not logged in.");
         }
@@ -21,6 +23,7 @@ Q.exports(function(priv){
             "type": relationType,
             "fromPublisherId": fromPublisherId,
             "fromStreamName": fromStreamName,
+            "inheritAccess": (options && inheritAccess) || undefined,
             "Q.clientId": Q.clientId()
         };
         // TODO: When we refactor Streams to support multiple hosts,

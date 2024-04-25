@@ -5,7 +5,7 @@
  *
  * @param array $_REQUEST 
  *   toPublisherId, toStreamName, type
- *   fromPublisherId, fromStreamName, weight
+ *   fromPublisherId, fromStreamName, inheritAccess, weight
  * @return {void}
  */
 
@@ -17,6 +17,12 @@ function Streams_related_post($params) {
 	$type = $_REQUEST['type'];
 	$fromPublisherId = $_REQUEST['fromPublisherId'];
 	$fromStreamName = $_REQUEST['fromStreamName'];
+
+	$req = array_merge($_REQUEST, $params);
+	$inheritAccess = filter_var(
+		Q_Request::special("Streams.related.inheritAccess", false, $req),
+		FILTER_VALIDATE_BOOLEAN
+	);
 	
 	// TODO: When we start supporting multiple hosts, this will have to be rewritten
 	// to make servers communicate with one another when establishing relations between streams
@@ -67,7 +73,7 @@ function Streams_related_post($params) {
 		$type, 
 		$fromPublisherId, 
 		$fromStreamName,
-		@compact('weight')
+		@compact('weight', 'inheritAccess')
 	);
 	Q_Response::setSlot('result', $result);
 }

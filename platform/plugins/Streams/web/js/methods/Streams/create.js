@@ -15,6 +15,7 @@ Q.exports(function(priv){
     *   @param {String} [related.streamName] the name of the related stream
     *   @param {Mixed} [related.type] the type of the relation
     *   @param {Mixed} [related.weight=1] the weight of the relation, if user has at least testWriteLevel('relations')
+    *   @param {Object} [related.inheritAccess] pass true to inherit access from the stream being related to
     * @param {Object} [options] Any extra options involved in creating the stream
     *   @param {Object} [options.fields] Used to override any other fields passed in the request
     *   @param {Object} [options.streamName] Overrides fields.name . You can set a specific stream name from Streams/possibleUserStreams config
@@ -53,6 +54,7 @@ Q.exports(function(priv){
             fields['Q.Streams.related.streamName'] = related.streamName || related.name;
             fields['Q.Streams.related.type'] = related.type;
             fields['Q.Streams.related.weight'] = related.weight;
+            fields['Q.Streams.related.inheritAccess'] = related.inheritAccess;
             slotNames.push('messageTo');
         }
         var baseUrl = Q.baseUrl({
