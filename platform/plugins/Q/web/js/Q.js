@@ -15678,6 +15678,16 @@ Q.Video = function (url, container, attributes) {
 };
 
 /**
+ * Pauses all the video that is playing
+ * @method Q.Video.pauseAll
+ */
+Q.Video.pauseAll = function () {
+	Q.each(Q.Tool.active, function (index, obj) {
+		obj.q_video && obj.q_video.pause();
+	});
+};
+
+/**
  * Uses an adapter to upload a video to a cloud service provider.
  * Qbix plugins can define their own adapters to Q.Video.upload.adapters
  * @param {Object} params 

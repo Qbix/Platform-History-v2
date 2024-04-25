@@ -21,12 +21,6 @@ Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_a
 	preview.state.onRefresh.add(tool.refresh.bind(tool));
 	preview.state.creatable.preprocess = tool.composer.bind(tool);
 
-	if (preview.state.streamName) {
-		$(tool.element).on(Q.Pointer.fastclick, function () {
-			Q.handle(state.onInvoke, tool);
-		});
-	}
-
 	tool.Q.onStateChanged('participants').set(tool.setParticipants.bind(tool), tool);
 },
 
@@ -41,6 +35,7 @@ Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_a
 	refresh: function (stream) {
 		var tool = this;
 		tool.stream = stream;
+		var $toolElement = $(this.element);
 		var publisherId = stream.fields.publisherId;
 		var streamName = stream.fields.name;
 		var type = stream.getAttribute("type");
@@ -49,7 +44,7 @@ Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_a
 		var extra = participant.getExtra && participant.getExtra("content");
 		var participating = participant.state === "participating";
 
-		$(tool.element)
+		$toolElement
 			.attr("data-type", type)
 			.attr("data-participating", participating);
 
@@ -95,6 +90,12 @@ Q.Tool.define("Streams/answer/preview", ["Streams/preview"], function _Streams_a
 			});
 
 			Q.handle(tool.state.onRefresh, tool);
+
+			$toolElement
+			.off([Q.Pointer.fastclick, "Streams_answer_preview"])
+			.on([Q.Pointer.fastclick, "Streams_answer_preview"], function () {
+				Q.handle(tool.state.onInvoke, tool, [stream]);
+			});
 		});
 	},
 	/**
