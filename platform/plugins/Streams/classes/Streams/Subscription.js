@@ -75,7 +75,11 @@ Streams_Subscription.test = function _Subscription_test(userId, stream, msgType,
 		} catch (err) {
 			return callback(err);
 		}
-		var types = filter.types;
+		if (!filter) {
+			console.log('debugger');
+			debugger;
+		}
+		var types = (filter && filter.types) || [];
 		var matched = false;
 		for (var i=0, l=types.length; i<l; ++i) {
 			if (msgType.match(types[i])) {

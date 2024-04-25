@@ -14030,7 +14030,7 @@ Q.Visual = Q.Pointer = {
                         }
                     } else {
                         img1.target = targets;
-                        if (targets && targets.isConnected) {
+                        if (targets && !targets.isConnected) {
                             img1.remove();
                         }
                     }

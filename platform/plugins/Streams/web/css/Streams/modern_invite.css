@@ -29,7 +29,7 @@
 	cursor: pointer;
 }
 .Streams_invite_option:hover {
-	background: rgba(100, 100, 100, 0.2);
+	background: rgba(180, 180, 180, 0.2);
 	color: var(--dialog-color);
 }
 .Streams_invite_option:hover svg {
