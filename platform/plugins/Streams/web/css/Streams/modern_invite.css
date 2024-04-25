@@ -29,11 +29,11 @@
 	cursor: pointer;
 }
 .Streams_invite_option:hover {
-	background: #e3e3e3;
-	color: black;
+	background: rgba(100, 100, 100, 0.5);
+	color: var(--dialog-color);
 }
 .Streams_invite_option:hover svg {
-	fill: black;
+	fill: var(--dialog-color);
 }
 .Streams_invite_share_link{
 	margin-right:0;
@@ -362,8 +362,6 @@ telegram
 	display: block;
 }
 
-@media (prefers-color-scheme: dark) {
-	.Streams_invite_option {
-		border-color: white;
-	}
+.Streams_invite_option {
+	border-color: var(--dialog-color);
 }
