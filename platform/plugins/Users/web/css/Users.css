@@ -573,7 +573,7 @@ html.Users_loggedIn .Users_whenLoggedOut {
 
 #Users_login_usingPlatforms a {
 	display: inline-block;
-	color: #444444;
+	color: var(--dialog-color);
 	font-size: 18px;
 }
 

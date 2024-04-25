@@ -1,8 +1,8 @@
 .Users_list_tool {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    align-content: baseline;
+    justify-content: space-around;
+    align-items: center;
     row-gap: 20px;
     column-gap: 20px;
 }
