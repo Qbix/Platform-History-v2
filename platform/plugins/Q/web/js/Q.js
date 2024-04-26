@@ -13577,7 +13577,13 @@ Q.Visual = Q.Pointer = {
 		};
 	},
 	/**
-	 * Whether the click was canceled by Q.Pointer.cancelClick()
+	 * Whether the user has clicked at least once in the webpage
+	 * @static
+	 * @property {boolean} clickedAtLeastOnce
+	 */
+	clickedAtLeastOnce: false,
+	/**
+	 * Whether the latest click was canceled by Q.Pointer.cancelClick()
 	 * @static
 	 * @property {boolean} canceledClick
 	 */
@@ -14463,6 +14469,11 @@ Q.Visual = Q.Pointer = {
 		cancelClickDistance: 10
 	}
 };
+
+Q.addEventListener(root, 'click', function _clicked() {
+	Q.Pointer.clickedAtLeastOnce = true;
+	Q.removeEventListener(root, 'click', _clicked);
+}, false, true);
 
 var _cancelClick_counter = 0;
 Q.Visual.preventRubberBand.suspend = {};
