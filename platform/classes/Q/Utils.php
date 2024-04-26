@@ -1564,7 +1564,7 @@ class Q_Utils
 	 * Checks whether the path can be used for writing files in the current session
 	 * @method canWriteToPath
 	 * @static
-	 * @param {string} $path The path to check
+	 * @param {string} $path The filesystem path to check. Will change all directory separators to "/"
 	 * @param {mixed} [$throwIfNotWritable=false] Defaults to false.
 	 * Set to true to throw a Q_Exception_CantWriteToPath if hooks explicitly set result = false
 	 * Set to null to skip firing the "before" event, thereby skipping hooks for access checks.
@@ -1579,6 +1579,7 @@ class Q_Utils
 		$throwIfNotWritable = false, 
 		$mkdirIfMissing = false
 	) {
+		$path = str_replace(DS, '/', $path);
 		$result = Q::event(
 			"Q/Utils/canWriteToPath",
 			@compact('path', 'throwIfNotWritable', 'mkdirIfMissing'),
@@ -1587,11 +1588,8 @@ class Q_Utils
 		if (isset($result) and !$result and $throwIfNotWritable) {
 			throw new Q_Exception_CantWriteToPath(@compact('path', 'mkdirIfMissing'));
 		}
-		if (!$result) {
-			return $result; // it may be null, if not explicitly set
-		}
 		if (!$mkdirIfMissing && !is_string($mkdirIfMissing)) {
-			return $result;
+			return $result; // it may be null, if not explicitly set
 		}
 		$paths = array(APP_FILES_DIR);
 		foreach (Q::plugins() as $plugin) {

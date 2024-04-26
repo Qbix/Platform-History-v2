@@ -66,14 +66,14 @@ abstract class Users extends Base_Users
 	 * Get the id of the currently selected community, if one was set in the session.
 	 * @method currentCommunityId
 	 * @static
-	 * @param {bool} $defaultMainCommunity If true and communityId from session empty, return the main community id.
+	 * @param {bool} $fallbackToMainCommunityId If true and communityId from session empty, return the main community id.
 	 * @return {string} The id of the current community, or null if none and defaultMainCommunity = false
 	 */
-	static function currentCommunityId($defaultMainCommunity = false)
+	static function currentCommunityId($fallbackToMainCommunityId = false)
 	{
 		$communityId = Q::ifset($_SESSION, 'Users', 'communityId', null);
 
-		if (!$communityId && $defaultMainCommunity) {
+		if (!$communityId && $fallbackToMainCommunityId) {
 			$communityId = self::communityId();
 		}
 
