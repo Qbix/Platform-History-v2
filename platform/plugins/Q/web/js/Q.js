@@ -13310,6 +13310,23 @@ function _Q_Pointer_start_end_handler (e) {
 Q.Visual = Q.Pointer = {
 
 	/**
+	 * Cross-browser way to call requestFullscreen on the element
+	 * @static
+	 * @param {Element} element 
+	 */
+	requestFullscreen: function (element) {
+		var oFsc = {navigationUI: 'hide'};
+		if (element.requestFullScreen) {
+			element.requestFullscreen(oFsc);
+		} else if (element.mozRequestFullScreen) {
+			element.mozRequestFullScreen(oFsc);
+		} else if (element.webkitRequestFullScreen) {
+			element.webkitRequestFullScreen(oFsc);
+		}
+		return true;
+	},
+
+	/**
 	 * Computes the intersection of two rectangles, if any.
 	 * Note that edge intersection may have 0 width or height.
 	 * @method intersection
@@ -13577,7 +13594,13 @@ Q.Visual = Q.Pointer = {
 		};
 	},
 	/**
-	 * Whether the click was canceled by Q.Pointer.cancelClick()
+	 * Whether the user has clicked at least once in the webpage
+	 * @static
+	 * @property {boolean} clickedAtLeastOnce
+	 */
+	clickedAtLeastOnce: false,
+	/**
+	 * Whether the latest click was canceled by Q.Pointer.cancelClick()
 	 * @static
 	 * @property {boolean} canceledClick
 	 */
@@ -14463,6 +14486,11 @@ Q.Visual = Q.Pointer = {
 		cancelClickDistance: 10
 	}
 };
+
+Q.addEventListener(root, 'click', function _clicked() {
+	Q.Pointer.clickedAtLeastOnce = true;
+	Q.removeEventListener(root, 'click', _clicked);
+}, false, true);
 
 var _cancelClick_counter = 0;
 Q.Visual.preventRubberBand.suspend = {};

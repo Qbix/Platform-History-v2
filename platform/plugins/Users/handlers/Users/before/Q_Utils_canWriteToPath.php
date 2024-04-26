@@ -24,8 +24,7 @@ function Users_before_Q_Utils_canWriteToPath($params, &$result)
 	$usersCanHandle = array($user->id);
 
 	$matches = array();
-	$pregNormalizedPath = preg_replace("#\\\+#", "/", $path);
-	if (preg_match("#files/$app/uploads/Users/(.*)/icon#", $pregNormalizedPath, $matches)
+	if (preg_match("#files/$app/uploads/Users/(.*)/icon#", $path, $matches)
 	and !empty($matches[1])) {
 		if ($userIdForIcon = Q_Utils::joinId($matches[1], '/')
 		and $userIdForIcon !== $user->id) {
@@ -44,7 +43,7 @@ function Users_before_Q_Utils_canWriteToPath($params, &$result)
 				$usersCanHandle[] = $userIdForIcon;
 			}
 		}
-	} else if (preg_match("#files/$app/uploads/Users/(.*)/labels/(.*)/#", $pregNormalizedPath, $matches)
+	} else if (preg_match("#files/$app/uploads/Users/(.*)/labels/(.*)/#", $path, $matches)
 	and !empty($matches[1]) and !empty($matches[2])) {
 		if ($label = $matches[2]
 		and $userIdForIcon = Q_Utils::joinId($matches[1], '/')

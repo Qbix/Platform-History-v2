@@ -24,7 +24,7 @@
 	dc["Q.Users.User"] = true;
 
 	/**
-	 * Text messages used in dialogs
+	 * Text for Users plugin, will be overridden by loaded language file
 	 * @property Q.text.Users
 	 * @type {Object}
 	 */

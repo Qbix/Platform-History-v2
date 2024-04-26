@@ -27,7 +27,8 @@ if (Q.Assets.Web3.defaultChain) {
  *   @param {String|Object} [options.all] To show "all labels" option, whose value is "*", pass here its title or object with "title" and "icon" properties.
  *   @param {String} options.abiPath="Users/templates/R1/Community/contract". 
  *      ABI for community contract
- *   @param {String} options.addToPhonebook true if run from mobile 
+ *   @param {Boolean} [options.addToPhonebook=Q.info.isMobile] whether to show option to Add to Phonebook
+ *   @param {Boolean} [options.addToPhonebookAtEnd=false] set to true to show the option at the end, if it's shown at all
  *   @param {String} options.icon showsize for icons
  *   @param {String} options.editable if true then available interface to add WEB3 roles
  *      keep in mind that to add web3 need to:
@@ -128,6 +129,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
     canAddWeb3: null, // filled on backend side
     //},
     addToPhonebook: Q.info.isMobile,
+    addToPhonebookAtEnd: false,
     icon: 200,
     editable: false,
     imagepicker: {},
@@ -727,7 +729,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                 canAdd: Q.Users.loggedInUser && state.canAdd,
                 canAddIcon: Q.url('{{Q}}/img/actions/add.png'),
                 phoneBookIcon: Q.url('{{Q}}/img/actions/add_to_phonebook.png'),
-                addToPhonebook: state.contactUserId && state.addToPhonebook && tool.text.addToPhonebook
+                addToPhonebook: state.contactUserId && state.addToPhonebook && tool.text.addToPhonebook,
             }, function (err, html) {
                 tool.element.removeClass('Q_loading');
                 Q.replace(tool.element, html);
@@ -864,6 +866,9 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                         .on(Q.Pointer.fastclick, function () {
                             location.href = Q.url("{{baseUrl}}/Users/" + state.contactUserId + ".vcf");
                         });
+                }
+                if (state.addToPhonebookAtEnd) {
+                    $addToPhonebook.appendTo($addToPhonebook.parent());
                 }
 
                 var elems = $('.Users_labels_title');
