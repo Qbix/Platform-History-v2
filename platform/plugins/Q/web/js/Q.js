@@ -2732,7 +2732,7 @@ Q.element = function (tagName, attributes, elementsToAppend) {
 		}
 	}
 	if (elementsToAppend) {
-		if (typeof elementToAppend === 'string') {
+		if (typeof elementsToAppend === 'string') {
 			element.innerHTML = elementsToAppend
 		} else {
 			for (var i=0, l=elementsToAppend.length; i<l; ++i) {
