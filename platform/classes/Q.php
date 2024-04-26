@@ -1257,9 +1257,10 @@ class Q
 	 * @param {array} $fields An array of fields to take or an associative array of fieldname => default pairs
 	 * @param {array|object} &$dest Optional reference to an array or object in which we will set values.
 	 *  Otherwise an empty array is used.
+	 * @param {array} Optionally pass an array of shortFieldName => fullFieldName map
 	 * @return {array|object} The $dest array or object, otherwise an array that has been filled with values.
 	 */
-	static function take($source, $fields, &$dest = null)
+	static function take($source, $fields, &$dest = null, $aliases = array())
 	{
 		if (!is_array($fields)) {
 			$fields = array($fields);
@@ -1271,31 +1272,37 @@ class Q
 			if (is_array($source)) {
 				if (is_array($dest)) {
 					foreach ($fields as $k => $v) {
-						$dest[$k] = array_key_exists($k, $source) ? $source[$k] : $v;
+						$a = isset($aliases[$k]) ? $aliases[$k] : $k;
+						$dest[$a] = array_key_exists($k, $source) ? $source[$k] : $v;
 					}
 				} else {
 					foreach ($fields as $k => $v) {
-						$dest->$k = array_key_exists($k, $source) ? $source[$k] : $v;
+						$a = isset($aliases[$k]) ? $aliases[$k] : $k;
+						$dest->$a = array_key_exists($k, $source) ? $source[$k] : $v;
 					}
 				}
 			} else if (is_object($source)) {
 				if (is_array($dest)) {
 					foreach ($fields as $k => $v) {
-						$dest[$k] = (property_exists($source, $k) or isset($source->$k)) ? $source->$k : $v;
+						$a = isset($aliases[$k]) ? $aliases[$k] : $k;
+						$dest[$a] = (property_exists($source, $k) or isset($source->$k)) ? $source->$k : $v;
 				 	}
 				} else {
 					foreach ($fields as $k => $v) {
-						$dest->$k = (property_exists($source, $k) or isset($source->$k)) ? $source->$k : $v;
+						$a = isset($aliases[$k]) ? $aliases[$k] : $k;
+						$dest->$a = (property_exists($source, $k) or isset($source->$k)) ? $source->$k : $v;
 				 	}
 				}
 			} else {
 				if (is_array($dest)) {
 					foreach ($fields as $k => $v) {
-						$dest[$k] = $v;
+						$a = isset($aliases[$k]) ? $aliases[$k] : $k;
+						$dest[$a] = $v;
 					}
 				} else {
 					foreach ($fields as $k => $v) {
-						$dest->$k = $v;
+						$a = isset($aliases[$k]) ? $aliases[$k] : $k;
+						$dest->$a = $v;
 					}
 				}
 			}
@@ -1304,13 +1311,15 @@ class Q
 				if (is_array($dest)) {
 					foreach ($fields as $k) {
 						if (array_key_exists($k, $source)) {
-							$dest[$k] = $source[$k];
+							$a = isset($aliases[$k]) ? $aliases[$k] : $k;
+							$dest[$a] = $source[$k];
 						}
 					}
 				} else {
 					foreach ($fields as $k) {
 						if (array_key_exists($k, $source)) {
-							$dest->$k = $source[$k];
+							$a = isset($aliases[$k]) ? $aliases[$k] : $k;
+							$dest->$a = $source[$k];
 						}
 					}
 				}
@@ -1318,13 +1327,15 @@ class Q
 				if (is_array($dest)) {
 					foreach ($fields as $k) {
 						if (property_exists($source, $k) or isset($source->$k)) {
-							$dest[$k] = $source->$k;
+							$a = isset($aliases[$k]) ? $aliases[$k] : $k;
+							$dest[$a] = $source->$k;
 						}
 					}
 				} else {
 					foreach ($fields as $k) {
 						if (property_exists($source, $k) or isset($source->$k)) {
-							$dest->$k = $source->$k;
+							$a = isset($aliases[$k]) ? $aliases[$k] : $k;
+							$dest->$a = $source->$k;
 						}
 					}
 				}
@@ -2272,6 +2283,14 @@ class Q
 	 * @static
 	 */
 	public static $toolWasRendered = array();
+
+	/**
+	 * Shorthand variable to be passed by reference when null is allowed
+	 * @property $null
+	 * @type null
+	 * @static
+	 */
+	public static $null;
 }
 
 if (!function_exists('json_last_error_msg')) {
