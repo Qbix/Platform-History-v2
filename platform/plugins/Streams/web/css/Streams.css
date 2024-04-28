@@ -519,6 +519,9 @@
 .Streams_interests_tool .Q_expandable_container {
 	text-align: center;
 }
+.Streams_interests_tool .Q_expandable_content {
+	padding: 10px;
+}
 .Streams_interests_tool .Streams_interest_title {
 	/* safari is slow at drawing rounded borders, so wait until animations are done */
     border-radius: 5px;
