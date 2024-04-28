@@ -30,7 +30,7 @@ var Q = {
 		var ext = event.request.url.split('?')[0]
 			.split('.').pop().toLowerCase();
 		if (url.origin !== self.location.origin
-		|| ['js', '.css'].indexOf(ext) >= 0) {
+		|| ['js', 'css'].indexOf(ext) < 0) {
 			return; // let the browser do its usual fetch
 		}
 		if (url.toString() === Q.info.serviceWorkerUrl) {
