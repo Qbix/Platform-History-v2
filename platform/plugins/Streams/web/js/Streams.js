@@ -5009,7 +5009,12 @@ Q.Page.beforeUnload("").set(function () {
 
 function _preloaded(elem) {
 	// Every time we get an HTTP response to a request,
-	// process any preloaded streams and avatars data we find
+	// check if any streams have been marked public
+	if (Streams._public) {
+		Streams.arePublic(Streams._public);
+	}
+	Streams._public = null;
+	// now process any preloaded streams and avatars data we find
 	var pns = Object.keys(Stream._preloaded || {});
 	var p = Stream._preloaded;
 	if (pns.length == 0) {
@@ -5027,10 +5032,6 @@ function _preloaded(elem) {
 		Avatar.get.cache.set([fields.publisherId], 0, avatar, [null, avatar]);
 	});
 	Avatar._preloaded = null;
-	if (Streams._public) {
-		Streams.arePublic(Streams._public);
-	}
-	Streams._public = null;
 }
 
 function _updateMessageCache(msg) {
