@@ -26,7 +26,7 @@ function Streams_answer_put ($params) {
 		"type" => "Streams/answers"
 	))->fetchDbRow();
 	if (empty($questionStream)) {
-		throw new Exception("question stream not found");
+		throw new Streams_Exception_NoSuchStream();
 	}
 	$questionStream = Streams::fetchOne(null, $questionStream->toPublisherId, $questionStream->toStreamName, true);
 	if ($questionStream->getAttribute("cantChangeAnswers")) {
