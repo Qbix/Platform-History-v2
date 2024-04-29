@@ -1238,15 +1238,27 @@ Q.Tool.define('Streams/chat', function(options) {
 					_doScrollToComposer(true);
 				}, 300);
 			}
-			$scrolling.off('scroll.Streams_chat')
-			.on('scroll.Streams_chat', function () {
-				var t = event.target;
-				if (t.scrollTop + 1 < t.scrollHeight - t.clientHeight) {
+
+			if (!$scrolling || !$scrolling.length) {
+				return;
+			}
+
+			if (checkScrolling($scrolling[0])) {
+				stopScrollingToComposer = true;
+			} else {
+				$scrolling.off('scroll.Streams_chat').on('scroll.Streams_chat', function (event) {
 					// user started scrolling manually
+					if (!checkScrolling(event.target)) {
+						return;
+					}
+
 					stopScrollingToComposer = true;
 					$scrolling.off('scroll.Streams_chat');
-				}
-			});
+				});
+			}
+		}
+		function checkScrolling (element) {
+			return element.scrollTop + 1 < element.scrollHeight - element.clientHeight;
 		}
 	},
 
