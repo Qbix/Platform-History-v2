@@ -1547,7 +1547,7 @@ abstract class Users extends Base_Users
 	 * @param {string} [$directory=null] Set this unless $obj is a Users_User, in which case it will
 	 *   defaults to APP/files/APP/uploads/Users/USERID/icon/imported
 	 * @param {string|array} [$cookies=null] The cookies to pass, if downloading from URLs
-	 * @return {string} the path to the icon directory, or false if files weren't created
+	 * @return {string} the path to the icon directory, or null if files weren't created
 	 */
 	static function importIcon($obj, $sources = array(), $directory = null, $cookies = null)
 	{
@@ -1557,9 +1557,12 @@ abstract class Users extends Base_Users
 				.DS.Q_Utils::splitId($obj->id).DS.'icon'.DS.'imported';
 		}
 		if (empty($sources)) {
-			return $directory;
+			return null;
 		}
 		Q_Utils::canWriteToPath($directory, null, true);
+		if (!is_dir($directory)) {
+			return null;
+		}
 		$largestWidth = 0;
 		$largestHeight = 0;
 		$largestSource = null;
