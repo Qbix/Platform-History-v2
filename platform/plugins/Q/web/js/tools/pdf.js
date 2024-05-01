@@ -32,6 +32,9 @@ Q.Tool.define("Q/pdf", function (options) {
 		state.url = state.url.interpolate({ "baseUrl": Q.info.baseUrl });
 	}
 
+	tool.cache = Q.Cache.document('Q/pdf');
+	tool.cacheKey = Q.normalize(state.url);
+
 	tool.implement();
 
 	tool.Q.onStateChanged('clipStart').set(function () {
@@ -49,14 +52,18 @@ Q.Tool.define("Q/pdf", function (options) {
 	clipStart: null,
 	clipEnd: null,
 	scale: 0.5,
-	pdfInfo: {},
 	onSuccess: new Q.Event(),
 	onError: new Q.Event(function (message) {
 		Q.alert('File upload error' + (message ? ': ' + message : '') + '.');
 	}, 'Q/audio'),
 	onFinish: new Q.Event(),
-	onScroll: new Q.Event(),
-	onSlide: new Q.Event(),
+	onScroll: new Q.Event(function (currentTopPosition, currentLeftPosition) {
+		this.cacheData.scrollTop = currentTopPosition;
+		this.cacheData.scrollLeft = currentLeftPosition;
+	}),
+	onSlide: new Q.Event(function (index) {
+		this.cacheData.slideIndex = this.cacheData.slideIndex === index ? null : index;
+	}),
 	/* </Q/audio jquery plugin states> */
 	onRefresh: new Q.Event(function (numPages, element) {
 		// remove preloader
@@ -130,15 +137,41 @@ Q.Tool.define("Q/pdf", function (options) {
 			Q.handle(state.onSlide, tool, [slideIndex]);
 		});
 
+		tool.cacheData = Q.getObject(['params', 0], tool.cache && tool.cache.get(tool.cacheKey));
+		if (tool.cacheData && !Q.isEmpty(tool.cacheData.pages)) {
+			Q.each(tool.cacheData.pages, function (i, canvas) {
+				tool.element.appendChild(canvas);
+			});
+
+			var scrollTop = tool.cacheData.scrollTop && tool.element.scrollHeight/100*tool.cacheData.scrollTop;
+			var scrollLeft = tool.cacheData.scrollLeft && tool.element.scrollWidth/100*tool.cacheData.scrollLeft;
+			return setTimeout(function () {
+				tool.setCurrentPosition(scrollTop, scrollLeft);
+				Q.handle(state.onRefresh, tool, [tool.cacheData.pages.length, tool.element]);
+			}, 100);
+		}
+
+		tool.cacheData = {
+			pdfInfo: {},
+			pages: [],
+			slideIndex: null,
+			scrollTop: 0,
+			scrollLeft: 0
+		};
+
 		window.canvasSize.maxArea({onSuccess({ width, height, testTime, totalTime }) {
 			state.maxCanvas = width * height;
 			pdfjsLib.getDocument(state.url).promise.then(function(pdf) {
 				state.pdf = pdf;
 
+				tool.cache
+
 				pdf.getMetadata().then(function(stuff) {
-					state.pdfInfo.title = Q.getObject("info.Title", stuff) || Q.getObject("contentDispositionFilename", stuff);
-					state.pdfInfo.description = Q.getObject("info.Subject", stuff);
-					state.pdfInfo.author = Q.getObject("info.Author", stuff);
+					tool.pdfInfo = tool.cacheData.pdfInfo = {
+						title: Q.getObject("info.Title", stuff) || Q.getObject("contentDispositionFilename", stuff),
+						description: Q.getObject("info.Subject", stuff),
+						author: Q.getObject("info.Author", stuff)
+					};
 				}).catch(function(err) {
 					console.log('Q/pdf: Error getting meta data');
 					console.log(err);
@@ -190,6 +223,8 @@ Q.Tool.define("Q/pdf", function (options) {
 
 		//Add it to the web page
 		tool.element.appendChild(canvas);
+
+		tool.cacheData.pages.push(canvas);
 
 		var currPage = page.pageNumber + 1;
 
@@ -267,7 +302,11 @@ Q.Tool.define("Q/pdf", function (options) {
 		}
 
 		return this.state.stuffHeight * clipValue / 100;
+	},
+	Q: {
+		beforeRemove: function () {
+			!Q.isEmpty(this.cacheData) && this.cache.set(this.cacheKey, 0, null, [this.cacheData]);
+		}
 	}
 });
-
 })(window, Q, jQuery);
