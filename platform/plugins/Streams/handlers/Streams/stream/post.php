@@ -158,7 +158,7 @@ function Streams_stream_post($params = array())
 	}
 
 	// if $stream is null - Create new stream
-	if (!$stream instanceOf Streams_Stream) {
+	if (!$stream instanceof Streams_Stream) {
 		$stream =  Streams::create($user->id, $publisherId, $type, $fields, null, $result);
 	}
 	$messageTo = false;

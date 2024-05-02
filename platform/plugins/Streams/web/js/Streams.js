@@ -4386,6 +4386,9 @@ Q.onInit.add(function _Streams_onInit() {
 	//add private|public toggle to dialog for changing email/mobile
 	Q.Users.setIdentifier.options.onActivate = function (options) {
 		var userId = Q.Users.loggedInUserId();
+		if (!userId) {
+			return;
+		}
 		$('<button class="Q_button Users_setIdentifier_privacy_btn"/>')
 			.on(Q.Pointer.fastclick, function () {
 				var m = {
