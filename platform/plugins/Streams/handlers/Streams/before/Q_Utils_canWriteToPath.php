@@ -22,17 +22,15 @@ function Streams_before_Q_Utils_canWriteToPath($params, &$result)
 	$appDir = str_replace(DS, '/', APP_DIR);
 	$pluginFilesDir = str_replace(DS, '/', STREAMS_PLUGIN_FILES_DIR);
 	$sp = null;
+	$prefix = null;
 	if (Q::startsWith($path, $appDir)) {
+		$prefix = "files/$app/uploads/Streams/";
 		$sp = substr($path, strlen($appDir)+1);
-		if (!Q::startsWith($sp, "files/$app/uploads/Streams/")) {
-			return;
-		}
 	} else if (Q::startsWith($path, $pluginFilesDir)) {
 		$sp = substr($path, strlen($pluginFilesDir)+1);
-		if (!Q::startsWith($sp, "uploads/Streams/")) {
-			return;
-		}
-	} else {
+		$prefix = "uploads/Streams/";
+	}
+	if (!$prefix || !Q::startsWith($sp, $prefix)) {
 		return;
 	}
 	if (substr($sp, -1) === '/') {
@@ -40,17 +38,20 @@ function Streams_before_Q_Utils_canWriteToPath($params, &$result)
 	}
 	$splitId = Q_Utils::splitId($userId, 3, '/');
 	$prefix2 = $prefix."invitations/$splitId";
-	if ($userId and substr($sp, 0, strlen($prefix2)) === $prefix2) {
+	if ($userId and Q::startsWith($sp, $prefix2)) {
 		$result = true; // user can write any invitations here
 		return;
 	}
 
-	$parts = explode('/', substr($sp, $len));	
+	$parts = explode('/', substr($sp, strlen($prefix)));	
 	$c = count($parts);
 	if ($c >= 3) {
 		$result = false;
 		for ($j=0; $j<$c-3; ++$j) {
 			$publisherId = implode('', array_slice($parts, 0, $j+1));
+			if (!Users_User::fetch($publisherId)) {
+				continue;
+			}
 			$l = $j;
 			for ($i=$c-1; $i>$j; --$i) {
 				$l = $i;
