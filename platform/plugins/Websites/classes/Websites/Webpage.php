@@ -296,8 +296,8 @@ class Websites_Webpage extends Base_Websites_Webpage
 
 		// additional handler for youtube.com
 		if (in_array($host, array('www.youtube.com', 'youtube.com'))) {
-			preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\\/)[^&\n]+(?=\\?)|(?<=v=)[^&\n]+|(?<=youtu.be/)[^&\n]+#", $url, $videoId);
-			$videoId = reset($videoId);
+			preg_match("/^(?:http(?:s)?:\/\/)?(?:www\.)?(?:m\.)?(?:youtu\.be\/|youtube\.com\/(?:(?:watch)?\?(?:.*&)?v(?:i)?=|(?:embed|v|vi|user|shorts)\/))([^\?&\"'>]+)/u", $url, $videoId);
+			$videoId = end($videoId);
 			$youtubeData = self::youtube(@compact("videoId"));
 			$youtubeData  = reset($youtubeData);
 			$result = array_merge($result, $youtubeData);
