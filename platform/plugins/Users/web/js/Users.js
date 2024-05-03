@@ -1383,12 +1383,14 @@
 	Users.onDisconnected = new Q.Event();
 	
 	Q.Socket.onConnect('Users').set(function (qs, ns, url) {
-		Q.loadNonce(function () {
-			qs.socket.emit('Users/user', Users.capability, Q.clientId(),
-			function () {
-				Q.handle(Users.Socket.onSession, Users.Socket, qs, ns, url);
+		if (Users.capability && Users.capability.userId) {
+			Q.loadNonce(function () {
+				qs.socket.emit('Users/user', Users.capability, Q.clientId(),
+				function () {
+					Q.handle(Users.Socket.onSession, Users.Socket, qs, ns, url);
+				});
 			});
-		});
+		}
 	}, 'Users');
 
 	/**
