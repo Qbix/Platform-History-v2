@@ -114,7 +114,7 @@ Q.Tool.define("Streams/image/preview", "Streams/preview", function(options, prev
 			inplace: inplace,
 			showTitle: state.showTitle !== false
 		});
-		var tpl = (state.editable !== false || stream.testWriteLevel('suggest'))
+		var tpl = (ps.editable !== false && stream.testWriteLevel('suggest'))
 			? 'edit' 
 			: 'view';
 		Q.Template.render(
