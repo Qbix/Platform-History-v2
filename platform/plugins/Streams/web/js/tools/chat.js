@@ -1104,6 +1104,7 @@ Q.Tool.define('Streams/chat', function(options) {
 
 		if (previewToolName === "Streams/image/preview") {
 			fields.imagepicker = {showSize: "200x", useAnySize: true};
+			fields.editable = false;
 		}
 
 		Q.Streams.get(fields.publisherId, fields.streamName, function (err) {
