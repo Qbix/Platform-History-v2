@@ -90,9 +90,6 @@
 				}
 			}
 		},
-		"socket": {
-			"disconnectTimeout": 1500
-		},
 		"text": {
 			"Users": {
 				"*": ["Users/content"],
@@ -291,7 +288,14 @@
 			"createSecondsMax": 0
 		},
 		"capability": {
-			"duration": 86400
+			"duration": 86400,
+			"public": {
+				"permissions": {} /* route: [permission] pairs */
+			}
+		},
+		"socket": {
+			"disconnectTimeout": 1500,
+			"permissions": ["u"]
 		},
 		"passphrase": {
 			"hashFunction": "sha1",

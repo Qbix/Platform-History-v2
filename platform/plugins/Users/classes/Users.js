@@ -397,6 +397,17 @@ Users.Socket = {
 			console.warn("Users.listen: socket missing");
 		}
 		socket.io.of('/Users').on('connection', function(client) {
+			var permissions = Q.Config.get(['Users', 'socket', 'permissions'], []);
+			var found = false;
+			for (var permission of permissions) {
+				if (Q.Utils.validateCapability(client.handshake.auth, permission)) {
+					found = true;
+					break;
+				}
+			}
+			if (!found) {
+				client.disconnect();
+			}
 			Q.log("Socket.IO client connected " + client.id);
 			if (client.alreadyListening) {
 				return;
@@ -404,11 +415,11 @@ Users.Socket = {
 			client.alreadyListening = true;
 			client.on('Users/user', function (capability, clientId, callback) {
 				if (!Q.Utils.validateCapability(capability, 'Users/socket')) {
-					client.disconnect(); // force disconnect
+					client.disconnect(); // force disconnectstream.js
 					return;
 				}
 				var userId = capability.userId;
-				Users.fetch(userId, function (err, results) {
+				userId && Users.fetch(userId, function (err, results) {
 					if (err || !results[0]) {
 						client.disconnect(); // force disconnect
 						return;

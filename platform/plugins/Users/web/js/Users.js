@@ -1557,7 +1557,7 @@
 					callback && callback(socket, ns, url);
 				});
 			}
-		}),
+		}, false, 1),
 
 		/**
 		 * Returns a socket, if it was already connected, or returns undefined
