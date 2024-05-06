@@ -1553,7 +1553,7 @@
 				_waitForSession.call(qs, 'Users', nodeUrl);
 			}
 			Q.Socket.connect('Users', nodeUrl, _waitForSession);
-			function _waitForSession() {
+			function _waitForSession(socket, ns, url) {
 				if (dontWaitForAuthenticatedSession) {
 					return callback && callback(socket, ns, url);
 				}
