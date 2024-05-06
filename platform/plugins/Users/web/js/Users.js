@@ -1387,7 +1387,7 @@
 			Q.loadNonce(function () {
 				qs.socket.emit('Users/user', Users.capability, Q.clientId(),
 				function () {
-					Q.handle(Users.Socket.onSession, Users.Socket, qs, ns, url);
+					Q.handle(Users.Socket.onAuthenticatedSession, Users.Socket, qs, ns, url);
 				});
 			});
 		}
@@ -1543,9 +1543,10 @@
 		 * @method connect
 		 * @param {String} nodeUrl The url of the socket.io node to connect to
 		 * @param {Function} callback When a connection is made, receives the socket object
+		 * @param {Boolean} dontWaitForAuthenticatedSession if the callback doesn't require an authenticate Users session
 		 * @return {Promise} to be used instead of callback
 		 */
-		connect: Q.promisify(function _Users_Socket_connect(nodeUrl, callback) {
+		connect: Q.promisify(function _Users_Socket_connect(nodeUrl, callback, dontWaitForAuthenticatedSession) {
 			var qs = Q.Socket.get('Users', nodeUrl);
 			if (qs && qs.socket &&
 			(qs.socket.io.connected || !Q.isEmpty(qs.socket.io.connecting))) {
@@ -1553,11 +1554,14 @@
 			}
 			Q.Socket.connect('Users', nodeUrl, _waitForSession);
 			function _waitForSession() {
-				Users.Socket.onSession.addOnce(function (socket, ns, url) {
+				if (dontWaitForAuthenticatedSession) {
+					return callback && callback(socket, ns, url);
+				}
+				Users.Socket.onAuthenticatedSession.addOnce(function (socket, ns, url) {
 					callback && callback(socket, ns, url);
 				});
 			}
-		}),
+		}, false, 1),
 
 		/**
 		 * Returns a socket, if it was already connected, or returns undefined
@@ -1573,11 +1577,11 @@
 		/**
 		 * Returns Q.Event that occurs on some socket event coming from socket.io
 		 * through the Users namespace
-		 * @event onEvent
+		 * @event onAuthenticatedSession
 		 * @param {String} name the name of the event
 		 * @return {Q.Event}
 		 */
-		onSession: new Q.Event(),
+		onAuthenticatedSession: new Q.Event(),
 
 		/**
 		 * Returns Q.Event that occurs on some socket event coming from socket.io
