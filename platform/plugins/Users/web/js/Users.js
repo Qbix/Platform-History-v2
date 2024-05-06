@@ -1550,9 +1550,10 @@
 			var qs = Q.Socket.get('Users', nodeUrl);
 			if (qs && qs.socket &&
 			(qs.socket.io.connected || !Q.isEmpty(qs.socket.io.connecting))) {
-				_waitForSession.call(qs, 'Users', nodeUrl);
+				_waitForSession.call(this, qs, 'Users', nodeUrl);
+			} else {
+				Q.Socket.connect('Users', nodeUrl, _waitForSession);
 			}
-			Q.Socket.connect('Users', nodeUrl, _waitForSession);
 			function _waitForSession(socket, ns, url) {
 				if (dontWaitForAuthenticatedSession) {
 					return callback && callback(socket, ns, url);
