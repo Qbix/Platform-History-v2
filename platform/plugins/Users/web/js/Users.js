@@ -1548,8 +1548,7 @@
 		 */
 		connect: Q.promisify(function _Users_Socket_connect(nodeUrl, callback, dontWaitForAuthenticatedSession) {
 			var qs = Q.Socket.get('Users', nodeUrl);
-			if (qs && qs.socket &&
-			(qs.socket.io.connected || !Q.isEmpty(qs.socket.io.connecting))) {
+			if (qs && qs.socket && qs.socket.io.connected) {
 				_waitForSession.call(this, qs, 'Users', nodeUrl);
 			} else {
 				Q.Socket.connect('Users', nodeUrl, _waitForSession);
