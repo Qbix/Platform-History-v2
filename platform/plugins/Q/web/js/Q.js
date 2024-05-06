@@ -2396,8 +2396,8 @@ Q.chain = function (callbacks) {
  * @method promisify
  * @static
  * @param  {Function} getter A function that takes arguments that include a callback and passes err as the first parameter to that callback, and the value as the second argument.
- * @param {Boolean} useThis whether to resolve the promise with the "this" instead of the second argument.
- * @param {Number|Array} callbackIndex Which argument the getter is expecting the callback, if any.
+ * @param {Boolean} [useThis] whether to resolve the promise with the "this" instead of the second argument.
+ * @param {Number|Array} [callbackIndex] Which argument the getter is expecting the callback, if any.
  *  For cordova-style functions pass an array of indexes for the
  *  onSuccess, onFailure callbacks, respectively.
  * @return {Function} a wrapper around the function that returns a promise, extended with the original function's return value if it's an object
@@ -2436,6 +2436,9 @@ Q.promisify = function (getter, useThis, callbackIndex) {
 				});
 			} else {
 				var ci = (callbackIndex === undefined) ? args.length : callbackIndex;
+				if (args.length < ci) {
+					throw new Q.Exception("Q.promisify: Too few arguments");
+				}
 				args.splice(ci, 0, function _defaultCallback(err, second) {
 					if (err) {
 						return reject(err);
@@ -12214,6 +12217,9 @@ function _connectSocketNS(ns, url, callback, earlyCallback, forceNew) {
 		} : {}, {
 			transports: ['websocket']
 		});
+		if (Q.Users.capability) {
+			o.auth = Q.Users.capability;
+		}
 		if (!qs) {
 			var parsed = url.parseUrl();
 			var host = parsed.scheme + '://' + parsed.host 
@@ -12242,11 +12248,14 @@ function _connectSocketNS(ns, url, callback, earlyCallback, forceNew) {
 				log('Error on connection '+url+' ('+error+')');
 			});
 		}
+		qs.socket.on('disconnect', function _onDisconnect() {
+			qs.connected = false;
+			this.off('disconnect', _onDisconnect);
+		});
 		if (!qs.connected && qs.socket) {
-			var socket = qs.socket;
-			if (!socket.connecting) {
-				socket.connect(); // connect it again
-				_connecting(socket);
+			if (!qs.socket.connecting) {
+				qs.socket.connect(); // connect it again
+				_connecting(qs.socket);
 			}
 		}
 		function _connecting(socket) {
@@ -12357,7 +12366,6 @@ Q.Socket.prototype.disconnect = function _Q_Socket_prototype_disconnect() {
 		return;
 	}
 	qs.socket.disconnect();
-	qs.connected = false;
 };
 
 Q.Socket.prototype.toJSON = function () {

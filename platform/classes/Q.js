@@ -995,8 +995,8 @@ Q.chain = function (callbacks, callback) {
  * @method promisify
  * @static
  * @param  {Function} getter A function that takes arguments that include a callback and passes err as the first parameter to that callback, and the value as the second argument.
- * @param {Boolean} useThis whether to resolve the promise with the "this" instead of the second argument.
- * @param {Number|Array} callbackIndex Which argument the getter is expecting the callback, if any.
+ * @param {Boolean} [useThis] whether to resolve the promise with the "this" instead of the second argument.
+ * @param {Number|Array} [callbackIndex] Which argument the getter is expecting the callback, if any.
  *  For cordova-style functions pass an array of indexes for the
  *  onSuccess, onFailure callbacks, respectively.
  * @return {Function} a wrapper around the function that returns a promise, extended with the original function's return value if it's an object
@@ -1035,12 +1035,15 @@ Q.promisify = function (getter, useThis, callbackIndex) {
 				});
 			} else {
 				var ci = (callbackIndex === undefined) ? args.length : callbackIndex;
-				args[ci] = function _defaultCallback(err, second) {
+				if (args.length < ci) {
+					throw new Q.Exception("Q.promisify: Too few arguments");
+				}
+				args.splice(ci, 0, function _defaultCallback(err, second) {
 					if (err) {
 						return reject(err);
 					}
 					resolve(useThis ? this : second);
-				};
+				});
 			}
 		}
 		var promise = new Q.Promise(function (r1, r2) {

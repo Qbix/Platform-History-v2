@@ -1937,9 +1937,9 @@ class Q_Response
 		or !Q_Request::shouldLoadExtras('session')) {
 			return false;
 		}
-		if (Q_Request::isAjax()) {
-			$throwIfInvalid = (bool)Users::loggedInUser(false, false);
-			Q_Request::requireValidNonce($throwIfInvalid); // SECURITY: prevent CSRF attacks
+		if (Q_Request::isAjax()
+		and Users::loggedInUser(false, false)) {
+			Q_Request::requireValidNonce(true); // SECURITY: prevent CSRF attacks
 		}
 		Q::event('Q/sessionExtras', array(), $hookType);
 		return true;

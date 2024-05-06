@@ -1166,11 +1166,12 @@ class Q_Request
 	 * URI requires a valid nonce to be submitted, to prevent CSRF attacks.
 	 * @see Q_Valid::requireValidNonce
 	 * @method requireValidNonce
+	 * @param {boolean} [$throwIfInvalid=false] If true, throws an exception if the nonce is invalid.
 	 * @static
 	 * @throws {Q_Exception_FailedValidation}
 	 * @return {boolean} Whether Q_Valid::nonce() was called
 	 */
-	static function requireValidNonce()
+	static function requireValidNonce($throwIfInvalid = false)
 	{
 		$list = Q_Config::get('Q', 'web', 'requireValidNonce', array());
 		$exclude = Q::ifset($list, 'exclude', array());
@@ -1194,7 +1195,7 @@ class Q_Request
 			if (isset($parts[1]) and $uri->action !== $parts[1]) {
 				continue;
 			}
-			Q_Valid::nonce(true);
+			Q_Valid::nonce($throwIfInvalid);
 			return true;
 		}
 		return false;
