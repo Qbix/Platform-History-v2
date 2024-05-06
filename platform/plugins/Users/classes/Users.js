@@ -400,7 +400,8 @@ Users.Socket = {
 			var permissions = Q.Config.get(['Users', 'socket', 'permissions'], []);
 			var found = false;
 			for (var permission of permissions) {
-				if (Q.Utils.validateCapability(client.handshake.auth, permission)) {
+				if (client.handshake.auth
+				&& Q.Utils.validateCapability(client.handshake.auth, permission)) {
 					found = true;
 					break;
 				}
