@@ -35,6 +35,32 @@ function Socket (server, options) {
 		this.io = new io.Server(server, o);
 	}
 
+	this.io.of('/Q').use(function (client, next) {
+		var permissions = Q.Config.get(['Users', 'socket', 'permissions'], []);
+		var found = false;
+		var capability = Q.getObject('handshake.query.capability', client);
+		capability = capability && JSON.parse(capability);
+		for (var permission of permissions) {
+			if (capability && Q.Utils.validateCapability(capability, permission)) {
+				found = true;
+				client.capability = capability;
+				break;
+			}
+		}
+		if (!found) {
+			return next(new Error("Q.Socket.connect: Not Authorized"));
+		}
+		/**
+		 * Socket has connected.
+		 * Reconnections before disconnect timeout don't count.
+		 * @event connected
+		 * @param {Socket} client
+		 *	The connecting client. Contains userId, clientId
+		 */
+		Q.Socket.emit('connected', client);
+		next();
+	});
+
 	// for backwards compatibility
 	var BA = this.io.of('a').to('b').constructor;
 	var util = require('util');
