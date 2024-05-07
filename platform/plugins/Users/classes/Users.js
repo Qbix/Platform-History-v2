@@ -428,7 +428,7 @@ Users.Socket = {
 			 */
 			Users.emit('connected', client, wasOnline);
 			if (wasOnline) {
-				Q.log('New client connected: ' + userId + '('+clientId+')');
+				Q.log('New client connected: ' + userId + '('+client.id+')');
 			} else {
 				Q.log('User connected: ' + client.userId);
 			}
