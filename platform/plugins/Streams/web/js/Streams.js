@@ -843,7 +843,10 @@ Q.Tool.define({
 		css: "{{Streams}}/css/tools/previews.css"
 	},
 	"Streams/question/chat" : "{{Streams}}/js/tools/question/chat.js",
-	"Streams/pdf/preview" : "{{Streams}}/js/tools/pdf/preview.js",
+	"Streams/pdf/preview" : {
+		js: "{{Streams}}/js/tools/pdf/preview.js",
+		css: "{{Streams}}/css/tools/previews.css"
+	},
 	"Streams/pdf/chat" : {
 		js: "{{Streams}}/js/tools/pdf/chat.js",
 		css: "{{Streams}}/css/tools/previews.css"
@@ -2096,7 +2099,7 @@ Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, op
 		// rather than triggering the onRefresh event for the stream.
 		var result = Message.wait(publisherId, streamName, -1,
 		function (ordinals) {
-			Q.Streams.get(publisherId, streamName, function (err) {
+			Q.Streams.get.force(publisherId, streamName, function (err) {
 				if (!callbackCalled) {
 					callbackCalled = true;
 					Q.handle(callback, this, [err, ordinals]);
@@ -2116,7 +2119,7 @@ Stream.refresh = function _Stream_refresh (publisherId, streamName, callback, op
 			// We didn't even try to wait for messages,
 			// The socket will deliver them.
 			// (But we still need to fetch the stream from cache or server.)
-			Q.Streams.get(publisherId, streamName, function (err) {
+			Q.Streams.get.force(publisherId, streamName, function (err) {
 				// If stream was evicted from cache, this fetches it again
 				// from the server, causing the onRefresh method to fire.
 				if (!callbackCalled) {
