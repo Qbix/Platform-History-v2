@@ -1166,7 +1166,7 @@
 
 	Q.onInit.add(function () {
 		if (Users.capability) {
-			Q.Socket.connect.options.auth = Users.capability;
+			Q.Socket.connect.options.query = Users.capability;
 		}
 		priv._register_localStorageKey = "Q.Users.register.success " + Q.info.baseUrl;
 		Q.Text.get('Users/content', function (err, text) {

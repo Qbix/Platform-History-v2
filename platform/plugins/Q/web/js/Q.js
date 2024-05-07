@@ -12232,7 +12232,7 @@ function _connectSocketNS(ns, url, callback, options, forceNew) {
 			forceNew: true
 		} : {}, {
 			transports: ['websocket'],
-			auth: options.auth
+			query: options.query
 		});
 		if (!qs) {
 			var parsed = url.parseUrl();
@@ -12332,7 +12332,7 @@ function _connectSocketNS(ns, url, callback, options, forceNew) {
  * @param {String} url The url of the socket.io node to connect to
  * @param {Function} [callback] Called after socket connects successfully. Receives Q.Socket
  * @param {Object} [options]
- * @param {Object} [auth] the object to pass to the server, in socket.handshake.auth
+ * @param {Object} [query] the object to pass to the server, in socket.handshake.query
  * @param {Function} [options.earlyCallback] Receives Q.Socket as soon as it's constructed
  */
 Q.Socket.connect = Q.getter(function _Q_Socket_connect(ns, url, callback, options) {
