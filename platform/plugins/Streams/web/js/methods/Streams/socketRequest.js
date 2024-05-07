@@ -24,7 +24,6 @@ Q.exports(function(priv){
             return null;
         }
         var args = Array.prototype.slice.call(arguments, 0);
-        args.splice(1, 0, Q.clientId(), Q.getObject('Q.Users.capability'));
         socket.socket.emit.apply(socket.socket, args);
         return socket;
     };

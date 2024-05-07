@@ -439,7 +439,7 @@ Streams.listen = function (options, servers) {
 		client.alreadyListeningStreams = true;
 
 		client.on('Streams/observe',
-		function (clientId, capability, publisherId, streamName, fn) {
+		function (publisherId, streamName, fn) {
 			var now = Date.now() / 1000;
 			if (!Q.Utils.validateCapability(capability, 'Streams/observe')) {
 				return fn && fn({
@@ -497,7 +497,7 @@ Streams.listen = function (options, servers) {
 			});
 		});
 		client.on('Streams/neglect',
-		function (clientId, capability, publisherId, streamName, fn) {
+		function (publisherId, streamName, fn) {
 			var o = Streams.observers;
 			if (!Q.getObject([publisherId, streamName, client.id], o)) {
 				return fn && fn(null, false);
@@ -507,7 +507,7 @@ Streams.listen = function (options, servers) {
 			return fn && fn(null, true);
 		});
 		client.on('Streams/ephemeral',
-		function (clientId, capability, publisherId, streamName, payload, dontNotifyObservers, fn) {
+		function (publisherId, streamName, payload, dontNotifyObservers, fn) {
 			if (!payload.type) {
 				return fn && fn("Payload must have type set");
 			}
