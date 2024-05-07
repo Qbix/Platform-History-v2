@@ -396,7 +396,7 @@ Users.Socket = {
 		if (!socket) {
 			console.warn("Users.listen: socket missing");
 		}
-		socket.io.of('/Users').use(function (client, next) {
+		socket.io.of('/Q').use(function (client, next) {
 			var permissions = Q.Config.get(['Users', 'socket', 'permissions'], []);
 			var found = false;
 			for (var permission of permissions) {
@@ -413,7 +413,7 @@ Users.Socket = {
 			}
 
 		});
-		socket.io.of('/Users').on('connection', function(client) {
+		socket.io.of('/Q').on('connection', function(client) {
 			Q.log("Socket.IO client connected " + client.id);
 			if (client.alreadyListening) {
 				return;

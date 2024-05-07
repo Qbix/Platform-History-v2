@@ -1554,7 +1554,7 @@
 			if (qs && qs.socket && qs.socket.io.connected) {
 				_waitForSession.call(this, qs, 'Users', nodeUrl);
 			} else {
-				Q.Socket.connect('Users', nodeUrl, _waitForSession);
+				Q.Socket.connect('/Q', nodeUrl, _waitForSession);
 			}
 			function _waitForSession(socket, ns, url) {
 				if (dontWaitForAuthenticatedSession) {

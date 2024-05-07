@@ -432,7 +432,7 @@ Streams.listen = function (options, servers) {
 		https: Q.Config.get(['Q', 'node', 'https'], false) || {},
 	});
 
-	socket.io.of('/Users').on('connection', function(client) {
+	socket.io.of('/Q').on('connection', function(client) {
 		if (client.alreadyListeningStreams) {
 			return;
 		}
