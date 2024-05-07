@@ -165,9 +165,7 @@
 				}
 
 				if (!audioUrl) {
-					Q.Tool.remove(tool.element, true, true);
 					console.warn("Streams/audio/preview: URL undefined");
-					//throw new Q.Error("Streams/audio/preview: URL undefined");
 				}
 
 				$toolElement.removeClass('Q_uploading');

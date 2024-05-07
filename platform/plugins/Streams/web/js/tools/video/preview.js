@@ -97,7 +97,6 @@
 				var state = tool.state;
 				var previewState = tool.preview.state;
 				var $toolElement = $(tool.element);
-				var videoUrl = state.url;
 				var inplace = null;
 				var icon = null;
 
@@ -152,7 +151,6 @@
 						tool.preview.actions();
 					}
 
-					videoUrl =  stream.videoUrl() || stream.fileUrl();
 					// set up the inplace options
 					if (state.inplace) {
 						var inplaceOptions = Q.extend({
@@ -169,12 +167,6 @@
 				} else {
 					inplace = state.title;
 					icon = state.src;
-				}
-
-				if (!videoUrl) {
-					Q.Tool.remove(tool.element, true, true);
-					console.warn("Streams/video/preview: URL undefined");
-					//throw new Q.Error("Streams/video/preview: URL undefined");
 				}
 
 				$toolElement.removeClass('Q_uploading');
