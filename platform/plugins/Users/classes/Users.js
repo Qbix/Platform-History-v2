@@ -441,6 +441,10 @@ Users.Socket = {
 			}
 			client.alreadyListening = true;
 			client.on('Users/clients', function (callback) {
+				var userId = client.capability.userId;
+				if (!userId) {
+					callback(null);
+				}
 				var oci = {};
 				for (var cid in Users.clients[userId]){
 					var c = Users.clients[userId][cid];
