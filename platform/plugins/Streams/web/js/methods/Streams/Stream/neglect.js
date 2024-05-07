@@ -10,6 +10,12 @@ Q.exports(function(priv, Streams, Stream){
     * @param {Function} [callback] receives (err, result) as parameters
     */
     return function _Stream_neglect (publisherId, streamName, callback) {
+        var nodeUrl = Q.nodeUrl({
+            publisherId: publisherId,
+            streamName: streamName
+        });
+        var key = ['Streams.Stream.observe: ', publisherId, streamName].join("\t");
+        Q.Socket.onConnect('/Q', nodeUrl).remove(key);
         Q.Streams.socketRequest('Streams/neglect', publisherId, streamName, function () {
         	var ps = Streams.key(publisherId, streamName);
 			priv._observedByStream[ps] = false;

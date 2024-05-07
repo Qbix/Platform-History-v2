@@ -14,12 +14,17 @@ Q.exports(function(priv, Streams, Stream){
             publisherId: publisherId,
             streamName: streamName
         });
-        Q.Socket.onConnect('/Q', nodeUrl).add(function () {
+
+        // it will be called every time the socket reconnects,
+        // but neglect() will remove it by the key
+        var key = ['Streams.Stream.observe: ', publisherId, streamName].join("\t");
+        Q.Socket.onConnect('/Q', nodeUrl)
+        .add(function _observeSocketRequest () {
             Q.Streams.socketRequest('Streams/observe', publisherId, streamName, function () {
-				var ps = Streams.key(publisherId, streamName);
-				priv._observedByStream[ps] = true;
-            	Q.handle(callback);
+                var ps = Streams.key(publisherId, streamName);
+                priv._observedByStream[ps] = true;
+                Q.handle(callback);
             });
-        }, 'Streams.Stream.observe');
+        }, key);
     };
 })

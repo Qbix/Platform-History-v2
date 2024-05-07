@@ -12214,7 +12214,7 @@ Q.Socket.getAll = function _Q_Socket_all() {
 	return _qsockets;
 };
 
-window._connectSocketNS = Q.getter(function(ns, url, callback, options) {
+var _connectSocketNS = root.a = Q.getter(function(ns, url, callback, options) {
 	var o = Q.extend({}, Q.Socket.connect.options, options);
 	if (ns[0] !== '/') {
 		ns = '/' + ns;
@@ -12257,12 +12257,6 @@ window._connectSocketNS = Q.getter(function(ns, url, callback, options) {
 				url: url,
 				ns: ns
 			});
-			qs.socket.on('disconnect', function _onDisconnect() {
-				qs.connected = false;
-				_connectSocketNS.forget(ns, url, callback, options);
-				_connectSocketNS.forget(ns, url, callback);
-				this.off('disconnect', _onDisconnect);
-			});
 			// remember actual socket - for disconnecting
 			var socket = qs.socket;
 			_connecting(socket);
@@ -12274,6 +12268,9 @@ window._connectSocketNS = Q.getter(function(ns, url, callback, options) {
 			});
 			_ioOn(socket.io, 'close', function () {
 				log('Socket ' + ns + ' disconnected from '+url);
+				qs.connected = false;
+				_connectSocketNS.forget(ns, url, callback, options);
+				_connectSocketNS.forget(ns, url, callback);
 			});
 			_ioOn(socket, 'error', function (error) {
 				log('Error on connection '+url+' ('+error+')');
@@ -12362,6 +12359,9 @@ Q.Socket.connect = function _Q_Socket_connect(ns, url, callback, options) {
 		ns = '/Q';
 	} else if (ns[0] !== '/') {
 		ns = '/' + ns;
+	}
+	if (!callback) {
+		callback = function () {} // for getter cache to work
 	}
 	// check if socket already connected, or reconnect
 	_connectSocketNS(ns, url, callback, options);

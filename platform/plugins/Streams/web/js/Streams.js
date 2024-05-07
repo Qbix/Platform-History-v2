@@ -2614,7 +2614,7 @@ Sp.retain = function _Stream_prototype_retain (key, options) {
 						Q.setObject([nodeUrl, ps], true, priv._retainedNodes);
 					});
 				}
-			}, true);
+			});
 		}
 	}
 	Q.setObject([ps, key], true, priv._retainedByStream);
