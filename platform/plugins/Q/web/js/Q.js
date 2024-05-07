@@ -12494,7 +12494,7 @@ Q.Socket.onEvent = Q.Event.factory(
  */
 Q.Socket.onConnect = Q.Event.factory(
 	_connectHandlers, 
-	["", "", function (ns, url) { 
+	["/Q", "", function (ns, url) { 
 		if (ns[0] !== '/') {
 			return ['/'+ns, url];
 		}
