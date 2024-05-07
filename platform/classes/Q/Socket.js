@@ -119,5 +119,5 @@ Socket.listen = function (options) {
 	return server.attached.socket;
 };
 
-Q.makeEventEmitter(Socket, true);
+Q.makeEventEmitter(Socket);
 module.exports = Socket;
