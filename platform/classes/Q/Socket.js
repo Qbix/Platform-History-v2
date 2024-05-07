@@ -38,7 +38,7 @@ function Socket (server, options) {
 	this.io.of('/Q').use(function (client, next) {
 		var permissions = Q.Config.get(['Users', 'socket', 'permissions'], []);
 		var found = false;
-		var capability = Q.getObject('handshake.query.capability', client);
+		var capability = Q.getObject('handshake.auth.capability', client);
 		capability = capability && JSON.parse(capability);
 		for (var permission of permissions) {
 			if (capability && Q.Utils.validateCapability(capability, permission)) {
