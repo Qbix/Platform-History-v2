@@ -433,11 +433,6 @@ Users.Socket = {
 				Q.log('User connected: ' + client.userId);
 			}
 			next();
-			if (found) {
-				next();
-			} else {
-				next(new Error("Users.Socket: Not Authorized"));
-			}
 		});
 		socket.io.of('/Q').on('connection', function(client) {
 			Q.log("Socket.IO client connected " + client.id);
