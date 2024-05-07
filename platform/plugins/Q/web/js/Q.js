@@ -12181,7 +12181,7 @@ Q.Socket = function (params) {
  * @static
  * @method get
  * @param {String} [ns="/Q"] The socket.io namespace
- * @param {String} [url] The url where socket.io is listening. If it's empty, then returns all matching sockets.
+ * @param {String} [url] The url where socket.io is listening. If it's undefined, then returns all matching sockets.
  * @return {Q.Socket}
  */
 Q.Socket.get = function _Q_Socket_get(ns, url) {
@@ -12192,7 +12192,10 @@ Q.Socket.get = function _Q_Socket_get(ns, url) {
 		ns = '/' + ns;
 	}
 	if (!url) {
-		return _qsockets[ns];
+		if (url === undefined) {
+			return _qsockets[ns];
+		}
+		return _qsockets[ns] && Q.first(_qsockets[ns]);
 	}
 	return _qsockets[ns] && _qsockets[ns][url];
 };
@@ -12308,9 +12311,10 @@ function _connectSocketNS(ns, url, callback, options) {
 			Q.each(_socketRegister, function (i, item) {
 				if (item[1] !== ns) return;
 				var name = item[0];
-				_ioOn(qs.socket, name, Q.Socket.onEvent(name, ns, url).handle); // may overwrite again, but it's ok
+				// the following may overwrite again, but it's ok
+				_ioOn(qs.socket, name, Q.Socket.onEvent(name, ns, url).handle);
 				_ioOn(qs.socket, name, Q.Socket.onEvent(name, ns, '').handle);
-				_ioOn(qs.socket, name, Q.Socket.onEvent(name, '', '').handle);
+				// NOTE: we don't need to catch events across all namespaces, so skip that
 				Q.handle(Q.Socket.onRegister, Q.Socket, [ns, url, name]);
 			});
 		}
