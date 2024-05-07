@@ -12440,9 +12440,9 @@ Q.Socket.destroyAll = function _Q_Socket_destroyAll() {
  */
 Q.Socket.onEvent = Q.Event.factory(
 	_eventHandlers, 
-	["", "/Q", "", function (ns, url, name) { 
+	["", "/Q", "", function (name, ns, url) { 
 		if (ns[0] !== '/') {
-			return ['/'+ns, url, name];
+			return [name, '/'+ns, url];
 		}
 	}],
 	function _Q_Socket_SetupEvent(ns, url, name) {
