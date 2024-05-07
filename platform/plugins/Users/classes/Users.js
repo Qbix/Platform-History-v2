@@ -399,9 +399,9 @@ Users.Socket = {
 		socket.io.of('/Q').use(function (client, next) {
 			var permissions = Q.Config.get(['Users', 'socket', 'permissions'], []);
 			var found = false;
+			var capability = Q.getObject('handshake.query.capability', client);
 			for (var permission of permissions) {
-				if (client.handshake.auth
-				&& Q.Utils.validateCapability(client.handshake.auth, permission)) {
+				if (capability && Q.Utils.validateCapability(capability, permission)) {
 					found = true;
 					break;
 				}

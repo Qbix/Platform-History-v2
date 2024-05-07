@@ -12230,7 +12230,7 @@ function _connectSocketNS(ns, url, callback, options, forceNew) {
 		var qs = _qsockets[ns] && _qsockets[ns][url];
 		var o = Q.extend(forceNew ? {
 			forceNew: true
-		} : {}, {
+		} : {}, 10, {
 			transports: ['websocket'],
 			query: options.query
 		});
