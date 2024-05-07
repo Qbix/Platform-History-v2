@@ -12206,31 +12206,31 @@ Q.Socket.getAll = function _Q_Socket_all() {
 	return _qsockets;
 };
 
-function _connectSocketNS(ns, url, callback, options, forceNew) {
-	options = Q.extend({}, Q.Socket.connect.options, options);
-	var earlyCallback = options && options.earlyCallback;	if (ns[0] !== '/') {
+function _connectSocketNS(ns, url, callback, options) {
+	var o = Q.extend({}, Q.Socket.connect.options, options);
+	if (ns[0] !== '/') {
 		ns = '/' + ns;
 	}
 	if (root.io && root.io.Socket) {
-		_connectNS(ns, url, callback, earlyCallback);
+		_connectNS(ns, url, callback, o);
 	} else {
 		var socketPath = Q.getObject('Q.info.socketPath');
 		if (socketPath === undefined) {
 			socketPath = '/socket.io';
 		}
 		Q.addScript(url+socketPath+'/socket.io.js', function () {
-			_connectNS(ns, url, callback, earlyCallback, forceNew);
+			_connectNS(ns, url, callback, o);
 		});
 	}
 
 	// load socket.io script and connect socket
-	function _connectNS(ns, url, callback, earlyCallback) {
+	function _connectNS(ns, url, callback, options) {
 		// connect to (ns, url)
 		if (!root.io) return;
 		var qs = _qsockets[ns] && _qsockets[ns][url];
-		var o = Q.extend(forceNew ? {
-			forceNew: true
-		} : {}, 10, {
+		var ec = options.earlyCallback;
+		delete options.earlyCallback;
+		var o = Q.extend({}, options, 10, {
 			transports: ['websocket'],
 			query: options.query
 		});
@@ -12289,7 +12289,7 @@ function _connectSocketNS(ns, url, callback, options, forceNew) {
 		}
 
 		// if (!qs.socket.io.connected && Q.isEmpty(qs.socket.io.connecting)) {
-		Q.handle(earlyCallback, this, [_qsockets[ns][url], ns, url]);
+		Q.handle(ec, this, [_qsockets[ns][url], ns, url]);
 		var socket = Q.Socket.get(ns, url);
 		if (callback) {
 			if (socket && socket.connected) {
@@ -12334,6 +12334,7 @@ function _connectSocketNS(ns, url, callback, options, forceNew) {
  * @param {Object} [options]
  * @param {Object} [query] the object to pass to the server, in socket.handshake.query
  * @param {Function} [options.earlyCallback] Receives Q.Socket as soon as it's constructed
+ * @param {Function} [options.forceNew] option to pass to the socket.io connect function
  */
 Q.Socket.connect = Q.getter(function _Q_Socket_connect(ns, url, callback, options) {
 	if (!url) {
