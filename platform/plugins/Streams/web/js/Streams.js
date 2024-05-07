@@ -558,7 +558,7 @@ var priv = {
     // until things settle down on the screen
     _simulatePosting: function priv_simulatePosting(messages, extras) {
         Q.each(messages, function () {
-            Q.Users.Socket.onEvent('Streams/post').handle(this, extras);
+            Q.Socket.onEvent('Streams/post').handle(this, extras);
         }, {ascending: true, numeric: true});
     }
 
@@ -733,7 +733,7 @@ function _connectSockets(refresh) {
 			return;
 		}
 		for (var i=0, l = n.length; i < l; ++i) {
-			Users.Socket.connect(n[i], function (qs, ns, url) {
+			Q.Socket.connect(n[i], function (err, qs, ns, url) {
 				priv._connectedNodes[url] = qs;
 			});
 			priv._connectedNodes[n[i]] = true;
@@ -2608,7 +2608,7 @@ Sp.retain = function _Stream_prototype_retain (key, options) {
 			Q.setObject([nodeUrl, ps], true, priv._retainedNodes);	
 		} else if (!options.dontObserve) {
 			// If the socket already connected, this will just call the callback:
-			Users.Socket.connect(nodeUrl, function () {
+			Q.Socket.connect(nodeUrl, function () {
 				if (!participating && !options.dontObserve) {
 					stream.observe(function () {
 						Q.setObject([nodeUrl, ps], true, priv._retainedNodes);
@@ -3570,7 +3570,7 @@ Message.wait = function _Streams_Message_wait (publisherId, streamName, ordinal,
 		publisherId: publisherId,
 		streamName: streamName
 	});
-	var socket = Q.Users.Socket.get(nodeUrl);
+	var socket = Q.Socket.get('Q', nodeUrl);
 	if (ordinal - o.maxBeforeRefresh > latest) {
 
 	} else if (!socket || ordinal - o.max > latest) {
@@ -4761,7 +4761,7 @@ Q.onInit.add(function _Streams_onInit() {
 	Users.Socket.onEvent('Streams/post')
 	.set(function _Streams_post_handler (msg, extras) {
 		if (!msg) {
-			throw new Q.Error("Q.Users.Socket.onEvent('Streams/post') msg is empty");
+			throw new Q.Error("Q.Socket.onEvent('Streams/post') msg is empty");
 		}
 		var latest = Message.latestOrdinal(msg.publisherId, msg.streamName);
 		if (latest && parseInt(msg.ordinal) <= latest) {

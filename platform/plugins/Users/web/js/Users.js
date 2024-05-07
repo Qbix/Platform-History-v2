@@ -1384,17 +1384,6 @@
 	});
 	Users.onConnected = new Q.Event();
 	Users.onDisconnected = new Q.Event();
-	
-	Q.Socket.onConnect('Users').set(function (qs, ns, url) {
-		if (Users.capability && Users.capability.userId) {
-			Q.loadNonce(function () {
-				qs.socket.emit('Users/user', Users.capability, Q.clientId(),
-				function () {
-					Q.handle(Users.Socket.onAuthenticatedSession, Users.Socket, qs, ns, url);
-				});
-			});
-		}
-	}, 'Users');
 
 	/**
 	 * Trying to grab contacts from device
@@ -1530,74 +1519,6 @@
 	}, "{{Users}}/js/methods/Users/Dialogs", function() {
 		return [Users, priv];
 	});
-
-	/**
-	 * Some replacements for Q.Socket methods, use these instead.
-	 * They implement logic involving sockets, users, sessions, devices, and more.
-	 * Everything goes through the "Users" namespace in socket.io
-	 * @class Users.Socket
-	 */
-	Users.Socket = {
-		/**
-		 * Connects a socket, and stores it in the list of connected sockets.
-		 * But it also sends a "Users.session" message upon socket connection,
-		 * to tell connect the session id to the socket on the back end.
-		 * @static
-		 * @method connect
-		 * @param {String} nodeUrl The url of the socket.io node to connect to
-		 * @param {Function} callback When a connection is made, receives the socket object
-		 * @param {Boolean} dontWaitForAuthenticatedSession if the callback doesn't require an authenticate Users session
-		 * @return {Promise} to be used instead of callback
-		 */
-		connect: Q.promisify(function _Users_Socket_connect(nodeUrl, callback, dontWaitForAuthenticatedSession) {
-			var qs = Q.Socket.get('Users', nodeUrl);
-			if (qs && qs.socket && qs.socket.io.connected) {
-				_waitForSession.call(this, qs, 'Users', nodeUrl);
-			} else {
-				Q.Socket.connect('/Q', nodeUrl, _waitForSession);
-			}
-			function _waitForSession(socket, ns, url) {
-				if (dontWaitForAuthenticatedSession) {
-					return callback && callback(socket, ns, url);
-				}
-				Users.Socket.onAuthenticatedSession.addOnce(function (socket, ns, url) {
-					callback && callback(socket, ns, url);
-				});
-			}
-		}, false, 1),
-
-		/**
-		 * Returns a socket, if it was already connected, or returns undefined
-		 * @static
-		 * @method get
-		 * @param {String} nodeUrl The url where socket.io is listening. If it's empty, then returns all matching sockets.
-		 * @return {Q.Socket}
-		 */
-		get: function _Users_Socket_get(nodeUrl) {
-			return Q.Socket.get('Users', nodeUrl);
-		},
-		
-		/**
-		 * Returns Q.Event that occurs on some socket event coming from socket.io
-		 * through the Users namespace
-		 * @event onAuthenticatedSession
-		 * @param {String} name the name of the event
-		 * @return {Q.Event}
-		 */
-		onAuthenticatedSession: new Q.Event(),
-
-		/**
-		 * Returns Q.Event that occurs on some socket event coming from socket.io
-		 * through the Users namespace
-		 * @event onEvent
-		 * @param {String} name the name of the event
-		 * @return {Q.Event}
-		 */
-		onEvent: function (name) {
-			return Q.Socket.onEvent('Users', null, name);
-		}
-
-	};
 
 	Users.Facebook = {
 

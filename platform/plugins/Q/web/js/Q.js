@@ -3532,7 +3532,7 @@ Q.Event.factory = function (collection, defaults, callback, removeOnEmpty) {
 		_args = Array.prototype.slice.call(arguments, 0);
 		var len = defaults.length;
 		var f = (typeof(defaults[len-1]) === 'function')
-			? defaults[defaults.length-1] : null;
+			? defaults[len-1] : null;
 		if (f) --len;
 		for (var i=_args.length; i<len; ++i) {
 			_args[i] = defaults[i];
@@ -12180,12 +12180,14 @@ Q.Socket = function (params) {
  * Returns a socket, if it was already connected, or returns undefined
  * @static
  * @method get
- * @param {String} ns The socket.io namespace
- * @param {String} url The url where socket.io is listening. If it's empty, then returns all matching sockets.
+ * @param {String} [ns="/Q"] The socket.io namespace
+ * @param {String} [url] The url where socket.io is listening. If it's empty, then returns all matching sockets.
  * @return {Q.Socket}
  */
 Q.Socket.get = function _Q_Socket_get(ns, url) {
-	ns = ns || "";
+	if (ns === undefined) {
+		ns = '/Q';
+	}
 	if (ns[0] !== '/') {
 		ns = '/' + ns;
 	}
@@ -12306,8 +12308,9 @@ function _connectSocketNS(ns, url, callback, options) {
 			Q.each(_socketRegister, function (i, item) {
 				if (item[0] !== ns) return;
 				var name = item[1];
-				_ioOn(qs.socket, name, Q.Socket.onEvent(ns, url, name).handle); // may overwrite again, but it's ok
-				_ioOn(qs.socket, name, Q.Socket.onEvent(ns, '', name).handle);
+				_ioOn(qs.socket, name, Q.Socket.onEvent(name, ns, url).handle); // may overwrite again, but it's ok
+				_ioOn(qs.socket, name, Q.Socket.onEvent(name, ns, '').handle);
+				_ioOn(qs.socket, name, Q.Socket.onEvent(name, '', '').handle);
 				Q.handle(Q.Socket.onRegister, Q.Socket, [ns, url, name]);
 			});
 		}
@@ -12431,9 +12434,9 @@ Q.Socket.destroyAll = function _Q_Socket_destroyAll() {
 /**
  * Subscribe to a socket event and obtain a Q.Event based on the parameters
  * @event onEvent
+ * @param {String} name the name of the event
  * @param {String} ns the namespace of the socket
  * @param {String} url the url of the socket
- * @param {String} name the name of the event
  */
 Q.Socket.onEvent = Q.Event.factory(
 	_eventHandlers, 
@@ -12501,7 +12504,7 @@ Q.Socket.onConnect = Q.Event.factory(
  * @param name {String} name of the event to listen for
  */
 Q.Socket.prototype.onEvent = function(name) {
-	return Q.Socket.onEvent(this.url, this.ns, name);
+	return Q.Socket.onEvent(name, this.ns, this.url);
 };
 
 /**

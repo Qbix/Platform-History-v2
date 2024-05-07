@@ -207,7 +207,7 @@ Q.exports(function(priv, Streams, Stream){
             publisherId: publisherId,
             streamName: streamName
         })
-        var socket = Q.Users.Socket.get(nodeUrl);
+        var socket = Q.Socket.get('Q', nodeUrl);
         if (!socket) {
             // do not cache relations to/from this stream
             // since they may come to be out of date

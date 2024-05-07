@@ -340,12 +340,12 @@ Q.exports(function() {
                                     },
                                     onFinish: function () {
                                         // as we toke group photo no need to listen for accept to take individual photo
-                                        Q.Users.Socket.onEvent('Streams/invite/accept').remove(inviteAcceptKey);
+                                        Q.Socket.onEvent('Streams/invite/accept').remove(inviteAcceptKey);
                                     }
                                 });
 
                                 // listen for Streams/invite/accept event to show imagepicker
-                                Q.Users.Socket.onEvent('Streams/invite/accept')
+                                Q.Socket.onEvent('Streams/invite/accept')
                                     .set(function _Streams_invite_accept_handler (data) {
                                         console.log('Users.Socket.onEvent("Streams/invite/accept")');
                                         if (!Q.Users.isCustomIcon(data.icon, true)) {

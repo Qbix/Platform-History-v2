@@ -19,7 +19,7 @@ Q.exports(function(priv){
             publisherId: publisherId,
             streamName: streamName
         });
-        var socket = Q.Users.Socket.get(nodeUrl);
+        var socket = Q.Socket.get('Q', nodeUrl);
         if (!socket) {
             return null;
         }
