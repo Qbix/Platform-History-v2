@@ -12319,7 +12319,7 @@ function _connectSocketNS(ns, url, callback, options, forceNew) {
 			Q.Socket.onConnect(ns).handle(qs, ns, url);
 			Q.Socket.onConnect(ns, url).handle(qs, ns, url);
 			
-			log('Socket connected to '+url);
+			log('Socket ' + ns + ' connected to ' + url);
 		}
 	}
 }
