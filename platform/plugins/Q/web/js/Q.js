@@ -12306,8 +12306,8 @@ function _connectSocketNS(ns, url, callback, options) {
 		
 		function _Q_Socket_register(qs) {
 			Q.each(_socketRegister, function (i, item) {
-				if (item[0] !== ns) return;
-				var name = item[1];
+				if (item[1] !== ns) return;
+				var name = item[0];
 				_ioOn(qs.socket, name, Q.Socket.onEvent(name, ns, url).handle); // may overwrite again, but it's ok
 				_ioOn(qs.socket, name, Q.Socket.onEvent(name, ns, '').handle);
 				_ioOn(qs.socket, name, Q.Socket.onEvent(name, '', '').handle);
@@ -12445,7 +12445,7 @@ Q.Socket.onEvent = Q.Event.factory(
 			return [name, '/'+ns, url];
 		}
 	}],
-	function _Q_Socket_SetupEvent(ns, url, name) {
+	function _Q_Socket_SetupEvent(name, ns, url) {
 		// url may be empty, in which case we'll affect multiple sockets
 		var event = this;
     	event.onFirst().set(function () {
@@ -12461,7 +12461,7 @@ Q.Socket.onEvent = Q.Event.factory(
 				}
 			});
 			// add pending listeners on sockets that may constructed later
-	    	_socketRegister.push([ns, name]);
+	    	_socketRegister.push([name, ns]);
 		});
 		event.onEmpty().set(function () {
 			// Every handler was removed from the event
@@ -12472,7 +12472,7 @@ Q.Socket.onEvent = Q.Event.factory(
 			});
 	    	Q.each(_socketRegister, function (i, item) {
 				// remove pending listeners on sockets that may be constructed later
-				if (item[0] === ns && item[1] === name) {
+				if (item[0] === name && item[1] === ns) {
 					_socketRegister.splice(i, 1);
 				}
 			});
