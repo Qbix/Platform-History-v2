@@ -14,7 +14,7 @@ Q.exports(function(priv, Streams, Stream){
             publisherId: publisherId,
             streamName: streamName
         });
-        Q.Socket.onConnect('Users', nodeUrl).add(function () {
+        Q.Socket.onConnect('/Q', nodeUrl).add(function () {
             Q.Streams.socketRequest('Streams/observe', publisherId, streamName, function () {
 				var ps = Streams.key(publisherId, streamName);
 				priv._observedByStream[ps] = true;
