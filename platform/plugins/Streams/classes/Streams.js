@@ -441,7 +441,7 @@ Streams.listen = function (options, servers) {
 		client.on('Streams/observe',
 		function (publisherId, streamName, fn) {
 			var now = Date.now() / 1000;
-			if (!Q.Utils.validateCapability(capability, 'Streams/observe')) {
+			if (!Q.Utils.validateCapability(client.capability, 'Streams/observe')) {
 				return (typeof fn == 'function') && fn({
 					type: 'Users.Exception.NotAuthorized',
 					message: 'Not Authorized'
@@ -460,7 +460,7 @@ Streams.listen = function (options, servers) {
 			if (observer) {
 				return (typeof fn == 'function') && fn(null, true);
 			}
-			var byUserId = capability.userId;
+			var byUserId = client.capability.userId;
 			Streams.fetchOne(byUserId || '', publisherId, streamName, function (err, stream) {
 				if (err || !stream) {
 					return (typeof fn == 'function') && fn({
@@ -511,10 +511,10 @@ Streams.listen = function (options, servers) {
 			if (!payload.type) {
 				return (typeof fn == 'function') && fn("Payload must have type set");
 			}
-			if (!Q.Utils.validateCapability(capability, 'Users/socket')) {
+			if (!Q.Utils.validateCapability(client.capability, 'Users/socket')) {
 				return (typeof fn == 'function') && fn("Capability not valid", null);
 			}
-			var byUserId = capability.userId;
+			var byUserId = client.capability.userId;
 			Streams.fetchOne(byUserId, publisherId, streamName, function (err, stream) {
 				if (err) {
 					return (typeof fn == 'function') && fn(err, false);
