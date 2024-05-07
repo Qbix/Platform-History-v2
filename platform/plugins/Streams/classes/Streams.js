@@ -441,15 +441,15 @@ Streams.listen = function (options, servers) {
 		client.on('Streams/observe',
 		function (publisherId, streamName, fn) {
 			var now = Date.now() / 1000;
-			if (!Q.Utils.validateCapability(client.capability, 'Streams/observe')) {
-				return fn && fn({
+			if (!Q.Utils.validateCapability(capability, 'Streams/observe')) {
+				return (typeof fn == 'function') && fn({
 					type: 'Users.Exception.NotAuthorized',
 					message: 'Not Authorized'
 				});
 			}
 			if (typeof publisherId !== 'string'
 			|| typeof streamName !== 'string') {
-				return fn && fn({
+				return (typeof fn == 'function') && fn({
 					type: 'Streams.Exception.BadArguments',
 					message: 'Bad arguments'
 				});
@@ -458,19 +458,19 @@ Streams.listen = function (options, servers) {
 				[publisherId, streamName, client.id], Streams.observers
 			);
 			if (observer) {
-				return fn && fn(null, true);
+				return (typeof fn == 'function') && fn(null, true);
 			}
 			var byUserId = capability.userId;
 			Streams.fetchOne(byUserId || '', publisherId, streamName, function (err, stream) {
 				if (err || !stream) {
-					return fn && fn({
+					return (typeof fn == 'function') && fn({
 						type: 'Users.Exception.NotAuthorized',
 						message: 'not authorized'
 					});
 				}
 				stream.testReadLevel('messages', function (err, allowed) {
 					if (err || !allowed) {
-						return fn && fn({
+						return (typeof fn == 'function') && fn({
 							type: 'Users.Exception.NotAuthorized',
 							message: 'not authorized'
 						});
@@ -481,7 +481,7 @@ Streams.listen = function (options, servers) {
 						'observersMax'
 					);
 					if (max && Object.keys(clients).length >= max - 1) {
-						return fn && fn({
+						return (typeof fn == 'function') && fn({
 							type: 'Streams.Exception.TooManyObservers',
 							message: 'too many observers already'
 						});
@@ -492,7 +492,7 @@ Streams.listen = function (options, servers) {
 					Q.setObject(
 						[client.id, publisherId, streamName], true, Streams.observing
 					);
-					return fn && fn(null, true);
+					return (typeof fn == 'function') && fn(null, true);
 				});
 			});
 		});
@@ -500,24 +500,24 @@ Streams.listen = function (options, servers) {
 		function (publisherId, streamName, fn) {
 			var o = Streams.observers;
 			if (!Q.getObject([publisherId, streamName, client.id], o)) {
-				return fn && fn(null, false);
+				return (typeof fn == 'function') && fn(null, false);
 			}
 			delete o[publisherId][streamName][client.id];
 			delete Streams.observing[client.id][publisherId][streamName];
-			return fn && fn(null, true);
+			return (typeof fn == 'function') && fn(null, true);
 		});
 		client.on('Streams/ephemeral',
 		function (publisherId, streamName, payload, dontNotifyObservers, fn) {
 			if (!payload.type) {
-				return fn && fn("Payload must have type set");
+				return (typeof fn == 'function') && fn("Payload must have type set");
 			}
-			if (!Q.Utils.validateCapability(client.capability, 'Users/socket')) {
-				return fn && fn("Capability not valid", null);
+			if (!Q.Utils.validateCapability(capability, 'Users/socket')) {
+				return (typeof fn == 'function') && fn("Capability not valid", null);
 			}
-			var byUserId = client.capability.userId;
+			var byUserId = capability.userId;
 			Streams.fetchOne(byUserId, publisherId, streamName, function (err, stream) {
 				if (err) {
-					return fn && fn(err, false);
+					return (typeof fn == 'function') && fn(err, false);
 				}
 				var ephemeralTypes  = Streams.Stream.getConfigField(
 					stream.fields.type,
@@ -526,7 +526,7 @@ Streams.listen = function (options, servers) {
 				if (!ephemeralTypes[payload.type]) {
 					var err2 = 'Ephemeral of type "' + payload.type
 						+ '" is not supported by stream of type "' + stream.fields.type + '"';
-					return fn && fn(err2, false);
+					return (typeof fn == 'function') && fn(err2, false);
 				}
 				var ephemeral = new Streams.Ephemeral(payload, Date.now() / 1000);
 				this.notifyParticipants(
@@ -567,19 +567,6 @@ Streams.observers = {};
  * @type {Object}
  */ 
 Streams.observing = {};
-
-function _validateSessionId(sessionId, fn) {
-	// Validate sessionId to make sure we generated it
-	var result = Users.Session.decodeId(sessionId);
-	if (result[0]) {
-		return true;
-	}
-	fn && fn({
-		type: 'Users.Exception.BadSessionId',
-		message: 'bad session id'
-	});
-	return false;
-}
 
 function Streams_request_handler (req, res, next) {
 	var parsed = req.body;
