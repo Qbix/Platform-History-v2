@@ -347,7 +347,7 @@ Q.exports(function() {
                                 // listen for Streams/invite/accept event to show imagepicker
                                 Q.Socket.onEvent('Streams/invite/accept')
                                     .set(function _Streams_invite_accept_handler (data) {
-                                        console.log('Users.Socket.onEvent("Streams/invite/accept")');
+                                        console.log('Q.Socket.onEvent("Streams/invite/accept")');
                                         if (!Q.Users.isCustomIcon(data.icon, true)) {
                                             _setPhoto(data);
                                         }
