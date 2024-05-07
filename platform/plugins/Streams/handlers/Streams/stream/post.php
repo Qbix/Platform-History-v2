@@ -53,7 +53,6 @@ function Streams_stream_post($params = array())
 					'type' => $type
 				));
 			}
-
 			$type = $mentionedType;
 		}
 	}
@@ -99,10 +98,13 @@ function Streams_stream_post($params = array())
 		unset($req['icon']);
 	}
 
-	// animated thumbnail
+	// Process any animated thumbnail that was posted
 	$animatedThumbnail = null;
 	if (!empty($req['animatedThumbnail'])) {
-		$animatedThumbnail = $req['animatedThumbnail'];
+		if ($animatedThumbnail = $req['animatedThumbnail']) {
+			$dir = Streams::iconDirectory($publisherId, $streamName).DS.'animated';;
+			Q_Image::saveAnimatedThumbnail($animatedThumbnail, $dir);
+		}
 		unset($req['animatedThumbnail']);
 	}
 
@@ -146,11 +148,12 @@ function Streams_stream_post($params = array())
 
 	$stream = null;
 
-	// if stream named defined - check whether this stream already exist
-	if (Q::ifset($fields, 'name', null)) {
+	// if stream name was passed - check whether this stream already exist
+	$streamName = Q::ifset($fields, 'name', null);
+	if ($streamName) {
 		$stream = Streams_Stream::fetch($user->id, $publisherId, $fields['name']);
 
-		// if stream exist - clear closedTime (resurrection)
+		// if stream exists - clear closedTime (resurrection)
 		if ($stream instanceof Streams_Stream) {
 			$stream->closedTime = null;
 			$stream->save();
@@ -159,7 +162,8 @@ function Streams_stream_post($params = array())
 
 	// if $stream is null - Create new stream
 	if (!$stream instanceof Streams_Stream) {
-		$stream =  Streams::create($user->id, $publisherId, $type, $fields, null, $result);
+		$fields['name'] = $streamName;
+		$stream =  Streams::create($user->id, $publisherId, $type, $fields, $relate, $result);
 	}
 	$messageTo = false;
 	if (isset($result['messagesTo']) && !empty($result['messagesTo'])) {
@@ -181,17 +185,13 @@ function Streams_stream_post($params = array())
 			$icon['path'] = 'Q'.DS.'uploads'.DS.'Streams';
 		}
 		if (empty($icon['subpath'])) {
-			$icon['subpath'] = $splitId.DS."{$stream->name}".DS."icon".DS.time();
+			$icon['subpath'] = $splitId.DS."$streamName".DS."icon".DS.time();
 		}
 		Q_Response::setSlot('icon', Q::event("Q/image/post", $icon));
 		// the Streams/after/Q_image_save hook saves some attributes
 	}
 
-	if ($animatedThumbnail) {
-		$stream->saveAnimatedThumbnail($animatedThumbnail);
-	}
-
-	// Hold on to any file that was posted
+	// Process any file that was posted
 	$file = null;
 	if (!empty($req['file']) and is_array($req['file'])) {
 		$file = $req['file'];
@@ -219,14 +219,6 @@ function Streams_stream_post($params = array())
 	if (empty($req['dontSubscribe'])) {
 		// autosubscribe to streams you yourself create, using templates
 		$stream->subscribe();
-	}
-
-	// relate stream to category after all other actions (like save icon, file etc) complete
-	if (!empty($relate)) {
-		$stream->relateTo((object)$relate, $relate['type'], null, array(
-			'weight' => $relate['weight'],
-			'inheritAccess' => $relate['inheritAccess']
-		));
 	}
 
 	Streams::$cache['stream'] = $stream;

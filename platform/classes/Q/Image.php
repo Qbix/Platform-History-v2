@@ -530,6 +530,45 @@ class Q_Image
 	{
 		return Q::event('Q/image/post', $params);
 	}
+
+	/**
+	 * Save animated thumbnail as file and set as stream icon
+	 * @method saveAnimatedThumbnail
+	 * @param {string} $data Image data as string
+	 * @param {string} $dir Directory where where animated thumbnail is saved
+	 * @return {string} the absolute URL to the image
+	 */
+	static function saveAnimatedThumbnail ($data, $filename, $options = array()) {
+		if (!getimagesizefromstring($data)) {
+			$data = base64_decode(chunk_split(substr($data, strpos($data, ',')+1)));
+		}
+		if (!getimagesizefromstring($data)) {
+			throw new Q_Exception_BadValue(array(
+				'internal' => "image data",
+				'problem' => "should be image data or base64 encoded image data"
+			));
+		}
+
+		if (!is_dir($dir) && !@mkdir($dir, 0777, true)) {
+			throw new Q_Exception_FilePermissions(array(
+				'action' => 'create',
+				'filename' => $dir,
+				'recommendation' => ' Please set your files directory to be writable.'
+			));
+		}
+		// delete old files
+		foreach(glob($dir.DS.'*') as $file){
+			if(is_file($file)) {
+				unlink($file);
+			}
+		}
+		$path = $dir.DS.time().".gif";
+		file_put_contents($path, $data);
+		$url = str_replace('/', DS, $path);
+		$url = str_replace(APP_FILES_DIR.DS.Q::app(), '{{baseUrl}}/Q', $url);
+		$url = str_replace('\\', '/', $url);
+		return $url;
+	}
 	
 	/**
 	 * Resizes an image file and saves it as another file

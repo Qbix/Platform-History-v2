@@ -135,6 +135,9 @@ function Streams_stream_put($params) {
 
 	// special handler for animated thumbnail
 	if (!empty($req['animatedThumbnail'])) {
+		if (!$stream->testWriteLevel('edit')) {
+			throw new Users_Exception_NotAuthorized();
+		}
 		$stream->saveAnimatedThumbnail($req['animatedThumbnail']);
 		unset($req['animatedThumbnail']);
 	}
