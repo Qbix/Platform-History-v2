@@ -12185,6 +12185,9 @@ Q.Socket = function (params) {
  * @return {Q.Socket}
  */
 Q.Socket.get = function _Q_Socket_get(ns, url) {
+	if (ns === undefined && url === undefined) {
+		url = Q.nodeUrl(); // generic node URL by default
+	}
 	if (ns === undefined) {
 		ns = '/Q';
 	}
@@ -12211,7 +12214,7 @@ Q.Socket.getAll = function _Q_Socket_all() {
 	return _qsockets;
 };
 
-function _connectSocketNS(ns, url, callback, options) {
+window._connectSocketNS = Q.getter(function(ns, url, callback, options) {
 	var o = Q.extend({}, Q.Socket.connect.options, options);
 	if (ns[0] !== '/') {
 		ns = '/' + ns;
@@ -12229,15 +12232,15 @@ function _connectSocketNS(ns, url, callback, options) {
 	}
 
 	// load socket.io script and connect socket
-	function _connectNS(ns, url, callback, options) {
+	function _connectNS(ns, url, callback, o) {
 		// connect to (ns, url)
 		if (!root.io) return;
 		var qs = _qsockets[ns] && _qsockets[ns][url];
-		var ec = options.earlyCallback;
-		delete options.earlyCallback;
-		var o = Q.extend({}, options, 10, {
+		var ec = o.earlyCallback;
+		delete o.earlyCallback;
+		o = Q.extend({}, o, 10, {
 			transports: ['websocket'],
-			auth: options.auth
+			auth: o.auth
 		});
 		if (!qs) {
 			var parsed = url.parseUrl();
@@ -12256,6 +12259,8 @@ function _connectSocketNS(ns, url, callback, options) {
 			});
 			qs.socket.on('disconnect', function _onDisconnect() {
 				qs.connected = false;
+				_connectSocketNS.forget(ns, url, callback, options);
+				_connectSocketNS.forget(ns, url, callback);
 				this.off('disconnect', _onDisconnect);
 			});
 			// remember actual socket - for disconnecting
@@ -12329,7 +12334,7 @@ function _connectSocketNS(ns, url, callback, options) {
 			log('Socket ' + ns + ' connected to ' + url);
 		}
 	}
-}
+});
 
 /**
  * Connects a socket, and stores it in the list of connected sockets
@@ -12343,7 +12348,10 @@ function _connectSocketNS(ns, url, callback, options) {
  * @param {Function} [options.earlyCallback] Receives Q.Socket as soon as it's constructed
  * @param {Function} [options.forceNew] option to pass to the socket.io connect function
  */
-Q.Socket.connect = Q.getter(function _Q_Socket_connect(ns, url, callback, options) {
+Q.Socket.connect = function _Q_Socket_connect(ns, url, callback, options) {
+	if (url === undefined) {
+		url = Q.nodeUrl(); // generic node URL by default
+	}
 	if (!url) {
 		return false;
 	}
@@ -12351,13 +12359,13 @@ Q.Socket.connect = Q.getter(function _Q_Socket_connect(ns, url, callback, option
 		callback = ns;
 		ns = '';
 	} else if (!ns) {
-		ns = '';
+		ns = '/Q';
 	} else if (ns[0] !== '/') {
 		ns = '/' + ns;
 	}
 	// check if socket already connected, or reconnect
-	_connectSocketNS(ns, url, callback, options, false);
-});
+	_connectSocketNS(ns, url, callback, options);
+};
 
 Q.Socket.connect.options = {};
 
@@ -12414,7 +12422,7 @@ Q.Socket.reconnectAll = function _Q_Socket_reconnectAll() {
 	var ns, url;
 	for (ns in _qsockets) {
 		for (url in _qsockets[ns]) {
-			_connectSocketNS(ns, url, null, null, true);
+			_connectSocketNS(ns, url, null, {forceNew: true});
 		}
 	}
 };
