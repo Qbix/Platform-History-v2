@@ -2208,7 +2208,7 @@ function _disconnectStreamNode(publisherId, streamName, ps) {
 	}
 	// we can disconnect the node
 	delete(priv._retainedNodes[nodeUrl]);
-	var socket = Users.Socket.get(nodeUrl);
+	var socket = Q.Socket.get(nodeUrl);
 	socket && socket.disconnect();
 	return true;
 }

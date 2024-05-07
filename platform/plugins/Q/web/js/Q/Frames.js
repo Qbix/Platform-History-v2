@@ -105,7 +105,7 @@ var Frames = Q.Frames = {
 	 * @method message
 	 * @static
 	 * @param {Function} original The function to call if we are in the main frame
-	 * @param {String} methodPath for example "Users.Socket.connect"
+	 * @param {String} methodPath for example "Q.Socket.connect"
 	 */
 	useMainFrame: function(original, methodPath) {
 		var wrapper = function () {
