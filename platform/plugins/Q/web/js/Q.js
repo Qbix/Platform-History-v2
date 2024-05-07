@@ -12206,7 +12206,23 @@ Q.Socket.getAll = function _Q_Socket_all() {
 	return _qsockets;
 };
 
-function _connectSocketNS(ns, url, callback, earlyCallback, forceNew) {
+function _connectSocketNS(ns, url, callback, options, forceNew) {
+	options = Q.extend({}, Q.Socket.connect.options, options);
+	var earlyCallback = options && options.earlyCallback;	if (ns[0] !== '/') {
+		ns = '/' + ns;
+	}
+	if (root.io && root.io.Socket) {
+		_connectNS(ns, url, callback, earlyCallback);
+	} else {
+		var socketPath = Q.getObject('Q.info.socketPath');
+		if (socketPath === undefined) {
+			socketPath = '/socket.io';
+		}
+		Q.addScript(url+socketPath+'/socket.io.js', function () {
+			_connectNS(ns, url, callback, earlyCallback, forceNew);
+		});
+	}
+
 	// load socket.io script and connect socket
 	function _connectNS(ns, url, callback, earlyCallback) {
 		// connect to (ns, url)
@@ -12215,11 +12231,9 @@ function _connectSocketNS(ns, url, callback, earlyCallback, forceNew) {
 		var o = Q.extend(forceNew ? {
 			forceNew: true
 		} : {}, {
-			transports: ['websocket']
+			transports: ['websocket'],
+			auth: options.auth
 		});
-		if (Q.Users.capability) {
-			o.auth = Q.Users.capability;
-		}
 		if (!qs) {
 			var parsed = url.parseUrl();
 			var host = parsed.scheme + '://' + parsed.host 
@@ -12227,10 +12241,17 @@ function _connectSocketNS(ns, url, callback, earlyCallback, forceNew) {
 			if (url.startsWith(host+'/')) {
 				o.path = url.substring(host.length) + Q.getObject('Q.info.socketPath');
 			}
+			if (!_qsockets[ns]) {
+				_qsockets[ns] = {};
+			}
 			_qsockets[ns][url] = qs = new Q.Socket({
 				socket: root.io.connect(host+ns, o),
 				url: url,
 				ns: ns
+			});
+			qs.socket.on('disconnect', function _onDisconnect() {
+				qs.connected = false;
+				this.off('disconnect', _onDisconnect);
 			});
 			// remember actual socket - for disconnecting
 			var socket = qs.socket;
@@ -12248,10 +12269,6 @@ function _connectSocketNS(ns, url, callback, earlyCallback, forceNew) {
 				log('Error on connection '+url+' ('+error+')');
 			});
 		}
-		qs.socket.on('disconnect', function _onDisconnect() {
-			qs.connected = false;
-			this.off('disconnect', _onDisconnect);
-		});
 		if (!qs.connected && qs.socket) {
 			if (!qs.socket.connecting) {
 				qs.socket.connect(); // connect it again
@@ -12276,9 +12293,12 @@ function _connectSocketNS(ns, url, callback, earlyCallback, forceNew) {
 		var socket = Q.Socket.get(ns, url);
 		if (callback) {
 			if (socket && socket.connected) {
-				callback.call(qs, ns, url);
+				callback.call(null, qs, ns, url);
 			} else {
-				Q.Socket.onConnect(ns, url).setOnce(callback);
+				Q.Socket.onConnect(ns, url)
+				.setOnce(function (qs, ns, url) {
+					callback(null, qs, ns, url);
+				});
 			}
 		}
 		
@@ -12302,22 +12322,6 @@ function _connectSocketNS(ns, url, callback, earlyCallback, forceNew) {
 			log('Socket connected to '+url);
 		}
 	}
-	
-	if (ns[0] !== '/') {
-		ns = '/' + ns;
-	}
-	
-	if (root.io && root.io.Socket) {
-		_connectNS(ns, url, callback, earlyCallback);
-	} else {
-		var socketPath = Q.getObject('Q.info.socketPath');
-		if (socketPath === undefined) {
-			socketPath = '/socket.io';
-		}
-		Q.addScript(url+socketPath+'/socket.io.js', function () {
-			_connectNS(ns, url, callback, earlyCallback, forceNew);
-		});
-	}
 }
 
 /**
@@ -12327,9 +12331,11 @@ function _connectSocketNS(ns, url, callback, earlyCallback, forceNew) {
  * @param {String} ns A socket.io namespace to use
  * @param {String} url The url of the socket.io node to connect to
  * @param {Function} [callback] Called after socket connects successfully. Receives Q.Socket
- * @param {Function} [earlyCallback] Receives Q.Socket as soon as it's constructed
+ * @param {Object} [options]
+ * @param {Object} [auth] the object to pass to the server, in socket.handshake.auth
+ * @param {Function} [options.earlyCallback] Receives Q.Socket as soon as it's constructed
  */
-Q.Socket.connect = function _Q_Socket_connect(ns, url, callback, earlyCallback) {
+Q.Socket.connect = Q.getter(function _Q_Socket_connect(ns, url, callback, options) {
 	if (!url) {
 		return false;
 	}
@@ -12341,13 +12347,11 @@ Q.Socket.connect = function _Q_Socket_connect(ns, url, callback, earlyCallback) 
 	} else if (ns[0] !== '/') {
 		ns = '/' + ns;
 	}
-	if (!_qsockets[ns]) _qsockets[ns] = {};
-	if (!_qsockets[ns][url]) {
-		_qsockets[ns][url] = null; // pending
-	}
 	// check if socket already connected, or reconnect
-	_connectSocketNS(ns, url, callback, earlyCallback, false);
-};
+	_connectSocketNS(ns, url, callback, options, false);
+});
+
+Q.Socket.connect.options = {};
 
 Q.Socket.onRegister = new Q.Event();
 
