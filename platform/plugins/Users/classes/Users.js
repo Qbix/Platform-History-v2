@@ -404,11 +404,7 @@ Users.Socket = {
 			// so we trust it.
 			var userId = client.capability.userId;
 			if (!userId) {
-				return next();
-			}
-			if (err || !results[0]) {
-				next("Users.listen: missing user with ID " + userId);
-				return;
+				return next(); // user is not logged in
 			}
 			if (!Users.clients[userId]) {
 				Users.clients[userId] = {};
