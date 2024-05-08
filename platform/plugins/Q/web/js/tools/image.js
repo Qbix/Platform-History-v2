@@ -21,6 +21,8 @@ Q.Tool.define("Q/image", function (options) {
 		state.url = state.url.interpolate({ "baseUrl": Q.info.baseUrl });
 	}
 
+	tool.cache = Q.Cache.document('Q/image');
+	tool.cacheKey = Q.normalize(state.url);
 
 	tool.refresh();
 },
@@ -39,19 +41,31 @@ Q.Tool.define("Q/image", function (options) {
 		var tool = this;
 		var state = this.state;
 		var $toolElement = $(this.element);
+		var $img;
 
-		var $img = $("<img>").prop("src", state.url).appendTo(tool.element);
-		if (state.useViewport) {
-			$img.on("load", function () {
-				// to avoid lazyload transparent image loaded
-				if ($img.prop("src") !== state.url) {
-					return;
-				}
-
+		tool.cacheData = Q.getObject(['params', 0], tool.cache && tool.cache.get(tool.cacheKey));
+		if (tool.cacheData && !Q.isEmpty(tool.cacheData.img)) {
+			$img = $(tool.cacheData.img).appendTo(tool.element);
+			if (state.useViewport) {
 				// apply Q/viewport once image loaded
 				$img.plugin('Q/viewport', {
 					width: $toolElement.width(),
 				});
+			}
+		} else {
+			$img = $("<img>").prop("src", state.url).appendTo(tool.element);
+			tool.cacheData = {
+				img: $img[0]
+			};
+			$img.on("load", function () {
+				tool.cache.set(tool.cacheKey, 0, null, [tool.cacheData]);
+
+				if (state.useViewport) {
+					// apply Q/viewport once image loaded
+					$img.plugin('Q/viewport', {
+						width: $toolElement.width(),
+					});
+				}
 			});
 		}
 	}
