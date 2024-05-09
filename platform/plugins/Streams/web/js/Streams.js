@@ -1030,7 +1030,6 @@ Streams.create = new Q.Method({
  * Operates with dialogs.
  * @class Streams.Dialogs
  */
-
 Streams.Dialogs = Q.Method.define({
 	subscription: new Q.Method(),
 	access: new Q.Method(),
@@ -1041,6 +1040,18 @@ Streams.Dialogs = Q.Method.define({
         }       
     }),
 }, '{{Streams}}/js/methods/Streams/Dialogs', function () {
+	return [Users, Streams];
+});
+
+/**
+ * Operates with tools.
+ * @class Streams.Tool
+ */
+Streams.Tool = Q.Method.define({
+	preload: new Q.Method(),
+	preloadByStream: new Q.Method(),
+	preloadRelated: new Q.Method()
+}, '{{Streams}}/js/methods/Streams/Tool', function () {
 	return [Users, Streams];
 });
 
