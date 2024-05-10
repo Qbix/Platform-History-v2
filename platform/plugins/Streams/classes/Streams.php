@@ -855,11 +855,20 @@ abstract class Streams extends Base_Streams
 
 		// Override with per-user access data
 		foreach ($accesses as $access) {
+			$tail = substr($access->streamName, -1);
+			$head = substr($access->streamName, 0, -1);
+			if ($tail === '*') {
+				foreach ($accesses as $a) {
+					if ($access->streamName === $head) {
+						// skip the mutable access, because 
+						// direct stream access overrides it
+						continue 2;
+					}
+				}
+			}
 			foreach ($streams3 as $stream) {
-				$tail = substr($access->streamName, -1);
-				$head = substr($access->streamName, 0, -1);
 				if ($stream->name !== $access->streamName
-					and ($tail !== '*' or $head !== $stream->type)) {
+				and ($tail !== '*' or $head !== $stream->type)) {
 					continue;
 				}
 				if ($access->ofUserId === $asUserId) {
