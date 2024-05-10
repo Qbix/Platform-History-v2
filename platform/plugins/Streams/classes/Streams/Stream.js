@@ -679,9 +679,11 @@ Sp.inheritAccess = function (callback) {
 
 	var public_source = Streams.ACCESS_SOURCES['public'];
 	var contact_source = Streams.ACCESS_SOURCES['contact'];
+	var participant_source = Streams.ACCESS_SOURCES['participant'];
 	var direct_source = Streams.ACCESS_SOURCES['direct'];
 	var inherited_public_source = Streams.ACCESS_SOURCES['inherited_public'];
 	var inherited_contact_source = Streams.ACCESS_SOURCES['inherited_contact'];
+	var inherited_participant_source = Streams.ACCESS_SOURCES['inherited_participant'];
 	var inherited_direct_source = Streams.ACCESS_SOURCES['inherited_direct'];
 	var direct_sources = [inherited_direct_source, direct_source];
 	
