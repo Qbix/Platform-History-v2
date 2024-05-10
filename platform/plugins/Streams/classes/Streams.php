@@ -821,11 +821,10 @@ abstract class Streams extends Base_Streams
 			));
 			foreach ($contacts as $contact) {
 				foreach ($accesses as $access) {
-					if ($access->ofContactLabel !== $contact->label) {
-						continue;
-					}
-					foreach ($streams3 as $s) {
-						self::_setStreamAccess($s, $access, $contact_source);
+					if ($access->ofContactLabel === $contact->label) {
+						foreach ($streams3 as $s) {
+							self::_setStreamAccess($s, $access, $contact_source);
+						}
 					}
 				}
 			}
@@ -843,12 +842,11 @@ abstract class Streams extends Base_Streams
 					continue;
 				}
 				foreach ($accesses as $access) {
-					if (empty($access->ofParticipantRole)
-					or $access->ofParticipantRole !== $role) {
-						continue;
+					if (!empty($access->ofParticipantRole)
+					and $access->ofParticipantRole === $role) {
+						$s = Q::ifset($streams3ByName, $streamName, null);
+						self::_setStreamAccess($s, $access, $participant_source);
 					}
-					$s = Q::ifset($streams3ByName, $streamName, null);
-					self::_setStreamAccess($s, $access, $participant_source);
 				}
 			}
 		}
@@ -861,7 +859,7 @@ abstract class Streams extends Base_Streams
 				foreach ($accesses as $a) {
 					if ($access->streamName === $head) {
 						// skip the mutable access, because 
-						// direct stream access overrides it
+						// explicit stream access overrides it
 						continue 2;
 					}
 				}
