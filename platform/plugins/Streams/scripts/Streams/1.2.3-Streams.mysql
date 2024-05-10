@@ -1,0 +1,2 @@
+ALTER TABLE {{prefix}}access
+ADD COLUMN ofParticipantRole varbinary(255) NULL DEFAULT NULL AFTER ofContactLabel;
