@@ -55,7 +55,10 @@ Q.Tool.define("Q/image", function (options) {
 		} else {
 			$img = $("<img>").prop("src", state.url).appendTo(tool.element);
 			tool.cacheData = {
-				img: $img[0]
+				img: $("<img>").prop({
+					src: state.url,
+					class: "Q_no_lazyload"
+				})[0]
 			};
 			$img.on("load", function () {
 				tool.cache.set(tool.cacheKey, 0, null, [tool.cacheData]);
