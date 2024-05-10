@@ -144,7 +144,7 @@ class Streams_Participant extends Base_Streams_Participant
 
 	/**
 	 * Test whether participant has one or more roles in stream
-	 * 
+	 * @method testRoles
 	 * @param {string|array} $roles You can pass a role name, or array of role names
 	 * @return {boolean} whether the user has all the roles
 	 */
