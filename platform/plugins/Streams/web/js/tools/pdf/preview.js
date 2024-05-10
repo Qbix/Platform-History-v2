@@ -67,15 +67,9 @@
 			};
 		}
 
-		var p = Q.pipe(['stylesheet', 'text'], function (params, subjects) {
-			tool.text = params.text[1].pdf;
-			previewState.onRefresh.add(tool.refresh.bind(tool), tool);
-		});
+		tool.text = tool.text.pdf;
 
-		Q.Text.get('Streams/content', p.fill('text'));
-
-		// add styles
-		Q.addStylesheet("{{Streams}}/css/tools/previews.css", p.fill('stylesheet'), { slotName: 'Streams' });
+		previewState.onRefresh.add(tool.refresh.bind(tool), tool);
 	},
 
 	{
@@ -100,7 +94,6 @@
 			var state = tool.state;
 			var previewState = tool.preview.state;
 			var $toolElement = $(tool.element);
-			var pdfUrl = state.url;
 			var inplace = null;
 
 			$toolElement.off([Q.Pointer.fastclick, "Streams_pdf_preview"]).on([Q.Pointer.fastclick, "Streams_pdf_preview"], function () {
@@ -109,7 +102,6 @@
 
 			if (Q.Streams.isStream(stream)) {
 				tool.stream = stream;
-				pdfUrl = stream.fileUrl();
 				// set up the inplace options
 				if (state.inplace) {
 					inplace = tool.setUpElementHTML('div', 'Streams/inplace', Q.extend({
@@ -138,10 +130,6 @@
 				}
 			} else {
 				inplace = state.title;
-			}
-
-			if (!pdfUrl) {
-				throw new Q.Error("Streams/pdf/preview: URL undefined");
 			}
 
 			$toolElement.removeClass('Q_uploading');

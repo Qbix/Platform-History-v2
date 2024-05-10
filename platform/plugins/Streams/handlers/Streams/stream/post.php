@@ -78,7 +78,7 @@ function Streams_stream_post($params = array())
 	$relateStreamName = Q_Request::special("Streams.related.streamName", null, $req);
 	if (isset($relateStreamName)) {
 		$relate['publisherId'] = Q_Request::special("Streams.related.publisherId", $publisherId, $req);
-		$relate['name'] = $relateStreamName;
+		$relate['streamName'] = $relateStreamName;
 		$relate['inheritAccess'] = filter_var(
 			Q_Request::special("Streams.related.inheritAccess", true, $req),
 			FILTER_VALIDATE_BOOLEAN
