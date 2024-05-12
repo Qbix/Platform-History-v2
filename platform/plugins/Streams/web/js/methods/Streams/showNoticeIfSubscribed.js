@@ -24,7 +24,7 @@ Q.exports(function(priv){
                 return;
             }
 
-            var streamsSubscribeRulesFilter = JSON.parse(Q.getObject("participant.subscriptionRules.filter", this) || null);
+            var streamsSubscribeRulesFilter = JSON.parse(this.subscriptionRules.filter || null);
             if ((Q.getObject("types", streamsSubscribeRulesFilter) || []).includes(messageType)) {
                 return;
             }
@@ -37,7 +37,8 @@ Q.exports(function(priv){
 
             Q.handle(callback, this);
         }, {
-            withParticipant: true
+            withParticipant: true,
+            withSubscriptionRules: true
         });
     };
 })

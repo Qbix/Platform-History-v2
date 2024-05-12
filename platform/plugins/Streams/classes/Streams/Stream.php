@@ -2023,6 +2023,9 @@ class Streams_Stream extends Base_Streams_Stream
 		if ($this->get('participant')) {
 			$result['participant'] = $this->get('participant')->exportArray();
 		}
+		if ($this->get('subscriptionRules')) {
+			$result['subscriptionRules'] = Db::exportArray($this->get('subscriptionRules'));
+		}
 		if ($messageTotals = $this->get('messageTotals')) {
 			$result['messageTotals'] = $messageTotals;
 		}

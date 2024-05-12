@@ -133,7 +133,10 @@ class Db_Result
 	 * @param {string} [$class_name=null] The name of the class to instantiate and fill objects from.
 	 *  Must extend Db_Row. Defaults to $this->query->className
 	 * @param {string} [$fields_prefix=''] This is the prefix, if any, to strip out when fetching the rows.
-	 * @param {string} [$by_field=null] A field name to index the array by.
+	 * @param {string|array} [$by_field=null] A field name to index the array by.
+	 *  You can also pass an array containing the field name as its only item,
+	 *  in order to accumulate arrays of rows per field, if your query might return
+	 *  multiple rows with the same field value.
 	 *  If the field's value is NULL in a given row, that row is just appended
 	 *  in the usual way to the array.
 	 * @return {array}
@@ -172,9 +175,20 @@ class Db_Result
 				$row->copyFrom($arr, $fields_prefix, false, false);
 			}
 			$row->init($this);
-			if ($by_field and isset($row->$by_field)) {
-				$rows[$row->$by_field] = $row;
-			} else {
+			$wasSetByField = false;
+			if ($by_field) {
+				if (is_string($by_field) and isset($row->$by_field)) {
+					$rows[$row->$by_field] = $row;
+					$wasSetByField = true;
+				} else if (is_array($by_field)) {
+					$byField = reset($by_field);
+					if (isset($row->$byField)) {
+						$rows[$row->$byField][] = $row;
+						$wasSetByField = true;
+					}
+				}
+			}
+			if (!$wasSetByField) {
 				$rows[] = $row;
 			}
 			$callback = array($row, "afterFetch");
