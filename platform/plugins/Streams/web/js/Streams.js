@@ -404,7 +404,7 @@ Streams.iconUrl = function(icon, size) {
 		size = Q.largestSize(Q.image.sizes['Streams/image'], size === 'largestHeight');
 	}
 	size = (String(size).match(/\.\w+$/g)) ? size : size+'.png';
-	icon = icon.match(/\.\w+$/g) ? icon : icon + (size ? '/' + size : '');
+	icon = icon.match(/\w+\/\w+\.\w+$/g) ? icon : icon + (size ? '/' + size : '');
 	var src = Q.interpolateUrl(icon);
 	return src.isUrl() || icon.substr(0, 2) == '{{'
 		? Q.url(src)

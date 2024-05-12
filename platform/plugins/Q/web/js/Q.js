@@ -12341,7 +12341,7 @@ var _connectSocketNS = root.a = Q.getter(function(ns, url, callback, options) {
  * @param {String} url The url of the socket.io node to connect to
  * @param {Function} [callback] Called after socket connects successfully. Receives Q.Socket
  * @param {Object} [options]
- * @param {Object} [auth] the object to pass to the server, in socket.handshake.auth
+ * @param {Object} [options.auth] the object to pass to the server, in socket.handshake.auth
  * @param {Function} [options.earlyCallback] Receives Q.Socket as soon as it's constructed
  * @param {Function} [options.forceNew] option to pass to the socket.io connect function
  */
