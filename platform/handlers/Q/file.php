@@ -9,6 +9,9 @@ function Q_file($params, &$result)
 		case 'txt': 
 			header ("Context-type: text/plain");
 			break;
+		case 'xml': 
+			header ("Context-type: text/$ext");
+			break;
 		case 'png':
 		case 'jpeg':
 		case 'gif':
