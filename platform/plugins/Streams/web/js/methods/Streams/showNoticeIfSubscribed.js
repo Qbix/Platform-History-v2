@@ -24,7 +24,7 @@ Q.exports(function(priv){
                 return;
             }
 
-            var streamsSubscribeRulesFilter = JSON.parse(this.subscriptionRules.filter || null);
+            var streamsSubscribeRulesFilter = JSON.parse(Q.getObject("subscriptionRules.filter", this) || null);
             if ((Q.getObject("types", streamsSubscribeRulesFilter) || []).includes(messageType)) {
                 return;
             }
