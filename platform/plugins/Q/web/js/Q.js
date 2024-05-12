@@ -12226,6 +12226,13 @@ Q.Socket.getAll = function _Q_Socket_all() {
 
 var _connectSocketNS = root.a = Q.getter(function(ns, url, callback, options) {
 	var o = Q.extend({}, Q.Socket.connect.options, options);
+	if (Q.Socket.connect.verifyAuth) {
+		if (!Q.Socket.connect.verifyAuth(ns, url, o)) {
+			return setTimeout(function () {
+				callback("Q.Socket.connect: not authorized");
+			});
+		}
+	}
 	if (ns[0] !== '/') {
 		ns = '/' + ns;
 	}

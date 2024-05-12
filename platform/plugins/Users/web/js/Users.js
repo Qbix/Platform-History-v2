@@ -1163,6 +1163,12 @@
 
 	}, 'Users');
 
+	Q.Socket.connect.verifyAuth = function (ns, url, options) {
+		if (!options.auth || Q.isEmpty(options.auth.permissions)) {
+			return false;
+		}
+	};
+
 	Q.onInit.add(function () {
 		if (Users.capability) {
 			Q.setObject('Q.Socket.connect.options.auth.capability', JSON.stringify(Users.capability));
