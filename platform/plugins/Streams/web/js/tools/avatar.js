@@ -310,18 +310,13 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 			if (state.editable && state.editable.indexOf('icon') >= 0
 			&& Users.loggedInUser) {
 				var $img = tool.$('.Users_avatar_icon').addClass('Streams_editable');
-				var saveSizeName = {};
-				Q.each(Q.image.sizes['Users/icon'], function (k, v) {
-					saveSizeName[k] = v;
-				});
 				Streams.retainWith(tool).get(
 					state.userId,
 					'Streams/user/icon',
 					function (err) {
 						var stream = this;
 						var o = Q.extend({
-							saveSizeName: saveSizeName,
-							maxStretch: Q.image.maxStretch['Users/icon'],
+							saveSizeName: 'Users/icon',
 							showSize: state.icon || $img.width(),
 							path: 'Q/uploads/Users',
 							preprocess: function (callback) {

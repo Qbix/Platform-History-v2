@@ -145,6 +145,16 @@ Q.text = {
 }; // put all your text strings here e.g. Q.text.Users.foo
 
 /**
+ * Useful client-side information for displaying images
+ * @property {Object} image
+ */
+Q.image = {
+	sizes: {},
+	maxStretch: {},
+	defaultSize: {}
+};
+
+/**
  * Throws Q.Error with complaint if condition evaluates to something falsy
  * @method assert
  * @static

@@ -273,16 +273,11 @@ Q.exports(function() {
                                             '</div>',
                                         onActivate: function (dialog) {
                                             // handle "photo" button
-                                            var saveSizeName = {};
-                                            Q.each(Q.image.sizes['Users/icon'], function (k, v) {
-                                                saveSizeName[k] = v;
-                                            });
                                             $('.Streams_invite_photo', dialog).plugin('Q/imagepicker', {
                                                 path: 'Q/uploads/Users',
                                                 save: 'Users/icon',
                                                 subpath: subpath,
-                                                saveSizeName: saveSizeName,
-                                                maxStretch: Q.image.maxStretch['Users/icon'],
+                                                saveSizeName: 'Users/icon',
                                                 onFinish: function () {
                                                     Q.Dialogs.close(dialog);
                                                 }
@@ -315,8 +310,7 @@ Q.exports(function() {
                                 //$('.Q_button.Streams_invite_QR_scanned', dialog).plugin('Q/clickable').on(Q.Pointer.click, _setPhoto);
                                 var $groupPhotoButton = $('.Q_button.Streams_invite_QR_groupPhoto', dialog);
                                 $groupPhotoButton.plugin('Q/imagepicker', {
-                                    saveSizeName: Q.image.sizes['Streams/invite/groupPhoto'],
-                                    maxStretch: Q.image.maxStretch['Streams/invite/groupPhoto'],
+                                    saveSizeName: 'Streams/invite/groupPhoto',
                                     //showSize: state.icon || $img.width(),
                                     path: 'Q/uploads/Streams',
                                     subpath: subpath,

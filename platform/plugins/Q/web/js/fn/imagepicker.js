@@ -36,8 +36,9 @@ Q.onInit.add(function () {
  * @class Q imagepicker
  * @constructor
  * @param {Object} [options] options is an Object that contains parameters for function
- * @param {Object} options.saveSizeName Required object where key is the preferred image size and value is the image name. Several key-value pairs may be given and image will be generated and saved in different files.
- * @param {Object} [options.maxStretch=1] What scaling factor can be tolerated, for images smaller than the largest size required
+ * @param {String} options.saveSizeName Name of key under Q.image.sizes which lists the preferred image size and value is the image name.
+ * @param {String|Number} [options.maxStretch=1] What scaling factor can be tolerated, for images smaller than the largest size required.
+ *  Defaults to whatever is under Q.image.maxStretch[options.saveSizeName], falls back to 1, but you can override this.
 *   Key may be just one number, e.g. '100' which means square image 100x100 or in format '<width>x<height>', e.g. '80x120' to make non-square image.
  *  You can have one of <width> or <height> be empty, and then it will automatically keep the proportions.
  *  Or you can pass 'x' and then it will keep the original width and height of the image.
@@ -184,7 +185,7 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 	path: 'Q/uploads',
 	subpath: '',
 	save: 'x',
-	saveSizeName: {},
+	saveSizeName: null,
 	showSize: null,
 	useAnySize: false,
 	crop: null,
@@ -299,7 +300,7 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 			if (state.useAnySize) {
 				return true;
 			}
-			var ms = state.maxStretch || 1;
+			var ms = state.maxStretch || Q.image.maxStretch[state.saveSizeName] || 1;
 			if (requiredSize.width - 1 > imageSize.width * ms
 			 || requiredSize.height - 1 > imageSize.height * ms) {
 				var diff = 0;
@@ -443,8 +444,11 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 						width: isw,
 						height: ish
 					};
+					var saveSizeName = (typeof state.saveSizeName === 'string')
+						? Q.image.sizes[state.saveSizeName]
+						: state.saveSizeName;
 					var requiredSize  = _calculateRequiredSize(
-						state.saveSizeName, {width: isw, height: ish}, rotated
+						saveSizeName, {width: isw, height: ish}, rotated
 					);
 					if (!_checkRequiredSize(requiredSize, imageSize)) {
 						return _revert();

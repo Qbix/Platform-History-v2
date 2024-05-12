@@ -920,8 +920,7 @@
 			var url = Q.url("{{baseUrl}}/Q/uploads/Users/" + splitId + "/cover/" + Q.image.defaultSize['Users/cover'] + ".png?" + new Date().getTime());
 			container.style['background-image'] = "url(" + url + ")";
 			Q.Tool.setUpElement(trigger, 'Q/imagepicker', Q.extend({
-				saveSizeName: Q.image.sizes['Users/cover'],
-				maxStretch: Q.image.maxStretch['Users/cover'],
+				saveSizeName: 'Users/cover',
 				//showSize: state.icon || $img.width(),
 				path: 'Q/uploads/Users',
 				subpath: splitId + '/cover',

@@ -509,13 +509,8 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                             });
                         }
 
-                        var saveSizeName = {};
-                        Q.each(Q.image.sizes['Users/icon'], function (k, v) {
-                            saveSizeName[k] = v;
-                        });
                         var options = Q.extend({
-                            saveSizeName: saveSizeName,
-                            maxStretch: Q.image.maxStretch['Users/icon'],
+                            saveSizeName: 'Users/icon',
                             showSize: state.icon || $img.width(),
                             path: 'Q/uploads/Users',
                             preprocess: function (callback) {
