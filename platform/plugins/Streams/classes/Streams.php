@@ -4371,7 +4371,7 @@ abstract class Streams extends Base_Streams
 				$size = '40';
 			}
 			if ($size === 'largestWidth' or $size === 'largestHeight') {
-				$size = Q.largestSize(Q.image.sizes['Streams/image'], size === 'largestHeight');
+				// $size = Q.largestSize(Q.image.sizes['Streams/image'], size === 'largestHeight');
 			}
 			if (strpos($size, '.') === false) {
 				$size .= '.png';

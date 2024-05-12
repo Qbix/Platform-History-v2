@@ -668,6 +668,7 @@ class Q_Response
 	/**
 	 * Sets some data for the script
 	 * @method setScriptData
+	 * @static
 	 * @param {string} $path The path to the variable where the data will be saved, such as "Q.info" or "MyApp.foo.bar".
 	 * @param {array} $data The data to set. It will be JSON-encoded and stored in the specified variable.
 	 * @param {array} [$slotName=null] A way to override the slot name. Pass "" here to
@@ -683,6 +684,26 @@ class Q_Response
 		if (self::$captureScriptDataForSession) {
 			self::$sessionData[$path] = $data;
 			self::$sessionDataPaths[] = $path;
+		}
+	}
+
+	/**
+	 * Call this function to read image sizes from config
+	 * and set script data under Q.image.sizes and Q.image.maxStretch
+	 * @method setImageSizes
+	 * @static
+	 * @param {string} $name
+	 */
+	static function setImageSizes($type)
+	{
+		if ($sizes = Q_Image::getSizes($type, $maxStretch, $defaultSize)) {
+			Q_Response::setScriptData("Q.image.sizes.sizes.$type", $sizes);
+			if ($maxStretch) {
+				Q_Response::setScriptData("Q.image.maxStretch.$type", $maxStretch);
+			}
+			if ($defaultSize) {
+				Q_Response::setScriptData("Q.image.defaultSize.$defaultSize", $defaultSize);
+			}
 		}
 	}
 

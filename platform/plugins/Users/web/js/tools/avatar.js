@@ -14,7 +14,7 @@ var Users = Q.Users;
  * @constructor
  * @param {Object} [options]
  *   @param {String} options.userId The user's id, e.g. Q.Users.loggedInUserId(). Can be '' for a blank-looking avatar.
- *   @param {Number|String|true} [options.icon=Q.Users.icon.defaultSize] Size of the icon to render before the display name. Or 0 for no icon. You can also pass true here for default size. Or pass a string to specify the url of the icon.
+ *   @param {Number|String|true} [options.icon=Q.image.defaultSize.'Users/icon'] Size of the icon to render before the display name. Or 0 for no icon. You can also pass true here for default size. Or pass a string to specify the url of the icon.
  *   @param {Boolean} [options.contents] Set to false to not show the name
  *   @param {String} [options.className] Any css classes to add to the tool element
  *   @param {Object} [options.templates] Object for avatar template parameters
@@ -65,7 +65,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 	var tool = this;
 	var state = this.state;
 	if (state.icon === true) {
-		state.icon = Users.icon.defaultSize;
+		state.icon = Q.image.defaultSize['Users/icon'];
 	}
 	if (state.className) {
 		$(tool.element).addClass(state.className);
@@ -77,7 +77,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 
 {
 	userId: null,
-	icon: Users.icon.defaultSize,
+	icon: Q.image.defaultSize['Users/icon'],
 	contents: true,
 	templates: {
 		icon: {
@@ -160,7 +160,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 			if (state.icon) {
 				var icon = state.icon;
 				if (Q.isInteger(icon) && window.devicePixelRatio > 1) {
-					for (var k in Q.Users.icon.sizes) {
+					for (var k in Q.image.sizes['Users/icon']) {
 						if (k >= icon * window.devicPixelRatio) {
 							icon = k;
 						}

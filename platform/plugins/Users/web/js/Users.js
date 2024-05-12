@@ -917,17 +917,17 @@
 				return false;
 			}
 			var splitId = userId.splitId('');
-			var url = Q.url("{{baseUrl}}/Q/uploads/Users/" + splitId + "/cover/" + Q.Users.cover.defaultSize + ".png?" + new Date().getTime());
+			var url = Q.url("{{baseUrl}}/Q/uploads/Users/" + splitId + "/cover/" + Q.image.defaultSize['Users/cover'] + ".png?" + new Date().getTime());
 			container.style['background-image'] = "url(" + url + ")";
 			Q.Tool.setUpElement(trigger, 'Q/imagepicker', Q.extend({
-				saveSizeName: Q.Users.cover.sizes,
-				maxStretch: Q.Users.cover.maxStretch,
+				saveSizeName: Q.image.sizes['Users/cover'],
+				maxStretch: Q.image.maxStretch['Users/cover'],
 				//showSize: state.icon || $img.width(),
 				path: 'Q/uploads/Users',
 				subpath: splitId + '/cover',
 				save: "Users/cover",
 				onSuccess: function () {
-					var newUrl = Q.url("{{baseUrl}}/Q/uploads/Users/" + splitId + "/cover/" + Q.Users.cover.defaultSize + ".png?" + new Date().getTime());
+					var newUrl = Q.url("{{baseUrl}}/Q/uploads/Users/" + splitId + "/cover/" + Q.image.defaultSize['Users/cover'] + ".png?" + new Date().getTime());
 					container.style['background-image'] = "url(" + newUrl + ")";
 				}
 			}, options));

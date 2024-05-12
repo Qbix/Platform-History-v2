@@ -15,7 +15,7 @@ var Streams = Q.Streams;
  * @constructor
  * @param {Object} [options] A hash of options, containing:
  *   @param {String} options.userId The id of the user object. Defaults to id of the logged-in user, if any. Can be '' for a blank-looking avatar.
- *   @param {Number|String|true} [options.icon=Q.Users.icon.defaultSize] Size of the icon to render before the display name. Or 0 for no icon. You can also pass true here for default size. Or pass a string to specify the url of the icon.
+ *   @param {Number|String|true} [options.icon=Q.image.sizes.'Users/icon'.defaultSize] Size of the icon to render before the display name. Or 0 for no icon. You can also pass true here for default size. Or pass a string to specify the url of the icon.
  *   @param {Boolean} [options.contents=true] Set to false to not show the name
  *   @param {Boolean} [options.short=false] If true, renders the short version of the display name.
  *   @param {Boolean|Array} [options.editable=false] If true, and userId is the logged-in user's id, the tool presents an interface for the logged-in user to edit their name and icon. This can also be an array containing one or more of 'icon', 'name'.
@@ -63,7 +63,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 	var tool = this;
 	var state = this.state;
 	if (state.icon === true) {
-		state.icon = Users.icon.defaultSize;
+		state.icon = Q.image.defaultSize['Users/icon'];
 	}
 	if (state.userId == null) {
 		state.userId = Users.loggedInUserId();
@@ -109,7 +109,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 
 {
 	userId: undefined,
-	icon: Users.icon.defaultSize,
+	icon: Q.image.defaulSize['Users/icon'],
 	contents: true,
 	"short": false,
 	className: null,
@@ -177,7 +177,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 		}
 		Q.Tool.clear(tool.element);
 		if (state.icon === true) {
-			state.icon = Users.icon.defaultSize;
+			state.icon = Q.image.defaultSize['Users/icon'];
 		}
 
 		var fields;
@@ -311,7 +311,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 			&& Users.loggedInUser) {
 				var $img = tool.$('.Users_avatar_icon').addClass('Streams_editable');
 				var saveSizeName = {};
-				Q.each(Users.icon.sizes, function (k, v) {
+				Q.each(Q.image.sizes['Users/icon'], function (k, v) {
 					saveSizeName[k] = v;
 				});
 				Streams.retainWith(tool).get(
@@ -321,7 +321,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 						var stream = this;
 						var o = Q.extend({
 							saveSizeName: saveSizeName,
-							maxStretch: Users.icon.maxStretch,
+							maxStretch: Q.image.maxStretch['Users/icon'],
 							showSize: state.icon || $img.width(),
 							path: 'Q/uploads/Users',
 							preprocess: function (callback) {

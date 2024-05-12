@@ -7,15 +7,8 @@ function Streams_before_Q_responseExtras()
 	if (!Q_Request::isAjax()) {
 		$invite_url = Q_Config::get('Streams', 'invite', 'url', "https://invites.to");
 		Q_Response::setScriptData('Q.plugins.Streams.invite.url', $invite_url);
-		if ($sizes = Q_Image::getSizes('Streams/image', $maxStretch)) {
-			Q_Response::setScriptData('Q.image.sizes.Streams/image', $sizes);
-			Q_Response::setScriptData('Q.image.maxStretch.Streams/image', $maxStretch);
-		}
-		if ($sizes = Q_Image::getSizes('Streams/invite/groupPhoto', $maxStretch, $defaultSize)) {
-			Q_Response::setScriptData('Q.plugins.Streams.invite.groupPhoto.sizes', $sizes);
-			Q_Response::setScriptData('Q.plugins.Streams.invite.groupPhoto.maxStretch', $maxStretch);
-			Q_Response::setScriptData('Q.plugins.Streams.invite.groupPhoto.defaultSize', $defaultSize);
-		}
+		Q_Response::setImageSizes('Streams/image');
+		Q_Response::setImageSizes('Streams/invite/groupPhoto');
 		$defaults = array(
 			'readLevel' => Streams::$READ_LEVEL['messages'],
 			'writeLevel' => Streams::$WRITE_LEVEL['join'],
