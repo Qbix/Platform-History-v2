@@ -217,8 +217,8 @@ class Q_Dispatcher
 			}
 		}
 
-		// if response was served, then return
-		if ($served) {
+		// if response or 404 was served, then return
+		if (isset($served)) {
 			self::result($dir_was_served ? "Dir served" : "File served");
 			return true;
 		}
