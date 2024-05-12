@@ -697,7 +697,7 @@ class Q_Response
 	static function setImageSizes($type)
 	{
 		if ($sizes = Q_Image::getSizes($type, $maxStretch, $defaultSize)) {
-			Q_Response::setScriptData("Q.image.sizes.sizes.$type", $sizes);
+			Q_Response::setScriptData("Q.image.sizes.$type", $sizes);
 			if ($maxStretch) {
 				Q_Response::setScriptData("Q.image.maxStretch.$type", $maxStretch);
 			}
