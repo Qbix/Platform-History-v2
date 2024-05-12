@@ -109,7 +109,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 
 {
 	userId: undefined,
-	icon: Q.image.defaulSize['Users/icon'],
+	icon: Q.image.defaultSize['Users/icon'],
 	contents: true,
 	"short": false,
 	className: null,
