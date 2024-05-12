@@ -545,13 +545,12 @@ class Users_Label extends Base_Users_Label
 	}
 
 	/**
-	 * Fetch an array of labels
-	 * @method getLabels
+	 * Fetch an array of basic labels info
+	 * @method getLabelsInfo
 	 * @return {array} An array of array(label => array(title=> ..., icon => ...)) pairs
 	 */
-	static function getLabels () {
-		$labelsMysql = Users_Label::select('DISTINCT label, title, icon')
-			->fetchDbRows();
+	static function getLabelsInfo ($userId) {
+		$labelsMysql = self::fetch($userId);
 		$labels = array();
 		foreach ($labelsMysql as $row) {
 			$labels[$row->label] = array(
