@@ -1171,6 +1171,7 @@
 		if (Q.isEmpty(c.permissions)) {
 			return false;
 		}
+		return true;
 	};
 
 	Q.onInit.add(function () {
