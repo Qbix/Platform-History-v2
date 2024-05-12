@@ -230,6 +230,7 @@ class Q_Dispatcher
 		// if the Q service worker is requested, generate and serve it
 		if (Q_Request::isServiceWorker()) {
 			Q::event('Q/serviceWorker/response');
+			self::result("Service Worker served");
 			return true;
 		}
 		Q_Request::mergeCookieJS();
