@@ -707,13 +707,6 @@ class Q_Session
 			if (!empty(self::$session_db_connection)) {
 				// Create a new row to be saved in the session table
 				$db_row_class = self::$session_db_row_class;
-				// Make sure it has a primary key!
-				if (count(self::$session_db_row->getPrimaryKey()) != 1) {
-					throw new Q_Exception(
-						"The primary key of " . self::$session_db_row_class
-						. " has to consist of exactly 1 field!"
-					);
-				}
 				$id_field = self::$session_db_id_field;
 				$data_field = self::$session_db_data_field;
 				$updated_field = self::$session_db_updated_field;
@@ -721,6 +714,13 @@ class Q_Session
 				$platform_field = self::$session_db_platform_field;
 				if (!self::$session_db_row) {
 					self::$session_db_row = new $db_row_class();
+				}
+				// Make sure it has a primary key!
+				if (count(self::$session_db_row->getPrimaryKey()) != 1) {
+					throw new Q_Exception(
+						"The primary key of " . self::$session_db_row_class
+						. " has to consist of exactly 1 field!"
+					);
 				}
 				$row = self::$session_db_row;
 				$row->$id_field = $id;
