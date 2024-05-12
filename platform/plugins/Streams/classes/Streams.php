@@ -3995,7 +3995,7 @@ abstract class Streams extends Base_Streams
 			$invite = new Streams_Invite();
 			if (is_array($who['token'])) {
 				Q_Valid::requireFields(array('token', 'Q.sig'), $who['token'], true);
-				if (Q_Utils::sign($who['token']) !== $who['token']) {
+				if (!Q_Valid::signature($who['token'])) {
 					throw new Q_Exception_InvalidInput(array('source' => 'token'));
 				}
 				$invite->token = $who['token']['token'];

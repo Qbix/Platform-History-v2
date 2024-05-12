@@ -286,7 +286,8 @@ class Q_Valid
 	}
 	
 	/**
-	 * Validates the signature of the request (from Q_Request::special('sig', null))
+	 * Validates the signature of some data.
+	 * Defaults to checking $_REQUEST, with sig from from Q_Request::special('sig', null)
 	 * @method signature
 	 * @static
 	 * @param {boolean} [$throwIfInvalid=false] If true, throws an exception if the nonce is invalid.
