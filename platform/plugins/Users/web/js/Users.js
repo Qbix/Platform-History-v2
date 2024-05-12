@@ -1167,7 +1167,7 @@
 		if (!options.auth || !options.auth.capability) {
 			return false;
 		}
-		var c = JSON.parse(Q.isEmpty(options.auth.capability));
+		var c = JSON.parse(options.auth.capability);
 		if (Q.isEmpty(c.permissions)) {
 			return false;
 		}
