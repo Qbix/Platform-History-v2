@@ -12256,6 +12256,7 @@ var _connectSocketNS = root.a = Q.getter(function(ns, url, callback, options) {
 		var ec = o.earlyCallback;
 		delete o.earlyCallback;
 		o = Q.extend({}, o, 10, {
+			forceNew: true,
 			transports: ['websocket'],
 			auth: o.auth
 		});
@@ -12357,10 +12358,9 @@ var _connectSocketNS = root.a = Q.getter(function(ns, url, callback, options) {
  * @param {String} ns A socket.io namespace to use
  * @param {String} url The url of the socket.io node to connect to
  * @param {Function} [callback] Called after socket connects successfully. Receives Q.Socket
- * @param {Object} [options]
+ * @param {Object} [options] Options to pass to the io.connect function
  * @param {Object} [options.auth] the object to pass to the server, in socket.handshake.auth
  * @param {Function} [options.earlyCallback] Receives Q.Socket as soon as it's constructed
- * @param {Function} [options.forceNew] option to pass to the socket.io connect function
  */
 Q.Socket.connect = function _Q_Socket_connect(ns, url, callback, options) {
 	if (url === undefined) {
@@ -12439,7 +12439,7 @@ Q.Socket.reconnectAll = function _Q_Socket_reconnectAll() {
 	var ns, url;
 	for (ns in _qsockets) {
 		for (url in _qsockets[ns]) {
-			_connectSocketNS(ns, url, function () {}, {forceNew: true});
+			_connectSocketNS(ns, url, function () {});
 		}
 	}
 };
