@@ -1164,7 +1164,11 @@
 	}, 'Users');
 
 	Q.Socket.connect.verifyAuth = function (ns, url, options) {
-		if (!options.auth || Q.isEmpty(options.auth.permissions)) {
+		if (!options.auth || !options.auth.capability) {
+			return false;
+		}
+		var c = JSON.parse(Q.isEmpty(options.auth.capability));
+		if (Q.isEmpty(c.permissions)) {
 			return false;
 		}
 	};
