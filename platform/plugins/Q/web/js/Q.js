@@ -12439,7 +12439,7 @@ Q.Socket.reconnectAll = function _Q_Socket_reconnectAll() {
 	var ns, url;
 	for (ns in _qsockets) {
 		for (url in _qsockets[ns]) {
-			_connectSocketNS(ns, url, null, {forceNew: true});
+			_connectSocketNS(ns, url, function () {}, {forceNew: true});
 		}
 	}
 };
