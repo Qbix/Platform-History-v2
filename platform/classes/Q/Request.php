@@ -321,7 +321,7 @@ class Q_Request
 		if (!in_array($ext, $extensions)) {
 			return false;
 		}
-		$filename = Q_Uri::filenameFromUrl($url);
+		return Q_Uri::filenameFromUrl($url);
 	}
 	
 	/**
