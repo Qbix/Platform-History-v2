@@ -192,7 +192,7 @@ class Q_Dispatcher
 		}
 
 		// if file or dir is requested, try to serve it
-		$served = false;
+		$served = null;
 		$skip = Q_Config::get('Q', 'dispatcherSkipFilename', false);
 		$filename = $skip ? false : Q_Request::filename();
 		if ($filename) {
