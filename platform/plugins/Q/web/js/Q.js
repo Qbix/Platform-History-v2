@@ -12386,7 +12386,7 @@ Q.Socket.connect = function _Q_Socket_connect(ns, url, callback, options) {
 
 	// check if socket already connected, or reconnect
 	return callback
-		? _connectSocketNS(ns, url, callback options)
+		? _connectSocketNS(ns, url, callback, options)
 		: _connectSocketNS(ns, url, options);
 };
 
