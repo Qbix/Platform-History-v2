@@ -12318,11 +12318,11 @@ var _connectSocketNS = root.a = Q.getter(function(ns, url, callback, options) {
 		var socket = Q.Socket.get(ns, url);
 		if (callback) {
 			if (socket && socket.connected) {
-				callback.call(null, qs, ns, url);
+				callback.call(qs, null, qs, ns, url);
 			} else {
 				Q.Socket.onConnect(ns, url)
 				.setOnce(function (qs, ns, url) {
-					callback(null, qs, ns, url);
+					callback.call(qs, null, qs, ns, url);
 				});
 			}
 		}
@@ -12364,7 +12364,7 @@ var _connectSocketNS = root.a = Q.getter(function(ns, url, callback, options) {
  * @param {Object} [options.auth] the object to pass to the server, in socket.handshake.auth
  * @param {Function} [options.earlyCallback] Receives Q.Socket as soon as it's constructed
  */
-Q.Socket.connect = function _Q_Socket_connect(ns, url, callback, options) {
+Q.Socket.connect = Q.promisify(function _Q_Socket_connect(ns, url, callback, options) {
 	if (url === undefined) {
 		url = Q.nodeUrl(); // generic node URL by default
 	}
@@ -12385,7 +12385,7 @@ Q.Socket.connect = function _Q_Socket_connect(ns, url, callback, options) {
 
 	// check if socket already connected, or reconnect
 	_connectSocketNS(ns, url, callback, options);
-};
+});
 
 Q.Socket.connect.options = {};
 

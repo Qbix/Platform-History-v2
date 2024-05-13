@@ -734,6 +734,9 @@ function _connectSockets(refresh) {
 		}
 		for (var i=0, l = n.length; i < l; ++i) {
 			Q.Socket.connect('/Q', n[i], function (err, qs, ns, url) {
+				if (err) {
+					return;
+				}
 				priv._connectedNodes[url] = qs;
 			});
 			priv._connectedNodes[n[i]] = true;
@@ -2622,7 +2625,10 @@ Sp.retain = function _Stream_prototype_retain (key, options) {
 			Q.setObject([nodeUrl, ps], true, priv._retainedNodes);	
 		} else if (!options.dontObserve) {
 			// If the socket already connected, this will just call the callback:
-			Q.Socket.connect('/Q', nodeUrl, function () {
+			Q.Socket.connect('/Q', nodeUrl, function (err) {
+				if (err) {
+					return;
+				}
 				if (!participating && !options.dontObserve) {
 					stream.observe(function () {
 						Q.setObject([nodeUrl, ps], true, priv._retainedNodes);
