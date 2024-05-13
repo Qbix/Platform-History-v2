@@ -4235,6 +4235,7 @@ Q.batcher.factory = function _Q_batcher_factory(collection, baseUrl, tail, slotN
  * @param {Function} [options.prepare] This is a function that is run to copy-construct objects from cached data.
  *  It gets (subject, parameters, callback) and is supposed to call callback(subject2, parameters2)
  *  This function can also set up auxiliary data structures in the web environment.
+ * @param {Boolean} [options.dontWarn] Don't warn on errors in prepare() handler
  * @param {String} [options.throttle] an id to throttle on, or an Object that supports the throttle interface:
  * @param {Function} [options.throttleTry] function(subject, getter, args) - applies or throttles getter with subject, args
  * @param {Function} [options.throttleNext] function (subject) - applies next getter with subject
@@ -4368,7 +4369,9 @@ Q.getter = function _Q_getter(original, options) {
 							try {
 								_prepare(this, arguments, wk[i].callbacks[cbpos], wk[i].ret, true);
 							} catch (e) {
-								console.warn(e);
+								if (!gw.dontWarn) {
+									console.warn(e);
+								}
 							}
 						}
 					}
@@ -12225,9 +12228,6 @@ var _connectSocketNS = root.a = Q.getter(function(ns, url, callback, options) {
 	var o = Q.extend({}, Q.Socket.connect.options, options);
 	if (Q.Socket.connect.validateAuth) {
 		if (!Q.Socket.connect.validateAuth(ns, url, o)) {
-			if (!o.callbackEvenIfNoAuth) {
-				return;
-			}
 			return setTimeout(function () {
 				callback("Q.Socket.connect: not authorized");
 			});
@@ -12349,6 +12349,8 @@ var _connectSocketNS = root.a = Q.getter(function(ns, url, callback, options) {
 			log('Socket ' + ns + ' connected to ' + url);
 		}
 	}
+}, {
+	dontWarn: true
 });
 
 /**
