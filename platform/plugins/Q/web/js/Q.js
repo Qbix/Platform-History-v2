@@ -12223,8 +12223,11 @@ Q.Socket.getAll = function _Q_Socket_all() {
 
 var _connectSocketNS = root.a = Q.getter(function(ns, url, callback, options) {
 	var o = Q.extend({}, Q.Socket.connect.options, options);
-	if (Q.Socket.connect.verifyAuth) {
+	if (Q.Socket.connect.validateAuth) {
 		if (!Q.Socket.connect.verifyAuth(ns, url, o)) {
+			if (!o.callbackEvenIfNoAuth) {
+				return;
+			}
 			return setTimeout(function () {
 				callback("Q.Socket.connect: not authorized");
 			});
@@ -12377,6 +12380,7 @@ Q.Socket.connect = function _Q_Socket_connect(ns, url, callback, options) {
 	if (!callback) {
 		callback = function () {} // for getter cache to work
 	}
+
 	// check if socket already connected, or reconnect
 	_connectSocketNS(ns, url, callback, options);
 };

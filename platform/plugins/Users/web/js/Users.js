@@ -1163,7 +1163,7 @@
 
 	}, 'Users');
 
-	Q.Socket.connect.verifyAuth = function (ns, url, options) {
+	Q.Socket.connect.validateAuth = function (ns, url, options) {
 		if (!options.auth || !options.auth.capability) {
 			return false;
 		}
