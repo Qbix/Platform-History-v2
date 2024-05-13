@@ -4271,8 +4271,10 @@ Q.getter = function _Q_getter(original, options) {
 			// in case someone forgot to pass a callback
 			// pretend they added a callback at the end
 			function _promiseCallback(err, obj) {
-				if (err) {
-					_reject(err);
+				var error = !gw.nonStandardErrorConvention
+					&& Q.firstErrorMessage(err, obj);
+				if (error) {
+					_reject(error);
 				} else {
 					_resolve(this !== undefined ? this : obj);
 				}
@@ -4303,23 +4305,12 @@ Q.getter = function _Q_getter(original, options) {
 			function _result(subject, params) {
 				gw.onResult.handle(subject, params, arguments2, ret, gw);
 				Q.getter.usingCached = cached;
-				var err = null;
-				try {
-					// let the callback check params
-					callback.apply(subject, params);
-				} catch (e) {
-					// it should throw an exception if it encounters any errors
-					err = e;
-				}
+				callback.apply(subject, params); // may throw
 				if (!err && !gw.nonStandardErrorConvention) {
 					err = Q.firstErrorMessage(params[0], params[1]);
 				}
 				gw.onExecuted.handle(subject, params, arguments2, ret, gw);
 				Q.getter.usingCached = false;
-				if (err) {
-					throw err;
-				}
-				_resolve(subject !== undefined ? subject : params[1]);
 			}
 		}
 
