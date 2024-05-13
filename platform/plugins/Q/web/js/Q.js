@@ -12384,7 +12384,7 @@ Q.Socket.connect = Q.promisify(function _Q_Socket_connect(ns, url, callback, opt
 	}
 
 	// check if socket already connected, or reconnect
-	_connectSocketNS(ns, url, callback, options);
+	return _connectSocketNS(ns, url, callback, options);
 });
 
 Q.Socket.connect.options = {};
