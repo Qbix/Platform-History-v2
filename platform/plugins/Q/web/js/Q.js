@@ -4306,9 +4306,6 @@ Q.getter = function _Q_getter(original, options) {
 				gw.onResult.handle(subject, params, arguments2, ret, gw);
 				Q.getter.usingCached = cached;
 				callback.apply(subject, params); // may throw
-				if (!err && !gw.nonStandardErrorConvention) {
-					err = Q.firstErrorMessage(params[0], params[1]);
-				}
 				gw.onExecuted.handle(subject, params, arguments2, ret, gw);
 				Q.getter.usingCached = false;
 			}
