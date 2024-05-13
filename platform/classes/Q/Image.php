@@ -60,6 +60,49 @@ class Q_Image
 		return $sizes2;
 	}
 
+	static function largestSize($sizes, $useHeight = false, $options = array())
+	{
+        if (is_string($sizes)) {
+            $sizes = self::getSizes($sizes);
+            if (!$sizes) {
+                throw new Exception("Q_Image::largestSize: Sizes for key '$sizes' not found in Q_Image::getSizes()");
+            }
+        }
+        $wMax = 0;
+        $hMax = 0;
+        $largestIndex = null;
+        if (!is_array($sizes)) {
+            $sizes = array_keys($sizes);
+        }
+        $m = isset($options['minimumDimensions']) ? explode('x', $options['minimumDimensions']) : null;
+        if (in_array('x', $sizes) && !$m) {
+            return 'x';
+        }
+        foreach ($sizes as $i => $size) {
+            if (!$size) {
+                continue;
+            }
+            $parts = explode('x', $size);
+            if (count($parts) == 0) {
+                continue;
+            }
+            $w = intval($parts[0] ? $parts[0] : $parts[1]);
+            $h = intval($parts[1] ? $parts[1] : $parts[0]);
+
+            if (($useHeight && ($h > $hMax || ($h == $hMax && $w >= $wMax && count($parts) == 2)))
+			or (!$useHeight && ($w > $wMax || ($w == $wMax && $h >= $hMax && count($parts) == 2)))) {
+                $wMax = $w;
+                $hMax = $h;
+                $largestIndex = $i;
+            }
+            if ($m && $w >= $m[0] && $w >= $m[1]) {
+                return $sizes[$largestIndex];
+            }
+        }
+
+        return $largestIndex !== null ? $sizes[$largestIndex] : (in_array('x', $sizes) ? 'x' : null);
+	}
+
 	/**
 	 * Gets an array of "$filename.png" => $url pairs using the
 	 * "Q"/"images"/$type/"sizes" config. These are stored in the config

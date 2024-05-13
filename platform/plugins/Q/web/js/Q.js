@@ -1635,11 +1635,8 @@ Q.largestSize = function (sizes, useHeight, options) {
 		}
 		w = parseInt(parts[0] || parts[1]);
 		h = parseInt(parts[1] || parts[0]);
-		if (useHeight && (h > hMax || w >= wMax && parts.length == 2)) {
-			wMax = w;
-			hMax = h;
-			largestIndex = i;
-		} else if (w > wMax || w >= wMax && parts.length == 2) {
+		if ((useHeight && (h > hMax || (h == hMax && w >= wMax && parts.length == 2)))
+		|| (!useHeight && (w > wMax || (w == wMax && h >= hMax && parts.length == 2)))) {
 			wMax = w;
 			hMax = h;
 			largestIndex = i;
