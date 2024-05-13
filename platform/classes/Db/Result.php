@@ -176,7 +176,7 @@ class Db_Result
 			}
 			$row->init($this);
 			$wasSetByField = false;
-			if ($by_field) {
+			if ($by_field) {	
 				if (is_string($by_field) and isset($row->$by_field)) {
 					$rows[$row->$by_field] = $row;
 					$wasSetByField = true;
