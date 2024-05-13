@@ -12224,7 +12224,7 @@ Q.Socket.getAll = function _Q_Socket_all() {
 var _connectSocketNS = root.a = Q.getter(function(ns, url, callback, options) {
 	var o = Q.extend({}, Q.Socket.connect.options, options);
 	if (Q.Socket.connect.validateAuth) {
-		if (!Q.Socket.connect.verifyAuth(ns, url, o)) {
+		if (!Q.Socket.connect.validateAuth(ns, url, o)) {
 			if (!o.callbackEvenIfNoAuth) {
 				return;
 			}
