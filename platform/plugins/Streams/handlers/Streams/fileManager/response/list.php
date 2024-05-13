@@ -5,71 +5,45 @@ function Streams_fileManager_response_list($params = array()) {
     $params = array_merge($_REQUEST, $params);
     $loggedUserId = Users::loggedInUser(true)->id;
     $usersFilesDir = $fileManagerDir . '/' . $loggedUserId;
-    $currentDirStreamName = Q::ifset($params, 'currentDirStreamName', null);
+    $currentDirStreamName = Q::ifset($params, 'currentDirStreamName', 'currentDirStreamName');
     $streamTypes = Q::ifset($params, 'streamTypes', null);
     $relationTypes = Q::ifset($params, 'relationTypes', null);
-    //print_r($parentStream);die('1111111');
+    //print_r($categoryStream);die('1111111');
 
-    if(!is_null($currentDirStreamName) && $currentDirStreamName != 'Streams/fileManager/main'){
-
-        $parentStream = Streams_Stream::fetch($loggedUserId, $loggedUserId, $currentDirStreamName);
-
-        if(is_null($parentStream)) {
-            $fields = array(
-                'name' => $currentDirStreamName
-            );
-            $rootStream = Streams::create($loggedUserId, $loggedUserId, 'Streams/category', $fields);
-        } else {
-            $rootStream = $parentStream;
+    $categoryStream = Streams_Stream::fetch($loggedUserId, $loggedUserId, $currentDirStreamName);
+    if (!$categoryStream) {
+        $fields['name'] = $currentDirStreamName;
+        if ($currentDirStreamName === 'Streams/fileManager/main') {
+            $fields['title'] = '/';
+            $fields['content'] = $usersFilesDir;
         }
-
-
-
-        $browsePathOfStream = $rootStream;
-    } else {
-        $rootStream = Streams_Stream::fetch($loggedUserId, $loggedUserId, 'Streams/fileManager/main');
-
-        if(is_null($rootStream)) {
-            $fields = array(
-                'title' => '/',
-                'name' => 'Streams/fileManager/main',
-                'content' => $usersFilesDir
-            );
-            $rootStream = Streams::create($loggedUserId, $loggedUserId, 'Streams/fileManager', $fields);
-        }
-
-        $browsePathOfStream = $rootStream;
-
+        $categoryStream = Streams::create($loggedInUserId, $loggedInUserId, $type, $fields);
     }
     $criteria = array(
-        'toPublisherId' => $browsePathOfStream->fields['publisherId'],
-        'toStreamName' => $browsePathOfStream->fields['name']
+        'toPublisherId' => $categoryStream->fields['publisherId'],
+        'toStreamName' => $categoryStream->fields['name']
     );
-
     if(!is_null($relationTypes)) {
         $criteria['type'] = $relationTypes;
     }
-
     $relationsQuery = Streams_RelatedTo::select()->where($criteria);
     $relations = $relationsQuery->fetchDbRows();
-
-    function mapRelations($v) {
-        return array($v->fields['fromPublisherId'], $v->fields['fromStreamName']);
+    $inCriteria = array_map('Streams_fileManager_response_list_mapRelations', $relations);
+    if ($inCriteria) {
+        $streamsCriteria = array(
+            'publisherId, name' => $inCriteria
+        );
+        if(!is_null($streamTypes)) {
+            $streamsCriteria['type'] = $streamTypes;
+        }
+        $query = Streams_Stream::select()->where($streamsCriteria);
+        $relatedStreams = $query->ignoreCache()->fetchDbRows();
+    } else {
+        $relatedStreams = array();
     }
-
-    $inCriteria = array_map('mapRelations', $relations);
-
-    $streamsCriteria = array(
-        'publisherId, name' => $inCriteria
-    );
-
-    if(!is_null($streamTypes)) {
-        $streamsCriteria['type'] = $streamTypes;
-    }
-
-    $query = Streams_Stream::select($fields)->where($streamsCriteria);
-				
-    $relatedStreams = $query->ignoreCache()->fetchDbRows();
-
     Q_Response::setSlot("list", $relatedStreams);
+}
+
+function Streams_fileManager_response_list_mapRelations($v) {
+    return array($v->fields['fromPublisherId'], $v->fields['fromStreamName']);
 }
