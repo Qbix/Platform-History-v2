@@ -12353,7 +12353,8 @@ var _connectSocketNS = root.a = Q.getter(function(ns, url, callback, options) {
 		}
 	}
 }, {
-	dontWarn: true
+	dontWarn: true,
+	callbackIndex: 2
 });
 
 /**
@@ -12382,12 +12383,9 @@ Q.Socket.connect = function _Q_Socket_connect(ns, url, callback, options) {
 	} else if (ns[0] !== '/') {
 		ns = '/' + ns;
 	}
-	if (!callback) {
-		callback = function () {} // for getter cache to work
-	}
 
 	// check if socket already connected, or reconnect
-	return _connectSocketNS(ns, url, callback, options);
+	return _connectSocketNS(ns, url, options);
 };
 
 Q.Socket.connect.options = {};
