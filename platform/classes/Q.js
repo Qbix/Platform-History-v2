@@ -661,7 +661,8 @@ Q.batcher.options = {
  *  the wrapper function being returned. This is useful when calling Q.getter(Q.batcher(...))
  *  Call method .forget with the same arguments as original getter to clear cache record
  *  and update it on next call to getter (if it happen)
- *  @method getter
+ * @static
+ * @method getter
  * @param {Function} original
  *  The original getter function to be wrapped
  *  Can also be an array of [getter, execute] which you can use if
@@ -670,20 +671,26 @@ Q.batcher.options = {
  *  is supposed to execute the batched request without waiting any more.
  *  If the original function returns false, the caching is canceled for that call.
  * @param {Object} [options={}] An optional hash of possible options, which include:
- * @param {Function} [options.prepare] This is a function that is run to copy-construct objects from cached data. It gets (subject, parameters, callback) and is supposed to call callback(subject2, parameters2)
+ * @param {Function} [options.prepare] This is a function that is run to copy-construct objects from cached data.
+ *  It gets (subject, parameters, callback) and is supposed to call callback(subject2, parameters2)
+ *  This function can also set up auxiliary data structures in the web environment.
+ * @param {Boolean} [options.dontWarn] Don't warn on errors in prepare() handler
  * @param {String} [options.throttle] an id to throttle on, or an Object that supports the throttle interface:
  * @param {Function} [options.throttleTry] function(subject, getter, args) - applies or throttles getter with subject, args
  * @param {Function} [options.throttleNext] function (subject) - applies next getter with subject
  * @param {Integer} [options.throttleSize=100] The size of the throttle, if it is enabled
  * @param {Boolean} [options.nonStandardErrorConvention=false] Pass true here if the callback parameters don't work with Q.firstErrorMessage() conventions
  * @param {Number} [callbackIndex] use this to explicitly specify which argument number is expecting a callback function
- * @param {Q.Cache|Boolean} [options.cache] pass false here to prevent caching, or an object which supports the Q.Cache interface.
- *  By default, it will set up a cache in the process with default parameters.
+ * @param {Q.Cache|Boolean} [options.cache] pass false here to prevent caching, or an object which supports the Q.Cache interface
+ *  By default, it will set up a cache in the loaded webpage with default parameters.
+ *  You can use functions Q.Cache.document, Q.Cache.local and Q.Cache.session
+ *  to create new caches, but please cache a limited maximum number of limited-size items,
+ *  since the local and session storage can only handle up to 5MB on some browsers!
  * @return {Function}
- *  The wrapper function, which returns an object with a property called "result"
+ *  The wrapper function, which returns a Q.Promise with a property called "result"
  *  which could be one of Q.getter.CACHED, Q.getter.REQUESTING, Q.getter.WAITING or Q.getter.THROTTLING .
- *  The promise resolves with the "this" object returned in the getter, or rejects on any errors.
- *  The wrapper function also emits events 'called', 'result', 'executed.
+ *  After calling callbacks, the promise resolves with the "this" object returned in the getter, or rejects on any errors.
+ *  This wrapper function also contains Q.Events called onCalled, onResult and onExecuted.
  */
 Q.getter = function _Q_getter(original, options) {
 
@@ -691,25 +698,34 @@ Q.getter = function _Q_getter(original, options) {
 		var i, key, callbacks = [];
 		var arguments2 = Array.prototype.slice.call(arguments);
 
-		// separate fields and callbacks
-		key = Q.Cache.key(arguments2, callbacks);
-		if (callbacks.length === 0) {
-			// in case someone forgot to pass a callback
-			// pretend they added a callback at the end
-			var noop = function _noop() {} ;
-			callbacks.push(noop);
-			if (gw.callbackIndex !== undefined) {
-				arguments2.splice(gw.callbackIndex, 0, noop);
-			} else {
-				arguments2.push(noop);
-			}
-		}
-		
 		var _resolve, _reject;
 		var ret = new Q.Promise(function (resolve, reject) {
 			_resolve = resolve;
 			_reject = reject;
 		});
+
+		// separate fields and callbacks
+		key = Q.Cache.key(arguments2, callbacks);
+		if (callbacks.length === 0) {
+			// in case someone forgot to pass a callback
+			// pretend they added a callback at the end
+			function _promiseCallback(err, obj) {
+				var error = !gw.nonStandardErrorConvention
+					&& Q.firstErrorMessage(err, obj);
+				if (error) {
+					_reject(error);
+				} else {
+					_resolve(this !== undefined ? this : obj);
+				}
+			};
+			callbacks.push(_promiseCallback);
+			if (gw.callbackIndex !== undefined) {
+				arguments2.splice(gw.callbackIndex, 0, _promiseCallback);
+			} else {
+				arguments2.push(_promiseCallback);
+			}
+		}
+	
 		ret.dontCache = false;
 		gw.emit('called', this, arguments2, ret);
 
@@ -728,31 +744,13 @@ Q.getter = function _Q_getter(original, options) {
 			function _result(subject, params) {
 				gw.emit('result', subject, subject, params, arguments2, ret, gw);
 				Q.getter.usingCached = cached;
-				var err = null;
-				var resCallback = {};
-				try {
-					// let the callback check params
-					resCallback = callback.apply(subject, params);
-				} catch (e) {
-					// it should throw an exception if it encounters any errors
-					err = e;
-				}
-				if (!err && !gw.nonStandardErrorConvention) {
-					err = Q.firstErrorMessage(params[0], params[1]);
-				}
+				callback.apply(subject, params); // may throw
 				gw.emit('executed', subject, subject, params, arguments2, ret, gw);
 				Q.getter.usingCached = false;
-				if (err) {
-					if (!Q.getObject("skipException", resCallback)) {
-						_reject(err);
-					}
-					throw err;
-				}
-				_resolve(subject !== undefined ? subject : params[1]);
 			}
 		}
 
-		// if caching is required check the cache -- maybe the result is there
+		// if caching is required, check the cache -- maybe the result is there
 		if (gw.cache && !ignoreCache) {
 			if (cached = gw.cache.get(arguments2)) {
 				cbpos = cached.cbpos;
@@ -779,13 +777,11 @@ Q.getter = function _Q_getter(original, options) {
 		// replace the callbacks with smarter functions
 		var args = [];
 		for (i=0, cbi=0; i<arguments2.length; i++) {
-
 			// we only care about functions
 			if (typeof arguments2[i] !== 'function') {
 				args.push(arguments2[i]); // regular argument
 				continue;
 			}
-
 			args.push((function(cb, cbpos) {
 				// make a function specifically to call the
 				// callbacks in position pos, and then decrement
@@ -803,8 +799,10 @@ Q.getter = function _Q_getter(original, options) {
 							try {
 								_prepare(this, arguments, wk[i].callbacks[cbpos], wk[i].ret, true);
 							} catch (e) {
-								debugger;
-								console.warn(e);
+								if (!gw.dontWarn) {
+									debugger;
+									console.warn(e);
+								}
 							}
 						}
 					}
@@ -851,7 +849,7 @@ Q.getter = function _Q_getter(original, options) {
 			};
 			gw.throttle.throttleNext = function _throttleNext(that) {
 				if (--p.count < 0) {
-					console.warn("Q.getter: throttle count is negative");
+					console.warn("Q.getter: throttle count is negative. This probably means you passed a callback somewhere it shouldn't have been passed.");
 				}
 				if (p.queue.length) {
 					p.queue.shift().apply(that, p.args.shift());
@@ -860,7 +858,7 @@ Q.getter = function _Q_getter(original, options) {
 		}
 		if (!gw.throttleSize) {
 			gw.throttle.throttleSize = function _throttleSize(newSize) {
-				if (typeof(newSize) === 'undefined') {
+				if (newSize === undefined) {
 					return p.size;
 				}
 				p.size = newSize;
@@ -888,7 +886,6 @@ Q.getter = function _Q_getter(original, options) {
 				args = [args];
 			}
 			argsArray.push(args);
-
 		}
 		var pipe = Q.pipe(keys, 1, function (params, subjects) {
 			Q.handle(callback, this, [params, subjects, arrayOfArguments]);
@@ -906,10 +903,8 @@ Q.getter = function _Q_getter(original, options) {
 		gw.cache = null;
 	} else if (gw.cache === true || gw.cache === undefined) {
 		// create our own Object that will cache locally in the page
-		gw.cache = Q.Cache.process(++_Q_getter_i);
-	} else {
-		// assume we were passed an Object that supports the cache interface
-	}
+		gw.cache = Q.Cache.document(++_Q_getter_i);
+	} // else assume we were passed an Object that supports the cache interface
 
 	gw.throttle = gw.throttle || null;
 	if (gw.throttle === true) {
@@ -945,6 +940,7 @@ Q.getter = function _Q_getter(original, options) {
 		return gw.apply(this, arguments);
 	};
 	
+
 	if (original.batch) {
 		gw.batch = original.batch;
 	}
