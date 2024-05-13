@@ -2403,6 +2403,7 @@ abstract class Streams extends Base_Streams
 	 * @param {array} [$options.fetchOptions] An array of any options to pass to Streams::fetch when fetching streams
 	 * @param {array} [$options.relationsOnly] If true, returns only the relations to/from stream, doesn't fetch the other data. Useful if publisher id of relation objects is not the same as provided by publisherId.
 	 * @param {array} [$options.streamsOnly] If true, returns only the streams related to/from stream, doesn't return the other data.
+	 * @param {array} [$options.fetchPublicStreams] If true, when fetching streams, also gets those published by others, using Streams::fetchPublicStreams() method which doesn't check access
 	 * @param {array} [$options.streamFields] If specified, fetches only the fields listed here for any streams.
 	 * @param {callable} [$options.filter] Optional function to call to filter the relations. It should return a filtered array of relations.
 	 * @param {boolean} [$options.skipAccess=false] If true, skips the access checks and just fetches the relations and related streams
@@ -2595,17 +2596,25 @@ abstract class Streams extends Base_Streams
 				? $options['streamFields']
 				: implode(',', $options['streamFields']);
 		}
-		$names = array();
 		$FTP = $FT.'PublisherId';
 		$FSN = $FT.'StreamName';
-		foreach ($relations as $name => $r) {
-			if ($r->$FTP === $publisherId) {
-				$names[] = $r->$FSN;
+		if (!empty($options['fetchPublicStreams'])) {
+			$publishersAndNames = array();
+			foreach ($relations as $name => $r) {
+				$publishersAndNames[$r->FTP][] = $r->FSN;
 			}
+			Streams::fetchPublicStreams($publishersAndNames);
+		} else {
+			$names = array();
+			foreach ($relations as $name => $r) {
+				if ($r->$FTP === $publisherId) {
+					$names[] = $r->$FSN;
+				}
+			}
+			$relatedStreams = Streams::fetch(
+				$asUserId, $publisherId, $names, $fields, $fetchOptions
+			);
 		}
-		$relatedStreams = Streams::fetch(
-			$asUserId, $publisherId, $names, $fields, $fetchOptions
-		);
 		foreach ($relatedStreams as $name => $s) {
 			if (!$s) continue;
 			$weight = isset($relations[$name]->weight)

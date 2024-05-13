@@ -19,29 +19,12 @@ function Streams_fileManager_response_list($params = array()) {
         }
         $categoryStream = Streams::create($loggedInUserId, $loggedInUserId, $type, $fields);
     }
-    $criteria = array(
-        'toPublisherId' => $categoryStream->fields['publisherId'],
-        'toStreamName' => $categoryStream->fields['name']
-    );
-    if(!is_null($relationTypes)) {
-        $criteria['type'] = $relationTypes;
-    }
-    $relationsQuery = Streams_RelatedTo::select()->where($criteria);
-    $relations = $relationsQuery->fetchDbRows();
-    $inCriteria = array_map('Streams_fileManager_response_list_mapRelations', $relations);
-    if ($inCriteria) {
-        $streamsCriteria = array(
-            'publisherId, name' => $inCriteria
-        );
-        if(!is_null($streamTypes)) {
-            $streamsCriteria['type'] = $streamTypes;
-        }
-        $query = Streams_Stream::select()->where($streamsCriteria);
-        $relatedStreams = $query->ignoreCache()->fetchDbRows();
-    } else {
-        $relatedStreams = array();
-    }
-    Q_Response::setSlot("list", $relatedStreams);
+    $streams = Streams::related($loggedInUserId, $categoryStream->publisherId, $categoryStream->name, true, array(
+        'streamsOnly' => true,
+        'fetchPublicStreams' => true,
+        'ignoreCache' => true
+    ));
+    Q_Response::setSlot("list", $streams);
 }
 
 function Streams_fileManager_response_list_mapRelations($v) {
