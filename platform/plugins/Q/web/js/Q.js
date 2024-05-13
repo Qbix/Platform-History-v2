@@ -4259,25 +4259,32 @@ Q.getter = function _Q_getter(original, options) {
 		var i, key, callbacks = [];
 		var arguments2 = Array.prototype.slice.call(arguments);
 
-		// separate fields and callbacks
-		key = Q.Cache.key(arguments2, callbacks);
-		if (callbacks.length === 0) {
-			// in case someone forgot to pass a callback
-			// pretend they added a callback at the end
-			var noop = function _noop() {} ;
-			callbacks.push(noop);
-			if (gw.callbackIndex !== undefined) {
-				arguments2.splice(gw.callbackIndex, 0, noop);
-			} else {
-				arguments2.push(noop);
-			}
-		}
-		
 		var _resolve, _reject;
 		var ret = new Q.Promise(function (resolve, reject) {
 			_resolve = resolve;
 			_reject = reject;
 		});
+
+		// separate fields and callbacks
+		key = Q.Cache.key(arguments2, callbacks);
+		if (callbacks.length === 0) {
+			// in case someone forgot to pass a callback
+			// pretend they added a callback at the end
+			function _promiseCallback(err, obj) {
+				if (err) {
+					_reject(err);
+				} else {
+					_resolve(this !== undefined ? this : obj);
+				}
+			};
+			callbacks.push(_promiseCallback);
+			if (gw.callbackIndex !== undefined) {
+				arguments2.splice(gw.callbackIndex, 0, _promiseCallback);
+			} else {
+				arguments2.push(_promiseCallback);
+			}
+		}
+	
 		ret.dontCache = false;
 		gw.onCalled.handle.call(this, arguments2, ret);
 
@@ -4297,10 +4304,9 @@ Q.getter = function _Q_getter(original, options) {
 				gw.onResult.handle(subject, params, arguments2, ret, gw);
 				Q.getter.usingCached = cached;
 				var err = null;
-				var resCallback = {};
 				try {
 					// let the callback check params
-					resCallback = callback.apply(subject, params);
+					callback.apply(subject, params);
 				} catch (e) {
 					// it should throw an exception if it encounters any errors
 					err = e;
@@ -4311,9 +4317,6 @@ Q.getter = function _Q_getter(original, options) {
 				gw.onExecuted.handle(subject, params, arguments2, ret, gw);
 				Q.getter.usingCached = false;
 				if (err) {
-					if (!Q.getObject("skipException", resCallback)) {
-						_reject(err);
-					}
 					throw err;
 				}
 				_resolve(subject !== undefined ? subject : params[1]);
@@ -12442,7 +12445,7 @@ Q.Socket.reconnectAll = function _Q_Socket_reconnectAll() {
 	var ns, url;
 	for (ns in _qsockets) {
 		for (url in _qsockets[ns]) {
-			_connectSocketNS(ns, url, function () {});
+			_connectSocketNS(ns, url);
 		}
 	}
 };
