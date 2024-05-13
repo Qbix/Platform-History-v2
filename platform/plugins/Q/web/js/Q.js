@@ -12364,7 +12364,7 @@ var _connectSocketNS = root.a = Q.getter(function(ns, url, callback, options) {
  * @param {Object} [options.auth] the object to pass to the server, in socket.handshake.auth
  * @param {Function} [options.earlyCallback] Receives Q.Socket as soon as it's constructed
  */
-Q.Socket.connect = Q.promisify(function _Q_Socket_connect(ns, url, callback, options) {
+Q.Socket.connect = function _Q_Socket_connect(ns, url, callback, options) {
 	if (url === undefined) {
 		url = Q.nodeUrl(); // generic node URL by default
 	}
@@ -12385,7 +12385,7 @@ Q.Socket.connect = Q.promisify(function _Q_Socket_connect(ns, url, callback, opt
 
 	// check if socket already connected, or reconnect
 	return _connectSocketNS(ns, url, callback, options);
-});
+};
 
 Q.Socket.connect.options = {};
 
