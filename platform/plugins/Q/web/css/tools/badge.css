@@ -1,5 +1,4 @@
 .Q_badge {
-	display: block;
 	position: absolute;
 	content: "\00a0";
 	background-repeat: no-repeat;
@@ -10,6 +9,7 @@
 	display: none;
 }
 .Q_badge img {
+	display: inline-block;
 	width: 100%;
 	vertical-align: unset;
 }
