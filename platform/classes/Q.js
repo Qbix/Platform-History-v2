@@ -683,9 +683,6 @@ Q.batcher.options = {
  * @param {Number} [callbackIndex] use this to explicitly specify which argument number is expecting a callback function
  * @param {Q.Cache|Boolean} [options.cache] pass false here to prevent caching, or an object which supports the Q.Cache interface
  *  By default, it will set up a cache in the loaded webpage with default parameters.
- *  You can use functions Q.Cache.document, Q.Cache.local and Q.Cache.session
- *  to create new caches, but please cache a limited maximum number of limited-size items,
- *  since the local and session storage can only handle up to 5MB on some browsers!
  * @return {Function}
  *  The wrapper function, which returns a Q.Promise with a property called "result"
  *  which could be one of Q.getter.CACHED, Q.getter.REQUESTING, Q.getter.WAITING or Q.getter.THROTTLING .
@@ -903,7 +900,7 @@ Q.getter = function _Q_getter(original, options) {
 		gw.cache = null;
 	} else if (gw.cache === true || gw.cache === undefined) {
 		// create our own Object that will cache locally in the page
-		gw.cache = Q.Cache.document(++_Q_getter_i);
+		gw.cache = Q.Cache.process(++_Q_getter_i);
 	} // else assume we were passed an Object that supports the cache interface
 
 	gw.throttle = gw.throttle || null;
