@@ -1,0 +1,2 @@
+ALTER TABLE {{prefix}}vote
+ADD COLUMN extra VARCHAR(1023) COMMENT "json format";

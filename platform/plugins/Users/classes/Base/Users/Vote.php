@@ -22,6 +22,7 @@
  * @param {float} [$fields.value] defaults to 0
  * @param {float} [$fields.weight] defaults to 1
  * @param {string|Db_Expression} [$fields.updatedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
+ * @param {string} [$fields.extra] defaults to null
  */
 abstract class Base_Users_Vote extends Db_Row
 {
@@ -60,6 +61,12 @@ abstract class Base_Users_Vote extends Db_Row
 	 * @type string|Db_Expression
 	 * @default new Db_Expression("CURRENT_TIMESTAMP")
 	 * 
+	 */
+	/**
+	 * @property $extra
+	 * @type string
+	 * @default null
+	 * json format
 	 */
 	/**
 	 * The setUp() method is called the first time
@@ -559,6 +566,61 @@ return array (
 	}
 
 	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_extra
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_extra($value)
+	{
+		if (!isset($value)) {
+			return array('extra', $value);
+		}
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
+			return array('extra', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".extra");
+		if (strlen($value) > 1023)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".extra");
+		return array('extra', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the extra field
+	 * @return {integer}
+	 */
+	function maxSize_extra()
+	{
+
+		return 1023;			
+	}
+
+	/**
+	 * Returns schema information for extra column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_extra()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '1023',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Check if mandatory fields are set and updates 'magic fields' with appropriate values
 	 * @method beforeSave
 	 * @param {array} $value The array of fields
@@ -590,7 +652,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('userId', 'forType', 'forId', 'value', 'weight', 'updatedTime');
+		$field_names = array('userId', 'forType', 'forId', 'value', 'weight', 'updatedTime', 'extra');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();
