@@ -37,32 +37,3 @@ foreach ($adminLabels as $adminLabel) {
 		$access->save();
 	}
 }
-
-echo "Creating $categoryStreamName categories".PHP_EOL;
-while (1) {
-	$users = Users_User::select()
-		->limit(100, $offset)
-		->fetchDbRows();
-	if (!$users) {
-		break;
-	}
-	foreach ($users as $user) {
-		if (Users::isCommunityId($user->id)) {
-			continue;
-		}
-
-		$stream = Streams_Stream::fetch($user->id, $user->id, $categoryStreamName);
-		if ($stream) {
-			continue;
-		}
-		Streams::create($user->id, $user->id, "Streams/category", array(
-			'name' => $categoryStreamName,
-			'skipAccess' => true
-		));
-		++$i;
-		echo "\033[100D";
-		echo "Created $i streams";
-	}
-	$offset += 100;
-};
-echo PHP_EOL;

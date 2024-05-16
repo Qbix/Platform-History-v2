@@ -23,10 +23,7 @@ class Assets_NFT_Contract
 		if ($publisherId === null) {
 			$publisherId = Users::loggedInUser(true)->id;
 		}
-
-		$stream = Streams::fetchOneOrCreate($publisherId, $publisherId, self::$categoryStreamName, array("type" => 'Streams/category'));
-
-		return $stream;
+		return Streams_Stream::fetchOrCreate($publisherId, $publisherId, self::$categoryStreamName, array("type" => 'Streams/category'));
 	}
 
 	/**

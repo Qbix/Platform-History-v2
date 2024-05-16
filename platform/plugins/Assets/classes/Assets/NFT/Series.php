@@ -22,6 +22,8 @@ class Assets_NFT_Series
 	static function getComposerStream ($userId=null) {
 		$userId = $userId ?: Users::loggedInUser(true)->id;
 
+		Streams_Stream::fetchOrCreate($communityId, $communityId, self::$categoryStreamName, array("type" => 'Streams/category'));
+
 		$relations = Streams_RelatedTo::select()->where(array(
 			"toPublisherId" => $userId,
 			"toStreamName" => self::$categoryStreamName,
@@ -72,6 +74,7 @@ class Assets_NFT_Series
 	 */
 	static function update ($stream, $fields) {
 		$userId = Users::loggedInUser(true)->id;
+		Streams_Stream::fetchOrCreate($communityId, $communityId, self::$categoryStreamName, array("type" => 'Streams/category'));
 		$fieldsUpdated = false;
 		foreach (array("title", "content") as $field) {
 			if (!Q::ifset($fields, $field, null)) {

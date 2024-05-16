@@ -390,7 +390,7 @@
 			"Assets/NFT/series": true
 		},
 		"onInsert": {
-			"community": ["Assets/NFTs", "Assets/NFT/contracts", "Assets/NFT/collections"],
+			"community": [],
 			"person": ["Assets/NFT/series"]
 		}
 	},
