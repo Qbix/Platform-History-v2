@@ -79,7 +79,7 @@ class Q_Plugin
 		}
 
 		$db->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
-		$conn = db->connection();
+		$conn = $db->connection();
 
 		$tableName = "{{prefix}}Q_{$type}";
 		$prefix = empty($conn['prefix']) ? '' : $conn['prefix'];
