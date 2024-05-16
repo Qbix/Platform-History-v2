@@ -1012,6 +1012,7 @@ abstract class Streams extends Base_Streams
 	 * @param {string} [$fields.name=null] Here you can specify an exact name for the stream to be created. Otherwise a unique one is generated automatically.
 	 * @param {boolean} [$fields.skipAccess=false] Skip all access checks when creating and relating the stream.
 	 * @param {boolean} [$fields.private] Pass true to mark this stream as private, can also be an array containing ["invite"]
+	 * @param {boolean} [$fields.notices] Pass true to mark this stream as generating notices even if user retained it
 	 * @param {array} [$relate=array()]
 	 *  Fill this out in order to relate the newly created stream to a category stream,
 	 *  and also inheritAccess from it. When using this option, a user may be authorized
@@ -1095,9 +1096,12 @@ abstract class Streams extends Base_Streams
 				: Q::json_decode($fields['attributes'], true); // may throw an exception
 			$stream->setAttribute($attributes);
 		}
-		if (!empty($fields['private'])) {
-			// privileged setting of attribute
-			$stream->setAttribute('private', $fields['private'], true);
+		// privileged setting of attributes
+		$privileged = array('private', 'notices');
+		foreach ($privileged as $p) {
+			if (!empty($fields[$p])) {
+				$stream->setAttribute("Streams/$p", $fields[$p1], true);
+			}
 		}
 
 		// extend with any config defaults for this stream type
