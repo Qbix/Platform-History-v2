@@ -415,6 +415,9 @@ class Websites_Webpage extends Base_Websites_Webpage
 		// docs: https://developers.google.com/youtube/v3/docs/search/list
 		$youtubeApiUrl = $endPoint.'?'.http_build_query($ytQuery);
 		$result = Q::json_decode(Q_Utils::get($youtubeApiUrl), true);
+		if (Q::ifset($result, "error", null)) {
+			throw new Exception("Youtube API error: ".Q::ifset($result, "error", "message", null));
+		}
 		$cacheDuration = $type == "search" ? Q::ifset($options, "cacheDuration", Q_Config::get("Websites", "youtube", "list", "cacheDuration", 43200)) : null; // for youtube search results cache duration 12 hours
 		Websites_Webpage::cacheSet($cacheUrl, $result, $cacheDuration);
 
