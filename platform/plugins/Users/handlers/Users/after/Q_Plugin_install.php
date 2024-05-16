@@ -60,9 +60,9 @@ function Users_after_Q_Plugin_install($params)
 		}
 		foreach ($users as $j => $user) {
             if (Users::isCommunityId($user->id)) {
-                Users_Label::addLabel($rolesNeedToInstall, $user->id, null, null, $user->id);
+                Users_Label::addLabel($rolesNeedToInstall, $user->id, null, null, $user->id, false, true);
             } else {
-                Users_Label::addLabel($labelsNeedToInstall, $user->id, null, null, $user->id);
+                Users_Label::addLabel($labelsNeedToInstall, $user->id, null, null, $user->id, false, true);
             }
 			echo "\033[100D";
 			echo "$plugin_name: processed labels for ".($j + $offset + 1)." of $c users"
