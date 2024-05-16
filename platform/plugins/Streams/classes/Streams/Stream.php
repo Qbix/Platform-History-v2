@@ -330,17 +330,34 @@ class Streams_Stream extends Base_Streams_Stream
 	}
 
 	/**
+	 * Return whether stream is private, i.e. not to be related to categories in community
+	 * @return {boolean}
+	 */
+	function isPrivate() {
+		$priv = $this->getAttribute('Streams/private');
+		// fallback for older versions
+		if (!isset($priv)) {
+			$attr = $this->getAttribute('Streams');
+			$priv = Q::ifset($attr, 'private', null);
+		}
+		if (!isset($priv)) {
+			$priv = $this->getAttribute('private');
+		}
+		return is_array($priv) or $priv;
+	}
+
+	/**
 	 * Return whether invite is allowed, or restricted by the stream's attributes
 	 * @return {boolean}
 	 */
 	function inviteIsAllowed() {
 		$priv = $this->getAttribute('Streams/private');
 		if (!isset($priv)) {
-			$priv = $this->getAttribute('private');
-		}
-		if (!isset($priv)) {
 			$attr = $this->getAttribute('Streams');
 			$priv = Q::ifset($attr, 'private', null);
+		}
+		if (!isset($priv)) {
+			$priv = $this->getAttribute('private');
 		}
 		return !$priv || (is_array($priv) && in_array('invite', $priv));
 	}
@@ -1026,20 +1043,51 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @param {string|array} $attributeName The name of the attribute to set,
 	 *  or an array of $attributeName => $attributeValue pairs
 	 * @param {mixed} $value The value to set the attribute to
-	 * @return Streams_Stream
+	 * @param {boolean} [$privilegedAccess] Set only in calls from privileged PHP code
+	 * @return {Streams_Stream}
 	 */
-	function setAttribute($attributeName, $value = null)
+	function setAttribute($attributeName, $value = null, $privilegedAccess = false)
 	{
-		$attr = $this->getAllAttributes();
-		if (is_array($attributeName)) {
-			foreach ($attributeName as $k => $v) {
-				$attr[$k] = $v;
+		if (is_string($attributeName)) {
+			$attributeName = array($attributeName => $value);
+		}
+		if (!$privilegedAccess) {
+			$prefixes = Streams_Stream::getConfigField($stream->type, array(
+				'restricted', 'attributes', 'prefixes'
+			), array());
+			foreach ($attributeName as $k => $value) {
+				foreach ($prefixes as $prefix) {
+					if (Q::startsWith($k, $prefix)) {
+						throw new Streams_Exception_RestrictedAttribute(compact('attributeName'));
+					}
+				}
 			}
-		} else {
-			$attr[$attributeName] = $value;
+		}
+		$attr = $this->getAllAttributes();
+		if (!$privilegedAccess) {
+			$lockedAttributes = Q::ifset($attr, self::ATTRIBUTE_ATTRIBUTES_LOCKED, array());
+			if ($lockedAttributes) {
+				// assume that $arr is an array of strings for now
+				$locked = array();
+				foreach ($lockedAttributes as $k) {
+					if (!array_key_exists($k, $attributeName)) {
+						continue;
+					}
+					if (!isset($attr[$k]) or $attr[$k] !== $attributeName[$k]) {
+						$locked[] = $k;
+					}
+				}
+				if ($locked) {
+					throw new Streams_Exception_AttributesLocked(
+						array('attributes' => implode(', ', $locked))
+					);
+				}
+			}
+		}
+		foreach ($attributeName as $k => $v) {
+			$attr[$k] = $v;
 		}
 		$this->attributes = Q::json_encode($attr);
-
 		return $this;
 	}
 
@@ -1062,6 +1110,43 @@ class Streams_Stream extends Base_Streams_Stream
 	{
 		$this->attributes = '{}';
 		return $this;
+	}
+
+	/**
+	 * Get or set the lock status of an attribute
+	 * @method attributesLock
+	 * @param {array} $attributeNames for now it only takes an array of strings
+	 * @param {boolean} [$status] Pass the new status here if changing it
+	 * @param {boolean&} [$changed] Pass a reference to a variable to fill with whether
+	 *  the attribute changed and the stream needs to be saved
+	 * @return {array} the lock status of the attributes
+	 */
+	function attributesLock(array $attributeNames, $status = null, &$changed = null)
+	{
+		$n = self::ATTRIBUTE_ATTRIBUTES_LOCKED;
+		$a = $this->getAttribute($n, array());
+		$results = array();
+		$changed = false;
+		foreach ($attributeNames as $an) {
+			$i = array_search($an, $a);
+			if (!isset($status)) {
+				if ($i !== false) {
+					$results[] = $an;
+				}
+			} else if ($status) {
+				if ($i === false) {
+					$a[] = $an;
+				}
+				$changed = true;
+			} else {
+				array_splice($a, $i, 1);
+				$changed = true;
+			}
+		}
+		if ($changed) {
+			$this->setAttribute($n, $a, true);
+		}
+		return $results;
 	}
 	
 	/**
@@ -1110,7 +1195,7 @@ class Streams_Stream extends Base_Streams_Stream
 	}
 	
 	/**
-	 * Method is called before setting the field and verifies that, if it is a string,
+	 * Method is called before setting the field and can convert an array to a JSON string
 	 * it contains a JSON array.
 	 * @method beforeSet_attributes
 	 * @param {string|array} $value
@@ -1118,10 +1203,14 @@ class Streams_Stream extends Base_Streams_Stream
 	 */
 	function beforeSet_attributes($value)
 	{
-		if (is_array($value)) {
-			$value = Q::json_encode($value);
+		if (is_string($value)) {
+			$str = $value;
+			$arr = Q::json_decode($value, true); // may throw an exception
+		} else if (is_array($value)) {
+			$arr = $value;
+			$str = Q::json_encode($value);
 		}
-		return parent::beforeSet_attributes($value);
+		return parent::beforeSet_attributes($str);
 	}
 	
 	/**
@@ -2071,7 +2160,8 @@ class Streams_Stream extends Base_Streams_Stream
 	}
 
 	/**
-	 * Updates relations after a stream of a certain type was inserted or updated.
+	 * Updates relations after a stream of a certain type was inserted or updated,
+	 * based on changes in its fields and attributes.
 	 * Checks the "updateRelations" config first, which is an array that can contain "to", "from" or both.
 	 * The direction "from" refers to relations from the current stream, to another stream.
 	 * Then it fetches relations from the template of this stream type, with relation types "attribute/$attributeName",
@@ -2849,6 +2939,8 @@ class Streams_Stream extends Base_Streams_Stream
 		->execute()
 		->fetch(PDO::FETCH_NUM);
 	}
+
+	public const ATTRIBUTE_ATTRIBUTES_LOCKED = 'Streams/attributes/locked';
 
 	/**
 	 * Any fetched database rows that extend the stream

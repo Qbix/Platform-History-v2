@@ -6,6 +6,8 @@ Q.exports(function(priv){
     * @param {Object} fields
     *  Should contain at least the publisherId and type of the stream.
     *  Fields are passed to the Streams/stream POST handler.
+    *  See documentation for that handler for what fields can be passed,
+    *  including things like "private": ["invite"]
     *  The attributes field can be an object.
     * @param {Function} callback
     *	if there were errors, first parameter is the error message

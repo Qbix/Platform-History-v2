@@ -1011,6 +1011,7 @@ abstract class Streams extends Base_Streams
 	 * @param {string|integer} [$fields.adminLevel=null] You can set the stream's admin access level, see Streams::$ADMIN_LEVEL
 	 * @param {string} [$fields.name=null] Here you can specify an exact name for the stream to be created. Otherwise a unique one is generated automatically.
 	 * @param {boolean} [$fields.skipAccess=false] Skip all access checks when creating and relating the stream.
+	 * @param {boolean} [$fields.private] Pass true to mark this stream as private, can also be an array containing ["invite"]
 	 * @param {array} [$relate=array()]
 	 *  Fill this out in order to relate the newly created stream to a category stream,
 	 *  and also inheritAccess from it. When using this option, a user may be authorized
@@ -1041,6 +1042,7 @@ abstract class Streams extends Base_Streams
 			$fields = array();
 		}
 		$skipAccess = Q::ifset($fields, 'skipAccess', false);
+		$private = Q::ifset($fields, 'private', false);
 		if (!isset($asUserId)) {
 			$asUserId = Users::loggedInUser(true)->id;
 		} else if ($asUserId instanceof Users_User) {
@@ -1088,11 +1090,14 @@ abstract class Streams extends Base_Streams
 		
 		// prepare attributes field
 		if (isset($fields['attributes'])) {
-			if (is_array($fields['attributes'])) {
-				$fields['attributes'] = Q::json_encode($fields['attributes']);
-			} else if (is_string($fields['attributes'])) {
-				Q::json_decode($fields['attributes']); // may throw an exception
-			}
+			$attributes = is_array($fields['attributes'])
+				? $fields['attributes']
+				: Q::json_decode($fields['attributes'], true); // may throw an exception
+			$stream->setAttribute($attributes);
+		}
+		if (!empty($fields['private'])) {
+			// privileged setting of attribute
+			$stream->setAttribute('private', $fields['private'], true);
 		}
 
 		// extend with any config defaults for this stream type

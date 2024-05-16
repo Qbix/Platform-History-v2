@@ -167,6 +167,9 @@
         },
         "notice": {
             "text": "You have been invited. {{ClickOrTap}} here to accept and join."
+        },
+        "chat": {
+            "prompt": "You'll be inviting people to a conversation where you can stay in touch, share photos together, and more. Give it a name:"
         }
     },
     "messages": {

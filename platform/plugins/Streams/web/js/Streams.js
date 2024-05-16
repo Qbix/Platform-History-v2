@@ -56,6 +56,9 @@ Q.text.Streams = {
 			// this is just a fallback, see Streams/types/*/invite/dialog config
 			prompt: "Let friends recognize you:",
 			accept: "Accept Invite"
+		},
+		chat: {
+			prompt: "You'll be inviting people to a conversation where you can stay in touch, share photos together, and more. Give it a name:"
 		}
 	},
 	chat: {
@@ -3179,6 +3182,22 @@ Sp.testPermission = function _Stream_prototype_testPermission (permission) {
  */
 Sp.actionUrl = function _Stream_prototype_actionUrl (what) {
 	return Streams.actionUrl(this.fields.publisherId, this.fields.name, what);
+};
+
+/**
+ * Return whether a stream is private, i.e. not to be shown
+ * @return {Boolean}
+ */
+Sp.isPrivate = function() {
+	var priv = this.getAttribute('Streams/private');
+	if (priv == undefined) {
+		var attr = this.getAttribute('Streams');
+		priv = attr && attr.private;
+	}
+	if (priv === undefined) {
+		priv = this.getAttribute('private');
+	}
+	return priv;
 };
 
 /**
