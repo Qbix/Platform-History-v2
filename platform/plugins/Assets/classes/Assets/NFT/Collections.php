@@ -23,6 +23,8 @@ class Assets_NFT_Collections
 		$userId = $userId ?: Users::loggedInUser(true)->id;
 		$communityId = Users::communityId();
 
+		Streams_Stream::fetchOrCreate($communityId, $communityId, self::$categoryStreamName);
+
 		$relations = Streams_RelatedTo::select()->where(array(
 			"toPublisherId" => $communityId,
 			"toStreamName" => self::$categoryStreamName,
@@ -79,6 +81,8 @@ class Assets_NFT_Collections
 			$stream->{$field} = $fields[$field];
 			$fieldsUpdated = true;
 		}
+
+		Streams_Stream::fetchOrCreate($communityId, $communityId, self::$categoryStreamName, array("type" => 'Streams/category'));
 
 		// update attributes
 		if (Q::ifset($fields, "attributes", null)) {

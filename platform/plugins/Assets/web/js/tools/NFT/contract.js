@@ -10,7 +10,7 @@
     var Web3 = NFT.Web3;
 
     /**
-     * YUIDoc description goes here
+     * NFT contract tool
      * @class Assets NFT/contract
      * @constructor
      *  @param {string} userId - contract owner

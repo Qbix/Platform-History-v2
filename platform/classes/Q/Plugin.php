@@ -79,8 +79,11 @@ class Q_Plugin
 		}
 
 		$db->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
+		$conn = $db->connection();
 
 		$tableName = "{{prefix}}Q_{$type}";
+		$prefix = empty($conn['prefix']) ? '' : $conn['prefix'];
+		$tn = str_replace('{{prefix}}', $prefix, $tableName);
 
 		if ($db->dbms() === 'mysql') {
 			$cols = false;
@@ -104,7 +107,7 @@ class Q_Plugin
 					}
 				}
 				if (!$found) {
-					echo "Adding 'extra' column to '$tableName'" . PHP_EOL;
+					echo "Adding 'extra' column to '$tn'" . PHP_EOL;
 					$db->rawQuery("ALTER TABLE `$tableName` 
 						ADD COLUMN `extra` VARCHAR (2047) DEFAULT '{}' COMMENT 'json encoded';")
 						->execute();

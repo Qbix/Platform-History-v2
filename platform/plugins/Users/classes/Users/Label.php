@@ -96,12 +96,12 @@ class Users_Label extends Base_Users_Label
 		if (is_array($label)) {
 			if (!Q::isAssociative($label)) {
 				foreach ($label as $l) {
-					Users_Label::addLabel($l, $userId, null, null, $asUserId, $updateIfExists);
+					Users_Label::addLabel($l, $userId, null, null, $asUserId, $updateIfExists, $skipAccess);
 				}
 				return;
 			}
 			foreach ($label as $l => $title) {
-				Users_Label::addLabel($l, $userId, $title, $icon, $asUserId, $updateIfExists);
+				Users_Label::addLabel($l, $userId, $title, $icon, $asUserId, $updateIfExists, $skipAccess);
 			}
 			return;
 		}
