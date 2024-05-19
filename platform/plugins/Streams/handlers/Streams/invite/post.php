@@ -42,6 +42,10 @@ function Streams_invite_post()
 
 	$stream = Streams_Stream::fetch(null, $publisherId, $streamName, true);
 	Streams::$cache['invite'] = $data = Streams::invite($publisherId, $streamName, $r, $r);
+	if (!empty($data['invite'])) {
+		$data['url'] = $data['invite']->url();
+		$data['invite'] = $data['invite']->exportArray();
+	}
 	
 	// do not give the clients an easy to way to find userIds by identifiers and xids
 	unset($data['userIds']);

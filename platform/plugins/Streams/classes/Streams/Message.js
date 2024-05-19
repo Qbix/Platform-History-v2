@@ -365,6 +365,8 @@ Streams_Message.prototype.deliver = function(stream, toUserId, deliver, avatar, 
 			p1.add(w1, function () {
 				_next(0);
 			}).run();
+
+			Streams_Message.emit('deliver', o);
 		}
 		function _next(i) {
 			var destinations = to[i];

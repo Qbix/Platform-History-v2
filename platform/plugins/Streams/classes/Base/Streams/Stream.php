@@ -32,8 +32,11 @@
  * @param {string} [$fields.inheritAccess] defaults to null
  * @param {integer} [$fields.messageCount] defaults to 0
  * @param {integer} [$fields.invitedCount] defaults to 0
+ * @param {integer} [$fields.arrivedCount] defaults to 0
  * @param {integer} [$fields.participatingCount] defaults to 0
  * @param {integer} [$fields.leftCount] defaults to 0
+ * @param {float} [$fields.arrivedRatio] defaults to 0
+ * @param {float} [$fields.joinedRatio] defaults to 0
  * @param {string|Db_Expression} [$fields.closedTime] defaults to null
  */
 abstract class Base_Streams_Stream extends Db_Row
@@ -135,6 +138,12 @@ abstract class Base_Streams_Stream extends Db_Row
 	 * number of users invited
 	 */
 	/**
+	 * @property $arrivedCount
+	 * @type integer
+	 * @default 0
+	 * 
+	 */
+	/**
 	 * @property $participatingCount
 	 * @type integer
 	 * @default 0
@@ -145,6 +154,18 @@ abstract class Base_Streams_Stream extends Db_Row
 	 * @type integer
 	 * @default 0
 	 * number of users who left after participating
+	 */
+	/**
+	 * @property $arrivedRatio
+	 * @type float
+	 * @default 0
+	 * 
+	 */
+	/**
+	 * @property $joinedRatio
+	 * @type float
+	 * @default 0
+	 * 
 	 */
 	/**
 	 * @property $closedTime
@@ -1229,8 +1250,63 @@ return array (
     3 => NULL,
   ),
   1 => false,
-  2 => '',
+  2 => 'MUL',
   3 => '0',
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if integer value falls within allowed limits
+	 * @method beforeSet_arrivedCount
+	 * @param {integer} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not integer or does not fit in allowed range
+	 */
+	function beforeSet_arrivedCount($value)
+	{
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
+			return array('arrivedCount', $value);
+		}
+		if (!is_numeric($value) or floor($value) != $value)
+			throw new Exception('Non-integer value being assigned to '.$this->getTable().".arrivedCount");
+		$value = intval($value);
+		if ($value < -2147483648 or $value > 2147483647) {
+			$json = json_encode($value);
+			throw new Exception("Out-of-range value $json being assigned to ".$this->getTable().".arrivedCount");
+		}
+		return array('arrivedCount', $value);			
+	}
+
+	/**
+	 * @method maxSize_arrivedCount
+	 * Returns the maximum integer that can be assigned to the arrivedCount field
+	 * @return {integer}
+	 */
+	function maxSize_arrivedCount()
+	{
+
+		return 2147483647;			
+	}
+
+	/**
+	 * Returns schema information for arrivedCount column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_arrivedCount()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'int',
+    1 => NULL,
+    2 => NULL,
+    3 => NULL,
+  ),
+  1 => false,
+  2 => '',
+  3 => NULL,
 );			
 	}
 
@@ -1344,6 +1420,72 @@ return array (
 );			
 	}
 
+	function beforeSet_arrivedRatio($value)
+	{
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
+			return array('arrivedRatio', $value);
+		}
+		if (!is_numeric($value))
+			throw new Exception('Non-numeric value being assigned to '.$this->getTable().".arrivedRatio");
+		$value = floatval($value);
+		return array('arrivedRatio', $value);			
+	}
+
+	/**
+	 * Returns schema information for arrivedRatio column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_arrivedRatio()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'decimal',
+    1 => '10,4',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'MUL',
+  3 => NULL,
+);			
+	}
+
+	function beforeSet_joinedRatio($value)
+	{
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
+			return array('joinedRatio', $value);
+		}
+		if (!is_numeric($value))
+			throw new Exception('Non-numeric value being assigned to '.$this->getTable().".joinedRatio");
+		$value = floatval($value);
+		return array('joinedRatio', $value);			
+	}
+
+	/**
+	 * Returns schema information for joinedRatio column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_joinedRatio()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'decimal',
+    1 => '10,4',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'MUL',
+  3 => NULL,
+);			
+	}
+
 	/**
 	 * Method is called before setting the field and normalize the DateTime string
 	 * @method beforeSet_closedTime
@@ -1426,7 +1568,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('publisherId', 'name', 'insertedTime', 'updatedTime', 'type', 'title', 'icon', 'content', 'attributes', 'readLevel', 'writeLevel', 'adminLevel', 'permissions', 'inheritAccess', 'messageCount', 'invitedCount', 'participatingCount', 'leftCount', 'closedTime');
+		$field_names = array('publisherId', 'name', 'insertedTime', 'updatedTime', 'type', 'title', 'icon', 'content', 'attributes', 'readLevel', 'writeLevel', 'adminLevel', 'permissions', 'inheritAccess', 'messageCount', 'invitedCount', 'arrivedCount', 'participatingCount', 'leftCount', 'arrivedRatio', 'joinedRatio', 'closedTime');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

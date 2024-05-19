@@ -372,7 +372,7 @@ return [["varbinary","255","",false],false,"",null];
  */
 Base.prototype.beforeSet_state = function (value) {
 		if (value instanceof Db.Expression) return value;
-		if (['pending','accepted','declined','forwarded','expired','claimed'].indexOf(value) < 0)
+		if (['pending','accepted','declined','arrived','forwarded','expired'].indexOf(value) < 0)
 			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".state");
 		return value;
 };
@@ -383,7 +383,7 @@ Base.prototype.beforeSet_state = function (value) {
 	 */
 Base.column_state = function () {
 
-return [["enum","'pending','accepted','declined','forwarded','expired','claimed'","",false],false,"","pending"];
+return [["enum","'pending','accepted','declined','arrived','forwarded','expired'","",false],false,"","pending"];
 };
 
 /**
