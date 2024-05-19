@@ -3962,39 +3962,42 @@ abstract class Streams extends Base_Streams
 			}
 		}
 
-		// let node handle the rest, and get the result
-		$params = array(
-			"Q/method" => "Streams/Stream/invite",
-			"invitingUserId" => $asUserId,
-			"username" => $asUser->username,
-			"preferredLanguage" => $asUser->preferredLanguage,
-			"userIds" => Q::json_encode($userIds),
-			"stream" => Q::json_encode($stream->toArray()),
-			"appUrl" => $appUrl,
-			"label" => $label,
-			"addLabel" => $addLabel,
-			"addMyLabel" => $addMyLabel, 
-			"alwaysSend" => $alwaysSend,
-			"readLevel" => $readLevel,
-			"writeLevel" => $writeLevel,
-			"adminLevel" => $adminLevel,
-			"permissions" => $permissions,
-			"displayName" => $displayName,
-			"expireTime" => $expireTime
-		);
-		
-		if (!empty($template)) {
-			$params['template'] = $template;
-			$params['batchName'] = $batchName;
-		}
-		if (!empty($templateDir)) {
-			$params['templateDir'] = $templateDir;
-		}
-		try {
-			$result = Q_Utils::queryInternal('Q/node', $params);
-		} catch (Exception $e) {
-			// just suppress it
-			$result = null;
+		$result = null;
+		if ($userIds) {
+			// let node handle the rest, and get the result
+			$params = array(
+				"Q/method" => "Streams/Stream/invite",
+				"invitingUserId" => $asUserId,
+				"username" => $asUser->username,
+				"preferredLanguage" => $asUser->preferredLanguage,
+				"userIds" => Q::json_encode($userIds),
+				"stream" => Q::json_encode($stream->toArray()),
+				"appUrl" => $appUrl,
+				"label" => $label,
+				"addLabel" => $addLabel,
+				"addMyLabel" => $addMyLabel, 
+				"alwaysSend" => $alwaysSend,
+				"readLevel" => $readLevel,
+				"writeLevel" => $writeLevel,
+				"adminLevel" => $adminLevel,
+				"permissions" => $permissions,
+				"displayName" => $displayName,
+				"expireTime" => $expireTime
+			);
+			
+			if (!empty($template)) {
+				$params['template'] = $template;
+				$params['batchName'] = $batchName;
+			}
+			if (!empty($templateDir)) {
+				$params['templateDir'] = $templateDir;
+			}
+			try {
+				$result = Q_Utils::queryInternal('Q/node', $params);
+			} catch (Exception $e) {
+				// just suppress it
+				$result = null;
+			}
 		}
 
 		$return = array(
@@ -4012,6 +4015,14 @@ abstract class Streams extends Base_Streams
 		if (!empty($who['token'])) {
 			$invites = Streams::invites(1, array($who['token']));
 			if ($invite = reset($invites)) {
+				$invite->publisherId = $publisherId;
+				$invite->streamName = $streamName;
+				$invite->invitingUserId = $asUserId;
+				$invite->displayName = $displayName;
+				$invite->appUrl = $appUrl;
+				$invite->readLevel = $readLevel;
+				$invite->writeLevel = $writeLevel;
+				$invite->adminLevel = $adminLevel;
 				if (!empty($addLabel)) {
 					$invite->setExtra('addLabel', $addLabel);
 				}
@@ -4047,7 +4058,7 @@ abstract class Streams extends Base_Streams
 
 	/**
 	 * Creates invites in the database corresponding to tokens.
-	 * You can set extras on these invites, after they're created.
+	 * You must set all the fields on the invites, aside from userId and state.
 	 * You then have to save these invites in the database, which
 	 * you can do with Streams_Invite::insertManyAndExecute($invites).
 	 * This method is called internally.
@@ -4090,14 +4101,6 @@ abstract class Streams extends Base_Streams
 				}
 			}
 			$invite->userId = '';
-			$invite->publisherId = $publisherId;
-			$invite->streamName = $streamName;
-			$invite->invitingUserId = $asUserId;
-			$invite->displayName = $displayName;
-			$invite->appUrl = $appUrl;
-			$invite->readLevel = $readLevel;
-			$invite->writeLevel = $writeLevel;
-			$invite->adminLevel = $adminLevel;
 			$invite->state = 'pending';
 			$invites[] = $invite;
 		}
