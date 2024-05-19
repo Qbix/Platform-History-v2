@@ -1010,7 +1010,7 @@ Base.prototype.maxSize_arrivedCount = function () {
 	 */
 Base.column_arrivedCount = function () {
 
-return [["int",null,null,null],false,"",null];
+return [["int",null,null,null],false,"","0"];
 };
 
 /**

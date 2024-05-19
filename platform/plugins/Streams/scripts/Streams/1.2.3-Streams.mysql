@@ -1,7 +1,7 @@
 ALTER TABLE {{prefix}}stream
-ADD COLUMN `arrivedCount` INT NOT NULL AFTER `invitedCount`,
-ADD COLUMN `arrivedRatio` DECIMAL(10,4) NOT NULL AFTER `leftCount`,
-ADD COLUMN `joinedRatio` DECIMAL(10,4) NOT NULL AFTER `arrivedRatio`,
+ADD COLUMN `arrivedCount` INT NOT NULL DEFAULT 0 AFTER `invitedCount`,
+ADD COLUMN `arrivedRatio` DECIMAL(10,4) NOT NULL DEFAULT 0 AFTER `leftCount`,
+ADD COLUMN `joinedRatio` DECIMAL(10,4) NOT NULL DEFAULT 0 AFTER `arrivedRatio`,
 ADD INDEX byInvitedCount (invitedCount),
 ADD INDEX byArrivedRatio (arrivedRatio),
 ADD INDEX byInvitedRatio (joinedRatio);
