@@ -293,8 +293,11 @@
 					"adminLevel": 20,
 					"messageCount": 0,
 					"invitedCount": 0,
+					"arrivedCount": 0,
 					"participatingCount": 0,
-					"leftCount": 0
+					"leftCount": 0,
+					"arrivedRatio": 0,
+					"joinedRatio": 0
 				},
 				"url": "{{baseUrl}}/s/{{publisherId}}/{{name}}",
 				"uri": "Streams/stream publisherId={{publisherId}} streamName={{name}}",
