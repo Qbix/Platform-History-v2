@@ -37,8 +37,11 @@ var Row = Q.require('Db/Row');
  * @param {String|Buffer} [fields.inheritAccess] defaults to null
  * @param {Integer} [fields.messageCount] defaults to 0
  * @param {Integer} [fields.invitedCount] defaults to 0
+ * @param {Integer} [fields.arrivedCount] defaults to 0
  * @param {Integer} [fields.participatingCount] defaults to 0
  * @param {Integer} [fields.leftCount] defaults to 0
+ * @param {Number} [fields.arrivedRatio] defaults to 0
+ * @param {Number} [fields.joinedRatio] defaults to 0
  * @param {String|Db.Expression} [fields.closedTime] defaults to null
  */
 function Base (fields) {
@@ -144,6 +147,12 @@ Q.mixin(Base, Row);
  * number of users invited
  */
 /**
+ * @property arrivedCount
+ * @type Integer
+ * @default 0
+ * 
+ */
+/**
  * @property participatingCount
  * @type Integer
  * @default 0
@@ -154,6 +163,18 @@ Q.mixin(Base, Row);
  * @type Integer
  * @default 0
  * number of users who left after participating
+ */
+/**
+ * @property arrivedRatio
+ * @type Number
+ * @default 0
+ * 
+ */
+/**
+ * @property joinedRatio
+ * @type Number
+ * @default 0
+ * 
  */
 /**
  * @property closedTime
@@ -386,8 +407,11 @@ Base.fieldNames = function () {
 		"inheritAccess",
 		"messageCount",
 		"invitedCount",
+		"arrivedCount",
 		"participatingCount",
 		"leftCount",
+		"arrivedRatio",
+		"joinedRatio",
 		"closedTime"
 	];
 };
@@ -951,6 +975,41 @@ Base.prototype.maxSize_invitedCount = function () {
 	 */
 Base.column_invitedCount = function () {
 
+return [["int",null,null,null],false,"MUL","0"];
+};
+
+/**
+ * Method is called before setting the field and verifies if integer value falls within allowed limits
+ * @method beforeSet_arrivedCount
+ * @param {integer} value
+ * @return {integer} The value
+ * @throws {Error} An exception is thrown if 'value' is not integer or does not fit in allowed range
+ */
+Base.prototype.beforeSet_arrivedCount = function (value) {
+		if (value instanceof Db.Expression) return value;
+		value = Number(value);
+		if (isNaN(value) || Math.floor(value) != value) 
+			throw new Error('Non-integer value being assigned to '+this.table()+".arrivedCount");
+		if (value < -2147483648 || value > 2147483647)
+			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".arrivedCount");
+		return value;
+};
+
+/**
+ * Returns the maximum integer that can be assigned to the arrivedCount field
+ * @return {integer}
+ */
+Base.prototype.maxSize_arrivedCount = function () {
+
+		return 2147483647;
+};
+
+	/**
+	 * Returns schema information for arrivedCount column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_arrivedCount = function () {
+
 return [["int",null,null,null],false,"","0"];
 };
 
@@ -1022,6 +1081,54 @@ Base.prototype.maxSize_leftCount = function () {
 Base.column_leftCount = function () {
 
 return [["int",null,null,null],false,"","0"];
+};
+
+/**
+ * Method is called before setting the field to verify if value is a number
+ * @method beforeSet_arrivedRatio
+ * @param {number} value
+ * @return {number} The value
+ * @throws {Error} If 'value' is not number
+ */
+Base.prototype.beforeSet_arrivedRatio = function (value) {
+		if (value instanceof Db.Expression) return value;
+		value = Number(value);
+		if (isNaN(value))
+			throw new Error('Non-number value being assigned to '+this.table()+".arrivedRatio");
+		return value;
+};
+
+	/**
+	 * Returns schema information for arrivedRatio column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_arrivedRatio = function () {
+
+return [["decimal","10,4","",false],false,"MUL",null];
+};
+
+/**
+ * Method is called before setting the field to verify if value is a number
+ * @method beforeSet_joinedRatio
+ * @param {number} value
+ * @return {number} The value
+ * @throws {Error} If 'value' is not number
+ */
+Base.prototype.beforeSet_joinedRatio = function (value) {
+		if (value instanceof Db.Expression) return value;
+		value = Number(value);
+		if (isNaN(value))
+			throw new Error('Non-number value being assigned to '+this.table()+".joinedRatio");
+		return value;
+};
+
+	/**
+	 * Returns schema information for joinedRatio column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_joinedRatio = function () {
+
+return [["decimal","10,4","",false],false,"MUL",null];
 };
 
 /**

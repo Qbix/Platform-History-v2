@@ -397,7 +397,7 @@ return array (
                or $value instanceof Db_Range) {
 			return array('state', $value);
 		}
-		if (!in_array($value, array('pending','accepted','declined','forwarded','expired','claimed')))
+		if (!in_array($value, array('pending','accepted','declined','arrived','forwarded','expired')))
 			throw new Exception("Out-of-range value '$value' being assigned to ".$this->getTable().".state");
 		return array('state', $value);			
 	}
@@ -413,7 +413,7 @@ return array (
   0 => 
   array (
     0 => 'enum',
-    1 => '\'pending\',\'accepted\',\'declined\',\'forwarded\',\'expired\',\'claimed\'',
+    1 => '\'pending\',\'accepted\',\'declined\',\'arrived\',\'forwarded\',\'expired\'',
     2 => '',
     3 => false,
   ),

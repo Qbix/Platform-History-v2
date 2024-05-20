@@ -2,7 +2,7 @@
 
 /**
  * Streams/metrics tool.
- * Renders a metrics for some stream
+ * Renders metrics for some stream
  * @class Streams/metrics
  * @constructor
  * @param {Object} [options] options to pass

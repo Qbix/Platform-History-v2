@@ -25,6 +25,7 @@ var Row = Q.require('Db/Row');
  * @param {String|Buffer} [fields.streamName] defaults to ""
  * @param {String|Buffer} [fields.ofUserId] defaults to ""
  * @param {String|Buffer} [fields.ofContactLabel] defaults to ""
+ * @param {String|Buffer} [fields.ofParticipantRole] defaults to ""
  * @param {String|Buffer} [fields.grantedByUserId] defaults to null
  * @param {String|Db.Expression} [fields.insertedTime] defaults to new Db.Expression("CURRENT_TIMESTAMP")
  * @param {String|Db.Expression} [fields.updatedTime] defaults to null
@@ -62,6 +63,12 @@ Q.mixin(Base, Row);
  * @type String|Buffer
  * @default ""
  * to grant access to all contacts under a certain label, set byUserId = 0
+ */
+/**
+ * @property ofParticipantRole
+ * @type String|Buffer
+ * @default ""
+ * 
  */
 /**
  * @property grantedByUserId
@@ -295,7 +302,8 @@ Base.prototype.primaryKey = function () {
 		"publisherId",
 		"streamName",
 		"ofUserId",
-		"ofContactLabel"
+		"ofContactLabel",
+		"ofParticipantRole"
 	];
 };
 
@@ -320,6 +328,7 @@ Base.fieldNames = function () {
 		"streamName",
 		"ofUserId",
 		"ofContactLabel",
+		"ofParticipantRole",
 		"grantedByUserId",
 		"insertedTime",
 		"updatedTime",
@@ -478,6 +487,44 @@ Base.prototype.maxSize_ofContactLabel = function () {
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
 Base.column_ofContactLabel = function () {
+
+return [["varbinary","255","",false],false,"PRI",""];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_ofParticipantRole
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_ofParticipantRole = function (value) {
+		if (value == null) {
+			value='';
+		}
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".ofParticipantRole");
+		if (typeof value === "string" && value.length > 255)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".ofParticipantRole");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the ofParticipantRole field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_ofParticipantRole = function () {
+
+		return 255;
+};
+
+	/**
+	 * Returns schema information for ofParticipantRole column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_ofParticipantRole = function () {
 
 return [["varbinary","255","",false],false,"PRI",""];
 };

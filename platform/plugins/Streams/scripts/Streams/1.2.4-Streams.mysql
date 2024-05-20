@@ -1,0 +1,5 @@
+ALTER TABLE {{prefix}}access
+ADD COLUMN `ofParticipantRole` VARCHAR(63) AFTER `ofContactLabel`,
+DROP PRIMARY KEY,
+ADD PRIMARY KEY (`publisherId`,`streamName`,`ofUserId`,`ofContactLabel`,`ofParticipantRole`),
+ADD INDEX `participant` (`ofParticipantRole`);

@@ -1,0 +1,13 @@
+ALTER TABLE {{prefix}}stream
+ADD COLUMN `arrivedCount` INT NOT NULL DEFAULT 0 AFTER `invitedCount`,
+ADD COLUMN `arrivedRatio` DECIMAL(10,4) NOT NULL DEFAULT 0 AFTER `leftCount`,
+ADD COLUMN `joinedRatio` DECIMAL(10,4) NOT NULL DEFAULT 0 AFTER `arrivedRatio`,
+ADD INDEX byInvitedCount (invitedCount),
+ADD INDEX byArrivedRatio (arrivedRatio),
+ADD INDEX byInvitedRatio (joinedRatio);
+
+ALTER TABLE {{prefix}}invite
+MODIFY COLUMN `state` enum('pending','accepted','declined','arrived','forwarded','expired') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending' COMMENT 'the state of the invite';
+
+ALTER TABLE {{prefix}}invited
+MODIFY COLUMN `state` enum('pending','accepted','declined','arrived','forwarded','expired') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'pending' COMMENT 'the state of the invite';

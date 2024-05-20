@@ -20,6 +20,7 @@
  * @param {string} [$fields.streamName] defaults to ""
  * @param {string} [$fields.ofUserId] defaults to ""
  * @param {string} [$fields.ofContactLabel] defaults to ""
+ * @param {string} [$fields.ofParticipantRole] defaults to ""
  * @param {string} [$fields.grantedByUserId] defaults to null
  * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
  * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
@@ -53,6 +54,12 @@ abstract class Base_Streams_Access extends Db_Row
 	 * @type string
 	 * @default ""
 	 * to grant access to all contacts under a certain label, set byUserId = 0
+	 */
+	/**
+	 * @property $ofParticipantRole
+	 * @type string
+	 * @default ""
+	 * 
 	 */
 	/**
 	 * @property $grantedByUserId
@@ -111,6 +118,7 @@ abstract class Base_Streams_Access extends Db_Row
 			  1 => 'streamName',
 			  2 => 'ofUserId',
 			  3 => 'ofContactLabel',
+			  4 => 'ofParticipantRole',
 			)
 		);
 	}
@@ -536,6 +544,61 @@ return array (
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_ofParticipantRole
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_ofParticipantRole($value)
+	{
+		if (!isset($value)) {
+			$value='';
+		}
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
+			return array('ofParticipantRole', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".ofParticipantRole");
+		if (strlen($value) > 255)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".ofParticipantRole");
+		return array('ofParticipantRole', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the ofParticipantRole field
+	 * @return {integer}
+	 */
+	function maxSize_ofParticipantRole()
+	{
+
+		return 255;			
+	}
+
+	/**
+	 * Returns schema information for ofParticipantRole column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_ofParticipantRole()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varbinary',
+    1 => '255',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => '',
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_grantedByUserId
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
@@ -937,7 +1000,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('publisherId', 'streamName', 'ofUserId', 'ofContactLabel', 'grantedByUserId', 'insertedTime', 'updatedTime', 'readLevel', 'writeLevel', 'adminLevel', 'permissions');
+		$field_names = array('publisherId', 'streamName', 'ofUserId', 'ofContactLabel', 'ofParticipantRole', 'grantedByUserId', 'insertedTime', 'updatedTime', 'readLevel', 'writeLevel', 'adminLevel', 'permissions');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();
