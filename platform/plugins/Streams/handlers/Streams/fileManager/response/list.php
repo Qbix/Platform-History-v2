@@ -5,26 +5,54 @@ function Streams_fileManager_response_list($params = array()) {
     $params = array_merge($_REQUEST, $params);
     $loggedUserId = Users::loggedInUser(true)->id;
     $usersFilesDir = $fileManagerDir . '/' . $loggedUserId;
-    $currentDirStreamName = Q::ifset($params, 'currentDirStreamName', 'currentDirStreamName');
+    $currentDirStreamName = Q::ifset($params, 'currentDirStreamName', 'Streams/fileManager/main');
     $streamTypes = Q::ifset($params, 'streamTypes', null);
     $relationTypes = Q::ifset($params, 'relationTypes', null);
-    //print_r($categoryStream);die('1111111');
 
-    $categoryStream = Streams_Stream::fetch($loggedUserId, $loggedUserId, $currentDirStreamName);
-    if (!$categoryStream) {
-        $fields['name'] = $currentDirStreamName;
-        if ($currentDirStreamName === 'Streams/fileManager/main') {
+    $parentStream = Streams_Stream::fetch($loggedUserId, $loggedUserId, $currentDirStreamName);
+
+    if(is_null($parentStream)) {
+        $fields = array(
+            'name' => $currentDirStreamName
+        );
+        if($currentDirStreamName == 'Streams/fileManager/main') {
             $fields['title'] = '/';
             $fields['content'] = $usersFilesDir;
         }
-        $categoryStream = Streams::create($loggedInUserId, $loggedInUserId, $type, $fields);
+        $rootStream = Streams::create($loggedUserId, $loggedUserId, 'Streams/category', $fields);
+    } else {
+        $rootStream = $parentStream;
     }
-    $streams = Streams::related($loggedInUserId, $categoryStream->publisherId, $categoryStream->name, true, array(
-        'streamsOnly' => true,
-        'fetchPublicStreams' => true,
-        'ignoreCache' => true
-    ));
-    Q_Response::setSlot("list", $streams);
+
+    $browsePathOfStream = $rootStream;
+
+    $criteria = array(
+        'toPublisherId' => $browsePathOfStream->fields['publisherId'],
+        'toStreamName' => $browsePathOfStream->fields['name']
+    );
+
+    if(!is_null($relationTypes)) {
+        $criteria['type'] = $relationTypes;
+    }
+
+    $relationsQuery = Streams_RelatedTo::select()->where($criteria);
+    $relations = $relationsQuery->fetchDbRows();
+
+    $inCriteria = array_map('Streams_fileManager_response_list_mapRelations', $relations);
+
+    $streamsCriteria = array(
+        'publisherId, name' => $inCriteria
+    );
+
+    if(!is_null($streamTypes)) {
+        $streamsCriteria['type'] = $streamTypes;
+    }
+
+    $query = Streams_Stream::select()->where($streamsCriteria);
+				
+    $relatedStreams = $query->ignoreCache()->fetchDbRows();
+
+    Q_Response::setSlot("list", $relatedStreams);
 }
 
 function Streams_fileManager_response_list_mapRelations($v) {
