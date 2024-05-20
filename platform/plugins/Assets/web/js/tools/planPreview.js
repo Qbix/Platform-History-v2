@@ -58,7 +58,7 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 
 {
 	icon: {
-		defaultSize: 200
+		defaultSize: '1000x'
 	},
 	periods: ["annually", "monthly", "weekly", "daily"],
 	onInvoke: new Q.Event()

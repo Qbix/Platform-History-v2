@@ -1102,7 +1102,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			streamName: instructions.fromStreamName
 		};
 
-		if (previewToolName === "Streams/image/preview") {
+		if (["Streams/image/preview", "Streams/video/preview"].includes(previewToolName)) {
 			fields.imagepicker = {showSize: "200x", useAnySize: true};
 			fields.editable = false;
 		}

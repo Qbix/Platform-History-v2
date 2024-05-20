@@ -164,8 +164,8 @@ Q.Tool.define("Streams/topic", function(options) {
 	publisherId: null,
 	streamName: null,
 	imagepicker: {
-		showSize: "200",
-		fullSize: "400"
+		showSize: "200x",
+		fullSize: "1000x"
 	},
 	creatable: ["Streams/video", "Streams/audio", "Streams/pdf"] //TODO: make topics browser in topic preview tool and use it instead composer to select already created topic 'Streams/topic'
 

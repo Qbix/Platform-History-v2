@@ -11,7 +11,7 @@ Q.exports(function(){
     return Q.promisify(function Assets_Currencies_balanceOf(walletAddress, chainId, callback, options) {
         return Q.req("Assets/balances", "balance", function (err, response) {
             if (err) {
-                return;
+                return Q.handle(callback, null, [err]);
             }
 
             var balance = response.slots.balance;
