@@ -167,16 +167,6 @@ function Streams_stream_post($params = array())
 	}
 	Q_Response::setSlot('messageTo', $messageTo);
 
-	// Process any animated thumbnail that was posted
-	$animatedThumbnail = null;
-	if (!empty($req['animatedThumbnail'])) {
-		if ($animatedThumbnail = $req['animatedThumbnail']) {
-			$dir = Streams::iconDirectory($publisherId, $streamName).DS.'animated';
-			Q_Image::saveAnimatedThumbnail($animatedThumbnail, $dir);
-		}
-		unset($req['animatedThumbnail']);
-	}
-
 	// Process any icon that was posted
 	if ($icon === true) {
 		$icon = array();
@@ -190,6 +180,14 @@ function Streams_stream_post($params = array())
 		}
 		Q_Response::setSlot('icon', Q::event("Q/image/post", $icon));
 		// the Streams/after/Q_image_save hook saves some attributes
+	}
+
+	// Process any animated thumbnail that was posted
+	$animatedThumbnail = null;
+	if (!empty($req['animatedThumbnail'])) {
+		$stream->icon = Q_Image::saveAnimatedThumbnail($req['animatedThumbnail'], Streams::iconDirectory($publisherId, $streamName).DS.'animated');
+		$stream->changed();
+		unset($req['animatedThumbnail']);
 	}
 
 	// Process any file that was posted
