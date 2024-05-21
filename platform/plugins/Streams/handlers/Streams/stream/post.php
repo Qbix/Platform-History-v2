@@ -99,16 +99,6 @@ function Streams_stream_post($params = array())
 		unset($req['icon']);
 	}
 
-	// Process any animated thumbnail that was posted
-	$animatedThumbnail = null;
-	if (!empty($req['animatedThumbnail'])) {
-		if ($animatedThumbnail = $req['animatedThumbnail']) {
-			$dir = Streams::iconDirectory($publisherId, $streamName).DS.'animated';;
-			Q_Image::saveAnimatedThumbnail($animatedThumbnail, $dir);
-		}
-		unset($req['animatedThumbnail']);
-	}
-
 	// Check if the user owns the stream
 	if ($user->id === $publisherId) {
 		$asOwner = true;
@@ -176,7 +166,17 @@ function Streams_stream_post($params = array())
 		$messageTo = $messageTo->exportArray();
 	}
 	Q_Response::setSlot('messageTo', $messageTo);
-	
+
+	// Process any animated thumbnail that was posted
+	$animatedThumbnail = null;
+	if (!empty($req['animatedThumbnail'])) {
+		if ($animatedThumbnail = $req['animatedThumbnail']) {
+			$dir = Streams::iconDirectory($publisherId, $streamName).DS.'animated';
+			Q_Image::saveAnimatedThumbnail($animatedThumbnail, $dir);
+		}
+		unset($req['animatedThumbnail']);
+	}
+
 	// Process any icon that was posted
 	if ($icon === true) {
 		$icon = array();
