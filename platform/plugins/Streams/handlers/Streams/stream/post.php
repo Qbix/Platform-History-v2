@@ -153,8 +153,8 @@ function Streams_stream_post($params = array())
 
 	// if $stream is null - Create new stream
 	if (!$stream instanceof Streams_Stream) {
-		$fields['name'] = $streamName;
 		$stream =  Streams::create($user->id, $publisherId, $type, $fields, $relate, $result);
+		$streamName = $stream->name;
 	}
 	$messageTo = false;
 	if (isset($result['messagesTo']) && !empty($result['messagesTo'])) {
@@ -186,7 +186,7 @@ function Streams_stream_post($params = array())
 			$icon['path'] = 'Q'.DS.'uploads'.DS.'Streams';
 		}
 		if (empty($icon['subpath'])) {
-			$icon['subpath'] = $splitId.DS."$streamName".DS."icon".DS.time();
+			$icon['subpath'] = $splitId.DS.$streamName.DS."icon".DS.time();
 		}
 		Q_Response::setSlot('icon', Q::event("Q/image/post", $icon));
 		// the Streams/after/Q_image_save hook saves some attributes
