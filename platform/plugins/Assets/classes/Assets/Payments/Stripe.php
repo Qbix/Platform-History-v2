@@ -60,6 +60,7 @@ class Assets_Payments_Stripe extends Assets_Payments implements Assets_Payments_
 		$customer = new Assets_Customer();
 		$customer->userId = $user->id;
 		$customer->payments = 'stripe';
+		$customer->hash = Assets_Customer::getHash();
 		if (!$customer->retrieve() || !$customer->customerId) {
 			$err_mesage = "Invalid stripe customer id for userId=".$user->id;
 			self::log('Stripe.charges', $err_mesage);
@@ -159,6 +160,7 @@ class Assets_Payments_Stripe extends Assets_Payments implements Assets_Payments_
 		$customer = new Assets_Customer();
 		$customer->userId = $options['user']->id;
 		$customer->payments = 'stripe';
+		$customer->hash = Assets_Customer::getHash();
 		if (!$customer->retrieve()) {
 			$stripeCustomer = self::createCustomer($options['user']);
 			$customer->customerId = $stripeCustomer->id;
