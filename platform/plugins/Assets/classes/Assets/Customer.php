@@ -26,6 +26,16 @@ class Assets_Customer extends Base_Assets_Customer
 	}
 
 	/**
+	 * Get value for `hash` column. Hashed string of secret, publishableKey and clientId
+	 * @method getHash
+	 * @static
+	 * @return {String} hash
+	 */
+	static function getHash () {
+		return Q_Utils::hash(Q_Config::expect('Assets', 'payments', 'stripe', 'secret').Q_Config::expect('Assets', 'payments', 'stripe', 'publishableKey').Q_Config::get("Assets", "payments", "stripe", "clientId", null));
+	}
+
+	/**
 	 * Implements the __set_state method, so it can work with
 	 * with var_export and be re-imported successfully.
 	 * @method __set_state
