@@ -42,6 +42,18 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
         var tool = this;
         var state = this.state;
         var $toolElement = $(tool.element);
+        var _setHistoryTool = function (userId) {
+            // TODO: show history of web3 transactions to a wallet address
+            // which may not necessarily correspond to a user
+            var $history = $(".Assets_transfer_history", tool.element);
+            if ($history.length) {
+                Q.Tool.remove($history[0], true, false);
+                $history.tool("Assets/history", {
+                    type: "credits",
+                    withUserId: userId
+                }).activate();
+            }
+        };
 
         Q.Template.render("Assets/web3/transfer/send", {
             recipientUserId: state.recipientUserId,
@@ -78,17 +90,8 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
                             }, tool);
                             tool.assetsWeb3BalanceTool = this;
                         });
-        
-                        // TODO: show history of web3 transactions to a wallet address
-                        // which may not necessarily correspond to a user
-                        var $history = $(".Assets_transfer_history", tool.element);
-                        if ($history.length) {
-                            Q.Tool.remove($history[0], true, false);
-                            $history.tool("Assets/history", {
-                                type: "credits",
-                                withUserId: userId
-                            }).activate();
-                        }
+
+                        _setHistoryTool(userId);
                     }, tool);
     
                     // $(".Assets_transfer_userChooser", tool.element).tool("Streams/userChooser").activate(function () {
@@ -109,8 +112,9 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
                     });*/
                 } else {
                     _getSelectedUser(state.recipientUserId);
+                    _setHistoryTool(state.recipientUserId);
                 }
-    
+
                 var $amount = $("input[name=amount]", tool.element);
                 $send.on(Q.Pointer.fastclick, function () {
                     var $this = $(this);
@@ -267,7 +271,7 @@ Q.Tool.define("Assets/web3/transfer", function (options) {
     
                         $send.removeClass("Q_disabled");
                     });
-                };
+                }
             }
         });
     }
