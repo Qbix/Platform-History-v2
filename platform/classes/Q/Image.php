@@ -581,7 +581,7 @@ class Q_Image
 	 * @param {string} $dir Directory where where animated thumbnail is saved
 	 * @return {string} the absolute URL to the image
 	 */
-	static function saveAnimatedThumbnail ($data, $filename, $options = array()) {
+	static function saveAnimatedThumbnail ($data, $dir) {
 		if (!getimagesizefromstring($data)) {
 			$data = base64_decode(chunk_split(substr($data, strpos($data, ',')+1)));
 		}

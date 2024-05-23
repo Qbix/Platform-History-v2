@@ -24,6 +24,7 @@ var Row = Q.require('Db/Row');
  * @param {String|Buffer} [fields.userId] defaults to ""
  * @param {String} [fields.payments] defaults to "stripe"
  * @param {String|Buffer} [fields.customerId] defaults to ""
+ * @param {String} [fields.hash] defaults to ""
  * @param {String|Db.Expression} [fields.insertedTime] defaults to new Db.Expression("CURRENT_TIMESTAMP")
  * @param {String|Db.Expression} [fields.updatedTime] defaults to null
  */
@@ -50,6 +51,12 @@ Q.mixin(Base, Row);
  * @type String|Buffer
  * @default ""
  * the customer id in the payments processor
+ */
+/**
+ * @property hash
+ * @type String
+ * @default ""
+ * hashed string of secret and public keys to initiate customer with payment env
  */
 /**
  * @property insertedTime
@@ -251,7 +258,8 @@ Base.prototype.table = function () {
 Base.prototype.primaryKey = function () {
 	return [
 		"userId",
-		"payments"
+		"payments",
+		"hash"
 	];
 };
 
@@ -275,6 +283,7 @@ Base.fieldNames = function () {
 		"userId",
 		"payments",
 		"customerId",
+		"hash",
 		"insertedTime",
 		"updatedTime"
 	];
@@ -380,6 +389,44 @@ return [["varbinary","255","",false],false,"",""];
 };
 
 /**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_hash
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_hash = function (value) {
+		if (value == null) {
+			value='';
+		}
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".hash");
+		if (typeof value === "string" && value.length > 32)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".hash");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the hash field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_hash = function () {
+
+		return 32;
+};
+
+	/**
+	 * Returns schema information for hash column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_hash = function () {
+
+return [["varchar","32","",false],false,"PRI",null];
+};
+
+/**
  * Method is called before setting the field
  * @method beforeSet_insertedTime
  * @param {String} value
@@ -430,8 +477,24 @@ Base.column_updatedTime = function () {
 return [["timestamp",null,null,null],true,"",null];
 };
 
+/**
+ * Check if mandatory fields are set and updates 'magic fields' with appropriate values
+ * @method beforeSave
+ * @param {Object} value The object of fields
+ * @param {Function} callback Call this callback if you return null
+ * @return {Object|null} Return the fields, modified if necessary. If you return null, then you should call the callback(err, modifiedFields)
+ * @throws {Error} If e.g. mandatory field is not set or a bad values are supplied
+ */
 Base.prototype.beforeSave = function (value) {
-
+	var fields = ['hash'], i;
+	if (!this._retrieved) {
+		var table = this.table();
+		for (i=0; i<fields.length; i++) {
+			if (this.fields[fields[i]] === undefined) {
+				throw new Error("the field "+table+"."+fields[i]+" needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
+			}
+		}
+	}
 	// convention: we'll have updatedTime = insertedTime if just created.
 	this['updatedTime'] = value['updatedTime'] = new Db.Expression('CURRENT_TIMESTAMP');
 	return value;
