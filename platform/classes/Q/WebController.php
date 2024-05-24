@@ -53,7 +53,13 @@ class Q_WebController
 			$uri = Q_Request::uri();
 			$module = $uri->module;
 			$action = $uri->action;
-			if ($module and $action) {
+			if (in_array(Q_Dispatcher::$served, array('file', 'dir'))) {
+				Q::log("~" . ceil(Q::milliseconds()) . 'ms+'
+					. ceil(memory_get_peak_usage()/1000) . 'kb.'
+					. " $dispatchResult",
+					null, null, array('maxLength' => 10000)
+				);
+			} else if ($module and $action) {
 				$slotNames = Q_Request::slotNames();
 				$returned_slots = empty($slotNames) 
 					? '' 

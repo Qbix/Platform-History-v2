@@ -54,6 +54,7 @@ function Q_file($params, &$result)
 	}
 	if (!file_exists($filename)) {
 		header("HTTP/1.0 404 Not Found");
+		Q_Dispatcher::result('404 file generated');
 		$filename = Q_PLUGIN_WEB_DIR.DS.'img'.DS.'404'.DS."404.$ext";
 		readfile($filename);
 		return false;

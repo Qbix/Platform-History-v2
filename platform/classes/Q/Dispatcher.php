@@ -188,7 +188,9 @@ class Q_Dispatcher
 
 		// if response or 404 was served, then return
 		if (isset($served)) {
+			self::$uri = null;
 			self::result($dir_was_served ? "Dir served" : "File served");
+			self::$served = $dir_was_served ? 'dir' : 'file';
 			return true;
 		}
 
@@ -200,6 +202,7 @@ class Q_Dispatcher
 		if (Q_Request::isServiceWorker()) {
 			Q::event('Q/serviceWorker/response');
 			self::result("Service Worker served");
+			self::$served = 'serviceWorker';
 			return true;
 		}
 		Q_Request::mergeCookieJS();
@@ -279,6 +282,7 @@ class Q_Dispatcher
 					 */
 					Q::event("Q/noModule", self::$routed); // should echo things
 					self::result("No module");
+					self::$served = 'notFound';
 					return false;
 				}
 
@@ -296,12 +300,14 @@ class Q_Dispatcher
 						 */
 						Q::event('Q/notFound', self::$routed); // should echo things
 						self::result("Unknown module");
+						self::$served = 'notFound';
 						return false;
 					}
 				} else {
 					if (!Q::realPath("handlers/$module")) {
 						Q::event('Q/notFound', self::$routed); // should echo things
 						self::result("Unknown module");
+						self::$served = 'notFound';
 						return false;
 					}
 				}
@@ -310,6 +316,7 @@ class Q_Dispatcher
 				if (empty(self::$uri->action)) {
 					Q::event('Q/notFound', self::$routed); // should echo things
 					self::result("Unknown action");
+					self::$served = 'notFound';
 					return false;
 				}
 
@@ -353,6 +360,7 @@ class Q_Dispatcher
 					$stop_dispatch = Q::event($eventName, self::$routed, true);
 					if ($stop_dispatch) {
 						self::result("Stopped dispatch");
+						self::$served = 'stopped';
 						return false;
 					}
 				}
@@ -377,6 +385,7 @@ class Q_Dispatcher
 					if (Q_Response::getErrors()) {
 						// There were validation errors -- render a response
 						self::result('Validation errors');
+						self::$served = 'errors';
 						self::errors(null, $module, null);
 						return false;
 					}
@@ -421,6 +430,7 @@ class Q_Dispatcher
 					if (Q_Response::getErrors()) {
 						// There were processing errors -- render a response
 						self::result('Processing errors');
+						self::$served = 'errors';
 						self::errors(null, $module, null);
 						return false;
 					}
@@ -447,6 +457,7 @@ class Q_Dispatcher
 				}
 				self::errors(null, $module, $partialResponse);
 				self::result("Rendered errors");
+				self::$served = 'errors';
 				return true;	
 			} catch (Exception $exception) {
 				if (!empty($ob)) {
@@ -466,6 +477,7 @@ class Q_Dispatcher
 					$message, $file, $line, $trace_string
 				);
 				self::result("Exception occurred:\n\n$colored");
+				self::$served = 'errors';
 				try {
 					self::errors($exception, $module, $partialResponse);
 				} catch (Exception $e) {
@@ -564,6 +576,7 @@ class Q_Dispatcher
 		}
 		self::$servedResponse = true;
 		self::result("Served response");
+		self::$served = 'response';
 		return true;
 	}
 
@@ -685,6 +698,16 @@ class Q_Dispatcher
 	 * @protected
 	 */
 	protected static $uri;
+
+	/**
+	 * Set to "file", "dir", or "response"
+	 * @property $served
+	 * @type string
+	 * @static
+	 * @protected
+	 */
+	public static $served;
+
 	/**
 	 * @property $skip
 	 * @type array
