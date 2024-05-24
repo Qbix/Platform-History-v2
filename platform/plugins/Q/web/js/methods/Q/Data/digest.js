@@ -3,7 +3,7 @@ Q.exports(function (Q) {
      * Q plugin's front end code
      *
      * @module Q
-     * @class Q
+     * @class Q.Data
      */
 
     /**

@@ -59,11 +59,24 @@ class Q_Image
 		Q_Utils::sortKeysByLargestNumber($sizes2);
 		return $sizes2;
 	}
-
+	/**
+	 * Find an index with the largest width or height
+	 * @param {array|string} $sizes If an object, it will use Object.keys().
+	 *   If it is a string, it will load it by that key from Q.image.sizes object.
+	 * @param {boolean} [$useHeight=false] by default, uses width
+	 * @param {array} [$options]
+	 * @param {array} [$options.dontThrow] If set, then return null if no such key
+	 * @param {string} [$options.minimumDimensions] set e.g. "400x400" to return the smallest size
+	 *   that's larger than these dimensions (despite name of function)
+	 * @return {string|null} the size entry, or null if options.dontThrow is true and missing sizes
+	 */
 	static function largestSize($sizes, $useHeight = false, $options = array())
 	{
         if (is_string($sizes)) {
             $sizes = self::getSizes($sizes);
+			if (!empty($options['dontThrow'])) {
+				return null;
+			}
             if (!$sizes) {
                 throw new Exception("Q_Image::largestSize: Sizes for key '$sizes' not found in Q_Image::getSizes()");
             }

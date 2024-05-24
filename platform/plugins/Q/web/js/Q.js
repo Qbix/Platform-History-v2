@@ -1607,7 +1607,7 @@ Q.firstKey = function _Q_firstKey(container, options) {
  * @param {Object} [options.dontThrow] If set, then return null if no such key
  * @param {String} [options.minimumDimensions] set e.g. "400x400" to return the smallest size
  *   that's larger than these dimensions (despite name of function)
- * @returns {String|null} the size entry, or null if options.dontThrow is true and missing sizes
+ * @return {String|null} the size entry, or null if options.dontThrow is true and missing sizes
  */
 Q.largestSize = function (sizes, useHeight, options) {
 	if (typeof sizes === 'string') {
@@ -2245,31 +2245,6 @@ Q.getObject = function _Q_getObject(name, context, delimiter, create) {
 		result = Q.setObject(name, create, context, delimiter);
 	}
 	return result;
-};
-
-/**
- * Traverse all the leaves and optionally modify the values
- * @static
- * @method leaves
- * @param {Object|Array|mixed} structure 
- * @param {Function} callback This will be called for every leaf. 
- *   It receives the current value of the leaf, and must return a value
- *   that will be set there (to skip changes, simply return the current value)
- * @returns 
- */
-Q.leaves = function _Q_leaves(structure, callback) {
-	if (Q.isArrayLike(structure)) {
-		for (var i=0, l=structure.length; i<l; ++i) {
-			structure[i] = Q.leaves(structure[i], callback);
-		}
-	} else if (typeof structure === 'object') {
-		for (var k in structure) {
-			structure[k] = Q.leaves(structure[k], callback);
-		}
-	} else { // we found a scalar leaf
-		structure = callback(structure);
-	}
-	return structure;
 };
 
 /**
@@ -11897,6 +11872,9 @@ Q.Template.render = Q.promisify(function _Q_Template_render(name, fields, callba
 		});
 	});
 }, false, 2);
+
+Q.leaves = new Q.Method(); 
+Q.Method.define(Q);
 
 /**
  * Methods for working with data
