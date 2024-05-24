@@ -28,7 +28,7 @@ Q.exports(function() {
 			var fields = Q.extend({}, stream.getAllAttributes(), {
 				publisherId: stream.fields.publisherId,
 				streamName: stream.fields.name,
-				url: stream.fileUrl() || stream.iconUrl(Q.largestSize(Q.image.sizes[streamType]))
+				url: stream.fileUrl() || stream.iconUrl(Q.largestSize(Q.image.sizes[streamType] || Q.image.sizes['Streams/image']))
 			});
 
 			Q.Streams.Tool.preload(toolName, fields, container);

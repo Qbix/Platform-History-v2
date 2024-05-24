@@ -1,0 +1,2 @@
+ALTER TABLE {{prefix}}customer ADD hash varchar(32) NOT NULL COMMENT 'hashed string of secret and public keys to initiate customer with payment env' after customerId;
+ALTER TABLE {{prefix}}customer DROP PRIMARY KEY, ADD PRIMARY KEY(userId, payments, hash);

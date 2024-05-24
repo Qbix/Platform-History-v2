@@ -99,16 +99,6 @@ function Streams_stream_post($params = array())
 		unset($req['icon']);
 	}
 
-	// Process any animated thumbnail that was posted
-	$animatedThumbnail = null;
-	if (!empty($req['animatedThumbnail'])) {
-		if ($animatedThumbnail = $req['animatedThumbnail']) {
-			$dir = Streams::iconDirectory($publisherId, $streamName).DS.'animated';;
-			Q_Image::saveAnimatedThumbnail($animatedThumbnail, $dir);
-		}
-		unset($req['animatedThumbnail']);
-	}
-
 	// Check if the user owns the stream
 	if ($user->id === $publisherId) {
 		$asOwner = true;
@@ -163,8 +153,8 @@ function Streams_stream_post($params = array())
 
 	// if $stream is null - Create new stream
 	if (!$stream instanceof Streams_Stream) {
-		$fields['name'] = $streamName;
 		$stream =  Streams::create($user->id, $publisherId, $type, $fields, $relate, $result);
+		$streamName = $stream->name;
 	}
 	$messageTo = false;
 	if (isset($result['messagesTo']) && !empty($result['messagesTo'])) {
@@ -176,7 +166,7 @@ function Streams_stream_post($params = array())
 		$messageTo = $messageTo->exportArray();
 	}
 	Q_Response::setSlot('messageTo', $messageTo);
-	
+
 	// Process any icon that was posted
 	if ($icon === true) {
 		$icon = array();
@@ -186,10 +176,18 @@ function Streams_stream_post($params = array())
 			$icon['path'] = 'Q'.DS.'uploads'.DS.'Streams';
 		}
 		if (empty($icon['subpath'])) {
-			$icon['subpath'] = $splitId.DS."$streamName".DS."icon".DS.time();
+			$icon['subpath'] = $splitId.DS.$streamName.DS."icon".DS.time();
 		}
 		Q_Response::setSlot('icon', Q::event("Q/image/post", $icon));
 		// the Streams/after/Q_image_save hook saves some attributes
+	}
+
+	// Process any animated thumbnail that was posted
+	$animatedThumbnail = null;
+	if (!empty($req['animatedThumbnail'])) {
+		$stream->icon = Q_Image::saveAnimatedThumbnail($req['animatedThumbnail'], Streams::iconDirectory($publisherId, $streamName).DS.'animated');
+		$stream->changed();
+		unset($req['animatedThumbnail']);
 	}
 
 	// Process any file that was posted

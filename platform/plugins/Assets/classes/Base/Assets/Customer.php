@@ -19,6 +19,7 @@
  * @param {string} [$fields.userId] defaults to ""
  * @param {string} [$fields.payments] defaults to "stripe"
  * @param {string} [$fields.customerId] defaults to ""
+ * @param {string} [$fields.hash] defaults to ""
  * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
  * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
  */
@@ -41,6 +42,12 @@ abstract class Base_Assets_Customer extends Db_Row
 	 * @type string
 	 * @default ""
 	 * the customer id in the payments processor
+	 */
+	/**
+	 * @property $hash
+	 * @type string
+	 * @default ""
+	 * hashed string of secret and public keys to initiate customer with payment env
 	 */
 	/**
 	 * @property $insertedTime
@@ -67,6 +74,7 @@ abstract class Base_Assets_Customer extends Db_Row
 			array (
 			  0 => 'userId',
 			  1 => 'payments',
+			  2 => 'hash',
 			)
 		);
 	}
@@ -419,6 +427,61 @@ return array (
 	}
 
 	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_hash
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_hash($value)
+	{
+		if (!isset($value)) {
+			$value='';
+		}
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
+			return array('hash', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".hash");
+		if (strlen($value) > 32)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".hash");
+		return array('hash', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the hash field
+	 * @return {integer}
+	 */
+	function maxSize_hash()
+	{
+
+		return 32;			
+	}
+
+	/**
+	 * Returns schema information for hash column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_hash()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '32',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);			
+	}
+
+	/**
 	 * Method is called before setting the field and normalize the DateTime string
 	 * @method beforeSet_insertedTime
 	 * @param {string} $value
@@ -515,9 +578,23 @@ return array (
 );			
 	}
 
+	/**
+	 * Check if mandatory fields are set and updates 'magic fields' with appropriate values
+	 * @method beforeSave
+	 * @param {array} $value The array of fields
+	 * @return {array}
+	 * @throws {Exception} If mandatory field is not set
+	 */
 	function beforeSave($value)
 	{
-						
+		if (!$this->retrieved) {
+			$table = $this->getTable();
+			foreach (array('hash') as $name) {
+				if (!isset($value[$name])) {
+					throw new Exception("the field $table.$name needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
+				}
+			}
+		}						
 		// convention: we'll have updatedTime = insertedTime if just created.
 		$this->updatedTime = $value['updatedTime'] = new Db_Expression('CURRENT_TIMESTAMP');
 		return $value;			
@@ -533,7 +610,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('userId', 'payments', 'customerId', 'insertedTime', 'updatedTime');
+		$field_names = array('userId', 'payments', 'customerId', 'hash', 'insertedTime', 'updatedTime');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();
