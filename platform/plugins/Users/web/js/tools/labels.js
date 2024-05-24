@@ -130,7 +130,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
     //},
     addToPhonebook: Q.info.isMobile,
     addToPhonebookAtEnd: false,
-    icon: 200,
+    icon: Q.largestSize('Users/labels', false, {dontThrow: true}) || 1000,
     editable: false,
     imagepicker: {},
     cacheBust: null,
@@ -511,7 +511,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 
                         var options = Q.extend({
                             saveSizeName: 'Users/icon',
-                            showSize: state.icon || $img.width(),
+                            showSize: state.icon || Q.largestSize('Users/labels'),
                             path: 'Q/uploads/Users',
                             preprocess: function (callback) {
                                 var label = $('.Users_labels_editdialog', dialog).attr('data-label');

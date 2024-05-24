@@ -1604,13 +1604,17 @@ Q.firstKey = function _Q_firstKey(container, options) {
  *   If it is a string, it will load it by that key from Q.image.sizes object.
  * @param {Boolean} [useHeight=false] by default, uses width
  * @param {Object} [options]
+ * @param {Object} [options.dontThrow] If set, then return null if no such key
  * @param {String} [options.minimumDimensions] set e.g. "400x400" to return the smallest size
  *   that's larger than these dimensions (despite name of function)
- * @returns {String} the size entry
+ * @returns {String|null} the size entry, or null if options.dontThrow is true and missing sizes
  */
 Q.largestSize = function (sizes, useHeight, options) {
 	if (typeof sizes === 'string') {
 		if (!Q.image.sizes[sizes]) {
+			if (options && options.dontThrow) {
+				return null;
+			}
 			throw new Q.Exception("Q.largestSize: Q.image.sizes missing " + sizes);
 		}
 		sizes = Q.image.sizes[sizes];
