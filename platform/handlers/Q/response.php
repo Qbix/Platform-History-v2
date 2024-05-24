@@ -236,5 +236,12 @@ Q.init();
 
 	// Render a full HTML layout
 	$layout_view = Q_Response::layoutView();
-	echo Q::view($layout_view, $slots);
+	$response = Q::view($layout_view, $slots);
+
+	// optionally process static response
+	if (!empty($_SERVER['HTTP_X_QBIX_REQUEST'])
+	and $_SERVER['HTTP_X_QBIX_REQUEST'] === 'static.php') {
+		$response = Q_Response::processStaticResponse($response);
+	}
+	echo $response;
 }

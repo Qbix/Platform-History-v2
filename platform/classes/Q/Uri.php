@@ -945,15 +945,21 @@ class Q_Uri
 	 * @method fixUrl
 	 * @static
 	 * @param {string} $url The url to fix
+	 * @param {boolean} $variablesToo Whether to remove duplicate variables from querystring
 	 * @return {string} The URL with all subsequent ? and # replaced by &
 	 */
-	static function fixUrl($url)
+	static function fixUrl($url, $variablesToo = false)
 	{
 		$url = Q_Uri::interpolateUrl($url);
 		$pieces = explode('?', $url);
 		$url = $pieces[0];
 		if (isset($pieces[1])) {
-			$url .= '?' . implode('&', array_slice($pieces, 1));
+			$qs = implode('&', array_slice($pieces, 1));
+			if ($variablesToo) {
+				parse_str($qs, $arr);
+				$qs = http_build_query($arr);
+			}
+			$url .= '?' . $qs;
 		}
 		$pieces = explode('#', $url);
 		$url = $pieces[0];
@@ -1059,27 +1065,37 @@ class Q_Uri
 
 	/**
 	 * @param {string} $route
+	 *  The route to use for unrouting URIs to URLs
 	 * @param {string|array} $generate
 	 *  An associative array of "uriFieldName" => ["values", "here"]
 	 *  to get a cartesian product of all combinations.
 	 *  Can be a string naming a function, or "Class::method"
 	 *  that returns the array of combinations, instead.
 	 *  Typically URI fields include at least "module" and "action"
+	 * @param {string} [$querystring=array()]
+	 *  Optionally include a querystring to append to each URL
 	 * @return {array} Array of URLs as keys, and the combination as values
 	 */
-	static function urlsFromCombinations($route, $generate)
+	static function urlsFromCombinations($route, $generate, $querystrings = array())
 	{
 		if (is_string($generate)) {
 			$combinations = call_user_func(explode('::', $generate));
 		} else if (is_array($generate)) {
 			$combinations = Q_Utils::cartesianProduct($generate);
 		}
-		$result = array();
+		$results = array();
 		foreach ($combinations as $fields) {
 			$url = Q_Uri::url($fields, $route);
-			$result[$url] = array($fields, $route);
+			if ($querystrings) {
+				foreach ($querystrings as $querystring) {
+					$url2 = Q_Uri::fixUrl("$url?$querystring", true);
+					$results[$url2] = array($fields, $route);
+				}
+			} else {
+				$results[$url] = array($fields, $route);
+			}
 		}
-		return $result;
+		return $results;
 	}
 	
 	/**

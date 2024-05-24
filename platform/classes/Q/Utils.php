@@ -1918,11 +1918,10 @@ class Q_Utils
 	 * @method normalizeUrlToPath
 	 * @static
 	 * @param {string} $url
-	 * @param {string} $suffix such as ".html"
 	 * @param {string} [$baseUrl] to override the default request baseUrl
 	 * @return $filename A relative filename that can be stored or appended to
 	 */
-	static function normalizeUrlToPath ($url, $suffix, $baseUrl = null)
+	static function normalizeUrlToPath ($url, $baseUrl = null)
 	{
 		if (!$baseUrl) {
 			$baseUrl = Q_Request::baseUrl(true, true);
@@ -1931,8 +1930,12 @@ class Q_Utils
 			return null;
 		}
 		$tail = substr($url, strlen($baseUrl) + 1);
-		$normalized = Q_Utils::normalize($tail, '_', '/[^\\/A-Za-z0-9-]+/', null, 200, true);
-		return str_replace('/', DS, $normalized) . $suffix;
+		$parts = explode('/', $tail);
+		if (!end($parts)) {
+			$tail .= Q_Config::get('Q', 'urls', 'normalizeLastEmptySegment', '');
+		}
+		$normalized = Q_Utils::normalize($tail, '_', '/[^\\/_A-Za-z0-9-]+/', null, 200, true);
+		return str_replace('/', DS, $normalized);
 	}
 	
 	/**

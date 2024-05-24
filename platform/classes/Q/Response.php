@@ -2242,6 +2242,35 @@ class Q_Response
 		}
 		flush();
 	}
+
+	static function staticWebUrl()
+	{
+		return Q_Uri::interpolateUrl(Q_Config::get(
+			'Q', 'static', 'dir', '{{web}}'
+		), array('web' => Q_Request::baseUrl()));
+	}
+
+	static function staticWebDir()
+	{
+		return Q_Uri::interpolateUrl(Q_Config::get(
+			'Q', 'static', 'dir', '{{web}}'
+		), array('web' => APP_WEB_DIR));
+	}
+
+	static function processStaticResponse($content)
+	{
+		if (preg_match("/<base.*>/", $content)) {
+			return $content;
+		}
+		$url = Q_Request::url();
+		$parts = explode('/', $url);
+		$baseHref = implode('/', array_slice($parts, 0, -1));
+		return preg_replace(
+			"/<head(.*)>/",
+			"<head$1>\n<base href='$baseHref'>",
+			$content
+		);
+	}
 	
 	protected static function _cookie($name, $value, $expires, $path, $domain, $secure, $httponly, $samesite = null)
 	{

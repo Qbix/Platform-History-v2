@@ -66,16 +66,23 @@ if (isset($options['help'])) {
 }
 $out = !empty($options['out'])
 	? $options['out']
-	: Q_Uri::interpolateUrl(Q_Config::get(
-		'Q', 'static', 'dir', APP_WEB_DIR
-	), array('web' => APP_WEB_DIR));
+	: Q_Response::staticWebDir();
 $baseUrl = !empty($options['baseUrl']) ? $options['baseUrl'] : Q_Request::baseUrl(true, true);
+
+if (!is_dir($out)) {
+	@mkdir($out, 0777, true);
+}
 
 echo "Generating files into $out" . PHP_EOL . PHP_EOL;
 $config = Q_Config::expect('Q', 'static', 'generate');
 foreach ($config as $suffix => $info) {
 	if (empty($info['routes'])) {
 		continue;
+	}
+	$routes = Q_Config::expect('Q', 'static', 'routes', $info['routes']);
+	$querystrings = array();
+	if (!empty($info['querystrings'])) {
+		$querystrings = Q_Config::expect('Q', 'static', 'querystrings', $info['querystrings']);
 	}
 	$headers = array();
 	if (isset($info['session'])) {
@@ -96,24 +103,41 @@ foreach ($config as $suffix => $info) {
 	}
 	$paramsArray = array();
 	$results = array();
-	foreach ($info['routes'] as $route => $value) {
-		$results = array_merge($results, Q_Uri::urlsFromCombinations($route, $value));
+	foreach ($routes as $route => $value) {
+		$results = array_merge($results, Q_Uri::urlsFromCombinations(
+			$route, $value, $querystrings
+		));
 	}
 	$c = count($results);
 	echo "Requesting $c URLs for suffix $suffix" . PHP_EOL;
 	$baseUrlLength = strlen($baseUrl);
-	foreach ($results as $url => $info) {
-		$urlToFetch = Q_Uri::fixUrl("$url?Q.loadExtras=response");
-		$paramsArray[$url] = array('GET', $url, null, null, array(), $headers);
+	foreach ($results as $url => $r) {
+		if (Q::startsWith($url, '#_noRouteToUri')) {
+			continue;
+		}
+		$urlToFetch = Q_Uri::fixUrl("$url?Q.loadExtras=response", true);
+		$paramsArray[$url] = array('GET', $urlToFetch, null, null, array(), $headers);
 		// $body = Q_Utils::get($urlToFetch, null, array(), $headers);
-		$route = $info[1];
+		$route = $r[1];
 		$urlTail = substr($url, $baseUrlLength);
 		echo "$route -> $urlTail" . PHP_EOL;
 	}
 	$bodies = Q_Utils::requestMulti($paramsArray);
 	echo PHP_EOL;
 	foreach ($bodies as $url => $body) {
-		$normalized = Q_Utils::normalizeUrlToPath($url, $suffix, $baseUrl);
+		if ($querystrings) {
+			$parts = explode('?', $url);
+			$url = $parts[0];
+			$suffix2 = '-' . $info['querystrings'] . $suffix;
+		} else {
+			$suffix2 = $suffix;
+		}
+		$normalized = Q_Utils::normalizeUrlToPath($url, $baseUrl);
+		if (!isset($normalized)) {
+			echo "Problem with URL $url" . PHP_EOL;
+			continue;
+		}
+		$normalized .= $suffix2;
 		$filename = $out . DS . $normalized;
 		$dirname = dirname($filename);
 		if (!file_exists($dirname)) {

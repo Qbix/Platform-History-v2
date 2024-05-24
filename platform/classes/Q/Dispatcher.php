@@ -155,42 +155,6 @@ class Q_Dispatcher
 		}
 		$route = self::$uri->route();
 
-		$sessionId = Q_Session::requestedId();
-		if (!Q_Request::isAjax()
-		and empty($_SERVER['HTTP_X_QBIX_REQUEST'])) {
-			$redirectKey = '';
-			if (empty($sessionId)) {
-				$redirectKey = 'landing';
-			} else if ($prefix = Q_Config::get(
-				'Q', 'session', 'id', 'prefixes', 'authenticated', null
-			) and Q::startsWith($sessionId, $prefix)) {
-				$redirectKey = 'authenticated';
-			}
-			if ($redirectSuffix = Q_Config::get(
-				'Q', 'static', 'redirect', $redirectKey, null
-			) and $generate = Q_Config::get(
-				'Q', 'static', 'generate', $redirectSuffix, 'routes', $route, null
-			)) {
-				$found = true;
-				foreach (self::$uri->toArray() as $k => $v) {
-					if (!isset($generate[$k]) or !in_array($v, $generate[$k])) {
-						if (!$k) {
-							continue; // this is only used to define extra conditions for routes
-						}
-						$found = false;
-						break;
-					}
-				}
-				if ($found) {
-					Q_Session::start(); // set session cookie
-					$redirectUrl = Q_Request::url() . $redirectSuffix;
-					header("Location: $redirectUrl");
-					self::response();
-					return true;
-				}
-			}
-		}
-
 		// if file or dir is requested, try to serve it
 		$served = null;
 		$skip = Q_Config::get('Q', 'dispatcherSkipFilename', false);
@@ -234,6 +198,60 @@ class Q_Dispatcher
 			return true;
 		}
 		Q_Request::mergeCookieJS();
+
+		// potentially redirect to a static file
+		$sessionId = Q_Session::requestedId();
+		if (empty($_SERVER['HTTP_X_QBIX_REQUEST'])) {
+			$redirectKey = Q_Request::isAjax() ? 'json' : 'html';
+			if (empty($sessionId)) {
+				$redirectKey = 'landing';
+			} else if ($prefix = Q_Config::get(
+				'Q', 'session', 'id', 'prefixes', 'authenticated', null
+			) and Q::startsWith($sessionId, $prefix)) {
+				// $redirectKey .= '.authenticated';
+			}
+			if ($redirectSuffix = Q_Config::get(
+				'Q', 'static', 'redirect', $redirectKey, null
+			) and $routesKey = Q_Config::get(
+				'Q', 'static', 'generate', $redirectSuffix, 'routes', null
+			) and $routes = Q_Config::get(
+				'Q', 'static', 'routes', $routesKey, $route, null
+			)) {
+				$found = true;
+				foreach (self::$uri->toArray() as $k => $v) {
+					if (!isset($routes[$k])
+					or !in_array($v, $routes[$k])) {
+						if (!$k) {
+							continue; // this is only used to define extra conditions for routes
+						}
+						$found = false;
+						break;
+					}
+				}
+				if ($found) {
+					Q_Session::start(); // set session cookie
+					$baseUrl = Q_Request::baseUrl();
+					$staticWebUrl = Q_Response::staticWebUrl();
+					$redirectUrl = str_replace($baseUrl, $staticWebUrl, Q_Request::url()) . $redirectSuffix;
+					$filename = APP_WEB_DIR . DS . str_replace('/', DS, $redirectSuffix);
+					$mtime = filemtime($filename);
+					$noRedirect = false;
+					if ($duration = Q_Config::get('Q', 'static', 'expires', 0)) {
+						$expires = $mtime + $duration;
+						if (time() <= $expires) {
+							header("Expires: $expires");
+						} else {
+							$noRedirect = true;
+						}
+					}
+					if (!$noRedirect) {
+						header("Location: $redirectUrl");
+						self::response();
+						return true;
+					}
+				}
+			}
+		}
 
 		// This loop is for forwarding
 		$max_forwards = Q_Config::get('Q', 'maxForwards', 10);
