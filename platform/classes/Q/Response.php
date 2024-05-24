@@ -2246,7 +2246,9 @@ class Q_Response
 	static function staticWebUrl()
 	{
 		return Q_Uri::interpolateUrl(Q_Config::get(
-			'Q', 'static', 'dir', '{{web}}'
+			'Q', 'static', 'url', Q_Config::get(
+				'Q', 'static', 'dir', '{{web}}'
+			)
 		), array('web' => Q_Request::baseUrl()));
 	}
 

@@ -75,6 +75,7 @@
 			}
 		},
 		"static": {
+			"url": "{{web}}/Q/static",
 			"dir": "{{web}}/Q/static",
 			"redirect": {
 				"html": ".html",
