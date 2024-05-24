@@ -298,6 +298,9 @@ class Q_Request
 	 * Use this method to check whether a file is requested
 	 * @method filename
 	 * @static
+	 * @param {boolean} [$anyExtension] Pass true to return the URL
+	 *   regardless of any extension, as long as the last segment has
+	 *   a dot in it, otherwise it still returns false.
 	 * @return {string|false} Returns false if extension doesn't match.
 	 *   Otherwise returns full filename of potentially requested file.
 	 *   It first iterates any aliases in "Q"/"aliases" config, and returns
@@ -305,21 +308,28 @@ class Q_Request
 	 *   Q_Request::documentRoot(), whether or not it actually exists
 	 *   on the file system. You can use file_exists() or realpath().
 	 */
-	static function filename()
+	static function filename($anyExtension = false)
 	{
 		$url = Q_Request::url();
 		$ret = Q::event("Q/request/filename", @compact('url'), 'before');
 		if (isset($ret)) {
 			return $ret;
 		}
-		$parts = explode('.', $url);
-		$ext = end($parts);
-		if (strpos($ext, '/') !== false) {
-			$ext = '';
-		}
-		$extensions = Q_Config::expect("Q", "filename", "extensions");
-		if (!in_array($ext, $extensions)) {
-			return false;
+		if ($anyExtension) {
+			$parts = explode('/', $url);
+			if (!str_contains(end($parts), '.')) {
+				return false;
+			}
+		} else {
+			$parts = explode('.', $url);
+			$ext = end($parts);
+			if (strpos($ext, '/') !== false) {
+				$ext = '';
+			}
+			$extensions = Q_Config::expect("Q", "filename", "extensions");
+			if (!in_array($ext, $extensions)) {
+				return false;
+			}
 		}
 		return Q_Uri::filenameFromUrl($url);
 	}

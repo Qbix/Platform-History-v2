@@ -157,8 +157,13 @@ class Q_Dispatcher
 
 		// if file or dir is requested, try to serve it
 		$served = null;
+		$filename = null;
 		$skip = Q_Config::get('Q', 'dispatcherSkipFilename', false);
-		$filename = $skip ? false : Q_Request::filename();
+		$parts = explode('/', $route);
+		if (!$skip and !str_contains(end($parts), '.')) {
+			// route didn't have a dot in it, try to serve a file
+			$filename = Q_Request::filename(true);
+		}
 		if ($filename) {
 			if (is_dir($filename)) {
 				/**

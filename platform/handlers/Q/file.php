@@ -43,6 +43,13 @@ function Q_file($params, &$result)
 			header("Content-type: image/vnd.microsoft.icon .cur .ico");
 			break;
 		default:
+			if (file_exists($filename)) {
+				$mimetype = mime_content_type($filename);
+				header ("Content-Type: $mimetype");	
+			} else {
+				header("Content-Type: text/plain");
+				$ext = 'txt';
+			}
 			break;
 	}
 	if (!file_exists($filename)) {
