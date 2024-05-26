@@ -216,7 +216,7 @@ class Q_Dispatcher
 			} else if ($prefix = Q_Config::get(
 				'Q', 'session', 'id', 'prefixes', 'authenticated', null
 			) and Q::startsWith($sessionId, $prefix)) {
-				// $redirectKey .= '.authenticated';
+				$redirectKey .= '.authenticated';
 			}
 			if ($redirectSuffix = Q_Config::get(
 				'Q', 'static', 'redirect', $redirectKey, null
@@ -238,9 +238,9 @@ class Q_Dispatcher
 				}
 				if ($found) {
 					Q_Session::start(); // set session cookie
-					$baseUrl = Q_Request::baseUrl();
+					$normalized = Q_Utils::normalizeUrlToPath(Q_Request::url());
 					$staticWebUrl = Q_Response::staticWebUrl();
-					$redirectUrl = str_replace($baseUrl, $staticWebUrl, Q_Request::url()) . $redirectSuffix;
+					$redirectUrl = "$staticWebUrl/$normalized$redirectSuffix";
 					$filename = APP_WEB_DIR . DS . str_replace('/', DS, $redirectSuffix);
 					$mtime = filemtime($filename);
 					$noRedirect = false;
