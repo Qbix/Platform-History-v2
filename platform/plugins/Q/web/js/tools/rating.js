@@ -98,4 +98,4 @@ Q.Tool.define('Q/rating', function (options) {
 	}
 });
 
-})(Q, jQuery);
+})(Q, Q.jQuery);

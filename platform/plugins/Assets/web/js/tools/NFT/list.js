@@ -57,4 +57,4 @@ Q.Tool.define("Assets/NFT/preview", function (options) {
 	}
 });
 
-})(window, Q, jQuery);
+})(window, Q, Q.jQuery);

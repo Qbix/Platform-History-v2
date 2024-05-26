@@ -374,4 +374,4 @@ function _createObserver(tool, container) {
 Q.lazyload = Q.lazyload || {};
 var _loadedImages = Q.lazyload.loadedImages = {};
 
-})(Q, jQuery);
+})(Q, Q.jQuery);

@@ -158,4 +158,4 @@
     }
 
 
-})(Q, jQuery);
+})(Q, Q.jQuery);

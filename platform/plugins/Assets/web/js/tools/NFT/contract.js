@@ -682,4 +682,4 @@
         <h3 class="Streams_preview_title">{{title}}</h3>`,
         {text: ['Assets/content']}
     );
-})(window, Q, jQuery);
+})(window, Q, Q.jQuery);

@@ -57,4 +57,4 @@ Q.Template.set('Streams/image/album/begin',
 
 
 
-})(window, Q, jQuery);
+})(window, Q, Q.jQuery);

@@ -340,4 +340,4 @@ Q.Tool.define("Streams/photoSelector", function _Streams_photoSelector_construct
 
 );
 
-})(Q, jQuery);
+})(Q, Q.jQuery);

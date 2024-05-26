@@ -74,4 +74,4 @@ Q.Tool.define("Assets/credits/balance", function (options) {
 	}
 });
 
-})(window, Q, jQuery);
+})(window, Q, Q.jQuery);

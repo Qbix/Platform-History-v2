@@ -161,4 +161,4 @@
         <button class="Q_button" name="send">{{payment.Send}}</button>`,
         {text: ['Assets/content']}
     );
-})(window, Q, jQuery);
+})(window, Q, Q.jQuery);

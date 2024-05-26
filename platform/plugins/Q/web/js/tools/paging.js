@@ -59,4 +59,4 @@ Q.Tool.define('Q/paging', function (options) {
 	}
 });
 
-})(Q, jQuery);
+})(Q, Q.jQuery);

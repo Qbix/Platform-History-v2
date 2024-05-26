@@ -501,4 +501,4 @@ Q.Template.set('Streams/participants/invite',
 	'</div>'
 );
 
-})(Q, jQuery);
+})(Q, Q.jQuery);

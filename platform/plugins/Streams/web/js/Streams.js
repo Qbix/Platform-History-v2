@@ -5252,4 +5252,4 @@ Q.Method.define(
 	}
 );
     
-})(Q, jQuery);
+})(Q, Q.jQuery);

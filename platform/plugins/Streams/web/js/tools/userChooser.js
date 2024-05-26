@@ -326,4 +326,4 @@ Q.Streams.userChooser = {
 	lsKey: 'Streams.userChooser.initialList'
 };
 
-})(Q, jQuery);
+})(Q, Q.jQuery);

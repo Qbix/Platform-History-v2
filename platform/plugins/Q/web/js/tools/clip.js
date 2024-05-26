@@ -131,4 +131,4 @@ Q.Template.set('Q/clip',
 	'</button>'
 );
 
-})(window, Q, jQuery);
+})(window, Q, Q.jQuery);

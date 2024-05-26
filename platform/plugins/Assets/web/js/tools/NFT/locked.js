@@ -291,4 +291,4 @@ Q.Template.set("Assets/NFT/unlock",
             </div>
             <button class="Assets_NFT_locked_dialogUnlock Q_button">{{NFT.locked.Unlock}}</button>
         </div>`, {text: ["Assets/content"]});
-})(window, Q, jQuery);
+})(window, Q, Q.jQuery);

@@ -552,4 +552,4 @@ Q.Template.set('Streams/interests',
 + '<div class="Streams_interests_container"></div>'
 );
 
-})(window, Q, jQuery);
+})(window, Q, Q.jQuery);

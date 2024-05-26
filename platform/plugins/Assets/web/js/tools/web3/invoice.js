@@ -742,4 +742,4 @@ Q.Template.set("Assets/web3/invoice/interface/asterisk",
     {text: ["Assets/content"]}
 );
     
-})(window, Q, jQuery);
+})(window, Q, Q.jQuery);

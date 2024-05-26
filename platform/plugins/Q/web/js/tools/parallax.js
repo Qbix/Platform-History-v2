@@ -217,4 +217,4 @@
 	var _parallaxApplied = false;
 	var _startedAnimationFrames = false;
 
-})(Q, jQuery);
+})(Q, Q.jQuery);

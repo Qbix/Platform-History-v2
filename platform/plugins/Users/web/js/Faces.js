@@ -276,4 +276,4 @@
             that.state = null;
         }
     }
-})(Q, jQuery);
+})(Q, Q.jQuery);

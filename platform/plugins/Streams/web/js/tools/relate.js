@@ -111,4 +111,4 @@ Q.Template.set('Streams/relate/tool',
 	'{{{tool "Streams/lookup" ""}}} <button class="Streams_relate_button Q_button">Post it</button>'
 );
 
-})(Q, jQuery);
+})(Q, Q.jQuery);

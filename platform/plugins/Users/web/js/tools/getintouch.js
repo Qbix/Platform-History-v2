@@ -44,4 +44,4 @@ Q.Tool.define("Users/getintouch", function(options) {
 	}).click(preventDefault);
 });
 
-})(Q, jQuery);
+})(Q, Q.jQuery);

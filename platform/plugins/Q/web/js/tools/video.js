@@ -1252,4 +1252,4 @@ Q.Template.set("Q/video/twitch/overplay",
 	'<div class="Q_video_overlay_play" style="background-image: url({{poster}})"><img src="{{src}}" /></div>'
 );
 
-})(window, Q, jQuery);
+})(window, Q, Q.jQuery);

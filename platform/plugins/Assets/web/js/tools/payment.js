@@ -246,4 +246,4 @@ Q.Template.set('Assets/payment/Authnet',
 	'</form>'
 );
 
-})(window, Q, jQuery);
+})(window, Q, Q.jQuery);

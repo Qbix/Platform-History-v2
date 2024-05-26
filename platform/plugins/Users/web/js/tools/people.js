@@ -92,4 +92,4 @@ Q.Template.set("Users/people",
 <div class="Users_people_footer"></div>`,
     {text: ['Users/content']}
 );
-})(window, Q, jQuery);
+})(window, Q, Q.jQuery);

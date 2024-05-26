@@ -480,4 +480,4 @@ Q.Template.set("Assets/NFT/sales/factory",
 { text: ["Assets/content"] }
 );
 
-})(window, Q, jQuery);
+})(window, Q, Q.jQuery);

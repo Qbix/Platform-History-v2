@@ -697,4 +697,4 @@
 	</table>
 	`,
 	{text: ["Assets/content", "Assets/web3/coin/presale/admin"]});
-})(window, Q, jQuery);
+})(window, Q, Q.jQuery);

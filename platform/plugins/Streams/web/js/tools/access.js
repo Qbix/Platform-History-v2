@@ -288,4 +288,4 @@ Q.Tool.define("Streams/access", function(options) {
 		onActivateHandler = this.child('Q_tabs').state.onActivate.set(_initialize, this);
 	}, this);
 });
-})(Q, jQuery);
+})(Q, Q.jQuery);

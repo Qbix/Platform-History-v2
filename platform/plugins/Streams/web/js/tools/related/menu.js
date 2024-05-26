@@ -240,4 +240,4 @@ Q.Template.set('Streams/related/menu/edit',
 	'<div class="Streams_related_menu_edit_buttons"><button name="save" class="Q_button">{{text.Save}}</button>' +
 	'<button name="delete" class="Q_button">{{text.Delete}}</button></div>'
 );
-})(Q, jQuery);
+})(Q, Q.jQuery);

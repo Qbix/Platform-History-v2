@@ -309,4 +309,4 @@ Q.Tool.define("Q/pdf", function (options) {
 		}
 	}
 });
-})(window, Q, jQuery);
+})(window, Q, Q.jQuery);

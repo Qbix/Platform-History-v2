@@ -195,4 +195,4 @@ Q.Tool.define('Q/expandable', function (options) {
 	}
 });
 
-})(Q, jQuery);
+})(Q, Q.jQuery);

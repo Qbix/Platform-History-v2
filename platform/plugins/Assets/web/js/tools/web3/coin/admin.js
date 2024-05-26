@@ -497,4 +497,4 @@
 	`,
 	{text: ["Assets/content", "Assets/web3/coin/admin"]});
 
-})(window, Q, jQuery);
+})(window, Q, Q.jQuery);

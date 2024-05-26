@@ -923,4 +923,4 @@ Q.Template.set('Q/audio/recorder',
 	//+ '</div>'
 	+ '<div class="Q_audio_encoding">{{text.encoding}}</div>'
 );
-})(window, Q, jQuery);
+})(window, Q, Q.jQuery);

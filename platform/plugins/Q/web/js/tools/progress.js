@@ -86,4 +86,4 @@
 		`<div class="Q_progress_bar"></div><div class="Q_progress_text"></div>`
 	);
 
-})(Q, jQuery);
+})(Q, Q.jQuery);

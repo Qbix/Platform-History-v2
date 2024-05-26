@@ -1084,4 +1084,4 @@
         return rects;
     }
 
-})(Q, jQuery);
+})(Q, Q.jQuery);

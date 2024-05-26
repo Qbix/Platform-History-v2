@@ -244,4 +244,4 @@ Q.Template.set('Streams/subscription/view',
 		'{{/isRenderItems}}'+
 	'</div>'
 );
-})(Q, jQuery);
+})(Q, Q.jQuery);

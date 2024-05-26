@@ -74,4 +74,4 @@ Q.Tool.define("Q/image", function (options) {
 	}
 });
 
-})(window, Q, jQuery);
+})(window, Q, Q.jQuery);

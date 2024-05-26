@@ -90,4 +90,4 @@ Q.Tool.define("Q/panel", function() {
 	});
 });
 
-})(Q, jQuery);
+})(Q, Q.jQuery);

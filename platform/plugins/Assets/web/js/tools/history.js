@@ -223,4 +223,4 @@ Q.Template.set('Assets/row/charges',
 	'<td class="Assets_history_description">{{description}}</td></tr>'
 );
 
-})(window, Q, jQuery);
+})(window, Q, Q.jQuery);

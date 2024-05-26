@@ -1498,4 +1498,4 @@
         <span class="Users_avatar_name">{{address}}</span>`,
         {text: ['Assets/content']}
     );
-})(window, Q, jQuery);
+})(window, Q, Q.jQuery);

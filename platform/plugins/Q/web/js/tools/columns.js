@@ -1247,4 +1247,4 @@ function _updateThemeColor(fromIndex, toIndex, duration) {
 	});
 }
 
-})(Q, jQuery);
+})(Q, Q.jQuery);

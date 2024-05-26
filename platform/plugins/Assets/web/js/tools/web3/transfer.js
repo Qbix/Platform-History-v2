@@ -293,4 +293,4 @@ Q.Template.set("Assets/web3/transfer/send",
     '{{/if}}',
     { text: ['Assets/content'] }
 );
-})(window, Q, jQuery);
+})(window, Q, Q.jQuery);

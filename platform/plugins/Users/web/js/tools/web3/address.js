@@ -125,4 +125,4 @@
         });
     }
     
-    })(window, Q, jQuery);
+    })(window, Q, Q.jQuery);

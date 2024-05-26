@@ -780,4 +780,4 @@ function _addListeners(tool, $jq) {
 	});
 }
 
-})(Q, jQuery);
+})(Q, Q.jQuery);

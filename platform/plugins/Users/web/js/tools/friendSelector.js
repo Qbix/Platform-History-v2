@@ -284,4 +284,4 @@ Q.Tool.define('Users/friendSelector', function(o) {
 
 );
 
-})(Q, jQuery);
+})(Q, Q.jQuery);

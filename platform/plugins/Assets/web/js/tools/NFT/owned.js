@@ -185,4 +185,4 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 	}
 });
 
-})(window, Q, jQuery);
+})(window, Q, Q.jQuery);

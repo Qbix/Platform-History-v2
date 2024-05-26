@@ -313,4 +313,4 @@
         </div>`,
         {text: ['Assets/content']}
     );
-})(window, Q, jQuery);
+})(window, Q, Q.jQuery);

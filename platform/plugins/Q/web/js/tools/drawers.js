@@ -603,4 +603,4 @@ function _h(scrollingHeight, tool) {
 	return scrollingHeight - $(tool.element).position().top;
 }
 
-})(Q, jQuery);
+})(Q, Q.jQuery);

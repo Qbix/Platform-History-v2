@@ -1458,4 +1458,4 @@ Q.Template.set('Streams/chat/main',
 
 Q.Cache.local('Streams/chat', 100); // create a cache
 
-})(Q, jQuery);
+})(Q, Q.jQuery);

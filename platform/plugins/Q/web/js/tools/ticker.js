@@ -360,4 +360,4 @@ Q.Tool.define("Q/ticker", function() {
 
 );
 
-})(Q, jQuery);
+})(Q, Q.jQuery);

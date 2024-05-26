@@ -724,4 +724,4 @@
 		{text: ["Assets/content", "Assets/web3/coin/staking/start"]}
 	);
 
-})(window, Q, jQuery);
+})(window, Q, Q.jQuery);

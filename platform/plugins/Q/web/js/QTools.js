@@ -835,4 +835,4 @@
 		'height': '80%'
 	};
 
-})(Q, jQuery);
+})(Q, Q.jQuery);

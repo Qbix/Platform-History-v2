@@ -115,4 +115,4 @@ Q.Tool.define("Assets/subscription", function (options) {
 	}
 });
 
-})(window, Q, jQuery);
+})(window, Q, Q.jQuery);

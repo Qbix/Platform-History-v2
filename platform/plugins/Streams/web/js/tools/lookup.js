@@ -155,4 +155,4 @@ Q.Template.set('Streams/lookup/tool',
 	+ '{{{tool "Q/filter" ""}}}'
 );
 
-})(Q, jQuery);
+})(Q, Q.jQuery);

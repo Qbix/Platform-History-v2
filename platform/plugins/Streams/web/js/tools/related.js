@@ -860,4 +860,4 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 	}
 });
 
-})(Q, jQuery);
+})(Q, Q.jQuery);

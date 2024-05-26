@@ -245,4 +245,4 @@ Q.Tool.define('Q/timestamp', function () {
 	}
 });
 
-})(Q, jQuery);
+})(Q, Q.jQuery);

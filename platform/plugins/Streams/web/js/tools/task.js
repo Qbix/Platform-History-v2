@@ -53,4 +53,4 @@ Q.Template.set('Streams/task',
 	+ '</div>'
 );
 
-})(Q, jQuery);
+})(Q, Q.jQuery);

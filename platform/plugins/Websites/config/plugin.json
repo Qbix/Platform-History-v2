@@ -188,6 +188,8 @@
 	"Websites": {
 		"metadataReload": true,
 		"permalinks": {
+			"enabled": false,
+			"regex": "/[^\\/]*/", /* if not null, used to filter URLs before checking permalinks */
 			"routes": {}, /* whitelist of possible destinations */
 			"actions": {} /* whitelist of possible actions */
 		},

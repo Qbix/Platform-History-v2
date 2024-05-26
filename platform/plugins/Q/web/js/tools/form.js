@@ -208,4 +208,4 @@ Q.Tool.define('Q/form', function(options) {
 
 );
 
-})(Q, jQuery);
+})(Q, Q.jQuery);

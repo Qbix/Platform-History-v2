@@ -672,4 +672,4 @@
 		});
 	}, "Users.Device");
 
-})(Q, jQuery);
+})(Q, Q.jQuery);

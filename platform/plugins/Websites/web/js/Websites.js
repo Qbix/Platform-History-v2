@@ -149,4 +149,4 @@ Q.page('', function () {
 	}
 }, 'Websites');
 
-})(Q, jQuery);
+})(Q, Q.jQuery);

@@ -79,4 +79,4 @@ Q.Tool.define("Users/status", function(options) {
 }
 );
 
-})(Q, jQuery);
+})(Q, Q.jQuery);

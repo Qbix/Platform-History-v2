@@ -209,4 +209,4 @@ Q.Template.set('Assets/web3/balance/select',
 	{{/each}}
 </select>`);
 
-})(window, Q, jQuery);
+})(window, Q, Q.jQuery);

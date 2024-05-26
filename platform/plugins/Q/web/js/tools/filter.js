@@ -331,4 +331,4 @@ Q.Tool.define('Q/filter', function (options) {
 	}
 });
 
-})(Q, jQuery);
+})(Q, Q.jQuery);

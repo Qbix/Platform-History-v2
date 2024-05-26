@@ -194,4 +194,4 @@ Q.Template.set("Assets/NFT/sales/whitelist/remove",
 `<input name="account" type="text" class="form-control" placeholder="{{NFT.sales.whitelist.placeholders.account}}">
         <button name="remove" class="Q_button">{{NFT.Remove}}</button>`, { text: ["Assets/content"] }
 );
-})(window, Q, jQuery);
+})(window, Q, Q.jQuery);
