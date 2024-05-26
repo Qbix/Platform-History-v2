@@ -632,8 +632,8 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 			$ntbt = & $nt['backtraces'];
 
 			if (empty(self::$setTimezoneDone[$dsn])) {
-				$query->db->setTimezone();
 				self::$setTimezoneDone[$dsn] = true;
+				$query->db->setTimezone();
 			}
 
 			$sql = $query->getSQL(); // depends on shard, possibly
