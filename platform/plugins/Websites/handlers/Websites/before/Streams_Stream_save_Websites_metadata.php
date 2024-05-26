@@ -21,7 +21,8 @@ function Websites_before_Streams_Stream_save_Websites_metadata($params)
 	$wp->uri = $uri;
 	$wp->retrieve(null, array('ignoreCache' => true));
 	
-	if ($url = $stream->getAttribute('url', '')) {
+	$url = $stream->getAttribute('url', '');
+	if ($url) {
 		$url = Q_Html::themedUrl($url);
 		if (!isset($wp->url) or $wp->url !== $url) {
 			$wp->url = $url;
