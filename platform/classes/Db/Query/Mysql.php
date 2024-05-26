@@ -631,6 +631,11 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 			$ntct = & $nt['connections'];
 			$ntbt = & $nt['backtraces'];
 
+			if (empty(self::$setTimezoneDone[$dsn])) {
+				$query->db->setTimezone();
+				self::$setTimezoneDone[$dsn] = true;
+			}
+
 			$sql = $query->getSQL(); // depends on shard, possibly
 			// TODO: implement caching sql until query changes
 
@@ -2039,6 +2044,8 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 	public $endedTime = null;
 	public $useDeferredJoin = false;
 	protected $transactionKey = null;
+
+	protected static $setTimezoneDone;
 
 	protected static $nestedTransactions = array();
 	public $nestedTransactionCount = 0;
