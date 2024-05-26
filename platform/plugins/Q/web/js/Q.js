@@ -9920,7 +9920,7 @@ Q.currentScript = function (stackLevels) {
 		}
 		src = lines[index];
 	}
-	var parts = src.match(/((http[s]?:\/\/.+\/|file:\/\/\/.+\/)([^\/]+\.js.*))(?!:)/);
+	var parts = src.match(/((http[s]?:\/\/.+\/|file:\/\/\/.+\/)([^\/]+\.(?:js|html)[^:]*))/);
 	return {
 		src: parts[1].split('?')[0],
 		srcWithQuerystring: parts[1],
