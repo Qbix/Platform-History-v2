@@ -2266,7 +2266,7 @@ class Q_Response
 		}
 		$url = Q_Request::url();
 		$parts = explode('/', $url);
-		$baseHref = implode('/', array_slice($parts, 0, -1));
+		$baseHref = implode('/', array_slice($parts, 0, -1)) . '/';
 		return preg_replace(
 			"/<head(.*)>/",
 			"<head$1>\n<base href='$baseHref'>",
