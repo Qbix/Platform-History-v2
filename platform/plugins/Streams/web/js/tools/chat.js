@@ -125,6 +125,9 @@ Q.Tool.define('Streams/chat', function(options) {
 
 		return false;
 	});
+
+	// need to listen stream messages
+	Q.Streams.retainWith(tool).get(state.publisherId, state.streamName);
 },
 
 {
