@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "Thêm vào danh bạ điện thoại của tôi",
         "addLabel": "Mối quan hệ mơi",
-        "prompt": "Đặt cho nó một cái tên"
+        "prompt": "Đặt cho nó một cái tên",
+        "titles": {
+            "Users\/owners": "Những chủ sở hữu",
+            "Users\/admins": "Quản trị viên",
+            "Users\/members": "Các thành viên",
+            "Users\/guests": "Khách",
+            "Users\/hosts": "Máy chủ",
+            "Users\/testers": "Người thử nghiệm",
+            "Users\/speakers": "Diễn giả"
+        }
     },
     "people": {
         "People": "Mọi người"

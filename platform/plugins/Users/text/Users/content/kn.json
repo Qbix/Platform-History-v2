@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "ನನ್ನ ಫೋನ್ ಸಂಪರ್ಕಗಳಿಗೆ ಸೇರಿಸಿ",
         "addLabel": "ಹೊಸ ಸಂಬಂಧ",
-        "prompt": "ಅದಕ್ಕೊಂದು ಹೆಸರು ಕೊಡಿ"
+        "prompt": "ಅದಕ್ಕೊಂದು ಹೆಸರು ಕೊಡಿ",
+        "titles": {
+            "Users\/owners": "ಮಾಲೀಕರು",
+            "Users\/admins": "ನಿರ್ವಾಹಕರು",
+            "Users\/members": "ಸದಸ್ಯರು",
+            "Users\/guests": "ಅತಿಥಿಗಳು",
+            "Users\/hosts": "ಅತಿಥೇಯರು",
+            "Users\/testers": "ಪರೀಕ್ಷಕರು",
+            "Users\/speakers": "ಸ್ಪೀಕರ್ಗಳು"
+        }
     },
     "people": {
         "People": "ಜನರು"

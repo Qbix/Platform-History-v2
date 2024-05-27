@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "Дадаць у кантакты майго тэлефона",
         "addLabel": "Новыя адносіны",
-        "prompt": "Дайце яму назву"
+        "prompt": "Дайце яму назву",
+        "titles": {
+            "Users\/owners": "Уладальнікі",
+            "Users\/admins": "Адміністратары",
+            "Users\/members": "Члены",
+            "Users\/guests": "Госці",
+            "Users\/hosts": "Гаспадары",
+            "Users\/testers": "Тэстары",
+            "Users\/speakers": "Выступоўцы"
+        }
     },
     "people": {
         "People": "Людзі"

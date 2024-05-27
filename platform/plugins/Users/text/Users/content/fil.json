@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "Idagdag sa Aking Mga Contact sa Telepono",
         "addLabel": "Bagong Relasyon",
-        "prompt": "Bigyan ito ng pangalan"
+        "prompt": "Bigyan ito ng pangalan",
+        "titles": {
+            "Users\/owners": "Mga may-ari",
+            "Users\/admins": "Mga admin",
+            "Users\/members": "Mga miyembro",
+            "Users\/guests": "mga panauhin",
+            "Users\/hosts": "Mga host",
+            "Users\/testers": "Mga Tester",
+            "Users\/speakers": "Mga nagsasalita"
+        }
     },
     "people": {
         "People": "Mga tao"

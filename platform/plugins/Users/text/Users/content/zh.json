@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "添加到我的电话联系人",
         "addLabel": "新关系",
-        "prompt": "给它起个名字"
+        "prompt": "给它起个名字",
+        "titles": {
+            "Users\/owners": "拥有者",
+            "Users\/admins": "管理员",
+            "Users\/members": "成员",
+            "Users\/guests": "客人",
+            "Users\/hosts": "主办方",
+            "Users\/testers": "测试人员",
+            "Users\/speakers": "演讲嘉宾"
+        }
     },
     "people": {
         "People": "人们"

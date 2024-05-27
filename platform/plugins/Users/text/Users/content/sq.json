@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "Shto te kontaktet e telefonit tim",
         "addLabel": "Marrëdhënie e re",
-        "prompt": "Jepini një emër"
+        "prompt": "Jepini një emër",
+        "titles": {
+            "Users\/owners": "Pronarët",
+            "Users\/admins": "Administratorët",
+            "Users\/members": "Anëtarët",
+            "Users\/guests": "Të ftuarit",
+            "Users\/hosts": "Pritësit",
+            "Users\/testers": "Testuesit",
+            "Users\/speakers": "Folësit"
+        }
     },
     "people": {
         "People": "Njerëzit"

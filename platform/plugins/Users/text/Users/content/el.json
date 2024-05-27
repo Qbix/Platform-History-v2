@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "Προσθήκη στις Επαφές του τηλεφώνου μου",
         "addLabel": "Νέα Σχέση",
-        "prompt": "Δώστε του ένα όνομα"
+        "prompt": "Δώστε του ένα όνομα",
+        "titles": {
+            "Users\/owners": "Ιδιοκτήτες",
+            "Users\/admins": "Διαχειριστές",
+            "Users\/members": "Μέλη",
+            "Users\/guests": "Καλεσμένοι",
+            "Users\/hosts": "Οικοδεσπότες",
+            "Users\/testers": "Δοκιμαστές",
+            "Users\/speakers": "Ηχεία"
+        }
     },
     "people": {
         "People": "Ανθρωποι"

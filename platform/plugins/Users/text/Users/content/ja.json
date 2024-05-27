@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "電話の連絡先に追加",
         "addLabel": "新しい関係",
-        "prompt": "名前を付けてください"
+        "prompt": "名前を付けてください",
+        "titles": {
+            "Users\/owners": "オーナー",
+            "Users\/admins": "管理者",
+            "Users\/members": "メンバー",
+            "Users\/guests": "ゲスト",
+            "Users\/hosts": "ホスト",
+            "Users\/testers": "テスター",
+            "Users\/speakers": "スピーカー"
+        }
     },
     "people": {
         "People": "人々"

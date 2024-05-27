@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "Telefon Əlaqələrimə əlavə et",
         "addLabel": "Yeni Münasibət",
-        "prompt": "Bir ad verin"
+        "prompt": "Bir ad verin",
+        "titles": {
+            "Users\/owners": "Sahiblər",
+            "Users\/admins": "Adminlər",
+            "Users\/members": "Üzvlər",
+            "Users\/guests": "Qonaqlar",
+            "Users\/hosts": "Ev sahibləri",
+            "Users\/testers": "Testçilər",
+            "Users\/speakers": "Dinamiklər"
+        }
     },
     "people": {
         "People": "Xalq"

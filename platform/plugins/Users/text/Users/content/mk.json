@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "Додај во контакти на мојот телефон",
         "addLabel": "Нова врска",
-        "prompt": "Дајте му име"
+        "prompt": "Дајте му име",
+        "titles": {
+            "Users\/owners": "Сопственици",
+            "Users\/admins": "Администратори",
+            "Users\/members": "Членови",
+            "Users\/guests": "Гости",
+            "Users\/hosts": "Домаќини",
+            "Users\/testers": "Тестери",
+            "Users\/speakers": "Звучници"
+        }
     },
     "people": {
         "People": "Луѓе"

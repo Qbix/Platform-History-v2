@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "Pridėti prie mano telefono kontaktų",
         "addLabel": "Nauji santykiai",
-        "prompt": "Duok jam pavadinimą"
+        "prompt": "Duok jam pavadinimą",
+        "titles": {
+            "Users\/owners": "Savininkai",
+            "Users\/admins": "Administratoriai",
+            "Users\/members": "Nariai",
+            "Users\/guests": "Svečiai",
+            "Users\/hosts": "Šeimininkai",
+            "Users\/testers": "Bandytojai",
+            "Users\/speakers": "Garsiakalbiai"
+        }
     },
     "people": {
         "People": "Žmonės"

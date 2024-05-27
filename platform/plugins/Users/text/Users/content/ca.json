@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "Afegeix als meus contactes del telèfon",
         "addLabel": "Nova Relació",
-        "prompt": "Posa-li un nom"
+        "prompt": "Posa-li un nom",
+        "titles": {
+            "Users\/owners": "Propietaris",
+            "Users\/admins": "Administradors",
+            "Users\/members": "Membres",
+            "Users\/guests": "Convidats",
+            "Users\/hosts": "Amfitrions",
+            "Users\/testers": "Provadors",
+            "Users\/speakers": "Altaveus"
+        }
     },
     "people": {
         "People": "Gent"

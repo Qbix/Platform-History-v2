@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "Додај у контакте мог телефона",
         "addLabel": "Нев Релатионсхип",
-        "prompt": "Дајте му име"
+        "prompt": "Дајте му име",
+        "titles": {
+            "Users\/owners": "Власници",
+            "Users\/admins": "Админс",
+            "Users\/members": "Чланови",
+            "Users\/guests": "Гости",
+            "Users\/hosts": "Домаћини",
+            "Users\/testers": "Тестери",
+            "Users\/speakers": "Звучници"
+        }
     },
     "people": {
         "People": "Људи"

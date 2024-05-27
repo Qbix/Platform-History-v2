@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "Toevoegen aan Mijn telefooncontacten",
         "addLabel": "Nieuwe relatie",
-        "prompt": "Geef het een naam"
+        "prompt": "Geef het een naam",
+        "titles": {
+            "Users\/owners": "Eigenaren",
+            "Users\/admins": "Beheerders",
+            "Users\/members": "Leden",
+            "Users\/guests": "Gasten",
+            "Users\/hosts": "Gastheren",
+            "Users\/testers": "Testers",
+            "Users\/speakers": "Luidsprekers"
+        }
     },
     "people": {
         "People": "Mensen"

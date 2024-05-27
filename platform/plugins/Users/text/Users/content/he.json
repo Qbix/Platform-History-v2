@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "הוסף לטלפון שלי אנשי קשר",
         "addLabel": "מערכת יחסים חדשה",
-        "prompt": "תן לזה שם"
+        "prompt": "תן לזה שם",
+        "titles": {
+            "Users\/owners": "בעלים",
+            "Users\/admins": "מנהלי מערכת",
+            "Users\/members": "חברים",
+            "Users\/guests": "אורחים",
+            "Users\/hosts": "מארחים",
+            "Users\/testers": "בודקים",
+            "Users\/speakers": "רמקולים"
+        }
     },
     "people": {
         "People": "אֲנָשִׁים"

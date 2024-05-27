@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "Dodaj v moje stike v telefonu",
         "addLabel": "Novo razmerje",
-        "prompt": "Daj mu ime"
+        "prompt": "Daj mu ime",
+        "titles": {
+            "Users\/owners": "Lastniki",
+            "Users\/admins": "Administratorji",
+            "Users\/members": "člani",
+            "Users\/guests": "gostje",
+            "Users\/hosts": "Gostitelji",
+            "Users\/testers": "Testerji",
+            "Users\/speakers": "Zvočniki"
+        }
     },
     "people": {
         "People": "Ljudje"

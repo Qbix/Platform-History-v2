@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "Gehitu Nire telefonoko kontaktuetara",
         "addLabel": "Harreman Berria",
-        "prompt": "Eman izena"
+        "prompt": "Eman izena",
+        "titles": {
+            "Users\/owners": "Jabeak",
+            "Users\/admins": "Administratzaileak",
+            "Users\/members": "Kideak",
+            "Users\/guests": "Gonbidatuak",
+            "Users\/hosts": "Ostalariak",
+            "Users\/testers": "Probatzaileak",
+            "Users\/speakers": "Hizlariak"
+        }
     },
     "people": {
         "People": "Jendea"

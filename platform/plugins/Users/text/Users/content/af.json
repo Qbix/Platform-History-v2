@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "Voeg by my foon kontakte",
         "addLabel": "Nuwe Verhouding",
-        "prompt": "Gee dit &#39;n naam"
+        "prompt": "Gee dit &#39;n naam",
+        "titles": {
+            "Users\/owners": "Eienaars",
+            "Users\/admins": "Admins",
+            "Users\/members": "Lede",
+            "Users\/guests": "Gaste",
+            "Users\/hosts": "Gashere",
+            "Users\/testers": "Toetsers",
+            "Users\/speakers": "Luidsprekers"
+        }
     },
     "people": {
         "People": "Mense"

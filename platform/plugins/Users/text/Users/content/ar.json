@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "إضافة إلى جهات اتصال هاتفي",
         "addLabel": "علاقة جديدة",
-        "prompt": "أعطه إسما"
+        "prompt": "أعطه إسما",
+        "titles": {
+            "Users\/owners": "أصحاب",
+            "Users\/admins": "المشرفين",
+            "Users\/members": "أعضاء",
+            "Users\/guests": "ضيوف",
+            "Users\/hosts": "المضيفين",
+            "Users\/testers": "المختبرين",
+            "Users\/speakers": "مكبرات الصوت"
+        }
     },
     "people": {
         "People": "الناس"

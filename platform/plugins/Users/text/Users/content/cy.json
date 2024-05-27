@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "Ychwanegu at Fy Nghysylltiadau Ffôn",
         "addLabel": "Perthynas Newydd",
-        "prompt": "Rhowch enw iddo"
+        "prompt": "Rhowch enw iddo",
+        "titles": {
+            "Users\/owners": "Perchenogion",
+            "Users\/admins": "Gweinyddwyr",
+            "Users\/members": "Aelodau",
+            "Users\/guests": "Gwesteion",
+            "Users\/hosts": "Gwesteiwyr",
+            "Users\/testers": "Profwyr",
+            "Users\/speakers": "Siaradwyr"
+        }
     },
     "people": {
         "People": "Pobl"

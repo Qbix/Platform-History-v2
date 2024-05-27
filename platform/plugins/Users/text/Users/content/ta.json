@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "எனது தொலைபேசி தொடர்புகளில் சேர்",
         "addLabel": "புதிய உறவு",
-        "prompt": "அதற்கு ஒரு பெயர் கொடுங்கள்"
+        "prompt": "அதற்கு ஒரு பெயர் கொடுங்கள்",
+        "titles": {
+            "Users\/owners": "உரிமையாளர்கள்",
+            "Users\/admins": "நிர்வாகிகள்",
+            "Users\/members": "உறுப்பினர்கள்",
+            "Users\/guests": "விருந்தினர்கள்",
+            "Users\/hosts": "புரவலர்கள்",
+            "Users\/testers": "சோதனையாளர்கள்",
+            "Users\/speakers": "பேச்சாளர்கள்"
+        }
     },
     "people": {
         "People": "மக்கள்"

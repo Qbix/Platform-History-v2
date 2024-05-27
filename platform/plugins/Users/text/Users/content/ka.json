@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "ჩემი ტელეფონის კონტაქტებში დამატება",
         "addLabel": "ახალი ურთიერთობა",
-        "prompt": "დაარქვით სახელი"
+        "prompt": "დაარქვით სახელი",
+        "titles": {
+            "Users\/owners": "მფლობელები",
+            "Users\/admins": "ადმინები",
+            "Users\/members": "წევრები",
+            "Users\/guests": "სტუმრები",
+            "Users\/hosts": "მასპინძლებს",
+            "Users\/testers": "ტესტერები",
+            "Users\/speakers": "სპიკერები"
+        }
     },
     "people": {
         "People": "ხალხი"

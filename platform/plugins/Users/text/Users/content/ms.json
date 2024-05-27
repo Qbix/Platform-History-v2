@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "Tambahkan Pada Kenalan Telefon Saya",
         "addLabel": "Hubungan Baru",
-        "prompt": "Beri nama"
+        "prompt": "Beri nama",
+        "titles": {
+            "Users\/owners": "Pemilik",
+            "Users\/admins": "Pentadbir",
+            "Users\/members": "ahli",
+            "Users\/guests": "tetamu",
+            "Users\/hosts": "hos",
+            "Users\/testers": "Penguji",
+            "Users\/speakers": "Penceramah"
+        }
     },
     "people": {
         "People": "Orang ramai"

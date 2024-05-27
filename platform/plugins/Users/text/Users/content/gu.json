@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "મારા ફોન સંપર્કોમાં ઉમેરો",
         "addLabel": "નવો સંબંધ",
-        "prompt": "તેને એક નામ આપો"
+        "prompt": "તેને એક નામ આપો",
+        "titles": {
+            "Users\/owners": "માલિકો",
+            "Users\/admins": "એડમિન્સ",
+            "Users\/members": "સભ્યો",
+            "Users\/guests": "મહેમાનો",
+            "Users\/hosts": "યજમાનો",
+            "Users\/testers": "પરીક્ષકો",
+            "Users\/speakers": "સ્પીકર્સ"
+        }
     },
     "people": {
         "People": "લોકો"

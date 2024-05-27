@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "నా ఫోన్ పరిచయాలకు జోడించండి",
         "addLabel": "కొత్త సంబంధం",
-        "prompt": "దానికి పేరు పెట్టండి"
+        "prompt": "దానికి పేరు పెట్టండి",
+        "titles": {
+            "Users\/owners": "యజమానులు",
+            "Users\/admins": "నిర్వాహకులు",
+            "Users\/members": "సభ్యులు",
+            "Users\/guests": "అతిథులు",
+            "Users\/hosts": "హోస్ట్‌లు",
+            "Users\/testers": "పరీక్షకులు",
+            "Users\/speakers": "స్పీకర్లు"
+        }
     },
     "people": {
         "People": "ప్రజలు"

@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "Adicionar aos contatos do meu telefone",
         "addLabel": "Novo relacionamento",
-        "prompt": "Dê um nome"
+        "prompt": "Dê um nome",
+        "titles": {
+            "Users\/owners": "os Proprietários",
+            "Users\/admins": "Administradores",
+            "Users\/members": "Membros",
+            "Users\/guests": "Convidados",
+            "Users\/hosts": "Anfitriões",
+            "Users\/testers": "Testadores",
+            "Users\/speakers": "caixas de som"
+        }
     },
     "people": {
         "People": "Pessoas"

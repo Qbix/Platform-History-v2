@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "Добавить в контакты моего телефона",
         "addLabel": "Новые отношения",
-        "prompt": "Дайте ему имя"
+        "prompt": "Дайте ему имя",
+        "titles": {
+            "Users\/owners": "Владельцы",
+            "Users\/admins": "Админы",
+            "Users\/members": "Члены",
+            "Users\/guests": "Гости",
+            "Users\/hosts": "Хозяева",
+            "Users\/testers": "Тестеры",
+            "Users\/speakers": "Динамики"
+        }
     },
     "people": {
         "People": "Люди"

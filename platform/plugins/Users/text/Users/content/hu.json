@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "Hozzáadás a telefonhoz névjegyekhez",
         "addLabel": "Új kapcsolat",
-        "prompt": "Adj neki nevet"
+        "prompt": "Adj neki nevet",
+        "titles": {
+            "Users\/owners": "Tulajdonosok",
+            "Users\/admins": "Adminok",
+            "Users\/members": "tagok",
+            "Users\/guests": "Vendégek",
+            "Users\/hosts": "Otthont ad",
+            "Users\/testers": "Tesztelők",
+            "Users\/speakers": "Hangszórók"
+        }
     },
     "people": {
         "People": "Emberek"

@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "افزودن به مخاطبین تلفن من",
         "addLabel": "رابطه جدید",
-        "prompt": "اسمش را بگذار"
+        "prompt": "اسمش را بگذار",
+        "titles": {
+            "Users\/owners": "صاحبان",
+            "Users\/admins": "ادمین ها",
+            "Users\/members": "اعضا",
+            "Users\/guests": "میهمانان",
+            "Users\/hosts": "میزبان ها",
+            "Users\/testers": "آزمایش کننده ها",
+            "Users\/speakers": "بلندگوها"
+        }
     },
     "people": {
         "People": "مردم"

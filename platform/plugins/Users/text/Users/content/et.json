@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "Lisa minu telefoni kontaktidesse",
         "addLabel": "Uus suhe",
-        "prompt": "Andke sellele nimi"
+        "prompt": "Andke sellele nimi",
+        "titles": {
+            "Users\/owners": "Omanikud",
+            "Users\/admins": "Administraatorid",
+            "Users\/members": "liikmed",
+            "Users\/guests": "Külalised",
+            "Users\/hosts": "Saatejuhid",
+            "Users\/testers": "Testijad",
+            "Users\/speakers": "Kõlarid"
+        }
     },
     "people": {
         "People": "Inimesed"

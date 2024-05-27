@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "Ongeza Kwenye Anwani Zangu za Simu",
         "addLabel": "Uhusiano Mpya",
-        "prompt": "Ipe jina"
+        "prompt": "Ipe jina",
+        "titles": {
+            "Users\/owners": "Wamiliki",
+            "Users\/admins": "Wasimamizi",
+            "Users\/members": "Wanachama",
+            "Users\/guests": "Wageni",
+            "Users\/hosts": "Wenyeji",
+            "Users\/testers": "Wajaribu",
+            "Users\/speakers": "Wazungumzaji"
+        }
     },
     "people": {
         "People": "Watu"

@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "Żid Mal-Kuntatti tat-Telefown Tiegħi",
         "addLabel": "Relazzjoni Ġdida",
-        "prompt": "Agħtiha isem"
+        "prompt": "Agħtiha isem",
+        "titles": {
+            "Users\/owners": "Sidien",
+            "Users\/admins": "Amministraturi",
+            "Users\/members": "Membri",
+            "Users\/guests": "Mistednin",
+            "Users\/hosts": "Ospitanti",
+            "Users\/testers": "Testers",
+            "Users\/speakers": "Kelliema"
+        }
     },
     "people": {
         "People": "Nies"

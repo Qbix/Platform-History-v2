@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "Pridať do kontaktov v mojom telefóne",
         "addLabel": "Nový vzťah",
-        "prompt": "Daj tomu meno"
+        "prompt": "Daj tomu meno",
+        "titles": {
+            "Users\/owners": "Vlastníci",
+            "Users\/admins": "Správcovia",
+            "Users\/members": "členov",
+            "Users\/guests": "Hostia",
+            "Users\/hosts": "Hostitelia",
+            "Users\/testers": "Testeri",
+            "Users\/speakers": "Reproduktory"
+        }
     },
     "people": {
         "People": "Ľudia"

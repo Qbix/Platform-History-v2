@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "Dodaj u kontakte mog telefona",
         "addLabel": "Nova veza",
-        "prompt": "Daj mu ime"
+        "prompt": "Daj mu ime",
+        "titles": {
+            "Users\/owners": "Vlasnici",
+            "Users\/admins": "Administratori",
+            "Users\/members": "članovi",
+            "Users\/guests": "Gosti",
+            "Users\/hosts": "Domaćini",
+            "Users\/testers": "Testeri",
+            "Users\/speakers": "Zvučnici"
+        }
     },
     "people": {
         "People": "narod"

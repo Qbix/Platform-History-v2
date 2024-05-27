@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "Lisää puhelimeen yhteystietoihin",
         "addLabel": "Uusi suhde",
-        "prompt": "Anna sille nimi"
+        "prompt": "Anna sille nimi",
+        "titles": {
+            "Users\/owners": "Omistajat",
+            "Users\/admins": "Järjestelmänvalvojat",
+            "Users\/members": "Jäsenet",
+            "Users\/guests": "Vieraita",
+            "Users\/hosts": "Isännät",
+            "Users\/testers": "Testaajat",
+            "Users\/speakers": "Kaiuttimet"
+        }
     },
     "people": {
         "People": "Ihmiset"

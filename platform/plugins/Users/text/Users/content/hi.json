@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "मेरे फ़ोन संपर्कों में जोड़ें",
         "addLabel": "नए रिश्ते",
-        "prompt": "उसे एक नाम दे दो"
+        "prompt": "उसे एक नाम दे दो",
+        "titles": {
+            "Users\/owners": "मालिकों",
+            "Users\/admins": "व्यवस्थापक",
+            "Users\/members": "सदस्यों",
+            "Users\/guests": "अतिथियों",
+            "Users\/hosts": "मेजबान",
+            "Users\/testers": "परीक्षक",
+            "Users\/speakers": "वक्ताओं"
+        }
     },
     "people": {
         "People": "लोग"

@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "Cuir le Mo Theagmhálaithe Fón",
         "addLabel": "Gaol Nua",
-        "prompt": "Tabhair ainm air"
+        "prompt": "Tabhair ainm air",
+        "titles": {
+            "Users\/owners": "Úinéirí",
+            "Users\/admins": "Riarthóirí",
+            "Users\/members": "Baill",
+            "Users\/guests": "Aíonna",
+            "Users\/hosts": "Óstach",
+            "Users\/testers": "Tástálaithe",
+            "Users\/speakers": "Cainteoirí"
+        }
     },
     "people": {
         "People": "Daoine"

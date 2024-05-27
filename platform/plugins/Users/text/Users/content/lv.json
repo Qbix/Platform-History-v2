@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "Pievienot mana tālruņa kontaktpersonām",
         "addLabel": "Jaunas attiecības",
-        "prompt": "Piešķiriet tai nosaukumu"
+        "prompt": "Piešķiriet tai nosaukumu",
+        "titles": {
+            "Users\/owners": "Īpašnieki",
+            "Users\/admins": "Admini",
+            "Users\/members": "Biedri",
+            "Users\/guests": "Viesi",
+            "Users\/hosts": "Saimnieki",
+            "Users\/testers": "Testētāji",
+            "Users\/speakers": "Skaļruņi"
+        }
     },
     "people": {
         "People": "Cilvēki"

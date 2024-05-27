@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "Bæta við tengiliði í símanum mínum",
         "addLabel": "Nýtt samband",
-        "prompt": "Gefðu því nafn"
+        "prompt": "Gefðu því nafn",
+        "titles": {
+            "Users\/owners": "Eigendur",
+            "Users\/admins": "Stjórnendur",
+            "Users\/members": "Meðlimir",
+            "Users\/guests": "Gestir",
+            "Users\/hosts": "Gestgjafar",
+            "Users\/testers": "Prófunarmenn",
+            "Users\/speakers": "Hátalarar"
+        }
     },
     "people": {
         "People": "Fólk"

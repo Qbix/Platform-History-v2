@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "Dodaj do moich kontaktów w telefonie",
         "addLabel": "Nowy związek",
-        "prompt": "Daj temu imię"
+        "prompt": "Daj temu imię",
+        "titles": {
+            "Users\/owners": "Właściciele",
+            "Users\/admins": "Administratorzy",
+            "Users\/members": "Członkowie",
+            "Users\/guests": "Goście",
+            "Users\/hosts": "Zastępy niebieskie",
+            "Users\/testers": "Testery",
+            "Users\/speakers": "Głośniki"
+        }
     },
     "people": {
         "People": "Ludzie"

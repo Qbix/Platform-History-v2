@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "Føj til Min telefon-kontakter",
         "addLabel": "Nyt forhold",
-        "prompt": "Giv det et navn"
+        "prompt": "Giv det et navn",
+        "titles": {
+            "Users\/owners": "Ejere",
+            "Users\/admins": "administratorer",
+            "Users\/members": "Medlemmer",
+            "Users\/guests": "Gæster",
+            "Users\/hosts": "Værter",
+            "Users\/testers": "Testere",
+            "Users\/speakers": "Højttalere"
+        }
     },
     "people": {
         "People": "Mennesker"

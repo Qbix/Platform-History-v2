@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "আমার ফোন পরিচিতি যোগ করুন",
         "addLabel": "নতুন সম্পর্ক",
-        "prompt": "এটার একটি নাম দাও"
+        "prompt": "এটার একটি নাম দাও",
+        "titles": {
+            "Users\/owners": "মালিকদের",
+            "Users\/admins": "অ্যাডমিনস",
+            "Users\/members": "সদস্যরা",
+            "Users\/guests": "অতিথিরা",
+            "Users\/hosts": "হোস্ট",
+            "Users\/testers": "পরীক্ষক",
+            "Users\/speakers": "বক্তারা"
+        }
     },
     "people": {
         "People": "মানুষ"

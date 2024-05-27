@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "내 전화 연락처에 추가",
         "addLabel": "새로운 관계",
-        "prompt": "이름을 지어주세요"
+        "prompt": "이름을 지어주세요",
+        "titles": {
+            "Users\/owners": "소유자",
+            "Users\/admins": "관리자",
+            "Users\/members": "회원",
+            "Users\/guests": "손님",
+            "Users\/hosts": "호스트",
+            "Users\/testers": "테스터",
+            "Users\/speakers": "스피커"
+        }
     },
     "people": {
         "People": "사람들"

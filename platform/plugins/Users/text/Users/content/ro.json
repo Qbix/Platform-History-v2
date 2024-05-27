@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "Adăugați la contactele mele din telefon",
         "addLabel": "Noua Relatie",
-        "prompt": "Dă-i un nume"
+        "prompt": "Dă-i un nume",
+        "titles": {
+            "Users\/owners": "Proprietarii",
+            "Users\/admins": "Administratori",
+            "Users\/members": "Membrii",
+            "Users\/guests": "Vizitatori",
+            "Users\/hosts": "Gazde",
+            "Users\/testers": "Testeri",
+            "Users\/speakers": "Difuzoare"
+        }
     },
     "people": {
         "People": "oameni"

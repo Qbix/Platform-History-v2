@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "ወደ ስልኬ እውቂያዎች አክል",
         "addLabel": "አዲስ ግንኙነት",
-        "prompt": "ስም ስጠው"
+        "prompt": "ስም ስጠው",
+        "titles": {
+            "Users\/owners": "ባለቤቶች",
+            "Users\/admins": "አስተዳዳሪዎች",
+            "Users\/members": "አባላት",
+            "Users\/guests": "እንግዶች",
+            "Users\/hosts": "አስተናጋጆች",
+            "Users\/testers": "ሞካሪዎች",
+            "Users\/speakers": "ተናጋሪዎች"
+        }
     },
     "people": {
         "People": "ሰዎች"

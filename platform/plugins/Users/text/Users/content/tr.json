@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "Telefon Kişilerime Ekle",
         "addLabel": "Yeni ilişki",
-        "prompt": "Bir isim ver"
+        "prompt": "Bir isim ver",
+        "titles": {
+            "Users\/owners": "Sahipler",
+            "Users\/admins": "Yöneticiler",
+            "Users\/members": "Üyeler",
+            "Users\/guests": "Misafirler",
+            "Users\/hosts": "Toplantı sahipleri",
+            "Users\/testers": "Test kullanıcıları",
+            "Users\/speakers": "Hoparlörler"
+        }
     },
     "people": {
         "People": "İnsanlar"

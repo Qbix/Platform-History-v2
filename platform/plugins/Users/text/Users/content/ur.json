@@ -163,7 +163,16 @@
     "labels": {
         "addToPhonebook": "میرے فون رابطوں میں شامل کریں۔",
         "addLabel": "نیا رشتہ",
-        "prompt": "اسے ایک نام دیں۔"
+        "prompt": "اسے ایک نام دیں۔",
+        "titles": {
+            "Users\/owners": "مالکان",
+            "Users\/admins": "ایڈمنز",
+            "Users\/members": "ممبران",
+            "Users\/guests": "مہمانوں",
+            "Users\/hosts": "میزبان",
+            "Users\/testers": "ٹیسٹرز",
+            "Users\/speakers": "مقررین"
+        }
     },
     "people": {
         "People": "لوگ"
