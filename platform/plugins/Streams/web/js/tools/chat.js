@@ -690,6 +690,11 @@ Q.Tool.define('Streams/chat', function(options) {
 		);
 	},
 
+	more: function (callback) {
+		// for backward compatibility
+		this.earlierMessages.apply(this, arguments);
+	},
+
 	earlierMessages: function(callback){
 		var tool = this;
 		var state = tool.state;

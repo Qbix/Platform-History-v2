@@ -414,6 +414,13 @@ Streams.iconUrl = function(icon, size) {
 		: Q.url('{{Streams}}/img/icons/'+src);
 };
 
+Streams.getSocket = function(publisherId, streamName) {
+	return Q.Socket.get('Q', Q.nodeUrl({
+		publisherId: publisherId,
+		streamName: streamName
+	}));
+};
+
 var priv = {
     _messageHandlers: {},
     _ephemeralHandlers: {},
