@@ -140,4 +140,4 @@ Q.Template.set('Streams/metrics/iterative',
 	{text: ['Streams/content']}
 );
 
-})(window, Q, jQuery);
+})(window, Q, Q.jQuery);
