@@ -70,42 +70,44 @@ function Users_Vote (fields) {
 		var self = this;
 		var total = new Users.Total({forId: this.forId});
 		total.retrieve('*', true, true, function(err, total_res) {
-			if (!err) {
-				if (!total_res.length) {
-					total.weightTotal = 0;
-					total.voteCount = 0;
-					total.value = 0;
-				} else {
-					total = total_res[0];
+			if (err) {
+				return console.log(err);
+			}
+			if (!total_res.length) {
+				total.weightTotal = 0;
+				total.voteCount = 0;
+				total.value = 0;
+			} else {
+				total = total_res[0];
+			}
+			var weightTotal = total.weightTotal;
+			var vote = new Users.Vote({userId: modifiedFields.userId, forId: modifiedFields.forId});
+			vote.retrieve('*', true, function (err, vote_res) {
+				if (!err) {
+					return console.log(err);
 				}
-				var weightTotal = total.weightTotal;
-				var vote = new Users.Vote({userId: modifiedFields.userId, forId: modifiedFields.forId});
-				vote.retrieve('*', true, function (err, vote_res) {
-					if (!err) {
-						if (!vote_res.length) {
-							total.weightTotal += modifiedFields.weight;
-							total.voteCount += 1;
-							total.value = (total.value * weightTotal + modifiedFields.value * modifiedFields.weight) / (total.weightTotal);
-						} else {
-							vote = vote_res[0];
-							if (!total.voteCount) {
-								// something is wrong
-								total.voteCount = 1;
-							}
-							total.weightTotal += (modifiedFields.weight - vote.weight);
-							if (!total.weightTotal) {
-								_rollback(total, self.className + ".beforeSaveExecute(): total.weight = 0!");
-							}
-							total.value =
-								(total.value * weightTotal 
-									- vote.value * vote.weight 
-									+ modifiedFields.value * modifiedFields.weight) / (total.weightTotal);
-						}
-						_cache = total;
-						query.resume();
-					} else console.log(err);
-				});
-			} else console.log(err);
+				if (!vote_res.length) {
+					total.weightTotal += modifiedFields.weight;
+					total.voteCount += 1;
+					total.value = (total.value * weightTotal + modifiedFields.value * modifiedFields.weight) / (total.weightTotal);
+				} else {
+					vote = vote_res[0];
+					if (!total.voteCount) {
+						// something is wrong
+						total.voteCount = 1;
+					}
+					total.weightTotal += (modifiedFields.weight - vote.weight);
+					if (!total.weightTotal) {
+						_rollback(total, self.className + ".beforeSaveExecute(): total.weight = 0!");
+					}
+					total.value =
+						(total.value * weightTotal 
+							- vote.value * vote.weight 
+							+ modifiedFields.value * modifiedFields.weight) / (total.weightTotal);
+				}
+				_cache = total;
+				query.resume();
+			});
 		}).begin().lock().resume();
 		if (this.prototype.beforeSaveExecute) {
 			return this.prototype.beforeSaveExecute(query, modifiedFields);
@@ -123,48 +125,6 @@ function Users_Vote (fields) {
 	 *	Error object if any
 	 */
 	this.afterSaveExecute = _afterHandler;
-	
-	/**
-	 * Update total votes in Users.Total when removing a vote
-	 * @method beforeRemoveExecute
-	 * @param query {Db.Query.Mysql}
-	 *	The query being excecuted
-	 */
-	this.beforeRemoveExecute = function (query) {
-		var self = this;
-		var vote = new Users.Vote({userId: this.userId, forId: this.forId});
-		vote.retrieve('*', true, true, function(err, vote_res) {
-			if (!err) {
-				if (vote_res.length) {
-					vote = vote_res[0];
-					var total = new Users.Total({forId: vote.forId});
-					total.retrieve('*', true, true, function (err, total_res) {
-						if (!err) {
-							if (!total_res.length) {
-								// something is wrong ... if there are votes, there should have been a total
-								total.weightTotal = 0;
-								total.voteCount = 0;
-								total.value = 0;
-							} else {
-								total = total_res[0];
-								var weightTotal = total.weightTotal;
-								total.weightTotal -= vote.weight;
-								if (!total.weightTotal) {
-									total.value = 0;
-								} else {
-									total.value = 
-										(total.value * weightTotal - vote.value * vote.weight) / (total.weightTotal);
-								}
-								total.voteCount -= 1;
-							}
-							_cache = total;
-							query.resume();
-						} else console.log(err);
-					}).lock().resume();
-				} else query.resume();
-			} else console.log(err);
-		}).begin().resume();
-	};
 
 	/**
 	 * Commit or rollback transaction when deleting a vote
