@@ -15069,7 +15069,7 @@ Q.Dialogs.push.options = {
 	beforeLoad: new Q.Event(),
 	onActivate: new Q.Event(),
 	beforeClose: new Q.Event(),
-	onClose: null,
+	onClose: new Event(),
 	closeOnEsc: true,
 	removeOnClose: null,
 	hidePrevious: true
