@@ -159,7 +159,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                     return $(this).data('label') === obj.label
                 });
                 if ($newlyAdded.length != 0) {
-                    tool.onClickHandler($newlyAdded); // start to edit it
+                    tool.onClickHandler($newlyAdded, {noClose: true}); // start to edit it
                 }
             });
         });
@@ -191,7 +191,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
      * overwise - add new label
      * @return {undefined}
      */
-    onClickHandler: function($item) {
+    onClickHandler: function($item, options) {
 
         var isEdit = ($item instanceof $) ? true : false;
 
@@ -226,7 +226,8 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                                 src: Q.url("{{Users}}/img/icons/default/200.png"),
                                 canAddWeb3: state.canAddWeb3,
                             }
-                        }
+                        },
+                        noClose: options && options.noClose
                     }
                 ,
                 {
