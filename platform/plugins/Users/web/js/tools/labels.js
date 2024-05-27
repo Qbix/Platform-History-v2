@@ -233,7 +233,6 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 					className: 'Q_alert',
                     fullscreen: false,
                     hidePrevious: true, 
-                    noClose: true,
                     onActivate: function (dialog) {
                         var $img = $('img', dialog);
                         var $addButton = $("button[name=addLabel]", dialog);
@@ -923,7 +922,7 @@ Q.Template.set('Users/labels', `
 {{/if}}
 {{#each labels}}
     <li class="Users_labels_label" data-label="{{this.label}}" data-icon="{{this.icon}}" data-title="{{this.title}}" data-description="{{this.description}}">
-      <img class="Users_labels_icon" src="{{call "iconUrl" iconSize}}" alt="label icon">
+      <img class="Users_labels_icon" src="{{call "iconUrl" ../iconSize}}" alt="label icon">
       <div class="Users_labels_title">{{this.title}}</div>
     </li>
 {{/each}}
