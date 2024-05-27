@@ -1779,12 +1779,15 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 		);
 
 		Q.Text.get('Users/content', function(err, text) {
-			$("label[for=Users_agree] a", $formContent).on(Q.Pointer.fastclick, function () {
+			$("label[for=Users_agree] a", $formContent).on(Q.Pointer.click, function () {
 				Q.Dialogs.push({
 					title: text.authorize.TermsTitle,
 					className: 'Users_authorize_terms',
+					fullscreen: true,
 					url: this.href
 				});
+
+				return false;
 			});
 		});
 	}
