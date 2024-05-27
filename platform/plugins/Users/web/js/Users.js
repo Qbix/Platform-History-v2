@@ -1310,6 +1310,7 @@
 				if (msg) {
 					return Users.onError.handle(msg, err);
 				}
+				Q.setObject('Q.Socket.connect.options.auth.capability', JSON.stringify(Users.capability));
 				var user = res.slots.data.user;
 				if (!user && Users.loggedInUser) {
 					Users.loggedInUser = null;
