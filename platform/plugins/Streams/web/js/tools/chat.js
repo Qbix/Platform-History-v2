@@ -690,7 +690,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		);
 	},
 
-	more: function(callback){
+	earlierMessages: function(callback){
 		var tool = this;
 		var state = tool.state;
 		if (!state.stream) {
@@ -713,12 +713,51 @@ Q.Tool.define('Streams/chat', function(options) {
 			}
 
 			Q.each(messages, function (ordinal) {
-				state.earliest = ordinal;
+				state.earliest = state.earliest 
+					? Math.min(state.earliest, ordinal)
+					: ordinal;
+				state.latest = Math.max(state.latest, ordinal);
 				return false;
 			}, {ascending: true, numeric: true});
 			callback.call(tool, messages);
 		});
 	},
+
+	laterMessages: function (callback) {
+		var tool = this;
+		var state = tool.state;
+		if (!state.stream) {
+			return;
+		}
+		var params = {
+			min  : state.latest+1
+		};
+
+		Q.Streams.Message.get(state.publisherId, state.streamName, params,
+		function(err, messages){
+			if (err) {
+				return Q.handle(state.onError, this, [err]);
+			}
+			var results = tool.prepareMessages(messages);
+			tool.renderMessages(results, function (items) {
+				var least = 1000;
+				var $scm = tool.$('.Streams_chat_messages');
+				Q.each(items, function (ordinal, $element) {
+					$element.appendTo($scm).activate();
+				}, {ascending: false});
+				$scm.scrollTop($scm[0].scrollHeight);
+				tool.processDOM();
+			});
+			Q.each(messages, function (ordinal) {
+				state.latest = state.latest 
+					? Math.max(state.latest, ordinal)
+					: ordinal;
+				return false;
+			}, {ascending: true, numeric: true});
+			callback.call(tool, messages);
+		});
+	},
+
 	/**
 	 * get more messages
 	*/
@@ -774,11 +813,11 @@ Q.Tool.define('Streams/chat', function(options) {
 
 		if (state.more.isClick) {
 			tool.$('.Streams_chat_more').click(function(){
-				tool.more(tool.renderMore);
+				tool.earlierMessages(tool.renderMore);
 			});
 		} else {
 			this.niceScroll(function(){
-				tool.more(tool.renderMore);
+				tool.earlierMessages(tool.renderMore);
 			});
 		}
 
@@ -1299,6 +1338,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		var state = tool.state;
 		tool.menuItems = {};
 		state.earliest = null;
+		state.latest = null;
 		callback = callback || function () {
 			Q.Visual.waitUntilVisible(tool, function () {
 				Q.activate(tool.element, function () {
@@ -1316,7 +1356,10 @@ Q.Tool.define('Streams/chat', function(options) {
 				return;
 			}
 			Q.each(messages, function (ordinal) {
-				state.earliest = ordinal;
+				state.earliest = state.earliest 
+					? Math.min(state.earliest, ordinal)
+					: ordinal;
+				state.latest = Math.max(state.latest, ordinal);
 				return false;
 			}, {ascending: true, numeric: true});
 
@@ -1363,7 +1406,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			}
 			function _continue(err) {
 				state.stream = err ? null : this;
-				tool.more(function () {
+				tool.earlierMessages(function () {
 					_render.apply(this, arguments);
 	
 					state.stream && state.stream.refresh(null, {
