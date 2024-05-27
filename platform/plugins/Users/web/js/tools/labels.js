@@ -200,6 +200,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
         
         Q.Dialogs.push(
             Q.extend(
+                options || {},
                 isEdit 
                 ?
                     {
@@ -226,8 +227,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                                 src: Q.url("{{Users}}/img/icons/default/200.png"),
                                 canAddWeb3: state.canAddWeb3,
                             }
-                        },
-                        noClose: options && options.noClose
+                        }
                     }
                 ,
                 {
