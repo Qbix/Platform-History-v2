@@ -414,6 +414,14 @@ Streams.iconUrl = function(icon, size) {
 		: Q.url('{{Streams}}/img/icons/'+src);
 };
 
+/**
+ * Get the Q.Socket, if any, corresponding to a stream
+ * @static
+ * @method getSocket
+ * @param {String} publisherId
+ * @param {String} streamName
+ * @return {Q.Socket|null} the Q.socket, or null if not connected
+ */
 Streams.getSocket = function(publisherId, streamName) {
 	return Q.Socket.get('Q', Q.nodeUrl({
 		publisherId: publisherId,
