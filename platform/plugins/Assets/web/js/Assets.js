@@ -478,7 +478,7 @@
 			css: "{{Assets}}/css/tools/AssetsPayment.css"
 		},
 		"Assets/history": "{{Assets}}/js/tools/history.js",
-		"Assets/service/preview": "{{Assets}}/js/tools/servicePreview.js",
+		"Assets/service/preview": "{{Assets}}/js/tools/service/preview.js",
 		"Assets/NFT/preview": "{{Assets}}/js/tools/NFT/preview.js",
 		"Assets/NFT/series": "{{Assets}}/js/tools/NFT/series.js",
 		"Assets/NFT/series/preview": "{{Assets}}/js/tools/NFT/seriesPreview.js",
@@ -490,8 +490,8 @@
 		},
 		"Assets/NFT/list": "{{Assets}}/js/tools/NFT/list.js",
 		"Assets/plan/preview": {
-			js: "{{Assets}}/js/tools/planPreview.js",
-			css: "{{Assets}}/css/tools/PlanPreview.css"
+			js: "{{Assets}}/js/tools/plan/preview.js",
+			css: "{{Assets}}/css/tools/plan/preview.css"
 		},
 		"Assets/plan": {
 			js: ["{{Assets}}/js/tools/plan.js", "{{Q}}/js/datejs/date.js"],

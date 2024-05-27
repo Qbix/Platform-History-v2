@@ -263,7 +263,7 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 
 Q.Template.set('Assets/plan/preview',
 `<div class="Streams_preview_container Streams_preview_view Q_clearfix">
-	<img class="Streams_preview_icon">
+	<img class="Streams_preview_icon Q_square">
 	<div class="Streams_preview_contents">
 		<h3 class="Streams_preview_title Streams_preview_view">{{title}}</h3>
 		<span class="Assets_plan_preview_price">{{price}}</span>

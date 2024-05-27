@@ -94,6 +94,7 @@ body { position: relative; margin: 0; }
 .Q_forceRedraw { animation: Q_forceRedraw 4s infinite; }
 .Q_pagebreak { page-break-after: always; }
 .Q_collapsed { border-bottom: solid 2px #777 !important; }
+.Q_square { aspect-ratio: 1 !important; height: auto !important; object-fit: cover !important; }
 .Q_compact {}
 .Q_editable { color: #225 !important; }
 .Q_editing {}
