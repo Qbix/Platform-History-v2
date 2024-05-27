@@ -1966,9 +1966,8 @@ abstract class Users extends Base_Users
 		$url = (Q_Valid::url($url) or mb_substr($icon, 0, 2) === '{{') 
 			? $url 
 			: "{{Users}}/img/icons/$url";
-		$baseUrl = Q_Request::baseUrl();
 		$themedUrl = Q_Html::themedUrl($url);
-		if ($basename !== false && Q::startsWith($themedUrl, $baseUrl)) {
+		if ($basename !== false && Q_Image::shouldUseBasenames($themedUrl)) {
 			if ($basename === null or $basename === true) {
 				$basename = '40';
 			}

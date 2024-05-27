@@ -1198,7 +1198,7 @@ class Streams_Stream extends Base_Streams_Stream
 	 * Method is called before setting the field and can convert an array to a JSON string
 	 * it contains a JSON array.
 	 * @method beforeSet_attributes
-	 * @param {string|array} $value
+	 * @param {string|array|null} $value
 	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
 	 */
 	function beforeSet_attributes($value)
@@ -1209,6 +1209,8 @@ class Streams_Stream extends Base_Streams_Stream
 		} else if (is_array($value)) {
 			$arr = $value;
 			$str = Q::json_encode($value);
+		} else {
+			$str = $value;
 		}
 		return parent::beforeSet_attributes($str);
 	}
