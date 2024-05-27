@@ -216,6 +216,7 @@ Q.exports(function (Users, priv) {
 
 		// login complete - run onSuccess handler
 		function _onComplete(user) {
+			Q.setObject('Q.Socket.connect.options.auth.capability', JSON.stringify(Users.capability));
 			var pn = priv.used || 'native';
 			var ret = Q.handle(o.onResult, this, [user, o, priv, pn]);
 			if (false !== ret) {
