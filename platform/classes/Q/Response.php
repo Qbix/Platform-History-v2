@@ -702,7 +702,7 @@ class Q_Response
 				Q_Response::setScriptData("Q.image.maxStretch.$type", $maxStretch);
 			}
 			if ($defaultSize) {
-				Q_Response::setScriptData("Q.image.defaultSize.$defaultSize", $defaultSize);
+				Q_Response::setScriptData("Q.image.defaultSize.$type", $defaultSize);
 			}
 		}
 	}

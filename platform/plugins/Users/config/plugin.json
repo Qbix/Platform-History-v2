@@ -112,7 +112,7 @@
 				"sizes": ["40", "50", "80", "1000"],
 				"defaultSize": "40",
 				"defaultCacheBust": 1000,
-				"maxStretch": 3
+				"maxStretch": 5
 			},
             "Users/labels": {
 				"sizes": ["40", "50", "80", "200"],

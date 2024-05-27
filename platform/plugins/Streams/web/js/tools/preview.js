@@ -76,11 +76,13 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 	if (!si || !si.showSize) {
 		throw new Q.Error("Streams/preview tool: missing options.imagepicker.showSize");
 	}
+	if (!si.maxStretch) {
+		si.maxStretch = Q.image.maxStretch[typeof si.saveSizeName === "string" ? si.saveSizeName : 'Streams/image'];
+	}
 	if (!si.saveSizeName) {
 		si.saveSizeName = Q.extend({}, state.sizes || Q.image.sizes['Streams/image']);
-	}
-	if (!si.maxStretch) {
-		si.maxStretch = Q.image.maxStretch['Streams/image'];
+	} else if (typeof si.saveSizeName === "string") {
+		si.saveSizeName = Q.image.sizes[si.saveSizeName];
 	}
 	var $te = $(tool.element);
 	$te.addClass('Streams_preview');
