@@ -324,6 +324,19 @@ class Q_Image
 		}
 		return empty($results) ? null : @file_get_contents(reset($results));
 	}
+
+	static function shouldUseBasenames($themedUrl)
+	{
+		$baseUrls = Q_Config::get('Q', 'images', 'shouldUseBasenames', array());
+		$baseUrls[] = Q_Request::baseUrl();;
+		foreach ($baseUrls as $b) {
+			if (Q::startsWith($themedUrl, $b)) {
+				return true;
+				break;
+			}
+		}
+		return false;
+	}
 	
 	/**
 	 * Saves an image, usually sent by the client, in one or more sizes.
