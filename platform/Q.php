@@ -132,6 +132,12 @@ if (defined('APP_WEB_DIR')) {
 	Q_Bootstrap::addAlias();
 	Q_Request::baseUrl();
 }
+$clearCache = Q_Request::special('clearCache');
+if (isset($clearCache)) {
+	if ($clearCache == Q_Config::get('Q', 'cache', 'secret', '')) {
+		Q_Cache::clear(true);
+	}
+}
 Q::$bootstrapped = true;
 
 if (empty($Q_installing)) {

@@ -133,8 +133,6 @@ class Q_Cache
 		$namespace = self::$namespace;
 		$store = self::fetchStore($fetched);
 		if (!isset($key) or $key === true) {
-			$store = array();
-			self::$changed[$namespace][$key] = true; // it will be saved at shutdown
 			if ($key === true) {
 				if (is_callable('apcu_clear_cache')) {
 					apcu_clear_cache();
@@ -142,6 +140,7 @@ class Q_Cache
 					apc_clear_cache('user');
 				}
 			}
+			$store = array();
 			return $store;
 		}
 		if (array_key_exists($key, $store)) {

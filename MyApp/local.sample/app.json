@@ -24,6 +24,10 @@
 		"internal": {
 			"secret": "TODO: CHANGE TO SOME RANDOM STRING, FOR SIGNING DATA TO BE SENT BACK TO US"
 		},
+		"cache": {
+			"duration": 600,
+			"secret": "" /* you can set a secret to expect in Q.clearCache field to clear the cache */
+		}
 		"images": {
 			"pixabay": null /* {
 				"username": "TODO: YOUR USERNAME HERE",
