@@ -2,7 +2,7 @@
 
 function Websites_before_Q_Uri_fromUrl($params, &$result)
 {
-	$enabled = Q_Config::get('Websites', 'permalinks', 'regex', false);
+	$enabled = Q_Config::get('Websites', 'permalinks', 'enabled', false);
 	if (!$enabled || !Q::$bootstrapped
 	|| $params['url'] === Q_Request::serviceWorkerURL()) {
 		return;
