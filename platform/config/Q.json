@@ -26,7 +26,7 @@
 			"extensions": ["txt", "xml", "png", "jpeg", "gif", "jpg", "pdf", "js", "ogg", "mp3", "css", "cur"]
 		},
 		"cache": {
-			"duration": 0
+			"duration": 600
 		},
 		"exception": {
 			"showTrace": false,

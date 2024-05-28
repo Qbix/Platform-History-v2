@@ -499,15 +499,14 @@ class Q
 		$ignoreCache = false)
 	{
 		$filename = str_replace('/', DS, $filename);
+		$result = Q::event('Q/realPath', compact('filename', 'ignoreCache'), 'before');
+		if (isset($result)) {
+			return $result;
+		}
 		if (!$ignoreCache) {
-			// Try the extended cache mechanism, if any
-			$result = Q::event('Q/realPath', array(), 'before');
-			if (isset($result)) {
-				return $result;
-			}
 			// Try the native cache mechanism
-			$result = Q_Cache::get("Q::realPath\t$filename");
-			if (isset($result)) {
+			$result = Q_Cache::get("Q::realPath\t$filename", null, $fetched);
+			if ($fetched) {
 				return $result;
 			}
 		}
@@ -531,7 +530,10 @@ class Q
 	    }
 
 		// Notify the cache mechanism, if any
-		Q_Cache::set("Q::realPath\t$filename", $result);
+		if ($result !== false) {
+			Q_Cache::set("Q::realPath\t$filename", $result);
+		}
+
 		/**
 		 * @event Q/realPath {after}
 		 * @param {string} $result
@@ -661,9 +663,15 @@ class Q
 			return $result;
 		}
 		
-		$namespace = "Q::readFile\t$filename";
-		if (empty($options['ignoreCache'])) {
-			$result = Q_Cache::get('content', null, $namespace);
+		$exclude = Q::startsWith($filename, APP_LOCAL_DIR); // SECURITY reasons
+		if (!$exclude) {
+			$key = "Q::readFile\t$filename";
+			if (empty($options['ignoreCache'])) {
+				$result = Q_Cache::get($key, null, $fetched);
+				if (!$fetched) {
+					$result = null;
+				}
+			}
 		}
 
 		$abs_filename = self::realPath($filename);
@@ -676,10 +684,9 @@ class Q
 		if (!isset($result)) {
 			$result = file_get_contents($abs_filename);
 		}
-		if (empty($options['dontCache'])) {
-			$duration = Q::ifset($options, 'duration', 0);
-			Q_Cache::set('content', $result, $namespace);
-			Q_Cache::setDuration($duration, $namespace);
+		if (!$exclude and empty($options['dontCache'])) {
+			$duration = Q::ifset($options, 'duration', null);
+			Q_Cache::set($key, $result, $duration);
 		}
 		return $result;
 	}

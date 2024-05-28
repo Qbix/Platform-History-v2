@@ -894,7 +894,8 @@ class Db_Row
 	 * This can be called even if the Db_Row was not retrieved,
 	 * and typically is used for caching purposes.
 	 * @method calculatePKValue
-	 * @param {boolean|array} [$useIndex=false] If there is no primary key on this table,
+	 * @param {boolean|array} [$useIndex=false] Pass true here to use the primary key.
+	 *  If there is no primary key on this table,
 	 *  then pass an array of field names to use, corresponding to a key.
 	 * @return {array|false} An associative array naming all the fields that comprise the
 	 *  primary key index, in the order they appear in the key.<br/>
@@ -1617,7 +1618,7 @@ class Db_Row
 		if (!isset($search_criteria)) {
 			if ($this->retrieved) {
 				// use primary key
-				$search_criteria = $this->getPkValue();
+				$search_criteria = $this->getPKValue();
 			} else {
 				// use modified fields
 				$modifiedFields = array();
@@ -1839,7 +1840,7 @@ class Db_Row
 			if (!$this->getPrimaryKey()) {
 				throw new Exception("Db_Row cannot update an existing row using without a primary key");
 			}
-			$where = $this->getPkValue();
+			$where = $this->getPKValue();
 			if (!$where) {
 				throw new Exception("The primary key is not specified for $table");
 			}
@@ -2290,7 +2291,10 @@ class Db_Row
 	protected function _shardedQuery(&$where)
 	{
 		$table = $this->getTable();
-		$where = $this->getPkValue();
+		$where = $this->getPKValue();
+		if (!$where) {
+			$where = $this->calculatePKValue(true);
+		}
 		if (!$where) {
 			throw new Exception("The primary key is not specified for $table");
 		}
