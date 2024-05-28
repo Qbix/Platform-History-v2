@@ -106,8 +106,8 @@ function Streams_related_response()
 			$farPublisherId = $far . 'PublisherId';
 			$farStreamName = $far . 'StreamName';
 			$nodeUrl = Q_Utils::nodeUrl(array(
-				'publisherId' => $r2->$farPublisherId,
-				'streamName' => $r2->$farStreamName
+				'publisherId' => $r2[$farPublisherId],
+				'streamName' => $r2[$farStreamName]
 			));
 			$nodeUrls[$nodeUrl] = true;
 		}
