@@ -617,6 +617,7 @@ Q.Tool.define('Streams/chat', function(options) {
 							element = Q.Tool.setUpElement(element, toolName, fields);
 							Q.invoke({
 								title: stream.fields.title,
+								className: "Streams_chat_" + Q.normalize(stream.fields.type),
 								content: element,
 								trigger: $toolElement[0],
 								columnIndex: state.openInSameColumn.includes(stream.fields.type) ? "current" : null
