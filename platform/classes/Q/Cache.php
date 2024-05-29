@@ -109,9 +109,10 @@ class Q_Cache
 		$store = self::fetchStore();
 		if (!array_key_exists($key, $store)) {
 			$name = "Q_Cache\t".self::$namespace."\t$key";
+			$fetched = false;
 			if (is_callable('apcu_fetch')) {
 				$value = apcu_fetch($name, $fetched);
-			} else {
+			} else if (is_callable('apc_fetch')) {
 				$value = apc_fetch($name, $fetched);
 			}
 			$store[$key] = $fetched ? $value : $default; // no such $key is stored in cache
