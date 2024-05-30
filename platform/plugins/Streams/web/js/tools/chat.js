@@ -1220,7 +1220,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		var tool = this;
 		var state = this.state;
 		var $scrolling = null;
-		Q.addEventListener(this.element.scrollingParent, 'scroll', function () {
+		Q.addEventListener(this.element.scrollingParent(), 'scroll', function () {
 			stopScrollingToComposer = true;
 		});
 		setTimeout(_doScrollToComposer, 100);
