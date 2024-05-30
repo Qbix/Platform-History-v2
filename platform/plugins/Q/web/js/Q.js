@@ -13987,12 +13987,13 @@ Q.Visual = Q.Pointer = {
 	 */
 	hint: function (targets, options) {
 
-		if (!targets || !targets.length) {
-			return;
-		}
 		options = Q.extend({}, Q.Visual.hint.options, 10, options);
 		if (options.waitUntilVisible) {
-			return Q.Visual.waitUntilVisible(targets[0], function (entries, observer) {
+			var element = targets[0] || targets;
+			if (!element instanceof Element) {
+				throw new Exception("Q.Visua.hint: waitUntilVisible needs element");
+			}
+			return Q.Visual.waitUntilVisible(targets[0] || targets, function (entries, observer) {
 				if (entries[0].isIntersecting) {
 					var sp = entries[0].target.scrollingParent();
 					var st = sp.scrollTop;
