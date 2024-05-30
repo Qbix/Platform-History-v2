@@ -305,7 +305,7 @@ Q.exports(function() {
                                     });
                                 };
 
-                                var inviteAcceptKey = 'Streams_invite_QR_content';
+                                var inviteAcceptKey = 'Streams.invite.QR';
                                 var igpStreamName = "Streams/image/invite/" + rsd.invite.token;
                                 var subpath = `invitations/${loggedUserId.splitId()}/${igpStreamName}`;
                                 //$('.Q_button.Streams_invite_QR_scanned', dialog).plugin('Q/clickable').on(Q.Pointer.click, _setPhoto);
@@ -342,17 +342,20 @@ Q.exports(function() {
                                 // listen for Streams/invite/accept event to show imagepicker
                                 Q.Socket.onEvent('Streams/invite/accept')
                                 .set(function _Streams_invite_accept_handler (data) {
-                                    console.log('Q.Socket.onEvent("Streams/invite/accept")');
                                     if (!Q.Users.isCustomIcon(data.icon, true)) {
                                         _setPhoto(data);
                                     }
-                                    Q.Streams.Stream.observe(data.invitedUserId, 'Streams/user/icon');
                                 }, inviteAcceptKey);
                             });
                         }
                     });
                     break;
             }
+            Q.Socket.onEvent('Streams/invite/accept')
+            .setOnce(function _Streams_invite_accept_handler (data) {
+                console.log('Q.Socket.onEvent("Streams/invite/accept")');
+                Q.Streams.Stream.observe(data.invitedUserId, 'Streams_invite_observe_icon');
+            }, 'Streams.invite.observe');
             return true;
         }
         if (o.identifier || o.token || o.xids || o.userIds || o.label) {
