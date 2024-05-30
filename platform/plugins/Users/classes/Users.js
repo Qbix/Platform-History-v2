@@ -175,7 +175,7 @@ Users.pushNotifications = function (userIds, notifications, callback, options, f
 		userId: userIds
 	}).execute(function (err, devices) {
 		if (err) {
-			return callback(err);
+			return callback && callback(err);
 		}
 		Q.each(devices, function (i) {
 			if (filter && filter(this) === false) {

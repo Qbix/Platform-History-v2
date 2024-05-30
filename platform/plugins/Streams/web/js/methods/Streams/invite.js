@@ -346,7 +346,7 @@ Q.exports(function() {
                                     if (!Q.Users.isCustomIcon(data.icon, true)) {
                                         _setPhoto(data);
                                     }
-                                    Streams.Stream.observe(data.invitedUserId, 'Streams/user/icon');
+                                    Q.Streams.Stream.observe(data.invitedUserId, 'Streams/user/icon');
                                 }, inviteAcceptKey);
                             });
                         }
