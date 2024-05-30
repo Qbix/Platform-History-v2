@@ -10047,16 +10047,16 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 	}
 	var container = options.container || document.getElementsByTagName('head')[0];
 
-	if (Q.addStylesheet.loaded[href]) {
-		onload();
-		return options.returnAll ? null : false;
-	}
 	if (!href) {
 		onload(false);
 		return false;
 	}
 	options.info = {};
 	href = Q.url(href, null, options);
+	if (Q.addStylesheet.loaded[href]) {
+		onload();
+		return options.returnAll ? null : false;
+	}
 	if (!media) {
 		media = 'screen,print';
 	}
@@ -13987,6 +13987,9 @@ Q.Visual = Q.Pointer = {
 	 */
 	hint: function (targets, options) {
 
+		if (!targets || !targets.length) {
+			return;
+		}
 		options = Q.extend({}, Q.Visual.hint.options, 10, options);
 		if (options.waitUntilVisible) {
 			return Q.Visual.waitUntilVisible(targets[0], function (entries, observer) {
