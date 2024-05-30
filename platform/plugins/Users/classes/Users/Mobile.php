@@ -202,7 +202,7 @@ class Users_Mobile extends Base_Users_Mobile
 		 */
 		Q::event(
 			'Users/mobile/sendMessage', 
-			@compact('view', 'fields', 'options', 'mail', 'app', 'message', 'mail'),
+			@compact('view', 'fields', 'options', 'mail', 'app', 'message', 'mail', 'number', 'from', 'body'),
 			'after'
 		);
 		return true;
