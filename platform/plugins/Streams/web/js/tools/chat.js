@@ -1222,14 +1222,9 @@ Q.Tool.define('Streams/chat', function(options) {
 		var $scrolling = null;
 		var sp = this.element;
 		while (sp = sp.scrollingParent()) {
-			(function (sp) {
-				Q.addEventListener(sp, 'scroll', function _func() {
-					stopScrollingToComposer = true;
-				});
-				tool.Q.beforeRemove.set(function () {
-					Q.removeElementListener(sp, 'scroll', _func);
-				});
-			})(sp);
+			Q.Event.From(sp, 'scroll').set(function () {
+				stopScrollingToComposer = true;
+			}, tool);
 		}
 		setTimeout(_doScrollToComposer, 100);
 		Q.Dialogs.push.options.onActivate.set(function () {

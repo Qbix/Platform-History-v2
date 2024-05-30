@@ -3007,17 +3007,22 @@ Q.Event.define = function (target, type) {
 };
 
 /**
- * Returns a Q.Event that will fire given an DOM object and an event name
+ * Returns a Q.Event that will fire given an DOM object and an event name.
+ * Add and remove event handlers on this event. When the last handler is
+ * removed, then Q.removeEventListener() is called on the target DOM element.
  * @static
  * @method from
  * @param {String|Q.Tool} key
- * @param {Object} source
+ * @param {Object} target
  * @param {String} eventName
  * @return {Q.Event}
  */
-Q.Event.from = function _Q_Event_from(source, eventName) {
+Q.Event.from = function _Q_Event_from(target, eventName) {
 	var event = new Q.Event();
-	Q.addEventListener(source, eventName, event.handle);
+	Q.addEventListener(target, eventName, event.handle);
+	event._onEmpty.set(function () {
+		Q.removeEventListener(target, eventName, event.handler);
+	});
 	return event;
 };
 
