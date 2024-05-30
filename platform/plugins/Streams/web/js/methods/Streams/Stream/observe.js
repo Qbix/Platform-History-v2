@@ -20,10 +20,19 @@ Q.exports(function(priv, Streams, Stream){
         var key = ['Streams.Stream.observe: ', publisherId, streamName].join("\t");
         Q.Socket.onConnect('/Q', nodeUrl)
         .add(function _observeSocketRequest () {
-            Q.Streams.socketRequest('Streams/observe', publisherId, streamName, function () {
-                var ps = Streams.key(publisherId, streamName);
-                priv._observedByStream[ps] = true;
-                Q.handle(callback);
+            Q.Streams.get(publisherId, streamName, function (err, stream) {
+                if (err) {
+                    return Q.handle(callback, Q.Streams, [err]);
+                }
+                Q.Streams.socketRequest(
+                    'Streams/observe', publisherId, streamName, this.fields.messageCount, 
+                    function (err, messages) {
+                        var ps = Streams.key(publisherId, streamName);
+                        priv._observedByStream[ps] = true;
+                        priv._simulatePosting(messages);
+                        Q.handle(callback, Q.Streams, [null, messages]);
+                    }
+                );
             });
         }, key);
     };

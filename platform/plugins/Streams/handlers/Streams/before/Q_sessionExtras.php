@@ -8,5 +8,6 @@ function Streams_before_Q_sessionExtras()
 			'Q.plugins.Users.loggedInUser.displayName', 
 			Streams::displayName($user)
 		);
+		Users::capability()->addPermission('Streams/observe');
 	}
 }
