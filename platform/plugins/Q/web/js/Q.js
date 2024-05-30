@@ -10619,7 +10619,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 	var o = Q.extend({}, Q.loadUrl.options, options);
 
 	var handler = o.handler;
-	var slotNames = o.slotNames;
+	var slotNames = o.slotNames || (Q.info && Q.info.slotNames);
 	if (typeof slotNames === 'string') {
 		slotNames = slotNames.split(',');
 	}

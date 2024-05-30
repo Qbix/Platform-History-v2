@@ -234,6 +234,17 @@ class Q_Valid
 			return false;
 		}
 		
+		$prefixes = array('00', '011', '010', '810', '19');
+		if (strlen($number) > 10) {
+			// Seems like it could be an international number
+			foreach ($prefixes as $prefix) {
+				if (strpos($stripped, $prefix) === 0) {
+					$number = preg_replace("/^$prefix/", '+', $stripped);
+					break;
+				}
+			}
+		}
+		
 		if ($stripped[0] !== '+' and strlen($stripped) === 10) {
 			// we will assume that this number is in north america and has a trunk code of 1
 			if ($stripped[0] === '1') {
