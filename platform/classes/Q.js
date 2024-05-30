@@ -730,9 +730,6 @@ Q.getter = function _Q_getter(original, options) {
 		Q.getter.usingCached = false;
 		
 		function _prepare(subject, params, callback, ret, cached) {
-			if (!gw.nonStandardErrorConvention && Q.firstErrorMessage(params[0], params[1])) {
-				ret.dontCache = true;
-			}
 			if (gw.prepare) {
 				gw.prepare.call(gw, subject, params, _result, arguments2);
 			} else {
@@ -784,6 +781,9 @@ Q.getter = function _Q_getter(original, options) {
 				// callbacks in position pos, and then decrement
 				// the throttle
 				return function _Q_getter_callback() {
+					if (!gw.nonStandardErrorConvention && Q.firstErrorMessage(arguments[0], arguments[1])) {
+						ret.dontCache = true;
+					}
 					// save the results in the cache
 					if (gw.cache && !ret.dontCache) {
 						gw.cache.set(arguments2, cbpos, this, arguments);
