@@ -1228,7 +1228,7 @@ Q.Tool.define('Streams/chat', function(options) {
 				});
 				tool.Q.beforeRemove.set(function () {
 					Q.removeElementListener(sp, 'scroll', _func);
-				}, tool);
+				});
 			})(sp);
 		}
 		setTimeout(_doScrollToComposer, 100);
