@@ -3020,7 +3020,7 @@ Q.Event.define = function (target, type) {
 Q.Event.from = function _Q_Event_from(target, eventName) {
 	var event = new Q.Event();
 	Q.addEventListener(target, eventName, event.handle);
-	event._onEmpty.set(function () {
+	event.onEmpty().set(function () {
 		Q.removeEventListener(target, eventName, event.handler);
 	});
 	return event;
