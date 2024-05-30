@@ -812,7 +812,8 @@
 	 * @param {String} [options.width="200px"]
 	 * @param {String} [options.height="200px"]
 	 * @param {Integer} [options.zIndex=99999]
-	 * @param {boolean} [option.dontStopBeforeShown=false] Don't var Q.Pointer.stopHints stop this hint before it's shown.
+	 * @param {Boolean|Object} [options.waitUntilVisible=false] Wait until it's visible, then show hint right away. You can also pass an options here for Q.Pointer.waitUntilVisible(). Typically used together with dontStopBeforeShown.
+	 * @param {boolean} [option.dontStopBeforeShown=false] Don't var Q.Pointer.stopHints stop this hint before it's shown. If waitUntilVisible is true, the stopHints checks are deferred.
 	 * @param {Boolean} [options.dontRemove=false] Pass true to keep current hints displayed
 	 * @param {String} [options.audio.src] Can be used to play an audio file.
 	 * @param {String} [options.audio.from=0] Number of seconds inside the audio to start playing the audio from. Make sure audio is longer than this.

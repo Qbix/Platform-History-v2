@@ -13996,7 +13996,7 @@ Q.Visual = Q.Pointer = {
 	 * @param {String} [options.height="200px"]
 	 * @param {Integer} [options.zIndex=99999]
 	 * @param {Boolean|Object} [options.waitUntilVisible=false] Wait until it's visible, then show hint right away. You can also pass an options here for Q.Pointer.waitUntilVisible(). Typically used together with dontStopBeforeShown.
-	 * @param {Boolean} [options.dontStopBeforeShown=false] Don't let Q.Visual.stopHints stop this hint before it's shown.
+	 * @param {Boolean} [options.dontStopBeforeShown=false] Don't let Q.Visual.stopHints stop this hint before it's shown. If waitUntilVisible is true, the stopHints checks are deferred.
 	 * @param {boolean} [options.dontRemove=false] Pass true to keep current hints displayed
 	 * @param {boolean} [options.neverRemove=false] Pass true to keep current hints displayed even after user interaction.
 	 * @param {boolean} [options.tooltip] Can be used to show a tooltip with some html
@@ -14025,9 +14025,9 @@ Q.Visual = Q.Pointer = {
 
 		options = Q.extend({}, Q.Visual.hint.options, 10, options);
 		if (options.waitUntilVisible) {
-			var element = targets[0] || targets;
-			if (!element instanceof Element) {
-				throw new Exception("Q.Visua.hint: waitUntilVisible needs element");
+			var element = (targets && targets[0]) || targets;
+			if (!(element instanceof Element)) {
+				throw new Q.Exception("Q.Visua.hint: waitUntilVisible needs element");
 			}
 			return Q.Visual.waitUntilNoMasks(0, function () {
 				Q.Visual.waitUntilVisible(targets[0] || targets, function (entries, observer) {
