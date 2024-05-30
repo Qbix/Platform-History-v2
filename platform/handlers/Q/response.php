@@ -83,7 +83,8 @@ function Q_response($params)
 			} catch (Exception $e) {
 				// couldn't get internal URI
 			}
-		} else if (is_array($slotNames)) {
+		}
+		if (is_array($slotNames)) {
 			foreach ($slotNames as $slotName) {
 				Q_Response::fillSlot($slotName, 'default',
 					Q::ifset($idPrefixes, $slotName, null)
