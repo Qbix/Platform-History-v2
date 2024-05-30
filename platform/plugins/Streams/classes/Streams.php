@@ -1100,7 +1100,7 @@ abstract class Streams extends Base_Streams
 		$privileged = array('private', 'notices');
 		foreach ($privileged as $p) {
 			if (!empty($fields[$p])) {
-				$stream->setAttribute("Streams/$p", $fields[$p1], true);
+				$stream->setAttribute("Streams/$p", $fields[$p], true);
 			}
 		}
 
@@ -3365,15 +3365,7 @@ abstract class Streams extends Base_Streams
 						? Q::json_decode($template->filter)
 						: Streams_Stream::getConfigField($type, array(
 							'subscriptions', 'filter'
-						), array(
-							"types" => array(
-								"^(?!(Users/)|(Streams/)).*/",
-								"Streams/relatedTo",
-								"Streams/announcement",
-								"Streams/chat/message"
-							),
-							"notifications" => 0
-						))
+						), null)
 					);
 				}
 				if (!isset($untilTime)) {

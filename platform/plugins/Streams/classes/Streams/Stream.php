@@ -2788,16 +2788,12 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @param {string} [$options.url] The name of an attribute that contains the url
 	 * @return {array} The metas to set
 	 */
-	function metas($options=[])
+	function metas($options = array())
 	{
 		if (!empty($options['iconFile'])) {
 			$iconFile = $options['iconFile'];
 		} else {
-			try {
-				$sizes = Q_Image::getSizes($this->type, $maxStretch);
-			} catch (Exception $exception) {
-				$sizes = Q_Image::getSizes('Streams/image', $maxStretch);
-			}
+			$sizes = Q_Image::getSizes('Streams/image', $maxStretch);
 			$iconFile = end($sizes);
 		}
 		$maxLength = Q_Config::get('Streams', 'meta', 'description', 'maxLength', 150);

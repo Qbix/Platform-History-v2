@@ -350,11 +350,14 @@ class Q_Tree
 
 		// check Q_Cache and if set - use it
 		// update class cache as it is not set
-		$arr = Q_Cache::get("Q_Tree\t$filename2");
-		if (isset($arr)) {
-			self::$cache[$filename2] = $arr;
-			$this->merge($arr);
-			return $this;
+		$exclude = Q::startsWith($filename, APP_LOCAL_DIR); // SECURITY reasons
+		if (!$exclude && !$ignoreCache) {
+			$arr = Q_Cache::get("Q_Tree\t$filename2", null, $fetched);
+			if ($fetched) {
+				self::$cache[$filename2] = $arr;
+				$this->merge($arr);
+				return $this;
+			}
 		}
 
 		/**
@@ -394,7 +397,9 @@ class Q_Tree
 		// $arr was loaded from $filename2 or by Q/tree/load before event
 		$this->merge($arr);
 		self::$cache[$filename2] = $arr;
-		Q_Cache::set("Q_Tree\t$filename2", $arr); // no need to check result - on failure Q_Cache is disabled
+		if (!$exclude) {
+			Q_Cache::set("Q_Tree\t$filename2", $arr); // no need to check result - on failure Q_Cache is disabled
+		}
 		return $this;
 	}
 	

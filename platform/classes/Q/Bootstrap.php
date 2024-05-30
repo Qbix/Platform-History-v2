@@ -190,7 +190,6 @@ class Q_Bootstrap
 		if (isset($script_tz)) {
 			date_default_timezone_set($script_tz);
 		}
-		Db::setTimezones();
 	}
 	
 	/**
@@ -206,32 +205,17 @@ class Q_Bootstrap
 	{
 		$app_tree = new Q_Tree();
 		// check if config need to be reloaded
-		if (Q_Cache::connected()) {
-			// we need to know reload interval
-			$app_tree->load('config/Q.json');
-			$app_tree->load('config/app.json');
-			$app_tree->load('local/app.json');
-			$app_tree->load('local/app.json.php');
-
-			$config_files = $app_tree->get('Q', 'configFiles', array());
-			foreach ($config_files as $cf) {
-				$app_tree->merge(Q_Config::getFromServer($cf));
-			}
-			// second round to catch configFiles inside configFiles
-			$config_files = $app_tree->get('Q', 'configFiles', array());
-			foreach ($config_files as $cf) {
-				$app_tree->merge(Q_Config::getFromServer($cf));
-			}
-
-			$interval = $app_tree->get('Q', 'configServer', 'interval', 60); // reload each minute by default
-			$app_tree->clear(null);
-			$timestamp = Q_Cache::get("Q_Config\tupdateTime");
-			if (!isset($timestamp) || (time() - $timestamp > $interval)) $force_reload = true;
-		}
-
-		if ($force_reload) {
-			$old_setting = Q_Cache::ignore(true);
-		}
+		// if (Q_Cache::connected()) {
+		// 	$intervalKey = "Q_Config\tinterval";
+		// 	$updateTimeKey = "Q_Config\tupdateTime";
+		// 	$interval = Q_Cache::get($intervalKey);
+		// 	$updateTime = Q_Cache::get($updateTimeKey);
+		// 	if (!isset($updateTime)
+		// 	|| (isset($interval) && time() - $updateTime > $interval)) {
+		// 		$force_reload = true;
+		// 	}
+		// }
+		// $old_setting = Q_Cache::ignore(true);
 		Q_Config::clear(null); // clear the config
 		Q_Config::load('config/Q.json');
 
@@ -311,9 +295,11 @@ class Q_Bootstrap
 		}
 		error_reporting(Q_Config::get('Q', 'errorReporting', E_ALL & ~E_NOTICE & ~E_STRICT));
 		
-		if (isset($old_setting)) {
-			Q_Cache::ignore($old_setting);
-		}
+		//if (isset($old_setting)) {
+			// Q_Cache::ignore($old_setting);
+			$interval = $app_tree->get('Q', 'configServer', 'interval', 60); // reload each minute by default
+			// Q_Cache::set($intervalKey, $interval);
+		//}
 		set_time_limit(Q_Config::get('Q', 'internal', 'phpTimeout', 300));
 		self::setDefaultTimezone();
 

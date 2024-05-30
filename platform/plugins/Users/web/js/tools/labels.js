@@ -891,7 +891,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                         var labelNameArr = label.split('/');
                         if(labelNameArr.length > 1) labelName = labelNameArr[1];
                     }
-                    Q.Visual.hint('Users/labels/' + labelName, this, {
+                    Q.Users.hint('Users/labels/' + labelName, this, {
                         hotspot: {x: i % 2 ? 0 : 0.3, y: 0},
                         dontStopBeforeShown: true,
                         dontRemove: true,

@@ -34,8 +34,8 @@ class Handlebars_Cache_APC implements Handlebars_Cache
     /**
      * Get cache for $name if exist.
      *
-     * @param string $name Handlebars_Cache id
-     *
+     * @param {string} $name Handlebars_Cache id
+     
      * @return {mixed} data on hit, boolean false on cache not found
      */
     public function get($name)

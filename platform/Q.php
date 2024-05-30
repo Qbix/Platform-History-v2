@@ -92,10 +92,15 @@ if (!defined('JSON_PRETTY_PRINT')) define('JSON_PRETTY_PRINT', 0);
 // Include core classes
 //
 require_once(Q_CLASSES_DIR.DS.'Q.php');
+
+Q::milliseconds();
 require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Cache.php');
 require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Bootstrap.php');
 require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Tree.php');
 require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Config.php');
+Q_Bootstrap::registerShutdownFunction();
+Q_Bootstrap::setIncludePath();
+Q_Bootstrap::defineFunctions();
 require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Text.php');
 require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Exception.php');
 require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Exception'.DS.'PHPError.php');
@@ -111,12 +116,7 @@ require_once(Q_CLASSES_DIR.DS.'RandomCompat'.DS.'random.php');
 //
 // Set things up
 //
-
-Q::milliseconds();
-Q_Bootstrap::registerShutdownFunction();
 Q_Bootstrap::setDefaultTimezone();
-Q_Bootstrap::setIncludePath();
-Q_Bootstrap::defineFunctions();
 Q_Bootstrap::configure();
 Q_Bootstrap::registerAutoload();
 Q_Bootstrap::registerExceptionHandler();
@@ -131,6 +131,12 @@ Q_Response::setIgnoreUserAbort();
 if (defined('APP_WEB_DIR')) {
 	Q_Bootstrap::addAlias();
 	Q_Request::baseUrl();
+}
+$clearCache = Q_Request::special('clearCache');
+if (isset($clearCache)) {
+	if ($clearCache == Q_Config::get('Q', 'cache', 'secret', '')) {
+		Q_Cache::clear(true);
+	}
 }
 Q::$bootstrapped = true;
 

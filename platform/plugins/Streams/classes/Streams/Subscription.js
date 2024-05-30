@@ -58,14 +58,17 @@ Streams_Subscription.test = function _Subscription_test(userId, stream, msgType,
 		try {
 			if (sub.fields.filter) {
 				filter = JSON.parse(sub.fields.filter);
-			} else {
-				filter = Stream.getConfigField(
+			}
+			if (!filter) {
+				// even if bad JSON, let's just do this as a fallback
+				filter = Streams.Stream.getConfigField(
 					stream.fields.type, 
 					['subscriptions', 'filter'],
 					{ 
 						types: [
 							"^(?!(Users/)|(Streams/)).*/", 
 							"Streams/relatedTo", 
+							"Streams/announcement",
 							"Streams/chat/message"
 						],
 						notifications: 0

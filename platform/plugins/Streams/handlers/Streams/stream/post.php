@@ -119,7 +119,7 @@ function Streams_stream_post($params = array())
 	
 	// Get allowed fields
 	$allowedFields = array_merge(
-		array('publisherId', 'name', 'type', 'icon', 'file'),
+		array('publisherId', 'name', 'type', 'icon', 'file', 'private'),
 		Streams::getExtendFieldNames($type, $asOwner)
 	);
 	$fields = Q::take($req, $allowedFields);

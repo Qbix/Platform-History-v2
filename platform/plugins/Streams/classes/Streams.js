@@ -439,62 +439,68 @@ Streams.listen = function (options, servers) {
 		client.alreadyListeningStreams = true;
 
 		client.on('Streams/observe',
-		function (publisherId, streamName, fn) {
-			var now = Date.now() / 1000;
-			if (!Q.Utils.validateCapability(client.capability, 'Streams/observe')) {
-				return (typeof fn == 'function') && fn({
+		function (publisherId, streamName, messageCount, fn) {
+			if (typeof messageCount === 'number') {
+				Streams.Message.SELECT().where({
+					publisherId: publisherId,
+					streamName: streamName,
+					ordinal: new Db.Range(messageCount, false)
+				}).execute(function (err, rows) {
+					_continue(err ? [] : rows.map(row => row.fields));
+				});
+			}
+			function _continue(messages) {
+				var NotAuthorizedException = {
 					type: 'Users.Exception.NotAuthorized',
-					message: 'Not Authorized'
-				});
-			}
-			if (typeof publisherId !== 'string'
-			|| typeof streamName !== 'string') {
-				return (typeof fn == 'function') && fn({
-					type: 'Streams.Exception.BadArguments',
-					message: 'Bad arguments'
-				});
-			}
-			var observer = Q.getObject(
-				[publisherId, streamName, client.id], Streams.observers
-			);
-			if (observer) {
-				return (typeof fn == 'function') && fn(null, true);
-			}
-			var byUserId = client.capability.userId;
-			Streams.fetchOne(byUserId || '', publisherId, streamName, function (err, stream) {
-				if (err || !stream) {
+					message: 'Not  Authorized'
+				};
+				var now = Date.now() / 1000;
+				if (!Q.Utils.validateCapability(client.capability, 'Streams/observe')) {
+					return (typeof fn == 'function') && fn(NotAuthorizedException);
+				}
+				if (typeof publisherId !== 'string'
+				|| typeof streamName !== 'string') {
 					return (typeof fn == 'function') && fn({
-						type: 'Users.Exception.NotAuthorized',
-						message: 'not authorized'
+						type: 'Streams.Exception.BadArguments',
+						message: 'Bad arguments'
 					});
 				}
-				stream.testReadLevel('messages', function (err, allowed) {
-					if (err || !allowed) {
-						return (typeof fn == 'function') && fn({
-							type: 'Users.Exception.NotAuthorized',
-							message: 'not authorized'
-						});
+				var observer = Q.getObject(
+					[publisherId, streamName, client.id], Streams.observers
+				);
+				if (observer) {
+					return (typeof fn == 'function') && fn(null, []);
+				}
+				var byUserId = client.capability.userId;
+				Streams.fetchOne(byUserId || '', publisherId, streamName, function (err, stream) {
+					if (err || !stream) {
+						return (typeof fn == 'function') && fn(NotAuthorizedException);
 					}
-					var clients = Q.getObject([publisherId, streamName], Streams.observers) || {};
-					var max = Streams.Stream.getConfigField(
-						stream.fields.type,
-						'observersMax'
-					);
-					if (max && Object.keys(clients).length >= max - 1) {
-						return (typeof fn == 'function') && fn({
-							type: 'Streams.Exception.TooManyObservers',
-							message: 'too many observers already'
-						});
-					}
-					Q.setObject(
-						[publisherId, streamName, client.id], client, Streams.observers
-					);
-					Q.setObject(
-						[client.id, publisherId, streamName], true, Streams.observing
-					);
-					return (typeof fn == 'function') && fn(null, true);
+					stream.testReadLevel('messages', function (err, allowed) {
+						if (err || !allowed) {
+							return (typeof fn == 'function') && fn(NotAuthorizedException);
+						}
+						var clients = Q.getObject([publisherId, streamName], Streams.observers) || {};
+						var max = Streams.Stream.getConfigField(
+							stream.fields.type,
+							'observersMax'
+						);
+						if (max && Object.keys(clients).length >= max - 1) {
+							return (typeof fn == 'function') && fn({
+								type: 'Streams.Exception.TooManyObservers',
+								message: 'too many observers already'
+							});
+						}
+						Q.setObject(
+							[publisherId, streamName, client.id], client, Streams.observers
+						);
+						Q.setObject(
+							[client.id, publisherId, streamName], true, Streams.observing
+						);
+						return (typeof fn == 'function') && fn(null, messages);
+					});
 				});
-			});
+			}
 		});
 		client.on('Streams/neglect',
 		function (publisherId, streamName, fn) {

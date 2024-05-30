@@ -1759,7 +1759,7 @@ Q.isInteger = function _Q_isInteger(value, strictComparison) {
  *	Whether it is an array
  */
 Q.isArrayLike = function _Q_isArrayLike(value) {
-	return (Q.typeOf(value) === 'array');
+	return (Q.typeOf(value) === 'array') || value instanceof $;
 };
 
 /**
@@ -4273,9 +4273,6 @@ Q.getter = function _Q_getter(original, options) {
 		Q.getter.usingCached = false;
 		
 		function _prepare(subject, params, callback, ret, cached) {
-			if (!gw.nonStandardErrorConvention && Q.firstErrorMessage(params[0], params[1])) {
-				ret.dontCache = true;
-			}
 			if (gw.prepare) {
 				gw.prepare.call(gw, subject, params, _result, arguments2);
 			} else {
@@ -4327,6 +4324,9 @@ Q.getter = function _Q_getter(original, options) {
 				// callbacks in position pos, and then decrement
 				// the throttle
 				return function _Q_getter_callback() {
+					if (!gw.nonStandardErrorConvention && Q.firstErrorMessage(arguments[0], arguments[1])) {
+						ret.dontCache = true;
+					}
 					// save the results in the cache
 					if (gw.cache && !ret.dontCache) {
 						gw.cache.set(arguments2, cbpos, this, arguments);
@@ -10047,16 +10047,16 @@ Q.addStylesheet = function _Q_addStylesheet(href, media, onload, options) {
 	}
 	var container = options.container || document.getElementsByTagName('head')[0];
 
-	if (Q.addStylesheet.loaded[href]) {
-		onload();
-		return options.returnAll ? null : false;
-	}
 	if (!href) {
 		onload(false);
 		return false;
 	}
 	options.info = {};
 	href = Q.url(href, null, options);
+	if (Q.addStylesheet.loaded[href]) {
+		onload();
+		return options.returnAll ? null : false;
+	}
 	if (!media) {
 		media = 'screen,print';
 	}
@@ -13987,6 +13987,9 @@ Q.Visual = Q.Pointer = {
 	 */
 	hint: function (targets, options) {
 
+		if (!targets || !targets.length) {
+			return;
+		}
 		options = Q.extend({}, Q.Visual.hint.options, 10, options);
 		if (options.waitUntilVisible) {
 			return Q.Visual.waitUntilVisible(targets[0], function (entries, observer) {

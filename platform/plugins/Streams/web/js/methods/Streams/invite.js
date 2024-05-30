@@ -222,11 +222,12 @@ Q.exports(function() {
                     Q.Dialogs.push({
                         className: 'Streams_invite_QR',
                         title: Q.getObject(['invite', 'dialog', 'QRtitle'], text),
-                        content: '<div class="Streams_invite_QR_content"></div>'
-                            + '<div class="Q_buttons">'
+                        content: 
+                            '<div class="Q_buttons">'
                             //+ '<button class="Q_button Streams_invite_QR_scanned">' + text.invite.dialog.scannedQR.interpolate(Q.text.Q.words) + '</button>'
                             + '<button class="Q_button Streams_invite_QR_groupPhoto">' + text.invite.dialog.TakeGroupPhoto + '<i class="streams-icon-checkmark-outline"></i></button>'
-                            + '</div>',
+                            + '</div>'
+                            + '<div class="Streams_invite_QR_content"></div>',
                         onActivate: function (dialog) {
                             // fill QR code
                             Q.addScript("{{Q}}/js/qrcode/qrcode.js", function(){
@@ -340,12 +341,13 @@ Q.exports(function() {
 
                                 // listen for Streams/invite/accept event to show imagepicker
                                 Q.Socket.onEvent('Streams/invite/accept')
-                                    .set(function _Streams_invite_accept_handler (data) {
-                                        console.log('Q.Socket.onEvent("Streams/invite/accept")');
-                                        if (!Q.Users.isCustomIcon(data.icon, true)) {
-                                            _setPhoto(data);
-                                        }
-                                    }, inviteAcceptKey);
+                                .set(function _Streams_invite_accept_handler (data) {
+                                    console.log('Q.Socket.onEvent("Streams/invite/accept")');
+                                    if (!Q.Users.isCustomIcon(data.icon, true)) {
+                                        _setPhoto(data);
+                                    }
+                                    Streams.Stream.observe(data.invitedUserId, 'Streams/user/icon');
+                                }, inviteAcceptKey);
                             });
                         }
                     });
