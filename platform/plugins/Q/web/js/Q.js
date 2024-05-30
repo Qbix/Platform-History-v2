@@ -13768,6 +13768,37 @@ Q.Visual = Q.Pointer = {
 			|| (Q.info.platform === 'mac' && event.metaKey);
 	},
 	/**
+	 * Waits until all Q.Masks above count  have been hidden.
+	 * If none were showing, calls the callback asynchronously right away
+	 * @static
+	 * @method waitUntilNoMasks
+	 * @param {Number} [counter=0] How many masks would be remaining
+	 * @param {Function} callback The function called by the IntersectionObserver, takes (entries, observer).
+	 *   Only called when entries[0].isIntersecting is true.
+	 * @return {Object} has cancel() function to remove event handler early
+	 */
+	waitUntilNoMasks: function (counter, callback) {
+		if (!callback) {
+			return;
+		}
+		var key;
+		if (Q.Masks.counter <= counter) {
+			setTimeout(callback, 0);
+		} else {
+			key = Q.Masks.onHide.set(function _handler() {
+				if (Q.Masks.counter <= counter) {
+					setTimeout(callback, 0);
+					Q.Masks.onHide.remove(key);
+				}
+			});
+		}
+		return {
+			cancel: function () {
+				key && Q.Masks.onHide.remove(key);
+			}
+		};
+	},
+	/**
 	 * Sets an observer to wait for an element become visible.
 	 * @static
 	 * @method waitUntilVisible
@@ -13998,22 +14029,24 @@ Q.Visual = Q.Pointer = {
 			if (!element instanceof Element) {
 				throw new Exception("Q.Visua.hint: waitUntilVisible needs element");
 			}
-			return Q.Visual.waitUntilVisible(targets[0] || targets, function (entries, observer) {
-				if (entries[0].isIntersecting) {
-					var sp = entries[0].target.scrollingParent();
-					var st = sp.scrollTop;
-					var ival = setInterval(function () {
-						if (st === sp.scrollTop) {
-							// scrolling paused for a little bit
-							clearInterval(ival);
-							options.waitUntilVisible = false;
-							options.dontStopBeforeShown = true;
-							Q.Visual.hint(targets, options);
-						}
-						st = sp.scrollTop;
-					}, 300);
-				}
-			}, options.waitUntilVisible === true ? {} : options.waitUntilVisible);
+			return Q.Visual.waitUntilNoMasks(0, function () {
+				Q.Visual.waitUntilVisible(targets[0] || targets, function (entries, observer) {
+					if (entries[0].isIntersecting) {
+						var sp = entries[0].target.scrollingParent();
+						var st = sp.scrollTop;
+						var ival = setInterval(function () {
+							if (st === sp.scrollTop) {
+								// scrolling paused for a little bit
+								clearInterval(ival);
+								options.waitUntilVisible = false;
+								options.dontStopBeforeShown = true;
+								Q.Visual.hint(targets, options);
+							}
+							st = sp.scrollTop;
+						}, 300);
+					}
+				}, options.waitUntilVisible === true ? {} : options.waitUntilVisible)
+			});
 		}
 
 		var args = Array.prototype.slice.call(arguments, 0);
@@ -15771,6 +15804,7 @@ Q.Video.upload = function (params, provider, callback) {
  */
 Q.Masks = {
 	collection: {},
+	counter: 0,
 	/**
 	 * Creates new mask with given key and options, or returns already created one for that key.
 	 * @static
@@ -15847,6 +15881,7 @@ Q.Masks = {
 		options.animation = options.animation || {};
 		var mask = Q.Masks.mask(key, options);
 		if (!mask.counter) {
+			++Q.Masks.counter;
 			var me = mask.element;
 			me.style.display = 'block';
 			if (mask.fadeIn) {
@@ -15891,6 +15926,7 @@ Q.Masks = {
 			} else {
 				me.style.display='none';
 			}
+			--Q.Masks.counter;
 		}
 		Q.handle(Q.Masks.onHide, Q.Masks, [key, mask]);
 	},
