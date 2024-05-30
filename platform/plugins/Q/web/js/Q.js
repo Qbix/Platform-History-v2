@@ -14033,6 +14033,9 @@ Q.Visual = Q.Pointer = {
 				Q.Visual.waitUntilVisible(targets[0] || targets, function (entries, observer) {
 					if (entries[0].isIntersecting) {
 						var sp = entries[0].target.scrollingParent();
+						if (!sp) {
+							return;
+						}
 						var st = sp.scrollTop;
 						var ival = setInterval(function () {
 							if (st === sp.scrollTop) {
@@ -14231,7 +14234,7 @@ Q.Visual = Q.Pointer = {
                 Q.Visual.stopHintsIgnore = true;
                 Q.addEventListener(window, Q.Pointer.start, Q.Visual.stopHints, false, true);
                 Q.addEventListener(window, 'keydown', Q.Visual.stopHints, false, true);
-                Q.addEventListener(document, 'scroll', Q.Visual.stopHints, false, true);
+                Q.addEventListener(document, 'scroll', Q.Visual.stopHints, true, true);
                 Q.Visual.hint.addedListeners = true;
                 setTimeout(function () {
                     delete Q.Visual.stopHintsIgnore;
