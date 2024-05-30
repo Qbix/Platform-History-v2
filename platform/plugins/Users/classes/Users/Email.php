@@ -195,15 +195,8 @@ class Users_Email extends Base_Users_Email
 				} catch (Exception $e) {
 					throw new Users_Exception_EmailMessage(array('error' => $e->getMessage()));
 				}
-			}
-
-			if ($key = Q_Config::get('Users', 'email', 'log', 'key', 'email')) {
-				$logMessage = "Sent message to $emailAddress:\n$subject\n$body";
-				if (!isset($transport)) {
-					Q_Response::setNotice("Q/email", "Please set up SMTP in Users/email/smtp as in docs.", false);
-					$logMessage = "Would have $logMessage";
-				}
-				Q::log($logMessage, $key);
+			} else {
+				Q_Response::setNotice("Q/email", "Please set up SMTP in Users/email/smtp as in docs.", false);
 			}
 		}
 		
@@ -217,7 +210,7 @@ class Users_Email extends Base_Users_Email
 		 */
 		Q::event(
 			'Users/email/sendMessage', 
-			@compact('subject', 'view', 'fields', 'options', 'mail', 'app'),
+			@compact('emailAddress', 'subject', 'body', 'view', 'fields', 'options', 'mail', 'app'),
 			'after'
 		);
 		return true;
