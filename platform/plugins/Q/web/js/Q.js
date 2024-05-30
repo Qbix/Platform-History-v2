@@ -12455,7 +12455,7 @@ Q.Socket.onEvent = Q.Event.factory(
 		var event = this;
     	event.onFirst().set(function () {
 			// The first handler was added to the event
-			Q.each(Q.Socket.get(ns, url), function (url, qs) {
+			Q.each(Q.Socket.get(ns), function (url, qs) {
 				function _Q_Socket_register(qs) {
 					// this occurs when socket is connected
 					_ioOn(qs.socket, name, event.handle);

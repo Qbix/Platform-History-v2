@@ -341,7 +341,7 @@ Q.exports(function() {
 
                                 // listen for Streams/invite/accept event to show imagepicker
                                 Q.Socket.onEvent('Streams/invite/accept')
-                                .set(function _Streams_invite_accept_handler (data) {
+                                .set(function (data) {
                                     if (!Q.Users.isCustomIcon(data.icon, true)) {
                                         _setPhoto(data);
                                     }
@@ -352,9 +352,9 @@ Q.exports(function() {
                     break;
             }
             Q.Socket.onEvent('Streams/invite/accept')
-            .setOnce(function _Streams_invite_accept_handler (data) {
+            .set(function (data) {
                 console.log('Q.Socket.onEvent("Streams/invite/accept")');
-                Q.Streams.Stream.observe(data.invitedUserId, 'Streams_invite_observe_icon');
+                Q.Streams.Stream.observe(data.invitedUserId, 'Streams/user/icon');
             }, 'Streams.invite.observe');
             return true;
         }
