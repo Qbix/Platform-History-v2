@@ -1220,16 +1220,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		var tool = this;
 		var state = this.state;
 		var $scrolling = null;
-		var sp = this.element;
-		while (sp = sp.scrollingParent()) {
-			Q.Event.from(sp, 'scroll').set(function () {
-				stopScrollingToComposer = true;
-			}, tool);
-		}
 		setTimeout(_doScrollToComposer, 100);
-		Q.Dialogs.push.options.onActivate.set(function () {
-			stopScrollingToComposer = true;
-		}, tool);
 		function _doScrollToComposer (recursive) {
 			if (stopScrollingToComposer
 			|| !$(tool.element).is(':visible')) {
@@ -1295,6 +1286,15 @@ Q.Tool.define('Streams/chat', function(options) {
 				setTimeout(function () {
 					_doScrollToComposer(true);
 				}, 300);
+				var sp = this.element;
+				while (sp = sp.scrollingParent()) {
+					Q.Event.from(sp, 'scroll').set(function () {
+						stopScrollingToComposer = true;
+					}, tool);
+				}
+				Q.Dialogs.push.options.onActivate.set(function () {
+					stopScrollingToComposer = true;
+				}, tool);
 			}
 
 			if (!$scrolling || !$scrolling.length) {
@@ -1304,7 +1304,8 @@ Q.Tool.define('Streams/chat', function(options) {
 			if (checkScrolling($scrolling[0])) {
 				stopScrollingToComposer = true;
 			} else {
-				$scrolling.off('scroll.Streams_chat').on('scroll.Streams_chat', function (event) {
+				$scrolling.off('scroll.Streams_chat')
+				.on('scroll.Streams_chat', function (event) {
 					// user started scrolling manually
 					if (!checkScrolling(event.target)) {
 						return;
