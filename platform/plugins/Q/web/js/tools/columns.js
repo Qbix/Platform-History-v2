@@ -512,7 +512,7 @@ Q.Tool.define("Q/columns", function(options) {
 				if (Q.instanceOf(o.title, Element)) {
 					$titleSlot.empty().append(o.title);
 				} else {
-					$titleSlot.empty().text(o.title);
+					$titleSlot.empty().html(o.title);
 				}
 				$div.attr('data-title', $titleSlot.text());
 				$div.attr('data-prevTitle', document.title);
