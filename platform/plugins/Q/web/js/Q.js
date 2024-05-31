@@ -12237,6 +12237,7 @@ var _connectSocketNS = root.a = Q.getter(function(ns, url, callback, options) {
 	function _connectNS(ns, url, callback, o) {
 		// connect to (ns, url)
 		if (!root.io) return;
+		url = Q.url(url); // in case we need to transform it
 		var qs = _qsockets[ns] && _qsockets[ns][url];
 		var ec = o.earlyCallback;
 		delete o.earlyCallback;
