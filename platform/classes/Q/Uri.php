@@ -1066,7 +1066,7 @@ class Q_Uri
 			Q::parse_str($tail, $fields);
 			$fields[$field] = $fileTimestamp;
 			$qs = http_build_query($fields);
-			return array(Q_Uri::fixUrl("$relativeUrl?$qs"), $fileSHA1);
+			return array(Q_Uri::fixUrl("$head?$qs"), $fileSHA1);
 		}
 		return array($url, $fileSHA1);
 	}
