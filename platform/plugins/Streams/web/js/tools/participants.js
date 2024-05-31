@@ -483,7 +483,7 @@ function _continue(tool, callback) {
 					});
 
 					if (si.clickable) {
-						$('img', $element).plugin(
+						$('.Streams_inviteTrigger img', $element).plugin(
 							'Q/clickable', Q.extend({
 								triggers: $element
 							}, si.clickable)
