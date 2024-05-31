@@ -874,6 +874,8 @@ class Q_Uri
 	 */
 	static function filenamefromUrl ($url)
 	{
+		$parts = explode('?', $url);
+		$url = $parts[0];
 		$interpolatedUrl = self::interpolateUrl($url);
 		if (Q_Valid::url($interpolatedUrl)) {
 			// This is an absolute URL. Get only the part after the base URL

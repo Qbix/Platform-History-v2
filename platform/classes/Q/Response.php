@@ -1577,7 +1577,8 @@ class Q_Response
 				extract($stylesheet, EXTR_IF_EXISTS);
 
 				$ob = new Q_OutputBuffer();
-				if (Q_Valid::url($href) and !Q::startsWith($href, $baseUrl)) {
+				if (Q_Valid::url($href)
+				and !Q::startsWith(Q_Html::themedUrl($href), $baseUrl)) {
 					$imported_for_slots[$stylesheet['slot']][$href] = "@import url($href);";
 				} else {
 					list ($href, $filename) = Q_Html::themedUrlFilenameAndHash($href);
