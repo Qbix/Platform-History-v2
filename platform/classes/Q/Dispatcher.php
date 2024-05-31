@@ -237,10 +237,18 @@ class Q_Dispatcher
 					}
 				}
 				if ($found) {
+					$querystrings = Q_Config::get('Q', 'static', 'querystrings', array());
+					$qsname = '';
+					foreach ($querystrings as $qsn => $querystring) {
+						if (Q::startsWith($_SERVER['QUERY_STRING'], $querystring)) {
+							$qsname = "-$qsn";
+							break;
+						}
+					}
 					Q_Session::start(); // set session cookie
 					$normalized = Q_Utils::normalizeUrlToPath(Q_Request::url());
 					$staticWebUrl = Q_Response::staticWebUrl();
-					$redirectUrl = "$staticWebUrl/$normalized$redirectSuffix";
+					$redirectUrl = "$staticWebUrl/$normalized$qsname$redirectSuffix";
 					$filename = APP_WEB_DIR . DS . str_replace('/', DS, $redirectSuffix);
 					$mtime = filemtime($filename);
 					$noRedirect = false;
