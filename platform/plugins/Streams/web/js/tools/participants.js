@@ -228,12 +228,12 @@ function _Streams_participants(options) {
 			}, { sort: 'insertedTime', ascending: false });
 			state.count = c;
 			if (state.showBlanks) {
-				var opacity = 100;
+				var opacity = 50;
 				Q.each(c, state.maxShow-1, 1, function () {
 					var element = tool.addAvatar('');
 					if (element) {
-						opacity /= 2;
 						element.style.opacity = String(opacity) + '%';
+						opacity = opacity * 0.7;
 					}
 				});
 			}
