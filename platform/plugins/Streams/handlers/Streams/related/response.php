@@ -40,7 +40,7 @@ function Streams_related_response()
 
 	if (!$relations_requested && !$streams_requested) {
 		if (empty(Q_Utils::$nodeUrlRouters)) {
-			$nodeUrls = array(Q_Utils::nodeUrl());
+			$nodeUrls = array(Q_Uri::proxySource(Q_Utils::nodeUrl()));
 			$stream = Streams_Stream::fetch($asUserId, $publisherId, $streamName);
 			Q_Response::setSlot('nodeUrls', $nodeUrls);
 			Q_Response::setSlot('stream', $stream->exportArray());
