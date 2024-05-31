@@ -9645,6 +9645,7 @@ Q.updateUrls.urls = JSON.parse(localStorage.getItem(Q.updateUrls.urlsKey) || "{}
  * @param {Object} [options]
  *  Optional. A hash of options, including options for Q.url() and these:
  * @param {String} [options.type='text/javascript'] Type attribute of script tag
+ * @param {Boolean} [options.async] do not wait for previous scripts and don't block future scripts
  * @param {Boolean} [options.duplicate] if true, adds script even if one with that src was already loaded
  * @param {Boolean} [options.querystringMatters] if true, then different querystring is considered as different, even if duplicate option is false
  * @param {Boolean} [options.skipIntegrity] if true, skips adding "integrity" attribute even if one can be calculated
@@ -9849,6 +9850,9 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 			script.setAttribute('integrity', 'sha256-' + options.info.h);
 		}
 	}
+	if (o.async) {
+		script.async = true;
+	}
 	Q.addScript.added[src2] = true;
 	Q.addScript.onLoadCallbacks[src2] = [_onload];
 	Q.addScript.onErrorCallbacks[src2] = [];
@@ -9861,7 +9865,9 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 	
 	if ('async' in script) { // modern browsers
 		script.setAttribute('src', src);
-		script.async = false;
+		if (!o.async) {
+			script.async = false;
+		}
 		container.appendChild(script);
 	} else if (firstScript.readyState) { // IE<10
 		// create a script and add it to our todo pile
@@ -12223,7 +12229,7 @@ var _connectSocketNS = root.a = Q.getter(function(ns, url, callback, options) {
 		}
 		Q.addScript(url+socketPath+'/socket.io.js', function () {
 			_connectNS(ns, url, callback, o);
-		});
+		}, { async: true });
 	}
 
 	// load socket.io script and connect socket
