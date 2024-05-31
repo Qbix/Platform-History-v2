@@ -239,10 +239,12 @@ class Q_Dispatcher
 				if ($found) {
 					$querystrings = Q_Config::get('Q', 'static', 'querystrings', array());
 					$qsname = '';
-					foreach ($querystrings as $qsn => $querystring) {
-						if (Q::startsWith($_SERVER['QUERY_STRING'], $querystring)) {
-							$qsname = "-$qsn";
-							break;
+					foreach ($querystrings as $qsn => $qss) {
+						foreach ($qss as $qs) {
+							if (Q::startsWith($_SERVER['QUERY_STRING'], $qs)) {
+								$qsname = "-$qsn";
+								break 2;
+							}
 						}
 					}
 					Q_Session::start(); // set session cookie
