@@ -209,7 +209,7 @@ class Q_Request
 				$server_name = $_SERVER['HTTP_HOST'];
 			}
 			self::$url = sprintf('http%s://%s%s%s%s%s%s', 
-				$https ? '' : 's', 
+				$https ? 's' : '', 
 				isset($_SERVER['PHP_AUTH_USER']) ? $_SERVER['PHP_AUTH_USER'] : '',
 				isset($_SERVER['PHP_AUTH_PW']) ? ':'.$_SERVER['PHP_AUTH_PW'] : '',
 				isset($_SERVER['PHP_AUTH_USER']) ? '@' : '',
