@@ -2370,6 +2370,7 @@ Q.chain = function (callbacks) {
 		}
 		var prevResult = result;
 		result = function () {
+			var args = Array.prototype.slice.call(arguments, 0);
 			args.push(prevResult);
 			return cb.apply(this, arguments);
 		};
