@@ -818,7 +818,10 @@ Q.Tool.define({
 	"Streams/comments"	 : "{{Streams}}/js/tools/comments.js",
 	"Streams/photoSelector": "{{Streams}}/js/tools/photoSelector.js",
 	"Streams/userChooser"  : "{{Streams}}/js/tools/userChooser.js",
-	"Streams/participants" : "{{Streams}}/js/tools/participants.js",
+	"Streams/participants" : {
+		js: "{{Streams}}/js/tools/participants.js",
+		css: "{{Streams}}/css/tools/participants.css"
+	},
 	"Streams/basic"		: "{{Streams}}/js/tools/basic.js",
 	"Streams/access"	   : "{{Streams}}/js/tools/access.js",
 	"Streams/subscription" : "{{Streams}}/js/tools/subscription.js",

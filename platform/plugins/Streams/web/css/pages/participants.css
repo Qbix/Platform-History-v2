@@ -61,7 +61,7 @@
 	margin-right: 10px;
 }
 
-#content.Streams_participating {
+/* #content.Streams_participating {
 	padding: 0 5px;
 }
 #content.Streams_participating > h2 {
@@ -220,4 +220,4 @@ table.Streams_participating_stream {
 .Streams_participant_subscribed_icon[data-subscribed=false] {
 	background: url(../../img/subscription/off/80.png) center center no-repeat;
 	background-size: contain;
-}
+} */
