@@ -229,7 +229,10 @@ function _Streams_participants(options) {
 			state.count = c;
 			if (state.showBlanks) {
 				Q.each(c, state.maxShow-1, 1, function () {
-					tool.addAvatar('');
+					var element = tool.addAvatar('');
+					if (element) {
+						
+					}
 				});
 			}
 			_continue(tool, callback);
@@ -301,6 +304,7 @@ function _Streams_participants(options) {
 			tool.orderAvatars();
 			Q.layout(tool.$pc[0], true);
 		});
+		return $element[0];
 	},
 	/**
 	 * Remove avatar from participants list
@@ -453,7 +457,7 @@ function _continue(tool, callback) {
 				function (err, html) {
 					if (err) return;
 					var $element = tool.$invite = $(html).insertBefore(tool.$avatars);
-					var filter = '.Streams_inviteTrigger';
+					var filter = '.Streams_inviteTrigger, .Users_avatar_icon_blank';
 					$te.on(Q.Pointer.fastclick, filter, function () {
 						var options = Q.extend({
 							identifier: si.identifier

@@ -2587,6 +2587,29 @@
 		}
 	};
 
+	Users.Communities = {
+		Web3: {
+			Contract: {
+				adjustAbi: new Q.Method(),
+				get: new Q.Method()
+			},
+			Roles: {
+				prefixPattern: '<<< web3',
+				labelPattern: new Q.Method(),
+				isPatternCorrect: new Q.Method(),
+				parsePattern: new Q.Method(),
+				getAll: new Q.Method(),
+				byUser: new Q.Method(),
+				add: new Q.Method(),
+				setRoleURI: new Q.Method(),
+				manage: new Q.Method(),
+				grantRole: new Q.Method(),
+				revokeRole: new Q.Method(),
+				getIndex: new Q.Method()
+			}
+		}
+	};
+
 	/**
 	 * Disconnect external platforms
 	 */
