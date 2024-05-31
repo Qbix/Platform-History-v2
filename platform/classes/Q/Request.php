@@ -1311,7 +1311,7 @@ class Q_Request
 		$https = self::isSecure(true);
 
 		return sprintf('http%s://%s%s%s%s%s%s', 
-			$https ? '' : 's',
+			$https ? 's' : '',
 			isset($_SERVER['PHP_AUTH_USER']) ? $_SERVER['PHP_AUTH_USER'] : '',
 			isset($_SERVER['PHP_AUTH_PW']) ? ':'.$_SERVER['PHP_AUTH_PW'] : '',
 			isset($_SERVER['PHP_AUTH_USER']) ? '@' : '', 
@@ -1339,10 +1339,9 @@ class Q_Request
 		if ($server_name[0] === '*' || $server_name[0] === '~') {
 			$server_name = $_SERVER['HTTP_HOST'];
 		}
-		$https = empty($_SERVER['HTTPS'])
-			|| Q::ifset($_SERVER, 'HTTP_X_FORWARDED_PROTO', null) === 'https';
+		$https = self::isSecure(true);
 		return sprintf('http%s://%s%s%s%s%s%s', 
-			$https ? '' : 's',
+			$https ? 's' : '',
 			isset($_SERVER['PHP_AUTH_USER']) ? $_SERVER['PHP_AUTH_USER'] : '',
 			isset($_SERVER['PHP_AUTH_PW']) ? ':'.$_SERVER['PHP_AUTH_PW'] : '',
 			isset($_SERVER['PHP_AUTH_USER']) ? '@' : '',
