@@ -247,8 +247,8 @@
 
 		var scriptsToLoad = [
 			'{{Users}}/js/web3/ethers-5.2.umd.min.js',
-			'{{Users}}/js/web3/evm-chains.min.js',
-			'{{Users}}/js/web3/ethereumProvider.2.10.1.min.js' //'https://unpkg.com/@walletconnect/ethereum-provider'
+			'{{Users}}/js/web3/evm-chains.min.js' //,
+			// '{{Users}}/js/web3/ethereumProvider.2.10.1.min.js' //'https://unpkg.com/@walletconnect/ethereum-provider'
 		];
 
 		Q.addScript(scriptsToLoad, function () {
@@ -272,26 +272,26 @@
 					rpcMap[chainId] = Q.isArrayLike(r) ? r[0]: 0;
 				};
 			}
-			window['@walletconnect/ethereum-provider'].EthereumProvider.init({
-				projectId: projectId, // REQUIRED your projectId
-				showQrModal: true, // REQUIRED set to "true" to use @walletconnect/modal
-				qrModalOptions: { themeMode: "light" },
-				optionalChains: optionalChains,
-				rpcMap: rpcMap,
-				methods: ["eth_sendTransaction", "personal_sign", "eth_sign", "wallet_switchEthereumChain", "wallet_addEthereumChain"],
-				//optionalMethods: ["eth_accounts","eth_requestAccounts","eth_sendRawTransaction","eth_sign","eth_signTransaction","eth_signTypedData","eth_signTypedData_v3","eth_signTypedData_v4","wallet_switchEthereumChain","wallet_addEthereumChain","wallet_getPermissions","wallet_requestPermissions","wallet_registerOnboarding","wallet_watchAsset","wallet_scanQRCode"],
-				events: ["chainChanged", "accountsChanged","disconnect","connect"],
-				optionalEvents: ["message"],
-				metadata: {
-					name: Q.info.app,
-					description: 'Web3 Client',
-					url: Q.info.baseUrl,
-					icons: [Q.url("{{baseUrl}}/img/icon/icon.png")]
-				},
-			}).then(function (ethereumProvider) {
-				Users.Web3.ethereumProvider = ethereumProvider;
-				callback && callback();
-			});
+			// window['@walletconnect/ethereum-provider'].EthereumProvider.init({
+			// 	projectId: projectId, // REQUIRED your projectId
+			// 	showQrModal: true, // REQUIRED set to "true" to use @walletconnect/modal
+			// 	qrModalOptions: { themeMode: "light" },
+			// 	optionalChains: optionalChains,
+			// 	rpcMap: rpcMap,
+			// 	methods: ["eth_sendTransaction", "personal_sign", "eth_sign", "wallet_switchEthereumChain", "wallet_addEthereumChain"],
+			// 	//optionalMethods: ["eth_accounts","eth_requestAccounts","eth_sendRawTransaction","eth_sign","eth_signTransaction","eth_signTypedData","eth_signTypedData_v3","eth_signTypedData_v4","wallet_switchEthereumChain","wallet_addEthereumChain","wallet_getPermissions","wallet_requestPermissions","wallet_registerOnboarding","wallet_watchAsset","wallet_scanQRCode"],
+			// 	events: ["chainChanged", "accountsChanged","disconnect","connect"],
+			// 	optionalEvents: ["message"],
+			// 	metadata: {
+			// 		name: Q.info.app,
+			// 		description: 'Web3 Client',
+			// 		url: Q.info.baseUrl,
+			// 		icons: [Q.url("{{baseUrl}}/img/icon/icon.png")]
+			// 	},
+			// }).then(function (ethereumProvider) {
+			// 	Users.Web3.ethereumProvider = ethereumProvider;
+			// 	callback && callback();
+			// });
 		}, options);
 	};
 
@@ -1899,6 +1899,7 @@
 					_subscribeToEvents(ethereum);
 					_getProvider(ethereum);
 				} else if (wallets) {
+					delete wallets.walletconnect; // for now
 					Q.Template.set("Users/web3/connect/wallet", `<ul>
 						{{#each wallets}}
 							<li><a style="background-image: url({{img}})" {{#if url}}href="{{url}}"{{/if}} {{#if data-url}}data-url="{{data-url}}"{{/if}}>{{name}}</a></li>
