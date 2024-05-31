@@ -464,6 +464,12 @@ class Q_Bootstrap
 		if (isset($url)) {
 			Q_Uri::cacheBaseUrl($url);
 		}
+		$shouldUseBasenames = Q_Config::get('Q', 'images', 'shouldUseBasenames', array());
+		$baseUrl = Q_Request::baseUrl();
+		if (Q::startsWith($baseUrl, 'http://')) {
+			$shouldUseBasenames[] = 'https://' . substr($baseUrl, 7);
+			Q_Config::set('Q', 'images', 'shouldUseBasenames', $shouldUseBasenames);
+		}
 	}
 
 	/**
