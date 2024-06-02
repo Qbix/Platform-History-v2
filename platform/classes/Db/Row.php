@@ -978,7 +978,9 @@ class Db_Row
 		}
 
 		if (!isset($this->fieldsOriginal[$name_internal])) {
-			$this->fieldsOriginal[$name_internal] = Q::ifset($this->fields, $name_internal, null);
+			$this->fieldsOriginal[$name_internal] = isset($this->fields[$name_internal])
+				? $this->fields[$name_internal]
+				: null;
 		}
 		$this->fields[$name_internal] = $value;
 		$this->fieldsModified[$name_internal] = true;
@@ -1548,12 +1550,14 @@ class Db_Row
 			return $this->getRelated($relationName, array());
 		}
 
-		$class_name = get_class($this);
-		$class_event = implode('/', explode('_', $class_name));
-		$args2 = array_merge(array($this), $args);
-		$result = Q::event("$class_event/method/$name", $args2, 'before');
-		if (!$result) {
-			throw new Exception("calling method {$class_name}->{$name}, which doesn't exist");
+		if (class_exists('Q')) {
+			$class_name = get_class($this);
+			$class_event = implode('/', explode('_', $class_name));
+			$args2 = array_merge(array($this), $args);
+			$result = Q::event("$class_event/method/$name", $args2, 'before');
+			if (!isset($result)) {
+				throw new Exception("calling method {$class_name}->{$name}, which doesn't exist");
+			}
 		}
 		
 		// otherwise, function doesn't exist.
@@ -2014,7 +2018,7 @@ class Db_Row
 		$modifyQuery = false,
 		$options = array())
 	{
-		if (Q::isAssociative($useIndex)) {
+		if (Db::isAssociative($useIndex)) {
 			$modifyQuery = $useIndex;
 			$useIndex = $options = null;
 		}

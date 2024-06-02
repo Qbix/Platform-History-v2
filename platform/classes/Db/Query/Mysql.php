@@ -1,5 +1,7 @@
 <?php
 
+include_once(dirname(__FILE__).'/../Query.php');
+
 /**
  * @module Db
  */
@@ -543,7 +545,7 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 		unset($this->replacements['{{dbname}}']);
 		unset($this->replacements['{{prefix}}']);
 
-		$this->startedTime = Q::milliseconds(true);
+		$this->startedTime = Db::milliseconds(true);
 
 		if ($prepareStatement) {
 			// Prepare the query into a SQL statement
@@ -581,7 +583,7 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 			if (is_string($shards)) {
 				$shards = array($shards);
 			}
-			if (Q::isAssociative($shards)) {
+			if (Db::isAssociative($shards)) {
 				$queries = $shards;
 			} else {
 				$queries = array_fill_keys($shards, $this);
@@ -603,15 +605,16 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 		}
 
 		foreach ($queries as $shardName => $query) {
-
-			$upcoming = Q_Config::get('Db', 'upcoming', $connection, false);
+			$upcoming = class_exists('Q')
+			? Q_Config::get('Db', 'upcoming', $connection, false)
+			: null;
 			if ($query->type !== Db_Query::TYPE_SELECT && $query->type !== Db_Query::TYPE_RAW) {
 				if (!empty($upcoming['block']) && $shardName === $upcoming['shard']) {
 					throw new Db_Exception_Blocked(@compact('shardName', 'connection'));
 				}
 			}
 			
-			$query->startedTime = Q::milliseconds(true);
+			$query->startedTime = Db::milliseconds(true);
 
 			$shardInfo = null;
 			$pdo = $query->reallyConnect($shardName, $shardInfo);
@@ -641,7 +644,7 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 
 			try {
 				if (!empty($query->clauses["BEGIN"])) {
-					$ntk[] = Q::ifset($query, 'transactionKey', null);
+					$ntk[] = isset($query['transactionKey']) ? $query['transactionKey'] : null;
 					$ntct[] = $connection;
 					//$ntbt[] = Q::b();
 					if (++$ntc == 1) {
@@ -697,10 +700,12 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 						if ($lastTransactionKey
 						and $query->transactionKey !== $lastTransactionKey
 						and $query->transactionKey !== '*') {
-							Q::log("WARNING: Forgot to resolve transactions via commit or rollback");
-							foreach (self::$nestedTransactions as $t) {
-								Q::log($t['connections']);
-								Q::log($t['backtraces']);
+							if (class_exists('Q')) {
+								Q::log("WARNING: Forgot to resolve transactions via commit or rollback");
+								foreach (self::$nestedTransactions as $t) {
+									Q::log($t['connections']);
+									Q::log($t['backtraces']);
+								}
 							}
 							throw new Exception(
 								"forgot to resolve transaction with key $lastTransactionKey"
@@ -785,10 +790,10 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 						), $logServer, true);
 					}
 				}
-				$query->endedTime = Q::milliseconds(true);
+				$query->endedTime = Db::milliseconds(true);
 			}
 		}
-		$this->endedTime = Q::milliseconds(true);
+		$this->endedTime = Db::milliseconds(true);
 		if (!empty($exception)) {
 			/**
 			 * @event Db/query/exception {after}
@@ -810,13 +815,15 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 				'msg' => $exception->getMessage()
 			), 'PDOException');
 		}
-		/**
-		 * @event Db/query/execute {after}
-		 * @param {Db_Query_Mysql} query
-		 * @param {array} queries
-		 * @param {string} sql
-		 */
-		Q::event('Db/query/execute', @compact('query', 'queries', 'sql'), 'after');
+		if (class_exists('Q')) {
+			/**
+			 * @event Db/query/execute {after}
+			 * @param {Db_Query_Mysql} query
+			 * @param {array} queries
+			 * @param {string} sql
+			 */
+			Q::event('Db/query/execute', @compact('query', 'queries', 'sql'), 'after');
+		}
 
 		return new Db_Result($stmts, $this);
 	}
@@ -834,10 +841,12 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 			}
 		}
 		if ($connections) {
-			Q::log("WARNING: Forgot to resolve transactions on $connections connections");
-			foreach (self::$nestedTransactions as $t) {
-				Q::log($t['connections']);
-				Q::log($t['backtraces']);
+			if (class_exists('Q')) {
+				Q::log("WARNING: Forgot to resolve transactions on $connections connections");
+				foreach (self::$nestedTransactions as $t) {
+					Q::log($t['connections']);
+					Q::log($t['backtraces']);
+				}
 			}
 		}
 	}
@@ -2027,16 +2036,18 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 	 */
 	private function reallyConnect($shardName = null, &$shardInfo = null)
 	{
-		/**
-		 * @event Db/reallyConnect {before}
-		 * @param {Db_Query_Mysql} query
-		 * @param {string} 'shardName'
-		 */
-		Q::event(
-			'Db/query/route',
-			array('query' => $this, 'shardName' => $shardName),
-			'before'
-		);
+		if (class_exists('Q')) {
+			/**
+			 * @event Db/reallyConnect {before}
+			 * @param {Db_Query_Mysql} query
+			 * @param {string} 'shardName'
+			 */
+			Q::event(
+				'Db/reallyConnect',
+				array('query' => $this, 'shardName' => $shardName),
+				'before'
+			);
+		}
 		return $this->db->reallyConnect($shardName, $shardInfo);
 	}
 	

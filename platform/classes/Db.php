@@ -1,5 +1,10 @@
 <?php
 
+include(dirname(__FILE__).'/Db/Expression.php');
+include(dirname(__FILE__).'/Db/Result.php');
+include(dirname(__FILE__).'/Db/Query.php');
+include(dirname(__FILE__).'/Db/Row.php');
+
 /**
  * The database interface module. Contains basic properties and methods and serves as namespace
  * for more specific sub-classes
@@ -12,6 +17,10 @@
  * @class Db_Interface
  * @static
  */
+
+if (!defined('DS')) define('DS', DIRECTORY_SEPARATOR);
+if (!defined('PS')) define('PS', PATH_SEPARATOR);
+Db::milliseconds();
 
 interface Db_Interface
 {
@@ -427,7 +436,7 @@ abstract class Db
 		if (class_exists('Q_Config')) {
 			$result = Q_Config::get('Db', 'connections', $name, array());
 		} else { // standalone, no Q
-			$result = isset(self::$connections['name'])
+			$result = isset(self::$connections[$name])
 				? self::$connections[$name]
 				: array();
 		}
@@ -551,9 +560,13 @@ abstract class Db
 			return self::$dbs[$conn_name];
 		}
 		if (empty($conn_info['dsn'])) {
-			throw new Q_Exception_MissingConfig(array(
-				'fieldpath' => "Db/connections/$conn_name/dsn"
-			));
+			if (class_exists('Q_Exception_MissingConfig')) {
+				throw new Q_Exception_MissingConfig(array(
+					'fieldpath' => "Db/connections/$conn_name/dsn"
+				));
+			} else {
+				throw new Exception("Missing dsn for connection \"$conn_name\"");
+			}
 		}
 		$dsn_array = Db::parseDsnString($conn_info['dsn']);
 		$class_name = 'Db_' . ucfirst($dsn_array['dbms']);
@@ -620,7 +633,9 @@ abstract class Db
 				self::$pdo_array[$key]->exec($driver_options['exec']);
 			}
 		} catch (Exception $e) {
-			if (class_exists('Q_Config') and Q_Config::get('Db', 'exceptions', 'log', true)) {
+			if (is_callable(array('Q', 'log'))
+			and class_exists('Q_Config')
+			and Q_Config::get('Db', 'exceptions', 'log', true)) {
 				Q::log($e);
 			}
 			$exception = new Db_Exception_Connect(@compact('connection', 'dbname', 'shard_name'));
@@ -972,6 +987,55 @@ abstract class Db
 		$prevValue = self::$allowCaching;
 		self::$allowCaching = $allow;
 		return $prevValue;
+	}
+
+	/**
+	 * Returns the number of milliseconds since the
+	 * first call to this function (i.e. since script started).
+	 * @method milliseconds
+	 * @param {Boolean} $sinceEpoch
+	 *  Defaults to false. If true, just returns the number of milliseconds in the UNIX timestamp.
+	 * @return {float}
+	 *  The number of milliseconds, with fractional part
+	 */
+	static function milliseconds ($sinceEpoch = false)
+	{
+		$result = microtime(true)*1000;
+		if ($sinceEpoch) {
+			return $result;
+		}
+		return $result - self::millisecondsStarted();
+	}
+
+	/**
+	 * The microtime when the script first started executing
+	 */
+	static function millisecondsStarted()
+	{
+		static $microtime_start = null;
+		if (!isset($microtime_start)) {
+			$microtime_start = microtime(true)*1000;
+		}
+		return $microtime_start;
+	}
+
+	/**
+	 * Determine whether a PHP array if associative or not
+	 * Might be slow as it has to iterate through the array
+	 * @param {array} $array
+	 */
+	static function isAssociative($array)
+	{
+		if (!is_array($array)) {
+			return false;
+		}
+		
+		// Keys of the array
+		$keys = array_keys($array);
+
+		// If the array keys of the keys match the keys, then the array must
+		// not be associative (e.g. the keys array looked like {0:0, 1:1...}).
+		return array_keys($keys) !== $keys;
 	}
 	
 	/**
