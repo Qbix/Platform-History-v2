@@ -1,10 +1,5 @@
 <?php
 
-include(dirname(__FILE__).'/Db/Expression.php');
-include(dirname(__FILE__).'/Db/Result.php');
-include(dirname(__FILE__).'/Db/Query.php');
-include(dirname(__FILE__).'/Db/Row.php');
-
 /**
  * The database interface module. Contains basic properties and methods and serves as namespace
  * for more specific sub-classes
@@ -20,6 +15,10 @@ include(dirname(__FILE__).'/Db/Row.php');
 
 if (!defined('DS')) define('DS', DIRECTORY_SEPARATOR);
 if (!defined('PS')) define('PS', PATH_SEPARATOR);
+include_once(dirname(__FILE__).DS.'Db'.DS.'Expression.php');
+include_once(dirname(__FILE__).DS.'Db'.DS.'Result.php');
+include_once(dirname(__FILE__).DS.'Db'.DS.'Query.php');
+include_once(dirname(__FILE__).DS.'Db'.DS.'Row.php');
 Db::milliseconds();
 
 interface Db_Interface

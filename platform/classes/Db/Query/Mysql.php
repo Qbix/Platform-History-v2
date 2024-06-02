@@ -1,6 +1,6 @@
 <?php
 
-include_once(dirname(__FILE__).'/../Query.php');
+include_once(dirname(__FILE__).DS.'..'.DS.'Query.php');
 
 /**
  * @module Db
