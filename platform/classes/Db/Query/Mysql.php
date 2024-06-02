@@ -644,7 +644,7 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 
 			try {
 				if (!empty($query->clauses["BEGIN"])) {
-					$ntk[] = isset($query['transactionKey']) ? $query['transactionKey'] : null;
+					$ntk[] = isset($query->transactionKey) ? $query->transactionKey : null;
 					$ntct[] = $connection;
 					//$ntbt[] = Q::b();
 					if (++$ntc == 1) {
