@@ -880,10 +880,13 @@ class Q_Uri
 		if (Q_Valid::url($interpolatedUrl)) {
 			// This is an absolute URL. Get only the part after the base URL
 			// Run it through proxies first
-			$interpolatedUrl = self::proxyDestination($interpolatedUrl);
-			$local_url = Q_Request::tail($interpolatedUrl);
+			$proxiedUrl = self::proxyDestination($interpolatedUrl);
+			$local_url = Q_Request::tail($proxiedUrl);
 			if (!isset($local_url)) {
-				return null;
+				$local_url = Q_Request::tail($interpolatedUrl);
+				if (!isset($local_url)) {
+					return null;
+				}
 			}
 		} else {
 			$local_url = $url;
