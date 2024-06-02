@@ -420,18 +420,6 @@ class Q_Dispatcher
 						Q::event($method_event);
 					}
 				}
-
-				// You can calculate some analytics here, and store them somewhere
-				$eventName = 'Q/analytics';
-				self::startSessionBeforeEvent($eventName);
-				if (!isset(self::$skip[$eventName])) {
-					/**
-					 * Gives the app a chance to gather analytics from the request.
-					 * @event Q/analytics
-					 * @param {array} $routed
-					 */
-					Q::event($eventName, self::$routed, true);
-				}
 				
 				$eventName = 'Q/errors';
 				self::startSessionBeforeEvent($eventName);
@@ -453,6 +441,18 @@ class Q_Dispatcher
 
 				self::response();
 				
+				// You can calculate some analytics here, and store them somewhere
+				$eventName = 'Q/analytics';
+				self::startSessionBeforeEvent($eventName);
+				if (!isset(self::$skip[$eventName])) {
+					/**
+					 * Gives the app a chance to gather analytics from the request.
+					 * @event Q/analytics
+					 * @param {array} $routed
+					 */
+					Q::event($eventName, self::$routed, true);
+				}
+
 				return true;
 			} catch (Q_Exception_DispatcherForward $e) {
 				if (!empty($ob)) {
