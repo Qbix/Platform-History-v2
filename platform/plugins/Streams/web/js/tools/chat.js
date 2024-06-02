@@ -1286,7 +1286,7 @@ Q.Tool.define('Streams/chat', function(options) {
 				setTimeout(function () {
 					_doScrollToComposer(true);
 				}, 300);
-				var sp = this.element;
+				var sp = tool.element;
 				while (sp = sp.scrollingParent()) {
 					Q.Event.from(sp, 'scroll').set(function () {
 						stopScrollingToComposer = true;
