@@ -149,7 +149,7 @@ abstract class Base_Users_Web3Transaction extends Db_Row
 	 */
 	static function table($with_db_name = true, $alias = null)
 	{
-		if (Q_Config::get('Db', 'connections', 'Users', 'indexes', 'Web3Transaction', false)) {
+		if (class_exists('Q_Config') and Q_Config::get('Db', 'connections', 'Users', 'indexes', 'Web3Transaction', false)) {
 			return new Db_Expression(($with_db_name ? '{{dbname}}.' : '').'{{prefix}}'.'web3_transaction');
 		} else {
 			$conn = Db::getConnection('Users');

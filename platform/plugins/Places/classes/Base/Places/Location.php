@@ -84,7 +84,7 @@ abstract class Base_Places_Location extends Db_Row
 	 */
 	static function table($with_db_name = true, $alias = null)
 	{
-		if (Q_Config::get('Db', 'connections', 'Places', 'indexes', 'Location', false)) {
+		if (class_exists('Q_Config') and Q_Config::get('Db', 'connections', 'Places', 'indexes', 'Location', false)) {
 			return new Db_Expression(($with_db_name ? '{{dbname}}.' : '').'{{prefix}}'.'location');
 		} else {
 			$conn = Db::getConnection('Places');

@@ -87,7 +87,7 @@ abstract class Base_Streams_MessageTotal extends Db_Row
 	 */
 	static function table($with_db_name = true, $alias = null)
 	{
-		if (Q_Config::get('Db', 'connections', 'Streams', 'indexes', 'MessageTotal', false)) {
+		if (class_exists('Q_Config') and Q_Config::get('Db', 'connections', 'Streams', 'indexes', 'MessageTotal', false)) {
 			return new Db_Expression(($with_db_name ? '{{dbname}}.' : '').'{{prefix}}'.'message_total');
 		} else {
 			$conn = Db::getConnection('Streams');

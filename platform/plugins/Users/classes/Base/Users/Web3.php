@@ -117,7 +117,7 @@ abstract class Base_Users_Web3 extends Db_Row
 	 */
 	static function table($with_db_name = true, $alias = null)
 	{
-		if (Q_Config::get('Db', 'connections', 'Users', 'indexes', 'Web3', false)) {
+		if (class_exists('Q_Config') and Q_Config::get('Db', 'connections', 'Users', 'indexes', 'Web3', false)) {
 			return new Db_Expression(($with_db_name ? '{{dbname}}.' : '').'{{prefix}}'.'web3');
 		} else {
 			$conn = Db::getConnection('Users');

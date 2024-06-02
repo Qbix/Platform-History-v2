@@ -2540,7 +2540,7 @@ $field_hints
 	 */
 	static function table(\$with_db_name = true, \$alias = null)
 	{
-		if (Q_Config::get('Db', 'connections', '$connectionName', 'indexes', '$class_name_base', false)) {
+		if (class_exists('Q_Config') and Q_Config::get('Db', 'connections', '$connectionName', 'indexes', '$class_name_base', false)) {
 			return new Db_Expression((\$with_db_name ? '{{dbname}}.' : '').'{{prefix}}'.'$table_name_base');
 		} else {
 			\$conn = Db::getConnection($connectionName_var);

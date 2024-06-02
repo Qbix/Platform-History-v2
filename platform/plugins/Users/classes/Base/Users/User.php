@@ -183,7 +183,7 @@ abstract class Base_Users_User extends Db_Row
 	 */
 	static function table($with_db_name = true, $alias = null)
 	{
-		if (Q_Config::get('Db', 'connections', 'Users', 'indexes', 'User', false)) {
+		if (class_exists('Q_Config') and Q_Config::get('Db', 'connections', 'Users', 'indexes', 'User', false)) {
 			return new Db_Expression(($with_db_name ? '{{dbname}}.' : '').'{{prefix}}'.'user');
 		} else {
 			$conn = Db::getConnection('Users');

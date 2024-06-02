@@ -87,7 +87,7 @@ abstract class Base_Assets_Leader extends Db_Row
 	 */
 	static function table($with_db_name = true, $alias = null)
 	{
-		if (Q_Config::get('Db', 'connections', 'Assets', 'indexes', 'Leader', false)) {
+		if (class_exists('Q_Config') and Q_Config::get('Db', 'connections', 'Assets', 'indexes', 'Leader', false)) {
 			return new Db_Expression(($with_db_name ? '{{dbname}}.' : '').'{{prefix}}'.'leader');
 		} else {
 			$conn = Db::getConnection('Assets');

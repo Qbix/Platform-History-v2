@@ -93,7 +93,7 @@ abstract class Base_Websites_Article extends Db_Row
 	 */
 	static function table($with_db_name = true, $alias = null)
 	{
-		if (Q_Config::get('Db', 'connections', 'Websites', 'indexes', 'Article', false)) {
+		if (class_exists('Q_Config') and Q_Config::get('Db', 'connections', 'Websites', 'indexes', 'Article', false)) {
 			return new Db_Expression(($with_db_name ? '{{dbname}}.' : '').'{{prefix}}'.'article');
 		} else {
 			$conn = Db::getConnection('Websites');

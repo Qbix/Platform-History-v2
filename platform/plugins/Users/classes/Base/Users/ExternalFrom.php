@@ -129,7 +129,7 @@ abstract class Base_Users_ExternalFrom extends Db_Row
 	 */
 	static function table($with_db_name = true, $alias = null)
 	{
-		if (Q_Config::get('Db', 'connections', 'Users', 'indexes', 'ExternalFrom', false)) {
+		if (class_exists('Q_Config') and Q_Config::get('Db', 'connections', 'Users', 'indexes', 'ExternalFrom', false)) {
 			return new Db_Expression(($with_db_name ? '{{dbname}}.' : '').'{{prefix}}'.'external_from');
 		} else {
 			$conn = Db::getConnection('Users');

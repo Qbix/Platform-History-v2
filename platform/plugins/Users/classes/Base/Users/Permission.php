@@ -100,7 +100,7 @@ abstract class Base_Users_Permission extends Db_Row
 	 */
 	static function table($with_db_name = true, $alias = null)
 	{
-		if (Q_Config::get('Db', 'connections', 'Users', 'indexes', 'Permission', false)) {
+		if (class_exists('Q_Config') and Q_Config::get('Db', 'connections', 'Users', 'indexes', 'Permission', false)) {
 			return new Db_Expression(($with_db_name ? '{{dbname}}.' : '').'{{prefix}}'.'permission');
 		} else {
 			$conn = Db::getConnection('Users');

@@ -107,7 +107,7 @@ abstract class Base_Assets_Badge extends Db_Row
 	 */
 	static function table($with_db_name = true, $alias = null)
 	{
-		if (Q_Config::get('Db', 'connections', 'Assets', 'indexes', 'Badge', false)) {
+		if (class_exists('Q_Config') and Q_Config::get('Db', 'connections', 'Assets', 'indexes', 'Badge', false)) {
 			return new Db_Expression(($with_db_name ? '{{dbname}}.' : '').'{{prefix}}'.'badge');
 		} else {
 			$conn = Db::getConnection('Assets');

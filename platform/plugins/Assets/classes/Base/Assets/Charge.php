@@ -114,7 +114,7 @@ abstract class Base_Assets_Charge extends Db_Row
 	 */
 	static function table($with_db_name = true, $alias = null)
 	{
-		if (Q_Config::get('Db', 'connections', 'Assets', 'indexes', 'Charge', false)) {
+		if (class_exists('Q_Config') and Q_Config::get('Db', 'connections', 'Assets', 'indexes', 'Charge', false)) {
 			return new Db_Expression(($with_db_name ? '{{dbname}}.' : '').'{{prefix}}'.'charge');
 		} else {
 			$conn = Db::getConnection('Assets');

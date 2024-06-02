@@ -19,6 +19,7 @@ include_once(dirname(__FILE__).DS.'Db'.DS.'Expression.php');
 include_once(dirname(__FILE__).DS.'Db'.DS.'Result.php');
 include_once(dirname(__FILE__).DS.'Db'.DS.'Query.php');
 include_once(dirname(__FILE__).DS.'Db'.DS.'Row.php');
+include_once(dirname(__FILE__).DS.'Db'.DS.'Utils.php');
 Db::milliseconds();
 
 interface Db_Interface

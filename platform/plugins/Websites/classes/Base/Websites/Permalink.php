@@ -85,7 +85,7 @@ abstract class Base_Websites_Permalink extends Db_Row
 	 */
 	static function table($with_db_name = true, $alias = null)
 	{
-		if (Q_Config::get('Db', 'connections', 'Websites', 'indexes', 'Permalink', false)) {
+		if (class_exists('Q_Config') and Q_Config::get('Db', 'connections', 'Websites', 'indexes', 'Permalink', false)) {
 			return new Db_Expression(($with_db_name ? '{{dbname}}.' : '').'{{prefix}}'.'permalink');
 		} else {
 			$conn = Db::getConnection('Websites');

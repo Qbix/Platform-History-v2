@@ -105,7 +105,7 @@ abstract class Base_Assets_Earned extends Db_Row
 	 */
 	static function table($with_db_name = true, $alias = null)
 	{
-		if (Q_Config::get('Db', 'connections', 'Assets', 'indexes', 'Earned', false)) {
+		if (class_exists('Q_Config') and Q_Config::get('Db', 'connections', 'Assets', 'indexes', 'Earned', false)) {
 			return new Db_Expression(($with_db_name ? '{{dbname}}.' : '').'{{prefix}}'.'earned');
 		} else {
 			$conn = Db::getConnection('Assets');

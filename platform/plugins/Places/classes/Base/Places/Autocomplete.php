@@ -117,7 +117,7 @@ abstract class Base_Places_Autocomplete extends Db_Row
 	 */
 	static function table($with_db_name = true, $alias = null)
 	{
-		if (Q_Config::get('Db', 'connections', 'Places', 'indexes', 'Autocomplete', false)) {
+		if (class_exists('Q_Config') and Q_Config::get('Db', 'connections', 'Places', 'indexes', 'Autocomplete', false)) {
 			return new Db_Expression(($with_db_name ? '{{dbname}}.' : '').'{{prefix}}'.'autocomplete');
 		} else {
 			$conn = Db::getConnection('Places');

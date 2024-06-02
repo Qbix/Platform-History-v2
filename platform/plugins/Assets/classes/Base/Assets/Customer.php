@@ -101,7 +101,7 @@ abstract class Base_Assets_Customer extends Db_Row
 	 */
 	static function table($with_db_name = true, $alias = null)
 	{
-		if (Q_Config::get('Db', 'connections', 'Assets', 'indexes', 'Customer', false)) {
+		if (class_exists('Q_Config') and Q_Config::get('Db', 'connections', 'Assets', 'indexes', 'Customer', false)) {
 			return new Db_Expression(($with_db_name ? '{{dbname}}.' : '').'{{prefix}}'.'customer');
 		} else {
 			$conn = Db::getConnection('Assets');

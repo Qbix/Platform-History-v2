@@ -354,7 +354,7 @@ abstract class Db_Query extends Db_Expression
 		}
 		$conn_name = $this->db->connectionName();
 		$class_name = substr($this->className, strlen($conn_name)+1);
-		$index = Q_Config::get('Db', 'connections', $conn_name, 'indexes', $class_name, false);
+		$index = class_exists('Q') ? Q_Config::get('Db', 'connections', $conn_name, 'indexes', $class_name, false) : null;
 		if (!$index) {
 			return array("" => $this);
 		}

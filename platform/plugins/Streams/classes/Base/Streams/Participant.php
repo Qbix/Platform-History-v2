@@ -129,7 +129,7 @@ abstract class Base_Streams_Participant extends Db_Row
 	 */
 	static function table($with_db_name = true, $alias = null)
 	{
-		if (Q_Config::get('Db', 'connections', 'Streams', 'indexes', 'Participant', false)) {
+		if (class_exists('Q_Config') and Q_Config::get('Db', 'connections', 'Streams', 'indexes', 'Participant', false)) {
 			return new Db_Expression(($with_db_name ? '{{dbname}}.' : '').'{{prefix}}'.'participant');
 		} else {
 			$conn = Db::getConnection('Streams');

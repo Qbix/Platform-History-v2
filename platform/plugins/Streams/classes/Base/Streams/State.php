@@ -98,7 +98,7 @@ abstract class Base_Streams_State extends Db_Row
 	 */
 	static function table($with_db_name = true, $alias = null)
 	{
-		if (Q_Config::get('Db', 'connections', 'Streams', 'indexes', 'State', false)) {
+		if (class_exists('Q_Config') and Q_Config::get('Db', 'connections', 'Streams', 'indexes', 'State', false)) {
 			return new Db_Expression(($with_db_name ? '{{dbname}}.' : '').'{{prefix}}'.'state');
 		} else {
 			$conn = Db::getConnection('Streams');
