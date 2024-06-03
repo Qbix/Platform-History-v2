@@ -10191,7 +10191,7 @@ Q.ServiceWorker = {
 		var src = Q.url('Q-ServiceWorker');
 		navigator.serviceWorker.getRegistration(src)
 		.then(function (registration) {
-			if (registration && (!info || !Q.info.updateServiceWorker)) {
+			if (registration && (!Q.info || !Q.info.updateServiceWorker)) {
 				return;
 			}
 			navigator.serviceWorker.register(src)
