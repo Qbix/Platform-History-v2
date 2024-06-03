@@ -10189,29 +10189,35 @@ Q.ServiceWorker = {
 		}
 		Q.ServiceWorker.started = true;
 		var src = Q.url('Q-ServiceWorker');
-		navigator.serviceWorker.register(src)
+		navigator.serviceWorker.getRegistration(src)
 		.then(function (registration) {
-			log("Q.ServiceWorker.register", registration);
-			if (options.update) {
-				registration.update();
+			if (registration && (!info || !Q.info.updateServiceWorker)) {
+				return;
 			}
-			registration.removeEventListener("updatefound", _onUpdateFound);
-			registration.addEventListener("updatefound", _onUpdateFound);
-			var worker;
-			if (registration.active) {
-				worker = registration.active;
-			} else if (registration.waiting) {
-				worker = registration.waiting;
-			} else if (registration.installing) {
-				worker = registration.installing;
-			}
-			if (worker) {
-				Q.handle(callback, Q.ServiceWorker, [worker, registration]);
-				Q.handle(Q.ServiceWorker.onActive, Q.ServiceWorker, [worker, registration]);
-			}
-		}).catch(function (error) {
-			debugger;
-			console.warn("Q.ServiceWorker.start error", error);
+			navigator.serviceWorker.register(src)
+			.then(function (registration) {
+				log("Q.ServiceWorker.register", registration);
+				if (options.update) {
+					registration.update();
+				}
+				registration.removeEventListener("updatefound", _onUpdateFound);
+				registration.addEventListener("updatefound", _onUpdateFound);
+				var worker;
+				if (registration.active) {
+					worker = registration.active;
+				} else if (registration.waiting) {
+					worker = registration.waiting;
+				} else if (registration.installing) {
+					worker = registration.installing;
+				}
+				if (worker) {
+					Q.handle(callback, Q.ServiceWorker, [worker, registration]);
+					Q.handle(Q.ServiceWorker.onActive, Q.ServiceWorker, [worker, registration]);
+				}
+			}).catch(function (error) {
+				debugger;
+				console.warn("Q.ServiceWorker.start error", error);
+			});
 		});
 	}
 }
