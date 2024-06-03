@@ -64,10 +64,11 @@ var Q = {
 		if (data.type === 'Q.Cache.put') {
 			caches.open('Q').then(function (cache) {
 				data.items.forEach(function (item) {
-					cache.put(
-						item.url, new Response(item.content, {
-						headers: new Headers(item.headers)
-					}));
+					var o = {};
+					if (item.headers) {
+						o.headers = new Headers(item.headers);
+					}
+					cache.put(item.url, new Response(item.content, o));
 					console.log("cache.put " + item.url);
 				});
 			});
