@@ -272,26 +272,26 @@
 					rpcMap[chainId] = Q.isArrayLike(r) ? r[0]: 0;
 				};
 			}
-			// window['@walletconnect/ethereum-provider'].EthereumProvider.init({
-			// 	projectId: projectId, // REQUIRED your projectId
-			// 	showQrModal: true, // REQUIRED set to "true" to use @walletconnect/modal
-			// 	qrModalOptions: { themeMode: "light" },
-			// 	optionalChains: optionalChains,
-			// 	rpcMap: rpcMap,
-			// 	methods: ["eth_sendTransaction", "personal_sign", "eth_sign", "wallet_switchEthereumChain", "wallet_addEthereumChain"],
-			// 	//optionalMethods: ["eth_accounts","eth_requestAccounts","eth_sendRawTransaction","eth_sign","eth_signTransaction","eth_signTypedData","eth_signTypedData_v3","eth_signTypedData_v4","wallet_switchEthereumChain","wallet_addEthereumChain","wallet_getPermissions","wallet_requestPermissions","wallet_registerOnboarding","wallet_watchAsset","wallet_scanQRCode"],
-			// 	events: ["chainChanged", "accountsChanged","disconnect","connect"],
-			// 	optionalEvents: ["message"],
-			// 	metadata: {
-			// 		name: Q.info.app,
-			// 		description: 'Web3 Client',
-			// 		url: Q.info.baseUrl,
-			// 		icons: [Q.url("{{baseUrl}}/img/icon/icon.png")]
-			// 	},
-			// }).then(function (ethereumProvider) {
-			// 	Users.Web3.ethereumProvider = ethereumProvider;
-			// 	callback && callback();
-			// });
+			window['@walletconnect/ethereum-provider'].EthereumProvider.init({
+				projectId: projectId, // REQUIRED your projectId
+				showQrModal: true, // REQUIRED set to "true" to use @walletconnect/modal
+				qrModalOptions: { themeMode: "light" },
+				optionalChains: optionalChains,
+				rpcMap: rpcMap,
+				methods: ["eth_sendTransaction", "personal_sign", "eth_sign", "wallet_switchEthereumChain", "wallet_addEthereumChain"],
+				//optionalMethods: ["eth_accounts","eth_requestAccounts","eth_sendRawTransaction","eth_sign","eth_signTransaction","eth_signTypedData","eth_signTypedData_v3","eth_signTypedData_v4","wallet_switchEthereumChain","wallet_addEthereumChain","wallet_getPermissions","wallet_requestPermissions","wallet_registerOnboarding","wallet_watchAsset","wallet_scanQRCode"],
+				events: ["chainChanged", "accountsChanged","disconnect","connect"],
+				optionalEvents: ["message"],
+				metadata: {
+					name: Q.info.app,
+					description: 'Web3 Client',
+					url: Q.info.baseUrl,
+					icons: [Q.url("{{baseUrl}}/img/icon/icon.png")]
+				},
+			}).then(function (ethereumProvider) {
+				Users.Web3.ethereumProvider = ethereumProvider;
+				callback && callback();
+			});
 		}, options);
 	};
 
