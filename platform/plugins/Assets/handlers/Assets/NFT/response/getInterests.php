@@ -7,14 +7,9 @@ function Assets_NFT_response_getInterests ($params) {
 	$publisherId = $request["publisherId"];
 	$streamName = $request["streamName"];
 
-	$relatedStreams = Streams_RelatedTo::select('sr.*, ss.*', 'sr')->where(array(
-		"sr.fromPublisherId" => $publisherId,
-		"sr.fromStreamName" => $streamName,
-		"sr.type" => "NFT/interest"
-	))->join(Streams_Stream::table() . ' ss', array(
-		'sr.toPublisherId' => 'ss.publisherId',
-		'sr.toStreamName' => 'ss.name'
-	), 'LEFT')->fetchDbRows();
-
-	return $relatedStreams;
+	return Streams::related(null, $publisherId, $streamName, false, array(
+		'type' => 'NFT/interest',
+		'streamsOnly' => true,
+		'skipAccess' => true
+	));
 }

@@ -1870,18 +1870,20 @@ class Streams_Stream extends Base_Streams_Stream
 	 *  If true, returns all the streams this related to this category.
 	 *  If a string, returns all the streams related to this category with names prefixed by this string.
 	 * @param {array} $options=array()
+	 * @param {string|array|Db_Range} [$options.type] if specified, this filters the type of the relation. Can be useful for implementing custom indexes using relations and varying the value of "type".
 	 * @param {boolean} [$options.orderBy=false] Defaults to false, which means order by decreasing weight. True means order by increasing weight.
 	 * @param {integer} [$options.limit] number of records to fetch
 	 * @param {integer} [$options.offset] offset to start from
 	 * @param {double} [$options.min] the minimum orderBy value (inclusive) to filter by, if any
 	 * @param {double} [$options.max] the maximum orderBy value (inclusive) to filter by, if any
-	 * @param {string|array|Db_Range} [$options.type] if specified, this filters the type of the relation. Can be useful for implementing custom indexes using relations and varying the value of "type".
 	 * @param {string} [$options.prefix] if specified, this filters by the prefix of the related streams
 	 * @param {string} [$options.title] if specified, this filters the titles of the streams with a LIKE condition
 	 * @param {array} [$options.where] you can also specify any extra conditions here
 	 * @param {array} [$options.fetchOptions] An array of any options to pass to Streams::fetch when fetching streams
 	 * @param {array} [$options.relationsOnly] If true, returns only the relations to/from stream, doesn't fetch the other data. Useful if publisher id of relation objects is not the same as provided by publisherId.
 	 * @param {array} [$options.streamsOnly] If true, returns only the streams related to/from stream, doesn't return the other data.
+	 * @param {callable} [$options.filter] Optional function to call to filter the relations. It should return a filtered array of relations.
+	 * @param {boolean} [$options.skipAccess=false] If true, skips the access checks and just fetches the relations and related streams
 	 * @param {array} [$options.streamFields] If specified, fetches only the fields listed here for any streams.
 	 * @param {array} [$options.skipFields] Optional array of field names. If specified, skips these fields when fetching streams
 	 * @param {array} [$options.skipTypes] Optional array of ($streamName => $relationTypes) to skip when fetching relations.
