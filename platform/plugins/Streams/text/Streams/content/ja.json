@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "{{toTitle}}の新しい{{relationDisplayType}}",
         "Streams\/relatedFrom\/*": "{{relationDisplayType}}として{{toTitle}}に追加",
         "Streams\/mention": "{{{call 'avatar.displayName'}}}がコメントであなたをメンションしました",
-        "Streams\/call": "{{displayName}}リアルタイム通話を開始しました"
+        "Streams\/call": "{{displayName}}リアルタイム通話を開始しました",
+        "changed": {
+            "ChangesIn": "{{title}}の変更点",
+            "Changed": "かわった",
+            "HereIsWhatChanged": "変更された点は次のとおりです:"
+        },
+        "joined": {
+            "Joined": "{{subject}} <em>{{title}}<\/em>参加"
+        }
     },
     "invite": {
         "command": "招待",
@@ -135,7 +143,13 @@
             "scanQRCode": "QRコードをスキャン",
             "shareLink": "リンクを共有する",
             "chooseFromRegistered": "登録ユーザーから選ぶ",
-            "inviteViaEmailOrSms": "メールまたは SMS で招待する"
+            "inviteViaEmailOrSms": "メールまたは SMS で招待する",
+            "TakeGroupPhoto": "集合写真を撮る",
+            "Skip": "スキップ",
+            "byTelegram": "電報",
+            "byWhatsapp": "ワッツアップ",
+            "addRoles": "役割を追加",
+            "addPersonalRoles": "個人的な関係を追加する"
         },
         "complete": {
             "WelcomeToCommunity": "{{communityName}}へようこそ",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "招待されました。 {{ClickOrTap}}で承認して参加できます。"
+        },
+        "chat": {
+            "prompt": "会話に人を招待して、連絡を取り合ったり、一緒に写真を共有したりすることができます。名前を付けます:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "無効なファイル",
         "errorNoSource": "ビデオソースなし",
         "uploadLimit": "最大ファイル サイズ: {{size}}",
-        "errorFileSize": "申し訳ありませんが、ファイルが大きすぎます。<br>最大ファイル サイズは{{size}}です"
+        "errorFileSize": "申し訳ありませんが、ファイルが大きすぎます。<br>最大ファイル サイズは{{size}}です",
+        "createAnimatedThumbnail": "アニメーションサムネイルを作成する",
+        "errorNotAvailable": "申し訳ありませんが、ビデオはまだ利用できません。しばらくしてからもう一度お試しください。"
     },
     "pdf": {
         "reset": "リセット",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "ユーザーの名前..."
+    },
+    "task": {
+        "errorsTitle": "エラーが発生しました"
+    },
+    "topic": {
+        "NewTopic": "新しい話題",
+        "UpdateTopic": "トピックを更新",
+        "CreateTopic": "トピックを作成",
+        "AreYouSureDeleteTopic": "このトピックを削除してもよろしいですか?",
+        "TitlePlaceholder": "トピックタイトル...",
+        "DescribeTopic": "トピックを説明します...",
+        "TopicIcon": "トピック画像",
+        "UploadIcon": "アップロードアイコン",
+        "Conversation": "会話",
+        "Metrics": "メトリクス"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "アニメーションサムネイルを作成する",
+        "Width": "幅",
+        "Height": "身長",
+        "Start": "始める",
+        "End": "終わり",
+        "Delay": "遅れ",
+        "Quality": "品質",
+        "Size": "サイズ",
+        "OfFrames": "フレームの",
+        "Frame": "フレーム",
+        "UseThis": "これを使って",
+        "ResultGIF": "結果GIF",
+        "VideoElementNotFound": "ビデオ要素が見つかりません"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}}オン ユア フェイス",
+        "AcceptIcon": "選択したエリアを受け入れる"
     }
 }

@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "Новий {{relationDisplayType}} з {{toTitle}}",
         "Streams\/relatedFrom\/*": "Додано до {{toTitle}} як {{relationDisplayType}}",
         "Streams\/mention": "{{{call 'avatar.displayName'}}} згадав вас у коментарі",
-        "Streams\/call": "{{displayName}} почав дзвінок у реальному часі"
+        "Streams\/call": "{{displayName}} почав дзвінок у реальному часі",
+        "changed": {
+            "ChangesIn": "Зміни в {{title}}",
+            "Changed": "змінено",
+            "HereIsWhatChanged": "Ось що змінилося:"
+        },
+        "joined": {
+            "Joined": "{{subject}} приєдналися <em>{{title}}<\/em>"
+        }
     },
     "invite": {
         "command": "Запросити",
@@ -135,7 +143,13 @@
             "scanQRCode": "Відскануйте QR-код",
             "shareLink": "Поділіться посиланням",
             "chooseFromRegistered": "Виберіть із зареєстрованих користувачів",
-            "inviteViaEmailOrSms": "Запрошення електронною поштою або SMS"
+            "inviteViaEmailOrSms": "Запрошення електронною поштою або SMS",
+            "TakeGroupPhoto": "Зробіть групове фото",
+            "Skip": "Пропустити",
+            "byTelegram": "Телеграма",
+            "byWhatsapp": "WhatsApp",
+            "addRoles": "Додати ролі",
+            "addPersonalRoles": "Додайте особисті стосунки"
         },
         "complete": {
             "WelcomeToCommunity": "Ласкаво просимо до {{communityName}}",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "Вас запросили. {{ClickOrTap}} тут, щоб прийняти та приєднатися."
+        },
+        "chat": {
+            "prompt": "Ви запрошуватимете людей до розмови, де зможете залишатися на зв’язку, ділитися спільними фотографіями тощо. Дайте назву:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "Недійсний файл",
         "errorNoSource": "Немає джерела відео",
         "uploadLimit": "Максимальний розмір файлу: {{size}}",
-        "errorFileSize": "Вибачте, але файл завеликий.<br> Максимальний розмір файлу – {{size}}"
+        "errorFileSize": "Вибачте, але файл завеликий.<br> Максимальний розмір файлу – {{size}}",
+        "createAnimatedThumbnail": "Створення анімованої мініатюри",
+        "errorNotAvailable": "Вибачте, але відео поки що недоступне. Будь-ласка спробуйте пізніше."
     },
     "pdf": {
         "reset": "Скинути",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "Ім&#39;я користувача..."
+    },
+    "task": {
+        "errorsTitle": "Виникли помилки"
+    },
+    "topic": {
+        "NewTopic": "Нова тема",
+        "UpdateTopic": "Оновити тему",
+        "CreateTopic": "Створити тему",
+        "AreYouSureDeleteTopic": "Ви впевнені, що хочете видалити цю тему?",
+        "TitlePlaceholder": "назва теми...",
+        "DescribeTopic": "опишіть тему...",
+        "TopicIcon": "Тематичний малюнок",
+        "UploadIcon": "Завантажити значок",
+        "Conversation": "Розмова",
+        "Metrics": "Метрики"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "Створення анімованої мініатюри",
+        "Width": "Ширина",
+        "Height": "Висота",
+        "Start": "старт",
+        "End": "Кінець",
+        "Delay": "Затримка",
+        "Quality": "якість",
+        "Size": "Розмір",
+        "OfFrames": "кадрів",
+        "Frame": "рамка",
+        "UseThis": "Використовуй це",
+        "ResultGIF": "GIF результату",
+        "VideoElementNotFound": "Елемент відео не знайдено"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} На твоєму обличчі",
+        "AcceptIcon": "Прийняти вибрану область"
     }
 }

@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "{{relationDisplayType}} mpya katika {{toTitle}}",
         "Streams\/relatedFrom\/*": "Imeongezwa kwa {{toTitle}} kama {{relationDisplayType}}",
         "Streams\/mention": "{{{call 'avatar.displayName'}}} alikutaja kwenye maoni",
-        "Streams\/call": "{{displayName}} ilianzisha simu katika muda halisi"
+        "Streams\/call": "{{displayName}} ilianzisha simu katika muda halisi",
+        "changed": {
+            "ChangesIn": "Mabadiliko ya {{title}}",
+            "Changed": "iliyopita",
+            "HereIsWhatChanged": "Hii ndio iliyobadilika:"
+        },
+        "joined": {
+            "Joined": "{{subject}} walijiunga <em>{{title}}<\/em>"
+        }
     },
     "invite": {
         "command": "Alika",
@@ -135,7 +143,13 @@
             "scanQRCode": "Changanua Msimbo wa QR",
             "shareLink": "Shiriki kiungo",
             "chooseFromRegistered": "Chagua kutoka kwa watumiaji waliosajiliwa",
-            "inviteViaEmailOrSms": "Alika kupitia barua pepe au SMS"
+            "inviteViaEmailOrSms": "Alika kupitia barua pepe au SMS",
+            "TakeGroupPhoto": "Piga Picha ya Pamoja",
+            "Skip": "Ruka",
+            "byTelegram": "Telegramu",
+            "byWhatsapp": "WhatsApp",
+            "addRoles": "Ongeza Majukumu",
+            "addPersonalRoles": "Ongeza Mahusiano ya Kibinafsi"
         },
         "complete": {
             "WelcomeToCommunity": "Karibu kwenye {{communityName}}",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "Umealikwa. {{ClickOrTap}} hapa kukubali na kujiunga."
+        },
+        "chat": {
+            "prompt": "Utakuwa ukialika watu kwenye mazungumzo ambapo unaweza kuwasiliana, kushiriki picha pamoja, na zaidi. Ipe jina:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "Faili Batili",
         "errorNoSource": "Hakuna chanzo cha video",
         "uploadLimit": "Ukubwa wa juu wa faili: {{size}}",
-        "errorFileSize": "Samahani, lakini faili ni kubwa sana.<br> Ukubwa wa juu wa faili ni {{size}}"
+        "errorFileSize": "Samahani, lakini faili ni kubwa sana.<br> Ukubwa wa juu wa faili ni {{size}}",
+        "createAnimatedThumbnail": "Unda kijipicha kilichohuishwa",
+        "errorNotAvailable": "Samahani, lakini video bado haipatikani. Tafadhali jaribu tena baadae."
     },
     "pdf": {
         "reset": "Weka upya",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "Jina la mtumiaji..."
+    },
+    "task": {
+        "errorsTitle": "Hitilafu zimetokea"
+    },
+    "topic": {
+        "NewTopic": "Mada Mpya",
+        "UpdateTopic": "Sasisha Mada",
+        "CreateTopic": "Tengeneza Mada",
+        "AreYouSureDeleteTopic": "Je, una uhakika unataka kufuta mada hii",
+        "TitlePlaceholder": "kichwa cha mada...",
+        "DescribeTopic": "eleza mada...",
+        "TopicIcon": "Picha ya mada",
+        "UploadIcon": "Aikoni ya Kupakia",
+        "Conversation": "Mazungumzo",
+        "Metrics": "Vipimo"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "Unda kijipicha kilichohuishwa",
+        "Width": "Upana",
+        "Height": "Urefu",
+        "Start": "Anza",
+        "End": "Mwisho",
+        "Delay": "Kuchelewa",
+        "Quality": "Ubora",
+        "Size": "Ukubwa",
+        "OfFrames": "ya Fremu",
+        "Frame": "Fremu",
+        "UseThis": "Tumia hii",
+        "ResultGIF": "GIF ya matokeo",
+        "VideoElementNotFound": "Kipengele cha video hakijapatikana"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} Usoni Mwako",
+        "AcceptIcon": "Kubali eneo lililochaguliwa"
     }
 }

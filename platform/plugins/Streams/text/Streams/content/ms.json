@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "Baru {{relationDisplayType}} dalam {{toTitle}}",
         "Streams\/relatedFrom\/*": "Ditambah kepada {{toTitle}} sebagai {{relationDisplayType}}",
         "Streams\/mention": "{{{call 'avatar.displayName'}}} menyebut anda dalam ulasan",
-        "Streams\/call": "{{displayName}} memulakan panggilan masa nyata"
+        "Streams\/call": "{{displayName}} memulakan panggilan masa nyata",
+        "changed": {
+            "ChangesIn": "Perubahan pada {{title}}",
+            "Changed": "berubah",
+            "HereIsWhatChanged": "Inilah yang berubah:"
+        },
+        "joined": {
+            "Joined": "{{subject}} menyertai <em>{{title}}<\/em>"
+        }
     },
     "invite": {
         "command": "Jemput",
@@ -135,7 +143,13 @@
             "scanQRCode": "Imbas Kod QR",
             "shareLink": "Kongsi pautan",
             "chooseFromRegistered": "Pilih daripada pengguna berdaftar",
-            "inviteViaEmailOrSms": "Jemput melalui e-mel atau SMS"
+            "inviteViaEmailOrSms": "Jemput melalui e-mel atau SMS",
+            "TakeGroupPhoto": "Ambil Foto Kumpulan",
+            "Skip": "Langkau",
+            "byTelegram": "Telegram",
+            "byWhatsapp": "WhatsApp",
+            "addRoles": "Tambah Peranan",
+            "addPersonalRoles": "Tambah Perhubungan Peribadi"
         },
         "complete": {
             "WelcomeToCommunity": "Selamat datang ke {{communityName}}",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "Anda telah dijemput. {{ClickOrTap}} di sini untuk menerima dan menyertai."
+        },
+        "chat": {
+            "prompt": "Anda akan menjemput orang ke perbualan yang membolehkan anda terus berhubung, berkongsi foto bersama dan banyak lagi. Beri nama:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "Fail Tidak Sah",
         "errorNoSource": "Tiada sumber video",
         "uploadLimit": "Saiz fail maksimum: {{size}}",
-        "errorFileSize": "Maaf, tetapi fail terlalu besar.<br> Saiz fail maksimum ialah {{size}}"
+        "errorFileSize": "Maaf, tetapi fail terlalu besar.<br> Saiz fail maksimum ialah {{size}}",
+        "createAnimatedThumbnail": "Cipta lakaran kecil animasi",
+        "errorNotAvailable": "Maaf, tetapi video masih belum tersedia. Sila cuba sebentar lagi."
     },
     "pdf": {
         "reset": "Tetapkan semula",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "Nama pengguna..."
+    },
+    "task": {
+        "errorsTitle": "Ralat berlaku"
+    },
+    "topic": {
+        "NewTopic": "Topik baru",
+        "UpdateTopic": "Kemas kini Topik",
+        "CreateTopic": "Cipta Topik",
+        "AreYouSureDeleteTopic": "Adakah anda pasti mahu memadamkan topik ini",
+        "TitlePlaceholder": "tajuk topik...",
+        "DescribeTopic": "terangkan topik...",
+        "TopicIcon": "Gambar topik",
+        "UploadIcon": "Ikon Muat Naik",
+        "Conversation": "Perbualan",
+        "Metrics": "Metrik"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "Cipta lakaran kecil animasi",
+        "Width": "Lebar",
+        "Height": "Ketinggian",
+        "Start": "Mulakan",
+        "End": "tamat",
+        "Delay": "kelewatan",
+        "Quality": "Kualiti",
+        "Size": "Saiz",
+        "OfFrames": "daripada Bingkai",
+        "Frame": "Bingkai",
+        "UseThis": "Guna ini",
+        "ResultGIF": "GIF hasil",
+        "VideoElementNotFound": "Unsur video tidak ditemui"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} Di Wajah Anda",
+        "AcceptIcon": "Terima kawasan yang dipilih"
     }
 }

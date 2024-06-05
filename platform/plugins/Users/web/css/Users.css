@@ -298,6 +298,7 @@
 #Users_login_noPassphrase { font-size: 14px; font-weight: bold; color: #a00; text-align: center; }
 #Users_login_notVerified { font-size: 14px; font-weight: bold; text-align: center; }
 #Users_login_identifierExists { font-size: 12px; color: green; text-align: center; font-weight: bold; }
+#Users_login_identifierExists div { padding: 10px; }
 #Users_login_explanation { font-size: 13px; color: #779; text-indent: 5px; }
 #Users_login_usingPlatforms { padding: 10px; font-size: 18px; text-indent: 5px; text-align: center; }
 #Users_login_passphrase_div #current-password { width: 100%; padding: 2%; }
@@ -582,4 +583,8 @@ html.Users_loggedIn .Users_whenLoggedOut {
 
 .Users_login_connectPlatforms {
 	line-height: 40px;
+}
+
+@media (prefers-color-scheme: dark) {
+	#Users_login_identifierExists { color: white; }
 }

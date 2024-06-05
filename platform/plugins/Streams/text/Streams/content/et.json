@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "Uus {{relationDisplayType}} {{toTitle}} st",
         "Streams\/relatedFrom\/*": "Lisati {{toTitle}} kui {{relationDisplayType}}",
         "Streams\/mention": "{{{call 'avatar.displayName'}}} mainis teid kommentaaris",
-        "Streams\/call": "{{displayName}} alustas reaalajas kõnet"
+        "Streams\/call": "{{displayName}} alustas reaalajas kõnet",
+        "changed": {
+            "ChangesIn": "Muudatused {{title}}",
+            "Changed": "muutunud",
+            "HereIsWhatChanged": "Siin on see, mis muutus:"
+        },
+        "joined": {
+            "Joined": "{{subject}} liitus <em>{{title}}<\/em>"
+        }
     },
     "invite": {
         "command": "Kutsu",
@@ -135,7 +143,13 @@
             "scanQRCode": "QR-koodi skannimine",
             "shareLink": "Jaga linki",
             "chooseFromRegistered": "Valige registreeritud kasutajate hulgast",
-            "inviteViaEmailOrSms": "Kutsuge e-posti või SMS-i teel"
+            "inviteViaEmailOrSms": "Kutsuge e-posti või SMS-i teel",
+            "TakeGroupPhoto": "Tehke grupifoto",
+            "Skip": "Vahele jätma",
+            "byTelegram": "Telegramm",
+            "byWhatsapp": "WhatsApp",
+            "addRoles": "Lisa rollid",
+            "addPersonalRoles": "Lisage isiklikud suhted"
         },
         "complete": {
             "WelcomeToCommunity": "Tere tulemast numbrile {{communityName}}",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "Sind on kutsutud. {{ClickOrTap}} siin, et nõustuda ja liituda."
+        },
+        "chat": {
+            "prompt": "Kutsute inimesi vestlusele, kus saate ühendust hoida, koos fotosid jagada ja palju muud. Andke sellele nimi:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "Vigane fail",
         "errorNoSource": "Videoallikat pole",
         "uploadLimit": "Max faili suurus: {{size}}",
-        "errorFileSize": "Vabandust, kuid fail on liiga suur.<br> Maksimaalne faili suurus on {{size}}"
+        "errorFileSize": "Vabandust, kuid fail on liiga suur.<br> Maksimaalne faili suurus on {{size}}",
+        "createAnimatedThumbnail": "Looge animeeritud pisipilt",
+        "errorNotAvailable": "Kahjuks pole video veel saadaval. Palun proovi hiljem uuesti."
     },
     "pdf": {
         "reset": "Lähtesta",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "Kasutaja nimi..."
+    },
+    "task": {
+        "errorsTitle": "Tekkisid vead"
+    },
+    "topic": {
+        "NewTopic": "Uus teema",
+        "UpdateTopic": "Värskenda teemat",
+        "CreateTopic": "Loo teema",
+        "AreYouSureDeleteTopic": "Kas olete kindel, et soovite selle teema kustutada?",
+        "TitlePlaceholder": "teema pealkiri...",
+        "DescribeTopic": "kirjelda teemat...",
+        "TopicIcon": "Teema pilt",
+        "UploadIcon": "Üleslaadimise ikoon",
+        "Conversation": "Vestlus",
+        "Metrics": "Mõõdikud"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "Looge animeeritud pisipilt",
+        "Width": "Laius",
+        "Height": "Kõrgus",
+        "Start": "Alusta",
+        "End": "Lõpp",
+        "Delay": "Viivitus",
+        "Quality": "Kvaliteet",
+        "Size": "Suurus",
+        "OfFrames": "raamidest",
+        "Frame": "Raam",
+        "UseThis": "Kasuta seda",
+        "ResultGIF": "Tulemus GIF",
+        "VideoElementNotFound": "Videoelementi ei leitud"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} Sinu näol",
+        "AcceptIcon": "Nõustu valitud alaga"
     }
 }

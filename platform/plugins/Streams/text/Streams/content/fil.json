@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "Bagong {{relationDisplayType}} sa {{toTitle}}",
         "Streams\/relatedFrom\/*": "Idinagdag sa {{toTitle}} bilang {{relationDisplayType}}",
         "Streams\/mention": "Binanggit ka {{{call 'avatar.displayName'}}} sa isang komento",
-        "Streams\/call": "Nagsimula ang {{displayName}} ng isang real-time na tawag"
+        "Streams\/call": "Nagsimula ang {{displayName}} ng isang real-time na tawag",
+        "changed": {
+            "ChangesIn": "Mga pagbabago noong {{title}}",
+            "Changed": "nagbago",
+            "HereIsWhatChanged": "Narito ang nagbago:"
+        },
+        "joined": {
+            "Joined": "{{subject}} ang sumali <em>{{title}}<\/em>"
+        }
     },
     "invite": {
         "command": "Mag-anyaya",
@@ -135,7 +143,13 @@
             "scanQRCode": "I-scan ang QR Code",
             "shareLink": "Magbahagi ng link",
             "chooseFromRegistered": "Pumili mula sa mga rehistradong user",
-            "inviteViaEmailOrSms": "Mag-imbita sa pamamagitan ng email o SMS"
+            "inviteViaEmailOrSms": "Mag-imbita sa pamamagitan ng email o SMS",
+            "TakeGroupPhoto": "Kumuha ng Group Photo",
+            "Skip": "Laktawan",
+            "byTelegram": "Telegram",
+            "byWhatsapp": "WhatsApp",
+            "addRoles": "Magdagdag ng Mga Tungkulin",
+            "addPersonalRoles": "Magdagdag ng Mga Personal na Relasyon"
         },
         "complete": {
             "WelcomeToCommunity": "Maligayang pagdating sa {{communityName}}",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "Ikaw ay naimbitahan. {{ClickOrTap}} dito para tanggapin at sumali."
+        },
+        "chat": {
+            "prompt": "Mag-iimbita ka ng mga tao sa isang pag-uusap kung saan maaari kang makipag-ugnayan, magbahagi ng mga larawan nang magkasama, at higit pa. Bigyan ito ng pangalan:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "Di-wastong File",
         "errorNoSource": "Walang pinagmulan ng video",
         "uploadLimit": "Max na laki ng file: {{size}}",
-        "errorFileSize": "Paumanhin, ngunit masyadong malaki ang file.<br> Ang maximum na laki ng file ay {{size}}"
+        "errorFileSize": "Paumanhin, ngunit masyadong malaki ang file.<br> Ang maximum na laki ng file ay {{size}}",
+        "createAnimatedThumbnail": "Lumikha ng animated na thumbnail",
+        "errorNotAvailable": "Paumanhin, ngunit hindi pa available ang video. Subukang muli mamaya."
     },
     "pdf": {
         "reset": "I-reset",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "Pangalan ng isang gumagamit..."
+    },
+    "task": {
+        "errorsTitle": "Nagkaroon ng mga error"
+    },
+    "topic": {
+        "NewTopic": "Bagong Paksa",
+        "UpdateTopic": "I-update ang Paksa",
+        "CreateTopic": "Lumikha ng Paksa",
+        "AreYouSureDeleteTopic": "Sigurado ka bang gusto mong tanggalin ang paksang ito",
+        "TitlePlaceholder": "paksang pamagat...",
+        "DescribeTopic": "ilarawan ang paksa...",
+        "TopicIcon": "Larawan ng paksa",
+        "UploadIcon": "Icon ng Pag-upload",
+        "Conversation": "Pag-uusap",
+        "Metrics": "Mga sukatan"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "Gumawa ng animated na thumbnail",
+        "Width": "Lapad",
+        "Height": "taas",
+        "Start": "Magsimula",
+        "End": "Tapusin",
+        "Delay": "Pagkaantala",
+        "Quality": "Kalidad",
+        "Size": "Sukat",
+        "OfFrames": "ng mga Frame",
+        "Frame": "Frame",
+        "UseThis": "Gamitin mo to",
+        "ResultGIF": "Resulta ng GIF",
+        "VideoElementNotFound": "Hindi nakita ang elemento ng video"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} Sa Iyong Mukha",
+        "AcceptIcon": "Tanggapin ang napiling lugar"
     }
 }

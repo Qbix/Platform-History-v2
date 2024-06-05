@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "Új {{relationDisplayType}} az {{toTitle}} -ben",
         "Streams\/relatedFrom\/*": "{{toTitle}} hez hozzáadva {{relationDisplayType}}",
         "Streams\/mention": "{{{call 'avatar.displayName'}}} megemlített egy megjegyzésben",
-        "Streams\/call": "A {{displayName}} valós idejű hívást indított"
+        "Streams\/call": "A {{displayName}} valós idejű hívást indított",
+        "changed": {
+            "ChangesIn": "Változások {{title}} ben",
+            "Changed": "megváltozott",
+            "HereIsWhatChanged": "Íme, mi változott:"
+        },
+        "joined": {
+            "Joined": "{{subject}} csatlakozott <em>{{title}}<\/em>"
+        }
     },
     "invite": {
         "command": "Meghív",
@@ -135,7 +143,13 @@
             "scanQRCode": "QR kód beolvasása",
             "shareLink": "Link megosztása",
             "chooseFromRegistered": "Válasszon a regisztrált felhasználók közül",
-            "inviteViaEmailOrSms": "Meghívás e-mailben vagy SMS-ben"
+            "inviteViaEmailOrSms": "Meghívás e-mailben vagy SMS-ben",
+            "TakeGroupPhoto": "Készítsen csoportképet",
+            "Skip": "Kihagyás",
+            "byTelegram": "Távirat",
+            "byWhatsapp": "WhatsApp",
+            "addRoles": "Szerepek hozzáadása",
+            "addPersonalRoles": "Személyes kapcsolatok hozzáadása"
         },
         "complete": {
             "WelcomeToCommunity": "Üdvözöljük a {{communityName}} -ben",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "Meghívták. {{ClickOrTap}} ide, hogy elfogadja és csatlakozzon."
+        },
+        "chat": {
+            "prompt": "Meghívja az embereket egy beszélgetésre, ahol kapcsolatban maradhat, közös fotókat oszthat meg, és így tovább. Adj neki nevet:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "Érvénytelen fájl",
         "errorNoSource": "Nincs videó forrás",
         "uploadLimit": "Max fájlméret: {{size}}",
-        "errorFileSize": "Elnézést, de a fájl túl nagy.<br> A maximális fájlméret {{size}}"
+        "errorFileSize": "Elnézést, de a fájl túl nagy.<br> A maximális fájlméret {{size}}",
+        "createAnimatedThumbnail": "Animált miniatűr létrehozása",
+        "errorNotAvailable": "Sajnáljuk, de a videó még nem érhető el. Kérlek, próbáld újra később."
     },
     "pdf": {
         "reset": "Visszaállítás",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "Egy felhasználó neve..."
+    },
+    "task": {
+        "errorsTitle": "Hibák történtek"
+    },
+    "topic": {
+        "NewTopic": "Új téma",
+        "UpdateTopic": "Téma frissítése",
+        "CreateTopic": "Téma létrehozása",
+        "AreYouSureDeleteTopic": "Biztosan törli ezt a témát?",
+        "TitlePlaceholder": "téma címe...",
+        "DescribeTopic": "írd le a témát...",
+        "TopicIcon": "Témakép",
+        "UploadIcon": "Feltöltés ikon",
+        "Conversation": "Beszélgetés",
+        "Metrics": "Mérések"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "Animált miniatűr létrehozása",
+        "Width": "Szélesség",
+        "Height": "Magasság",
+        "Start": "Rajt",
+        "End": "Vége",
+        "Delay": "Késleltetés",
+        "Quality": "Minőség",
+        "Size": "Méret",
+        "OfFrames": "keretek közül",
+        "Frame": "Keret",
+        "UseThis": "Használd ezt",
+        "ResultGIF": "Eredmény GIF",
+        "VideoElementNotFound": "A videóelem nem található"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} Az arcodon",
+        "AcceptIcon": "A kiválasztott terület elfogadása"
     }
 }

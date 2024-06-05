@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "{{toTitle}} में नया {{relationDisplayType}}",
         "Streams\/relatedFrom\/*": "{{toTitle}} में {{relationDisplayType}} के रूप में जोड़ा गया",
         "Streams\/mention": "{{{call 'avatar.displayName'}}} एक टिप्पणी में आपका उल्लेख किया",
-        "Streams\/call": "{{displayName}} ने रीयल-टाइम कॉल शुरू की"
+        "Streams\/call": "{{displayName}} ने रीयल-टाइम कॉल शुरू की",
+        "changed": {
+            "ChangesIn": "{{title}} में परिवर्तन",
+            "Changed": "बदला हुआ",
+            "HereIsWhatChanged": "यहां बताया गया है कि क्या परिवर्तन हुआ:"
+        },
+        "joined": {
+            "Joined": "{{subject}} जुड़े <em>{{title}}<\/em>"
+        }
     },
     "invite": {
         "command": "आमंत्रित करना",
@@ -135,7 +143,13 @@
             "scanQRCode": "स्कैन क्यू आर कोड",
             "shareLink": "एक लिंक साझा करें",
             "chooseFromRegistered": "पंजीकृत उपयोगकर्ताओं में से चुनें",
-            "inviteViaEmailOrSms": "ईमेल या एसएमएस द्वारा आमंत्रित करें"
+            "inviteViaEmailOrSms": "ईमेल या एसएमएस द्वारा आमंत्रित करें",
+            "TakeGroupPhoto": "समूह फ़ोटो लें",
+            "Skip": "छोडना",
+            "byTelegram": "तार",
+            "byWhatsapp": "WhatsApp",
+            "addRoles": "भूमिकाएँ जोड़ें",
+            "addPersonalRoles": "व्यक्तिगत संबंध जोड़ें"
         },
         "complete": {
             "WelcomeToCommunity": "{{communityName}} में आपका स्वागत है",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "आपको आमंत्रित किया गया है। {{ClickOrTap}} यहाँ स्वीकार करने और शामिल होने के लिए।"
+        },
+        "chat": {
+            "prompt": "आप लोगों को एक वार्तालाप के लिए आमंत्रित करेंगे जहाँ आप संपर्क में रह सकते हैं, साथ में फ़ोटो साझा कर सकते हैं, और बहुत कुछ कर सकते हैं। इसे एक नाम दें:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "अमान्य लेख्यपत्र",
         "errorNoSource": "कोई वीडियो स्रोत नहीं",
         "uploadLimit": "अधिकतम फ़ाइल आकार: {{size}}",
-        "errorFileSize": "क्षमा करें, लेकिन फ़ाइल बहुत बड़ी है.<br> अधिकतम फ़ाइल आकार {{size}} है"
+        "errorFileSize": "क्षमा करें, लेकिन फ़ाइल बहुत बड़ी है.<br> अधिकतम फ़ाइल आकार {{size}} है",
+        "createAnimatedThumbnail": "एनिमेटेड थंबनेल बनाएं",
+        "errorNotAvailable": "क्षमा करें, लेकिन वीडियो अभी उपलब्ध नहीं है। कृपया बाद में पुनः प्रयास करें।"
     },
     "pdf": {
         "reset": "रीसेट",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "उपयोगकर्ता का नाम..."
+    },
+    "task": {
+        "errorsTitle": "त्रुटियाँ हुईं"
+    },
+    "topic": {
+        "NewTopic": "नया विषय",
+        "UpdateTopic": "विषय अपडेट करें",
+        "CreateTopic": "विषय बनाएं",
+        "AreYouSureDeleteTopic": "क्या आप वाकई इस विषय को हटाना चाहते हैं",
+        "TitlePlaceholder": "विषय शीर्षक...",
+        "DescribeTopic": "विषय का वर्णन करें...",
+        "TopicIcon": "विषय चित्र",
+        "UploadIcon": "अपलोड आइकन",
+        "Conversation": "बातचीत",
+        "Metrics": "मेट्रिक्स"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "एनिमेटेड थंबनेल बनाएं",
+        "Width": "चौड़ाई",
+        "Height": "ऊंचाई",
+        "Start": "शुरू",
+        "End": "अंत",
+        "Delay": "देरी",
+        "Quality": "गुणवत्ता",
+        "Size": "आकार",
+        "OfFrames": "फ़्रेम की संख्या",
+        "Frame": "चौखटा",
+        "UseThis": "इस का उपयोग करें",
+        "ResultGIF": "परिणाम GIF",
+        "VideoElementNotFound": "वीडियो तत्व नहीं मिला"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} आपके चेहरे पर",
+        "AcceptIcon": "चयनित क्षेत्र स्वीकार करें"
     }
 }

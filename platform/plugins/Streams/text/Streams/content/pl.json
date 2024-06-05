@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "Nowe {{relationDisplayType}} w {{toTitle}}",
         "Streams\/relatedFrom\/*": "Dodano do {{toTitle}} jako {{relationDisplayType}}",
         "Streams\/mention": "{{{call 'avatar.displayName'}}} wspomniało o Tobie w komentarzu",
-        "Streams\/call": "{{displayName}} rozpoczął połączenie w czasie rzeczywistym"
+        "Streams\/call": "{{displayName}} rozpoczął połączenie w czasie rzeczywistym",
+        "changed": {
+            "ChangesIn": "Zmiany w {{title}}",
+            "Changed": "zmieniony",
+            "HereIsWhatChanged": "Oto co się zmieniło:"
+        },
+        "joined": {
+            "Joined": "{{subject}} dołączyło <em>{{title}}<\/em>"
+        }
     },
     "invite": {
         "command": "Zapraszać",
@@ -135,7 +143,13 @@
             "scanQRCode": "Skanowania QR code",
             "shareLink": "Udostępnij link",
             "chooseFromRegistered": "Wybierz spośród zarejestrowanych użytkowników",
-            "inviteViaEmailOrSms": "Zaproszenie przez e-mail lub SMS"
+            "inviteViaEmailOrSms": "Zaproszenie przez e-mail lub SMS",
+            "TakeGroupPhoto": "Zrób zdjęcie grupowe",
+            "Skip": "Pominąć",
+            "byTelegram": "Telegram",
+            "byWhatsapp": "WhatsApp",
+            "addRoles": "Dodaj role",
+            "addPersonalRoles": "Dodaj relacje osobiste"
         },
         "complete": {
             "WelcomeToCommunity": "Witamy w {{communityName}}",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "Zostałeś zaproszony. {{ClickOrTap}} tutaj, aby zaakceptować i dołączyć."
+        },
+        "chat": {
+            "prompt": "Będziesz zapraszać ludzi do rozmów, podczas których będziesz mógł pozostać w kontakcie, udostępniać wspólne zdjęcia i nie tylko. Daj temu imię:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "Niepoprawny plik",
         "errorNoSource": "Brak źródła wideo",
         "uploadLimit": "Maksymalny rozmiar pliku: {{size}}",
-        "errorFileSize": "Przepraszamy, ale plik jest za duży.<br> Maksymalny rozmiar pliku to {{size}}"
+        "errorFileSize": "Przepraszamy, ale plik jest za duży.<br> Maksymalny rozmiar pliku to {{size}}",
+        "createAnimatedThumbnail": "Utwórz animowaną miniaturę",
+        "errorNotAvailable": "Przepraszamy, ale wideo jest jeszcze niedostępne. Spróbuj ponownie później."
     },
     "pdf": {
         "reset": "Resetowanie",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "Nazwa użytkownika..."
+    },
+    "task": {
+        "errorsTitle": "Wystąpiły błędy"
+    },
+    "topic": {
+        "NewTopic": "Nowy temat",
+        "UpdateTopic": "Aktualizuj temat",
+        "CreateTopic": "Utwórz temat",
+        "AreYouSureDeleteTopic": "Czy na pewno chcesz usunąć ten temat?",
+        "TitlePlaceholder": "tytuł wątku...",
+        "DescribeTopic": "opisz temat...",
+        "TopicIcon": "Zdjęcie tematyczne",
+        "UploadIcon": "Prześlij ikonę",
+        "Conversation": "Rozmowa",
+        "Metrics": "Metryka"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "Utwórz animowaną miniaturę",
+        "Width": "Szerokość",
+        "Height": "Wysokość",
+        "Start": "Początek",
+        "End": "Koniec",
+        "Delay": "Opóźnienie",
+        "Quality": "Jakość",
+        "Size": "Rozmiar",
+        "OfFrames": "ramek",
+        "Frame": "Rama",
+        "UseThis": "Użyj tego",
+        "ResultGIF": "Wynikowy GIF",
+        "VideoElementNotFound": "Nie znaleziono elementu wideo"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} na twojej twarzy",
+        "AcceptIcon": "Zaakceptuj wybrany obszar"
     }
 }

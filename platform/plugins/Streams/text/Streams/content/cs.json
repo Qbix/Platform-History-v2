@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "Nové {{relationDisplayType}} z {{toTitle}}",
         "Streams\/relatedFrom\/*": "Přidáno k {{toTitle}} jako {{relationDisplayType}}",
         "Streams\/mention": "{{{call 'avatar.displayName'}}} vás zmínil v komentáři",
-        "Streams\/call": "{{displayName}} zahájilo hovor v reálném čase"
+        "Streams\/call": "{{displayName}} zahájilo hovor v reálném čase",
+        "changed": {
+            "ChangesIn": "Změny v {{title}}",
+            "Changed": "změněno",
+            "HereIsWhatChanged": "Zde je to, co se změnilo:"
+        },
+        "joined": {
+            "Joined": "{{subject}} se připojilo <em>{{title}}<\/em>"
+        }
     },
     "invite": {
         "command": "Pozvat",
@@ -135,7 +143,13 @@
             "scanQRCode": "Naskenujte QR kód",
             "shareLink": "Sdílejte odkaz",
             "chooseFromRegistered": "Vyberte si z registrovaných uživatelů",
-            "inviteViaEmailOrSms": "Pozvěte e-mailem nebo SMS"
+            "inviteViaEmailOrSms": "Pozvěte e-mailem nebo SMS",
+            "TakeGroupPhoto": "Pořiďte skupinovou fotografii",
+            "Skip": "Přeskočit",
+            "byTelegram": "Telegram",
+            "byWhatsapp": "WhatsApp",
+            "addRoles": "Přidat role",
+            "addPersonalRoles": "Přidejte osobní vztahy"
         },
         "complete": {
             "WelcomeToCommunity": "Vítejte na {{communityName}}",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "Byli jste pozváni. {{ClickOrTap}} zde pro přijetí a připojení."
+        },
+        "chat": {
+            "prompt": "Budete zvát lidi ke konverzaci, kde můžete zůstat v kontaktu, sdílet společné fotky a mnoho dalšího. Pojmenujte to:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "Neplatný soubor",
         "errorNoSource": "Žádný zdroj videa",
         "uploadLimit": "Maximální velikost souboru: {{size}}",
-        "errorFileSize": "Omlouváme se, ale soubor je příliš velký.<br> Maximální velikost souboru je {{size}}"
+        "errorFileSize": "Omlouváme se, ale soubor je příliš velký.<br> Maximální velikost souboru je {{size}}",
+        "createAnimatedThumbnail": "Vytvořte animovanou miniaturu",
+        "errorNotAvailable": "Omlouváme se, ale video zatím není k dispozici. Prosím zkuste to znovu později."
     },
     "pdf": {
         "reset": "Resetovat",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "Jméno uživatele..."
+    },
+    "task": {
+        "errorsTitle": "Došlo k chybám"
+    },
+    "topic": {
+        "NewTopic": "Nové téma",
+        "UpdateTopic": "Aktualizovat téma",
+        "CreateTopic": "Vytvořit téma",
+        "AreYouSureDeleteTopic": "Opravdu chcete toto téma smazat?",
+        "TitlePlaceholder": "Název tématu...",
+        "DescribeTopic": "popsat téma...",
+        "TopicIcon": "Tématický obrázek",
+        "UploadIcon": "Ikona nahrávání",
+        "Conversation": "Konverzace",
+        "Metrics": "Metriky"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "Vytvořte animovanou miniaturu",
+        "Width": "Šířka",
+        "Height": "Výška",
+        "Start": "Start",
+        "End": "Konec",
+        "Delay": "Zpoždění",
+        "Quality": "Kvalitní",
+        "Size": "Velikost",
+        "OfFrames": "snímků",
+        "Frame": "Rám",
+        "UseThis": "Použij toto",
+        "ResultGIF": "Výsledek GIF",
+        "VideoElementNotFound": "Prvek videa nebyl nalezen"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} na vaší tváři",
+        "AcceptIcon": "Přijmout vybranou oblast"
     }
 }

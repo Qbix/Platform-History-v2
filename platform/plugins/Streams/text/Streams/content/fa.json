@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "{{relationDisplayType}} جدید در {{toTitle}}",
         "Streams\/relatedFrom\/*": "به {{toTitle}} به عنوان {{relationDisplayType}} اضافه شد",
         "Streams\/mention": "{{{call 'avatar.displayName'}}} از شما در یک نظر نام برده است",
-        "Streams\/call": "{{displayName}} یک تماس بلادرنگ شروع کرد"
+        "Streams\/call": "{{displayName}} یک تماس بلادرنگ شروع کرد",
+        "changed": {
+            "ChangesIn": "تغییرات در {{title}}",
+            "Changed": "تغییر کرد",
+            "HereIsWhatChanged": "این چیزی است که تغییر کرده است:"
+        },
+        "joined": {
+            "Joined": "{{subject}} به <em>{{title}}<\/em> پیوست"
+        }
     },
     "invite": {
         "command": "دعوت",
@@ -135,7 +143,13 @@
             "scanQRCode": "کد QR را اسکن کنید",
             "shareLink": "پیوندی را به اشتراک بگذارید",
             "chooseFromRegistered": "از بین کاربران ثبت نام شده انتخاب کنید",
-            "inviteViaEmailOrSms": "از طریق ایمیل یا پیامک دعوت کنید"
+            "inviteViaEmailOrSms": "از طریق ایمیل یا پیامک دعوت کنید",
+            "TakeGroupPhoto": "عکس گروهی بگیرید",
+            "Skip": "پرش کنید",
+            "byTelegram": "تلگرام",
+            "byWhatsapp": "واتس اپ",
+            "addRoles": "اضافه کردن نقش ها",
+            "addPersonalRoles": "روابط شخصی را اضافه کنید"
         },
         "complete": {
             "WelcomeToCommunity": "به {{communityName}} خوش آمدید",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "شما دعوت شده اید. {{ClickOrTap}} اینجا را بپذیرید و بپیوندید."
+        },
+        "chat": {
+            "prompt": "شما افراد را به یک مکالمه دعوت می کنید که در آن می توانید در تماس باشید، عکس ها را با هم به اشتراک بگذارید و موارد دیگر. اسمش را بگذار:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "فایل نامعتبر",
         "errorNoSource": "منبع ویدیویی وجود ندارد",
         "uploadLimit": "حداکثر حجم فایل: {{size}}",
-        "errorFileSize": "متاسفم، اما فایل خیلی بزرگ است.<br> حداکثر اندازه فایل {{size}} است"
+        "errorFileSize": "متاسفم، اما فایل خیلی بزرگ است.<br> حداکثر اندازه فایل {{size}} است",
+        "createAnimatedThumbnail": "تصویر کوچک متحرک ایجاد کنید",
+        "errorNotAvailable": "متأسفیم، اما ویدیو هنوز در دسترس نیست. لطفاً بعداً دوباره امتحان کنید."
     },
     "pdf": {
         "reset": "بازنشانی کنید",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "نام یک کاربر ..."
+    },
+    "task": {
+        "errorsTitle": "خطاهایی رخ داده است"
+    },
+    "topic": {
+        "NewTopic": "موضوع جدید",
+        "UpdateTopic": "به روز رسانی موضوع",
+        "CreateTopic": "ایجاد موضوع",
+        "AreYouSureDeleteTopic": "آیا مطمئن هستید که می خواهید این موضوع را حذف کنید؟",
+        "TitlePlaceholder": "عنوان موضوع ...",
+        "DescribeTopic": "شرح موضوع ...",
+        "TopicIcon": "تصویر موضوع",
+        "UploadIcon": "نماد آپلود",
+        "Conversation": "گفتگو",
+        "Metrics": "معیارهای"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "تصویر کوچک متحرک ایجاد کنید",
+        "Width": "عرض",
+        "Height": "ارتفاع",
+        "Start": "شروع کنید",
+        "End": "پایان",
+        "Delay": "تاخیر انداختن",
+        "Quality": "کیفیت",
+        "Size": "اندازه",
+        "OfFrames": "از قاب ها",
+        "Frame": "قاب",
+        "UseThis": "از این استفاده کن",
+        "ResultGIF": "نتیجه GIF",
+        "VideoElementNotFound": "عنصر ویدیو پیدا نشد"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} در چهره شما",
+        "AcceptIcon": "پذیرش منطقه انتخاب شده"
     }
 }

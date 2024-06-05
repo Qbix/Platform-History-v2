@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "Uusi {{relationDisplayType}} {{toTitle}} ssa",
         "Streams\/relatedFrom\/*": "Lisätty {{toTitle}} ään {{relationDisplayType}} ksi",
         "Streams\/mention": "{{{call 'avatar.displayName'}}} mainitsi sinut kommentissa",
-        "Streams\/call": "{{displayName}} aloitti reaaliaikaisen puhelun"
+        "Streams\/call": "{{displayName}} aloitti reaaliaikaisen puhelun",
+        "changed": {
+            "ChangesIn": "Muutoksia {{title}}",
+            "Changed": "muuttunut",
+            "HereIsWhatChanged": "Tässä on mikä muuttui:"
+        },
+        "joined": {
+            "Joined": "{{subject}} liittyi <em>{{title}}<\/em>"
+        }
     },
     "invite": {
         "command": "Kutsu",
@@ -135,7 +143,13 @@
             "scanQRCode": "Skannaa QR-koodi",
             "shareLink": "Jaa linkki",
             "chooseFromRegistered": "Valitse rekisteröityneistä käyttäjistä",
-            "inviteViaEmailOrSms": "Kutsu sähköpostilla tai tekstiviestillä"
+            "inviteViaEmailOrSms": "Kutsu sähköpostilla tai tekstiviestillä",
+            "TakeGroupPhoto": "Ota ryhmäkuva",
+            "Skip": "Ohita",
+            "byTelegram": "Telegram",
+            "byWhatsapp": "WhatsApp",
+            "addRoles": "Lisää Rooleja",
+            "addPersonalRoles": "Lisää henkilökohtaisia suhteita"
         },
         "complete": {
             "WelcomeToCommunity": "Tervetuloa numeroon {{communityName}}",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "Sinut on kutsuttu. {{ClickOrTap}} täällä hyväksyäksesi ja liittyäksesi."
+        },
+        "chat": {
+            "prompt": "Kutsut ihmisiä keskusteluun, jossa voit pitää yhteyttä, jakaa valokuvia yhdessä ja paljon muuta. Anna sille nimi:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "Virheellinen tiedosto",
         "errorNoSource": "Ei videolähdettä",
         "uploadLimit": "Tiedoston enimmäiskoko: {{size}}",
-        "errorFileSize": "Anteeksi, mutta tiedosto on liian suuri.<br> Tiedoston enimmäiskoko on {{size}}"
+        "errorFileSize": "Anteeksi, mutta tiedosto on liian suuri.<br> Tiedoston enimmäiskoko on {{size}}",
+        "createAnimatedThumbnail": "Luo animoitu pikkukuva",
+        "errorNotAvailable": "Anteeksi, mutta video ei ole vielä saatavilla. Yritä uudelleen myöhemmin."
     },
     "pdf": {
         "reset": "Nollaa",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "Käyttäjän nimi..."
+    },
+    "task": {
+        "errorsTitle": "Virheitä tapahtui"
+    },
+    "topic": {
+        "NewTopic": "Uusi aihe",
+        "UpdateTopic": "Päivitä aihe",
+        "CreateTopic": "Luo aihe",
+        "AreYouSureDeleteTopic": "Haluatko varmasti poistaa tämän aiheen",
+        "TitlePlaceholder": "Aiheen otsikko...",
+        "DescribeTopic": "kuvaile aihetta...",
+        "TopicIcon": "Aihekuva",
+        "UploadIcon": "Latauskuvake",
+        "Conversation": "Keskustelu",
+        "Metrics": "Mittarit"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "Luo animoitu pikkukuva",
+        "Width": "Leveys",
+        "Height": "Korkeus",
+        "Start": "alkaa",
+        "End": "Loppu",
+        "Delay": "Viive",
+        "Quality": "Laatu",
+        "Size": "Koko",
+        "OfFrames": "kehyksistä",
+        "Frame": "Kehys",
+        "UseThis": "Käytä tätä",
+        "ResultGIF": "Tulos GIF",
+        "VideoElementNotFound": "Videoelementtiä ei löydy"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} kasvoillesi",
+        "AcceptIcon": "Hyväksy valittu alue"
     }
 }

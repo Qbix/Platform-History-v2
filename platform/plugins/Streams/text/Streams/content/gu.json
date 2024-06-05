@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "{{toTitle}} માં નવું {{relationDisplayType}}",
         "Streams\/relatedFrom\/*": "{{relationDisplayType}} તરીકે {{toTitle}} માં ઉમેર્યું",
         "Streams\/mention": "{{{call 'avatar.displayName'}}} એ ટિપ્પણીમાં તમારો ઉલ્લેખ કર્યો છે",
-        "Streams\/call": "{{displayName}} એ રીઅલ-ટાઇમ કૉલ શરૂ કર્યો"
+        "Streams\/call": "{{displayName}} એ રીઅલ-ટાઇમ કૉલ શરૂ કર્યો",
+        "changed": {
+            "ChangesIn": "{{title}} માં ફેરફારો",
+            "Changed": "બદલાયેલ",
+            "HereIsWhatChanged": "અહીં શું બદલાયું છે:"
+        },
+        "joined": {
+            "Joined": "{{subject}} <em>{{title}}<\/em> જોડાયા"
+        }
     },
     "invite": {
         "command": "આમંત્રિત",
@@ -135,7 +143,13 @@
             "scanQRCode": "QR કોડ સ્કેન કરો",
             "shareLink": "એક લિંક શેર કરો",
             "chooseFromRegistered": "નોંધાયેલા વપરાશકર્તાઓમાંથી પસંદ કરો",
-            "inviteViaEmailOrSms": "ઇમેઇલ અથવા SMS દ્વારા આમંત્રિત કરો"
+            "inviteViaEmailOrSms": "ઇમેઇલ અથવા SMS દ્વારા આમંત્રિત કરો",
+            "TakeGroupPhoto": "ગ્રુપ ફોટો લો",
+            "Skip": "છોડો",
+            "byTelegram": "ટેલિગ્રામ",
+            "byWhatsapp": "વોટ્સેપ",
+            "addRoles": "ભૂમિકાઓ ઉમેરો",
+            "addPersonalRoles": "અંગત સંબંધો ઉમેરો"
         },
         "complete": {
             "WelcomeToCommunity": "{{communityName}} માં આપનું સ્વાગત છે",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "તમને આમંત્રણ આપવામાં આવ્યું છે. {{ClickOrTap}} અહીં સ્વીકારવા અને જોડાવા માટે."
+        },
+        "chat": {
+            "prompt": "તમે લોકોને એક વાર્તાલાપ માટે આમંત્રિત કરશો જ્યાં તમે સંપર્કમાં રહી શકો, સાથે ફોટા શેર કરી શકો અને વધુ. તેને એક નામ આપો:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "અમાન્ય ફાઇલ",
         "errorNoSource": "કોઈ વિડિઓ સ્ત્રોત નથી",
         "uploadLimit": "મહત્તમ ફાઇલ કદ: {{size}}",
-        "errorFileSize": "માફ કરશો, પરંતુ ફાઇલ ખૂબ મોટી છે.<br> મહત્તમ ફાઇલ કદ {{size}} છે"
+        "errorFileSize": "માફ કરશો, પરંતુ ફાઇલ ખૂબ મોટી છે.<br> મહત્તમ ફાઇલ કદ {{size}} છે",
+        "createAnimatedThumbnail": "એનિમેટેડ થંબનેલ બનાવો",
+        "errorNotAvailable": "માફ કરશો, પરંતુ વિડિયો હજુ સુધી અનુપલબ્ધ છે. પછીથી ફરી પ્રયત્ન કરો."
     },
     "pdf": {
         "reset": "રીસેટ કરો",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "વપરાશકર્તાનું નામ..."
+    },
+    "task": {
+        "errorsTitle": "ભૂલો આવી"
+    },
+    "topic": {
+        "NewTopic": "નવો વિષય",
+        "UpdateTopic": "વિષય અપડેટ કરો",
+        "CreateTopic": "વિષય બનાવો",
+        "AreYouSureDeleteTopic": "શું તમે ખરેખર આ વિષય કાઢી નાખવા માંગો છો",
+        "TitlePlaceholder": "વિષયનું શીર્ષક...",
+        "DescribeTopic": "વિષયનું વર્ણન કરો...",
+        "TopicIcon": "વિષય ચિત્ર",
+        "UploadIcon": "અપલોડ આઇકન",
+        "Conversation": "વાતચીત",
+        "Metrics": "મેટ્રિક્સ"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "એનિમેટેડ થંબનેલ બનાવો",
+        "Width": "પહોળાઈ",
+        "Height": "ઊંચાઈ",
+        "Start": "શરૂઆત",
+        "End": "અંત",
+        "Delay": "વિલંબ",
+        "Quality": "ગુણવત્તા",
+        "Size": "કદ",
+        "OfFrames": "ફ્રેમ્સ",
+        "Frame": "ફ્રેમ",
+        "UseThis": "આનો ઉપયોગ કરો",
+        "ResultGIF": "પરિણામ GIF",
+        "VideoElementNotFound": "વિડિઓ ઘટક મળ્યો નથી"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} તમારા ચહેરા પર",
+        "AcceptIcon": "પસંદ કરેલ વિસ્તાર સ્વીકારો"
     }
 }

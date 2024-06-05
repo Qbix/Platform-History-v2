@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "Nieuwe {{relationDisplayType}} op {{toTitle}}",
         "Streams\/relatedFrom\/*": "Toegevoegd aan {{toTitle}} als {{relationDisplayType}}",
         "Streams\/mention": "{{{call 'avatar.displayName'}}} noemde je in een reactie",
-        "Streams\/call": "{{displayName}} startte een real-time oproep"
+        "Streams\/call": "{{displayName}} startte een real-time oproep",
+        "changed": {
+            "ChangesIn": "Veranderingen in {{title}}",
+            "Changed": "veranderd",
+            "HereIsWhatChanged": "Dit is wat er is veranderd:"
+        },
+        "joined": {
+            "Joined": "{{subject}} sloten zich aan bij <em>{{title}}<\/em>"
+        }
     },
     "invite": {
         "command": "Uitnodiging",
@@ -135,7 +143,13 @@
             "scanQRCode": "Scan QR-code",
             "shareLink": "Deel een koppeling",
             "chooseFromRegistered": "Kies uit geregistreerde gebruikers",
-            "inviteViaEmailOrSms": "Nodig uit via e-mail of sms"
+            "inviteViaEmailOrSms": "Nodig uit via e-mail of sms",
+            "TakeGroupPhoto": "Maak een groepsfoto",
+            "Skip": "Overslaan",
+            "byTelegram": "Telegram",
+            "byWhatsapp": "WhatsAppen",
+            "addRoles": "Rollen toevoegen",
+            "addPersonalRoles": "Voeg persoonlijke relaties toe"
         },
         "complete": {
             "WelcomeToCommunity": "Welkom bij {{communityName}}",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "Je bent uitgenodigd. {{ClickOrTap}} hier om te accepteren en lid te worden."
+        },
+        "chat": {
+            "prompt": "Je nodigt mensen uit voor een gesprek waarin je contact kunt houden, samen foto&#39;s kunt delen en meer. Geef het een naam:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "Ongeldig bestand",
         "errorNoSource": "Geen videobron",
         "uploadLimit": "Maximale bestandsgrootte: {{size}}",
-        "errorFileSize": "Sorry, maar bestand te groot.<br> De maximale bestandsgrootte is {{size}}"
+        "errorFileSize": "Sorry, maar bestand te groot.<br> De maximale bestandsgrootte is {{size}}",
+        "createAnimatedThumbnail": "Maak een geanimeerde miniatuur",
+        "errorNotAvailable": "Sorry, maar de video is nog niet beschikbaar. Probeer het later opnieuw."
     },
     "pdf": {
         "reset": "Resetten",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "Naam van een gebruiker..."
+    },
+    "task": {
+        "errorsTitle": "Er zijn fouten opgetreden"
+    },
+    "topic": {
+        "NewTopic": "Nieuw onderwerp",
+        "UpdateTopic": "Onderwerp bijwerken",
+        "CreateTopic": "Onderwerp maken",
+        "AreYouSureDeleteTopic": "Weet je zeker dat je dit onderwerp wilt verwijderen?",
+        "TitlePlaceholder": "onderwerp titel...",
+        "DescribeTopic": "onderwerp beschrijven...",
+        "TopicIcon": "Onderwerp foto",
+        "UploadIcon": "Uploadpictogram",
+        "Conversation": "Gesprek",
+        "Metrics": "Statistieken"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "Maak een geanimeerde miniatuur",
+        "Width": "Breedte",
+        "Height": "Hoogte",
+        "Start": "Begin",
+        "End": "Einde",
+        "Delay": "Vertraging",
+        "Quality": "Kwaliteit",
+        "Size": "Maat",
+        "OfFrames": "van Kaders",
+        "Frame": "Kader",
+        "UseThis": "Gebruik dit",
+        "ResultGIF": "Resultaat GIF",
+        "VideoElementNotFound": "Video-element niet gevonden"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} Op je gezicht",
+        "AcceptIcon": "Accepteer het geselecteerde gebied"
     }
 }

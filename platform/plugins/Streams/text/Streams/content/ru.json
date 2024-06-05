@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "Новый {{relationDisplayType}} в {{toTitle}}",
         "Streams\/relatedFrom\/*": "Добавлено к {{toTitle}} как {{relationDisplayType}}",
         "Streams\/mention": "{{{call 'avatar.displayName'}}} упомянули вас в комментарии",
-        "Streams\/call": "{{displayName}} начал вызов в реальном времени"
+        "Streams\/call": "{{displayName}} начал вызов в реальном времени",
+        "changed": {
+            "ChangesIn": "Изменения в {{title}}",
+            "Changed": "измененный",
+            "HereIsWhatChanged": "Вот что изменилось:"
+        },
+        "joined": {
+            "Joined": "{{subject}} присоединились <em>{{title}}<\/em>"
+        }
     },
     "invite": {
         "command": "Приглашать",
@@ -135,7 +143,13 @@
             "scanQRCode": "Сканировать QR-код",
             "shareLink": "Поделитесь ссылкой",
             "chooseFromRegistered": "Выбирайте из зарегистрированных пользователей",
-            "inviteViaEmailOrSms": "Пригласить по электронной почте или SMS"
+            "inviteViaEmailOrSms": "Пригласить по электронной почте или SMS",
+            "TakeGroupPhoto": "Сделать групповое фото",
+            "Skip": "Пропускать",
+            "byTelegram": "Телеграмма",
+            "byWhatsapp": "WhatsApp",
+            "addRoles": "Добавить роли",
+            "addPersonalRoles": "Добавьте личные отношения"
         },
         "complete": {
             "WelcomeToCommunity": "Добро пожаловать в {{communityName}}",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "Вы были приглашены. {{ClickOrTap}} здесь, чтобы принять и присоединиться."
+        },
+        "chat": {
+            "prompt": "Вы будете приглашать людей в беседу, где вы сможете оставаться на связи, делиться совместными фотографиями и многое другое. Дайте ему имя:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "Неверный файл",
         "errorNoSource": "Нет источника видео",
         "uploadLimit": "Максимальный размер файла: {{size}}",
-        "errorFileSize": "Извините, но файл слишком большой.<br> Максимальный размер файла {{size}}"
+        "errorFileSize": "Извините, но файл слишком большой.<br> Максимальный размер файла {{size}}",
+        "createAnimatedThumbnail": "Создать анимированную миниатюру",
+        "errorNotAvailable": "Извините, но видео пока недоступно. Пожалуйста, повторите попытку позже."
     },
     "pdf": {
         "reset": "Перезагрузить",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "Имя пользователя..."
+    },
+    "task": {
+        "errorsTitle": "Произошли ошибки"
+    },
+    "topic": {
+        "NewTopic": "Новая тема",
+        "UpdateTopic": "Обновить тему",
+        "CreateTopic": "Создать тему",
+        "AreYouSureDeleteTopic": "Вы уверены, что хотите удалить эту тему?",
+        "TitlePlaceholder": "название темы...",
+        "DescribeTopic": "опишите тему...",
+        "TopicIcon": "Изображение темы",
+        "UploadIcon": "Значок загрузки",
+        "Conversation": "Беседа",
+        "Metrics": "Метрики"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "Создать анимированную миниатюру",
+        "Width": "Ширина",
+        "Height": "Высота",
+        "Start": "Начинать",
+        "End": "Конец",
+        "Delay": "Задерживать",
+        "Quality": "Качество",
+        "Size": "Размер",
+        "OfFrames": "кадров",
+        "Frame": "Рамка",
+        "UseThis": "Использовать это",
+        "ResultGIF": "Результат гифка",
+        "VideoElementNotFound": "Видеоэлемент не найден"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} На твоем лице",
+        "AcceptIcon": "Принять выбранную область"
     }
 }

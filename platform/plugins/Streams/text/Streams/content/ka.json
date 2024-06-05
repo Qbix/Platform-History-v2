@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "ახალი {{relationDisplayType}} {{toTitle}} -ში",
         "Streams\/relatedFrom\/*": "დაემატა {{toTitle}} {{relationDisplayType}} -ს",
         "Streams\/mention": "{{{call 'avatar.displayName'}}} მოგახსენეთ კომენტარში",
-        "Streams\/call": "{{displayName}} დაიწყო რეალურ დროში ზარი"
+        "Streams\/call": "{{displayName}} დაიწყო რეალურ დროში ზარი",
+        "changed": {
+            "ChangesIn": "ცვლილებები {{title}} წელს",
+            "Changed": "შეიცვალა",
+            "HereIsWhatChanged": "აი რა შეიცვალა:"
+        },
+        "joined": {
+            "Joined": "{{subject}} შეუერთდა <em>{{title}}<\/em>"
+        }
     },
     "invite": {
         "command": "მოიწვიე",
@@ -135,7 +143,13 @@
             "scanQRCode": "QR კოდის სკანირება",
             "shareLink": "გააზიარეთ ბმული",
             "chooseFromRegistered": "აირჩიეთ რეგისტრირებული მომხმარებლებიდან",
-            "inviteViaEmailOrSms": "მოიწვიე ელექტრონული ფოსტით ან SMS-ით"
+            "inviteViaEmailOrSms": "მოიწვიე ელექტრონული ფოსტით ან SMS-ით",
+            "TakeGroupPhoto": "გადაიღეთ ჯგუფური ფოტო",
+            "Skip": "გამოტოვება",
+            "byTelegram": "ტელეგრამა",
+            "byWhatsapp": "WhatsApp",
+            "addRoles": "როლების დამატება",
+            "addPersonalRoles": "დაამატეთ პირადი ურთიერთობები"
         },
         "complete": {
             "WelcomeToCommunity": "კეთილი იყოს თქვენი მობრძანება {{communityName}} ში",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "თქვენ მოწვეული ხართ. {{ClickOrTap}} აქ, რომ მიიღოთ და შეუერთდეთ."
+        },
+        "chat": {
+            "prompt": "თქვენ მოიწვევთ ადამიანებს საუბარში, სადაც შეგიძლიათ დარჩეთ კონტაქტზე, გააზიაროთ ფოტოები ერთად და სხვა. მიეცით სახელი:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "Არასწორი ფაილი",
         "errorNoSource": "ვიდეოს წყარო არ არის",
         "uploadLimit": "ფაილის მაქსიმალური ზომა: {{size}}",
-        "errorFileSize": "უკაცრავად, მაგრამ ფაილი ძალიან დიდია.<br> ფაილის მაქსიმალური ზომაა {{size}}"
+        "errorFileSize": "უკაცრავად, მაგრამ ფაილი ძალიან დიდია.<br> ფაილის მაქსიმალური ზომაა {{size}}",
+        "createAnimatedThumbnail": "შექმენით ანიმაციური მინიატურა",
+        "errorNotAvailable": "უკაცრავად, მაგრამ ვიდეო ჯერ მიუწვდომელია. Გთხოვთ სცადოთ მოგვიანებით."
     },
     "pdf": {
         "reset": "გადატვირთვა",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "მომხმარებლის სახელი..."
+    },
+    "task": {
+        "errorsTitle": "მოხდა შეცდომები"
+    },
+    "topic": {
+        "NewTopic": "Ახალი თემა",
+        "UpdateTopic": "თემის განახლება",
+        "CreateTopic": "თემის შექმნა",
+        "AreYouSureDeleteTopic": "დარწმუნებული ხართ, რომ გსურთ ამ თემის წაშლა",
+        "TitlePlaceholder": "თემის სათაური...",
+        "DescribeTopic": "აღწერეთ თემა...",
+        "TopicIcon": "თემის სურათი",
+        "UploadIcon": "ატვირთვის ხატულა",
+        "Conversation": "Საუბარი",
+        "Metrics": "მეტრიკა"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "შექმენით ანიმაციური მინიატურა",
+        "Width": "სიგანე",
+        "Height": "სიმაღლე",
+        "Start": "დაწყება",
+        "End": "Დასასრული",
+        "Delay": "დაგვიანებით",
+        "Quality": "ხარისხიანი",
+        "Size": "ზომა",
+        "OfFrames": "ჩარჩოების",
+        "Frame": "ჩარჩო",
+        "UseThis": "გამოიყენეთ ეს",
+        "ResultGIF": "შედეგი GIF",
+        "VideoElementNotFound": "ვიდეო ელემენტი ვერ მოიძებნა"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} შენს სახეზე",
+        "AcceptIcon": "არჩეული ზონის მიღება"
     }
 }

@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "{{relationDisplayType}} ġdid {{toTitle}}",
         "Streams\/relatedFrom\/*": "Miżjud ma {{toTitle}} bħala {{relationDisplayType}}",
         "Streams\/mention": "{{{call 'avatar.displayName'}}} semmetek f&#39;kumment",
-        "Streams\/call": "{{displayName}} beda sejħa f&#39;ħin reali"
+        "Streams\/call": "{{displayName}} beda sejħa f&#39;ħin reali",
+        "changed": {
+            "ChangesIn": "Bidliet fl {{title}}",
+            "Changed": "mibdula",
+            "HereIsWhatChanged": "Hawn x&#39;inbidel:"
+        },
+        "joined": {
+            "Joined": "{{subject}} ssieħbu mal <em>{{title}}<\/em>"
+        }
     },
     "invite": {
         "command": "Stieden",
@@ -135,7 +143,13 @@
             "scanQRCode": "Skennja l-Kodiċi QR",
             "shareLink": "Aqsam link",
             "chooseFromRegistered": "Agħżel minn utenti reġistrati",
-            "inviteViaEmailOrSms": "Stieden permezz ta&#39; email jew SMS"
+            "inviteViaEmailOrSms": "Stieden permezz ta&#39; email jew SMS",
+            "TakeGroupPhoto": "Ħu Ritratt tal-Grupp",
+            "Skip": "Aqbeż",
+            "byTelegram": "Telegramma",
+            "byWhatsapp": "WhatsApp",
+            "addRoles": "Żid Rwoli",
+            "addPersonalRoles": "Żid Relazzjonijiet Personali"
         },
         "complete": {
             "WelcomeToCommunity": "Merħba għal {{communityName}}",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "Ġejt mistieden. {{ClickOrTap}} hawn biex taċċetta u tissieħeb."
+        },
+        "chat": {
+            "prompt": "Int tkun qed tistieden lin-nies għal konverżazzjoni fejn tista&#39; tibqa&#39; f&#39;kuntatt, taqsam ritratti flimkien, u aktar. Agħtiha isem:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "Fajl Invalidu",
         "errorNoSource": "L-ebda sors tal-vidjo",
         "uploadLimit": "Daqs massimu tal-fajl: {{size}}",
-        "errorFileSize": "Jiddispjaċini, imma fajl kbir wisq.<br> Id-daqs massimu tal-fajl huwa {{size}}"
+        "errorFileSize": "Jiddispjaċini, imma fajl kbir wisq.<br> Id-daqs massimu tal-fajl huwa {{size}}",
+        "createAnimatedThumbnail": "Oħloq thumbnail animata",
+        "errorNotAvailable": "Jiddispjaċini, iżda l-vidjo għadu mhux disponibbli. Jekk jogħġbok erġa&#39; pprova aktar tard."
     },
     "pdf": {
         "reset": "Irrisettja",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "Isem ta&#39; utent..."
+    },
+    "task": {
+        "errorsTitle": "Żbalji seħħew"
+    },
+    "topic": {
+        "NewTopic": "Suġġett Ġdid",
+        "UpdateTopic": "Aġġorna Suġġett",
+        "CreateTopic": "Oħloq Suġġett",
+        "AreYouSureDeleteTopic": "Żgur li trid tħassar dan is-suġġett",
+        "TitlePlaceholder": "titolu tas-suġġett...",
+        "DescribeTopic": "iddeskrivi s-suġġett...",
+        "TopicIcon": "Stampa tas-suġġett",
+        "UploadIcon": "Tella Ikona",
+        "Conversation": "Konversazzjoni",
+        "Metrics": "Metriċi"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "Oħloq thumbnail animata",
+        "Width": "Wisa&#39;",
+        "Height": "Għoli",
+        "Start": "Ibda",
+        "End": "Tmiem",
+        "Delay": "Dewmien",
+        "Quality": "Kwalità",
+        "Size": "Daqs",
+        "OfFrames": "ta&#39; Gwarniċi",
+        "Frame": "Qafas",
+        "UseThis": "Uża dan",
+        "ResultGIF": "Riżultat GIF",
+        "VideoElementNotFound": "Element tal-vidjo ma nstabx"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} Fuq Wiċċek",
+        "AcceptIcon": "Aċċetta żona magħżula"
     }
 }

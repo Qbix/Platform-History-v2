@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "{{toTitle}} లో కొత్త {{relationDisplayType}}",
         "Streams\/relatedFrom\/*": "{{toTitle}} కి {{relationDisplayType}} గా జోడించబడింది",
         "Streams\/mention": "{{{call 'avatar.displayName'}}} మిమ్మల్ని వ్యాఖ్యలో పేర్కొన్నారు",
-        "Streams\/call": "{{displayName}} రియల్ టైమ్ కాల్‌ని ప్రారంభించింది"
+        "Streams\/call": "{{displayName}} రియల్ టైమ్ కాల్‌ని ప్రారంభించింది",
+        "changed": {
+            "ChangesIn": "{{title}} లో మార్పులు",
+            "Changed": "మార్చారు",
+            "HereIsWhatChanged": "మారినది ఇక్కడ ఉంది:"
+        },
+        "joined": {
+            "Joined": "{{subject}} <em>{{title}}<\/em> చేరారు"
+        }
     },
     "invite": {
         "command": "ఆహ్వానించండి",
@@ -135,7 +143,13 @@
             "scanQRCode": "QR కోడ్‌ని స్కాన్ చేయండి",
             "shareLink": "లింక్‌ను భాగస్వామ్యం చేయండి",
             "chooseFromRegistered": "నమోదిత వినియోగదారుల నుండి ఎంచుకోండి",
-            "inviteViaEmailOrSms": "ఇమెయిల్ లేదా SMS ద్వారా ఆహ్వానించండి"
+            "inviteViaEmailOrSms": "ఇమెయిల్ లేదా SMS ద్వారా ఆహ్వానించండి",
+            "TakeGroupPhoto": "గ్రూప్ ఫోటో తీయండి",
+            "Skip": "దాటవేయి",
+            "byTelegram": "టెలిగ్రామ్",
+            "byWhatsapp": "WhatsApp",
+            "addRoles": "పాత్రలను జోడించండి",
+            "addPersonalRoles": "వ్యక్తిగత సంబంధాలను జోడించండి"
         },
         "complete": {
             "WelcomeToCommunity": "{{communityName}} కి స్వాగతం",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "మీరు ఆహ్వానించబడ్డారు. అంగీకరించడానికి మరియు చేరడానికి ఇక్కడ {{ClickOrTap}} ."
+        },
+        "chat": {
+            "prompt": "మీరు టచ్‌లో ఉండడానికి, కలిసి ఫోటోలను పంచుకోవడానికి మరియు మరెన్నో చేయగల సంభాషణకు మీరు వ్యక్తులను ఆహ్వానిస్తారు. దీనికి పేరు పెట్టండి:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "చెల్లని ఫైల్",
         "errorNoSource": "వీడియో మూలం లేదు",
         "uploadLimit": "గరిష్ట ఫైల్ పరిమాణం: {{size}}",
-        "errorFileSize": "క్షమించండి, కానీ ఫైల్ చాలా పెద్దది.<br> గరిష్ట ఫైల్ పరిమాణం {{size}}"
+        "errorFileSize": "క్షమించండి, కానీ ఫైల్ చాలా పెద్దది.<br> గరిష్ట ఫైల్ పరిమాణం {{size}}",
+        "createAnimatedThumbnail": "యానిమేటెడ్ సూక్ష్మచిత్రాన్ని సృష్టించండి",
+        "errorNotAvailable": "క్షమించండి, కానీ వీడియో ఇంకా అందుబాటులో లేదు. దయచేసి తర్వాత మళ్లీ ప్రయత్నించండి."
     },
     "pdf": {
         "reset": "రీసెట్ చేయండి",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "వినియోగదారు పేరు..."
+    },
+    "task": {
+        "errorsTitle": "లోపాలు సంభవించాయి"
+    },
+    "topic": {
+        "NewTopic": "కొత్త అంశం",
+        "UpdateTopic": "అంశాన్ని నవీకరించండి",
+        "CreateTopic": "అంశాన్ని సృష్టించండి",
+        "AreYouSureDeleteTopic": "మీరు ఖచ్చితంగా ఈ అంశాన్ని తొలగించాలనుకుంటున్నారా",
+        "TitlePlaceholder": "టాపిక్ టైటిల్...",
+        "DescribeTopic": "అంశాన్ని వివరించండి...",
+        "TopicIcon": "టాపిక్ చిత్రం",
+        "UploadIcon": "అప్‌లోడ్ చిహ్నం",
+        "Conversation": "సంభాషణ",
+        "Metrics": "కొలమానాలు"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "యానిమేటెడ్ సూక్ష్మచిత్రాన్ని సృష్టించండి",
+        "Width": "వెడల్పు",
+        "Height": "ఎత్తు",
+        "Start": "ప్రారంభించండి",
+        "End": "ముగింపు",
+        "Delay": "ఆలస్యం",
+        "Quality": "నాణ్యత",
+        "Size": "పరిమాణం",
+        "OfFrames": "ఫ్రేములు",
+        "Frame": "ఫ్రేమ్",
+        "UseThis": "దీన్ని ఉపయోగించండి",
+        "ResultGIF": "GIF ఫలితం",
+        "VideoElementNotFound": "వీడియో మూలకం కనుగొనబడలేదు"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} మీ ముఖం మీద",
+        "AcceptIcon": "ఎంచుకున్న ప్రాంతాన్ని ఆమోదించండి"
     }
 }

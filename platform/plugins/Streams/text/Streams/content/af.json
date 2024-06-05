@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "Nuwe {{relationDisplayType}} in {{toTitle}}",
         "Streams\/relatedFrom\/*": "By {{toTitle}} gevoeg as {{relationDisplayType}}",
         "Streams\/mention": "{{{call 'avatar.displayName'}}} het jou in &#39;n opmerking genoem",
-        "Streams\/call": "{{displayName}} het &#39;n intydse oproep begin"
+        "Streams\/call": "{{displayName}} het &#39;n intydse oproep begin",
+        "changed": {
+            "ChangesIn": "Die verandering in {{title}}",
+            "Changed": "verander",
+            "HereIsWhatChanged": "Hier is wat verander het:"
+        },
+        "joined": {
+            "Joined": "{{subject}} het <em>{{title}}<\/em> aangesluit"
+        }
     },
     "invite": {
         "command": "Nooi",
@@ -135,7 +143,13 @@
             "scanQRCode": "Skandeer QR-kode",
             "shareLink": "Deel &#39;n skakel",
             "chooseFromRegistered": "Kies uit geregistreerde gebruikers",
-            "inviteViaEmailOrSms": "Nooi per e-pos of SMS"
+            "inviteViaEmailOrSms": "Nooi per e-pos of SMS",
+            "TakeGroupPhoto": "Neem &#39;n groepfoto",
+            "Skip": "Huppel",
+            "byTelegram": "Telegram",
+            "byWhatsapp": "WhatsApp",
+            "addRoles": "Voeg rolle by",
+            "addPersonalRoles": "Voeg persoonlike verhoudings by"
         },
         "complete": {
             "WelcomeToCommunity": "Welkom by {{communityName}}",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "Jy is genooi. {{ClickOrTap}} hier om te aanvaar en aan te sluit."
+        },
+        "chat": {
+            "prompt": "Jy sal mense nooi na &#39;n gesprek waar jy in kontak kan bly, foto&#39;s saam kan deel, en meer. Gee dit &#39;n naam:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "Ongeldige lêer",
         "errorNoSource": "Geen videobron nie",
         "uploadLimit": "Maksimum lêergrootte: {{size}}",
-        "errorFileSize": "Jammer, maar lêer te groot.<br> Maksimum lêergrootte is {{size}}"
+        "errorFileSize": "Jammer, maar lêer te groot.<br> Maksimum lêergrootte is {{size}}",
+        "createAnimatedThumbnail": "Skep geanimeerde kleinkiekie",
+        "errorNotAvailable": "Jammer, maar video is nog nie beskikbaar nie. Probeer asseblief weer later."
     },
     "pdf": {
         "reset": "Stel terug",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "Naam van &#39;n gebruiker..."
+    },
+    "task": {
+        "errorsTitle": "Foute het voorgekom"
+    },
+    "topic": {
+        "NewTopic": "Nuwe onderwerp",
+        "UpdateTopic": "Dateer Onderwerp op",
+        "CreateTopic": "Skep Onderwerp",
+        "AreYouSureDeleteTopic": "Is jy seker jy wil hierdie onderwerp uitvee",
+        "TitlePlaceholder": "onderwerp titel...",
+        "DescribeTopic": "beskryf onderwerp...",
+        "TopicIcon": "Onderwerp prentjie",
+        "UploadIcon": "Oplaai-ikoon",
+        "Conversation": "Gesprek",
+        "Metrics": "Metrieke"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "Skep geanimeerde kleinkiekie",
+        "Width": "Breedte",
+        "Height": "Hoogte",
+        "Start": "Begin",
+        "End": "Einde",
+        "Delay": "Vertraag",
+        "Quality": "Gehalte",
+        "Size": "Grootte",
+        "OfFrames": "van Rame",
+        "Frame": "Raam",
+        "UseThis": "Gebruik hierdie",
+        "ResultGIF": "Resultaat GIF",
+        "VideoElementNotFound": "Video-element nie gevind nie"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} op jou gesig",
+        "AcceptIcon": "Aanvaar gekose area"
     }
 }

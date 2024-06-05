@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "Нов {{relationDisplayType}} во {{toTitle}}",
         "Streams\/relatedFrom\/*": "Додадено на {{toTitle}} како {{relationDisplayType}}",
         "Streams\/mention": "{{{call 'avatar.displayName'}}} те спомна во коментар",
-        "Streams\/call": "{{displayName}} започна повик во реално време"
+        "Streams\/call": "{{displayName}} започна повик во реално време",
+        "changed": {
+            "ChangesIn": "Промени во {{title}}",
+            "Changed": "сменето",
+            "HereIsWhatChanged": "Еве што се смени:"
+        },
+        "joined": {
+            "Joined": "{{subject}} се приклучија <em>{{title}}<\/em>"
+        }
     },
     "invite": {
         "command": "Покани",
@@ -135,7 +143,13 @@
             "scanQRCode": "Скенирајте QR-код",
             "shareLink": "Споделете врска",
             "chooseFromRegistered": "Изберете од регистрираните корисници",
-            "inviteViaEmailOrSms": "Поканете преку е-пошта или СМС"
+            "inviteViaEmailOrSms": "Поканете преку е-пошта или СМС",
+            "TakeGroupPhoto": "Направете групна фотографија",
+            "Skip": "Прескокни",
+            "byTelegram": "Телеграма",
+            "byWhatsapp": "WhatsApp",
+            "addRoles": "Додадете улоги",
+            "addPersonalRoles": "Додадете лични односи"
         },
         "complete": {
             "WelcomeToCommunity": "Добредојдовте во {{communityName}}",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "Вие сте поканети. {{ClickOrTap}} тука за да прифатите и да се придружите."
+        },
+        "chat": {
+            "prompt": "Ќе ги поканувате луѓето на разговор каде што ќе можете да останете во контакт, да споделувате заеднички фотографии и многу повеќе. Дајте му име:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "Неважечка датотека",
         "errorNoSource": "Нема извор на видео",
         "uploadLimit": "Максимална големина на датотека: {{size}}",
-        "errorFileSize": "Извинете, но датотеката е премногу голема.<br> Максималната големина на датотеката е {{size}}"
+        "errorFileSize": "Извинете, но датотеката е премногу голема.<br> Максималната големина на датотеката е {{size}}",
+        "createAnimatedThumbnail": "Креирајте анимирана слика",
+        "errorNotAvailable": "Извинете, но видеото сè уште е недостапно. Обидете се повторно подоцна."
     },
     "pdf": {
         "reset": "Ресетирај",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "Име на корисник..."
+    },
+    "task": {
+        "errorsTitle": "Се појавија грешки"
+    },
+    "topic": {
+        "NewTopic": "Нова тема",
+        "UpdateTopic": "Ажурирајте ја темата",
+        "CreateTopic": "Креирај тема",
+        "AreYouSureDeleteTopic": "Дали сте сигурни дека сакате да ја избришете оваа тема",
+        "TitlePlaceholder": "наслов на темата...",
+        "DescribeTopic": "опиши ја темата...",
+        "TopicIcon": "Слика на тема",
+        "UploadIcon": "Икона за поставување",
+        "Conversation": "Разговор",
+        "Metrics": "Метрика"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "Креирајте анимирана слика",
+        "Width": "Ширина",
+        "Height": "Висина",
+        "Start": "Започнете",
+        "End": "Крај",
+        "Delay": "Одложување",
+        "Quality": "Квалитет",
+        "Size": "Големина",
+        "OfFrames": "на Рамки",
+        "Frame": "Рамка",
+        "UseThis": "Користете го ова",
+        "ResultGIF": "Резултат GIF",
+        "VideoElementNotFound": "Видео елементот не е пронајден"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} на твоето лице",
+        "AcceptIcon": "Прифатете ја избраната област"
     }
 }

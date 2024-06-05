@@ -9598,7 +9598,7 @@ Q.updateUrls = function(callback) {
 			Q.handle(callback, null, [result, timestamp]);
 		}, {extend: false, cacheBust: 1000, skipNonce: true});
 	} else if (ut && ut !== lut) {
-		url = 'Q/urls/diffs/' + ut + '.json';
+		url = 'Q/urls/diffs/' + lut + '.json';
 		Q.request(url, [], function (err, result) {
 			if (err) {
 				// we couldn't find a diff, so let's reload the latest.json

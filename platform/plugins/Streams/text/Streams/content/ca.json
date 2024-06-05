@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "Nou {{relationDisplayType}} en {{toTitle}}",
         "Streams\/relatedFrom\/*": "S&#39;ha afegit a {{toTitle}} com a {{relationDisplayType}}",
         "Streams\/mention": "{{{call 'avatar.displayName'}}} t&#39;ha esmentat en un comentari",
-        "Streams\/call": "{{displayName}} va iniciar una trucada en temps real"
+        "Streams\/call": "{{displayName}} va iniciar una trucada en temps real",
+        "changed": {
+            "ChangesIn": "Canvis al {{title}}",
+            "Changed": "canviat",
+            "HereIsWhatChanged": "Aquí teniu el que va canviar:"
+        },
+        "joined": {
+            "Joined": "{{subject}} es van unir <em>{{title}}<\/em>"
+        }
     },
     "invite": {
         "command": "Convidar",
@@ -135,7 +143,13 @@
             "scanQRCode": "Escaneja el codi QR",
             "shareLink": "Comparteix un enllaç",
             "chooseFromRegistered": "Trieu entre els usuaris registrats",
-            "inviteViaEmailOrSms": "Convida per correu electrònic o SMS"
+            "inviteViaEmailOrSms": "Convida per correu electrònic o SMS",
+            "TakeGroupPhoto": "Fes una foto de grup",
+            "Skip": "Omet",
+            "byTelegram": "Telegrama",
+            "byWhatsapp": "Què tal",
+            "addRoles": "Afegeix rols",
+            "addPersonalRoles": "Afegeix Relacions Personals"
         },
         "complete": {
             "WelcomeToCommunity": "Benvingut a {{communityName}}",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "Has estat convidat. {{ClickOrTap}} aquí per acceptar i unir-se."
+        },
+        "chat": {
+            "prompt": "Convidaràs gent a una conversa on podràs mantenir-te en contacte, compartir fotos junts i molt més. Posa-li un nom:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "Fitxer no vàlid",
         "errorNoSource": "Cap font de vídeo",
         "uploadLimit": "Mida màxima del fitxer: {{size}}",
-        "errorFileSize": "Ho sentim, però el fitxer és massa gran.<br> La mida màxima del fitxer és {{size}}"
+        "errorFileSize": "Ho sentim, però el fitxer és massa gran.<br> La mida màxima del fitxer és {{size}}",
+        "createAnimatedThumbnail": "Crea una miniatura animada",
+        "errorNotAvailable": "Ho sentim, però el vídeo encara no està disponible. Siusplau, intenta-ho més tard."
     },
     "pdf": {
         "reset": "Restableix",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "Nom d&#39;un usuari..."
+    },
+    "task": {
+        "errorsTitle": "S&#39;han produït errors"
+    },
+    "topic": {
+        "NewTopic": "Nou Tema",
+        "UpdateTopic": "Actualitzar el tema",
+        "CreateTopic": "Crear tema",
+        "AreYouSureDeleteTopic": "Esteu segur que voleu suprimir aquest tema",
+        "TitlePlaceholder": "títol del tema...",
+        "DescribeTopic": "descriu el tema...",
+        "TopicIcon": "Imatge del tema",
+        "UploadIcon": "Icona de càrrega",
+        "Conversation": "Conversa",
+        "Metrics": "Mètriques"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "Crea una miniatura animada",
+        "Width": "Amplada",
+        "Height": "Alçada",
+        "Start": "Començar",
+        "End": "Final",
+        "Delay": "Retard",
+        "Quality": "Qualitat",
+        "Size": "Mida",
+        "OfFrames": "de Marcs",
+        "Frame": "Marc",
+        "UseThis": "Usa aixó",
+        "ResultGIF": "GIF de resultats",
+        "VideoElementNotFound": "No s&#39;ha trobat l&#39;element de vídeo"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} A la teva cara",
+        "AcceptIcon": "Accepta l&#39;àrea seleccionada"
     }
 }

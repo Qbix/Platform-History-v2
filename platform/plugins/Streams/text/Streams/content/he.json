@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "חדש {{relationDisplayType}} ב {{toTitle}}",
         "Streams\/relatedFrom\/*": "נוסף ל {{toTitle}} כ {{relationDisplayType}}",
         "Streams\/mention": "{{{call 'avatar.displayName'}}} הזכיר אותך בתגובה",
-        "Streams\/call": "{{displayName}} התחיל שיחה בזמן אמת"
+        "Streams\/call": "{{displayName}} התחיל שיחה בזמן אמת",
+        "changed": {
+            "ChangesIn": "שינויים ב {{title}}",
+            "Changed": "השתנה",
+            "HereIsWhatChanged": "הנה מה שהשתנה:"
+        },
+        "joined": {
+            "Joined": "{{subject}} הצטרפו <em>{{title}}<\/em>"
+        }
     },
     "invite": {
         "command": "להזמין",
@@ -135,7 +143,13 @@
             "scanQRCode": "סרוק קוד QR",
             "shareLink": "שתף קישור",
             "chooseFromRegistered": "בחר מבין משתמשים רשומים",
-            "inviteViaEmailOrSms": "הזמינו במייל או ב-SMS"
+            "inviteViaEmailOrSms": "הזמינו במייל או ב-SMS",
+            "TakeGroupPhoto": "צלם תמונה קבוצתית",
+            "Skip": "לדלג",
+            "byTelegram": "מִברָק",
+            "byWhatsapp": "וואטסאפ",
+            "addRoles": "הוסף תפקידים",
+            "addPersonalRoles": "הוסף קשרים אישיים"
         },
         "complete": {
             "WelcomeToCommunity": "ברוכים הבאים ל {{communityName}}",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "הוזמנת. {{ClickOrTap}} כאן כדי לקבל ולהצטרף."
+        },
+        "chat": {
+            "prompt": "אתה תזמין אנשים לשיחה שבה תוכל לשמור על קשר, לשתף תמונות ביחד ועוד. תן לזה שם:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "קובץ לא תקין",
         "errorNoSource": "אין מקור וידאו",
         "uploadLimit": "גודל קובץ מקסימלי: {{size}}",
-        "errorFileSize": "סליחה, אבל הקובץ גדול מדי.<br> גודל הקובץ המרבי הוא {{size}}"
+        "errorFileSize": "סליחה, אבל הקובץ גדול מדי.<br> גודל הקובץ המרבי הוא {{size}}",
+        "createAnimatedThumbnail": "צור תמונה ממוזערת מונפשת",
+        "errorNotAvailable": "מצטערים, אבל הסרטון עדיין לא זמין. בבקשה נסה שוב מאוחר יותר."
     },
     "pdf": {
         "reset": "אִתחוּל",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "שם של משתמש..."
+    },
+    "task": {
+        "errorsTitle": "אירעו שגיאות"
+    },
+    "topic": {
+        "NewTopic": "נושא חדש",
+        "UpdateTopic": "עדכון נושא",
+        "CreateTopic": "צור נושא",
+        "AreYouSureDeleteTopic": "האם אתה בטוח שברצונך למחוק את הנושא הזה",
+        "TitlePlaceholder": "כותרת הנושא...",
+        "DescribeTopic": "תאר נושא...",
+        "TopicIcon": "תמונת נושא",
+        "UploadIcon": "סמל העלאה",
+        "Conversation": "שִׂיחָה",
+        "Metrics": "מדדים"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "צור תמונה ממוזערת מונפשת",
+        "Width": "רוֹחַב",
+        "Height": "גוֹבַה",
+        "Start": "הַתחָלָה",
+        "End": "סוֹף",
+        "Delay": "לְעַכֵּב",
+        "Quality": "איכות",
+        "Size": "גודל",
+        "OfFrames": "של מסגרות",
+        "Frame": "מִסגֶרֶת",
+        "UseThis": "השתמש בזה",
+        "ResultGIF": "תוצאה GIF",
+        "VideoElementNotFound": "רכיב וידאו לא נמצא"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} על הפנים שלך",
+        "AcceptIcon": "קבל את האזור הנבחר"
     }
 }

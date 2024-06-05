@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "{{relationDisplayType}} berria {{toTitle}} urtean",
         "Streams\/relatedFrom\/*": "{{toTitle}} {{relationDisplayType}} gisa gehitu da",
         "Streams\/mention": "{{{call 'avatar.displayName'}}} iruzkin batean aipatu zaitu",
-        "Streams\/call": "{{displayName}} telefonoak denbora errealeko dei bat hasi zuen"
+        "Streams\/call": "{{displayName}} telefonoak denbora errealeko dei bat hasi zuen",
+        "changed": {
+            "ChangesIn": "{{title}} aldaketak",
+            "Changed": "aldatu",
+            "HereIsWhatChanged": "Hona hemen zer aldatu den:"
+        },
+        "joined": {
+            "Joined": "{{subject}} batu <em>{{title}}<\/em>"
+        }
     },
     "invite": {
         "command": "Gonbidatu",
@@ -135,7 +143,13 @@
             "scanQRCode": "Eskaneatu QR kodea",
             "shareLink": "Partekatu esteka bat",
             "chooseFromRegistered": "Aukeratu erregistratutako erabiltzaileen artean",
-            "inviteViaEmailOrSms": "Gonbidatu posta elektroniko bidez edo SMS bidez"
+            "inviteViaEmailOrSms": "Gonbidatu posta elektroniko bidez edo SMS bidez",
+            "TakeGroupPhoto": "Taldeko argazkia atera",
+            "Skip": "Saltatu",
+            "byTelegram": "Telegrama",
+            "byWhatsapp": "WhatsApp",
+            "addRoles": "Gehitu rolak",
+            "addPersonalRoles": "Gehitu harreman pertsonalak"
         },
         "complete": {
             "WelcomeToCommunity": "Ongi etorri {{communityName}}",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "Gonbidatu zaituzte. {{ClickOrTap}} hona onartzeko eta sartzeko."
+        },
+        "chat": {
+            "prompt": "Jendea elkarrizketa batera gonbidatuko duzu, non harremanetan egoteko, argazkiak elkarrekin partekatzeko eta abar. Eman izena:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "Fitxategi baliogabea",
         "errorNoSource": "Ez dago bideo iturririk",
         "uploadLimit": "Fitxategiaren gehienezko tamaina: {{size}}",
-        "errorFileSize": "Barkatu, baina fitxategia handiegia da.<br> Fitxategiaren gehienezko tamaina {{size}} da"
+        "errorFileSize": "Barkatu, baina fitxategia handiegia da.<br> Fitxategiaren gehienezko tamaina {{size}} da",
+        "createAnimatedThumbnail": "Sortu miniatura animatua",
+        "errorNotAvailable": "Barkatu, baina bideoa ez dago erabilgarri oraindik. Saiatu berriro geroago."
     },
     "pdf": {
         "reset": "Berrezarri",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "Erabiltzaile baten izena..."
+    },
+    "task": {
+        "errorsTitle": "Erroreak gertatu dira"
+    },
+    "topic": {
+        "NewTopic": "Gai berria",
+        "UpdateTopic": "Eguneratu gaia",
+        "CreateTopic": "Sortu gaia",
+        "AreYouSureDeleteTopic": "Ziur gai hau ezabatu nahi duzula",
+        "TitlePlaceholder": "gaiaren izenburua...",
+        "DescribeTopic": "deskribatu gaia...",
+        "TopicIcon": "Gaiaren irudia",
+        "UploadIcon": "Kargatu ikonoa",
+        "Conversation": "Elkarrizketa",
+        "Metrics": "Metrikak"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "Sortu miniatura animatua",
+        "Width": "Zabalera",
+        "Height": "Altuera",
+        "Start": "Hasi",
+        "End": "Amaiera",
+        "Delay": "Atzerapena",
+        "Quality": "Kalitatea",
+        "Size": "Tamaina",
+        "OfFrames": "Markoen",
+        "Frame": "Markoa",
+        "UseThis": "Erabili hau",
+        "ResultGIF": "Emaitza GIF",
+        "VideoElementNotFound": "Ez da aurkitu bideo-elementua"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} Zure Aurpegian",
+        "AcceptIcon": "Onartu hautatutako eremua"
     }
 }
