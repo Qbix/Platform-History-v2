@@ -590,8 +590,10 @@ Q.exports(function (Users, priv) {
 			if (!data.emailExists && !data.mobileExists) {
 				return form;
 			}
-			var $p = $('<p id="Users_login_identifierExists" />').html(
-				data.emailExists ? Q.text.Users.login.emailExists : Q.text.Users.login.mobileExists
+			var $p = $('<p id="Users_login_identifierExists" />').append(
+				$('<div />').html(
+					data.emailExists ? Q.text.Users.login.emailExists : Q.text.Users.login.mobileExists
+				)
 			);
 			$('a', $p).plugin('Q/clickable', {
 				onInvoke: function () {
