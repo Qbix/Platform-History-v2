@@ -1,6 +1,7 @@
 .Streams_participants_invite img {
 	width: 40px;
 	height: 40px;
+	margin: auto;
 }
 
 .Streams_participants_tool .Streams_invite_label {
