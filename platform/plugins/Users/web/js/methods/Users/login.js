@@ -594,7 +594,7 @@ Q.exports(function (Users, priv) {
 				$('<div />').html(
 					data.emailExists ? Q.text.Users.login.emailExists : Q.text.Users.login.mobileExists
 				)
-			); 
+			);
 			$('a', $p).plugin('Q/clickable', {
 				onInvoke: function () {
 					$(this).addClass('Q_working');
