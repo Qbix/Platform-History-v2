@@ -1,5 +1,3 @@
-<html>
-{{call "avatar.displayName"}} joined <em>{{stream.fields.title}}</em>
+{{{interpolate notifications.joined.Joined subject=(call "avatar.displayName") title=stream.fields.title}}}
 <hr>
 <p>{{notifications.IfUnsubscribe}}, <a href="{{baseUrl}}/Streams/participating">{{notifications.ManageEmailSubscriptions}}</a></p>
-</html>
