@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "{{relationDisplayType}} جديد في {{toTitle}}",
         "Streams\/relatedFrom\/*": "يضاف إلى {{toTitle}} كـ {{relationDisplayType}}",
         "Streams\/mention": "ذكرك {{{call 'avatar.displayName'}}} في تعليق",
-        "Streams\/call": "{{displayName}} بدأ مكالمة في الوقت الفعلي"
+        "Streams\/call": "{{displayName}} بدأ مكالمة في الوقت الفعلي",
+        "changed": {
+            "ChangesIn": "التغييرات في {{title}}",
+            "Changed": "تغير",
+            "HereIsWhatChanged": "وهنا ما تغير:"
+        },
+        "joined": {
+            "Joined": "{{subject}} انضم إلى <em>{{title}}<\/em>"
+        }
     },
     "invite": {
         "command": "يدعو",
@@ -135,7 +143,13 @@
             "scanQRCode": "مسح رمز الاستجابة السريعة",
             "shareLink": "شارك الرابط",
             "chooseFromRegistered": "اختر من بين المستخدمين المسجلين",
-            "inviteViaEmailOrSms": "دعوة عبر البريد الإلكتروني أو الرسائل القصيرة"
+            "inviteViaEmailOrSms": "دعوة عبر البريد الإلكتروني أو الرسائل القصيرة",
+            "TakeGroupPhoto": "التقط صورة جماعية",
+            "Skip": "يتخطى",
+            "byTelegram": "برقية",
+            "byWhatsapp": "واتساب",
+            "addRoles": "أضف الأدوار",
+            "addPersonalRoles": "أضف العلاقات الشخصية"
         },
         "complete": {
             "WelcomeToCommunity": "مرحبًا بك في {{communityName}}",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "لقد تمت دعوتك. {{ClickOrTap}} هنا للقبول والانضمام."
+        },
+        "chat": {
+            "prompt": "ستدعو الأشخاص إلى محادثة حيث يمكنك البقاء على اتصال ومشاركة الصور معًا والمزيد. أعطه إسما:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "ملف غير صالح",
         "errorNoSource": "لا يوجد مصدر فيديو",
         "uploadLimit": "الحد الأقصى لحجم الملف: {{size}}",
-        "errorFileSize": "عذرا ، ولكن الملف كبير جدا.<br> الحد الأقصى لحجم الملف هو {{size}}"
+        "errorFileSize": "عذرا ، ولكن الملف كبير جدا.<br> الحد الأقصى لحجم الملف هو {{size}}",
+        "createAnimatedThumbnail": "إنشاء صورة مصغرة متحركة",
+        "errorNotAvailable": "آسف، ولكن الفيديو غير متوفر بعد. الرجاء معاودة المحاولة في وقت لاحق."
     },
     "pdf": {
         "reset": "إعادة ضبط",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "اسم المستخدم ..."
+    },
+    "task": {
+        "errorsTitle": "حدثت أخطاء"
+    },
+    "topic": {
+        "NewTopic": "موضوع جديد",
+        "UpdateTopic": "تحديث الموضوع",
+        "CreateTopic": "إنشاء موضوع",
+        "AreYouSureDeleteTopic": "هل أنت متأكد أنك تريد حذف هذا الموضوع",
+        "TitlePlaceholder": "عنوان الموضوع...",
+        "DescribeTopic": "وصف الموضوع...",
+        "TopicIcon": "صورة الموضوع",
+        "UploadIcon": "أيقونة التحميل",
+        "Conversation": "محادثة",
+        "Metrics": "المقاييس"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "إنشاء صورة مصغرة متحركة",
+        "Width": "عرض",
+        "Height": "ارتفاع",
+        "Start": "يبدأ",
+        "End": "نهاية",
+        "Delay": "تأخير",
+        "Quality": "جودة",
+        "Size": "مقاس",
+        "OfFrames": "من الإطارات",
+        "Frame": "إطار",
+        "UseThis": "استخدم هذا",
+        "ResultGIF": "نتيجة GIF",
+        "VideoElementNotFound": "لم يتم العثور على عنصر الفيديو"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} على وجهك",
+        "AcceptIcon": "قبول المنطقة المحددة"
     }
 }

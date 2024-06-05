@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "Ny {{relationDisplayType}} i {{toTitle}}",
         "Streams\/relatedFrom\/*": "Lades till {{toTitle}} som {{relationDisplayType}}",
         "Streams\/mention": "{{{call 'avatar.displayName'}}} nämnde dig i en kommentar",
-        "Streams\/call": "{{displayName}} startade ett realtidssamtal"
+        "Streams\/call": "{{displayName}} startade ett realtidssamtal",
+        "changed": {
+            "ChangesIn": "Ändringar i {{title}}",
+            "Changed": "ändrats",
+            "HereIsWhatChanged": "Här är vad som ändrades:"
+        },
+        "joined": {
+            "Joined": "{{subject}} gick med i <em>{{title}}<\/em>"
+        }
     },
     "invite": {
         "command": "Bjuda",
@@ -135,7 +143,13 @@
             "scanQRCode": "Skanna QR kod",
             "shareLink": "Dela en länk",
             "chooseFromRegistered": "Välj bland registrerade användare",
-            "inviteViaEmailOrSms": "Bjud in via e-post eller SMS"
+            "inviteViaEmailOrSms": "Bjud in via e-post eller SMS",
+            "TakeGroupPhoto": "Ta ett gruppfoto",
+            "Skip": "Hoppa",
+            "byTelegram": "Telegram",
+            "byWhatsapp": "WhatsApp",
+            "addRoles": "Lägg till roller",
+            "addPersonalRoles": "Lägg till personliga relationer"
         },
         "complete": {
             "WelcomeToCommunity": "Välkommen till {{communityName}}",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "Du har blivit inbjuden. {{ClickOrTap}} här för att acceptera och gå med."
+        },
+        "chat": {
+            "prompt": "Du kommer att bjuda in människor till en konversation där ni kan hålla kontakten, dela foton tillsammans och mer. Ge det ett namn:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "Felaktig fil",
         "errorNoSource": "Ingen videokälla",
         "uploadLimit": "Max filstorlek: {{size}}",
-        "errorFileSize": "Tyvärr, men filen är för stor.<br> Max filstorlek är {{size}}"
+        "errorFileSize": "Tyvärr, men filen är för stor.<br> Max filstorlek är {{size}}",
+        "createAnimatedThumbnail": "Skapa animerad miniatyrbild",
+        "errorNotAvailable": "Tyvärr, men videon är inte tillgänglig ännu. Vänligen försök igen senare."
     },
     "pdf": {
         "reset": "Återställa",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "Namn på en användare..."
+    },
+    "task": {
+        "errorsTitle": "Fel uppstod"
+    },
+    "topic": {
+        "NewTopic": "Nytt ämne",
+        "UpdateTopic": "Uppdatera ämne",
+        "CreateTopic": "Skapa ämne",
+        "AreYouSureDeleteTopic": "Är du säker på att du vill ta bort det här ämnet",
+        "TitlePlaceholder": "Ämnestitel...",
+        "DescribeTopic": "beskriv ämne...",
+        "TopicIcon": "Ämnesbild",
+        "UploadIcon": "Ladda upp ikon",
+        "Conversation": "Konversation",
+        "Metrics": "Metrik"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "Skapa animerad miniatyrbild",
+        "Width": "Bredd",
+        "Height": "Höjd",
+        "Start": "Start",
+        "End": "Slutet",
+        "Delay": "Dröjsmål",
+        "Quality": "Kvalitet",
+        "Size": "Storlek",
+        "OfFrames": "av ramar",
+        "Frame": "Ram",
+        "UseThis": "Använd detta",
+        "ResultGIF": "Resultat GIF",
+        "VideoElementNotFound": "Videoelementet hittades inte"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} On Your Face",
+        "AcceptIcon": "Acceptera valt område"
     }
 }

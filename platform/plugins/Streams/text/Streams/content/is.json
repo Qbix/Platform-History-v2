@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "Nýtt {{relationDisplayType}} á {{toTitle}}",
         "Streams\/relatedFrom\/*": "Bætt við {{toTitle}} sem {{relationDisplayType}}",
         "Streams\/mention": "{{{call 'avatar.displayName'}}} minntist á þig í athugasemd",
-        "Streams\/call": "{{displayName}} hóf símtal í rauntíma"
+        "Streams\/call": "{{displayName}} hóf símtal í rauntíma",
+        "changed": {
+            "ChangesIn": "Breytingar á {{title}}",
+            "Changed": "breytt",
+            "HereIsWhatChanged": "Hér er það sem breyttist:"
+        },
+        "joined": {
+            "Joined": "{{subject}} tóku þátt <em>{{title}}<\/em>"
+        }
     },
     "invite": {
         "command": "Bjóða",
@@ -135,7 +143,13 @@
             "scanQRCode": "Skannaðu QR kóða",
             "shareLink": "Deildu tengli",
             "chooseFromRegistered": "Veldu úr skráðum notendum",
-            "inviteViaEmailOrSms": "Boðið með tölvupósti eða SMS"
+            "inviteViaEmailOrSms": "Boðið með tölvupósti eða SMS",
+            "TakeGroupPhoto": "Taktu hópmynd",
+            "Skip": "Sleppa",
+            "byTelegram": "Telegram",
+            "byWhatsapp": "WhatsApp",
+            "addRoles": "Bæta við hlutverkum",
+            "addPersonalRoles": "Bættu við persónulegum samböndum"
         },
         "complete": {
             "WelcomeToCommunity": "Velkomin í {{communityName}}",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "Þér hefur verið boðið. {{ClickOrTap}} hér til að samþykkja og taka þátt."
+        },
+        "chat": {
+            "prompt": "Þú munt bjóða fólki í samtal þar sem þú getur verið í sambandi, deilt myndum saman og fleira. Gefðu því nafn:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "Ógild skrá",
         "errorNoSource": "Engin myndbandsuppspretta",
         "uploadLimit": "Hámarks skráarstærð: {{size}}",
-        "errorFileSize": "Því miður, en skráin er of stór.<br> Hámarksskráarstærð er {{size}}"
+        "errorFileSize": "Því miður, en skráin er of stór.<br> Hámarksskráarstærð er {{size}}",
+        "createAnimatedThumbnail": "Búðu til hreyfimyndir",
+        "errorNotAvailable": "Því miður er myndbandið ekki tiltækt ennþá. Vinsamlegast reyndu aftur síðar."
     },
     "pdf": {
         "reset": "Endurstilla",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "Nafn notanda..."
+    },
+    "task": {
+        "errorsTitle": "Villur komu upp"
+    },
+    "topic": {
+        "NewTopic": "Nýtt efni",
+        "UpdateTopic": "Uppfæra efni",
+        "CreateTopic": "Búa til efni",
+        "AreYouSureDeleteTopic": "Ertu viss um að þú viljir eyða þessu efni",
+        "TitlePlaceholder": "titill efnis...",
+        "DescribeTopic": "lýstu umræðuefni...",
+        "TopicIcon": "Efnismynd",
+        "UploadIcon": "Hlaða upp táknmynd",
+        "Conversation": "Samtal",
+        "Metrics": "Mælingar"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "Búðu til hreyfimyndir",
+        "Width": "Breidd",
+        "Height": "Hæð",
+        "Start": "Byrjaðu",
+        "End": "Enda",
+        "Delay": "Töf",
+        "Quality": "Gæði",
+        "Size": "Stærð",
+        "OfFrames": "af ramma",
+        "Frame": "Rammi",
+        "UseThis": "Notaðu þetta",
+        "ResultGIF": "Niðurstaða GIF",
+        "VideoElementNotFound": "Myndbandsþáttur fannst ekki"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} On Your Face",
+        "AcceptIcon": "Samþykkja valið svæði"
     }
 }

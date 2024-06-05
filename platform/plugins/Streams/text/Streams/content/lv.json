@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "Jauns {{relationDisplayType}} no {{toTitle}}",
         "Streams\/relatedFrom\/*": "Pievienots {{toTitle}} kā {{relationDisplayType}}",
         "Streams\/mention": "{{{call 'avatar.displayName'}}} pieminēja jūs komentārā",
-        "Streams\/call": "{{displayName}} sāka reāllaika zvanu"
+        "Streams\/call": "{{displayName}} sāka reāllaika zvanu",
+        "changed": {
+            "ChangesIn": "Izmaiņas {{title}} gadā",
+            "Changed": "mainīts",
+            "HereIsWhatChanged": "Lūk, kas mainījās:"
+        },
+        "joined": {
+            "Joined": "{{subject}} pievienojās <em>{{title}}<\/em>"
+        }
     },
     "invite": {
         "command": "Uzaicināt",
@@ -135,7 +143,13 @@
             "scanQRCode": "Skenējiet QR kodu",
             "shareLink": "Kopīgojiet saiti",
             "chooseFromRegistered": "Izvēlieties no reģistrētajiem lietotājiem",
-            "inviteViaEmailOrSms": "Uzaicināt pa e-pastu vai SMS"
+            "inviteViaEmailOrSms": "Uzaicināt pa e-pastu vai SMS",
+            "TakeGroupPhoto": "Uzņemiet grupas fotoattēlu",
+            "Skip": "Izlaist",
+            "byTelegram": "Telegramma",
+            "byWhatsapp": "WhatsApp",
+            "addRoles": "Pievienojiet lomas",
+            "addPersonalRoles": "Pievienojiet personiskās attiecības"
         },
         "complete": {
             "WelcomeToCommunity": "Laipni lūdzam {{communityName}}",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "Jūs esat uzaicināts. {{ClickOrTap}} šeit, lai pieņemtu un pievienotos."
+        },
+        "chat": {
+            "prompt": "Jūs uzaicināsit cilvēkus uz sarunu, kurā varēsit sazināties, koplietot fotoattēlus un veikt citas darbības. Piešķiriet tai nosaukumu:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "Nederīgs fails",
         "errorNoSource": "Nav video avota",
         "uploadLimit": "Maksimālais faila lielums: {{size}}",
-        "errorFileSize": "Atvainojiet, bet fails ir pārāk liels.<br> Maksimālais faila lielums ir {{size}}"
+        "errorFileSize": "Atvainojiet, bet fails ir pārāk liels.<br> Maksimālais faila lielums ir {{size}}",
+        "createAnimatedThumbnail": "Izveidojiet animētu sīktēlu",
+        "errorNotAvailable": "Atvainojiet, bet video vēl nav pieejams. Lūdzu, pamēģiniet vēlreiz vēlāk."
     },
     "pdf": {
         "reset": "Atiestatīt",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "Lietotāja vārds..."
+    },
+    "task": {
+        "errorsTitle": "Radās kļūdas"
+    },
+    "topic": {
+        "NewTopic": "Jauna tēma",
+        "UpdateTopic": "Atjaunināt tēmu",
+        "CreateTopic": "Izveidot tēmu",
+        "AreYouSureDeleteTopic": "Vai tiešām vēlaties dzēst šo tēmu?",
+        "TitlePlaceholder": "tēmas virsraksts...",
+        "DescribeTopic": "apraksti tēmu...",
+        "TopicIcon": "Tēmas attēls",
+        "UploadIcon": "Augšupielādes ikona",
+        "Conversation": "Saruna",
+        "Metrics": "Metrika"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "Izveidojiet animētu sīktēlu",
+        "Width": "Platums",
+        "Height": "Augstums",
+        "Start": "Sākt",
+        "End": "Beigas",
+        "Delay": "Kavēšanās",
+        "Quality": "Kvalitāte",
+        "Size": "Izmērs",
+        "OfFrames": "no rāmjiem",
+        "Frame": "Rāmis",
+        "UseThis": "Lieto šo",
+        "ResultGIF": "Rezultāts GIF",
+        "VideoElementNotFound": "Video elements nav atrasts"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} uz jūsu sejas",
+        "AcceptIcon": "Pieņemt izvēlēto apgabalu"
     }
 }

@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "Ново {{relationDisplayType}} в {{toTitle}}",
         "Streams\/relatedFrom\/*": "Добавено към {{toTitle}} като {{relationDisplayType}}",
         "Streams\/mention": "{{{call 'avatar.displayName'}}} ви споменаха в коментар",
-        "Streams\/call": "{{displayName}} започна обаждане в реално време"
+        "Streams\/call": "{{displayName}} започна обаждане в реално време",
+        "changed": {
+            "ChangesIn": "Промени в {{title}}",
+            "Changed": "променен",
+            "HereIsWhatChanged": "Ето какво се промени:"
+        },
+        "joined": {
+            "Joined": "{{subject}} се присъединиха <em>{{title}}<\/em>"
+        }
     },
     "invite": {
         "command": "Покани",
@@ -135,7 +143,13 @@
             "scanQRCode": "Сканирайте QR код",
             "shareLink": "Споделете връзка",
             "chooseFromRegistered": "Изберете от регистрирани потребители",
-            "inviteViaEmailOrSms": "Поканете чрез имейл или SMS"
+            "inviteViaEmailOrSms": "Поканете чрез имейл или SMS",
+            "TakeGroupPhoto": "Направете групова снимка",
+            "Skip": "Пропускане",
+            "byTelegram": "Телеграма",
+            "byWhatsapp": "WhatsApp",
+            "addRoles": "Добавяне на роли",
+            "addPersonalRoles": "Добавяне на лични отношения"
         },
         "complete": {
             "WelcomeToCommunity": "Добре дошли в {{communityName}}",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "Вие сте поканени. {{ClickOrTap}} тук, за да приемете и да се присъедините."
+        },
+        "chat": {
+            "prompt": "Ще поканите хора на разговор, където можете да поддържате връзка, да споделяте снимки заедно и др. Дайте му име:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "Невалиден файл",
         "errorNoSource": "Няма видео източник",
         "uploadLimit": "Максимален размер на файла: {{size}}",
-        "errorFileSize": "Съжалявам, но файлът е твърде голям.<br> Максималният размер на файла е {{size}}"
+        "errorFileSize": "Съжалявам, но файлът е твърде голям.<br> Максималният размер на файла е {{size}}",
+        "createAnimatedThumbnail": "Създайте анимирана миниатюра",
+        "errorNotAvailable": "Съжаляваме, но видеото все още не е налично. Моля, опитайте отново по-късно."
     },
     "pdf": {
         "reset": "Нулиране",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "Име на потребител..."
+    },
+    "task": {
+        "errorsTitle": "Възникнаха грешки"
+    },
+    "topic": {
+        "NewTopic": "Нова тема",
+        "UpdateTopic": "Актуализиране на темата",
+        "CreateTopic": "Създаване на тема",
+        "AreYouSureDeleteTopic": "Сигурни ли сте, че искате да изтриете тази тема",
+        "TitlePlaceholder": "заглавие на темата...",
+        "DescribeTopic": "опиши темата...",
+        "TopicIcon": "Снимка на темата",
+        "UploadIcon": "Икона за качване",
+        "Conversation": "Разговор",
+        "Metrics": "Метрика"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "Създайте анимирана миниатюра",
+        "Width": "ширина",
+        "Height": "Височина",
+        "Start": "Започнете",
+        "End": "Край",
+        "Delay": "Закъснение",
+        "Quality": "качество",
+        "Size": "Размер",
+        "OfFrames": "на рамки",
+        "Frame": "Кадър",
+        "UseThis": "Използвай това",
+        "ResultGIF": "Резултат GIF",
+        "VideoElementNotFound": "Видео елементът не е намерен"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} На твоето лице",
+        "AcceptIcon": "Приемете избраната област"
     }
 }

@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "Mới {{relationDisplayType}} trong {{toTitle}}",
         "Streams\/relatedFrom\/*": "Cộng với {{toTitle}} thành {{relationDisplayType}}",
         "Streams\/mention": "{{{call 'avatar.displayName'}}} đã đề cập đến bạn trong một bình luận",
-        "Streams\/call": "{{displayName}} bắt đầu cuộc gọi theo thời gian thực"
+        "Streams\/call": "{{displayName}} bắt đầu cuộc gọi theo thời gian thực",
+        "changed": {
+            "ChangesIn": "Những thay đổi ở {{title}}",
+            "Changed": "đã thay đổi",
+            "HereIsWhatChanged": "Đây là những gì đã thay đổi:"
+        },
+        "joined": {
+            "Joined": "{{subject}} tham gia <em>{{title}}<\/em>"
+        }
     },
     "invite": {
         "command": "Mời",
@@ -135,7 +143,13 @@
             "scanQRCode": "Quét mã QR",
             "shareLink": "Chia sẻ một liên kết",
             "chooseFromRegistered": "Chọn từ người dùng đã đăng ký",
-            "inviteViaEmailOrSms": "Mời qua email hoặc SMS"
+            "inviteViaEmailOrSms": "Mời qua email hoặc SMS",
+            "TakeGroupPhoto": "Chụp ảnh nhóm",
+            "Skip": "Nhảy",
+            "byTelegram": "điện tín",
+            "byWhatsapp": "WhatsApp",
+            "addRoles": "Thêm vai trò",
+            "addPersonalRoles": "Thêm mối quan hệ cá nhân"
         },
         "complete": {
             "WelcomeToCommunity": "Chào mừng đến với {{communityName}}",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "Bạn đã được mời. {{ClickOrTap}} ở đây để chấp nhận và tham gia."
+        },
+        "chat": {
+            "prompt": "Bạn sẽ mời mọi người tham gia cuộc trò chuyện nơi bạn có thể giữ liên lạc, chia sẻ ảnh cùng nhau và hơn thế nữa. Đặt tên cho nó:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "Tập tin không hợp lệ",
         "errorNoSource": "Không có nguồn video",
         "uploadLimit": "Kích thước tệp tối đa: {{size}}",
-        "errorFileSize": "Xin lỗi, nhưng tập tin quá lớn.<br> Kích thước tệp tối đa là {{size}}"
+        "errorFileSize": "Xin lỗi, nhưng tập tin quá lớn.<br> Kích thước tệp tối đa là {{size}}",
+        "createAnimatedThumbnail": "Tạo hình thu nhỏ hoạt hình",
+        "errorNotAvailable": "Xin lỗi, nhưng video hiện chưa có. Vui lòng thử lại sau."
     },
     "pdf": {
         "reset": "Cài lại",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "Tên người dùng..."
+    },
+    "task": {
+        "errorsTitle": "Đã xảy ra lỗi"
+    },
+    "topic": {
+        "NewTopic": "Chủ đề mới",
+        "UpdateTopic": "Cập nhật chủ đề",
+        "CreateTopic": "Tạo chủ đề",
+        "AreYouSureDeleteTopic": "Bạn có chắc chắn muốn xóa chủ đề này",
+        "TitlePlaceholder": "Tên chủ đề...",
+        "DescribeTopic": "mô tả chủ đề...",
+        "TopicIcon": "Hình ảnh chủ đề",
+        "UploadIcon": "Biểu tượng tải lên",
+        "Conversation": "Cuộc hội thoại",
+        "Metrics": "Số liệu"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "Tạo hình thu nhỏ hoạt hình",
+        "Width": "Chiều rộng",
+        "Height": "Chiều cao",
+        "Start": "Bắt đầu",
+        "End": "Kết thúc",
+        "Delay": "Trì hoãn",
+        "Quality": "Chất lượng",
+        "Size": "Kích cỡ",
+        "OfFrames": "của khung",
+        "Frame": "Khung",
+        "UseThis": "Dùng cái này",
+        "ResultGIF": "GIF kết quả",
+        "VideoElementNotFound": "Không tìm thấy phần tử video"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} Trên mặt bạn",
+        "AcceptIcon": "Chấp nhận khu vực đã chọn"
     }
 }

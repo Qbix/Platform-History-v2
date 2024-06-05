@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "Yeni {{relationDisplayType}} {{toTitle}}",
         "Streams\/relatedFrom\/*": "{{toTitle}} {{relationDisplayType}} kimi əlavə edildi",
         "Streams\/mention": "{{{call 'avatar.displayName'}}} şərhdə sizi qeyd etdi",
-        "Streams\/call": "{{displayName}} real vaxt zəng etməyə başladı"
+        "Streams\/call": "{{displayName}} real vaxt zəng etməyə başladı",
+        "changed": {
+            "ChangesIn": "{{title}} -da dəyişikliklər",
+            "Changed": "dəyişdi",
+            "HereIsWhatChanged": "Budur nə dəyişdi:"
+        },
+        "joined": {
+            "Joined": "{{subject}} <em>{{title}}<\/em> qoşuldu"
+        }
     },
     "invite": {
         "command": "dəvət et",
@@ -135,7 +143,13 @@
             "scanQRCode": "QR kodunu skan edin",
             "shareLink": "Link paylaşın",
             "chooseFromRegistered": "Qeydiyyatdan keçmiş istifadəçilərdən seçin",
-            "inviteViaEmailOrSms": "E-poçt və ya SMS vasitəsilə dəvət edin"
+            "inviteViaEmailOrSms": "E-poçt və ya SMS vasitəsilə dəvət edin",
+            "TakeGroupPhoto": "Qrup şəklini çəkin",
+            "Skip": "Keç",
+            "byTelegram": "Telegram",
+            "byWhatsapp": "WhatsApp",
+            "addRoles": "Rolları əlavə edin",
+            "addPersonalRoles": "Şəxsi münasibətlər əlavə edin"
         },
         "complete": {
             "WelcomeToCommunity": "{{communityName}} a xoş gəlmisiniz",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "Siz dəvət olundunuz. {{ClickOrTap}} qəbul etmək və qoşulmaq üçün burada."
+        },
+        "chat": {
+            "prompt": "Siz insanları söhbətə dəvət edəcəksiniz, burada əlaqə saxlaya bilərsiniz, fotoşəkilləri birlikdə paylaşa və s. Bir ad verin:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "Yanlış Fayl",
         "errorNoSource": "Video mənbəyi yoxdur",
         "uploadLimit": "Maksimum fayl ölçüsü: {{size}}",
-        "errorFileSize": "Bağışlayın, lakin fayl çox böyükdür.<br> Maksimum fayl ölçüsü {{size}} dur"
+        "errorFileSize": "Bağışlayın, lakin fayl çox böyükdür.<br> Maksimum fayl ölçüsü {{size}} dur",
+        "createAnimatedThumbnail": "Animasiyalı miniatür yaradın",
+        "errorNotAvailable": "Bağışlayın, lakin video hələ əlçatan deyil. Zəhmət olmasa bir az sonra yenə cəhd edin."
     },
     "pdf": {
         "reset": "Sıfırlayın",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "İstifadəçinin adı..."
+    },
+    "task": {
+        "errorsTitle": "Səhvlər baş verdi"
+    },
+    "topic": {
+        "NewTopic": "Yeni Mövzu",
+        "UpdateTopic": "Mövzunu yeniləyin",
+        "CreateTopic": "Mövzu yaradın",
+        "AreYouSureDeleteTopic": "Bu mövzunu silmək istədiyinizə əminsiniz",
+        "TitlePlaceholder": "mövzu başlığı...",
+        "DescribeTopic": "mövzunu təsvir edin...",
+        "TopicIcon": "Mövzu şəkli",
+        "UploadIcon": "Yükləmə İkonu",
+        "Conversation": "Söhbət",
+        "Metrics": "Metriklər"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "Animasiyalı miniatür yaradın",
+        "Width": "Genişlik",
+        "Height": "Hündürlük",
+        "Start": "Başlamaq",
+        "End": "Son",
+        "Delay": "Gecikmə",
+        "Quality": "Keyfiyyət",
+        "Size": "Ölçü",
+        "OfFrames": "Çərçivələr",
+        "Frame": "Çərçivə",
+        "UseThis": "Bunu istifadə et",
+        "ResultGIF": "Nəticə GIF",
+        "VideoElementNotFound": "Video element tapılmadı"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} Üzünüzdə",
+        "AcceptIcon": "Seçilmiş ərazini qəbul edin"
     }
 }

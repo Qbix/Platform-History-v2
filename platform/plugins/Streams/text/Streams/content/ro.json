@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "Nou {{relationDisplayType}} în {{toTitle}}",
         "Streams\/relatedFrom\/*": "Adăugat la {{toTitle}} ca {{relationDisplayType}}",
         "Streams\/mention": "{{{call 'avatar.displayName'}}} te-a menționat într-un comentariu",
-        "Streams\/call": "{{displayName}} a început un apel în timp real"
+        "Streams\/call": "{{displayName}} a început un apel în timp real",
+        "changed": {
+            "ChangesIn": "Modificări în {{title}}",
+            "Changed": "schimbat",
+            "HereIsWhatChanged": "Iată ce s-a schimbat:"
+        },
+        "joined": {
+            "Joined": "{{subject}} s-au alăturat <em>{{title}}<\/em>"
+        }
     },
     "invite": {
         "command": "A invita",
@@ -135,7 +143,13 @@
             "scanQRCode": "Scanați codul QR",
             "shareLink": "Distribuie un link",
             "chooseFromRegistered": "Alegeți dintre utilizatorii înregistrați",
-            "inviteViaEmailOrSms": "Invitați prin e-mail sau SMS"
+            "inviteViaEmailOrSms": "Invitați prin e-mail sau SMS",
+            "TakeGroupPhoto": "Faceți o fotografie de grup",
+            "Skip": "Ocolire",
+            "byTelegram": "Telegramă",
+            "byWhatsapp": "WhatsApp",
+            "addRoles": "Adăugați roluri",
+            "addPersonalRoles": "Adăugați relații personale"
         },
         "complete": {
             "WelcomeToCommunity": "Bun venit la {{communityName}}",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "Ai fost invitat. {{ClickOrTap}} aici pentru a accepta și a vă alătura."
+        },
+        "chat": {
+            "prompt": "Veți invita oameni la o conversație în care puteți rămâne în contact, puteți partaja fotografii împreună și multe altele. Dă-i un nume:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "Fișier invalid",
         "errorNoSource": "Fără sursă video",
         "uploadLimit": "Dimensiunea maximă a fișierului: {{size}}",
-        "errorFileSize": "Ne pare rău, dar fișierul este prea mare.<br> Dimensiunea maximă a fișierului este de {{size}}"
+        "errorFileSize": "Ne pare rău, dar fișierul este prea mare.<br> Dimensiunea maximă a fișierului este de {{size}}",
+        "createAnimatedThumbnail": "Creați o miniatură animată",
+        "errorNotAvailable": "Ne pare rău, dar videoclipul nu este încă disponibil. Vă rugăm să încercați din nou mai târziu."
     },
     "pdf": {
         "reset": "Resetați",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "Numele unui utilizator..."
+    },
+    "task": {
+        "errorsTitle": "Au apărut erori"
+    },
+    "topic": {
+        "NewTopic": "Subiect nou",
+        "UpdateTopic": "Actualizați subiectul",
+        "CreateTopic": "Creați subiect",
+        "AreYouSureDeleteTopic": "Sigur doriți să ștergeți acest subiect",
+        "TitlePlaceholder": "titlul topicului...",
+        "DescribeTopic": "descrie subiectul...",
+        "TopicIcon": "Poza subiectului",
+        "UploadIcon": "Pictograma Încărcare",
+        "Conversation": "Conversaţie",
+        "Metrics": "Metrici"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "Creați o miniatură animată",
+        "Width": "Lăţime",
+        "Height": "Înălţime",
+        "Start": "start",
+        "End": "Sfârşit",
+        "Delay": "Întârziere",
+        "Quality": "Calitate",
+        "Size": "mărimea",
+        "OfFrames": "de Cadre",
+        "Frame": "Cadru",
+        "UseThis": "Foloseste asta",
+        "ResultGIF": "GIF rezultat",
+        "VideoElementNotFound": "Elementul video nu a fost găsit"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} Pe fața ta",
+        "AcceptIcon": "Acceptați zona selectată"
     }
 }

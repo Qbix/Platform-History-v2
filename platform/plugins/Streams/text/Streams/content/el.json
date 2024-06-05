@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "Νέα {{relationDisplayType}} σε {{toTitle}}",
         "Streams\/relatedFrom\/*": "Προστέθηκε στο {{toTitle}} ως {{relationDisplayType}}",
         "Streams\/mention": "{{{call 'avatar.displayName'}}} σας ανέφερε σε ένα σχόλιο",
-        "Streams\/call": "{{displayName}} ξεκίνησε μια κλήση σε πραγματικό χρόνο"
+        "Streams\/call": "{{displayName}} ξεκίνησε μια κλήση σε πραγματικό χρόνο",
+        "changed": {
+            "ChangesIn": "Αλλαγές το {{title}}",
+            "Changed": "άλλαξε",
+            "HereIsWhatChanged": "Να τι άλλαξε:"
+        },
+        "joined": {
+            "Joined": "{{subject}} ενώθηκαν <em>{{title}}<\/em>"
+        }
     },
     "invite": {
         "command": "Καλώ",
@@ -135,7 +143,13 @@
             "scanQRCode": "Σάρωση κωδικού QR",
             "shareLink": "Μοιραστείτε έναν σύνδεσμο",
             "chooseFromRegistered": "Επιλέξτε από εγγεγραμμένους χρήστες",
-            "inviteViaEmailOrSms": "Πρόσκληση μέσω email ή SMS"
+            "inviteViaEmailOrSms": "Πρόσκληση μέσω email ή SMS",
+            "TakeGroupPhoto": "Τραβήξτε μια ομαδική φωτογραφία",
+            "Skip": "Παραλείπω",
+            "byTelegram": "Τηλεγράφημα",
+            "byWhatsapp": "WhatsApp",
+            "addRoles": "Προσθήκη ρόλων",
+            "addPersonalRoles": "Προσθήκη Προσωπικών Σχέσεων"
         },
         "complete": {
             "WelcomeToCommunity": "Καλώς ήρθατε στο {{communityName}}",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "Έχετε προσκληθεί. {{ClickOrTap}} εδώ για να αποδεχτείτε και να εγγραφείτε."
+        },
+        "chat": {
+            "prompt": "Θα προσκαλείτε άτομα σε μια συζήτηση όπου μπορείτε να μείνετε σε επαφή, να μοιράζεστε φωτογραφίες μαζί και πολλά άλλα. Δώστε του ένα όνομα:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "Μη έγκυρο αρχείο",
         "errorNoSource": "Δεν υπάρχει πηγή βίντεο",
         "uploadLimit": "Μέγιστο μέγεθος αρχείου: {{size}}",
-        "errorFileSize": "Λυπούμαστε, αλλά το αρχείο είναι πολύ μεγάλο.<br> Το μέγιστο μέγεθος αρχείου είναι {{size}}"
+        "errorFileSize": "Λυπούμαστε, αλλά το αρχείο είναι πολύ μεγάλο.<br> Το μέγιστο μέγεθος αρχείου είναι {{size}}",
+        "createAnimatedThumbnail": "Δημιουργία κινούμενης μικρογραφίας",
+        "errorNotAvailable": "Λυπούμαστε, αλλά το βίντεο δεν είναι ακόμα διαθέσιμο. Παρακαλώ δοκιμάστε ξανά αργότερα."
     },
     "pdf": {
         "reset": "Επαναφορά",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "Όνομα χρήστη..."
+    },
+    "task": {
+        "errorsTitle": "Παρουσιάστηκαν σφάλματα"
+    },
+    "topic": {
+        "NewTopic": "Νέο θέμα",
+        "UpdateTopic": "Ενημέρωση θέματος",
+        "CreateTopic": "Δημιουργία θέματος",
+        "AreYouSureDeleteTopic": "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το θέμα",
+        "TitlePlaceholder": "Τίτλος θέματος...",
+        "DescribeTopic": "περιγράψτε το θέμα...",
+        "TopicIcon": "Εικόνα θέματος",
+        "UploadIcon": "Μεταφόρτωση εικονίδιο",
+        "Conversation": "Συνομιλία",
+        "Metrics": "Μετρήσεις"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "Δημιουργία κινούμενης μικρογραφίας",
+        "Width": "Πλάτος",
+        "Height": "Υψος",
+        "Start": "Αρχή",
+        "End": "Τέλος",
+        "Delay": "Καθυστέρηση",
+        "Quality": "Ποιότητα",
+        "Size": "Μέγεθος",
+        "OfFrames": "των πλαισίων",
+        "Frame": "Πλαίσιο",
+        "UseThis": "Χρησιμοποίησε αυτό",
+        "ResultGIF": "Αποτέλεσμα GIF",
+        "VideoElementNotFound": "Το στοιχείο βίντεο δεν βρέθηκε"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} Στο πρόσωπό σου",
+        "AcceptIcon": "Αποδοχή της επιλεγμένης περιοχής"
     }
 }

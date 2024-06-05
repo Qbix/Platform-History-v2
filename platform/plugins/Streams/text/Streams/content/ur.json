@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "{{toTitle}} میں نیا {{relationDisplayType}}",
         "Streams\/relatedFrom\/*": "{{relationDisplayType}} کے طور پر {{toTitle}} میں شامل کیا گیا۔",
         "Streams\/mention": "{{{call 'avatar.displayName'}}} ایک تبصرہ میں آپ کا ذکر کیا۔",
-        "Streams\/call": "{{displayName}} نے ریئل ٹائم کال شروع کی۔"
+        "Streams\/call": "{{displayName}} نے ریئل ٹائم کال شروع کی۔",
+        "changed": {
+            "ChangesIn": "{{title}} میں تبدیلیاں",
+            "Changed": "تبدیل",
+            "HereIsWhatChanged": "یہاں کیا تبدیل ہوا ہے:"
+        },
+        "joined": {
+            "Joined": "{{subject}} <em>{{title}}<\/em> شامل ہوئے۔"
+        }
     },
     "invite": {
         "command": "دعوت دیں۔",
@@ -135,7 +143,13 @@
             "scanQRCode": "کیو آر کوڈ اسکین کریں۔",
             "shareLink": "ایک لنک شیئر کریں۔",
             "chooseFromRegistered": "رجسٹرڈ صارفین میں سے انتخاب کریں۔",
-            "inviteViaEmailOrSms": "ای میل یا ایس ایم ایس کے ذریعے مدعو کریں۔"
+            "inviteViaEmailOrSms": "ای میل یا ایس ایم ایس کے ذریعے مدعو کریں۔",
+            "TakeGroupPhoto": "ایک گروپ فوٹو لیں۔",
+            "Skip": "چھوڑ دو",
+            "byTelegram": "ٹیلی گرام",
+            "byWhatsapp": "واٹس ایپ",
+            "addRoles": "کردار شامل کریں۔",
+            "addPersonalRoles": "ذاتی تعلقات شامل کریں۔"
         },
         "complete": {
             "WelcomeToCommunity": "{{communityName}} میں خوش آمدید",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "آپ کو مدعو کیا گیا ہے۔ {{ClickOrTap}} یہاں قبول کرنے اور شامل ہونے کے لیے۔"
+        },
+        "chat": {
+            "prompt": "آپ لوگوں کو ایک گفتگو میں مدعو کر رہے ہوں گے جہاں آپ رابطے میں رہ سکتے ہیں، ایک ساتھ تصاویر کا اشتراک کر سکتے ہیں، اور بہت کچھ۔ اسے ایک نام دیں:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "غلط فائل",
         "errorNoSource": "کوئی ویڈیو سورس نہیں ہے۔",
         "uploadLimit": "زیادہ سے زیادہ فائل کا سائز: {{size}}",
-        "errorFileSize": "معذرت، لیکن فائل بہت بڑی ہے۔<br> فائل کا زیادہ سے زیادہ سائز {{size}} ہے۔"
+        "errorFileSize": "معذرت، لیکن فائل بہت بڑی ہے۔<br> فائل کا زیادہ سے زیادہ سائز {{size}} ہے۔",
+        "createAnimatedThumbnail": "متحرک تھمب نیل بنائیں",
+        "errorNotAvailable": "معذرت، لیکن ویڈیو ابھی تک دستیاب نہیں ہے۔ براہ کرم کچھ دیر بعد کوشش کریں."
     },
     "pdf": {
         "reset": "دوبارہ ترتیب دیں۔",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "ایک صارف کا نام..."
+    },
+    "task": {
+        "errorsTitle": "غلطیاں ہوئیں"
+    },
+    "topic": {
+        "NewTopic": "نیا موضوع",
+        "UpdateTopic": "موضوع کو اپ ڈیٹ کریں۔",
+        "CreateTopic": "موضوع بنائیں",
+        "AreYouSureDeleteTopic": "کیا آپ واقعی اس موضوع کو حذف کرنا چاہتے ہیں۔",
+        "TitlePlaceholder": "عنوان کا عنوان...",
+        "DescribeTopic": "موضوع بیان کریں...",
+        "TopicIcon": "موضوع کی تصویر",
+        "UploadIcon": "اپ لوڈ آئیکن",
+        "Conversation": "بات چیت",
+        "Metrics": "میٹرکس"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "متحرک تھمب نیل بنائیں",
+        "Width": "چوڑائی",
+        "Height": "اونچائی",
+        "Start": "شروع کریں۔",
+        "End": "ختم",
+        "Delay": "تاخیر",
+        "Quality": "معیار",
+        "Size": "سائز",
+        "OfFrames": "فریموں کا",
+        "Frame": "فریم",
+        "UseThis": "اسے استعمال کرو",
+        "ResultGIF": "نتیجہ GIF",
+        "VideoElementNotFound": "ویڈیو عنصر نہیں ملا"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} آپ کے چہرے پر",
+        "AcceptIcon": "منتخب علاقے کو قبول کریں۔"
     }
 }

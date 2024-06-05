@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "አዲስ {{relationDisplayType}} በ {{toTitle}}",
         "Streams\/relatedFrom\/*": "ወደ {{toTitle}} {{relationDisplayType}} ተጨምሯል።",
         "Streams\/mention": "{{{call 'avatar.displayName'}}} በአስተያየት ውስጥ ጠቅሶሃል",
-        "Streams\/call": "{{displayName}} የእውነተኛ ጊዜ ጥሪ ጀምሯል።"
+        "Streams\/call": "{{displayName}} የእውነተኛ ጊዜ ጥሪ ጀምሯል።",
+        "changed": {
+            "ChangesIn": "በ {{title}} ለውጦች",
+            "Changed": "ተለውጧል",
+            "HereIsWhatChanged": "የተለወጠው እነሆ፡-"
+        },
+        "joined": {
+            "Joined": "{{subject}} <em>{{title}}<\/em> ተቀላቅለዋል።"
+        }
     },
     "invite": {
         "command": "ጋብዝ",
@@ -135,7 +143,13 @@
             "scanQRCode": "የQR ኮድን ይቃኙ",
             "shareLink": "አገናኝ አጋራ",
             "chooseFromRegistered": "ከተመዘገቡ ተጠቃሚዎች ይምረጡ",
-            "inviteViaEmailOrSms": "በኢሜል ወይም በኤስኤምኤስ ይጋብዙ"
+            "inviteViaEmailOrSms": "በኢሜል ወይም በኤስኤምኤስ ይጋብዙ",
+            "TakeGroupPhoto": "የቡድን ፎቶ አንሳ",
+            "Skip": "ዝለል",
+            "byTelegram": "ቴሌግራም",
+            "byWhatsapp": "WhatsApp",
+            "addRoles": "ሚናዎችን ያክሉ",
+            "addPersonalRoles": "ግላዊ ግንኙነቶችን ያክሉ"
         },
         "complete": {
             "WelcomeToCommunity": "እንኳን ወደ {{communityName}} በደህና መጡ",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "ተጋብዘዋል። ለመቀበል እና ለመቀላቀል {{ClickOrTap}} እዚህ።"
+        },
+        "chat": {
+            "prompt": "እንደተገናኙ መቆየት፣ ፎቶዎችን በጋራ ማጋራት እና ሌሎችም ወደሚችሉበት ውይይት ሰዎችን እየጋበዙ ነው። ስም ስጠው፡-"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "ልክ ያልሆነ ፋይል",
         "errorNoSource": "ምንም የቪዲዮ ምንጭ የለም።",
         "uploadLimit": "ከፍተኛው የፋይል መጠን {{size}}",
-        "errorFileSize": "ይቅርታ፣ ግን ፋይል በጣም ትልቅ ነው።<br> ከፍተኛው የፋይል መጠን {{size}} ነው።"
+        "errorFileSize": "ይቅርታ፣ ግን ፋይል በጣም ትልቅ ነው።<br> ከፍተኛው የፋይል መጠን {{size}} ነው።",
+        "createAnimatedThumbnail": "የታነመ ድንክዬ ይፍጠሩ",
+        "errorNotAvailable": "ይቅርታ፣ ግን ቪዲዮው እስካሁን የለም። እባክዎ ቆየት ብለው ይሞክሩ."
     },
     "pdf": {
         "reset": "ዳግም አስጀምር",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "የተጠቃሚ ስም..."
+    },
+    "task": {
+        "errorsTitle": "ስህተቶች ተከስተዋል።"
+    },
+    "topic": {
+        "NewTopic": "አዲስ ርዕስ",
+        "UpdateTopic": "ርዕስ አዘምን",
+        "CreateTopic": "ርዕስ ፍጠር",
+        "AreYouSureDeleteTopic": "እርግጠኛ ነዎት ይህን ርዕስ መሰረዝ ይፈልጋሉ",
+        "TitlePlaceholder": "ርዕስ ርዕስ...",
+        "DescribeTopic": "ርዕስ ግለጽ...",
+        "TopicIcon": "የርዕስ ምስል",
+        "UploadIcon": "የመስቀል አዶ",
+        "Conversation": "ውይይት",
+        "Metrics": "መለኪያዎች"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "የታነመ ድንክዬ ይፍጠሩ",
+        "Width": "ስፋት",
+        "Height": "ቁመት",
+        "Start": "ጀምር",
+        "End": "መጨረሻ",
+        "Delay": "መዘግየት",
+        "Quality": "ጥራት",
+        "Size": "መጠን",
+        "OfFrames": "የክፈፎች",
+        "Frame": "ፍሬም",
+        "UseThis": "ይህንን ተጠቀም",
+        "ResultGIF": "ውጤት GIF",
+        "VideoElementNotFound": "የቪዲዮ ክፍል አልተገኘም።"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} በፊትዎ ላይ",
+        "AcceptIcon": "የተመረጠውን አካባቢ ተቀበል"
     }
 }

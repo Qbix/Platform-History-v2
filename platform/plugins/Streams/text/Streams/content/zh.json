@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "新品{{toTitle}}中的{{relationDisplayType}}",
         "Streams\/relatedFrom\/*": "添加到{{toTitle}}为{{relationDisplayType}}",
         "Streams\/mention": "{{{call 'avatar.displayName'}}}在评论中提到了你",
-        "Streams\/call": "{{displayName}}开始实时通话"
+        "Streams\/call": "{{displayName}}开始实时通话",
+        "changed": {
+            "ChangesIn": "{{title}}的变化",
+            "Changed": "已更改",
+            "HereIsWhatChanged": "变化如下："
+        },
+        "joined": {
+            "Joined": "{{subject}}已加入<em>{{title}}<\/em>"
+        }
     },
     "invite": {
         "command": "邀请",
@@ -135,7 +143,13 @@
             "scanQRCode": "扫描二维码",
             "shareLink": "分享链接",
             "chooseFromRegistered": "从注册用户中选择",
-            "inviteViaEmailOrSms": "通过电子邮件或短信邀请"
+            "inviteViaEmailOrSms": "通过电子邮件或短信邀请",
+            "TakeGroupPhoto": "拍摄合影",
+            "Skip": "跳过",
+            "byTelegram": "电报",
+            "byWhatsapp": "WhatsApp",
+            "addRoles": "添加角色",
+            "addPersonalRoles": "添加个人关系"
         },
         "complete": {
             "WelcomeToCommunity": "欢迎来到{{communityName}}",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "你被邀请了。 {{ClickOrTap}}在这里接受并加入。"
+        },
+        "chat": {
+            "prompt": "您将邀请人们加入对话，在对话中您可以保持联系、一起分享照片等等。为其命名："
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "无效文件",
         "errorNoSource": "没有视频源",
         "uploadLimit": "最大文件大小： {{size}}",
-        "errorFileSize": "抱歉，文件太大。<br>最大文件大小为{{size}}"
+        "errorFileSize": "抱歉，文件太大。<br>最大文件大小为{{size}}",
+        "createAnimatedThumbnail": "创建动画缩略图",
+        "errorNotAvailable": "抱歉，视频暂时不可用。请稍后重试。"
     },
     "pdf": {
         "reset": "重置",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "用户名..."
+    },
+    "task": {
+        "errorsTitle": "发生错误"
+    },
+    "topic": {
+        "NewTopic": "新话题",
+        "UpdateTopic": "更新主题",
+        "CreateTopic": "创建主题",
+        "AreYouSureDeleteTopic": "您确定要删除此主题吗",
+        "TitlePlaceholder": "主题标题...",
+        "DescribeTopic": "描述主题...",
+        "TopicIcon": "主题图片",
+        "UploadIcon": "上传图标",
+        "Conversation": "对话",
+        "Metrics": "指标"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "创建动画缩略图",
+        "Width": "宽度",
+        "Height": "高度",
+        "Start": "开始",
+        "End": "结尾",
+        "Delay": "延迟",
+        "Quality": "质量",
+        "Size": "尺寸",
+        "OfFrames": "帧数",
+        "Frame": "框架",
+        "UseThis": "用这个",
+        "ResultGIF": "结果 GIF",
+        "VideoElementNotFound": "未找到视频元素"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}}在你的脸上",
+        "AcceptIcon": "接受选定区域"
     }
 }

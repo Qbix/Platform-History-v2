@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "{{relationDisplayType}} e re në {{toTitle}}",
         "Streams\/relatedFrom\/*": "Shtuar në {{toTitle}} si {{relationDisplayType}}",
         "Streams\/mention": "{{{call 'avatar.displayName'}}} ju përmendi në një koment",
-        "Streams\/call": "{{displayName}} filloi një telefonatë në kohë reale"
+        "Streams\/call": "{{displayName}} filloi një telefonatë në kohë reale",
+        "changed": {
+            "ChangesIn": "Ndryshimet në {{title}}",
+            "Changed": "ndryshuar",
+            "HereIsWhatChanged": "Ja çfarë ndryshoi:"
+        },
+        "joined": {
+            "Joined": "{{subject}} u bashkuan <em>{{title}}<\/em>"
+        }
     },
     "invite": {
         "command": "Fto",
@@ -135,7 +143,13 @@
             "scanQRCode": "Skanoni kodin QR",
             "shareLink": "Ndani një lidhje",
             "chooseFromRegistered": "Zgjidhni nga përdoruesit e regjistruar",
-            "inviteViaEmailOrSms": "Fto me email ose SMS"
+            "inviteViaEmailOrSms": "Fto me email ose SMS",
+            "TakeGroupPhoto": "Bëni një foto në grup",
+            "Skip": "Kapërce",
+            "byTelegram": "Telegrami",
+            "byWhatsapp": "WhatsApp",
+            "addRoles": "Shto role",
+            "addPersonalRoles": "Shtoni Marrëdhëniet Personale"
         },
         "complete": {
             "WelcomeToCommunity": "Mirë se vini në {{communityName}}",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "Ju jeni ftuar. {{ClickOrTap}} këtu për të pranuar dhe për t&#39;u bashkuar."
+        },
+        "chat": {
+            "prompt": "Do të ftoni njerëz në një bisedë ku mund të qëndroni në kontakt, të ndani foto së bashku dhe më shumë. Jepini një emër:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "Skedar i pavlefshëm",
         "errorNoSource": "Nuk ka burim video",
         "uploadLimit": "Madhësia maksimale e skedarit: {{size}}",
-        "errorFileSize": "Na vjen keq, por skedari është shumë i madh.<br> Madhësia maksimale e skedarit është {{size}}"
+        "errorFileSize": "Na vjen keq, por skedari është shumë i madh.<br> Madhësia maksimale e skedarit është {{size}}",
+        "createAnimatedThumbnail": "Krijo miniaturë të animuar",
+        "errorNotAvailable": "Na vjen keq, por video nuk është ende e disponueshme. Ju lutemi provoni përsëri më vonë."
     },
     "pdf": {
         "reset": "Rivendos",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "Emri i një përdoruesi..."
+    },
+    "task": {
+        "errorsTitle": "Ndodhën gabime"
+    },
+    "topic": {
+        "NewTopic": "Temë e re",
+        "UpdateTopic": "Përditëso temën",
+        "CreateTopic": "Krijo Temë",
+        "AreYouSureDeleteTopic": "Jeni të sigurt që dëshironi ta fshini këtë temë",
+        "TitlePlaceholder": "titulli i temës...",
+        "DescribeTopic": "përshkruani temën ...",
+        "TopicIcon": "Foto e temës",
+        "UploadIcon": "Ikona e ngarkimit",
+        "Conversation": "bashkëbisedim",
+        "Metrics": "Metrikë"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "Krijo miniaturë të animuar",
+        "Width": "Gjerësia",
+        "Height": "Lartësia",
+        "Start": "Filloni",
+        "End": "fund",
+        "Delay": "Vonesa",
+        "Quality": "Cilësia",
+        "Size": "Madhësia",
+        "OfFrames": "të Kornizave",
+        "Frame": "Kornizë",
+        "UseThis": "Përdor këtë",
+        "ResultGIF": "Rezultati GIF",
+        "VideoElementNotFound": "Elementi i videos nuk u gjet"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} Në fytyrën tuaj",
+        "AcceptIcon": "Prano zonën e zgjedhur"
     }
 }

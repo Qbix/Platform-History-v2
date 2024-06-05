@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "{{toTitle}} ರಲ್ಲಿ ಹೊಸ {{relationDisplayType}}",
         "Streams\/relatedFrom\/*": "{{toTitle}} ಕ್ಕೆ {{relationDisplayType}} ಎಂದು ಸೇರಿಸಲಾಗಿದೆ",
         "Streams\/mention": "{{{call 'avatar.displayName'}}} ಕಾಮೆಂಟ್‌ನಲ್ಲಿ ನಿಮ್ಮನ್ನು ಉಲ್ಲೇಖಿಸಿದ್ದಾರೆ",
-        "Streams\/call": "{{displayName}} ನೈಜ-ಸಮಯದ ಕರೆಯನ್ನು ಪ್ರಾರಂಭಿಸಿದೆ"
+        "Streams\/call": "{{displayName}} ನೈಜ-ಸಮಯದ ಕರೆಯನ್ನು ಪ್ರಾರಂಭಿಸಿದೆ",
+        "changed": {
+            "ChangesIn": "{{title}} ರಲ್ಲಿ ಬದಲಾವಣೆಗಳು",
+            "Changed": "ಬದಲಾಗಿದೆ",
+            "HereIsWhatChanged": "ಬದಲಾದದ್ದು ಇಲ್ಲಿದೆ:"
+        },
+        "joined": {
+            "Joined": "{{subject}} <em>{{title}}<\/em> ಸೇರಿದೆ"
+        }
     },
     "invite": {
         "command": "ಆಹ್ವಾನಿಸಿ",
@@ -135,7 +143,13 @@
             "scanQRCode": "QR ಕೋಡ್ ಅನ್ನು ಸ್ಕ್ಯಾನ್ ಮಾಡಿ",
             "shareLink": "ಲಿಂಕ್ ಹಂಚಿಕೊಳ್ಳಿ",
             "chooseFromRegistered": "ನೋಂದಾಯಿತ ಬಳಕೆದಾರರಿಂದ ಆಯ್ಕೆಮಾಡಿ",
-            "inviteViaEmailOrSms": "ಇಮೇಲ್ ಅಥವಾ SMS ಮೂಲಕ ಆಹ್ವಾನಿಸಿ"
+            "inviteViaEmailOrSms": "ಇಮೇಲ್ ಅಥವಾ SMS ಮೂಲಕ ಆಹ್ವಾನಿಸಿ",
+            "TakeGroupPhoto": "ಗ್ರೂಪ್ ಫೋಟೋ ತೆಗೆಯಿರಿ",
+            "Skip": "ಬಿಟ್ಟುಬಿಡಿ",
+            "byTelegram": "ಟೆಲಿಗ್ರಾಮ್",
+            "byWhatsapp": "WhatsApp",
+            "addRoles": "ಪಾತ್ರಗಳನ್ನು ಸೇರಿಸಿ",
+            "addPersonalRoles": "ವೈಯಕ್ತಿಕ ಸಂಬಂಧಗಳನ್ನು ಸೇರಿಸಿ"
         },
         "complete": {
             "WelcomeToCommunity": "{{communityName}} ಗೆ ಸುಸ್ವಾಗತ",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "ನಿಮ್ಮನ್ನು ಆಹ್ವಾನಿಸಲಾಗಿದೆ. {{ClickOrTap}} ಸ್ವೀಕರಿಸಲು ಮತ್ತು ಸೇರಲು ಇಲ್ಲಿ."
+        },
+        "chat": {
+            "prompt": "ನೀವು ಸಂಪರ್ಕದಲ್ಲಿರಲು, ಫೋಟೋಗಳನ್ನು ಒಟ್ಟಿಗೆ ಹಂಚಿಕೊಳ್ಳಲು ಮತ್ತು ಹೆಚ್ಚಿನದನ್ನು ಮಾಡುವ ಸಂಭಾಷಣೆಗೆ ನೀವು ಜನರನ್ನು ಆಹ್ವಾನಿಸುತ್ತೀರಿ. ಅದಕ್ಕೊಂದು ಹೆಸರು ಕೊಡಿ:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "ಅಮಾನ್ಯ ಫೈಲ್",
         "errorNoSource": "ಯಾವುದೇ ವೀಡಿಯೊ ಮೂಲವಿಲ್ಲ",
         "uploadLimit": "ಗರಿಷ್ಠ ಫೈಲ್ ಗಾತ್ರ: {{size}}",
-        "errorFileSize": "ಕ್ಷಮಿಸಿ, ಆದರೆ ಫೈಲ್ ತುಂಬಾ ದೊಡ್ಡದಾಗಿದೆ.<br> ಗರಿಷ್ಠ ಫೈಲ್ ಗಾತ್ರ {{size}}"
+        "errorFileSize": "ಕ್ಷಮಿಸಿ, ಆದರೆ ಫೈಲ್ ತುಂಬಾ ದೊಡ್ಡದಾಗಿದೆ.<br> ಗರಿಷ್ಠ ಫೈಲ್ ಗಾತ್ರ {{size}}",
+        "createAnimatedThumbnail": "ಅನಿಮೇಟೆಡ್ ಥಂಬ್‌ನೇಲ್ ರಚಿಸಿ",
+        "errorNotAvailable": "ಕ್ಷಮಿಸಿ, ಆದರೆ ವೀಡಿಯೊ ಇನ್ನೂ ಲಭ್ಯವಿಲ್ಲ. ದಯವಿಟ್ಟು ನಂತರ ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ."
     },
     "pdf": {
         "reset": "ಮರುಹೊಂದಿಸಿ",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "ಬಳಕೆದಾರರ ಹೆಸರು..."
+    },
+    "task": {
+        "errorsTitle": "ದೋಷಗಳು ಸಂಭವಿಸಿವೆ"
+    },
+    "topic": {
+        "NewTopic": "ಹೊಸ ವಿಷಯ",
+        "UpdateTopic": "ವಿಷಯವನ್ನು ನವೀಕರಿಸಿ",
+        "CreateTopic": "ವಿಷಯವನ್ನು ರಚಿಸಿ",
+        "AreYouSureDeleteTopic": "ಈ ವಿಷಯವನ್ನು ಅಳಿಸಲು ನೀವು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ",
+        "TitlePlaceholder": "ವಿಷಯದ ಶೀರ್ಷಿಕೆ...",
+        "DescribeTopic": "ವಿಷಯವನ್ನು ವಿವರಿಸಿ...",
+        "TopicIcon": "ವಿಷಯದ ಚಿತ್ರ",
+        "UploadIcon": "ಅಪ್‌ಲೋಡ್ ಐಕಾನ್",
+        "Conversation": "ಸಂಭಾಷಣೆ",
+        "Metrics": "ಮೆಟ್ರಿಕ್ಸ್"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "ಅನಿಮೇಟೆಡ್ ಥಂಬ್‌ನೇಲ್ ರಚಿಸಿ",
+        "Width": "ಅಗಲ",
+        "Height": "ಎತ್ತರ",
+        "Start": "ಪ್ರಾರಂಭಿಸಿ",
+        "End": "ಅಂತ್ಯ",
+        "Delay": "ವಿಳಂಬ",
+        "Quality": "ಗುಣಮಟ್ಟ",
+        "Size": "ಗಾತ್ರ",
+        "OfFrames": "ಚೌಕಟ್ಟುಗಳ",
+        "Frame": "ಫ್ರೇಮ್",
+        "UseThis": "ಇದನ್ನು ಬಳಸು",
+        "ResultGIF": "ಫಲಿತಾಂಶ GIF",
+        "VideoElementNotFound": "ವೀಡಿಯೊ ಅಂಶ ಕಂಡುಬಂದಿಲ್ಲ"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} ನಿಮ್ಮ ಮುಖದ ಮೇಲೆ",
+        "AcceptIcon": "ಆಯ್ದ ಪ್ರದೇಶವನ್ನು ಸ್ವೀಕರಿಸಿ"
     }
 }

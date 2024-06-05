@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "Novo {{relationDisplayType}} v {{toTitle}}",
         "Streams\/relatedFrom\/*": "Dodano k {{toTitle}} kot {{relationDisplayType}}",
         "Streams\/mention": "{{{call 'avatar.displayName'}}} vas je omenil v komentarju",
-        "Streams\/call": "{{displayName}} je začel klic v realnem času"
+        "Streams\/call": "{{displayName}} je začel klic v realnem času",
+        "changed": {
+            "ChangesIn": "Spremembe leta {{title}}",
+            "Changed": "spremenjeno",
+            "HereIsWhatChanged": "Tukaj se je spremenilo:"
+        },
+        "joined": {
+            "Joined": "{{subject}} se je pridružilo <em>{{title}}<\/em>"
+        }
     },
     "invite": {
         "command": "Povabi",
@@ -135,7 +143,13 @@
             "scanQRCode": "Skenirajte kodo QR",
             "shareLink": "Delite povezavo",
             "chooseFromRegistered": "Izbirajte med registriranimi uporabniki",
-            "inviteViaEmailOrSms": "Povabite preko elektronske pošte ali SMS-a"
+            "inviteViaEmailOrSms": "Povabite preko elektronske pošte ali SMS-a",
+            "TakeGroupPhoto": "Posnemite skupinsko fotografijo",
+            "Skip": "Preskoči",
+            "byTelegram": "Telegram",
+            "byWhatsapp": "WhatsApp",
+            "addRoles": "Dodajte vloge",
+            "addPersonalRoles": "Dodajte osebne odnose"
         },
         "complete": {
             "WelcomeToCommunity": "Dobrodošli v {{communityName}}",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "Povabljeni ste bili. {{ClickOrTap}} tukaj, da sprejmete in se pridružite."
+        },
+        "chat": {
+            "prompt": "Ljudi boste povabili k pogovoru, kjer boste lahko ostali v stiku, delili skupne fotografije in drugo. Daj mu ime:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "Neveljavna datoteka",
         "errorNoSource": "Ni video vira",
         "uploadLimit": "Največja velikost datoteke: {{size}}",
-        "errorFileSize": "Žal je datoteka prevelika.<br> Največja velikost datoteke je {{size}}"
+        "errorFileSize": "Žal je datoteka prevelika.<br> Največja velikost datoteke je {{size}}",
+        "createAnimatedThumbnail": "Ustvarite animirano sličico",
+        "errorNotAvailable": "Žal video še ni na voljo. Prosim poskusite kasneje."
     },
     "pdf": {
         "reset": "Ponastaviti",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "Ime uporabnika..."
+    },
+    "task": {
+        "errorsTitle": "Prišlo je do napak"
+    },
+    "topic": {
+        "NewTopic": "Nova tema",
+        "UpdateTopic": "Posodobi temo",
+        "CreateTopic": "Ustvari temo",
+        "AreYouSureDeleteTopic": "Ali ste prepričani, da želite izbrisati to temo?",
+        "TitlePlaceholder": "naslov teme...",
+        "DescribeTopic": "opiši temo...",
+        "TopicIcon": "Slika teme",
+        "UploadIcon": "Ikona za nalaganje",
+        "Conversation": "Pogovor",
+        "Metrics": "Metrike"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "Ustvarite animirano sličico",
+        "Width": "Premer",
+        "Height": "Višina",
+        "Start": "Začetek",
+        "End": "Konec",
+        "Delay": "Zamuda",
+        "Quality": "Kakovost",
+        "Size": "Velikost",
+        "OfFrames": "okvirjev",
+        "Frame": "Okvir",
+        "UseThis": "Uporabi to",
+        "ResultGIF": "Rezultat GIF",
+        "VideoElementNotFound": "Video elementa ni bilo mogoče najti"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} Na tvojem obrazu",
+        "AcceptIcon": "Sprejmi izbrano območje"
     }
 }

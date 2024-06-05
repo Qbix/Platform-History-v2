@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "새로운 {{relationDisplayType}} in {{toTitle}}",
         "Streams\/relatedFrom\/*": "{{toTitle}} 에 {{relationDisplayType}} 으로 추가",
         "Streams\/mention": "{{{call 'avatar.displayName'}}} 댓글에서 당신을 언급했습니다",
-        "Streams\/call": "{{displayName}} 실시간 통화 시작"
+        "Streams\/call": "{{displayName}} 실시간 통화 시작",
+        "changed": {
+            "ChangesIn": "{{title}} 의 변화",
+            "Changed": "변경됨",
+            "HereIsWhatChanged": "변경된 내용은 다음과 같습니다."
+        },
+        "joined": {
+            "Joined": "{{subject}} <em>{{title}}<\/em> 합류했습니다."
+        }
     },
     "invite": {
         "command": "초대하다",
@@ -135,7 +143,13 @@
             "scanQRCode": "QR 코드 스캔",
             "shareLink": "링크 공유",
             "chooseFromRegistered": "등록된 사용자 중에서 선택",
-            "inviteViaEmailOrSms": "이메일 또는 SMS를 통해 초대"
+            "inviteViaEmailOrSms": "이메일 또는 SMS를 통해 초대",
+            "TakeGroupPhoto": "단체 사진 찍기",
+            "Skip": "건너뛰다",
+            "byTelegram": "전보",
+            "byWhatsapp": "왓츠앱",
+            "addRoles": "역할 추가",
+            "addPersonalRoles": "개인적인 관계 추가"
         },
         "complete": {
             "WelcomeToCommunity": "{{communityName}} 에 오신 것을 환영합니다",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "당신은 초대되었습니다. {{ClickOrTap}} 여기에서 수락하고 가입하세요."
+        },
+        "chat": {
+            "prompt": "연락을 주고받고 사진을 공유하는 등의 작업을 할 수 있는 대화에 사람들을 초대하게 됩니다. 이름을 지어주세요:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "유효하지 않은 파일",
         "errorNoSource": "비디오 소스 없음",
         "uploadLimit": "최대 파일 크기: {{size}}",
-        "errorFileSize": "죄송합니다. 파일이 너무 큽니다.<br> 최대 파일 크기는 {{size}} 입니다."
+        "errorFileSize": "죄송합니다. 파일이 너무 큽니다.<br> 최대 파일 크기는 {{size}} 입니다.",
+        "createAnimatedThumbnail": "애니메이션 썸네일 만들기",
+        "errorNotAvailable": "죄송합니다. 아직 동영상을 볼 수 없습니다. 나중에 다시 시도 해주십시오."
     },
     "pdf": {
         "reset": "초기화",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "사용자 이름..."
+    },
+    "task": {
+        "errorsTitle": "오류가 발생했습니다."
+    },
+    "topic": {
+        "NewTopic": "새로운 주제",
+        "UpdateTopic": "주제 업데이트",
+        "CreateTopic": "주제 만들기",
+        "AreYouSureDeleteTopic": "이 주제를 삭제하시겠습니까?",
+        "TitlePlaceholder": "주제 제목...",
+        "DescribeTopic": "주제 설명...",
+        "TopicIcon": "주제 그림",
+        "UploadIcon": "업로드 아이콘",
+        "Conversation": "대화",
+        "Metrics": "측정항목"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "애니메이션 썸네일 만들기",
+        "Width": "너비",
+        "Height": "키",
+        "Start": "시작",
+        "End": "끝",
+        "Delay": "지연",
+        "Quality": "품질",
+        "Size": "크기",
+        "OfFrames": "프레임 수",
+        "Frame": "액자",
+        "UseThis": "이것을 사용하십시오",
+        "ResultGIF": "결과 GIF",
+        "VideoElementNotFound": "비디오 요소를 찾을 수 없습니다"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} 온 유어 페이스",
+        "AcceptIcon": "선택한 영역 수락"
     }
 }

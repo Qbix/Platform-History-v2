@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "ใหม่ {{relationDisplayType}} ใน {{toTitle}}",
         "Streams\/relatedFrom\/*": "เพิ่มเป็น {{toTitle}} เป็น {{relationDisplayType}}",
         "Streams\/mention": "{{{call 'avatar.displayName'}}} พูดถึงคุณในความคิดเห็น",
-        "Streams\/call": "{{displayName}} เริ่มการโทรตามเวลาจริง"
+        "Streams\/call": "{{displayName}} เริ่มการโทรตามเวลาจริง",
+        "changed": {
+            "ChangesIn": "การเปลี่ยนแปลงใน {{title}}",
+            "Changed": "เปลี่ยน",
+            "HereIsWhatChanged": "นี่คือสิ่งที่เปลี่ยนแปลง:"
+        },
+        "joined": {
+            "Joined": "{{subject}} เข้าร่วม <em>{{title}}<\/em>"
+        }
     },
     "invite": {
         "command": "เชิญ",
@@ -135,7 +143,13 @@
             "scanQRCode": "สแกนคิวอาร์โค้ด",
             "shareLink": "แบ่งปันลิงค์",
             "chooseFromRegistered": "เลือกจากผู้ใช้ที่ลงทะเบียน",
-            "inviteViaEmailOrSms": "เชิญทางอีเมลหรือ SMS"
+            "inviteViaEmailOrSms": "เชิญทางอีเมลหรือ SMS",
+            "TakeGroupPhoto": "ถ่ายรูปหมู่",
+            "Skip": "ข้าม",
+            "byTelegram": "โทรเลข",
+            "byWhatsapp": "วอทส์แอพพ์",
+            "addRoles": "เพิ่มบทบาท",
+            "addPersonalRoles": "เพิ่มความสัมพันธ์ส่วนตัว"
         },
         "complete": {
             "WelcomeToCommunity": "ยินดีต้อนรับสู่ {{communityName}}",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "คุณได้รับเชิญ {{ClickOrTap}} ที่นี่เพื่อยอมรับและเข้าร่วม"
+        },
+        "chat": {
+            "prompt": "คุณจะเชิญผู้คนเข้าร่วมการสนทนาซึ่งคุณสามารถติดต่อ แบ่งปันรูปภาพร่วมกัน และอื่นๆ อีกมากมาย ตั้งชื่อให้:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "ไฟล์ไม่ถูกต้อง",
         "errorNoSource": "ไม่มีแหล่งที่มาของวิดีโอ",
         "uploadLimit": "ขนาดไฟล์สูงสุด: {{size}}",
-        "errorFileSize": "ขออภัย ไฟล์ใหญ่เกินไป<br> ขนาดไฟล์สูงสุดคือ {{size}}"
+        "errorFileSize": "ขออภัย ไฟล์ใหญ่เกินไป<br> ขนาดไฟล์สูงสุดคือ {{size}}",
+        "createAnimatedThumbnail": "สร้างภาพขนาดย่อแบบเคลื่อนไหว",
+        "errorNotAvailable": "ขออภัย วิดีโอยังไม่พร้อมใช้งาน กรุณาลองใหม่อีกครั้งในภายหลัง."
     },
     "pdf": {
         "reset": "รีเซ็ต",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "ชื่อผู้ใช้..."
+    },
+    "task": {
+        "errorsTitle": "เกิดข้อผิดพลาด"
+    },
+    "topic": {
+        "NewTopic": "หัวข้อใหม่",
+        "UpdateTopic": "อัปเดตหัวข้อ",
+        "CreateTopic": "สร้างหัวข้อ",
+        "AreYouSureDeleteTopic": "คุณแน่ใจหรือไม่ว่าต้องการลบหัวข้อนี้",
+        "TitlePlaceholder": "ชื่อหัวข้อ...",
+        "DescribeTopic": "อธิบายหัวข้อ...",
+        "TopicIcon": "ภาพหัวข้อ",
+        "UploadIcon": "อัพโหลดไอคอน",
+        "Conversation": "การสนทนา",
+        "Metrics": "เมตริก"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "สร้างภาพขนาดย่อแบบเคลื่อนไหว",
+        "Width": "ความกว้าง",
+        "Height": "ความสูง",
+        "Start": "เริ่ม",
+        "End": "จบ",
+        "Delay": "ล่าช้า",
+        "Quality": "คุณภาพ",
+        "Size": "ขนาด",
+        "OfFrames": "ของเฟรม",
+        "Frame": "กรอบ",
+        "UseThis": "ใช้สิ่งนี้",
+        "ResultGIF": "ผลลัพธ์ GIF",
+        "VideoElementNotFound": "ไม่พบองค์ประกอบวิดีโอ"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} บนใบหน้าของคุณ",
+        "AcceptIcon": "ยอมรับพื้นที่ที่เลือก"
     }
 }

@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "{{relationDisplayType}} nua i {{toTitle}}",
         "Streams\/relatedFrom\/*": "Curtha le {{toTitle}} mar {{relationDisplayType}}",
         "Streams\/mention": "Luaigh {{{call 'avatar.displayName'}}} tú i dtrácht",
-        "Streams\/call": "Chuir {{displayName}} tús le glao fíor-ama"
+        "Streams\/call": "Chuir {{displayName}} tús le glao fíor-ama",
+        "changed": {
+            "ChangesIn": "Athruithe i {{title}}",
+            "Changed": "athraigh",
+            "HereIsWhatChanged": "Seo an méid a d’athraigh:"
+        },
+        "joined": {
+            "Joined": "Chuaigh {{subject}} isteach <em>{{title}}<\/em>"
+        }
     },
     "invite": {
         "command": "cuireadh",
@@ -135,7 +143,13 @@
             "scanQRCode": "Scan an Cód QR",
             "shareLink": "Roinn nasc",
             "chooseFromRegistered": "Roghnaigh ó úsáideoirí cláraithe",
-            "inviteViaEmailOrSms": "Tabhair cuireadh trí ríomhphost nó SMS"
+            "inviteViaEmailOrSms": "Tabhair cuireadh trí ríomhphost nó SMS",
+            "TakeGroupPhoto": "Tóg Grianghraf Grúpa",
+            "Skip": "Scipeáil",
+            "byTelegram": "Teileagram",
+            "byWhatsapp": "WhatsApp",
+            "addRoles": "Cuir Róil leis",
+            "addPersonalRoles": "Cuir Caidrimh Phearsanta leis"
         },
         "complete": {
             "WelcomeToCommunity": "Fáilte go dtí {{communityName}}",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "Tugadh cuireadh duit. {{ClickOrTap}} anseo chun glacadh leis agus páirt a ghlacadh."
+        },
+        "chat": {
+            "prompt": "Beidh tú ag tabhairt cuireadh do dhaoine chuig comhrá inar féidir leat fanacht i dteagmháil, grianghraif a roinnt le chéile agus tuilleadh. Tabhair ainm dó:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "Comhad Neamhbhailí",
         "errorNoSource": "Níl aon fhoinse físeáin",
         "uploadLimit": "Uasmhéid comhaid: {{size}}",
-        "errorFileSize": "Ár leithscéal, ach tá an comhad rómhór.<br> Is é {{size}} méid comhaid uasta"
+        "errorFileSize": "Ár leithscéal, ach tá an comhad rómhór.<br> Is é {{size}} méid comhaid uasta",
+        "createAnimatedThumbnail": "Cruthaigh mionsamhail beoite",
+        "errorNotAvailable": "Ár leithscéal, níl an físeán ar fáil go fóill. Bain triail eile as ar ball."
     },
     "pdf": {
         "reset": "Athshocraigh",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "Ainm úsáideora..."
+    },
+    "task": {
+        "errorsTitle": "Tharla earráidí"
+    },
+    "topic": {
+        "NewTopic": "Ábhar Nua",
+        "UpdateTopic": "Ábhar Nuashonraithe",
+        "CreateTopic": "Cruthaigh Topaic",
+        "AreYouSureDeleteTopic": "An bhfuil tú cinnte gur mhaith leat an t-ábhar seo a scriosadh",
+        "TitlePlaceholder": "teideal an ábhair...",
+        "DescribeTopic": "déan cur síos ar an topaic...",
+        "TopicIcon": "Pictiúr topaic",
+        "UploadIcon": "Uaslódáil Icon",
+        "Conversation": "Comhrá",
+        "Metrics": "Méadracht"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "Cruthaigh mionsamhail beoite",
+        "Width": "Leithead",
+        "Height": "Airde",
+        "Start": "Tosaigh",
+        "End": "Deireadh",
+        "Delay": "Moill",
+        "Quality": "Cáilíocht",
+        "Size": "Méid",
+        "OfFrames": "de Frámaí",
+        "Frame": "Fráma",
+        "UseThis": "Bain úsáid as seo",
+        "ResultGIF": "GIF torthaí",
+        "VideoElementNotFound": "Níor aimsíodh eilimint físe"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} Ar Do Aghaidh",
+        "AcceptIcon": "Glac leis an limistéar roghnaithe"
     }
 }

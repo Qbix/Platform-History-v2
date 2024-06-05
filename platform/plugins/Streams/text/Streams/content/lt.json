@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "Nauji {{relationDisplayType}} iš {{toTitle}}",
         "Streams\/relatedFrom\/*": "Pridėta prie {{toTitle}} kaip {{relationDisplayType}}",
         "Streams\/mention": "{{{call 'avatar.displayName'}}} paminėjo jus komentare",
-        "Streams\/call": "{{displayName}} pradėjo skambutį realiuoju laiku"
+        "Streams\/call": "{{displayName}} pradėjo skambutį realiuoju laiku",
+        "changed": {
+            "ChangesIn": "Pakeitimai {{title}}",
+            "Changed": "pasikeitė",
+            "HereIsWhatChanged": "Štai kas pasikeitė:"
+        },
+        "joined": {
+            "Joined": "{{subject}} prisijungė prie <em>{{title}}<\/em>"
+        }
     },
     "invite": {
         "command": "Pakviesti",
@@ -135,7 +143,13 @@
             "scanQRCode": "Nuskaityti QR kodą",
             "shareLink": "Bendrinkite nuorodą",
             "chooseFromRegistered": "Pasirinkite iš registruotų vartotojų",
-            "inviteViaEmailOrSms": "Pakviesti el. paštu arba SMS"
+            "inviteViaEmailOrSms": "Pakviesti el. paštu arba SMS",
+            "TakeGroupPhoto": "Padarykite grupinę nuotrauką",
+            "Skip": "Praleisti",
+            "byTelegram": "Telegrama",
+            "byWhatsapp": "WhatsApp",
+            "addRoles": "Pridėti vaidmenis",
+            "addPersonalRoles": "Pridėti asmeninius santykius"
         },
         "complete": {
             "WelcomeToCommunity": "Sveiki atvykę į {{communityName}}",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "Jus pakvietė. {{ClickOrTap}} čia priimti ir prisijungti."
+        },
+        "chat": {
+            "prompt": "Pakviesite žmones į pokalbį, kuriame galėsite palaikyti ryšį, dalytis nuotraukomis kartu ir dar daugiau. Suteikite jam pavadinimą:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "Neteisingas failas",
         "errorNoSource": "Nėra vaizdo šaltinio",
         "uploadLimit": "Maksimalus failo dydis: {{size}}",
-        "errorFileSize": "Atsiprašome, bet failas per didelis.<br> Maksimalus failo dydis yra {{size}}"
+        "errorFileSize": "Atsiprašome, bet failas per didelis.<br> Maksimalus failo dydis yra {{size}}",
+        "createAnimatedThumbnail": "Sukurkite animuotą miniatiūrą",
+        "errorNotAvailable": "Atsiprašome, bet vaizdo įrašas dar nepasiekiamas. Pabandykite dar kartą vėliau."
     },
     "pdf": {
         "reset": "Nustatyti iš naujo",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "Vartotojo vardas..."
+    },
+    "task": {
+        "errorsTitle": "Įvyko klaidų"
+    },
+    "topic": {
+        "NewTopic": "Nauja tema",
+        "UpdateTopic": "Atnaujinti temą",
+        "CreateTopic": "Sukurti temą",
+        "AreYouSureDeleteTopic": "Ar tikrai norite ištrinti šią temą?",
+        "TitlePlaceholder": "temos pavadinimas...",
+        "DescribeTopic": "aprašykite temą...",
+        "TopicIcon": "Temos paveikslėlis",
+        "UploadIcon": "Įkėlimo piktograma",
+        "Conversation": "Pokalbis",
+        "Metrics": "Metrika"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "Sukurkite animuotą miniatiūrą",
+        "Width": "Plotis",
+        "Height": "Aukštis",
+        "Start": "Pradėti",
+        "End": "Galas",
+        "Delay": "Delsimas",
+        "Quality": "Kokybė",
+        "Size": "Dydis",
+        "OfFrames": "rėmelių",
+        "Frame": "Rėmas",
+        "UseThis": "Naudok tai",
+        "ResultGIF": "Rezultatas GIF",
+        "VideoElementNotFound": "Vaizdo įrašo elementas nerastas"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} ant tavo veido",
+        "AcceptIcon": "Priimti pasirinktą sritį"
     }
 }

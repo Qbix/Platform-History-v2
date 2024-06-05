@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "{{relationDisplayType}} newydd mewn {{toTitle}}",
         "Streams\/relatedFrom\/*": "Wedi&#39;i ychwanegu at {{toTitle}} fel {{relationDisplayType}}",
         "Streams\/mention": "Soniodd {{{call 'avatar.displayName'}}} amdanoch chi mewn sylw",
-        "Streams\/call": "Dechreuodd {{displayName}} alwad amser real"
+        "Streams\/call": "Dechreuodd {{displayName}} alwad amser real",
+        "changed": {
+            "ChangesIn": "Newidiadau yn {{title}}",
+            "Changed": "wedi newid",
+            "HereIsWhatChanged": "Dyma beth newidiodd:"
+        },
+        "joined": {
+            "Joined": "Ymunodd {{subject}} â <em>{{title}}<\/em>"
+        }
     },
     "invite": {
         "command": "Gwahodd",
@@ -135,7 +143,13 @@
             "scanQRCode": "Sganiwch y Cod QR",
             "shareLink": "Rhannwch ddolen",
             "chooseFromRegistered": "Dewiswch o blith defnyddwyr cofrestredig",
-            "inviteViaEmailOrSms": "Gwahodd trwy e-bost neu SMS"
+            "inviteViaEmailOrSms": "Gwahodd trwy e-bost neu SMS",
+            "TakeGroupPhoto": "Tynnwch lun grŵp",
+            "Skip": "Sgipio",
+            "byTelegram": "Telegram",
+            "byWhatsapp": "WhatsApp",
+            "addRoles": "Ychwanegu Rolau",
+            "addPersonalRoles": "Ychwanegu Perthnasoedd Personol"
         },
         "complete": {
             "WelcomeToCommunity": "Croeso i {{communityName}}",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "Rydych chi wedi cael gwahoddiad. {{ClickOrTap}} yma i dderbyn ac ymuno."
+        },
+        "chat": {
+            "prompt": "Byddwch yn gwahodd pobl i sgwrs lle gallwch gadw mewn cysylltiad, rhannu lluniau gyda&#39;ch gilydd, a mwy. Rhowch enw iddo:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "Ffeil Annilys",
         "errorNoSource": "Dim ffynhonnell fideo",
         "uploadLimit": "Maint ffeil mwyaf: {{size}}",
-        "errorFileSize": "Mae&#39;n ddrwg gennym, ond mae&#39;r ffeil yn rhy fawr.<br> Maint ffeil mwyaf yw {{size}}"
+        "errorFileSize": "Mae&#39;n ddrwg gennym, ond mae&#39;r ffeil yn rhy fawr.<br> Maint ffeil mwyaf yw {{size}}",
+        "createAnimatedThumbnail": "Creu bawd animeiddiedig",
+        "errorNotAvailable": "Mae&#39;n ddrwg gennym, ond nid yw fideo ar gael eto. Rho gynnig Arni eto&#39;n hwyrach."
     },
     "pdf": {
         "reset": "Ail gychwyn",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "Enw defnyddiwr..."
+    },
+    "task": {
+        "errorsTitle": "Digwyddodd gwallau"
+    },
+    "topic": {
+        "NewTopic": "Pwnc Newydd",
+        "UpdateTopic": "Pwnc Diweddaru",
+        "CreateTopic": "Creu Pwnc",
+        "AreYouSureDeleteTopic": "Ydych chi&#39;n siŵr eich bod am ddileu&#39;r pwnc hwn",
+        "TitlePlaceholder": "teitl y pwnc...",
+        "DescribeTopic": "disgrifiwch y pwnc...",
+        "TopicIcon": "Llun pwnc",
+        "UploadIcon": "Uwchlwytho Eicon",
+        "Conversation": "Sgwrs",
+        "Metrics": "Metrigau"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "Creu bawd animeiddiedig",
+        "Width": "Lled",
+        "Height": "Uchder",
+        "Start": "Dechrau",
+        "End": "Diwedd",
+        "Delay": "Oedi",
+        "Quality": "Ansawdd",
+        "Size": "Maint",
+        "OfFrames": "o Fframiau",
+        "Frame": "Ffrâm",
+        "UseThis": "Defnyddiwch hwn",
+        "ResultGIF": "Canlyniad GIF",
+        "VideoElementNotFound": "Elfen fideo heb ei chanfod"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} Ar Dy Wyneb",
+        "AcceptIcon": "Derbyn yr ardal a ddewiswyd"
     }
 }

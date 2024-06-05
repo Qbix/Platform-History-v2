@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "{{toTitle}} இல் புதிய {{relationDisplayType}}",
         "Streams\/relatedFrom\/*": "{{toTitle}} உடன் {{relationDisplayType}} ஆக சேர்க்கப்பட்டது",
         "Streams\/mention": "{{{call 'avatar.displayName'}}} ஒரு கருத்தில் உங்களைக் குறிப்பிட்டுள்ளார்",
-        "Streams\/call": "{{displayName}} நிகழ்நேர அழைப்பைத் தொடங்கியது"
+        "Streams\/call": "{{displayName}} நிகழ்நேர அழைப்பைத் தொடங்கியது",
+        "changed": {
+            "ChangesIn": "{{title}} இல் மாற்றங்கள்",
+            "Changed": "மாற்றப்பட்டது",
+            "HereIsWhatChanged": "என்ன மாறியது என்பது இங்கே:"
+        },
+        "joined": {
+            "Joined": "{{subject}} <em>{{title}}<\/em> சேர்ந்தது"
+        }
     },
     "invite": {
         "command": "அழைக்கவும்",
@@ -135,7 +143,13 @@
             "scanQRCode": "QR குறியீட்டை ஸ்கேன் செய்யவும்",
             "shareLink": "இணைப்பைப் பகிரவும்",
             "chooseFromRegistered": "பதிவுசெய்யப்பட்ட பயனர்களிடமிருந்து தேர்வு செய்யவும்",
-            "inviteViaEmailOrSms": "மின்னஞ்சல் அல்லது SMS மூலம் அழைக்கவும்"
+            "inviteViaEmailOrSms": "மின்னஞ்சல் அல்லது SMS மூலம் அழைக்கவும்",
+            "TakeGroupPhoto": "குழு புகைப்படம் எடுங்கள்",
+            "Skip": "தவிர்க்கவும்",
+            "byTelegram": "தந்தி",
+            "byWhatsapp": "பகிரி",
+            "addRoles": "பாத்திரங்களைச் சேர்க்கவும்",
+            "addPersonalRoles": "தனிப்பட்ட உறவுகளைச் சேர்க்கவும்"
         },
         "complete": {
             "WelcomeToCommunity": "{{communityName}} க்கு வரவேற்கிறோம்",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "நீங்கள் அழைக்கப்பட்டுள்ளீர்கள். ஏற்கவும் சேரவும் இங்கே {{ClickOrTap}} ."
+        },
+        "chat": {
+            "prompt": "நீங்கள் தொடர்பில் இருக்கவும், ஒன்றாக புகைப்படங்களைப் பகிரவும், மேலும் பலவற்றையும் உரையாடலுக்கு அழைப்பீர்கள். அதற்கு ஒரு பெயரைக் கொடுங்கள்:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "தவறான கோப்பு",
         "errorNoSource": "வீடியோ ஆதாரம் இல்லை",
         "uploadLimit": "அதிகபட்ச கோப்பு அளவு: {{size}}",
-        "errorFileSize": "மன்னிக்கவும், கோப்பு மிகவும் பெரியது.<br> அதிகபட்ச கோப்பு அளவு {{size}}"
+        "errorFileSize": "மன்னிக்கவும், கோப்பு மிகவும் பெரியது.<br> அதிகபட்ச கோப்பு அளவு {{size}}",
+        "createAnimatedThumbnail": "அனிமேஷன் சிறுபடத்தை உருவாக்கவும்",
+        "errorNotAvailable": "மன்னிக்கவும், வீடியோ இன்னும் கிடைக்கவில்லை. பிறகு முயற்சிக்கவும்."
     },
     "pdf": {
         "reset": "மீட்டமை",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "ஒரு பயனரின் பெயர்..."
+    },
+    "task": {
+        "errorsTitle": "பிழைகள் ஏற்பட்டன"
+    },
+    "topic": {
+        "NewTopic": "புது தலைப்பு",
+        "UpdateTopic": "தலைப்பைப் புதுப்பிக்கவும்",
+        "CreateTopic": "தலைப்பை உருவாக்கவும்",
+        "AreYouSureDeleteTopic": "இந்தத் தலைப்பை நிச்சயமாக நீக்க விரும்புகிறீர்களா",
+        "TitlePlaceholder": "தலைப்பு தலைப்பு...",
+        "DescribeTopic": "தலைப்பை விவரிக்க...",
+        "TopicIcon": "தலைப்பு படம்",
+        "UploadIcon": "பதிவேற்ற ஐகான்",
+        "Conversation": "உரையாடல்",
+        "Metrics": "அளவீடுகள்"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "அனிமேஷன் சிறுபடத்தை உருவாக்கவும்",
+        "Width": "அகலம்",
+        "Height": "உயரம்",
+        "Start": "தொடங்கு",
+        "End": "முடிவு",
+        "Delay": "தாமதம்",
+        "Quality": "தரம்",
+        "Size": "அளவு",
+        "OfFrames": "சட்டங்கள்",
+        "Frame": "சட்டகம்",
+        "UseThis": "இதை உபயோகி",
+        "ResultGIF": "முடிவு GIF",
+        "VideoElementNotFound": "வீடியோ உறுப்பு கிடைக்கவில்லை"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} உங்கள் முகத்தில்",
+        "AcceptIcon": "தேர்ந்தெடுக்கப்பட்ட பகுதியை ஏற்கவும்"
     }
 }

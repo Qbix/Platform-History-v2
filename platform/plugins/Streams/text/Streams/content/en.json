@@ -73,7 +73,7 @@
             "HereIsWhatChanged": "Here is what changed:"
         },
         "joined": {
-            "Joined": "{{subject}} joined <em>{{title}}</em>"
+            "Joined": "{{subject}} joined <em>{{title}}<\/em>"
         },
         "*": "Message {{{message.fields.type}}} to {{{stream.fields.title}}}",
         "Streams\/joined": "{{{call 'avatar.displayName'}}} joined",
@@ -501,7 +501,7 @@
     },
     "animatedThumbnail": {
         "CreateAnimatedThumbnail": "Create animated thumbnail",
-        "Width":  "Width",
+        "Width": "Width",
         "Height": "Height",
         "Start": "Start",
         "End": "End",

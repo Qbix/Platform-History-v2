@@ -83,7 +83,15 @@
         "Streams\/relatedTo\/*": "Ny {{relationDisplayType}} i {{toTitle}}",
         "Streams\/relatedFrom\/*": "Tilføjet til {{toTitle}} som {{relationDisplayType}}",
         "Streams\/mention": "{{{call 'avatar.displayName'}}} nævnte dig i en kommentar",
-        "Streams\/call": "{{displayName}} startede et opkald i realtid"
+        "Streams\/call": "{{displayName}} startede et opkald i realtid",
+        "changed": {
+            "ChangesIn": "Ændringer i {{title}}",
+            "Changed": "ændret",
+            "HereIsWhatChanged": "Her er, hvad der er ændret:"
+        },
+        "joined": {
+            "Joined": "{{subject}} sluttede sig <em>{{title}}<\/em>"
+        }
     },
     "invite": {
         "command": "Invitere",
@@ -135,7 +143,13 @@
             "scanQRCode": "Scan QR-kode",
             "shareLink": "Del et link",
             "chooseFromRegistered": "Vælg blandt registrerede brugere",
-            "inviteViaEmailOrSms": "Inviter via e-mail eller SMS"
+            "inviteViaEmailOrSms": "Inviter via e-mail eller SMS",
+            "TakeGroupPhoto": "Tag et gruppebillede",
+            "Skip": "Springe",
+            "byTelegram": "Telegram",
+            "byWhatsapp": "WhatsApp",
+            "addRoles": "Tilføj roller",
+            "addPersonalRoles": "Tilføj personlige forhold"
         },
         "complete": {
             "WelcomeToCommunity": "Velkommen til {{communityName}}",
@@ -158,6 +172,9 @@
         },
         "notice": {
             "text": "Du er blevet inviteret. {{ClickOrTap}} her for at acceptere og deltage."
+        },
+        "chat": {
+            "prompt": "Du vil invitere folk til en samtale, hvor du kan holde kontakten, dele billeder sammen og meget mere. Giv det et navn:"
         }
     },
     "messages": {
@@ -373,7 +390,9 @@
         "invalidFile": "Ugyldig fil",
         "errorNoSource": "Ingen videokilde",
         "uploadLimit": "Maksimal filstørrelse: {{size}}",
-        "errorFileSize": "Beklager, men filen er for stor.<br> Maksimal filstørrelse er {{size}}"
+        "errorFileSize": "Beklager, men filen er for stor.<br> Maksimal filstørrelse er {{size}}",
+        "createAnimatedThumbnail": "Opret animeret thumbnail",
+        "errorNotAvailable": "Beklager, men videoen er endnu ikke tilgængelig. Prøv igen senere."
     },
     "pdf": {
         "reset": "Nulstil",
@@ -464,5 +483,39 @@
     },
     "userChooser": {
         "Placeholder": "Navn på en bruger..."
+    },
+    "task": {
+        "errorsTitle": "Der opstod fejl"
+    },
+    "topic": {
+        "NewTopic": "Nyt emne",
+        "UpdateTopic": "Opdater emne",
+        "CreateTopic": "Opret emne",
+        "AreYouSureDeleteTopic": "Er du sikker på, at du vil slette dette emne",
+        "TitlePlaceholder": "emne titel...",
+        "DescribeTopic": "beskriv emnet...",
+        "TopicIcon": "Emnebillede",
+        "UploadIcon": "Upload ikon",
+        "Conversation": "Samtale",
+        "Metrics": "Metrics"
+    },
+    "animatedThumbnail": {
+        "CreateAnimatedThumbnail": "Opret animeret thumbnail",
+        "Width": "Bredde",
+        "Height": "Højde",
+        "Start": "Start",
+        "End": "Ende",
+        "Delay": "Forsinke",
+        "Quality": "Kvalitet",
+        "Size": "Størrelse",
+        "OfFrames": "af rammer",
+        "Frame": "Ramme",
+        "UseThis": "Brug denne",
+        "ResultGIF": "Resultat GIF",
+        "VideoElementNotFound": "Videoelement blev ikke fundet"
+    },
+    "groupPhoto": {
+        "ClickOnYourFace": "{{ClickOrTap}} på dit ansigt",
+        "AcceptIcon": "Accepter det valgte område"
     }
 }
