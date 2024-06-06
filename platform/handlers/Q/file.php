@@ -60,7 +60,7 @@ function Q_file($params, &$result)
 		return false;
 	}
 	if (false === Q::event("Q/file/authorize", compact(
-		'filename', 'ext',
+		'filename', 'ext'
 	), 'before')) {
 		header("HTTP/1.0 403 Forbidden");
 		$filename = Q_PLUGIN_WEB_DIR.DS.'img'.DS.'403'.DS."403.$ext";
