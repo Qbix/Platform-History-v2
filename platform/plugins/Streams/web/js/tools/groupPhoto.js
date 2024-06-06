@@ -59,9 +59,9 @@
 			var title = tool.text.groupPhoto.ClickOnYourFace.interpolate(Q.text.Q.words);
 			var streamPredictions = tool.stream.getAttribute("predictions");
 			//streamPredictions = null;
-			if (Q.isEmpty(streamPredictions)) {
+			/*if (Q.isEmpty(streamPredictions)) {
 				title = tool.text.imagepicker.cropping.title + '<br>' + (Q.info.isTouchscreen ? tool.text.imagepicker.cropping.touchscreen : tool.text.imagepicker.cropping.notTouchscreen);
-			}
+			}*/
 
 			Q.Template.render("Streams/groupPhoto", {
 				title: title,
@@ -104,8 +104,7 @@
 			var tool = this;
 			var state = this.state;
 
-			tool.element.setAttribute("data-viewport", true);
-
+			/*tool.element.setAttribute("data-viewport", true);
 			tool.$input.plugin('Q/viewport', {
 				maxScale: null
 			}, function () {
@@ -131,45 +130,56 @@
 					//tool.element.append(canvas); return false;
 					Q.handle(tool.state.onChoose, tool, [canvas.toDataURL()]);
 				});
-			});
+			});*/
 
-			/*tool.$input.on('mousedown touchstart', function (e) {
+			tool.$input.on(Q.Pointer.fastclick, function (e) {
 				e = tool.getEventOffset(e);
 				var rect = tool.input.getBoundingClientRect();
 				var width = rect.width;
 				var height = rect.height;
+				var $input = tool.$input.clone();
 
 				Q.Dialogs.push({
 					className: 'Q_dialog_imagepicker',
 					title: tool.text.imagepicker.cropping.title + "<br>" + Q.info.isTouchscreen ? tool.text.imagepicker.cropping.touchscreen : tool.text.imagepicker.cropping.notTouchscreen,
-					content: tool.input,
+					content: $input,
 					destroyOnClose: true,
 					apply: true,
 					onActivate : function (dialog) {
-						tool.$input.plugin('Q/viewport', {
+						$input.plugin('Q/viewport', {
 							initial: {
 								x: e.offsetX/width,
 								y: e.offsetY/height,
-								scale: 0.5
+								scale: 1
 							},
-							width: 300,
-							height: 300
+							width: 355,
+							height: 355
 						});
 					},
 					beforeClose: function(dialog) {
-						var state = $('.Q_viewport', dialog).state('Q/viewport');
-						var result = state.selection;
+						var stateViewPort = $('.Q_viewport', dialog).state('Q/viewport');
+						var result = stateViewPort.selection;
+						if (isNaN(result.left) || isNaN(result.top)) {
+							return false;
+						}
 
 						var canvas = document.createElement("canvas");
-						canvas.width = result.width;
-						canvas.height = result.height;
+						canvas.width = result.width * tool.input.naturalWidth;
+						canvas.height = result.height * tool.input.naturalHeight;
 						var context = canvas.getContext("2d");
-						context.drawImage(tool.input, result.left, result.top, canvas.width, canvas.height, 0, 0, canvas.width, canvas.height);
-						tool.element.append(canvas); return false;
-						//Q.handle(tool.state.onChoose, tool, [canvas.toDataURL()]);
+						context.drawImage(
+							tool.input,
+							result.left * tool.input.naturalWidth,
+							result.top * tool.input.naturalHeight,
+							canvas.width, canvas.height,
+							0,
+							0,
+							canvas.width, canvas.height);
+						//tool.element.append(canvas);
+						Q.handle(tool.state.onChoose, tool, [canvas.toDataURL()]);
 					}
 				});
-			});*/
+			});
 		},
 		useAI: function (streamPredictions) {
 			var tool = this;

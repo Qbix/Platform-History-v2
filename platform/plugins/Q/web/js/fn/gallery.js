@@ -302,14 +302,19 @@ Q.Tool.jQuery('Q/gallery', function _Q_gallery(state) {
 						controls: false,
 						loop: false,
 						muted: true
-					}).activate(function () {
+					}, "gallery_video_" + index).activate(function () {
 						if (index === 0) {
 							var firstPlayer = Q.Tool.from($(".Q_video_tool", $videoItem)[0], "Q/video");
+							var count = 0;
 							var playTimerId = setInterval(function () {
+								if (count > 10) {
+									clearInterval(playTimerId);
+								}
 								try {
 									firstPlayer.player.volume(0);
 									firstPlayer.play()
 								} catch (e) {}
+								count++;
 							}, 500);
 							firstPlayer.state.onPlay.set(function() {
 								clearInterval(playTimerId);

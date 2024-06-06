@@ -58,7 +58,6 @@ Q.Tool.define("Q/video", function (options) {
 		loop: state.loop,
 		muted: state.muted,
 		controls: state.controls,
-		ytControls: 0,
 		playsinline: state.playsinline
 	}, state.videojsOptions);
 
@@ -100,6 +99,8 @@ Q.Tool.define("Q/video", function (options) {
 	};
 	tool.adapters.youtube = {
 		init: function () {
+			state.videojsOptions.controls = 0;
+			state.videojsOptions.ytControls = 1;
 			Q.addScript("{{Q}}/js/videojs/plugins/YouTube.js", function () {
 				var options = {
 					techOrder: ["youtube"],

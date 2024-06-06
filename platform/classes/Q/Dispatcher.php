@@ -251,10 +251,11 @@ class Q_Dispatcher
 					$normalized = Q_Utils::normalizeUrlToPath(Q_Request::url());
 					$staticWebUrl = Q_Response::staticWebUrl();
 					$redirectUrl = "$staticWebUrl/$normalized$qsname$redirectSuffix";
-					$filename = APP_WEB_DIR . DS . str_replace('/', DS, $redirectSuffix);
+					$filename = Q_Html::themedFilename($redirectUrl);
 					$mtime = filemtime($filename);
-					$noRedirect = false;
-					if ($duration = Q_Config::get('Q', 'static', 'expires', 0)) {
+					$noRedirect = !$mtime;
+					$duration = Q_Config::get('Q', 'static', 'duration', 0);
+					if ($mtime and $duration) {
 						$expires = $mtime + $duration;
 						if (time() <= $expires) {
 							header("Expires: $expires");
