@@ -15,7 +15,7 @@
  *   @default ''
  *   @param {Object} [options.initial] can be used to set initial bounds of content to display inside tool.
  *   @param {Object} [options.initial.x] horizontal midpoint, from 0 to 1
- *   @param {Object} [options.initial.y] horizontal midpoint, from 0 to 1
+ *   @param {Object} [options.initial.y] vertical midpoint, from 0 to 1
  *   @param {Object} [options.initial.scale] initial scale
  *   @param {Q.Event} [options.onRelease] This event triggering after viewport creation
  *   @default Q.Event()
@@ -262,7 +262,7 @@ function _Q_viewport(options) {
 			factor = Math.max(cw / sw * f, ch / sh * f);
 		}
 		var df = factor / state.scale - 1;
-		var left1, left2, left3, top1, top2, top3, offset, css;
+		var left1, top1, css;
 		var offset = stretcher.offset();
 		left1 = parseFloat(stretcher.css('left')) * f;
 		top1 = parseFloat(stretcher.css('top')) * f;
