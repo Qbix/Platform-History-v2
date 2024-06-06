@@ -88,8 +88,7 @@
 			"querystrings": {
 				"ajax": ["Q.ajax=json&Q.loadExtras=all&Q.slotNames=content%2Ctitle"]
 			},
-
-			"duration": "86500",
+			"duration": 86500,
 			"generate": {
 				".html": {
 					"session": "sessionId_static",
