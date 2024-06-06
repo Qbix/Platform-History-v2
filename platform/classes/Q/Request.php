@@ -326,7 +326,7 @@ class Q_Request
 		}
 		if ($anyExtension) {
 			$parts = explode('/', $url);
-			if (!str_contains(end($parts), '.')) {
+			if (!strpos(end($parts), '.') === false) {
 				return false;
 			}
 		} else {

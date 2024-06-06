@@ -160,7 +160,7 @@ class Q_Dispatcher
 		$filename = null;
 		$skip = Q_Config::get('Q', 'dispatcherSkipFilename', false);
 		$parts = $route ? explode('/', $route) : array();
-		if (!$skip and !str_contains(end($parts), '.')) {
+		if (!$skip and strpos(end($parts), '.') === false) {
 			// route didn't have a dot in it, try to serve a file
 			$filename = Q_Request::filename(true);
 		}
