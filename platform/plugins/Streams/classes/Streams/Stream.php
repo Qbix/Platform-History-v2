@@ -2944,7 +2944,7 @@ class Streams_Stream extends Base_Streams_Stream
 		->fetch(PDO::FETCH_NUM);
 	}
 
-	public const ATTRIBUTE_ATTRIBUTES_LOCKED = 'Streams/attributes/locked';
+	const ATTRIBUTE_ATTRIBUTES_LOCKED = 'Streams/attributes/locked';
 
 	/**
 	 * Any fetched database rows that extend the stream
