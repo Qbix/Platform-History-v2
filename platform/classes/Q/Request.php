@@ -320,13 +320,14 @@ class Q_Request
 	static function filename($anyExtension = false)
 	{
 		$url = Q_Request::url();
+
 		$ret = Q::event("Q/request/filename", @compact('url'), 'before');
 		if (isset($ret)) {
 			return $ret;
 		}
 		if ($anyExtension) {
 			$parts = explode('/', $url);
-			if (!strpos(end($parts), '.') === false) {
+			if (strpos(end($parts), '.') === false) {
 				return false;
 			}
 		} else {

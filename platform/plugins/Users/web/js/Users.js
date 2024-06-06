@@ -1561,7 +1561,7 @@
 					if (!response.authResponse) {
 						return Q.handle(callback);
 					}
-					return FB.logout(function () {
+					return window.FB && FB.logout(function () {
 						delete Users.connected.facebook;
 						Q.handle(callback);
 					});
