@@ -895,7 +895,7 @@ html body .Q_columns_containsExpanded {
 #content.Q_columns_containsExpanded {
 	padding: 0;
 }
-.Q_columns_siblingContainsExpanded:not(#notices_slot):not(.Q_contextual):not(.Q_floatAboveDocument) {
+.Q_columns_siblingContainsExpanded:not(#notices_slot):not(.Q_contextual):not(.Q_floatAboveDocument):not(.Q_mask):not(.Q_overlay):not(.Q_dialog) {
 	z-index: 0 !important;
 }
 #status_background {
