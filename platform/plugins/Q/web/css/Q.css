@@ -1107,7 +1107,8 @@ body.Q_columns_animationFX {
 }
 
 @media (prefers-color-scheme: dark) {
-	.Q_overlay, .Q_fullscreen_dialog {
+	.Q_overlay, .Q_fullscreen_dialog,
+	.Q_overlay a, .Q_fullscreen_dialog a {
 		background: url(../img/bg/overlay-dark.png);
 		color: white;
 		fill: white;
