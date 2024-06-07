@@ -497,7 +497,7 @@ class Users_User extends Base_Users_User
 		$minutes = Q_Config::get('Users', 'activation', 'expires', 60*24*7);
 		$email->state = 'unverified';
 		$email->userId = $this->id;
-		$email->activationCode = strtolower(Q_Utils::randomString(7));
+		$email->activationCode = random_int(1000000, 9999999);
 		$email->activationCodeExpires = new Db_Expression(
 			"CURRENT_TIMESTAMP + INTERVAL $minutes MINUTE"
 		);
@@ -806,7 +806,7 @@ class Users_User extends Base_Users_User
 		$minutes = Q_Config::get('Users', 'activation', 'expires', 60*24*7);
 		$mobile->state = 'unverified';
 		$mobile->userId = $this->id;
-		$mobile->activationCode = strtolower(Q_Utils::randomString(7));
+		$mobile->activationCode = random_int(1000000, 9999999);
 		$mobile->activationCodeExpires = new Db_Expression(
 			"CURRENT_TIMESTAMP + INTERVAL $minutes MINUTE"
 		);

@@ -244,7 +244,7 @@ class Users_Email extends Base_Users_Email
 			}
 		}
 		$minutes = Q_Config::get('Users', 'activation', 'expires', 60*24*7);
-		$this->activationCode = strtolower(Q_Utils::randomString(7));
+		$this->activationCode = random_int(1000000, 9999999);
 		$this->activationCodeExpires = new Db_Expression(
 			"CURRENT_TIMESTAMP + INTERVAL $minutes MINUTE"
 		);

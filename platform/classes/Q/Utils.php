@@ -43,7 +43,10 @@ class Q_Utils
 		$characters_len = strlen($characters);
 		$result = str_repeat(' ', $len);
 		for ($i=0; $i<$len; ++$i) {
-			$result[$i] = $characters[mt_rand(0, $characters_len-1)];
+			$index = is_callable('random_int')
+				? random_int(0, $characters_len-1)
+				: mt_rand(0, $characters_len-1);
+			$result[$i] = $characters[$index];
 		}
 		return $result;
 	}
@@ -52,7 +55,7 @@ class Q_Utils
 	 * Returns a random hexadecimal string of the specified length
 	 * @method randomHexString
 	 * @static
-	 * @param {integer} $length Any length up to 
+	 * @param {integer} $length The length of the desired string
 	 * @return {string}
 	 */
 	static function randomHexString($length)
@@ -68,7 +71,7 @@ class Q_Utils
 				$temp .= sha1(mt_rand().microtime());
 			}
 		}
-		return substr($temp, 0, $length);
+		return substr(sha1($temp), 0, $length);
 	}
 
 	/**
