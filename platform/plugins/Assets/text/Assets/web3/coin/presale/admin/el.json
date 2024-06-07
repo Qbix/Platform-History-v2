@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "Token πώλησης",
+                        "timestamps": "Φορές",
+                        "prices": "Τιμές",
+                        "endTime": "Τέλος χρόνου",
+                        "thresholds": "κατώφλια",
+                        "bonuses": "Μπόνους"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "Ο ιδιοκτήτης δεν μπορεί να αποσύρει",
+                            "option1": "Ο κάτοχος μπορεί να αποσύρει διακριτικά μόνο αφού περάσει το endTime",
+                            "option2": "Ο κάτοχος μπορεί να αποσύρει μάρκες ανά πάσα στιγμή"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "Διεύθυνση κοινότητας",
+                    "methodkeccack": "Συνάρτηση κατακερματισμού Keccak256",
+                    "roleId": "Αναγνωριστικό ρόλου",
+                    "sellingToken": "Διεύθυνση Token πώλησης",
+                    "prices": "ETH, Τιμή",
+                    "thresholds": "# μάρκες",
+                    "bonuses": "Μπόνους %"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "Δεν υπάρχουν κονδύλια"
+                },
+                "btns": {
+                    "createFund": "Δημιουργία Ταμείου",
+                    "createFundInForm": "Δημιουργώ"
+                },
+                "fundAddress": "Διεύθυνση ταμείου",
+                "createFund": "Δημιουργία Ταμείου",
+                "fundInfo": "Πληροφορίες",
+                "produce": "Παράγω",
+                "loading": "Φόρτωση",
+                "viewInstancesList": "Ανανέωση λίστας"
+            }
+        }
+    }
+}

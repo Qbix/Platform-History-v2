@@ -1,0 +1,21 @@
+{
+    "coin": {
+        "presale": {
+            "buy": {
+                "form": {
+                    "labels": {
+                        "amount": "Zenbat inbertitu?"
+                    },
+                    "placeholders": {
+                        "amount": "{{nativeCoin}} zenbatekoa",
+                        "max": "Gehienez: {{nativeCoinBalance}}"
+                    }
+                },
+                "btns": {
+                    "buy": "Erosi",
+                    "execute": "Exekutatu"
+                }
+            }
+        }
+    }
+}

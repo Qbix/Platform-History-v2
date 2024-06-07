@@ -1,0 +1,27 @@
+{
+    "title": "বেতন",
+    "steps": {
+        "sending_native_coins": "দেশীয় কয়েন পাঠানো হচ্ছে",
+        "sending_tokens": "টোকেন পাঠানো হচ্ছে",
+        "swap": "অদলবদল",
+        "approve": "অনুমোদন করুন",
+        "one_tx": "আপনি একটি লেনদেন পাঠাতে হবে",
+        "two_tx": "আপনি দুটি লেনদেন পাঠাতে হবে"
+    },
+    "form": {
+        "fields": {
+            "labels": {
+                "funds_to_pay": "দিতে তহবিল"
+            }
+        },
+        "btns": {
+            "pay": "বেতন"
+        }
+    },
+    "msgs": {
+        "need_to_pay": "&quot; {{amountOut}} &quot; টোকেন দিতে হবে"
+    },
+    "errmsgs": {
+        "chain_is_not_supported": "&quot; {{chainId}} &quot; আইডি সহ এই ধরনের চেইন সমর্থিত নয়৷"
+    }
+}

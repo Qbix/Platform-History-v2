@@ -175,7 +175,8 @@
         },
         "chat": {
             "prompt": "Int tkun qed tistieden lin-nies għal konverżazzjoni fejn tista&#39; tibqa&#39; f&#39;kuntatt, taqsam ritratti flimkien, u aktar. Agħtiha isem:"
-        }
+        },
+        "Participants": "Stieden nies"
     },
     "messages": {
         "html": {

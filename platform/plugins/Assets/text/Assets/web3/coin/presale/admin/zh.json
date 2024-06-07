@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "出售代币",
+                        "timestamps": "時間",
+                        "prices": "价格",
+                        "endTime": "时间结束",
+                        "thresholds": "阈值",
+                        "bonuses": "奖金"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "所有者无法撤回",
+                            "option1": "所有者只能在 endTime 结束后才能提取代币",
+                            "option2": "所有者可以随时提取代币"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "社区地址",
+                    "methodkeccack": "Keccak256 哈希函数",
+                    "roleId": "角色 ID",
+                    "sellingToken": "出售代币地址",
+                    "prices": "ETH，价格",
+                    "thresholds": "代币数量",
+                    "bonuses": "奖金 ％"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "没有资金"
+                },
+                "btns": {
+                    "createFund": "创建基金",
+                    "createFundInForm": "创造"
+                },
+                "fundAddress": "基金地址",
+                "createFund": "创建基金",
+                "fundInfo": "信息",
+                "produce": "生产",
+                "loading": "加载中",
+                "viewInstancesList": "刷新列表"
+            }
+        }
+    }
+}

@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "ресервеТокен",
+                        "duration": "Трајање",
+                        "amount": "Износ"
+                    },
+                    "small": {
+                        "reserveToken": "ресервеТокен",
+                        "duration": "Трајање",
+                        "amount": "Износ"
+                    }
+                },
+                "placeholders": {
+                    "duration": "Трајање",
+                    "amount": "износ"
+                },
+                "btns": {
+                    "stake": "Улог"
+                },
+                "stake": "Улог",
+                "loading": "Лоадинг"
+            }
+        }
+    }
+}

@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "টোকেন বিক্রি হচ্ছে",
+                        "timestamps": "বার",
+                        "prices": "দাম",
+                        "endTime": "শেষ সময়",
+                        "thresholds": "থ্রেশহোল্ড",
+                        "bonuses": "বোনাস"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "মালিক প্রত্যাহার করতে পারবেন না",
+                            "option1": "শেষ সময় অতিবাহিত হওয়ার পরেই মালিক টোকেন প্রত্যাহার করতে পারবেন",
+                            "option2": "মালিক যে কোন সময় টোকেন প্রত্যাহার করতে পারেন"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "সম্প্রদায়ের ঠিকানা",
+                    "methodkeccack": "Keccak256 হ্যাশ ফাংশন",
+                    "roleId": "ভূমিকা আইডি",
+                    "sellingToken": "টোকেন ঠিকানা বিক্রি",
+                    "prices": "ETH, মূল্য",
+                    "thresholds": "# টোকেন",
+                    "bonuses": "বোনাস %"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "কোন ফান্ড আছে"
+                },
+                "btns": {
+                    "createFund": "তহবিল তৈরি করুন",
+                    "createFundInForm": "সৃষ্টি"
+                },
+                "fundAddress": "তহবিল ঠিকানা",
+                "createFund": "তহবিল তৈরি করুন",
+                "fundInfo": "তথ্য",
+                "produce": "উৎপাদন করা",
+                "loading": "লোড হচ্ছে",
+                "viewInstancesList": "তালিকা পুনরুজ্জীবিত করা"
+            }
+        }
+    }
+}

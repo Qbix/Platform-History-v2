@@ -1,19 +1,17 @@
 {
     "title": "Pay",
     "steps": {
-        
         "sending_native_coins": "Sending native coins",
         "sending_tokens": "Sending tokens",
         "swap": "Swap",
         "approve": "Approve",
         "one_tx": "You should send one transaction",
         "two_tx": "You should send two transactions"
-        
     },
     "form": {
         "fields": {
             "labels": {
-                "funds_to_pay":"Funds to pay"
+                "funds_to_pay": "Funds to pay"
             }
         },
         "btns": {
@@ -23,7 +21,7 @@
     "msgs": {
         "need_to_pay": "Need to pay \"{{amountOut}}\" tokens"
     },
-    "errmsgs" : {
-        "chain_is_not_supported":"Such chain with id \"{{chainId}}\" is not supported"
+    "errmsgs": {
+        "chain_is_not_supported": "Such chain with id \"{{chainId}}\" is not supported"
     }
 }

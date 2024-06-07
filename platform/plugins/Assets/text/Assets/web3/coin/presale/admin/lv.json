@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "Pārdodu žetonu",
+                        "timestamps": "reizes",
+                        "prices": "Cenas",
+                        "endTime": "Beigu laiks",
+                        "thresholds": "Sliekšņi",
+                        "bonuses": "Bonusi"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "Īpašnieks nevar atsaukt",
+                            "option1": "Īpašnieks var izņemt žetonus tikai pēc beigu laika beigām",
+                            "option2": "Īpašnieks jebkurā laikā var izņemt žetonus"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "Kopienas adrese",
+                    "methodkeccack": "Keccak256 jaucējfunkcija",
+                    "roleId": "Lomas ID",
+                    "sellingToken": "Pārdod Token adresi",
+                    "prices": "ETH, cena",
+                    "thresholds": "Tokenu skaits",
+                    "bonuses": "Bonusa %"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "Nav līdzekļu"
+                },
+                "btns": {
+                    "createFund": "Izveidot fondu",
+                    "createFundInForm": "Izveidot"
+                },
+                "fundAddress": "Fonda adrese",
+                "createFund": "Izveidot fondu",
+                "fundInfo": "Informācija",
+                "produce": "Ražot",
+                "loading": "Notiek ielāde",
+                "viewInstancesList": "Atsvaidzināt sarakstu"
+            }
+        }
+    }
+}

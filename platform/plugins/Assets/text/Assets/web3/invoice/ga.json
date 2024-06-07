@@ -1,0 +1,27 @@
+{
+    "title": "Pá",
+    "steps": {
+        "sending_native_coins": "Boinn dúchais a sheoladh",
+        "sending_tokens": "Comharthaí a sheoladh",
+        "swap": "Babhtáil",
+        "approve": "Cheadaigh",
+        "one_tx": "Ba cheart duit idirbheart amháin a sheoladh",
+        "two_tx": "Ba cheart duit dhá idirbheart a sheoladh"
+    },
+    "form": {
+        "fields": {
+            "labels": {
+                "funds_to_pay": "Cistí le híoc"
+            }
+        },
+        "btns": {
+            "pay": "Pá"
+        }
+    },
+    "msgs": {
+        "need_to_pay": "An riachtanas is gá comharthaí &quot; {{amountOut}} &quot; a íoc"
+    },
+    "errmsgs": {
+        "chain_is_not_supported": "Ní thacaítear le slabhra den sórt sin le id &quot; {{chainId}} &quot;"
+    }
+}

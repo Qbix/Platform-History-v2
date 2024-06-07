@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "ಟೋಕನ್Erc20",
+                    "duration": "ಅವಧಿ",
+                    "bonusTokenFraction": "ಬೋನಸ್ ಟೋಕನ್ಫ್ರಾಕ್ಷನ್",
+                    "popularToken": "ಜನಪ್ರಿಯ ಟೋಕನ್",
+                    "donations": "ದೇಣಿಗೆಗಳು",
+                    "rewardsRateFraction": "ಪ್ರತಿಫಲಗಳು ದರ ಭಿನ್ನರಾಶಿ",
+                    "numerator": "ಸಂಖ್ಯಾಕಾರಕ",
+                    "denominator": "ಛೇದಕ"
+                },
+                "small": {
+                    "tokenErc20": "ಟೋಕನ್Erc20",
+                    "duration": "ದಿನಗಳಲ್ಲಿ ಅವಧಿ",
+                    "bonusTokenFraction": "ಬೋನಸ್ ಟೋಕನ್ಫ್ರಾಕ್ಷನ್",
+                    "popularToken": "ಜನಪ್ರಿಯ ಟೋಕನ್",
+                    "donations": "ದೇಣಿಗೆಗಳು",
+                    "rewardsRateFraction": "ಪ್ರತಿಫಲಗಳು ದರ ಭಿನ್ನರಾಶಿ",
+                    "numerator": "ಸಂಖ್ಯಾಕಾರಕ",
+                    "denominator": "ಛೇದಕ"
+                }
+            },
+            "placeholders": {
+                "optional": "(ಐಚ್ಛಿಕ)",
+                "tuple": "ಟುಪಲ್[]",
+                "number": "ಸಂಖ್ಯೆ",
+                "address": "ವಿಳಾಸ",
+                "fraction": "ಭಿನ್ನರಾಶಿ",
+                "integer": "ಪೂರ್ಣಾಂಕ",
+                "seconds": "ಸೆಕೆಂಡುಗಳು",
+                "days": "ದಿನಗಳು",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "ಯಾವುದೇ ಕೊಳಗಳಿಲ್ಲ"
+            },
+            "btns": {
+                "createPool": "ಪೂಲ್ ರಚಿಸಿ",
+                "createPoolInForm": "ರಚಿಸಿ"
+            },
+            "createPool": "ಪೂಲ್ ರಚಿಸಿ",
+            "produce": "ಉತ್ಪಾದಿಸು",
+            "loading": "ಲೋಡ್ ಆಗುತ್ತಿದೆ",
+            "viewInstancesList": "ಪಟ್ಟಿಯನ್ನು ರಿಫ್ರೆಶ್ ಮಾಡಿ"
+        }
+    }
+}

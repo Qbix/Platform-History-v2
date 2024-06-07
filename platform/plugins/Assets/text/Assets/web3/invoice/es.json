@@ -1,0 +1,27 @@
+{
+    "title": "Pagar",
+    "steps": {
+        "sending_native_coins": "Envío de monedas nativas",
+        "sending_tokens": "Envío de fichas",
+        "swap": "Intercambio",
+        "approve": "Aprobar",
+        "one_tx": "Deberías enviar una transacción",
+        "two_tx": "Deberías enviar dos transacciones."
+    },
+    "form": {
+        "fields": {
+            "labels": {
+                "funds_to_pay": "Fondos para pagar"
+            }
+        },
+        "btns": {
+            "pay": "Pagar"
+        }
+    },
+    "msgs": {
+        "need_to_pay": "Necesidad de pagar tokens &quot; {{amountOut}} &quot;"
+    },
+    "errmsgs": {
+        "chain_is_not_supported": "Esta cadena con ID &quot; {{chainId}} &quot; no es compatible"
+    }
+}

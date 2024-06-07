@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "Bu istifadəçiyə pul kisəsi təyin edilməyib",
         "TheWalletOfThisUserInvalid": "Bu istifadəçinin pul kisəsi etibarsızdır",
         "WalletInvalid": "Pulqabı ünvanı yanlışdır",
-        "CantManageFrozenSeries": "Dondurulmuş serialları idarə edə bilməzsiniz"
+        "CantManageFrozenSeries": "Dondurulmuş serialları idarə edə bilməzsiniz",
+        "SubscriptionStreamNotPaid": "Bu məzmuna baxmaq üçün ödəniş etməmisiniz. Zəhmət olmasa {{subscriptionUrl}} düyməsini basın və müvafiq plana abunə olun."
     },
     "admin": {
         "Title": "İnzibati aktivlər",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "qiymət",
             "DescriptionPlaceholder": "abunə planının təsviri",
             "SavePlan": "Planı Saxla",
-            "NewPlan": "Yeni Plan"
+            "NewPlan": "Yeni Plan",
+            "SubscriptionTitle": "Abunə planları",
+            "AreYouSureDeletePlan": "Bu planı silmək istədiyinizə əminsiniz?",
+            "Duration": "Müddət",
+            "Discount": "Endirim",
+            "Interrupt": "kəsmək",
+            "Continue": "Davam et",
+            "SelectDisplayType": "{{displayType}} seçin",
+            "EndDate": "bitmə vaxtı"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "Yüklənir",
             "viewInstancesList": "Siyahını yeniləyin"
         }
+    },
+    "fundrise": {
+        "placeholder": "bu töhfə haqqında nəsə yazın..."
     }
 }

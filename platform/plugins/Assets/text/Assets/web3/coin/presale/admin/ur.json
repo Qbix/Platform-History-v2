@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "ٹوکن فروخت کرنا",
+                        "timestamps": "اوقات",
+                        "prices": "قیمتیں",
+                        "endTime": "آخر وقت",
+                        "thresholds": "دہلیز",
+                        "bonuses": "بونس"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "مالک واپس نہیں لے سکتا",
+                            "option1": "اختتامی وقت گزرنے کے بعد ہی مالک ٹوکن واپس لے سکتا ہے۔",
+                            "option2": "مالک کسی بھی وقت ٹوکن واپس لے سکتا ہے۔"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "کمیونٹی کا پتہ",
+                    "methodkeccack": "Keccak256 ہیش فنکشن",
+                    "roleId": "کردار کی شناخت",
+                    "sellingToken": "ٹوکن ایڈریس فروخت کرنا",
+                    "prices": "ای ٹی ایچ، قیمت",
+                    "thresholds": "# ٹوکنز",
+                    "bonuses": "اضافی انعام ٪"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "فنڈز نہیں ہیں۔"
+                },
+                "btns": {
+                    "createFund": "فنڈ بنائیں",
+                    "createFundInForm": "بنانا"
+                },
+                "fundAddress": "فنڈ کا پتہ",
+                "createFund": "فنڈ بنائیں",
+                "fundInfo": "معلومات",
+                "produce": "پیدا کرنا",
+                "loading": "لوڈ ہو رہا ہے۔",
+                "viewInstancesList": "فہرست کو تازہ کریں۔"
+            }
+        }
+    }
+}

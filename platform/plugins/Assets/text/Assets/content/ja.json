@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "このユーザーにはウォレットが割り当てられていません",
         "TheWalletOfThisUserInvalid": "このユーザーのウォレットは無効です",
         "WalletInvalid": "ウォレットのアドレスが無効です",
-        "CantManageFrozenSeries": "凍結されたシリーズは管理できません"
+        "CantManageFrozenSeries": "凍結されたシリーズは管理できません",
+        "SubscriptionStreamNotPaid": "このコンテンツを閲覧するには料金を支払っていません。999 {{subscriptionUrl}}クリックして適切なプランに加入してください。"
     },
     "admin": {
         "Title": "資産管理",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "価格",
             "DescriptionPlaceholder": "サブスクリプションプランの説明",
             "SavePlan": "プランを保存",
-            "NewPlan": "新プラン"
+            "NewPlan": "新プラン",
+            "SubscriptionTitle": "サブスクリプションプラン",
+            "AreYouSureDeletePlan": "このプランを削除してもよろしいですか?",
+            "Duration": "間隔",
+            "Discount": "割引",
+            "Interrupt": "割り込み",
+            "Continue": "続く",
+            "SelectDisplayType": "{{displayType}}選択",
+            "EndDate": "終了日"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "読み込み中",
             "viewInstancesList": "リストを更新"
         }
+    },
+    "fundrise": {
+        "placeholder": "この貢献について何か入力してください..."
     }
 }

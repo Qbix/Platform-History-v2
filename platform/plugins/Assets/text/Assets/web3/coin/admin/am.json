@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "ቆይታ",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "ታዋቂ ማስመሰያ",
+                    "donations": "ልገሳዎች",
+                    "rewardsRateFraction": "ሽልማቶችRateFraction",
+                    "numerator": "አሃዛዊ",
+                    "denominator": "አካታች"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "የሚቆይበት ጊዜ በቀናት ውስጥ",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "ታዋቂ ማስመሰያ",
+                    "donations": "ልገሳዎች",
+                    "rewardsRateFraction": "ሽልማቶችRateFraction",
+                    "numerator": "አሃዛዊ",
+                    "denominator": "አካታች"
+                }
+            },
+            "placeholders": {
+                "optional": "(አማራጭ)",
+                "tuple": "tuple[]",
+                "number": "ቁጥር",
+                "address": "አድራሻ",
+                "fraction": "ክፍልፋይ",
+                "integer": "ኢንቲጀር",
+                "seconds": "ሰከንዶች",
+                "days": "ቀናት",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "ገንዳዎች የሉም"
+            },
+            "btns": {
+                "createPool": "ገንዳ ይፍጠሩ",
+                "createPoolInForm": "ፍጠር"
+            },
+            "createPool": "ገንዳ ይፍጠሩ",
+            "produce": "ማምረት",
+            "loading": "በመጫን ላይ",
+            "viewInstancesList": "ዝርዝር አድስ"
+        }
+    }
+}

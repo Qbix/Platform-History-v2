@@ -175,7 +175,8 @@
         },
         "chat": {
             "prompt": "Byddwch yn gwahodd pobl i sgwrs lle gallwch gadw mewn cysylltiad, rhannu lluniau gyda&#39;ch gilydd, a mwy. Rhowch enw iddo:"
-        }
+        },
+        "Participants": "Gwahodd Pobl"
     },
     "messages": {
         "html": {

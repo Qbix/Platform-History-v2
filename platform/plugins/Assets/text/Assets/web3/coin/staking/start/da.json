@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reserveToken",
+                        "duration": "Varighed",
+                        "amount": "Beløb"
+                    },
+                    "small": {
+                        "reserveToken": "reserveToken",
+                        "duration": "Varighed",
+                        "amount": "Beløb"
+                    }
+                },
+                "placeholders": {
+                    "duration": "Varighed",
+                    "amount": "beløb"
+                },
+                "btns": {
+                    "stake": "Indsats"
+                },
+                "stake": "Indsats",
+                "loading": "Indlæser"
+            }
+        }
+    }
+}

@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "Этому пользователю не назначен кошелек",
         "TheWalletOfThisUserInvalid": "Кошелек этого пользователя недействителен",
         "WalletInvalid": "Неверный адрес кошелька",
-        "CantManageFrozenSeries": "Вы не можете управлять замороженными сериями"
+        "CantManageFrozenSeries": "Вы не можете управлять замороженными сериями",
+        "SubscriptionStreamNotPaid": "Вы не заплатили за просмотр этого контента. Пожалуйста, нажмите {{subscriptionUrl}} и подпишитесь на соответствующий план."
     },
     "admin": {
         "Title": "Активы административные",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "цена",
             "DescriptionPlaceholder": "описание плана подписки",
             "SavePlan": "Сохранить план",
-            "NewPlan": "Новый план"
+            "NewPlan": "Новый план",
+            "SubscriptionTitle": "Планы подписки",
+            "AreYouSureDeletePlan": "Вы уверены, что хотите удалить этот план?",
+            "Duration": "Продолжительность",
+            "Discount": "Скидка",
+            "Interrupt": "Прерывать",
+            "Continue": "Продолжать",
+            "SelectDisplayType": "Выберите {{displayType}}",
+            "EndDate": "Дата окончания"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "Загрузка",
             "viewInstancesList": "Обновить список"
         }
+    },
+    "fundrise": {
+        "placeholder": "напишите что-нибудь об этом вкладе..."
     }
 }

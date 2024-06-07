@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "આ વપરાશકર્તાને કોઈ વૉલેટ અસાઇન કરેલ નથી",
         "TheWalletOfThisUserInvalid": "આ વપરાશકર્તાનું વૉલેટ અમાન્ય છે",
         "WalletInvalid": "વૉલેટ સરનામું અમાન્ય",
-        "CantManageFrozenSeries": "તમે સ્થિર શ્રેણીનું સંચાલન કરી શકતા નથી"
+        "CantManageFrozenSeries": "તમે સ્થિર શ્રેણીનું સંચાલન કરી શકતા નથી",
+        "SubscriptionStreamNotPaid": "તમે આ સામગ્રી જોવા માટે ચૂકવણી કરી નથી. કૃપા કરીને {{subscriptionUrl}} પર ક્લિક કરો અને યોગ્ય પ્લાન માટે સબ્સ્ક્રાઇબ કરો."
     },
     "admin": {
         "Title": "અસ્કયામતો વહીવટી",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "કિંમત",
             "DescriptionPlaceholder": "સબ્સ્ક્રિપ્શન પ્લાનનું વર્ણન",
             "SavePlan": "યોજના સાચવો",
-            "NewPlan": "નવી યોજના"
+            "NewPlan": "નવી યોજના",
+            "SubscriptionTitle": "સબ્સ્ક્રિપ્શન યોજનાઓ",
+            "AreYouSureDeletePlan": "શું તમે ખરેખર આ પ્લાન ડિલીટ કરવા માંગો છો?",
+            "Duration": "અવધિ",
+            "Discount": "ડિસ્કાઉન્ટ",
+            "Interrupt": "વિક્ષેપ",
+            "Continue": "ચાલુ રાખો",
+            "SelectDisplayType": "{{displayType}} પસંદ કરો",
+            "EndDate": "અંતિમ તારીખ"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "લોડ કરી રહ્યું છે",
             "viewInstancesList": "યાદી તાજી કરો"
         }
+    },
+    "fundrise": {
+        "placeholder": "આ યોગદાન વિશે કંઈક લખો..."
     }
 }

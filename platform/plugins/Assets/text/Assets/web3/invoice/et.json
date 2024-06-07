@@ -1,0 +1,27 @@
+{
+    "title": "Maksma",
+    "steps": {
+        "sending_native_coins": "Emakeelsete müntide saatmine",
+        "sending_tokens": "Märkide saatmine",
+        "swap": "Vahetada",
+        "approve": "Kinnita",
+        "one_tx": "Peaksite saatma ühe tehingu",
+        "two_tx": "Peaksite saatma kaks tehingut"
+    },
+    "form": {
+        "fields": {
+            "labels": {
+                "funds_to_pay": "Maksmiseks vajalikud vahendid"
+            }
+        },
+        "btns": {
+            "pay": "Maksma"
+        }
+    },
+    "msgs": {
+        "need_to_pay": "Peate maksma &quot; {{amountOut}} &quot; märgid"
+    },
+    "errmsgs": {
+        "chain_is_not_supported": "Sellist ahelat ID-ga &quot; {{chainId}} &quot; ei toetata"
+    }
+}

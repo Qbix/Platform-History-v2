@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "토큰Erc20",
+                    "duration": "지속",
+                    "bonusTokenFraction": "보너스토큰분수",
+                    "popularToken": "인기토큰",
+                    "donations": "기부",
+                    "rewardsRateFraction": "보상비율분수",
+                    "numerator": "분자",
+                    "denominator": "분모"
+                },
+                "small": {
+                    "tokenErc20": "토큰Erc20",
+                    "duration": "기간(일)",
+                    "bonusTokenFraction": "보너스토큰분수",
+                    "popularToken": "인기토큰",
+                    "donations": "기부",
+                    "rewardsRateFraction": "보상비율분수",
+                    "numerator": "분자",
+                    "denominator": "분모"
+                }
+            },
+            "placeholders": {
+                "optional": "(선택 과목)",
+                "tuple": "튜플[]",
+                "number": "숫자",
+                "address": "주소",
+                "fraction": "분수",
+                "integer": "정수",
+                "seconds": "초",
+                "days": "날",
+                "uint256": "단위256",
+                "uint192": "단위192",
+                "uint64": "단위64",
+                "uint32": "uint32",
+                "uint16": "단위16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "수영장이 없습니다."
+            },
+            "btns": {
+                "createPool": "풀 생성",
+                "createPoolInForm": "만들다"
+            },
+            "createPool": "풀 생성",
+            "produce": "생산하다",
+            "loading": "로드 중",
+            "viewInstancesList": "새로 고침 목록"
+        }
+    }
+}

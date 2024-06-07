@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "لم يتم تخصيص محفظة لهذا المستخدم",
         "TheWalletOfThisUserInvalid": "محفظة هذا المستخدم غير صالحة",
         "WalletInvalid": "عنوان المحفظة غير صالح",
-        "CantManageFrozenSeries": "لا يمكنك إدارة المسلسلات المجمدة"
+        "CantManageFrozenSeries": "لا يمكنك إدارة المسلسلات المجمدة",
+        "SubscriptionStreamNotPaid": "لم تدفع مقابل مشاهدة هذا المحتوى. الرجاء الضغط على {{subscriptionUrl}} والاشتراك في الخطة المناسبة."
     },
     "admin": {
         "Title": "الأصول الإدارية",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "سعر",
             "DescriptionPlaceholder": "وصف خطة الاشتراك",
             "SavePlan": "حفظ الخطة",
-            "NewPlan": "خطة جديدة"
+            "NewPlan": "خطة جديدة",
+            "SubscriptionTitle": "خطط الاشتراك",
+            "AreYouSureDeletePlan": "هل أنت متأكد أنك تريد حذف هذه الخطة؟",
+            "Duration": "مدة",
+            "Discount": "تخفيض",
+            "Interrupt": "مقاطعة",
+            "Continue": "يكمل",
+            "SelectDisplayType": "اختر {{displayType}}",
+            "EndDate": "تاريخ الانتهاء"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "تحميل",
             "viewInstancesList": "تحديث القائمة"
         }
+    },
+    "fundrise": {
+        "placeholder": "اكتب شيئا عن هذه المساهمة..."
     }
 }

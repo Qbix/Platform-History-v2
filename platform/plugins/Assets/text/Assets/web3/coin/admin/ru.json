@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "токенErc20",
+                    "duration": "Продолжительность",
+                    "bonusTokenFraction": "бонусТокенФракция",
+                    "popularToken": "PopularToken",
+                    "donations": "пожертвования",
+                    "rewardsRateFraction": "наградыСтавкаДробь",
+                    "numerator": "числитель",
+                    "denominator": "знаменатель"
+                },
+                "small": {
+                    "tokenErc20": "токенErc20",
+                    "duration": "Продолжительность в днях",
+                    "bonusTokenFraction": "бонусТокенФракция",
+                    "popularToken": "PopularToken",
+                    "donations": "пожертвования",
+                    "rewardsRateFraction": "вознагражденияСтавкаДробь",
+                    "numerator": "числитель",
+                    "denominator": "знаменатель"
+                }
+            },
+            "placeholders": {
+                "optional": "(необязательный)",
+                "tuple": "кортеж[]",
+                "number": "число",
+                "address": "адрес",
+                "fraction": "доля",
+                "integer": "целое число",
+                "seconds": "секунды",
+                "days": "дни",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Нет бассейнов"
+            },
+            "btns": {
+                "createPool": "Создать пул",
+                "createPoolInForm": "Создавать"
+            },
+            "createPool": "Создать пул",
+            "produce": "Производить",
+            "loading": "Загрузка",
+            "viewInstancesList": "Обновить список"
+        }
+    }
+}

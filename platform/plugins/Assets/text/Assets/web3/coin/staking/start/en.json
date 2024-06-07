@@ -18,9 +18,7 @@
                     "duration": "Duration",
                     "amount": "amount"
                 },
-                "errmsgs": {
-                },
-                "btns":{
+                "btns": {
                     "stake": "Stake"
                 },
                 "stake": "Stake",

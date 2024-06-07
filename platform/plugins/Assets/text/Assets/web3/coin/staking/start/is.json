@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reserveToken",
+                        "duration": "Lengd",
+                        "amount": "Magn"
+                    },
+                    "small": {
+                        "reserveToken": "reserveToken",
+                        "duration": "Lengd",
+                        "amount": "Magn"
+                    }
+                },
+                "placeholders": {
+                    "duration": "Lengd",
+                    "amount": "magn"
+                },
+                "btns": {
+                    "stake": "Hlutur"
+                },
+                "stake": "Hlutur",
+                "loading": "Hleðsla"
+            }
+        }
+    }
+}

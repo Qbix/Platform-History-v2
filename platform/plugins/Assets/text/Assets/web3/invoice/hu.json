@@ -1,0 +1,27 @@
+{
+    "title": "Fizetés",
+    "steps": {
+        "sending_native_coins": "Natív érmék küldése",
+        "sending_tokens": "Tokenek küldése",
+        "swap": "Csere",
+        "approve": "Jóváhagy",
+        "one_tx": "Egy tranzakciót kell küldenie",
+        "two_tx": "Két tranzakciót kell küldenie"
+    },
+    "form": {
+        "fields": {
+            "labels": {
+                "funds_to_pay": "Fizetendő pénzeszközök"
+            }
+        },
+        "btns": {
+            "pay": "Fizetés"
+        }
+    },
+    "msgs": {
+        "need_to_pay": "&quot; {{amountOut}} &quot; tokeneket kell fizetni"
+    },
+    "errmsgs": {
+        "chain_is_not_supported": "Az ilyen &quot; {{chainId}} &quot; azonosítójú lánc nem támogatott"
+    }
+}

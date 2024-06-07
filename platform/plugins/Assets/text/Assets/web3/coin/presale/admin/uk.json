@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "Продаж токена",
+                        "timestamps": "Часи",
+                        "prices": "Ціни",
+                        "endTime": "Час закінчення",
+                        "thresholds": "Пороги",
+                        "bonuses": "Бонуси"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "Власник не може зняти",
+                            "option1": "Власник може вилучити токени лише після закінчення часу закінчення",
+                            "option2": "Власник може зняти токени в будь-який час"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "Адреса спільноти",
+                    "methodkeccack": "Хеш-функція Keccak256",
+                    "roleId": "ID ролі",
+                    "sellingToken": "Адреса продажу токенів",
+                    "prices": "ETH, Ціна",
+                    "thresholds": "# токенів",
+                    "bonuses": "% бонусу"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "Коштів немає"
+                },
+                "btns": {
+                    "createFund": "Створити фонд",
+                    "createFundInForm": "Створити"
+                },
+                "fundAddress": "Адреса фонду",
+                "createFund": "Створити фонд",
+                "fundInfo": "Інформація",
+                "produce": "Виробляти",
+                "loading": "Завантаження",
+                "viewInstancesList": "Оновити список"
+            }
+        }
+    }
+}

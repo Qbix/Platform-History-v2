@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "ಮೀಸಲು ಟೋಕನ್",
+                        "duration": "ಅವಧಿ",
+                        "amount": "ಮೊತ್ತ"
+                    },
+                    "small": {
+                        "reserveToken": "ಮೀಸಲು ಟೋಕನ್",
+                        "duration": "ಅವಧಿ",
+                        "amount": "ಮೊತ್ತ"
+                    }
+                },
+                "placeholders": {
+                    "duration": "ಅವಧಿ",
+                    "amount": "ಮೊತ್ತ"
+                },
+                "btns": {
+                    "stake": "ಪಾಲು"
+                },
+                "stake": "ಪಾಲು",
+                "loading": "ಲೋಡ್ ಆಗುತ್ತಿದೆ"
+            }
+        }
+    }
+}

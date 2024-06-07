@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reserveToken",
+                        "duration": "Durată",
+                        "amount": "Cantitate"
+                    },
+                    "small": {
+                        "reserveToken": "reserveToken",
+                        "duration": "Durată",
+                        "amount": "Cantitate"
+                    }
+                },
+                "placeholders": {
+                    "duration": "Durată",
+                    "amount": "Cantitate"
+                },
+                "btns": {
+                    "stake": "Miză"
+                },
+                "stake": "Miză",
+                "loading": "Se încarcă"
+            }
+        }
+    }
+}

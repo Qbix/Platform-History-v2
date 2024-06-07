@@ -1,0 +1,21 @@
+{
+    "coin": {
+        "presale": {
+            "buy": {
+                "form": {
+                    "labels": {
+                        "amount": "Kiasi gani cha kuwekeza?"
+                    },
+                    "placeholders": {
+                        "amount": "Kiasi cha {{nativeCoin}}",
+                        "max": "Kiwango cha juu: {{nativeCoinBalance}}"
+                    }
+                },
+                "btns": {
+                    "buy": "Nunua",
+                    "execute": "Tekeleza"
+                }
+            }
+        }
+    }
+}

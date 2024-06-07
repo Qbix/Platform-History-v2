@@ -175,7 +175,8 @@
         },
         "chat": {
             "prompt": "Je nodigt mensen uit voor een gesprek waarin je contact kunt houden, samen foto&#39;s kunt delen en meer. Geef het een naam:"
-        }
+        },
+        "Participants": "Mensen uitnodigen"
     },
     "messages": {
         "html": {

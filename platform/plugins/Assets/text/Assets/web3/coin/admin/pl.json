@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Czas trwania",
+                    "bonusTokenFraction": "bonusTokenFrakcja",
+                    "popularToken": "popularnyToken",
+                    "donations": "darowizny",
+                    "rewardsRateFraction": "nagrodyRateFraction",
+                    "numerator": "licznik ułamka",
+                    "denominator": "mianownik"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Czas trwania w dniach",
+                    "bonusTokenFraction": "bonusTokenFrakcja",
+                    "popularToken": "popularnyToken",
+                    "donations": "darowizny",
+                    "rewardsRateFraction": "nagrodyRateFraction",
+                    "numerator": "licznik ułamka",
+                    "denominator": "mianownik"
+                }
+            },
+            "placeholders": {
+                "optional": "(opcjonalny)",
+                "tuple": "krotka[]",
+                "number": "numer",
+                "address": "adres",
+                "fraction": "frakcja",
+                "integer": "liczba całkowita",
+                "seconds": "sekundy",
+                "days": "dni",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Nie ma basenów"
+            },
+            "btns": {
+                "createPool": "Utwórz pulę",
+                "createPoolInForm": "Tworzyć"
+            },
+            "createPool": "Utwórz pulę",
+            "produce": "Produkować",
+            "loading": "Ładowanie",
+            "viewInstancesList": "Odśwież listę"
+        }
+    }
+}

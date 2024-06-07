@@ -1,0 +1,21 @@
+{
+    "coin": {
+        "presale": {
+            "buy": {
+                "form": {
+                    "labels": {
+                        "amount": "Magkano ang puhunan?"
+                    },
+                    "placeholders": {
+                        "amount": "Halaga ng {{nativeCoin}}",
+                        "max": "Max: {{nativeCoinBalance}}"
+                    }
+                },
+                "btns": {
+                    "buy": "Bumili",
+                    "execute": "Ipatupad"
+                }
+            }
+        }
+    }
+}

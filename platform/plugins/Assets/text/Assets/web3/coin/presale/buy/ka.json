@@ -1,0 +1,21 @@
+{
+    "coin": {
+        "presale": {
+            "buy": {
+                "form": {
+                    "labels": {
+                        "amount": "რამდენი ინვესტიცია?"
+                    },
+                    "placeholders": {
+                        "amount": "თანხა {{nativeCoin}}",
+                        "max": "მაქსიმუმი: {{nativeCoinBalance}}"
+                    }
+                },
+                "btns": {
+                    "buy": "იყიდე",
+                    "execute": "შეასრულეთ"
+                }
+            }
+        }
+    }
+}

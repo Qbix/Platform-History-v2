@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "Pengguna ini tidak memiliki dompet yang ditetapkan",
         "TheWalletOfThisUserInvalid": "Dompet pengguna ini tidak valid",
         "WalletInvalid": "Alamat dompet tidak valid",
-        "CantManageFrozenSeries": "Anda tidak dapat mengelola seri beku"
+        "CantManageFrozenSeries": "Anda tidak dapat mengelola seri beku",
+        "SubscriptionStreamNotPaid": "Anda belum membayar untuk melihat konten ini. Silakan klik {{subscriptionUrl}} dan berlangganan paket yang sesuai."
     },
     "admin": {
         "Title": "Administrasi aset",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "harga",
             "DescriptionPlaceholder": "deskripsi paket langganan",
             "SavePlan": "Simpan Rencana",
-            "NewPlan": "Rencana Baru"
+            "NewPlan": "Rencana Baru",
+            "SubscriptionTitle": "Paket berlangganan",
+            "AreYouSureDeletePlan": "Apakah Anda yakin ingin menghapus paket ini?",
+            "Duration": "Durasi",
+            "Discount": "Diskon",
+            "Interrupt": "Mengganggu",
+            "Continue": "Melanjutkan",
+            "SelectDisplayType": "Pilih {{displayType}}",
+            "EndDate": "tanggal akhir"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "Memuat",
             "viewInstancesList": "Segarkan Daftar"
         }
+    },
+    "fundrise": {
+        "placeholder": "ketik sesuatu tentang kontribusi ini..."
     }
 }

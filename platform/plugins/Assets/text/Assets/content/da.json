@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "Denne bruger har ingen tegnebog tildelt",
         "TheWalletOfThisUserInvalid": "Denne brugers tegnebog er ugyldig",
         "WalletInvalid": "Wallet-adressen er ugyldig",
-        "CantManageFrozenSeries": "Du kan ikke administrere frosne serier"
+        "CantManageFrozenSeries": "Du kan ikke administrere frosne serier",
+        "SubscriptionStreamNotPaid": "Du har ikke betalt for at se dette indhold. Klik venligst på {{subscriptionUrl}} og abonner på den relevante plan."
     },
     "admin": {
         "Title": "Administrative aktiver",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "pris",
             "DescriptionPlaceholder": "beskrivelse af abonnementsplanen",
             "SavePlan": "Gem plan",
-            "NewPlan": "Ny plan"
+            "NewPlan": "Ny plan",
+            "SubscriptionTitle": "Abonnementsplaner",
+            "AreYouSureDeletePlan": "Er du sikker på, at du vil slette denne plan?",
+            "Duration": "Varighed",
+            "Discount": "Rabat",
+            "Interrupt": "Afbryde",
+            "Continue": "Blive ved",
+            "SelectDisplayType": "Vælg {{displayType}}",
+            "EndDate": "slutdato"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "Indlæser",
             "viewInstancesList": "Opdater liste"
         }
+    },
+    "fundrise": {
+        "placeholder": "skriv noget om dette bidrag..."
     }
 }

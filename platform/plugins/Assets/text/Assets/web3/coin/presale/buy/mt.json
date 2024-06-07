@@ -1,0 +1,21 @@
+{
+    "coin": {
+        "presale": {
+            "buy": {
+                "form": {
+                    "labels": {
+                        "amount": "Kemm tinvesti?"
+                    },
+                    "placeholders": {
+                        "amount": "Ammont ta {{nativeCoin}}",
+                        "max": "Max: {{nativeCoinBalance}}"
+                    }
+                },
+                "btns": {
+                    "buy": "Ixtri",
+                    "execute": "Esegwixxi"
+                }
+            }
+        }
+    }
+}

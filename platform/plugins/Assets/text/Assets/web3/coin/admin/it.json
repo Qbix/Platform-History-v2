@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Durata",
+                    "bonusTokenFraction": "bonusTokenFrazione",
+                    "popularToken": "PopularToken",
+                    "donations": "donazioni",
+                    "rewardsRateFraction": "ricompenseTassoFrazione",
+                    "numerator": "numeratore",
+                    "denominator": "denominatore"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Durata in giorni",
+                    "bonusTokenFraction": "bonusTokenFrazione",
+                    "popularToken": "PopularToken",
+                    "donations": "donazioni",
+                    "rewardsRateFraction": "ricompenseTassoFrazione",
+                    "numerator": "numeratore",
+                    "denominator": "denominatore"
+                }
+            },
+            "placeholders": {
+                "optional": "(opzionale)",
+                "tuple": "tupla[]",
+                "number": "numero",
+                "address": "indirizzo",
+                "fraction": "frazione",
+                "integer": "numero intero",
+                "seconds": "secondi",
+                "days": "giorni",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Non ci sono piscine"
+            },
+            "btns": {
+                "createPool": "Crea piscina",
+                "createPoolInForm": "Creare"
+            },
+            "createPool": "Crea piscina",
+            "produce": "Produrre",
+            "loading": "Caricamento",
+            "viewInstancesList": "Aggiorna la lista"
+        }
+    }
+}

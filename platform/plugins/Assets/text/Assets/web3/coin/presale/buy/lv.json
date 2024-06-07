@@ -1,0 +1,21 @@
+{
+    "coin": {
+        "presale": {
+            "buy": {
+                "form": {
+                    "labels": {
+                        "amount": "Cik daudz ieguldīt?"
+                    },
+                    "placeholders": {
+                        "amount": "Summa {{nativeCoin}}",
+                        "max": "Maks.: {{nativeCoinBalance}}"
+                    }
+                },
+                "btns": {
+                    "buy": "Pirkt",
+                    "execute": "Izpildīt"
+                }
+            }
+        }
+    }
+}

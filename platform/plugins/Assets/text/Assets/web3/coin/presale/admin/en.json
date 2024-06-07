@@ -13,9 +13,9 @@
                     },
                     "fields": {
                         "ownerWithdrawOptions": {
-                            "option0":"Owner can't withdraw",
-                            "option1":"Owner can withdraw tokens only after endTime passed",
-                            "option2":"Owner can withdraw tokens anytime"
+                            "option0": "Owner can't withdraw",
+                            "option1": "Owner can withdraw tokens only after endTime passed",
+                            "option2": "Owner can withdraw tokens anytime"
                         }
                     }
                 },
@@ -31,7 +31,7 @@
                 "errmsgs": {
                     "ThereAreNoFunds": "There are no funds"
                 },
-                "btns":{
+                "btns": {
                     "createFund": "Create Fund",
                     "createFundInForm": "Create"
                 },

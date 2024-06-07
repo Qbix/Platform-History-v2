@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "Este usuário não tem carteira atribuída",
         "TheWalletOfThisUserInvalid": "A carteira deste usuário é inválida",
         "WalletInvalid": "Endereço da carteira inválido",
-        "CantManageFrozenSeries": "Você não pode gerenciar séries congeladas"
+        "CantManageFrozenSeries": "Você não pode gerenciar séries congeladas",
+        "SubscriptionStreamNotPaid": "Você não pagou para visualizar este conteúdo. Clique em {{subscriptionUrl}} e assine o plano apropriado."
     },
     "admin": {
         "Title": "Ativos administrativos",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "preço",
             "DescriptionPlaceholder": "descrição do plano de assinatura",
             "SavePlan": "Salvar plano",
-            "NewPlan": "Novo plano"
+            "NewPlan": "Novo plano",
+            "SubscriptionTitle": "Planos de assinatura",
+            "AreYouSureDeletePlan": "Tem certeza de que deseja excluir este plano?",
+            "Duration": "Duração",
+            "Discount": "Desconto",
+            "Interrupt": "Interromper",
+            "Continue": "Continuar",
+            "SelectDisplayType": "Selecione {{displayType}}",
+            "EndDate": "data final"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "Carregando",
             "viewInstancesList": "Atualizar lista"
         }
+    },
+    "fundrise": {
+        "placeholder": "digite algo sobre esta contribuição..."
     }
 }

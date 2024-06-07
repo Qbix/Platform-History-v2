@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "rezerwowy token",
+                        "duration": "Czas trwania",
+                        "amount": "Kwota"
+                    },
+                    "small": {
+                        "reserveToken": "rezerwowy token",
+                        "duration": "Czas trwania",
+                        "amount": "Kwota"
+                    }
+                },
+                "placeholders": {
+                    "duration": "Czas trwania",
+                    "amount": "kwota"
+                },
+                "btns": {
+                    "stake": "Stawka"
+                },
+                "stake": "Stawka",
+                "loading": "Ładowanie"
+            }
+        }
+    }
+}

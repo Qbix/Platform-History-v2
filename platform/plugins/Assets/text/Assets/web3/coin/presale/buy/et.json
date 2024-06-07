@@ -1,0 +1,21 @@
+{
+    "coin": {
+        "presale": {
+            "buy": {
+                "form": {
+                    "labels": {
+                        "amount": "Kui palju investeerida?"
+                    },
+                    "placeholders": {
+                        "amount": "Summa {{nativeCoin}}",
+                        "max": "Max: {{nativeCoinBalance}}"
+                    }
+                },
+                "btns": {
+                    "buy": "Osta",
+                    "execute": "Käivitage"
+                }
+            }
+        }
+    }
+}

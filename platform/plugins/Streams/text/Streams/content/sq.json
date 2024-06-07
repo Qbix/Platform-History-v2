@@ -175,7 +175,8 @@
         },
         "chat": {
             "prompt": "Do të ftoni njerëz në një bisedë ku mund të qëndroni në kontakt, të ndani foto së bashku dhe më shumë. Jepini një emër:"
-        }
+        },
+        "Participants": "Ftoni njerëzit"
     },
     "messages": {
         "html": {

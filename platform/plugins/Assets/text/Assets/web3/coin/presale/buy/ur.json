@@ -1,0 +1,21 @@
+{
+    "coin": {
+        "presale": {
+            "buy": {
+                "form": {
+                    "labels": {
+                        "amount": "کتنی سرمایہ کاری کرنی ہے؟"
+                    },
+                    "placeholders": {
+                        "amount": "{{nativeCoin}} کی رقم",
+                        "max": "زیادہ سے زیادہ: {{nativeCoinBalance}}"
+                    }
+                },
+                "btns": {
+                    "buy": "خریدنے",
+                    "execute": "پھانسی"
+                }
+            }
+        }
+    }
+}

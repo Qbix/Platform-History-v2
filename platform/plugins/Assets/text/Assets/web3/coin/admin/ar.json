@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "مدة",
+                    "bonusTokenFraction": "BonusTokenFraction",
+                    "popularToken": "PopularToken",
+                    "donations": "التبرعات",
+                    "rewardsRateFraction": "RewardsRateFraction",
+                    "numerator": "البسط",
+                    "denominator": "المقام - صفة مشتركة - حالة"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "المدة بالأيام",
+                    "bonusTokenFraction": "BonusTokenFraction",
+                    "popularToken": "PopularToken",
+                    "donations": "التبرعات",
+                    "rewardsRateFraction": "RewardsRateFraction",
+                    "numerator": "البسط",
+                    "denominator": "المقام - صفة مشتركة - حالة"
+                }
+            },
+            "placeholders": {
+                "optional": "(خياري)",
+                "tuple": "مترابطة بيانية[]",
+                "number": "رقم",
+                "address": "عنوان",
+                "fraction": "جزء",
+                "integer": "عدد صحيح",
+                "seconds": "ثواني",
+                "days": "أيام",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "لا توجد حمامات سباحة"
+            },
+            "btns": {
+                "createPool": "إنشاء تجمع",
+                "createPoolInForm": "يخلق"
+            },
+            "createPool": "إنشاء تجمع",
+            "produce": "ينتج",
+            "loading": "تحميل",
+            "viewInstancesList": "تحديث القائمة"
+        }
+    }
+}

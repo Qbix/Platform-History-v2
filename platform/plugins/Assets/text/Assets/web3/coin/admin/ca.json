@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Durada",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "donacions",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "numerador",
+                    "denominator": "denominador"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Durada en dies",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "donacions",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "numerador",
+                    "denominator": "denominador"
+                }
+            },
+            "placeholders": {
+                "optional": "(opcional)",
+                "tuple": "tupla[]",
+                "number": "nombre",
+                "address": "adreça",
+                "fraction": "fracció",
+                "integer": "enter",
+                "seconds": "segons",
+                "days": "dies",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "No hi ha piscines"
+            },
+            "btns": {
+                "createPool": "Crea una piscina",
+                "createPoolInForm": "Crear"
+            },
+            "createPool": "Crea una piscina",
+            "produce": "Produir",
+            "loading": "Carregant",
+            "viewInstancesList": "Actualitza la llista"
+        }
+    }
+}

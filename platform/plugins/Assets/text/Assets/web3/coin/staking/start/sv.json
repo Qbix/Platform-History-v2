@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reserveToken",
+                        "duration": "Varaktighet",
+                        "amount": "Belopp"
+                    },
+                    "small": {
+                        "reserveToken": "reserveToken",
+                        "duration": "Varaktighet",
+                        "amount": "Belopp"
+                    }
+                },
+                "placeholders": {
+                    "duration": "Varaktighet",
+                    "amount": "belopp"
+                },
+                "btns": {
+                    "stake": "Insats"
+                },
+                "stake": "Insats",
+                "loading": "Läser in"
+            }
+        }
+    }
+}

@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "Prodaja žetona",
+                        "timestamps": "Times",
+                        "prices": "Cene",
+                        "endTime": "Končni čas",
+                        "thresholds": "Pragovi",
+                        "bonuses": "Bonusi"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "Lastnik se ne more umakniti",
+                            "option1": "Lastnik lahko umakne žetone šele, ko mine endTime",
+                            "option2": "Lastnik lahko kadar koli dvigne žetone"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "naslov skupnosti",
+                    "methodkeccack": "Funkcija zgoščevanja Keccak256",
+                    "roleId": "ID vloge",
+                    "sellingToken": "Naslov prodajnega žetona",
+                    "prices": "ETH, cena",
+                    "thresholds": "# žetonov",
+                    "bonuses": "Bonus %"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "Ni sredstev"
+                },
+                "btns": {
+                    "createFund": "Ustvari sklad",
+                    "createFundInForm": "Ustvari"
+                },
+                "fundAddress": "Naslov sklada",
+                "createFund": "Ustvari sklad",
+                "fundInfo": "Informacije",
+                "produce": "Proizvajaj",
+                "loading": "nalaganje",
+                "viewInstancesList": "Osveži seznam"
+            }
+        }
+    }
+}

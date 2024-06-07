@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tocynErc20",
+                    "duration": "Hyd",
+                    "bonusTokenFraction": "bonwsTokenFfraction",
+                    "popularToken": "poblogaiddToken",
+                    "donations": "rhoddion",
+                    "rewardsRateFraction": "gwobrauRateFfraction",
+                    "numerator": "rhifiadur",
+                    "denominator": "enwadur"
+                },
+                "small": {
+                    "tokenErc20": "tocynErc20",
+                    "duration": "Hyd mewn dyddiau",
+                    "bonusTokenFraction": "bonwsTokenFfraction",
+                    "popularToken": "poblogaiddToken",
+                    "donations": "rhoddion",
+                    "rewardsRateFraction": "gwobrauRateFfraction",
+                    "numerator": "rhifiadur",
+                    "denominator": "enwadur"
+                }
+            },
+            "placeholders": {
+                "optional": "(dewisol)",
+                "tuple": "tuple[]",
+                "number": "rhif",
+                "address": "cyfeiriad",
+                "fraction": "ffracsiwn",
+                "integer": "cyfanrif",
+                "seconds": "eiliadau",
+                "days": "dyddiau",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Nid oes pyllau"
+            },
+            "btns": {
+                "createPool": "Creu Pwll",
+                "createPoolInForm": "Creu"
+            },
+            "createPool": "Creu Pwll",
+            "produce": "Cynnyrch",
+            "loading": "Llwytho",
+            "viewInstancesList": "Rhestr Adnewyddu"
+        }
+    }
+}

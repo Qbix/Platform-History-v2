@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "токенErc20",
+                    "duration": "Времетраење",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "популарен Токен",
+                    "donations": "донации",
+                    "rewardsRateFraction": "наградиRateFraction",
+                    "numerator": "броител",
+                    "denominator": "именител"
+                },
+                "small": {
+                    "tokenErc20": "токенErc20",
+                    "duration": "Времетраење во денови",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "популарен Токен",
+                    "donations": "донации",
+                    "rewardsRateFraction": "наградиRateFraction",
+                    "numerator": "броител",
+                    "denominator": "именител"
+                }
+            },
+            "placeholders": {
+                "optional": "(изборен)",
+                "tuple": "торка[]",
+                "number": "број",
+                "address": "адреса",
+                "fraction": "дропка",
+                "integer": "цел број",
+                "seconds": "секунди",
+                "days": "денови",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Нема базени"
+            },
+            "btns": {
+                "createPool": "Креирај базен",
+                "createPoolInForm": "Креирај"
+            },
+            "createPool": "Креирај базен",
+            "produce": "Производство",
+            "loading": "Се вчитува",
+            "viewInstancesList": "Освежи список"
+        }
+    }
+}

@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "Shitja e Tokenit",
+                        "timestamps": "Kohët",
+                        "prices": "Çmimet",
+                        "endTime": "Koha e Fundit",
+                        "thresholds": "Pragjet",
+                        "bonuses": "Bonuset"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "Pronari nuk mund të tërhiqet",
+                            "option1": "Pronari mund të tërheqë argumentet vetëm pasi të ketë kaluar koha e fundit",
+                            "option2": "Pronari mund të tërheqë argumentet në çdo kohë"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "Adresa e komunitetit",
+                    "methodkeccack": "Funksioni hash Keccak256",
+                    "roleId": "ID-ja e rolit",
+                    "sellingToken": "Adresa e Shitjes së Tokenit",
+                    "prices": "ETH, Çmimi",
+                    "thresholds": "# e argumenteve",
+                    "bonuses": "Bonus %"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "Nuk ka fonde"
+                },
+                "btns": {
+                    "createFund": "Krijo Fond",
+                    "createFundInForm": "Krijo"
+                },
+                "fundAddress": "Adresa e fondit",
+                "createFund": "Krijo Fond",
+                "fundInfo": "Informacion",
+                "produce": "Prodhoni",
+                "loading": "Po ngarkohet",
+                "viewInstancesList": "Rifresko listën"
+            }
+        }
+    }
+}

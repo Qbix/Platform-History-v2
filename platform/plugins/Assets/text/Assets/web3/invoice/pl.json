@@ -1,0 +1,27 @@
+{
+    "title": "Płacić",
+    "steps": {
+        "sending_native_coins": "Wysyłanie rodzimych monet",
+        "sending_tokens": "Wysyłanie tokenów",
+        "swap": "Zamieniać",
+        "approve": "Zatwierdzić",
+        "one_tx": "Powinieneś wysłać jedną transakcję",
+        "two_tx": "Powinieneś wysłać dwie transakcje"
+    },
+    "form": {
+        "fields": {
+            "labels": {
+                "funds_to_pay": "Fundusze do zapłaty"
+            }
+        },
+        "btns": {
+            "pay": "Płacić"
+        }
+    },
+    "msgs": {
+        "need_to_pay": "Trzeba zapłacić „ {{amountOut}} ” tokenów"
+    },
+    "errmsgs": {
+        "chain_is_not_supported": "Taki łańcuch o identyfikatorze „ {{chainId}} ” nie jest obsługiwany"
+    }
+}

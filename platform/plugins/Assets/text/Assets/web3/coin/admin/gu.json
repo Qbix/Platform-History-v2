@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "અવધિ",
+                    "bonusTokenFraction": "બોનસ ટોકનફ્રેક્શન",
+                    "popularToken": "લોકપ્રિય ટોકન",
+                    "donations": "દાન",
+                    "rewardsRateFraction": "rewardsratefraction",
+                    "numerator": "અંશ",
+                    "denominator": "છેદ"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "દિવસોમાં અવધિ",
+                    "bonusTokenFraction": "બોનસ ટોકનફ્રેક્શન",
+                    "popularToken": "લોકપ્રિય ટોકન",
+                    "donations": "દાન",
+                    "rewardsRateFraction": "rewardsratefraction",
+                    "numerator": "અંશ",
+                    "denominator": "છેદ"
+                }
+            },
+            "placeholders": {
+                "optional": "(વૈકલ્પિક)",
+                "tuple": "ટપલ[]",
+                "number": "સંખ્યા",
+                "address": "સરનામું",
+                "fraction": "અપૂર્ણાંક",
+                "integer": "પૂર્ણાંક",
+                "seconds": "સેકન્ડ",
+                "days": "દિવસ",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "ત્યાં કોઈ પૂલ નથી"
+            },
+            "btns": {
+                "createPool": "પૂલ બનાવો",
+                "createPoolInForm": "બનાવો"
+            },
+            "createPool": "પૂલ બનાવો",
+            "produce": "ઉત્પાદન કરો",
+            "loading": "લોડ કરી રહ્યું છે",
+            "viewInstancesList": "યાદી તાજી કરો"
+        }
+    }
+}

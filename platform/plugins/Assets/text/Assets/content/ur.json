@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "اس صارف کو کوئی والیٹ تفویض نہیں کیا گیا ہے۔",
         "TheWalletOfThisUserInvalid": "اس صارف کا پرس غلط ہے۔",
         "WalletInvalid": "والیٹ کا پتہ غلط ہے۔",
-        "CantManageFrozenSeries": "آپ منجمد سیریز کا نظم نہیں کر سکتے"
+        "CantManageFrozenSeries": "آپ منجمد سیریز کا نظم نہیں کر سکتے",
+        "SubscriptionStreamNotPaid": "آپ نے اس مواد کو دیکھنے کے لیے ادائیگی نہیں کی ہے۔ براہ کرم {{subscriptionUrl}} پر کلک کریں اور مناسب پلان کو سبسکرائب کریں۔"
     },
     "admin": {
         "Title": "انتظامی اثاثے۔",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "قیمت",
             "DescriptionPlaceholder": "سبسکرپشن پلان کی تفصیل",
             "SavePlan": "منصوبہ محفوظ کریں۔",
-            "NewPlan": "نیا منصوبہ"
+            "NewPlan": "نیا منصوبہ",
+            "SubscriptionTitle": "سبسکرپشن پلانز",
+            "AreYouSureDeletePlan": "کیا آپ واقعی اس پلان کو حذف کرنا چاہتے ہیں؟",
+            "Duration": "دورانیہ",
+            "Discount": "رعایت",
+            "Interrupt": "خلل ڈالنا",
+            "Continue": "جاری رہے",
+            "SelectDisplayType": "{{displayType}} منتخب کریں۔",
+            "EndDate": "آخری تاریخ"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "لوڈ ہو رہا ہے۔",
             "viewInstancesList": "فہرست کو تازہ کریں۔"
         }
+    },
+    "fundrise": {
+        "placeholder": "اس شراکت کے بارے میں کچھ لکھیں..."
     }
 }

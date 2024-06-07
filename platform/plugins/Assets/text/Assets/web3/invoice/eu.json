@@ -1,0 +1,27 @@
+{
+    "title": "Ordaindu",
+    "steps": {
+        "sending_native_coins": "Bertako txanponak bidaltzea",
+        "sending_tokens": "Tokenak bidaltzea",
+        "swap": "Trukatu",
+        "approve": "Onartu",
+        "one_tx": "Transakzio bat bidali beharko zenuke",
+        "two_tx": "Bi transakzio bidali behar dituzu"
+    },
+    "form": {
+        "fields": {
+            "labels": {
+                "funds_to_pay": "Ordaindu beharreko funtsak"
+            }
+        },
+        "btns": {
+            "pay": "Ordaindu"
+        }
+    },
+    "msgs": {
+        "need_to_pay": "&quot; {{amountOut}} &quot; tokenak ordaindu behar dira"
+    },
+    "errmsgs": {
+        "chain_is_not_supported": "&quot; {{chainId}} &quot; ID duten kate hori ez da onartzen"
+    }
+}

@@ -1,0 +1,27 @@
+{
+    "title": "לְשַׁלֵם",
+    "steps": {
+        "sending_native_coins": "שליחת מטבעות מקומיים",
+        "sending_tokens": "שולח אסימונים",
+        "swap": "לְהַחלִיף",
+        "approve": "לְאַשֵׁר",
+        "one_tx": "עליך לשלוח עסקה אחת",
+        "two_tx": "עליך לשלוח שתי עסקאות"
+    },
+    "form": {
+        "fields": {
+            "labels": {
+                "funds_to_pay": "כספים לתשלום"
+            }
+        },
+        "btns": {
+            "pay": "לְשַׁלֵם"
+        }
+    },
+    "msgs": {
+        "need_to_pay": "צריך לשלם אסימונים של &quot; {{amountOut}} &quot;."
+    },
+    "errmsgs": {
+        "chain_is_not_supported": "שרשרת כזו עם המזהה &quot; {{chainId}} &quot; אינה נתמכת"
+    }
+}

@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Durată",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "donatii",
+                    "rewardsRateFraction": "recompenseRateFracție",
+                    "numerator": "numărător",
+                    "denominator": "numitor"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Durata in zile",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "donatii",
+                    "rewardsRateFraction": "recompenseRateFracție",
+                    "numerator": "numărător",
+                    "denominator": "numitor"
+                }
+            },
+            "placeholders": {
+                "optional": "(optional)",
+                "tuple": "tuplu[]",
+                "number": "număr",
+                "address": "abordare",
+                "fraction": "fracțiune",
+                "integer": "întreg",
+                "seconds": "secunde",
+                "days": "zile",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Nu există piscine"
+            },
+            "btns": {
+                "createPool": "Creați pool",
+                "createPoolInForm": "Crea"
+            },
+            "createPool": "Creați pool",
+            "produce": "Legume şi fructe",
+            "loading": "Se încarcă",
+            "viewInstancesList": "Actualizează lista"
+        }
+    }
+}

@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "jeton de réserve",
+                        "duration": "Durée",
+                        "amount": "Montant"
+                    },
+                    "small": {
+                        "reserveToken": "jeton de réserve",
+                        "duration": "Durée",
+                        "amount": "Montant"
+                    }
+                },
+                "placeholders": {
+                    "duration": "Durée",
+                    "amount": "montant"
+                },
+                "btns": {
+                    "stake": "Miser"
+                },
+                "stake": "Miser",
+                "loading": "Chargement"
+            }
+        }
+    }
+}

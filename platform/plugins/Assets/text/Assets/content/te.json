@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "ఈ వినియోగదారుకు వాలెట్ కేటాయించబడలేదు",
         "TheWalletOfThisUserInvalid": "ఈ వినియోగదారు యొక్క వాలెట్ చెల్లదు",
         "WalletInvalid": "వాలెట్ చిరునామా చెల్లదు",
-        "CantManageFrozenSeries": "మీరు స్తంభింపచేసిన సిరీస్‌లను నిర్వహించలేరు"
+        "CantManageFrozenSeries": "మీరు స్తంభింపచేసిన సిరీస్‌లను నిర్వహించలేరు",
+        "SubscriptionStreamNotPaid": "ఈ కంటెంట్‌ని వీక్షించడానికి మీరు చెల్లించలేదు. దయచేసి {{subscriptionUrl}} క్లిక్ చేసి, తగిన ప్లాన్‌కు సభ్యత్వాన్ని పొందండి."
     },
     "admin": {
         "Title": "ఆస్తులు అడ్మినిస్ట్రేటివ్",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "ధర",
             "DescriptionPlaceholder": "సబ్‌స్క్రిప్షన్ ప్లాన్ వివరణ",
             "SavePlan": "ప్లాన్‌ను సేవ్ చేయండి",
-            "NewPlan": "కొత్త ప్లాన్"
+            "NewPlan": "కొత్త ప్లాన్",
+            "SubscriptionTitle": "సబ్‌స్క్రిప్షన్ ప్లాన్‌లు",
+            "AreYouSureDeletePlan": "మీరు ఖచ్చితంగా ఈ ప్లాన్‌ని తొలగించాలనుకుంటున్నారా?",
+            "Duration": "వ్యవధి",
+            "Discount": "తగ్గింపు",
+            "Interrupt": "అంతరాయం కలిగించు",
+            "Continue": "కొనసాగించు",
+            "SelectDisplayType": "{{displayType}} ఎంచుకోండి",
+            "EndDate": "ఆఖరి తేది"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "లోడ్",
             "viewInstancesList": "జాబితాను రిఫ్రెష్ చేయండి"
         }
+    },
+    "fundrise": {
+        "placeholder": "ఈ సహకారం గురించి ఏదైనా టైప్ చేయండి..."
     }
 }

@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "ขายโทเค็น",
+                        "timestamps": "ครั้ง",
+                        "prices": "ราคา",
+                        "endTime": "เวลาสิ้นสุด",
+                        "thresholds": "เกณฑ์",
+                        "bonuses": "โบนัส"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "เจ้าของถอนไม่ได้",
+                            "option1": "เจ้าของสามารถถอนโทเค็นได้หลังจากเวลาสิ้นสุดผ่านไปแล้วเท่านั้น",
+                            "option2": "เจ้าของสามารถถอนโทเค็นได้ตลอดเวลา"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "ที่อยู่ชุมชน",
+                    "methodkeccack": "ฟังก์ชันแฮช Keccak256",
+                    "roleId": "รหัสบทบาท",
+                    "sellingToken": "ขายที่อยู่โทเค็น",
+                    "prices": "ETH ราคา",
+                    "thresholds": "# ของโทเค็น",
+                    "bonuses": "โบนัส %"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "ไม่มีเงินทุน"
+                },
+                "btns": {
+                    "createFund": "สร้างกองทุน",
+                    "createFundInForm": "สร้าง"
+                },
+                "fundAddress": "ที่อยู่กองทุน",
+                "createFund": "สร้างกองทุน",
+                "fundInfo": "ข้อมูล",
+                "produce": "ผลิต",
+                "loading": "กำลังโหลด",
+                "viewInstancesList": "รีเฟรชรายการ"
+            }
+        }
+    }
+}

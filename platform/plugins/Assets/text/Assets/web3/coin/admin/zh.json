@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "代币Erc20",
+                    "duration": "期间",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "捐款",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "分子",
+                    "denominator": "分母"
+                },
+                "small": {
+                    "tokenErc20": "代币Erc20",
+                    "duration": "持续时间（天）",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "捐款",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "分子",
+                    "denominator": "分母"
+                }
+            },
+            "placeholders": {
+                "optional": "（选修的）",
+                "tuple": "元组[]",
+                "number": "数字",
+                "address": "地址",
+                "fraction": "分数",
+                "integer": "整数",
+                "seconds": "秒",
+                "days": "天",
+                "uint256": "uint256",
+                "uint192": "单位192",
+                "uint64": "uint64",
+                "uint32": "单位32",
+                "uint16": "单位16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "没有泳池"
+            },
+            "btns": {
+                "createPool": "创建池",
+                "createPoolInForm": "创造"
+            },
+            "createPool": "创建池",
+            "produce": "生产",
+            "loading": "加载中",
+            "viewInstancesList": "刷新列表"
+        }
+    }
+}

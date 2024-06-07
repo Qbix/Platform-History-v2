@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Iraupena",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "dohaintzak",
+                    "rewardsRateFraction": "sariakBalorazioaFrakzioa",
+                    "numerator": "zenbatzailea",
+                    "denominator": "izendatzailea"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Iraupena egunetan",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "dohaintzak",
+                    "rewardsRateFraction": "sariakBalorazioaFrakzioa",
+                    "numerator": "zenbatzailea",
+                    "denominator": "izendatzailea"
+                }
+            },
+            "placeholders": {
+                "optional": "(aukerakoa)",
+                "tuple": "tupla[]",
+                "number": "zenbakia",
+                "address": "helbidea",
+                "fraction": "zatikia",
+                "integer": "osokoa",
+                "seconds": "segundoak",
+                "days": "egunak",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Ez dago igerilekurik"
+            },
+            "btns": {
+                "createPool": "Sortu igerilekua",
+                "createPoolInForm": "Sortu"
+            },
+            "createPool": "Sortu igerilekua",
+            "produce": "Ekoiztu",
+            "loading": "Kargatzen",
+            "viewInstancesList": "Freskatu zerrenda"
+        }
+    }
+}

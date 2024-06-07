@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "ரிசர்வ் டோக்கன்",
+                        "duration": "கால அளவு",
+                        "amount": "தொகை"
+                    },
+                    "small": {
+                        "reserveToken": "ரிசர்வ் டோக்கன்",
+                        "duration": "கால அளவு",
+                        "amount": "தொகை"
+                    }
+                },
+                "placeholders": {
+                    "duration": "கால அளவு",
+                    "amount": "தொகை"
+                },
+                "btns": {
+                    "stake": "பங்கு"
+                },
+                "stake": "பங்கு",
+                "loading": "ஏற்றுகிறது"
+            }
+        }
+    }
+}

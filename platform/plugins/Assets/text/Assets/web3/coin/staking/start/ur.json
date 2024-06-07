@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "ریزرو ٹوکن",
+                        "duration": "دورانیہ",
+                        "amount": "رقم"
+                    },
+                    "small": {
+                        "reserveToken": "ریزرو ٹوکن",
+                        "duration": "دورانیہ",
+                        "amount": "رقم"
+                    }
+                },
+                "placeholders": {
+                    "duration": "دورانیہ",
+                    "amount": "رقم"
+                },
+                "btns": {
+                    "stake": "داؤ"
+                },
+                "stake": "داؤ",
+                "loading": "لوڈ ہو رہا ہے۔"
+            }
+        }
+    }
+}

@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "mã thông báoErc20",
+                    "duration": "Khoảng thời gian",
+                    "bonusTokenFraction": "phần thưởngTokenPhân số",
+                    "popularToken": "phổ biếnToken",
+                    "donations": "Quyên góp",
+                    "rewardsRateFraction": "phần thưởngTỷ lệPhân số",
+                    "numerator": "tử số",
+                    "denominator": "mẫu số"
+                },
+                "small": {
+                    "tokenErc20": "mã thông báoErc20",
+                    "duration": "Thời lượng tính theo ngày",
+                    "bonusTokenFraction": "phần thưởngTokenPhân số",
+                    "popularToken": "phổ biếnToken",
+                    "donations": "Quyên góp",
+                    "rewardsRateFraction": "phần thưởngTỷ lệPhân số",
+                    "numerator": "tử số",
+                    "denominator": "mẫu số"
+                }
+            },
+            "placeholders": {
+                "optional": "(không bắt buộc)",
+                "tuple": "bộ []",
+                "number": "con số",
+                "address": "Địa chỉ",
+                "fraction": "phân số",
+                "integer": "số nguyên",
+                "seconds": "giây",
+                "days": "ngày",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Không có hồ bơi"
+            },
+            "btns": {
+                "createPool": "Tạo nhóm",
+                "createPoolInForm": "Tạo nên"
+            },
+            "createPool": "Tạo nhóm",
+            "produce": "Sản xuất",
+            "loading": "Đang tải",
+            "viewInstancesList": "Làm mới danh sách"
+        }
+    }
+}

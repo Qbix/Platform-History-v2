@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "Цьому користувачеві не призначено гаманця",
         "TheWalletOfThisUserInvalid": "Гаманець цього користувача недійсний",
         "WalletInvalid": "Недійсна адреса гаманця",
-        "CantManageFrozenSeries": "Ви не можете керувати замороженими серіями"
+        "CantManageFrozenSeries": "Ви не можете керувати замороженими серіями",
+        "SubscriptionStreamNotPaid": "Ви не заплатили за перегляд цього вмісту. Натисніть {{subscriptionUrl}} і підпишіться на відповідний план."
     },
     "admin": {
         "Title": "Активи адміністративні",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "ціна",
             "DescriptionPlaceholder": "опис тарифного плану",
             "SavePlan": "Зберегти план",
-            "NewPlan": "Новий план"
+            "NewPlan": "Новий план",
+            "SubscriptionTitle": "Плани передплати",
+            "AreYouSureDeletePlan": "Ви впевнені, що хочете видалити цей план?",
+            "Duration": "Тривалість",
+            "Discount": "Знижка",
+            "Interrupt": "Переривати",
+            "Continue": "Продовжити",
+            "SelectDisplayType": "Виберіть {{displayType}}",
+            "EndDate": "Дата закінчення"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "Завантаження",
             "viewInstancesList": "Оновити список"
         }
+    },
+    "fundrise": {
+        "placeholder": "напишіть щось про цей внесок..."
     }
 }

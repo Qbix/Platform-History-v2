@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "rezervToken",
+                        "duration": "ხანგრძლივობა",
+                        "amount": "თანხა"
+                    },
+                    "small": {
+                        "reserveToken": "rezervToken",
+                        "duration": "ხანგრძლივობა",
+                        "amount": "თანხა"
+                    }
+                },
+                "placeholders": {
+                    "duration": "ხანგრძლივობა",
+                    "amount": "თანხა"
+                },
+                "btns": {
+                    "stake": "ფსონი"
+                },
+                "stake": "ფსონი",
+                "loading": "Ჩატვირთვა"
+            }
+        }
+    }
+}

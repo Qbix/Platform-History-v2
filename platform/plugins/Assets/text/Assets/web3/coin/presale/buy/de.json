@@ -1,0 +1,21 @@
+{
+    "coin": {
+        "presale": {
+            "buy": {
+                "form": {
+                    "labels": {
+                        "amount": "Wie viel soll investiert werden?"
+                    },
+                    "placeholders": {
+                        "amount": "Betrag von {{nativeCoin}}",
+                        "max": "Max: {{nativeCoinBalance}}"
+                    }
+                },
+                "btns": {
+                    "buy": "Kaufen",
+                    "execute": "Ausführen"
+                }
+            }
+        }
+    }
+}

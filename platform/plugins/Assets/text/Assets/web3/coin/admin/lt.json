@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Trukmė",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "populiarus Tokenas",
+                    "donations": "aukos",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "skaitiklis",
+                    "denominator": "vardiklis"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Trukmė dienomis",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "populiarus Tokenas",
+                    "donations": "aukos",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "skaitiklis",
+                    "denominator": "vardiklis"
+                }
+            },
+            "placeholders": {
+                "optional": "(neprivaloma)",
+                "tuple": "rinkinys[]",
+                "number": "numerį",
+                "address": "adresu",
+                "fraction": "trupmena",
+                "integer": "sveikasis skaičius",
+                "seconds": "sekundžių",
+                "days": "dienų",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Baseinų nėra"
+            },
+            "btns": {
+                "createPool": "Sukurti baseiną",
+                "createPoolInForm": "Sukurti"
+            },
+            "createPool": "Sukurti baseiną",
+            "produce": "Gaminti",
+            "loading": "Įkeliama",
+            "viewInstancesList": "Atnaujinti sąrašą"
+        }
+    }
+}

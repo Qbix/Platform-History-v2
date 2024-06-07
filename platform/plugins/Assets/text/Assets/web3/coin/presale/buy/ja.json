@@ -1,0 +1,21 @@
+{
+    "coin": {
+        "presale": {
+            "buy": {
+                "form": {
+                    "labels": {
+                        "amount": "いくら投資すればいいですか？"
+                    },
+                    "placeholders": {
+                        "amount": "{{nativeCoin}}の金額",
+                        "max": "最大: {{nativeCoinBalance}}"
+                    }
+                },
+                "btns": {
+                    "buy": "買う",
+                    "execute": "実行する"
+                }
+            }
+        }
+    }
+}

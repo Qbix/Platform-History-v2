@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "토큰 판매",
+                        "timestamps": "타임스",
+                        "prices": "물가",
+                        "endTime": "종료 시간",
+                        "thresholds": "임계값",
+                        "bonuses": "보너스"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "소유자는 철회할 수 없습니다.",
+                            "option1": "소유자는 endTime이 경과한 후에만 토큰을 인출할 수 있습니다.",
+                            "option2": "소유자는 언제든지 토큰을 인출할 수 있습니다."
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "커뮤니티 주소",
+                    "methodkeccack": "Keccak256 해시 함수",
+                    "roleId": "역할 ID",
+                    "sellingToken": "판매 토큰 주소",
+                    "prices": "ETH, 가격",
+                    "thresholds": "토큰 수",
+                    "bonuses": "보너스 %"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "자금이 없습니다"
+                },
+                "btns": {
+                    "createFund": "기금 조성",
+                    "createFundInForm": "만들다"
+                },
+                "fundAddress": "기금 주소",
+                "createFund": "기금 조성",
+                "fundInfo": "정보",
+                "produce": "생산하다",
+                "loading": "로드 중",
+                "viewInstancesList": "새로 고침 목록"
+            }
+        }
+    }
+}

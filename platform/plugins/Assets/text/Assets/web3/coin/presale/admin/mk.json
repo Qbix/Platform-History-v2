@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "Продажба на токен",
+                        "timestamps": "Времиња",
+                        "prices": "Цените",
+                        "endTime": "Време на завршување",
+                        "thresholds": "Прагови",
+                        "bonuses": "Бонуси"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "Сопственикот не може да се повлече",
+                            "option1": "Сопственикот може да ги повлече токените само откако ќе помине endTime",
+                            "option2": "Сопственикот може да повлече токени во секое време"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "Адреса на заедницата",
+                    "methodkeccack": "Keccak256 хаш функција",
+                    "roleId": "ID на улоги",
+                    "sellingToken": "Адреса на токен за продажба",
+                    "prices": "ЕТХ, цена",
+                    "thresholds": "# токени",
+                    "bonuses": "Бонус %"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "Нема средства"
+                },
+                "btns": {
+                    "createFund": "Креирај фонд",
+                    "createFundInForm": "Креирај"
+                },
+                "fundAddress": "Адреса на фондот",
+                "createFund": "Креирај фонд",
+                "fundInfo": "Инфо",
+                "produce": "Производство",
+                "loading": "Се вчитува",
+                "viewInstancesList": "Освежи список"
+            }
+        }
+    }
+}

@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "فروش توکن",
+                        "timestamps": "بار",
+                        "prices": "قیمت",
+                        "endTime": "زمان پایان",
+                        "thresholds": "آستانه ها",
+                        "bonuses": "جوایز"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "مالک نمی تواند برداشت کند",
+                            "option1": "مالک فقط پس از گذشت پایان زمان می‌تواند توکن‌ها را برداشت کند",
+                            "option2": "مالک می تواند توکن ها را در هر زمان برداشت کند"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "آدرس انجمن",
+                    "methodkeccack": "تابع هش Keccak256",
+                    "roleId": "شناسه نقش",
+                    "sellingToken": "آدرس توکن فروش",
+                    "prices": "اتریوم، قیمت",
+                    "thresholds": "# توکن",
+                    "bonuses": "جایزه ٪"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "هیچ بودجه ای وجود ندارد"
+                },
+                "btns": {
+                    "createFund": "صندوق ایجاد کنید",
+                    "createFundInForm": "ايجاد كردن"
+                },
+                "fundAddress": "آدرس صندوق",
+                "createFund": "صندوق ایجاد کنید",
+                "fundInfo": "اطلاعات",
+                "produce": "تولید کردن",
+                "loading": "بارگذاری",
+                "viewInstancesList": "فهرست بازخوانی کنید"
+            }
+        }
+    }
+}

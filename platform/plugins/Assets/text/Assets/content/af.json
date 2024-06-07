@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "Hierdie gebruiker het geen beursie toegewys nie",
         "TheWalletOfThisUserInvalid": "Die beursie van hierdie gebruiker is ongeldig",
         "WalletInvalid": "Wallet-adres ongeldig",
-        "CantManageFrozenSeries": "Jy kan nie bevrore reekse bestuur nie"
+        "CantManageFrozenSeries": "Jy kan nie bevrore reekse bestuur nie",
+        "SubscriptionStreamNotPaid": "Jy het nie betaal om hierdie inhoud te sien nie. Klik asseblief {{subscriptionUrl}} en teken in op die toepaslike plan."
     },
     "admin": {
         "Title": "Bates administratief",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "prys",
             "DescriptionPlaceholder": "intekening plan beskrywing",
             "SavePlan": "Stoor plan",
-            "NewPlan": "Nuwe Plan"
+            "NewPlan": "Nuwe Plan",
+            "SubscriptionTitle": "Intekenplanne",
+            "AreYouSureDeletePlan": "Is jy seker jy wil hierdie plan uitvee?",
+            "Duration": "Duur",
+            "Discount": "Afslag",
+            "Interrupt": "Onderbreek",
+            "Continue": "Aanhou",
+            "SelectDisplayType": "Kies {{displayType}}",
+            "EndDate": "einddatum"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "Laai tans",
             "viewInstancesList": "Herlaai lys"
         }
+    },
+    "fundrise": {
+        "placeholder": "tik iets oor hierdie bydrae..."
     }
 }

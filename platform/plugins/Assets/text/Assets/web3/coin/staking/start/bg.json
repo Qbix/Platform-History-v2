@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reserveToken",
+                        "duration": "Продължителност",
+                        "amount": "Количество"
+                    },
+                    "small": {
+                        "reserveToken": "reserveToken",
+                        "duration": "Продължителност",
+                        "amount": "Количество"
+                    }
+                },
+                "placeholders": {
+                    "duration": "Продължителност",
+                    "amount": "количество"
+                },
+                "btns": {
+                    "stake": "Залог"
+                },
+                "stake": "Залог",
+                "loading": "Зареждане"
+            }
+        }
+    }
+}

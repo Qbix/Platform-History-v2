@@ -175,7 +175,8 @@
         },
         "chat": {
             "prompt": "Sie laden Leute zu einem Gespräch ein, bei dem Sie in Kontakt bleiben, gemeinsam Fotos austauschen und vieles mehr können. Geben Sie dem Gespräch einen Namen:"
-        }
+        },
+        "Participants": "Menschen einladen"
     },
     "messages": {
         "html": {

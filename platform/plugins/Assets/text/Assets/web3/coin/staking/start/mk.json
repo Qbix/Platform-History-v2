@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "резерви Токен",
+                        "duration": "Времетраење",
+                        "amount": "износ"
+                    },
+                    "small": {
+                        "reserveToken": "резерви Токен",
+                        "duration": "Времетраење",
+                        "amount": "износ"
+                    }
+                },
+                "placeholders": {
+                    "duration": "Времетраење",
+                    "amount": "износ"
+                },
+                "btns": {
+                    "stake": "Влог"
+                },
+                "stake": "Влог",
+                "loading": "Се вчитува"
+            }
+        }
+    }
+}

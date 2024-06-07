@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "టోకెన్Erc20",
+                    "duration": "వ్యవధి",
+                    "bonusTokenFraction": "బోనస్ టోకెన్ ఫ్రాక్షన్",
+                    "popularToken": "ప్రముఖ టోకెన్",
+                    "donations": "విరాళాలు",
+                    "rewardsRateFraction": "రివార్డ్స్ రేటు భిన్నం",
+                    "numerator": "న్యూమరేటర్",
+                    "denominator": "హారం"
+                },
+                "small": {
+                    "tokenErc20": "టోకెన్Erc20",
+                    "duration": "రోజులలో వ్యవధి",
+                    "bonusTokenFraction": "బోనస్ టోకెన్ ఫ్రాక్షన్",
+                    "popularToken": "ప్రముఖ టోకెన్",
+                    "donations": "విరాళాలు",
+                    "rewardsRateFraction": "రివార్డ్స్ రేటు భిన్నం",
+                    "numerator": "న్యూమరేటర్",
+                    "denominator": "హారం"
+                }
+            },
+            "placeholders": {
+                "optional": "(ఐచ్ఛికం)",
+                "tuple": "టుపుల్[]",
+                "number": "సంఖ్య",
+                "address": "చిరునామా",
+                "fraction": "భిన్నం",
+                "integer": "పూర్ణ సంఖ్య",
+                "seconds": "సెకన్లు",
+                "days": "రోజులు",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "కొలనులు లేవు"
+            },
+            "btns": {
+                "createPool": "పూల్ సృష్టించండి",
+                "createPoolInForm": "సృష్టించు"
+            },
+            "createPool": "పూల్ సృష్టించండి",
+            "produce": "ఉత్పత్తి",
+            "loading": "లోడ్",
+            "viewInstancesList": "జాబితాను రిఫ్రెష్ చేయండి"
+        }
+    }
+}

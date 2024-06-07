@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "ટોકનનું વેચાણ",
+                        "timestamps": "વખત",
+                        "prices": "કિંમતો",
+                        "endTime": "સમાપ્તિ સમય",
+                        "thresholds": "થ્રેશોલ્ડ",
+                        "bonuses": "બોનસ"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "માલિક પાછી ખેંચી શકશે નહીં",
+                            "option1": "અંતિમ સમય પસાર થયા પછી જ માલિક ટોકન્સ પાછી ખેંચી શકે છે",
+                            "option2": "માલિક ગમે ત્યારે ટોકન્સ ઉપાડી શકે છે"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "સમુદાયનું સરનામું",
+                    "methodkeccack": "Keccak256 હેશ ફંક્શન",
+                    "roleId": "રોલ આઈડી",
+                    "sellingToken": "ટોકન સરનામું વેચાણ",
+                    "prices": "ETH, કિંમત",
+                    "thresholds": "# ટોકન્સ",
+                    "bonuses": "બોનસ %"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "ત્યાં કોઈ ભંડોળ નથી"
+                },
+                "btns": {
+                    "createFund": "ફંડ બનાવો",
+                    "createFundInForm": "બનાવો"
+                },
+                "fundAddress": "ફંડ સરનામું",
+                "createFund": "ફંડ બનાવો",
+                "fundInfo": "માહિતી",
+                "produce": "ઉત્પાદન કરો",
+                "loading": "લોડ કરી રહ્યું છે",
+                "viewInstancesList": "યાદી તાજી કરો"
+            }
+        }
+    }
+}

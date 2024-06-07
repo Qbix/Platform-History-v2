@@ -1,0 +1,27 @@
+{
+    "title": "Bayar",
+    "steps": {
+        "sending_native_coins": "Menghantar syiling asli",
+        "sending_tokens": "Menghantar token",
+        "swap": "Tukar",
+        "approve": "Terima",
+        "one_tx": "Anda harus menghantar satu transaksi",
+        "two_tx": "Anda harus menghantar dua transaksi"
+    },
+    "form": {
+        "fields": {
+            "labels": {
+                "funds_to_pay": "Dana untuk membayar"
+            }
+        },
+        "btns": {
+            "pay": "Bayar"
+        }
+    },
+    "msgs": {
+        "need_to_pay": "Perlu membayar token &quot; {{amountOut}} &quot;."
+    },
+    "errmsgs": {
+        "chain_is_not_supported": "Rantaian sedemikian dengan id &quot; {{chainId}} &quot; tidak disokong"
+    }
+}

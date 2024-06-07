@@ -1,0 +1,21 @@
+{
+    "coin": {
+        "presale": {
+            "buy": {
+                "form": {
+                    "labels": {
+                        "amount": "Kolik investovat?"
+                    },
+                    "placeholders": {
+                        "amount": "Částka {{nativeCoin}}",
+                        "max": "Max: {{nativeCoinBalance}}"
+                    }
+                },
+                "btns": {
+                    "buy": "Koupit",
+                    "execute": "Vykonat"
+                }
+            }
+        }
+    }
+}

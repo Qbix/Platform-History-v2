@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "Ishara ya kuuza",
+                        "timestamps": "Nyakati",
+                        "prices": "Bei",
+                        "endTime": "Wakati wa Mwisho",
+                        "thresholds": "Vizingiti",
+                        "bonuses": "Bonasi"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "Mmiliki hawezi kujiondoa",
+                            "option1": "Mmiliki anaweza kuondoa tokeni tu baada ya EndTime kupita",
+                            "option2": "Mmiliki anaweza kuondoa tokeni wakati wowote"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "Anwani ya jumuiya",
+                    "methodkeccack": "Keccak256 kazi ya heshi",
+                    "roleId": "Kitambulisho cha jukumu",
+                    "sellingToken": "Anwani ya Tokeni",
+                    "prices": "ETH, Bei",
+                    "thresholds": "# ya ishara",
+                    "bonuses": "Ziada %"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "Hakuna fedha"
+                },
+                "btns": {
+                    "createFund": "Unda Mfuko",
+                    "createFundInForm": "Unda"
+                },
+                "fundAddress": "Anwani ya mfuko",
+                "createFund": "Unda Mfuko",
+                "fundInfo": "Habari",
+                "produce": "Kuzalisha",
+                "loading": "Inapakia",
+                "viewInstancesList": "Onyesha upya Orodha"
+            }
+        }
+    }
+}

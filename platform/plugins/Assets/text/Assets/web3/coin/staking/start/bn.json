@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "রিজার্ভ টোকেন",
+                        "duration": "সময়কাল",
+                        "amount": "পরিমাণ"
+                    },
+                    "small": {
+                        "reserveToken": "রিজার্ভ টোকেন",
+                        "duration": "সময়কাল",
+                        "amount": "পরিমাণ"
+                    }
+                },
+                "placeholders": {
+                    "duration": "সময়কাল",
+                    "amount": "পরিমাণ"
+                },
+                "btns": {
+                    "stake": "বাজি"
+                },
+                "stake": "বাজি",
+                "loading": "লোড হচ্ছে"
+            }
+        }
+    }
+}

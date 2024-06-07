@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Διάρκεια",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "δημοφιλέςToken",
+                    "donations": "δωρεές",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "αριθμητής",
+                    "denominator": "παρονομαστής"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Διάρκεια σε ημέρες",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "δημοφιλέςToken",
+                    "donations": "δωρεές",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "αριθμητής",
+                    "denominator": "παρονομαστής"
+                }
+            },
+            "placeholders": {
+                "optional": "(προαιρετικός)",
+                "tuple": "πλειάδα[]",
+                "number": "αριθμός",
+                "address": "διεύθυνση",
+                "fraction": "κλάσμα",
+                "integer": "ακέραιος αριθμός",
+                "seconds": "δευτερόλεπτα",
+                "days": "ημέρες",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Δεν υπάρχουν πισίνες"
+            },
+            "btns": {
+                "createPool": "Δημιουργία πισίνας",
+                "createPoolInForm": "Δημιουργώ"
+            },
+            "createPool": "Δημιουργία πισίνας",
+            "produce": "Παράγω",
+            "loading": "Φόρτωση",
+            "viewInstancesList": "Ανανέωση λίστας"
+        }
+    }
+}

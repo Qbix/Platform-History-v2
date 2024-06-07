@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "Dan l-utent m&#39;għandux kartiera assenjat",
         "TheWalletOfThisUserInvalid": "Il-kartiera ta&#39; dan l-utent invalida",
         "WalletInvalid": "Indirizz tal-kartiera mhux validu",
-        "CantManageFrozenSeries": "Ma tistax tmexxi serje ffriżata"
+        "CantManageFrozenSeries": "Ma tistax tmexxi serje ffriżata",
+        "SubscriptionStreamNotPaid": "Inti ma ħallastx biex tara dan il-kontenut. Jekk jogħġbok ikklikkja {{subscriptionUrl}} u abbona għall-pjan xieraq."
     },
     "admin": {
         "Title": "Assi amministrattivi",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "prezz",
             "DescriptionPlaceholder": "deskrizzjoni tal-pjan ta&#39; abbonament",
             "SavePlan": "Ħlief Pjan",
-            "NewPlan": "Pjan Ġdid"
+            "NewPlan": "Pjan Ġdid",
+            "SubscriptionTitle": "Pjanijiet ta&#39; abbonament",
+            "AreYouSureDeletePlan": "Int żgur li trid tħassar dan il-pjan?",
+            "Duration": "Tul ta&#39; żmien",
+            "Discount": "Roħs",
+            "Interrupt": "Tinterrompi",
+            "Continue": "Kompli",
+            "SelectDisplayType": "Agħżel {{displayType}}",
+            "EndDate": "data tat-tmiem"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "Tagħbija",
             "viewInstancesList": "Aġġorna l-Lista"
         }
+    },
+    "fundrise": {
+        "placeholder": "ittajpja xi ħaġa dwar din il-kontribuzzjoni..."
     }
 }

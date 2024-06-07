@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "ReserveToken",
+                        "duration": "Doba trvání",
+                        "amount": "Množství"
+                    },
+                    "small": {
+                        "reserveToken": "ReserveToken",
+                        "duration": "Doba trvání",
+                        "amount": "Množství"
+                    }
+                },
+                "placeholders": {
+                    "duration": "Doba trvání",
+                    "amount": "množství"
+                },
+                "btns": {
+                    "stake": "Kůl"
+                },
+                "stake": "Kůl",
+                "loading": "načítání"
+            }
+        }
+    }
+}

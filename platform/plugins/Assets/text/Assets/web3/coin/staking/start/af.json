@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reserveToken",
+                        "duration": "Duur",
+                        "amount": "Bedrag"
+                    },
+                    "small": {
+                        "reserveToken": "reserveToken",
+                        "duration": "Duur",
+                        "amount": "Bedrag"
+                    }
+                },
+                "placeholders": {
+                    "duration": "Duur",
+                    "amount": "bedrag"
+                },
+                "btns": {
+                    "stake": "Stake"
+                },
+                "stake": "Stake",
+                "loading": "Laai tans"
+            }
+        }
+    }
+}

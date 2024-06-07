@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Varighed",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "populær Token",
+                    "donations": "donationer",
+                    "rewardsRateFraction": "belønningerRateFraction",
+                    "numerator": "tæller",
+                    "denominator": "nævner"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Varighed i dage",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "populær Token",
+                    "donations": "donationer",
+                    "rewardsRateFraction": "belønningerRateFraction",
+                    "numerator": "tæller",
+                    "denominator": "nævner"
+                }
+            },
+            "placeholders": {
+                "optional": "(valgfri)",
+                "tuple": "tuple[]",
+                "number": "nummer",
+                "address": "adresse",
+                "fraction": "brøkdel",
+                "integer": "heltal",
+                "seconds": "sekunder",
+                "days": "dage",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Der er ingen pools"
+            },
+            "btns": {
+                "createPool": "Opret pool",
+                "createPoolInForm": "skab"
+            },
+            "createPool": "Opret pool",
+            "produce": "Fremstille",
+            "loading": "Indlæser",
+            "viewInstancesList": "Opdater liste"
+        }
+    }
+}

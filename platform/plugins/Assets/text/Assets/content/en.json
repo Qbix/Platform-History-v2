@@ -171,7 +171,7 @@
             "Continue": "Continue",
             "NewPlan": "New Plan",
             "SelectDisplayType": "Select {{displayType}}",
-            "EndDate":  "end date"
+            "EndDate": "end date"
         }
     },
     "payments": {
@@ -226,7 +226,7 @@
             "content": "Received {{amount}} credits from {{fromUserName}}"
         },
         "Assets\/credits\/alert": {
-            "content": "You have insufficient credits in your account. Please visit the following <a href='{{link}}'>link</a> to purchase more credits."
+            "content": "You have insufficient credits in your account. Please visit the following <a href='{{link}}'>link<\/a> to purchase more credits."
         }
     },
     "billing": {
@@ -605,7 +605,7 @@
             "TokenWasUnlocked": "Token \"{{title}}\" was unlocked"
         }
     },
-	"fundrise": {
+    "fundrise": {
         "placeholder": "type something about this contribution..."
     },
     "currencies": {

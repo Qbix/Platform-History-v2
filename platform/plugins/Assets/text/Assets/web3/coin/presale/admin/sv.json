@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "Säljer Token",
+                        "timestamps": "Tider",
+                        "prices": "Priser",
+                        "endTime": "Sluttid",
+                        "thresholds": "Trösklar",
+                        "bonuses": "Bonusar"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "Ägaren kan inte dra sig ur",
+                            "option1": "Ägaren kan ta ut tokens först efter att sluttiden har passerat",
+                            "option2": "Ägaren kan ta ut tokens när som helst"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "Gemenskapsadress",
+                    "methodkeccack": "Keccak256 hashfunktion",
+                    "roleId": "Roll-ID",
+                    "sellingToken": "Sälj Token-adress",
+                    "prices": "ETH, Pris",
+                    "thresholds": "# av tokens",
+                    "bonuses": "Bonus %"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "Det finns inga medel"
+                },
+                "btns": {
+                    "createFund": "Skapa fond",
+                    "createFundInForm": "Skapa"
+                },
+                "fundAddress": "Fondens adress",
+                "createFund": "Skapa fond",
+                "fundInfo": "Info",
+                "produce": "Producera",
+                "loading": "Läser in",
+                "viewInstancesList": "Uppdatera listan"
+            }
+        }
+    }
+}

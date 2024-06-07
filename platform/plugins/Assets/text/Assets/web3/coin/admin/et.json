@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Kestus",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "populaarne Token",
+                    "donations": "annetused",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "lugeja",
+                    "denominator": "nimetaja"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Kestus päevades",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "populaarne Token",
+                    "donations": "annetused",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "lugeja",
+                    "denominator": "nimetaja"
+                }
+            },
+            "placeholders": {
+                "optional": "(valikuline)",
+                "tuple": "mitmekordne[]",
+                "number": "number",
+                "address": "aadress",
+                "fraction": "murdosa",
+                "integer": "täisarv",
+                "seconds": "sekundit",
+                "days": "päevadel",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "unint64",
+                "uint32": "uint32",
+                "uint16": "unint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Basseine ei ole"
+            },
+            "btns": {
+                "createPool": "Loo bassein",
+                "createPoolInForm": "Loo"
+            },
+            "createPool": "Loo bassein",
+            "produce": "Toota",
+            "loading": "Laadimine",
+            "viewInstancesList": "Värskenda loendit"
+        }
+    }
+}

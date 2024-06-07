@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "Nid oes gan y defnyddiwr hwn waled wedi&#39;i neilltuo",
         "TheWalletOfThisUserInvalid": "Mae waled y defnyddiwr hwn yn annilys",
         "WalletInvalid": "Cyfeiriad waled yn annilys",
-        "CantManageFrozenSeries": "Ni allwch reoli cyfresi wedi&#39;u rhewi"
+        "CantManageFrozenSeries": "Ni allwch reoli cyfresi wedi&#39;u rhewi",
+        "SubscriptionStreamNotPaid": "Nid ydych wedi talu i weld y cynnwys hwn. Cliciwch ar {{subscriptionUrl}} a thanysgrifio i&#39;r cynllun priodol."
     },
     "admin": {
         "Title": "Gweinyddol asedau",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "pris",
             "DescriptionPlaceholder": "disgrifiad cynllun tanysgrifio",
             "SavePlan": "Cynllun Arbed",
-            "NewPlan": "Cynllun Newydd"
+            "NewPlan": "Cynllun Newydd",
+            "SubscriptionTitle": "Cynlluniau tanysgrifio",
+            "AreYouSureDeletePlan": "Ydych chi&#39;n siŵr eich bod am ddileu&#39;r cynllun hwn?",
+            "Duration": "Hyd",
+            "Discount": "Disgownt",
+            "Interrupt": "Torri ar draws",
+            "Continue": "Parhau",
+            "SelectDisplayType": "Dewiswch {{displayType}}",
+            "EndDate": "Dyddiad Gorffen"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "Llwytho",
             "viewInstancesList": "Rhestr Adnewyddu"
         }
+    },
+    "fundrise": {
+        "placeholder": "Teipiwch rywbeth am y cyfraniad hwn..."
     }
 }

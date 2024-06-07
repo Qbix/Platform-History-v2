@@ -175,7 +175,8 @@
         },
         "chat": {
             "prompt": "Siz insanları söhbətə dəvət edəcəksiniz, burada əlaqə saxlaya bilərsiniz, fotoşəkilləri birlikdə paylaşa və s. Bir ad verin:"
-        }
+        },
+        "Participants": "İnsanları Dəvət Et"
     },
     "messages": {
         "html": {

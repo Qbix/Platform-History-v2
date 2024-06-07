@@ -1,0 +1,27 @@
+{
+    "title": "plačaj",
+    "steps": {
+        "sending_native_coins": "Pošiljanje domačih kovancev",
+        "sending_tokens": "Pošiljanje žetonov",
+        "swap": "Zamenjaj",
+        "approve": "odobri",
+        "one_tx": "Moral bi poslati eno transakcijo",
+        "two_tx": "Moral bi poslati dve transakciji"
+    },
+    "form": {
+        "fields": {
+            "labels": {
+                "funds_to_pay": "Sredstva za plačilo"
+            }
+        },
+        "btns": {
+            "pay": "plačaj"
+        }
+    },
+    "msgs": {
+        "need_to_pay": "Plačati je treba &quot; {{amountOut}} &quot; žetonov"
+    },
+    "errmsgs": {
+        "chain_is_not_supported": "Takšna veriga z id &quot; {{chainId}} &quot; ni podprta"
+    }
+}

@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "Aquest usuari no té assignada cap cartera",
         "TheWalletOfThisUserInvalid": "La cartera d&#39;aquest usuari no és vàlida",
         "WalletInvalid": "L&#39;adreça de la cartera no és vàlida",
-        "CantManageFrozenSeries": "No pots gestionar sèries congelades"
+        "CantManageFrozenSeries": "No pots gestionar sèries congelades",
+        "SubscriptionStreamNotPaid": "No has pagat per veure aquest contingut. Feu clic {{subscriptionUrl}} i subscriviu-vos al pla adequat."
     },
     "admin": {
         "Title": "Administratiu patrimonial",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "preu",
             "DescriptionPlaceholder": "descripció del pla de subscripció",
             "SavePlan": "Desa el pla",
-            "NewPlan": "Nou Pla"
+            "NewPlan": "Nou Pla",
+            "SubscriptionTitle": "Plans de subscripció",
+            "AreYouSureDeletePlan": "Esteu segur que voleu suprimir aquest pla?",
+            "Duration": "Durada",
+            "Discount": "Descompte",
+            "Interrupt": "Interrupció",
+            "Continue": "Continua",
+            "SelectDisplayType": "Seleccioneu {{displayType}}",
+            "EndDate": "data de finalització"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "Carregant",
             "viewInstancesList": "Actualitza la llista"
         }
+    },
+    "fundrise": {
+        "placeholder": "escriviu alguna cosa sobre aquesta contribució..."
     }
 }

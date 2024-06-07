@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "Parduodu žetoną",
+                        "timestamps": "Laikai",
+                        "prices": "Kainos",
+                        "endTime": "Pabaigos laikas",
+                        "thresholds": "Slenksčiai",
+                        "bonuses": "Premijos"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "Savininkas negali atsiimti",
+                            "option1": "Savininkas gali atsiimti žetonus tik praėjus endTime",
+                            "option2": "Savininkas gali bet kada atsiimti žetonus"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "Bendrijos adresas",
+                    "methodkeccack": "Keccak256 maišos funkcija",
+                    "roleId": "Vaidmens ID",
+                    "sellingToken": "Parduodu Token adresą",
+                    "prices": "ETH, kaina",
+                    "thresholds": "Žetonų skaičius",
+                    "bonuses": "Premija %"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "Lėšų nėra"
+                },
+                "btns": {
+                    "createFund": "Sukurti fondą",
+                    "createFundInForm": "Sukurti"
+                },
+                "fundAddress": "Fondo adresas",
+                "createFund": "Sukurti fondą",
+                "fundInfo": "Informacija",
+                "produce": "Gaminti",
+                "loading": "Įkeliama",
+                "viewInstancesList": "Atnaujinti sąrašą"
+            }
+        }
+    }
+}

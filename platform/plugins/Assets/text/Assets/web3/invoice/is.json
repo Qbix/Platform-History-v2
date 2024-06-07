@@ -1,0 +1,27 @@
+{
+    "title": "Borga",
+    "steps": {
+        "sending_native_coins": "Að senda innfædda mynt",
+        "sending_tokens": "Sendir tákn",
+        "swap": "Skipta",
+        "approve": "Samþykkja",
+        "one_tx": "Þú ættir að senda eina færslu",
+        "two_tx": "Þú ættir að senda tvær færslur"
+    },
+    "form": {
+        "fields": {
+            "labels": {
+                "funds_to_pay": "Fjármunir til að greiða"
+            }
+        },
+        "btns": {
+            "pay": "Borga"
+        }
+    },
+    "msgs": {
+        "need_to_pay": "Þarf að borga &quot; {{amountOut}} &quot; tákn"
+    },
+    "errmsgs": {
+        "chain_is_not_supported": "Slík keðja með auðkenninu &quot; {{chainId}} &quot; er ekki studd"
+    }
+}

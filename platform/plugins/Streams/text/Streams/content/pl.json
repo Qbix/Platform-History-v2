@@ -175,7 +175,8 @@
         },
         "chat": {
             "prompt": "Będziesz zapraszać ludzi do rozmów, podczas których będziesz mógł pozostać w kontakcie, udostępniać wspólne zdjęcia i nie tylko. Daj temu imię:"
-        }
+        },
+        "Participants": "Zaproś ludzi"
     },
     "messages": {
         "html": {

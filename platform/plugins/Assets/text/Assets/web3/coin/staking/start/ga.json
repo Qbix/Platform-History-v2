@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "cúlchiste",
+                        "duration": "Fad",
+                        "amount": "Méid"
+                    },
+                    "small": {
+                        "reserveToken": "cúlchiste",
+                        "duration": "Fad",
+                        "amount": "Méid"
+                    }
+                },
+                "placeholders": {
+                    "duration": "Fad",
+                    "amount": "méid"
+                },
+                "btns": {
+                    "stake": "Geall"
+                },
+                "stake": "Geall",
+                "loading": "Ag lódáil"
+            }
+        }
+    }
+}

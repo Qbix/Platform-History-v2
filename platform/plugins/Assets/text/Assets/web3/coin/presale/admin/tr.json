@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "Token Satışı",
+                        "timestamps": "Zamanlar",
+                        "prices": "Fiyat:% s",
+                        "endTime": "Bitiş zamanı",
+                        "thresholds": "Eşikler",
+                        "bonuses": "Bonuslar"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "Sahibi geri çekilemez",
+                            "option1": "Sahip, jetonları yalnızca endTime geçtikten sonra çekebilir",
+                            "option2": "Sahibi dilediği zaman jetonları geri çekebilir"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "Topluluk adresi",
+                    "methodkeccack": "Keccak256 karma işlevi",
+                    "roleId": "Rol Kimliği",
+                    "sellingToken": "Token adresinin satışı",
+                    "prices": "ETH, Fiyat",
+                    "thresholds": "jeton sayısı",
+                    "bonuses": "Bonus yüzdesi"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "Fon yok"
+                },
+                "btns": {
+                    "createFund": "Fon Oluştur",
+                    "createFundInForm": "Yaratmak"
+                },
+                "fundAddress": "Fon adresi",
+                "createFund": "Fon Oluştur",
+                "fundInfo": "Bilgi",
+                "produce": "Üretmek",
+                "loading": "Yükleniyor",
+                "viewInstancesList": "Listeyi Yenile"
+            }
+        }
+    }
+}

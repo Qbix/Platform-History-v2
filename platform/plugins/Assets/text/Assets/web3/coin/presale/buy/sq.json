@@ -1,0 +1,21 @@
+{
+    "coin": {
+        "presale": {
+            "buy": {
+                "form": {
+                    "labels": {
+                        "amount": "Sa për të investuar?"
+                    },
+                    "placeholders": {
+                        "amount": "Shuma prej {{nativeCoin}}",
+                        "max": "Maksimumi: {{nativeCoinBalance}}"
+                    }
+                },
+                "btns": {
+                    "buy": "Blej",
+                    "execute": "Ekzekutoni"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "トークンの販売",
+                        "timestamps": "タイムズ",
+                        "prices": "価格",
+                        "endTime": "終了時間",
+                        "thresholds": "閾値",
+                        "bonuses": "ボーナス"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "オーナーは撤退できない",
+                            "option1": "所有者は終了時間が経過した後にのみトークンを引き出すことができます",
+                            "option2": "所有者はいつでもトークンを引き出すことができます"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "コミュニティアドレス",
+                    "methodkeccack": "Keccak256ハッシュ関数",
+                    "roleId": "ロールID",
+                    "sellingToken": "トークン販売アドレス",
+                    "prices": "ETH、価格",
+                    "thresholds": "トークンの数",
+                    "bonuses": "ボーナス %"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "資金がない"
+                },
+                "btns": {
+                    "createFund": "ファンドの作成",
+                    "createFundInForm": "作成する"
+                },
+                "fundAddress": "ファンドアドレス",
+                "createFund": "ファンドの作成",
+                "fundInfo": "情報",
+                "produce": "生産する",
+                "loading": "読み込み中",
+                "viewInstancesList": "リストを更新"
+            }
+        }
+    }
+}

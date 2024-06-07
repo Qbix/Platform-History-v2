@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Varaktighet",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "populär Token",
+                    "donations": "donationer",
+                    "rewardsRateFraction": "belöningarRateFraction",
+                    "numerator": "täljare",
+                    "denominator": "nämnare"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Varaktighet i dagar",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "populär Token",
+                    "donations": "donationer",
+                    "rewardsRateFraction": "belöningarRateFraction",
+                    "numerator": "täljare",
+                    "denominator": "nämnare"
+                }
+            },
+            "placeholders": {
+                "optional": "(frivillig)",
+                "tuple": "tuppel[]",
+                "number": "siffra",
+                "address": "adress",
+                "fraction": "fraktion",
+                "integer": "heltal",
+                "seconds": "sekunder",
+                "days": "dagar",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Det finns inga pooler"
+            },
+            "btns": {
+                "createPool": "Skapa pool",
+                "createPoolInForm": "Skapa"
+            },
+            "createPool": "Skapa pool",
+            "produce": "Producera",
+            "loading": "Läser in",
+            "viewInstancesList": "Uppdatera listan"
+        }
+    }
+}

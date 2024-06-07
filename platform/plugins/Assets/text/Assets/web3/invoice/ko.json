@@ -1,0 +1,27 @@
+{
+    "title": "지불하다",
+    "steps": {
+        "sending_native_coins": "네이티브 코인 보내기",
+        "sending_tokens": "토큰 보내기",
+        "swap": "교환",
+        "approve": "승인하다",
+        "one_tx": "하나의 거래를 보내야 합니다",
+        "two_tx": "두 개의 트랜잭션을 보내야 합니다"
+    },
+    "form": {
+        "fields": {
+            "labels": {
+                "funds_to_pay": "지불할 자금"
+            }
+        },
+        "btns": {
+            "pay": "지불하다"
+        }
+    },
+    "msgs": {
+        "need_to_pay": "&quot; {{amountOut}} &quot; 토큰을 지불해야 합니다."
+    },
+    "errmsgs": {
+        "chain_is_not_supported": "ID가 &quot; {{chainId}} &quot;인 체인은 지원되지 않습니다."
+    }
+}

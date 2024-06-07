@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "rezervëToken",
+                        "duration": "Kohëzgjatja",
+                        "amount": "Shuma"
+                    },
+                    "small": {
+                        "reserveToken": "rezervëToken",
+                        "duration": "Kohëzgjatja",
+                        "amount": "Shuma"
+                    }
+                },
+                "placeholders": {
+                    "duration": "Kohëzgjatja",
+                    "amount": "shuma"
+                },
+                "btns": {
+                    "stake": "Kunj"
+                },
+                "stake": "Kunj",
+                "loading": "Po ngarkohet"
+            }
+        }
+    }
+}

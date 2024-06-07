@@ -1,0 +1,27 @@
+{
+    "title": "Zahlen",
+    "steps": {
+        "sending_native_coins": "Senden nativer Münzen",
+        "sending_tokens": "Token senden",
+        "swap": "Tauschen",
+        "approve": "Genehmigen",
+        "one_tx": "Sie sollten eine Transaktion senden",
+        "two_tx": "Sie sollten zwei Transaktionen senden"
+    },
+    "form": {
+        "fields": {
+            "labels": {
+                "funds_to_pay": "Zu zahlende Mittel"
+            }
+        },
+        "btns": {
+            "pay": "Zahlen"
+        }
+    },
+    "msgs": {
+        "need_to_pay": "Müssen &quot; {{amountOut}} &quot; Tokens bezahlen"
+    },
+    "errmsgs": {
+        "chain_is_not_supported": "Eine solche Kette mit der ID &quot; {{chainId}} &quot; wird nicht unterstützt"
+    }
+}

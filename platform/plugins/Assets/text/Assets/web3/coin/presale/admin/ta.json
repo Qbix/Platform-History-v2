@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "டோக்கன் விற்பனை",
+                        "timestamps": "நேரங்கள்",
+                        "prices": "விலைகள்",
+                        "endTime": "முடிவு நேரம்",
+                        "thresholds": "வாசல்கள்",
+                        "bonuses": "போனஸ்"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "உரிமையாளர் திரும்பப் பெற முடியாது",
+                            "option1": "இறுதி நேரம் கடந்த பின்னரே உரிமையாளர் டோக்கன்களை திரும்பப் பெற முடியும்",
+                            "option2": "உரிமையாளர் எப்போது வேண்டுமானாலும் டோக்கன்களை திரும்பப் பெறலாம்"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "சமூக முகவரி",
+                    "methodkeccack": "Keccak256 ஹாஷ் செயல்பாடு",
+                    "roleId": "பங்கு ஐடி",
+                    "sellingToken": "டோக்கன் முகவரி விற்பனை",
+                    "prices": "ETH, விலை",
+                    "thresholds": "# டோக்கன்கள்",
+                    "bonuses": "போனஸ் %"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "நிதி இல்லை"
+                },
+                "btns": {
+                    "createFund": "நிதியை உருவாக்கவும்",
+                    "createFundInForm": "உருவாக்கு"
+                },
+                "fundAddress": "நிதி முகவரி",
+                "createFund": "நிதியை உருவாக்கவும்",
+                "fundInfo": "தகவல்",
+                "produce": "உற்பத்தி செய்",
+                "loading": "ஏற்றுகிறது",
+                "viewInstancesList": "பட்டியலைப் புதுப்பிக்கவும்"
+            }
+        }
+    }
+}

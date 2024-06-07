@@ -1,0 +1,27 @@
+{
+    "title": "પે",
+    "steps": {
+        "sending_native_coins": "દેશી સિક્કા મોકલી રહ્યા છે",
+        "sending_tokens": "ટોકન્સ મોકલી રહ્યાં છીએ",
+        "swap": "સ્વેપ",
+        "approve": "મંજૂર",
+        "one_tx": "તમારે એક વ્યવહાર મોકલવો જોઈએ",
+        "two_tx": "તમારે બે વ્યવહારો મોકલવા જોઈએ"
+    },
+    "form": {
+        "fields": {
+            "labels": {
+                "funds_to_pay": "ચૂકવવા માટે ભંડોળ"
+            }
+        },
+        "btns": {
+            "pay": "પે"
+        }
+    },
+    "msgs": {
+        "need_to_pay": "&quot; {{amountOut}} &quot; ટોકન્સ ચૂકવવાની જરૂર છે"
+    },
+    "errmsgs": {
+        "chain_is_not_supported": "id &quot; {{chainId}} &quot; સાથે આવી સાંકળ આધારભૂત નથી"
+    }
+}

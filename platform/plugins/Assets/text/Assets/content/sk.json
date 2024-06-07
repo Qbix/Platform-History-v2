@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "Tento používateľ nemá priradenú žiadnu peňaženku",
         "TheWalletOfThisUserInvalid": "Peňaženka tohto používateľa je neplatná",
         "WalletInvalid": "Adresa peňaženky je neplatná",
-        "CantManageFrozenSeries": "Nemôžete spravovať zmrazené série"
+        "CantManageFrozenSeries": "Nemôžete spravovať zmrazené série",
+        "SubscriptionStreamNotPaid": "Za zobrazenie tohto obsahu ste nezaplatili. Kliknite na {{subscriptionUrl}} a prihláste sa na odber príslušného plánu."
     },
     "admin": {
         "Title": "Správa majetku",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "cena",
             "DescriptionPlaceholder": "popis plánu predplatného",
             "SavePlan": "Uložiť plán",
-            "NewPlan": "Nový plán"
+            "NewPlan": "Nový plán",
+            "SubscriptionTitle": "Plány predplatného",
+            "AreYouSureDeletePlan": "Naozaj chcete odstrániť tento plán?",
+            "Duration": "Trvanie",
+            "Discount": "Zľava",
+            "Interrupt": "Prerušiť",
+            "Continue": "ďalej",
+            "SelectDisplayType": "Vyberte {{displayType}}",
+            "EndDate": "dátum ukončenia"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "Načítava",
             "viewInstancesList": "Obnoviť zoznam"
         }
+    },
+    "fundrise": {
+        "placeholder": "napíš niečo o tomto príspevku..."
     }
 }

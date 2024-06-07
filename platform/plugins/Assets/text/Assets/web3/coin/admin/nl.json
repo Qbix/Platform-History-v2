@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Duur",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "populairToken",
+                    "donations": "donaties",
+                    "rewardsRateFraction": "beloningenRateFraction",
+                    "numerator": "teller",
+                    "denominator": "noemer"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Duur in dagen",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "populairToken",
+                    "donations": "donaties",
+                    "rewardsRateFraction": "beloningenRateFraction",
+                    "numerator": "teller",
+                    "denominator": "noemer"
+                }
+            },
+            "placeholders": {
+                "optional": "(optioneel)",
+                "tuple": "tupel[]",
+                "number": "nummer",
+                "address": "adres",
+                "fraction": "fractie",
+                "integer": "geheel getal",
+                "seconds": "seconden",
+                "days": "dagen",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Er zijn geen zwembaden"
+            },
+            "btns": {
+                "createPool": "Pool maken",
+                "createPoolInForm": "Creëren"
+            },
+            "createPool": "Pool maken",
+            "produce": "Produceren",
+            "loading": "Bezig met laden",
+            "viewInstancesList": "Ververs lijst"
+        }
+    }
+}

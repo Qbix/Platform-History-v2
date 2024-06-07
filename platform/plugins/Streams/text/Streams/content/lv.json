@@ -175,7 +175,8 @@
         },
         "chat": {
             "prompt": "Jūs uzaicināsit cilvēkus uz sarunu, kurā varēsit sazināties, koplietot fotoattēlus un veikt citas darbības. Piešķiriet tai nosaukumu:"
-        }
+        },
+        "Participants": "Uzaiciniet cilvēkus"
     },
     "messages": {
         "html": {

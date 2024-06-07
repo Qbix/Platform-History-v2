@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "ReserveToken",
+                        "duration": "Durata",
+                        "amount": "Quantità"
+                    },
+                    "small": {
+                        "reserveToken": "ReserveToken",
+                        "duration": "Durata",
+                        "amount": "Quantità"
+                    }
+                },
+                "placeholders": {
+                    "duration": "Durata",
+                    "amount": "quantità"
+                },
+                "btns": {
+                    "stake": "Palo"
+                },
+                "stake": "Palo",
+                "loading": "Caricamento"
+            }
+        }
+    }
+}

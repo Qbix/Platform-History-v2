@@ -1,0 +1,21 @@
+{
+    "coin": {
+        "presale": {
+            "buy": {
+                "form": {
+                    "labels": {
+                        "amount": "எவ்வளவு முதலீடு செய்ய வேண்டும்?"
+                    },
+                    "placeholders": {
+                        "amount": "தொகை {{nativeCoin}}",
+                        "max": "அதிகபட்சம்: {{nativeCoinBalance}}"
+                    }
+                },
+                "btns": {
+                    "buy": "வாங்க",
+                    "execute": "செயல்படுத்த"
+                }
+            }
+        }
+    }
+}

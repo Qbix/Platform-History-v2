@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "دورانیہ",
+                    "bonusTokenFraction": "بونس ٹوکن فریکشن",
+                    "popularToken": "مقبول ٹوکن",
+                    "donations": "عطیات",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "عدد",
+                    "denominator": "فرق"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "دنوں میں دورانیہ",
+                    "bonusTokenFraction": "بونس ٹوکن فریکشن",
+                    "popularToken": "مقبول ٹوکن",
+                    "donations": "عطیات",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "عدد",
+                    "denominator": "فرق"
+                }
+            },
+            "placeholders": {
+                "optional": "(اختیاری)",
+                "tuple": "ٹپل[]",
+                "number": "نمبر",
+                "address": "ایڈریس",
+                "fraction": "حصہ",
+                "integer": "عدد",
+                "seconds": "سیکنڈ",
+                "days": "دن",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "کوئی تالاب نہیں ہیں۔"
+            },
+            "btns": {
+                "createPool": "پول بنائیں",
+                "createPoolInForm": "بنانا"
+            },
+            "createPool": "پول بنائیں",
+            "produce": "پیدا کرنا",
+            "loading": "لوڈ ہو رہا ہے۔",
+            "viewInstancesList": "فہرست کو تازہ کریں۔"
+        }
+    }
+}

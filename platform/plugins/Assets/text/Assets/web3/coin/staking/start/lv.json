@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "rezervesToken",
+                        "duration": "Ilgums",
+                        "amount": "Summa"
+                    },
+                    "small": {
+                        "reserveToken": "rezervesToken",
+                        "duration": "Ilgums",
+                        "amount": "Summa"
+                    }
+                },
+                "placeholders": {
+                    "duration": "Ilgums",
+                    "amount": "summa"
+                },
+                "btns": {
+                    "stake": "Miets"
+                },
+                "stake": "Miets",
+                "loading": "Notiek ielāde"
+            }
+        }
+    }
+}

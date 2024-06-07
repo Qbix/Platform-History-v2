@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "رزرو توکن",
+                        "duration": "مدت زمان",
+                        "amount": "میزان"
+                    },
+                    "small": {
+                        "reserveToken": "رزرو توکن",
+                        "duration": "مدت زمان",
+                        "amount": "میزان"
+                    }
+                },
+                "placeholders": {
+                    "duration": "مدت زمان",
+                    "amount": "میزان"
+                },
+                "btns": {
+                    "stake": "سهام"
+                },
+                "stake": "سهام",
+                "loading": "بارگذاری"
+            }
+        }
+    }
+}

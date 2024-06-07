@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "Díol Chomhartha",
+                        "timestamps": "Amanna",
+                        "prices": "Praghsanna",
+                        "endTime": "Am Deiridh",
+                        "thresholds": "Tairseacha",
+                        "bonuses": "Bónais"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "Ní féidir leis an úinéir tarraingt siar",
+                            "option1": "Ní féidir leis an úinéir comharthaí a tharraingt siar ach amháin tar éis deireadh Ama a rith",
+                            "option2": "Is féidir leis an úinéir comharthaí a tharraingt siar am ar bith"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "Seoladh pobail",
+                    "methodkeccack": "Feidhm hash Keccak256",
+                    "roleId": "Aitheantas Róil",
+                    "sellingToken": "Seoladh Token á dhíol",
+                    "prices": "ETH, Praghas",
+                    "thresholds": "# chomharthaí",
+                    "bonuses": "Bónas %"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "Níl aon chistí ann"
+                },
+                "btns": {
+                    "createFund": "Cruthaigh Ciste",
+                    "createFundInForm": "Cruthaigh"
+                },
+                "fundAddress": "Seoladh ciste",
+                "createFund": "Cruthaigh Ciste",
+                "fundInfo": "Eolas",
+                "produce": "Tháirgeadh",
+                "loading": "Ag lódáil",
+                "viewInstancesList": "Liosta Athnuaigh"
+            }
+        }
+    }
+}

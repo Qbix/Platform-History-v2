@@ -1,0 +1,27 @@
+{
+    "title": "Betala",
+    "steps": {
+        "sending_native_coins": "Skickar inhemska mynt",
+        "sending_tokens": "Skickar tokens",
+        "swap": "Byta",
+        "approve": "Godkänna",
+        "one_tx": "Du bör skicka en transaktion",
+        "two_tx": "Du bör skicka två transaktioner"
+    },
+    "form": {
+        "fields": {
+            "labels": {
+                "funds_to_pay": "Medel att betala"
+            }
+        },
+        "btns": {
+            "pay": "Betala"
+        }
+    },
+    "msgs": {
+        "need_to_pay": "Behöver betala &quot; {{amountOut}} &quot; tokens"
+    },
+    "errmsgs": {
+        "chain_is_not_supported": "Sådan kedja med id &quot; {{chainId}} &quot; stöds inte"
+    }
+}

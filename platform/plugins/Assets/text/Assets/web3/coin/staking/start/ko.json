@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "예비 토큰",
+                        "duration": "지속",
+                        "amount": "양"
+                    },
+                    "small": {
+                        "reserveToken": "예비 토큰",
+                        "duration": "지속",
+                        "amount": "양"
+                    }
+                },
+                "placeholders": {
+                    "duration": "지속",
+                    "amount": "양"
+                },
+                "btns": {
+                    "stake": "말뚝"
+                },
+                "stake": "말뚝",
+                "loading": "로드 중"
+            }
+        }
+    }
+}

@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "אסימון מוכר",
+                        "timestamps": "פִּי",
+                        "prices": "מחירים",
+                        "endTime": "שעת סיום",
+                        "thresholds": "ספים",
+                        "bonuses": "בונוסים"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "הבעלים לא יכול לסגת",
+                            "option1": "הבעלים יכול למשוך אסימונים רק לאחר חלוף זמן הסיום",
+                            "option2": "הבעלים יכול למשוך אסימונים בכל עת"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "כתובת קהילה",
+                    "methodkeccack": "פונקציית Hash Keccak256",
+                    "roleId": "מזהה תפקיד",
+                    "sellingToken": "כתובת אסימון מוכר",
+                    "prices": "ETH, מחיר",
+                    "thresholds": "# של אסימונים",
+                    "bonuses": "% בונוס"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "אין כספים"
+                },
+                "btns": {
+                    "createFund": "צור קרן",
+                    "createFundInForm": "לִיצוֹר"
+                },
+                "fundAddress": "כתובת הקרן",
+                "createFund": "צור קרן",
+                "fundInfo": "מידע",
+                "produce": "ליצר",
+                "loading": "טוען",
+                "viewInstancesList": "רשימת רענון"
+            }
+        }
+    }
+}

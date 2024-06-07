@@ -175,7 +175,8 @@
         },
         "chat": {
             "prompt": "Ljudi boste povabili k pogovoru, kjer boste lahko ostali v stiku, delili skupne fotografije in drugo. Daj mu ime:"
-        }
+        },
+        "Participants": "Povabi ljudi"
     },
     "messages": {
         "html": {

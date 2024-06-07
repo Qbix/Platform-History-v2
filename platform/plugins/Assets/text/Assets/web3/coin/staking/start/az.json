@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "ehtiyat Token",
+                        "duration": "Müddət",
+                        "amount": "Məbləğ"
+                    },
+                    "small": {
+                        "reserveToken": "ehtiyat Token",
+                        "duration": "Müddət",
+                        "amount": "Məbləğ"
+                    }
+                },
+                "placeholders": {
+                    "duration": "Müddət",
+                    "amount": "məbləğ"
+                },
+                "btns": {
+                    "stake": "Pay"
+                },
+                "stake": "Pay",
+                "loading": "Yüklənir"
+            }
+        }
+    }
+}

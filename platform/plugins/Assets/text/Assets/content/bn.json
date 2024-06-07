@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "এই ব্যবহারকারীর কোন ওয়ালেট বরাদ্দ নেই",
         "TheWalletOfThisUserInvalid": "এই ব্যবহারকারীর ওয়ালেট অবৈধ৷",
         "WalletInvalid": "ওয়ালেট ঠিকানা অবৈধ৷",
-        "CantManageFrozenSeries": "আপনি হিমায়িত সিরিজ পরিচালনা করতে পারবেন না"
+        "CantManageFrozenSeries": "আপনি হিমায়িত সিরিজ পরিচালনা করতে পারবেন না",
+        "SubscriptionStreamNotPaid": "আপনি এই বিষয়বস্তু দেখার জন্য অর্থ প্রদান করেননি৷ অনুগ্রহ করে {{subscriptionUrl}} ক্লিক করুন এবং উপযুক্ত প্ল্যানে সদস্যতা নিন।"
     },
     "admin": {
         "Title": "সম্পদ প্রশাসনিক",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "মূল্য",
             "DescriptionPlaceholder": "সাবস্ক্রিপশন প্ল্যানের বিবরণ",
             "SavePlan": "পরিকল্পনা সংরক্ষণ করুন",
-            "NewPlan": "নতুন পরিকল্পনা"
+            "NewPlan": "নতুন পরিকল্পনা",
+            "SubscriptionTitle": "সদস্যতা পরিকল্পনা",
+            "AreYouSureDeletePlan": "আপনি কি এই প্ল্যানটি মুছে দেওয়ার বিষয়ে নিশ্চিত?",
+            "Duration": "সময়কাল",
+            "Discount": "ছাড়",
+            "Interrupt": "বাধা",
+            "Continue": "চালিয়ে যান",
+            "SelectDisplayType": "{{displayType}} নির্বাচন করুন",
+            "EndDate": "শেষ তারিখ"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "লোড হচ্ছে",
             "viewInstancesList": "তালিকা পুনরুজ্জীবিত করা"
         }
+    },
+    "fundrise": {
+        "placeholder": "এই অবদান সম্পর্কে কিছু টাইপ করুন..."
     }
 }

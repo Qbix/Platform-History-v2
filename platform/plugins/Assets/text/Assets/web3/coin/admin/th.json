@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "โทเค็นErc20",
+                    "duration": "ระยะเวลา",
+                    "bonusTokenFraction": "โบนัสTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "การบริจาค",
+                    "rewardsRateFraction": "รางวัลRateFraction",
+                    "numerator": "เศษ",
+                    "denominator": "ตัวส่วน"
+                },
+                "small": {
+                    "tokenErc20": "โทเค็นErc20",
+                    "duration": "ระยะเวลาเป็นวัน",
+                    "bonusTokenFraction": "โบนัสTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "การบริจาค",
+                    "rewardsRateFraction": "รางวัลRateFraction",
+                    "numerator": "เศษ",
+                    "denominator": "ตัวส่วน"
+                }
+            },
+            "placeholders": {
+                "optional": "(ไม่จำเป็น)",
+                "tuple": "สิ่งอันดับ[]",
+                "number": "ตัวเลข",
+                "address": "ที่อยู่",
+                "fraction": "เศษส่วน",
+                "integer": "จำนวนเต็ม",
+                "seconds": "วินาที",
+                "days": "วัน",
+                "uint256": "uint256",
+                "uint192": "ไม่ใช่ 192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "ไม่มีสระน้ำ"
+            },
+            "btns": {
+                "createPool": "สร้างพูล",
+                "createPoolInForm": "สร้าง"
+            },
+            "createPool": "สร้างพูล",
+            "produce": "ผลิต",
+            "loading": "กำลังโหลด",
+            "viewInstancesList": "รีเฟรชรายการ"
+        }
+    }
+}

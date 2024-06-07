@@ -1,0 +1,27 @@
+{
+    "title": "చెల్లించండి",
+    "steps": {
+        "sending_native_coins": "దేశీయ నాణేలను పంపుతోంది",
+        "sending_tokens": "టోకెన్లను పంపుతోంది",
+        "swap": "మార్పిడి",
+        "approve": "ఆమోదించడానికి",
+        "one_tx": "మీరు ఒక లావాదేవీని పంపాలి",
+        "two_tx": "మీరు రెండు లావాదేవీలను పంపాలి"
+    },
+    "form": {
+        "fields": {
+            "labels": {
+                "funds_to_pay": "చెల్లించాల్సిన నిధులు"
+            }
+        },
+        "btns": {
+            "pay": "చెల్లించండి"
+        }
+    },
+    "msgs": {
+        "need_to_pay": "&quot; {{amountOut}} &quot; టోకెన్లు చెల్లించాలి"
+    },
+    "errmsgs": {
+        "chain_is_not_supported": "id &quot; {{chainId}} &quot;తో అటువంటి గొలుసుకు మద్దతు లేదు"
+    }
+}

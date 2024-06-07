@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "Tocyn Gwerthu",
+                        "timestamps": "Amseroedd",
+                        "prices": "Prisiau",
+                        "endTime": "Amser Gorffen",
+                        "thresholds": "Trothwyon",
+                        "bonuses": "Bonysau"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "Ni all y perchennog dynnu&#39;n ôl",
+                            "option1": "Dim ond ar ôl i endTime fynd heibio y gall y perchennog dynnu tocynnau yn ôl",
+                            "option2": "Gall perchennog dynnu tocynnau unrhyw bryd"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "Cyfeiriad cymunedol",
+                    "methodkeccack": "Swyddogaeth hash Keccak256",
+                    "roleId": "ID Rôl",
+                    "sellingToken": "Cyfeiriad gwerthu Token",
+                    "prices": "ETH, Pris",
+                    "thresholds": "# o docynnau",
+                    "bonuses": "Bonws %"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "Nid oes unrhyw gronfeydd"
+                },
+                "btns": {
+                    "createFund": "Creu Cronfa",
+                    "createFundInForm": "Creu"
+                },
+                "fundAddress": "Cyfeiriad y gronfa",
+                "createFund": "Creu Cronfa",
+                "fundInfo": "Gwybodaeth",
+                "produce": "Cynnyrch",
+                "loading": "Llwytho",
+                "viewInstancesList": "Rhestr Adnewyddu"
+            }
+        }
+    }
+}

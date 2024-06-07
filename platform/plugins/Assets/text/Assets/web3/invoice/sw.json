@@ -1,0 +1,27 @@
+{
+    "title": "Lipa",
+    "steps": {
+        "sending_native_coins": "Kutuma sarafu za asili",
+        "sending_tokens": "Kutuma ishara",
+        "swap": "Badili",
+        "approve": "Idhinisha",
+        "one_tx": "Unapaswa kutuma muamala mmoja",
+        "two_tx": "Unapaswa kutuma miamala miwili"
+    },
+    "form": {
+        "fields": {
+            "labels": {
+                "funds_to_pay": "Fedha za kulipa"
+            }
+        },
+        "btns": {
+            "pay": "Lipa"
+        }
+    },
+    "msgs": {
+        "need_to_pay": "Unahitaji kulipa tokeni &quot; {{amountOut}} &quot;."
+    },
+    "errmsgs": {
+        "chain_is_not_supported": "Msururu kama huo wenye kitambulisho &quot; {{chainId}} &quot; hautumiki"
+    }
+}

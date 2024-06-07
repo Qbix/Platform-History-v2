@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "Sprzedam token",
+                        "timestamps": "Czasy",
+                        "prices": "Ceny",
+                        "endTime": "Koniec czasu",
+                        "thresholds": "Progi",
+                        "bonuses": "Bonusy"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "Właściciel nie może się wycofać",
+                            "option1": "Właściciel może wypłacić tokeny dopiero po upływie czasu endTime",
+                            "option2": "Właściciel może wypłacić tokeny w dowolnym momencie"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "Adres Wspólnoty",
+                    "methodkeccack": "Funkcja skrótu Keccak256",
+                    "roleId": "Identyfikator roli",
+                    "sellingToken": "Adres tokena sprzedaży",
+                    "prices": "ETH, cena",
+                    "thresholds": "# tokenów",
+                    "bonuses": "Bonus%"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "Nie ma funduszy"
+                },
+                "btns": {
+                    "createFund": "Utwórz fundusz",
+                    "createFundInForm": "Tworzyć"
+                },
+                "fundAddress": "Adres funduszu",
+                "createFund": "Utwórz fundusz",
+                "fundInfo": "Informacje",
+                "produce": "Produkować",
+                "loading": "Ładowanie",
+                "viewInstancesList": "Odśwież listę"
+            }
+        }
+    }
+}

@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Időtartam",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "népszerűToken",
+                    "donations": "adományokat",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "számláló",
+                    "denominator": "névadó"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Időtartam napokban",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "népszerűToken",
+                    "donations": "adományokat",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "számláló",
+                    "denominator": "névadó"
+                }
+            },
+            "placeholders": {
+                "optional": "(választható)",
+                "tuple": "tuple[]",
+                "number": "szám",
+                "address": "cím",
+                "fraction": "töredék",
+                "integer": "egész szám",
+                "seconds": "másodpercig",
+                "days": "napok",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Nincsenek medencék"
+            },
+            "btns": {
+                "createPool": "Pool létrehozása",
+                "createPoolInForm": "Teremt"
+            },
+            "createPool": "Pool létrehozása",
+            "produce": "előállítani",
+            "loading": "Betöltés",
+            "viewInstancesList": "Lista frissítése"
+        }
+    }
+}

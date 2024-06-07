@@ -1,0 +1,27 @@
+{
+    "title": "zaplatiť",
+    "steps": {
+        "sending_native_coins": "Posielanie natívnych mincí",
+        "sending_tokens": "Odosielanie tokenov",
+        "swap": "Vymeňte",
+        "approve": "schváliť",
+        "one_tx": "Mali by ste odoslať jednu transakciu",
+        "two_tx": "Mali by ste odoslať dve transakcie"
+    },
+    "form": {
+        "fields": {
+            "labels": {
+                "funds_to_pay": "Prostriedky na zaplatenie"
+            }
+        },
+        "btns": {
+            "pay": "zaplatiť"
+        }
+    },
+    "msgs": {
+        "need_to_pay": "Je potrebné zaplatiť &quot; {{amountOut}} &quot; žetónov"
+    },
+    "errmsgs": {
+        "chain_is_not_supported": "Takýto reťazec s ID &quot; {{chainId}} &quot; nie je podporovaný"
+    }
+}

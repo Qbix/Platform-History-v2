@@ -41,7 +41,7 @@
             "errmsgs": {
                 "ThereAreNoPools": "There are no pools"
             },
-            "btns":{
+            "btns": {
                 "createPool": "Create Pool",
                 "createPoolInForm": "Create"
             },
@@ -51,5 +51,4 @@
             "viewInstancesList": "Refresh List"
         }
     }
-    
 }

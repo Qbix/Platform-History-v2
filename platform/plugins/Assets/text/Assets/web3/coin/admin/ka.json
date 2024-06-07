@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "ხანგრძლივობა",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "პოპულარული ტოკენი",
+                    "donations": "შემოწირულობები",
+                    "rewardsRateFraction": "ჯილდოებიRateFraction",
+                    "numerator": "მრიცხველი",
+                    "denominator": "მნიშვნელი"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "ხანგრძლივობა დღეებში",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "პოპულარული ტოკენი",
+                    "donations": "შემოწირულობები",
+                    "rewardsRateFraction": "ჯილდოებიRateFraction",
+                    "numerator": "მრიცხველი",
+                    "denominator": "მნიშვნელი"
+                }
+            },
+            "placeholders": {
+                "optional": "(სურვილისამებრ)",
+                "tuple": "ტუპი[]",
+                "number": "ნომერი",
+                "address": "მისამართი",
+                "fraction": "წილადი",
+                "integer": "მთელი რიცხვი",
+                "seconds": "წამი",
+                "days": "დღეები",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "აუზები არ არის"
+            },
+            "btns": {
+                "createPool": "აუზის შექმნა",
+                "createPoolInForm": "Შექმნა"
+            },
+            "createPool": "აუზის შექმნა",
+            "produce": "აწარმოე",
+            "loading": "Ჩატვირთვა",
+            "viewInstancesList": "Განახლებული სია"
+        }
+    }
+}

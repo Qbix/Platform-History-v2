@@ -175,7 +175,8 @@
         },
         "chat": {
             "prompt": "Meghívja az embereket egy beszélgetésre, ahol kapcsolatban maradhat, közös fotókat oszthat meg, és így tovább. Adj neki nevet:"
-        }
+        },
+        "Participants": "Emberek meghívása"
     },
     "messages": {
         "html": {

@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reserveToken",
+                        "duration": "Duración",
+                        "amount": "Cantidade"
+                    },
+                    "small": {
+                        "reserveToken": "reserveToken",
+                        "duration": "Duración",
+                        "amount": "Cantidade"
+                    }
+                },
+                "placeholders": {
+                    "duration": "Duración",
+                    "amount": "cantidade"
+                },
+                "btns": {
+                    "stake": "Estaca"
+                },
+                "stake": "Estaca",
+                "loading": "Cargando"
+            }
+        }
+    }
+}

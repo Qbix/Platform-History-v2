@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "ReserveToken",
+                        "duration": "Dauer",
+                        "amount": "Menge"
+                    },
+                    "small": {
+                        "reserveToken": "ReserveToken",
+                        "duration": "Dauer",
+                        "amount": "Menge"
+                    }
+                },
+                "placeholders": {
+                    "duration": "Dauer",
+                    "amount": "Menge"
+                },
+                "btns": {
+                    "stake": "Einsatz"
+                },
+                "stake": "Einsatz",
+                "loading": "Wird geladen"
+            }
+        }
+    }
+}

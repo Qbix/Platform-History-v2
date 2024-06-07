@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "Pagbebenta ng Token",
+                        "timestamps": "Mga oras",
+                        "prices": "Mga presyo",
+                        "endTime": "Oras ng Pagtatapos",
+                        "thresholds": "Mga threshold",
+                        "bonuses": "Mga bonus"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "Hindi maaaring mag-withdraw ang may-ari",
+                            "option1": "Maaari lamang mag-withdraw ng mga token ang may-ari pagkatapos na lumipas ang endTime",
+                            "option2": "Maaaring mag-withdraw ng mga token ang may-ari anumang oras"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "Address ng komunidad",
+                    "methodkeccack": "Keccak256 hash function",
+                    "roleId": "Role ID",
+                    "sellingToken": "Address ng Pagbebenta ng Token",
+                    "prices": "ETH, Presyo",
+                    "thresholds": "# ng mga token",
+                    "bonuses": "Bonus%"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "Walang pondo"
+                },
+                "btns": {
+                    "createFund": "Lumikha ng Pondo",
+                    "createFundInForm": "Lumikha"
+                },
+                "fundAddress": "Address ng pondo",
+                "createFund": "Lumikha ng Pondo",
+                "fundInfo": "Impormasyon",
+                "produce": "Gumawa",
+                "loading": "Naglo-load",
+                "viewInstancesList": "I-refresh ang Listahan"
+            }
+        }
+    }
+}

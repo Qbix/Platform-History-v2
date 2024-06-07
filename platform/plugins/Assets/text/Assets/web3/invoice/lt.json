@@ -1,0 +1,27 @@
+{
+    "title": "Mokėti",
+    "steps": {
+        "sending_native_coins": "Vietinių monetų siuntimas",
+        "sending_tokens": "Žetonų siuntimas",
+        "swap": "Sukeisti",
+        "approve": "Patvirtinti",
+        "one_tx": "Turėtumėte išsiųsti vieną operaciją",
+        "two_tx": "Turėtumėte išsiųsti dvi operacijas"
+    },
+    "form": {
+        "fields": {
+            "labels": {
+                "funds_to_pay": "Lėšos mokėti"
+            }
+        },
+        "btns": {
+            "pay": "Mokėti"
+        }
+    },
+    "msgs": {
+        "need_to_pay": "Reikia sumokėti „ {{amountOut}} “ žetonus"
+    },
+    "errmsgs": {
+        "chain_is_not_supported": "Tokia grandinė su ID &quot; {{chainId}} &quot; nepalaikoma"
+    }
+}

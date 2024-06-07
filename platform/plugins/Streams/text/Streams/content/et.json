@@ -175,7 +175,8 @@
         },
         "chat": {
             "prompt": "Kutsute inimesi vestlusele, kus saate ühendust hoida, koos fotosid jagada ja palju muud. Andke sellele nimi:"
-        }
+        },
+        "Participants": "Kutsuge inimesi"
     },
     "messages": {
         "html": {

@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Tul ta&#39; żmien",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "donazzjonijiet",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "numeratur",
+                    "denominator": "denominatur"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Tul f&#39;jiem",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "donazzjonijiet",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "numeratur",
+                    "denominator": "denominatur"
+                }
+            },
+            "placeholders": {
+                "optional": "(mhux obbligatorju)",
+                "tuple": "tuppju[]",
+                "number": "numru",
+                "address": "indirizz",
+                "fraction": "frazzjoni",
+                "integer": "numru sħiħ",
+                "seconds": "sekondi",
+                "days": "jiem",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "M&#39;hemm l-ebda pools"
+            },
+            "btns": {
+                "createPool": "Oħloq Pool",
+                "createPoolInForm": "Oħloq"
+            },
+            "createPool": "Oħloq Pool",
+            "produce": "Ipproduċi",
+            "loading": "Tagħbija",
+            "viewInstancesList": "Aġġorna l-Lista"
+        }
+    }
+}

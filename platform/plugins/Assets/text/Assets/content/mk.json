@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "Овој корисник нема доделен паричник",
         "TheWalletOfThisUserInvalid": "Паричникот на овој корисник е неважечки",
         "WalletInvalid": "Адресата на паричникот е неважечка",
-        "CantManageFrozenSeries": "Не можете да управувате со замрзнати серии"
+        "CantManageFrozenSeries": "Не можете да управувате со замрзнати серии",
+        "SubscriptionStreamNotPaid": "Не сте платиле за да ја видите оваа содржина. Ве молиме кликнете на {{subscriptionUrl}} и претплатете се на соодветниот план."
     },
     "admin": {
         "Title": "Административни средства",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "цена",
             "DescriptionPlaceholder": "опис на претплатен план",
             "SavePlan": "Зачувај план",
-            "NewPlan": "Нов план"
+            "NewPlan": "Нов план",
+            "SubscriptionTitle": "Планови за претплата",
+            "AreYouSureDeletePlan": "Дали сте сигурни дека сакате да го избришете овој план?",
+            "Duration": "Времетраење",
+            "Discount": "Попуст",
+            "Interrupt": "Прекини",
+            "Continue": "Продолжи",
+            "SelectDisplayType": "Изберете {{displayType}}",
+            "EndDate": "крајна дата"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "Се вчитува",
             "viewInstancesList": "Освежи список"
         }
+    },
+    "fundrise": {
+        "placeholder": "напишете нешто за овој придонес..."
     }
 }

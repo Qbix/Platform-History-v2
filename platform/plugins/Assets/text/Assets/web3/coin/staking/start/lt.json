@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "rezervo ženklas",
+                        "duration": "Trukmė",
+                        "amount": "Suma"
+                    },
+                    "small": {
+                        "reserveToken": "rezervo ženklas",
+                        "duration": "Trukmė",
+                        "amount": "Suma"
+                    }
+                },
+                "placeholders": {
+                    "duration": "Trukmė",
+                    "amount": "suma"
+                },
+                "btns": {
+                    "stake": "Stalas"
+                },
+                "stake": "Stalas",
+                "loading": "Įkeliama"
+            }
+        }
+    }
+}

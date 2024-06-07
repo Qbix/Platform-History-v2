@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "Ovaj korisnik nema dodijeljen novčanik",
         "TheWalletOfThisUserInvalid": "Novčanik ovog korisnika nije valjan",
         "WalletInvalid": "Adresa novčanika nije važeća",
-        "CantManageFrozenSeries": "Ne možete upravljati zamrznutim serijama"
+        "CantManageFrozenSeries": "Ne možete upravljati zamrznutim serijama",
+        "SubscriptionStreamNotPaid": "Niste platili za gledanje ovog sadržaja. Kliknite {{subscriptionUrl}} i pretplatite se na odgovarajući plan."
     },
     "admin": {
         "Title": "Sredstva administrativna",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "cijena",
             "DescriptionPlaceholder": "opis plana pretplate",
             "SavePlan": "Spremi plan",
-            "NewPlan": "Novi plan"
+            "NewPlan": "Novi plan",
+            "SubscriptionTitle": "Planovi pretplate",
+            "AreYouSureDeletePlan": "Jeste li sigurni da želite izbrisati ovaj plan?",
+            "Duration": "Trajanje",
+            "Discount": "Popust",
+            "Interrupt": "Prekinuti",
+            "Continue": "Nastaviti",
+            "SelectDisplayType": "Odaberite {{displayType}}",
+            "EndDate": "datum završetka"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "Učitavam",
             "viewInstancesList": "Osvježi popis"
         }
+    },
+    "fundrise": {
+        "placeholder": "napiši nešto o ovom prilogu..."
     }
 }

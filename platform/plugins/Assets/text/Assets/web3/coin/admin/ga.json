@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "comharthaErc20",
+                    "duration": "Fad",
+                    "bonusTokenFraction": "bónasTokenFraction",
+                    "popularToken": "tóirToken",
+                    "donations": "tabhartais",
+                    "rewardsRateFraction": "luach saothairRateFraction",
+                    "numerator": "uimhreoir",
+                    "denominator": "ainmneoir"
+                },
+                "small": {
+                    "tokenErc20": "comharthaErc20",
+                    "duration": "Fad i laethanta",
+                    "bonusTokenFraction": "bónasTokenFraction",
+                    "popularToken": "tóirToken",
+                    "donations": "tabhartais",
+                    "rewardsRateFraction": "luach saothairRateFraction",
+                    "numerator": "uimhreoir",
+                    "denominator": "ainmneoir"
+                }
+            },
+            "placeholders": {
+                "optional": "(roghnach)",
+                "tuple": "tuple[]",
+                "number": "uimhir",
+                "address": "seoladh",
+                "fraction": "codán",
+                "integer": "slánuimhir",
+                "seconds": "soicind",
+                "days": "laethanta",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Níl aon linnte"
+            },
+            "btns": {
+                "createPool": "Cruthaigh Linn",
+                "createPoolInForm": "Cruthaigh"
+            },
+            "createPool": "Cruthaigh Linn",
+            "produce": "Tháirgeadh",
+            "loading": "Ag lódáil",
+            "viewInstancesList": "Liosta Athnuaigh"
+        }
+    }
+}

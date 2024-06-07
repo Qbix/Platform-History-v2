@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "Този потребител няма присвоен портфейл",
         "TheWalletOfThisUserInvalid": "Портфейлът на този потребител е невалиден",
         "WalletInvalid": "Адресът на портфейла е невалиден",
-        "CantManageFrozenSeries": "Не можете да управлявате замразени серии"
+        "CantManageFrozenSeries": "Не можете да управлявате замразени серии",
+        "SubscriptionStreamNotPaid": "Не сте платили, за да видите това съдържание. Моля, щракнете върху {{subscriptionUrl}} и се абонирайте за съответния план."
     },
     "admin": {
         "Title": "Административни активи",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "цена",
             "DescriptionPlaceholder": "описание на абонаментния план",
             "SavePlan": "Запазване на плана",
-            "NewPlan": "Нов план"
+            "NewPlan": "Нов план",
+            "SubscriptionTitle": "Абонаментни планове",
+            "AreYouSureDeletePlan": "Сигурни ли сте, че искате да изтриете този план?",
+            "Duration": "Продължителност",
+            "Discount": "Отстъпка",
+            "Interrupt": "Прекъсване",
+            "Continue": "продължи",
+            "SelectDisplayType": "Изберете {{displayType}}",
+            "EndDate": "крайна дата"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "Зареждане",
             "viewInstancesList": "Опресняване на списъка"
         }
+    },
+    "fundrise": {
+        "placeholder": "напишете нещо за този принос..."
     }
 }

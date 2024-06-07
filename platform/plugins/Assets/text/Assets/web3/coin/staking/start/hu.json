@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "tartalékToken",
+                        "duration": "Időtartam",
+                        "amount": "Összeg"
+                    },
+                    "small": {
+                        "reserveToken": "tartalékToken",
+                        "duration": "Időtartam",
+                        "amount": "Összeg"
+                    }
+                },
+                "placeholders": {
+                    "duration": "Időtartam",
+                    "amount": "összeg"
+                },
+                "btns": {
+                    "stake": "Tét"
+                },
+                "stake": "Tét",
+                "loading": "Betöltés"
+            }
+        }
+    }
+}

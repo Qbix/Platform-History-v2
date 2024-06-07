@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reserveToken",
+                        "duration": "Tagal",
+                        "amount": "Halaga"
+                    },
+                    "small": {
+                        "reserveToken": "reserveToken",
+                        "duration": "Tagal",
+                        "amount": "Halaga"
+                    }
+                },
+                "placeholders": {
+                    "duration": "Tagal",
+                    "amount": "halaga"
+                },
+                "btns": {
+                    "stake": "istaka"
+                },
+                "stake": "istaka",
+                "loading": "Naglo-load"
+            }
+        }
+    }
+}

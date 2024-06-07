@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "이 사용자에게는 할당된 지갑이 없습니다.",
         "TheWalletOfThisUserInvalid": "이 사용자의 지갑이 유효하지 않습니다",
         "WalletInvalid": "지갑 주소가 잘못되었습니다.",
-        "CantManageFrozenSeries": "정지된 시리즈를 관리할 수 없습니다."
+        "CantManageFrozenSeries": "정지된 시리즈를 관리할 수 없습니다.",
+        "SubscriptionStreamNotPaid": "이 콘텐츠를 보기 위해 비용을 지불하지 않았습니다. {{subscriptionUrl}} 클릭하고 적절한 요금제에 가입하세요."
     },
     "admin": {
         "Title": "자산 관리",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "가격",
             "DescriptionPlaceholder": "구독 계획 설명",
             "SavePlan": "계획 저장",
-            "NewPlan": "새로운 계획"
+            "NewPlan": "새로운 계획",
+            "SubscriptionTitle": "구독 계획",
+            "AreYouSureDeletePlan": "이 계획을 삭제하시겠습니까?",
+            "Duration": "지속",
+            "Discount": "할인",
+            "Interrupt": "방해하다",
+            "Continue": "계속하다",
+            "SelectDisplayType": "{{displayType}} 선택하세요",
+            "EndDate": "종료일"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "로드 중",
             "viewInstancesList": "새로 고침 목록"
         }
+    },
+    "fundrise": {
+        "placeholder": "이 기여에 대해 입력하세요..."
     }
 }

@@ -1,0 +1,27 @@
+{
+    "title": "پرداخت",
+    "steps": {
+        "sending_native_coins": "ارسال سکه های بومی",
+        "sending_tokens": "ارسال توکن",
+        "swap": "تعویض کنید",
+        "approve": "تایید",
+        "one_tx": "شما باید یک تراکنش ارسال کنید",
+        "two_tx": "شما باید دو تراکنش ارسال کنید"
+    },
+    "form": {
+        "fields": {
+            "labels": {
+                "funds_to_pay": "وجوه برای پرداخت"
+            }
+        },
+        "btns": {
+            "pay": "پرداخت"
+        }
+    },
+    "msgs": {
+        "need_to_pay": "نیاز به پرداخت &quot; {{amountOut}} &quot; توکن"
+    },
+    "errmsgs": {
+        "chain_is_not_supported": "چنین زنجیره ای با شناسه &quot; {{chainId}} &quot; پشتیبانی نمی شود"
+    }
+}

@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Müddət",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "populyar Token",
+                    "donations": "ianələr",
+                    "rewardsRateFraction": "mükafatlarRateFraction",
+                    "numerator": "hesablayıcı",
+                    "denominator": "məxrəc"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Müddət günlərlə",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "populyar Token",
+                    "donations": "ianələr",
+                    "rewardsRateFraction": "mükafatlarRateFraction",
+                    "numerator": "hesablayıcı",
+                    "denominator": "məxrəc"
+                }
+            },
+            "placeholders": {
+                "optional": "(isteğe bağlı)",
+                "tuple": "tuple[]",
+                "number": "nömrə",
+                "address": "ünvanı",
+                "fraction": "kəsr",
+                "integer": "tam",
+                "seconds": "saniyə",
+                "days": "günlər",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Hovuzlar yoxdur"
+            },
+            "btns": {
+                "createPool": "Hovuz yaradın",
+                "createPoolInForm": "Yaradın"
+            },
+            "createPool": "Hovuz yaradın",
+            "produce": "istehsal",
+            "loading": "Yüklənir",
+            "viewInstancesList": "Siyahını yeniləyin"
+        }
+    }
+}

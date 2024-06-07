@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "למשתמש זה לא הוקצה ארנק",
         "TheWalletOfThisUserInvalid": "הארנק של משתמש זה לא חוקי",
         "WalletInvalid": "כתובת הארנק לא חוקית",
-        "CantManageFrozenSeries": "אי אפשר לנהל סדרות קפואות"
+        "CantManageFrozenSeries": "אי אפשר לנהל סדרות קפואות",
+        "SubscriptionStreamNotPaid": "לא שילמת כדי לצפות בתוכן זה. אנא לחץ על {{subscriptionUrl}} והירשם לתוכנית המתאימה."
     },
     "admin": {
         "Title": "ניהול נכסים",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "מחיר",
             "DescriptionPlaceholder": "תיאור תוכנית המנוי",
             "SavePlan": "שמור תוכנית",
-            "NewPlan": "תכנית חדשה"
+            "NewPlan": "תכנית חדשה",
+            "SubscriptionTitle": "תוכניות מנוי",
+            "AreYouSureDeletePlan": "האם אתה בטוח שברצונך למחוק את התוכנית הזו?",
+            "Duration": "מֶשֶׁך",
+            "Discount": "הנחה",
+            "Interrupt": "פסיקת",
+            "Continue": "לְהַמשִׁיך",
+            "SelectDisplayType": "בחר {{displayType}}",
+            "EndDate": "תאריך סיום"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "טוען",
             "viewInstancesList": "רשימת רענון"
         }
+    },
+    "fundrise": {
+        "placeholder": "הקלד משהו על התרומה הזו..."
     }
 }

@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "इस उपयोगकर्ता को कोई वॉलेट असाइन नहीं किया गया है",
         "TheWalletOfThisUserInvalid": "इस उपयोगकर्ता का बटुआ अमान्य है",
         "WalletInvalid": "बटुआ पता अमान्य",
-        "CantManageFrozenSeries": "आप जमे हुए श्रृंखला का प्रबंधन नहीं कर सकते"
+        "CantManageFrozenSeries": "आप जमे हुए श्रृंखला का प्रबंधन नहीं कर सकते",
+        "SubscriptionStreamNotPaid": "आपने इस सामग्री को देखने के लिए भुगतान नहीं किया है। कृपया {{subscriptionUrl}} पर क्लिक करें और उचित योजना की सदस्यता लें।"
     },
     "admin": {
         "Title": "संपत्ति प्रशासनिक",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "कीमत",
             "DescriptionPlaceholder": "सदस्यता योजना विवरण",
             "SavePlan": "योजना सहेजें",
-            "NewPlan": "नई योजना"
+            "NewPlan": "नई योजना",
+            "SubscriptionTitle": "सदस्यता योजनाएँ",
+            "AreYouSureDeletePlan": "क्या आप वाकई इस योजना को हटाना चाहते हैं?",
+            "Duration": "अवधि",
+            "Discount": "छूट",
+            "Interrupt": "रुकावट डालना",
+            "Continue": "जारी रखना",
+            "SelectDisplayType": "{{displayType}} चुनें",
+            "EndDate": "अंतिम तिथि"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "लोड हो रहा है",
             "viewInstancesList": "सूची रीफ़्रेश करें"
         }
+    },
+    "fundrise": {
+        "placeholder": "इस योगदान के बारे में कुछ लिखें..."
     }
 }

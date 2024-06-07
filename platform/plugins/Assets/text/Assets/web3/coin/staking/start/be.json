@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reserveToken",
+                        "duration": "Працягласць",
+                        "amount": "Сума"
+                    },
+                    "small": {
+                        "reserveToken": "reserveToken",
+                        "duration": "Працягласць",
+                        "amount": "Сума"
+                    }
+                },
+                "placeholders": {
+                    "duration": "Працягласць",
+                    "amount": "колькасць"
+                },
+                "btns": {
+                    "stake": "Стаўка"
+                },
+                "stake": "Стаўка",
+                "loading": "Загрузка"
+            }
+        }
+    }
+}

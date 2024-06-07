@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "Acest utilizator nu are portofel alocat",
         "TheWalletOfThisUserInvalid": "Portofelul acestui utilizator este invalid",
         "WalletInvalid": "Adresa portofel nevalidă",
-        "CantManageFrozenSeries": "Nu poți gestiona seriale înghețate"
+        "CantManageFrozenSeries": "Nu poți gestiona seriale înghețate",
+        "SubscriptionStreamNotPaid": "Nu ați plătit pentru a vedea acest conținut. Faceți clic pe {{subscriptionUrl}} și abonați-vă la planul corespunzător."
     },
     "admin": {
         "Title": "Active administrative",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "Preț",
             "DescriptionPlaceholder": "descrierea planului de abonament",
             "SavePlan": "Salvați planul",
-            "NewPlan": "Plan nou"
+            "NewPlan": "Plan nou",
+            "SubscriptionTitle": "Abonamente",
+            "AreYouSureDeletePlan": "Sigur doriți să ștergeți acest plan?",
+            "Duration": "Durată",
+            "Discount": "Reducere",
+            "Interrupt": "Întrerupe",
+            "Continue": "Continua",
+            "SelectDisplayType": "Selectați {{displayType}}",
+            "EndDate": "Data de încheiere"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "Se încarcă",
             "viewInstancesList": "Actualizează lista"
         }
+    },
+    "fundrise": {
+        "placeholder": "scrie ceva despre această contribuție..."
     }
 }

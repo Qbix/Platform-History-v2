@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "מֶשֶׁך",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "פופולריToken",
+                    "donations": "תרומות",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "מוֹנֶה",
+                    "denominator": "מְכַנֶה"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "משך ימים",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "פופולריToken",
+                    "donations": "תרומות",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "מוֹנֶה",
+                    "denominator": "מְכַנֶה"
+                }
+            },
+            "placeholders": {
+                "optional": "(אופציונאלי)",
+                "tuple": "tuple[]",
+                "number": "מספר",
+                "address": "כתובת",
+                "fraction": "שבריר",
+                "integer": "מספר שלם",
+                "seconds": "שניות",
+                "days": "ימים",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "אין בריכות"
+            },
+            "btns": {
+                "createPool": "צור מאגר",
+                "createPoolInForm": "לִיצוֹר"
+            },
+            "createPool": "צור מאגר",
+            "produce": "ליצר",
+            "loading": "טוען",
+            "viewInstancesList": "רשימת רענון"
+        }
+    }
+}

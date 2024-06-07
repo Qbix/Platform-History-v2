@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "rezervToken",
+                        "duration": "Διάρκεια",
+                        "amount": "Ποσό"
+                    },
+                    "small": {
+                        "reserveToken": "rezervToken",
+                        "duration": "Διάρκεια",
+                        "amount": "Ποσό"
+                    }
+                },
+                "placeholders": {
+                    "duration": "Διάρκεια",
+                    "amount": "ποσό"
+                },
+                "btns": {
+                    "stake": "Στοίχημα"
+                },
+                "stake": "Στοίχημα",
+                "loading": "Φόρτωση"
+            }
+        }
+    }
+}

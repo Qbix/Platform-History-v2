@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "Mtumiaji huyu hajakabidhiwa pochi",
         "TheWalletOfThisUserInvalid": "Pochi ya mtumiaji huyu ni batili",
         "WalletInvalid": "Anwani ya Wallet si sahihi",
-        "CantManageFrozenSeries": "Huwezi kudhibiti mfululizo uliogandishwa"
+        "CantManageFrozenSeries": "Huwezi kudhibiti mfululizo uliogandishwa",
+        "SubscriptionStreamNotPaid": "Hujalipa ili kutazama maudhui haya. Tafadhali bofya {{subscriptionUrl}} na ujiandikishe kwa mpango unaofaa."
     },
     "admin": {
         "Title": "Utawala wa mali",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "bei",
             "DescriptionPlaceholder": "maelezo ya mpango wa usajili",
             "SavePlan": "Hifadhi Mpango",
-            "NewPlan": "Mpango Mpya"
+            "NewPlan": "Mpango Mpya",
+            "SubscriptionTitle": "Mipango ya usajili",
+            "AreYouSureDeletePlan": "Je, una uhakika unataka kufuta mpango huu?",
+            "Duration": "Muda",
+            "Discount": "Punguzo",
+            "Interrupt": "Katiza",
+            "Continue": "Endelea",
+            "SelectDisplayType": "Chagua {{displayType}}",
+            "EndDate": "tarehe ya mwisho"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "Inapakia",
             "viewInstancesList": "Onyesha upya Orodha"
         }
+    },
+    "fundrise": {
+        "placeholder": "andika kitu kuhusu mchango huu..."
     }
 }

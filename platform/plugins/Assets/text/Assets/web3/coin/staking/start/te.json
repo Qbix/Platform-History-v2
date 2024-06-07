@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "రిజర్వ్ టోకెన్",
+                        "duration": "వ్యవధి",
+                        "amount": "మొత్తం"
+                    },
+                    "small": {
+                        "reserveToken": "రిజర్వ్ టోకెన్",
+                        "duration": "వ్యవధి",
+                        "amount": "మొత్తం"
+                    }
+                },
+                "placeholders": {
+                    "duration": "వ్యవధి",
+                    "amount": "మొత్తం"
+                },
+                "btns": {
+                    "stake": "వాటాను"
+                },
+                "stake": "వాటాను",
+                "loading": "లోడ్"
+            }
+        }
+    }
+}

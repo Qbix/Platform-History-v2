@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reserveToken",
+                        "duration": "Trajanje",
+                        "amount": "Iznos"
+                    },
+                    "small": {
+                        "reserveToken": "reserveToken",
+                        "duration": "Trajanje",
+                        "amount": "Iznos"
+                    }
+                },
+                "placeholders": {
+                    "duration": "Trajanje",
+                    "amount": "iznos"
+                },
+                "btns": {
+                    "stake": "Ulog"
+                },
+                "stake": "Ulog",
+                "loading": "Učitavam"
+            }
+        }
+    }
+}

@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "Deze gebruiker heeft geen portemonnee toegewezen",
         "TheWalletOfThisUserInvalid": "De portemonnee van deze gebruiker is ongeldig",
         "WalletInvalid": "Wallet-adres ongeldig",
-        "CantManageFrozenSeries": "U kunt geen bevroren series beheren"
+        "CantManageFrozenSeries": "U kunt geen bevroren series beheren",
+        "SubscriptionStreamNotPaid": "Je hebt niet betaald om deze inhoud te bekijken. Klik op {{subscriptionUrl}} en abonneer u op het juiste abonnement."
     },
     "admin": {
         "Title": "Activa administratief",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "prijs",
             "DescriptionPlaceholder": "beschrijving abonnementsplan",
             "SavePlan": "Plan opslaan",
-            "NewPlan": "Nieuw plan"
+            "NewPlan": "Nieuw plan",
+            "SubscriptionTitle": "Abonnementsplannen",
+            "AreYouSureDeletePlan": "Weet u zeker dat u dit abonnement wilt verwijderen?",
+            "Duration": "Duur",
+            "Discount": "Korting",
+            "Interrupt": "Onderbreken",
+            "Continue": "Doorgaan",
+            "SelectDisplayType": "Selecteer {{displayType}}",
+            "EndDate": "einddatum"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "Bezig met laden",
             "viewInstancesList": "Ververs lijst"
         }
+    },
+    "fundrise": {
+        "placeholder": "typ iets over deze bijdrage..."
     }
 }

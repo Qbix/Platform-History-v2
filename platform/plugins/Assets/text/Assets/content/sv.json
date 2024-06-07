@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "Denna användare har ingen plånbok tilldelad",
         "TheWalletOfThisUserInvalid": "Den här användarens plånbok är ogiltig",
         "WalletInvalid": "Ogiltig plånboksadress",
-        "CantManageFrozenSeries": "Du kan inte hantera frysta serier"
+        "CantManageFrozenSeries": "Du kan inte hantera frysta serier",
+        "SubscriptionStreamNotPaid": "Du har inte betalat för att se det här innehållet. Klicka på {{subscriptionUrl}} och prenumerera på lämplig plan."
     },
     "admin": {
         "Title": "Tillgångar administrativa",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "pris",
             "DescriptionPlaceholder": "beskrivning av prenumerationsplan",
             "SavePlan": "Spara plan",
-            "NewPlan": "Ny plan"
+            "NewPlan": "Ny plan",
+            "SubscriptionTitle": "Prenumerationsplaner",
+            "AreYouSureDeletePlan": "Är du säker på att du vill ta bort den här planen?",
+            "Duration": "Varaktighet",
+            "Discount": "Rabatt",
+            "Interrupt": "Avbryta",
+            "Continue": "Fortsätta",
+            "SelectDisplayType": "Välj {{displayType}}",
+            "EndDate": "slutdatum"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "Läser in",
             "viewInstancesList": "Uppdatera listan"
         }
+    },
+    "fundrise": {
+        "placeholder": "skriv något om detta bidrag..."
     }
 }

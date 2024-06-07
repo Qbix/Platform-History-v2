@@ -1,0 +1,21 @@
+{
+    "coin": {
+        "presale": {
+            "buy": {
+                "form": {
+                    "labels": {
+                        "amount": "כמה להשקיע?"
+                    },
+                    "placeholders": {
+                        "amount": "סכום של {{nativeCoin}}",
+                        "max": "מקסימום: {{nativeCoinBalance}}"
+                    }
+                },
+                "btns": {
+                    "buy": "לִקְנוֹת",
+                    "execute": "לבצע"
+                }
+            }
+        }
+    }
+}

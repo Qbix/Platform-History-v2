@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "ಈ ಬಳಕೆದಾರರಿಗೆ ಯಾವುದೇ ವ್ಯಾಲೆಟ್ ನಿಯೋಜಿಸಲಾಗಿಲ್ಲ",
         "TheWalletOfThisUserInvalid": "ಈ ಬಳಕೆದಾರರ ವಾಲೆಟ್ ಅಮಾನ್ಯವಾಗಿದೆ",
         "WalletInvalid": "ವಾಲೆಟ್ ವಿಳಾಸ ಅಮಾನ್ಯವಾಗಿದೆ",
-        "CantManageFrozenSeries": "ನೀವು ಫ್ರೋಜನ್ ಸರಣಿಯನ್ನು ನಿರ್ವಹಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ"
+        "CantManageFrozenSeries": "ನೀವು ಫ್ರೋಜನ್ ಸರಣಿಯನ್ನು ನಿರ್ವಹಿಸಲು ಸಾಧ್ಯವಿಲ್ಲ",
+        "SubscriptionStreamNotPaid": "ಈ ವಿಷಯವನ್ನು ವೀಕ್ಷಿಸಲು ನೀವು ಪಾವತಿಸಿಲ್ಲ. ದಯವಿಟ್ಟು {{subscriptionUrl}} ಕ್ಲಿಕ್ ಮಾಡಿ ಮತ್ತು ಸೂಕ್ತವಾದ ಯೋಜನೆಗೆ ಚಂದಾದಾರರಾಗಿ."
     },
     "admin": {
         "Title": "ಸ್ವತ್ತುಗಳು ಆಡಳಿತಾತ್ಮಕ",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "ಬೆಲೆ",
             "DescriptionPlaceholder": "ಚಂದಾದಾರಿಕೆ ಯೋಜನೆ ವಿವರಣೆ",
             "SavePlan": "ಯೋಜನೆಯನ್ನು ಉಳಿಸಿ",
-            "NewPlan": "ಹೊಸ ಯೋಜನೆ"
+            "NewPlan": "ಹೊಸ ಯೋಜನೆ",
+            "SubscriptionTitle": "ಚಂದಾದಾರಿಕೆ ಯೋಜನೆಗಳು",
+            "AreYouSureDeletePlan": "ಈ ಯೋಜನೆಯನ್ನು ಅಳಿಸಲು ನೀವು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ?",
+            "Duration": "ಅವಧಿ",
+            "Discount": "ರಿಯಾಯಿತಿ",
+            "Interrupt": "ಅಡ್ಡಿಪಡಿಸು",
+            "Continue": "ಮುಂದುವರಿಸಿ",
+            "SelectDisplayType": "{{displayType}} ಆಯ್ಕೆಮಾಡಿ",
+            "EndDate": "ಅಂತಿಮ ದಿನಾಂಕ"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "ಲೋಡ್ ಆಗುತ್ತಿದೆ",
             "viewInstancesList": "ಪಟ್ಟಿಯನ್ನು ರಿಫ್ರೆಶ್ ಮಾಡಿ"
         }
+    },
+    "fundrise": {
+        "placeholder": "ಈ ಕೊಡುಗೆಯ ಬಗ್ಗೆ ಏನಾದರೂ ಟೈಪ್ ಮಾಡಿ..."
     }
 }

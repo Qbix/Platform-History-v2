@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "ამ მომხმარებელს არ აქვს მინიჭებული საფულე",
         "TheWalletOfThisUserInvalid": "ამ მომხმარებლის საფულე არასწორია",
         "WalletInvalid": "საფულის მისამართი არასწორია",
-        "CantManageFrozenSeries": "გაყინულ სერიებს ვერ მართავ"
+        "CantManageFrozenSeries": "გაყინულ სერიებს ვერ მართავ",
+        "SubscriptionStreamNotPaid": "თქვენ არ გადაგიხდიათ ამ კონტენტის სანახავად. გთხოვთ, დააწკაპუნოთ {{subscriptionUrl}} და გამოიწეროთ შესაბამისი გეგმა."
     },
     "admin": {
         "Title": "აქტივების ადმინისტრაციული",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "ფასი",
             "DescriptionPlaceholder": "სააბონენტო გეგმის აღწერა",
             "SavePlan": "გეგმის შენახვა",
-            "NewPlan": "ახალი გეგმა"
+            "NewPlan": "ახალი გეგმა",
+            "SubscriptionTitle": "გამოწერის გეგმები",
+            "AreYouSureDeletePlan": "დარწმუნებული ხართ, რომ გსურთ ამ გეგმის წაშლა?",
+            "Duration": "ხანგრძლივობა",
+            "Discount": "ფასდაკლება",
+            "Interrupt": "შეწყვეტა",
+            "Continue": "განაგრძეთ",
+            "SelectDisplayType": "აირჩიეთ {{displayType}}",
+            "EndDate": "დასრულების თარიღი"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "Ჩატვირთვა",
             "viewInstancesList": "Განახლებული სია"
         }
+    },
+    "fundrise": {
+        "placeholder": "ჩაწერეთ რამე ამ წვლილის შესახებ..."
     }
 }

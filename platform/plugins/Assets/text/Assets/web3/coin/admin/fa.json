@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "مدت زمان",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "محبوب توکن",
+                    "donations": "کمک های مالی",
+                    "rewardsRateFraction": "RewardsRateFraction",
+                    "numerator": "صورت کسر",
+                    "denominator": "مخرج"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "مدت زمان بر حسب روز",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "محبوب توکن",
+                    "donations": "کمک های مالی",
+                    "rewardsRateFraction": "RewardsRateFraction",
+                    "numerator": "صورت کسر",
+                    "denominator": "مخرج"
+                }
+            },
+            "placeholders": {
+                "optional": "(اختیاری)",
+                "tuple": "چندتایی[]",
+                "number": "عدد",
+                "address": "نشانی",
+                "fraction": "کسر",
+                "integer": "عدد صحیح",
+                "seconds": "ثانیه",
+                "days": "روزها",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "هیچ استخری وجود ندارد"
+            },
+            "btns": {
+                "createPool": "استخر ایجاد کنید",
+                "createPoolInForm": "ايجاد كردن"
+            },
+            "createPool": "استخر ایجاد کنید",
+            "produce": "تولید کردن",
+            "loading": "بارگذاری",
+            "viewInstancesList": "بازخوانی لیست"
+        }
+    }
+}

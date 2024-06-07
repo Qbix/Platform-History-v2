@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Trajanje",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "donacije",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "števnik",
+                    "denominator": "imenovalec"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Trajanje v dnevih",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "donacije",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "števnik",
+                    "denominator": "imenovalec"
+                }
+            },
+            "placeholders": {
+                "optional": "(neobvezno)",
+                "tuple": "tuple[]",
+                "number": "število",
+                "address": "naslov",
+                "fraction": "ulomek",
+                "integer": "celo število",
+                "seconds": "sekund",
+                "days": "dnevi",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Ni bazenov"
+            },
+            "btns": {
+                "createPool": "Ustvari bazen",
+                "createPoolInForm": "Ustvari"
+            },
+            "createPool": "Ustvari bazen",
+            "produce": "Proizvajaj",
+            "loading": "nalaganje",
+            "viewInstancesList": "Osveži seznam"
+        }
+    }
+}

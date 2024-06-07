@@ -1,0 +1,21 @@
+{
+    "coin": {
+        "presale": {
+            "buy": {
+                "form": {
+                    "labels": {
+                        "amount": "Ne kadar yatırım yapmalı?"
+                    },
+                    "placeholders": {
+                        "amount": "{{nativeCoin}} miktarı",
+                        "max": "Maksimum: {{nativeCoinBalance}}"
+                    }
+                },
+                "btns": {
+                    "buy": "Satın almak",
+                    "execute": "Uygulamak"
+                }
+            }
+        }
+    }
+}

@@ -175,7 +175,8 @@
         },
         "chat": {
             "prompt": "Utakuwa ukialika watu kwenye mazungumzo ambapo unaweza kuwasiliana, kushiriki picha pamoja, na zaidi. Ipe jina:"
-        }
+        },
+        "Participants": "Alika Watu"
     },
     "messages": {
         "html": {

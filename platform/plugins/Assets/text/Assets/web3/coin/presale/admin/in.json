@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "Jual Token",
+                        "timestamps": "Waktu",
+                        "prices": "Harga",
+                        "endTime": "Akhir waktu",
+                        "thresholds": "Ambang batas",
+                        "bonuses": "Bonus"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "Pemilik tidak dapat menarik diri",
+                            "option1": "Pemilik dapat menarik token hanya setelah waktu berakhir berlalu",
+                            "option2": "Pemilik dapat menarik token kapan saja"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "Alamat komunitas",
+                    "methodkeccack": "Fungsi hash Keccak256",
+                    "roleId": "ID Peran",
+                    "sellingToken": "Alamat Penjualan Token",
+                    "prices": "ETH, Harga",
+                    "thresholds": "# token",
+                    "bonuses": "Bonus%"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "Tidak ada dana"
+                },
+                "btns": {
+                    "createFund": "Buat Dana",
+                    "createFundInForm": "Membuat"
+                },
+                "fundAddress": "Alamat dana",
+                "createFund": "Buat Dana",
+                "fundInfo": "Informasi",
+                "produce": "Menghasilkan",
+                "loading": "Memuat",
+                "viewInstancesList": "Segarkan Daftar"
+            }
+        }
+    }
+}

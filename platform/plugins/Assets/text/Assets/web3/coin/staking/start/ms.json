@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reserveToken",
+                        "duration": "Tempoh",
+                        "amount": "Jumlah"
+                    },
+                    "small": {
+                        "reserveToken": "reserveToken",
+                        "duration": "Tempoh",
+                        "amount": "Jumlah"
+                    }
+                },
+                "placeholders": {
+                    "duration": "Tempoh",
+                    "amount": "jumlah"
+                },
+                "btns": {
+                    "stake": "pancang"
+                },
+                "stake": "pancang",
+                "loading": "Memuatkan"
+            }
+        }
+    }
+}

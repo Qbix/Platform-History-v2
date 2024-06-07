@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "Ky përdorues nuk ka një portofol të caktuar",
         "TheWalletOfThisUserInvalid": "Portofoli i këtij përdoruesi është i pavlefshëm",
         "WalletInvalid": "Adresa e portofolit është e pavlefshme",
-        "CantManageFrozenSeries": "Nuk mund të menaxhosh seritë e ngrira"
+        "CantManageFrozenSeries": "Nuk mund të menaxhosh seritë e ngrira",
+        "SubscriptionStreamNotPaid": "Ju nuk keni paguar për të parë këtë përmbajtje. Ju lutemi klikoni {{subscriptionUrl}} dhe regjistrohuni në planin e duhur."
     },
     "admin": {
         "Title": "Asetet administrative",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "çmimi",
             "DescriptionPlaceholder": "përshkrimi i planit të abonimit",
             "SavePlan": "Ruaj planin",
-            "NewPlan": "Plani i ri"
+            "NewPlan": "Plani i ri",
+            "SubscriptionTitle": "Planet e abonimit",
+            "AreYouSureDeletePlan": "Je i sigurt që dëshiron ta fshish këtë plan?",
+            "Duration": "Kohëzgjatja",
+            "Discount": "Zbritje",
+            "Interrupt": "Ndërprisni",
+            "Continue": "Vazhdoni",
+            "SelectDisplayType": "Zgjidhni {{displayType}}",
+            "EndDate": "Data e përfundimit"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "Po ngarkohet",
             "viewInstancesList": "Rifresko listën"
         }
+    },
+    "fundrise": {
+        "placeholder": "shkruani diçka për këtë kontribut..."
     }
 }

@@ -175,7 +175,8 @@
         },
         "chat": {
             "prompt": "Kutsut ihmisiä keskusteluun, jossa voit pitää yhteyttä, jakaa valokuvia yhdessä ja paljon muuta. Anna sille nimi:"
-        }
+        },
+        "Participants": "Kutsu ihmisiä"
     },
     "messages": {
         "html": {

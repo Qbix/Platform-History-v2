@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "Este usuario non ten ningunha carteira asignada",
         "TheWalletOfThisUserInvalid": "A carteira deste usuario non é válida",
         "WalletInvalid": "O enderezo da carteira non é válido",
-        "CantManageFrozenSeries": "Non podes xestionar series conxeladas"
+        "CantManageFrozenSeries": "Non podes xestionar series conxeladas",
+        "SubscriptionStreamNotPaid": "Non pagaches para ver este contido. Fai clic en {{subscriptionUrl}} e subscríbete ao plan adecuado."
     },
     "admin": {
         "Title": "Administrativo de activos",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "prezo",
             "DescriptionPlaceholder": "descrición do plan de subscrición",
             "SavePlan": "Gardar Plan",
-            "NewPlan": "Novo Plan"
+            "NewPlan": "Novo Plan",
+            "SubscriptionTitle": "Plans de subscrición",
+            "AreYouSureDeletePlan": "Estás seguro de que queres eliminar este plan?",
+            "Duration": "Duración",
+            "Discount": "Desconto",
+            "Interrupt": "Interromper",
+            "Continue": "Continuar",
+            "SelectDisplayType": "Seleccione {{displayType}}",
+            "EndDate": "data de finalización"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "Cargando",
             "viewInstancesList": "Lista de actualización"
         }
+    },
+    "fundrise": {
+        "placeholder": "escribe algo sobre esta contribución..."
     }
 }

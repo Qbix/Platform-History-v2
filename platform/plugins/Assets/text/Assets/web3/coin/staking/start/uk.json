@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reserveToken",
+                        "duration": "Тривалість",
+                        "amount": "Сума"
+                    },
+                    "small": {
+                        "reserveToken": "reserveToken",
+                        "duration": "Тривалість",
+                        "amount": "Сума"
+                    }
+                },
+                "placeholders": {
+                    "duration": "Тривалість",
+                    "amount": "сума"
+                },
+                "btns": {
+                    "stake": "Ставка"
+                },
+                "stake": "Ставка",
+                "loading": "Завантаження"
+            }
+        }
+    }
+}

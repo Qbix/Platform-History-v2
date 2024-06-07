@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "varataToken",
+                        "duration": "Kesto",
+                        "amount": "Määrä"
+                    },
+                    "small": {
+                        "reserveToken": "varataToken",
+                        "duration": "Kesto",
+                        "amount": "Määrä"
+                    }
+                },
+                "placeholders": {
+                    "duration": "Kesto",
+                    "amount": "määrä"
+                },
+                "btns": {
+                    "stake": "Panos"
+                },
+                "stake": "Panos",
+                "loading": "Ladataan"
+            }
+        }
+    }
+}

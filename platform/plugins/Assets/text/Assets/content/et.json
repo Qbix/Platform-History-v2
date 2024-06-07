@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "Sellele kasutajale pole rahakotti määratud",
         "TheWalletOfThisUserInvalid": "Selle kasutaja rahakott on kehtetu",
         "WalletInvalid": "Rahakoti aadress on kehtetu",
-        "CantManageFrozenSeries": "Sa ei saa hallata külmutatud seeriaid"
+        "CantManageFrozenSeries": "Sa ei saa hallata külmutatud seeriaid",
+        "SubscriptionStreamNotPaid": "Te pole selle sisu vaatamise eest maksnud. Klõpsake {{subscriptionUrl}} ja tellige sobiv pakett."
     },
     "admin": {
         "Title": "Varade haldus",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "hind",
             "DescriptionPlaceholder": "liitumisplaani kirjeldus",
             "SavePlan": "Salvesta plaan",
-            "NewPlan": "Uus plaan"
+            "NewPlan": "Uus plaan",
+            "SubscriptionTitle": "Tellimisplaanid",
+            "AreYouSureDeletePlan": "Kas olete kindel, et soovite selle plaani kustutada?",
+            "Duration": "Kestus",
+            "Discount": "Allahindlus",
+            "Interrupt": "Vahele segama",
+            "Continue": "Jätka",
+            "SelectDisplayType": "Valige {{displayType}}",
+            "EndDate": "lõppkuupäev"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "Laadimine",
             "viewInstancesList": "Värskenda loendit"
         }
+    },
+    "fundrise": {
+        "placeholder": "kirjuta midagi selle panuse kohta..."
     }
 }

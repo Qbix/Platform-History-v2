@@ -1,0 +1,27 @@
+{
+    "title": "Platit",
+    "steps": {
+        "sending_native_coins": "Odesílání nativních mincí",
+        "sending_tokens": "Odesílání tokenů",
+        "swap": "Vyměňte",
+        "approve": "Schvalovat",
+        "one_tx": "Měli byste odeslat jednu transakci",
+        "two_tx": "Měli byste odeslat dvě transakce"
+    },
+    "form": {
+        "fields": {
+            "labels": {
+                "funds_to_pay": "Prostředky k zaplacení"
+            }
+        },
+        "btns": {
+            "pay": "Platit"
+        }
+    },
+    "msgs": {
+        "need_to_pay": "Je třeba zaplatit &quot; {{amountOut}} &quot; tokenů"
+    },
+    "errmsgs": {
+        "chain_is_not_supported": "Takový řetězec s id &quot; {{chainId}} &quot; není podporován"
+    }
+}

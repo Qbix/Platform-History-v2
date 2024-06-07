@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "टोकन बेचना",
+                        "timestamps": "टाइम्स",
+                        "prices": "कीमतों",
+                        "endTime": "अंत समय",
+                        "thresholds": "सीमारेखा",
+                        "bonuses": "बोनस"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "स्वामी वापस नहीं ले सकता",
+                            "option1": "मालिक केवल समाप्ति समय बीत जाने के बाद ही टोकन वापस ले सकता है",
+                            "option2": "मालिक कभी भी टोकन वापस ले सकता है"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "सामुदायिक पता",
+                    "methodkeccack": "Keccak256 हैश फ़ंक्शन",
+                    "roleId": "भूमिका आईडी",
+                    "sellingToken": "टोकन बेचने का पता",
+                    "prices": "ETH, मूल्य",
+                    "thresholds": "टोकन की संख्या",
+                    "bonuses": "बक्शीश %"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "कोई निधि नहीं है"
+                },
+                "btns": {
+                    "createFund": "फंड बनाएं",
+                    "createFundInForm": "बनाएं"
+                },
+                "fundAddress": "निधि का पता",
+                "createFund": "फंड बनाएं",
+                "fundInfo": "जानकारी",
+                "produce": "उत्पादन करना",
+                "loading": "लोड हो रहा है",
+                "viewInstancesList": "सूची रीफ़्रेश करें"
+            }
+        }
+    }
+}

@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "டோக்கன்Erc20",
+                    "duration": "கால அளவு",
+                    "bonusTokenFraction": "போனஸ்TokenFraction",
+                    "popularToken": "பிரபலமான டோக்கன்",
+                    "donations": "நன்கொடைகள்",
+                    "rewardsRateFraction": "வெகுமதி விகிதம்",
+                    "numerator": "எண்",
+                    "denominator": "வகுக்கும்"
+                },
+                "small": {
+                    "tokenErc20": "டோக்கன்Erc20",
+                    "duration": "நாட்களில் கால அளவு",
+                    "bonusTokenFraction": "போனஸ்TokenFraction",
+                    "popularToken": "பிரபலமான டோக்கன்",
+                    "donations": "நன்கொடைகள்",
+                    "rewardsRateFraction": "வெகுமதி விகிதம்",
+                    "numerator": "எண்",
+                    "denominator": "வகுக்கும்"
+                }
+            },
+            "placeholders": {
+                "optional": "(விரும்பினால்)",
+                "tuple": "டூப்பிள்[]",
+                "number": "எண்",
+                "address": "முகவரி",
+                "fraction": "பின்னம்",
+                "integer": "முழு",
+                "seconds": "வினாடிகள்",
+                "days": "நாட்களில்",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "குளங்கள் இல்லை"
+            },
+            "btns": {
+                "createPool": "குளத்தை உருவாக்கவும்",
+                "createPoolInForm": "உருவாக்கு"
+            },
+            "createPool": "குளத்தை உருவாக்கவும்",
+            "produce": "உற்பத்தி செய்",
+            "loading": "ஏற்றுகிறது",
+            "viewInstancesList": "பட்டியலைப் புதுப்பிக்கவும்"
+        }
+    }
+}

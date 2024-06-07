@@ -1,0 +1,21 @@
+{
+    "coin": {
+        "presale": {
+            "buy": {
+                "form": {
+                    "labels": {
+                        "amount": "Πόσο να επενδύσετε;"
+                    },
+                    "placeholders": {
+                        "amount": "Ποσό {{nativeCoin}}",
+                        "max": "Μέγιστο: {{nativeCoinBalance}}"
+                    }
+                },
+                "btns": {
+                    "buy": "Αγορά",
+                    "execute": "Εκτέλεση"
+                }
+            }
+        }
+    }
+}

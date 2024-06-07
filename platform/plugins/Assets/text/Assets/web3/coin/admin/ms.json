@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Tempoh",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "derma",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "pengangka",
+                    "denominator": "penyebut"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Tempoh dalam hari",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "derma",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "pengangka",
+                    "denominator": "penyebut"
+                }
+            },
+            "placeholders": {
+                "optional": "(pilihan)",
+                "tuple": "tupel[]",
+                "number": "nombor",
+                "address": "alamat",
+                "fraction": "pecahan",
+                "integer": "integer",
+                "seconds": "detik",
+                "days": "hari",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Tiada kolam"
+            },
+            "btns": {
+                "createPool": "Buat Kolam",
+                "createPoolInForm": "Buat"
+            },
+            "createPool": "Buat Kolam",
+            "produce": "Menghasilkan",
+            "loading": "Memuatkan",
+            "viewInstancesList": "Muat semula Senarai"
+        }
+    }
+}

@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reserveToken",
+                        "duration": "Kestus",
+                        "amount": "Summa"
+                    },
+                    "small": {
+                        "reserveToken": "reserveToken",
+                        "duration": "Kestus",
+                        "amount": "Summa"
+                    }
+                },
+                "placeholders": {
+                    "duration": "Kestus",
+                    "amount": "summa"
+                },
+                "btns": {
+                    "stake": "Panus"
+                },
+                "stake": "Panus",
+                "loading": "Laadimine"
+            }
+        }
+    }
+}

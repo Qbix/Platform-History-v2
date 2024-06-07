@@ -175,7 +175,8 @@
         },
         "chat": {
             "prompt": "Jendea elkarrizketa batera gonbidatuko duzu, non harremanetan egoteko, argazkiak elkarrekin partekatzeko eta abar. Eman izena:"
-        }
+        },
+        "Participants": "Gonbidatu jendea"
     },
     "messages": {
         "html": {

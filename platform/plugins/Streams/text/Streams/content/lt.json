@@ -175,7 +175,8 @@
         },
         "chat": {
             "prompt": "Pakviesite žmones į pokalbį, kuriame galėsite palaikyti ryšį, dalytis nuotraukomis kartu ir dar daugiau. Suteikite jam pavadinimą:"
-        }
+        },
+        "Participants": "Pakvieskite žmones"
     },
     "messages": {
         "html": {

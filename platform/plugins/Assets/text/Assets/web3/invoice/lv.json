@@ -1,0 +1,27 @@
+{
+    "title": "Maksājiet",
+    "steps": {
+        "sending_native_coins": "Vietējo monētu sūtīšana",
+        "sending_tokens": "Žetonu nosūtīšana",
+        "swap": "Apmainīt",
+        "approve": "Apstiprināt",
+        "one_tx": "Jums vajadzētu nosūtīt vienu darījumu",
+        "two_tx": "Jums jānosūta divi darījumi"
+    },
+    "form": {
+        "fields": {
+            "labels": {
+                "funds_to_pay": "Līdzekļi, kas jāmaksā"
+            }
+        },
+        "btns": {
+            "pay": "Maksājiet"
+        }
+    },
+    "msgs": {
+        "need_to_pay": "Jāmaksā &quot; {{amountOut}} &quot; žetoni"
+    },
+    "errmsgs": {
+        "chain_is_not_supported": "Šāda ķēde ar ID &quot; {{chainId}} &quot; netiek atbalstīta"
+    }
+}

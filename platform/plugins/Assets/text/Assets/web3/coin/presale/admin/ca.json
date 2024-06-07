@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "Fitxa de venda",
+                        "timestamps": "Temps",
+                        "prices": "Preus",
+                        "endTime": "Fi del temps",
+                        "thresholds": "Llindars",
+                        "bonuses": "Bonificacions"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "El propietari no es pot retirar",
+                            "option1": "El propietari només pot retirar fitxes després que hagi passat l&#39;hora final",
+                            "option2": "El propietari pot retirar fitxes en qualsevol moment"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "Adreça de la comunitat",
+                    "methodkeccack": "Funció hash Keccak256",
+                    "roleId": "ID del rol",
+                    "sellingToken": "Adreça de token de venda",
+                    "prices": "ETH, preu",
+                    "thresholds": "# de fitxes",
+                    "bonuses": "% de bonificació"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "No hi ha fons"
+                },
+                "btns": {
+                    "createFund": "Crear fons",
+                    "createFundInForm": "Crear"
+                },
+                "fundAddress": "Adreça del fons",
+                "createFund": "Crear fons",
+                "fundInfo": "Informació",
+                "produce": "Produir",
+                "loading": "Carregant",
+                "viewInstancesList": "Actualitza la llista"
+            }
+        }
+    }
+}

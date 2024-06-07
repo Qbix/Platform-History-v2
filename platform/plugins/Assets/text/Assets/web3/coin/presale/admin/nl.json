@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "Token verkopen",
+                        "timestamps": "Keer",
+                        "prices": "Prijzen",
+                        "endTime": "Eindtijd",
+                        "thresholds": "Drempels",
+                        "bonuses": "Bonussen"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "Eigenaar kan zich niet terugtrekken",
+                            "option1": "De eigenaar kan tokens alleen intrekken nadat de endTime is verstreken",
+                            "option2": "De eigenaar kan op elk moment tokens opnemen"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "Communautair adres",
+                    "methodkeccack": "Keccak256 hash-functie",
+                    "roleId": "Rol-ID",
+                    "sellingToken": "Token-adres verkopen",
+                    "prices": "ETH, prijs",
+                    "thresholds": "# tokens",
+                    "bonuses": "Bonus%"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "Er zijn geen fondsen"
+                },
+                "btns": {
+                    "createFund": "Fonds creëren",
+                    "createFundInForm": "Creëren"
+                },
+                "fundAddress": "Adres van het fonds",
+                "createFund": "Fonds creëren",
+                "fundInfo": "Info",
+                "produce": "Produceren",
+                "loading": "Bezig met laden",
+                "viewInstancesList": "Ververs lijst"
+            }
+        }
+    }
+}

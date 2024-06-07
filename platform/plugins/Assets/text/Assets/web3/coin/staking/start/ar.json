@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "ReserveToken",
+                        "duration": "مدة",
+                        "amount": "كمية"
+                    },
+                    "small": {
+                        "reserveToken": "ReserveToken",
+                        "duration": "مدة",
+                        "amount": "كمية"
+                    }
+                },
+                "placeholders": {
+                    "duration": "مدة",
+                    "amount": "كمية"
+                },
+                "btns": {
+                    "stake": "حصة"
+                },
+                "stake": "حصة",
+                "loading": "تحميل"
+            }
+        }
+    }
+}

@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "Ta uporabnik nima dodeljene denarnice",
         "TheWalletOfThisUserInvalid": "Denarnica tega uporabnika je neveljavna",
         "WalletInvalid": "Naslov denarnice ni veljaven",
-        "CantManageFrozenSeries": "Ne morete upravljati zamrznjenih serij"
+        "CantManageFrozenSeries": "Ne morete upravljati zamrznjenih serij",
+        "SubscriptionStreamNotPaid": "Za ogled te vsebine niste plačali. Kliknite {{subscriptionUrl}} in se naročite na ustrezen paket."
     },
     "admin": {
         "Title": "Sredstva upravna",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "cena",
             "DescriptionPlaceholder": "opis naročniškega paketa",
             "SavePlan": "Shrani načrt",
-            "NewPlan": "Nov načrt"
+            "NewPlan": "Nov načrt",
+            "SubscriptionTitle": "Naročniški paketi",
+            "AreYouSureDeletePlan": "Ali ste prepričani, da želite izbrisati ta načrt?",
+            "Duration": "Trajanje",
+            "Discount": "Popust",
+            "Interrupt": "Prekiniti",
+            "Continue": "Nadaljuj",
+            "SelectDisplayType": "Izberite {{displayType}}",
+            "EndDate": "končni datum"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "nalaganje",
             "viewInstancesList": "Osveži seznam"
         }
+    },
+    "fundrise": {
+        "placeholder": "napiši nekaj o tem prispevku..."
     }
 }

@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "Jeton de vente",
+                        "timestamps": "Fois",
+                        "prices": "Des prix",
+                        "endTime": "Heure de fin",
+                        "thresholds": "Seuils",
+                        "bonuses": "Bonus"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "Le propriétaire ne peut pas se retirer",
+                            "option1": "Le propriétaire ne peut retirer les jetons qu&#39;une fois la fin de la période passée",
+                            "option2": "Le propriétaire peut retirer des jetons à tout moment"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "Adresse de la communauté",
+                    "methodkeccack": "Fonction de hachage Keccak256",
+                    "roleId": "ID de rôle",
+                    "sellingToken": "Adresse du jeton de vente",
+                    "prices": "ETH, prix",
+                    "thresholds": "# de jetons",
+                    "bonuses": "Prime %"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "Il n&#39;y a pas de fonds"
+                },
+                "btns": {
+                    "createFund": "Créer un fonds",
+                    "createFundInForm": "Créer"
+                },
+                "fundAddress": "Adresse du fonds",
+                "createFund": "Créer un fonds",
+                "fundInfo": "Info",
+                "produce": "Produire",
+                "loading": "Chargement",
+                "viewInstancesList": "Rafraîchir la liste"
+            }
+        }
+    }
+}

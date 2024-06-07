@@ -1,0 +1,27 @@
+{
+    "title": "支払う",
+    "steps": {
+        "sending_native_coins": "ネイティブコインの送信",
+        "sending_tokens": "トークンの送信",
+        "swap": "スワップ",
+        "approve": "承認する",
+        "one_tx": "1つのトランザクションを送信する必要があります",
+        "two_tx": "2つのトランザクションを送信する必要があります"
+    },
+    "form": {
+        "fields": {
+            "labels": {
+                "funds_to_pay": "支払う資金"
+            }
+        },
+        "btns": {
+            "pay": "支払う"
+        }
+    },
+    "msgs": {
+        "need_to_pay": "「 {{amountOut}} 」トークンを支払う必要があります"
+    },
+    "errmsgs": {
+        "chain_is_not_supported": "ID「 {{chainId}} 」のチェーンはサポートされていません"
+    }
+}

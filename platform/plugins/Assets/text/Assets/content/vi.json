@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "Người dùng này không có ví được chỉ định",
         "TheWalletOfThisUserInvalid": "Ví của người dùng này không hợp lệ",
         "WalletInvalid": "Địa chỉ ví không hợp lệ",
-        "CantManageFrozenSeries": "Bạn không thể quản lý sê-ri bị đóng băng"
+        "CantManageFrozenSeries": "Bạn không thể quản lý sê-ri bị đóng băng",
+        "SubscriptionStreamNotPaid": "Bạn chưa trả tiền để xem nội dung này. Hãy nhấn {{subscriptionUrl}} và đăng ký gói phù hợp."
     },
     "admin": {
         "Title": "quản lý tài sản",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "giá",
             "DescriptionPlaceholder": "mô tả kế hoạch đăng ký",
             "SavePlan": "Lưu kế hoạch",
-            "NewPlan": "Kế hoạch mới"
+            "NewPlan": "Kế hoạch mới",
+            "SubscriptionTitle": "gói đăng ký",
+            "AreYouSureDeletePlan": "Bạn có chắc chắn muốn xóa kế hoạch này không?",
+            "Duration": "Khoảng thời gian",
+            "Discount": "Giảm giá",
+            "Interrupt": "Ngắt",
+            "Continue": "Tiếp tục",
+            "SelectDisplayType": "Chọn {{displayType}}",
+            "EndDate": "ngày cuối"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "Đang tải",
             "viewInstancesList": "Làm mới danh sách"
         }
+    },
+    "fundrise": {
+        "placeholder": "gõ điều gì đó về sự đóng góp này..."
     }
 }

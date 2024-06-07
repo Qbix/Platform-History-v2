@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "Þessi notandi hefur ekkert veski úthlutað",
         "TheWalletOfThisUserInvalid": "Veski þessa notanda ógilt",
         "WalletInvalid": "Veski heimilisfang ógilt",
-        "CantManageFrozenSeries": "Þú getur ekki stjórnað frystum seríum"
+        "CantManageFrozenSeries": "Þú getur ekki stjórnað frystum seríum",
+        "SubscriptionStreamNotPaid": "Þú hefur ekki borgað fyrir að skoða þetta efni. Vinsamlegast smelltu á {{subscriptionUrl}} og gerðu áskrifandi að viðeigandi áætlun."
     },
     "admin": {
         "Title": "Umsýslu eigna",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "verð",
             "DescriptionPlaceholder": "lýsing á áskriftaráætlun",
             "SavePlan": "Vista áætlun",
-            "NewPlan": "Nýtt plan"
+            "NewPlan": "Nýtt plan",
+            "SubscriptionTitle": "Áskriftaráætlanir",
+            "AreYouSureDeletePlan": "Ertu viss um að þú viljir eyða þessari áætlun?",
+            "Duration": "Lengd",
+            "Discount": "Afsláttur",
+            "Interrupt": "Trufla",
+            "Continue": "Halda áfram",
+            "SelectDisplayType": "Veldu {{displayType}}",
+            "EndDate": "loka dagsetning"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "Hleðsla",
             "viewInstancesList": "Endurnýja lista"
         }
+    },
+    "fundrise": {
+        "placeholder": "skrifaðu eitthvað um þetta framlag..."
     }
 }

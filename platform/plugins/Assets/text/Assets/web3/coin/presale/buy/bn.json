@@ -1,0 +1,21 @@
+{
+    "coin": {
+        "presale": {
+            "buy": {
+                "form": {
+                    "labels": {
+                        "amount": "কত বিনিয়োগ করতে হবে?"
+                    },
+                    "placeholders": {
+                        "amount": "পরিমাণ {{nativeCoin}}",
+                        "max": "সর্বোচ্চ: {{nativeCoinBalance}}"
+                    }
+                },
+                "btns": {
+                    "buy": "কেনা",
+                    "execute": "এক্সিকিউট"
+                }
+            }
+        }
+    }
+}

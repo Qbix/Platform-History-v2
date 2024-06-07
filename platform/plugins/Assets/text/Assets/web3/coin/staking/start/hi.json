@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "रिज़र्वटोकन",
+                        "duration": "अवधि",
+                        "amount": "मात्रा"
+                    },
+                    "small": {
+                        "reserveToken": "रिज़र्वटोकन",
+                        "duration": "अवधि",
+                        "amount": "मात्रा"
+                    }
+                },
+                "placeholders": {
+                    "duration": "अवधि",
+                    "amount": "मात्रा"
+                },
+                "btns": {
+                    "stake": "दांव"
+                },
+                "stake": "दांव",
+                "loading": "लोड हो रहा है"
+            }
+        }
+    }
+}

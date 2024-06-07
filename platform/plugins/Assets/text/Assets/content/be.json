@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "Гэтаму карыстальніку не прызначаны кашалёк",
         "TheWalletOfThisUserInvalid": "Кашалёк гэтага карыстальніка несапраўдны",
         "WalletInvalid": "Несапраўдны адрас кашалька",
-        "CantManageFrozenSeries": "Вы не можаце кіраваць замарожанымі серыяламі"
+        "CantManageFrozenSeries": "Вы не можаце кіраваць замарожанымі серыяламі",
+        "SubscriptionStreamNotPaid": "Вы не заплацілі за прагляд гэтага кантэнту. Націсніце {{subscriptionUrl}} і падпішыцеся на адпаведны план."
     },
     "admin": {
         "Title": "Актывы адміністрацыйныя",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "цана",
             "DescriptionPlaceholder": "апісанне плана падпіскі",
             "SavePlan": "План захавання",
-            "NewPlan": "Новы план"
+            "NewPlan": "Новы план",
+            "SubscriptionTitle": "Планы падпіскі",
+            "AreYouSureDeletePlan": "Вы ўпэўнены, што хочаце выдаліць гэты план?",
+            "Duration": "Працягласць",
+            "Discount": "Зніжка",
+            "Interrupt": "Перапыніць",
+            "Continue": "Працягнуць",
+            "SelectDisplayType": "Выберыце {{displayType}}",
+            "EndDate": "дата заканчэння"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "Загрузка",
             "viewInstancesList": "Абнавіць спіс"
         }
+    },
+    "fundrise": {
+        "placeholder": "напішыце што-небудзь пра гэты ўклад..."
     }
 }

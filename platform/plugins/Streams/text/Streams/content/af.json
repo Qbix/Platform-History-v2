@@ -175,7 +175,8 @@
         },
         "chat": {
             "prompt": "Jy sal mense nooi na &#39;n gesprek waar jy in kontak kan bly, foto&#39;s saam kan deel, en meer. Gee dit &#39;n naam:"
-        }
+        },
+        "Participants": "Nooi mense"
     },
     "messages": {
         "html": {

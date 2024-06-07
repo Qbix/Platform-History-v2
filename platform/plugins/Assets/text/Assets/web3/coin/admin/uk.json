@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Тривалість",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "пожертвування",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "чисельник",
+                    "denominator": "знаменник"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Тривалість в днях",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "пожертвування",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "чисельник",
+                    "denominator": "знаменник"
+                }
+            },
+            "placeholders": {
+                "optional": "(необов&#39;язково)",
+                "tuple": "кортеж[]",
+                "number": "номер",
+                "address": "адресу",
+                "fraction": "дріб",
+                "integer": "ціле число",
+                "seconds": "секунд",
+                "days": "днів",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Басейнів немає"
+            },
+            "btns": {
+                "createPool": "Створити пул",
+                "createPoolInForm": "Створити"
+            },
+            "createPool": "Створити пул",
+            "produce": "Виробляти",
+            "loading": "Завантаження",
+            "viewInstancesList": "Оновити список"
+        }
+    }
+}

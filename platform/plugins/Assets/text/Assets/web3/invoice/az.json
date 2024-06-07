@@ -1,0 +1,27 @@
+{
+    "title": "Ödəmək",
+    "steps": {
+        "sending_native_coins": "Doğma sikkələrin göndərilməsi",
+        "sending_tokens": "Tokenlərin göndərilməsi",
+        "swap": "Mübadilə",
+        "approve": "Təsdiq edin",
+        "one_tx": "Bir əməliyyat göndərməlisiniz",
+        "two_tx": "Siz iki əməliyyat göndərməlisiniz"
+    },
+    "form": {
+        "fields": {
+            "labels": {
+                "funds_to_pay": "Ödəmək üçün vəsait"
+            }
+        },
+        "btns": {
+            "pay": "Ödəmək"
+        }
+    },
+    "msgs": {
+        "need_to_pay": "&quot; {{amountOut}} &quot; token ödəmək lazımdır"
+    },
+    "errmsgs": {
+        "chain_is_not_supported": "&quot; {{chainId}} &quot; id ilə belə zəncir dəstəklənmir"
+    }
+}

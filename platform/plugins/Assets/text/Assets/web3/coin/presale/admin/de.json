@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "Token verkaufen",
+                        "timestamps": "Mal",
+                        "prices": "Preise",
+                        "endTime": "Endzeit",
+                        "thresholds": "Schwellenwerte",
+                        "bonuses": "Boni"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "Der Besitzer kann nicht abheben",
+                            "option1": "Der Besitzer kann Token erst abheben, wenn die Endzeit abgelaufen ist.",
+                            "option2": "Der Besitzer kann Token jederzeit abheben"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "Gemeinschaftsadresse",
+                    "methodkeccack": "Keccak256-Hash-Funktion",
+                    "roleId": "Rollen-ID",
+                    "sellingToken": "Adresse des Verkaufstokens",
+                    "prices": "ETH, Preis",
+                    "thresholds": "Anzahl der Token",
+                    "bonuses": "Bonus %"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "Es gibt keine Mittel"
+                },
+                "btns": {
+                    "createFund": "Fonds anlegen",
+                    "createFundInForm": "Erstellen"
+                },
+                "fundAddress": "Fondsadresse",
+                "createFund": "Fonds anlegen",
+                "fundInfo": "Die Info",
+                "produce": "Produzieren",
+                "loading": "Wird geladen",
+                "viewInstancesList": "Liste aktualisieren"
+            }
+        }
+    }
+}

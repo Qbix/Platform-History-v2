@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "dự trữToken",
+                        "duration": "Khoảng thời gian",
+                        "amount": "Số lượng"
+                    },
+                    "small": {
+                        "reserveToken": "dự trữToken",
+                        "duration": "Khoảng thời gian",
+                        "amount": "Số lượng"
+                    }
+                },
+                "placeholders": {
+                    "duration": "Khoảng thời gian",
+                    "amount": "số lượng"
+                },
+                "btns": {
+                    "stake": "Cổ phần"
+                },
+                "stake": "Cổ phần",
+                "loading": "Đang tải"
+            }
+        }
+    }
+}

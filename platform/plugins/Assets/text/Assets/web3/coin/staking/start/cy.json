@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "tocyn cadw",
+                        "duration": "Hyd",
+                        "amount": "Swm"
+                    },
+                    "small": {
+                        "reserveToken": "tocyn cadw",
+                        "duration": "Hyd",
+                        "amount": "Swm"
+                    }
+                },
+                "placeholders": {
+                    "duration": "Hyd",
+                    "amount": "swm"
+                },
+                "btns": {
+                    "stake": "stanc"
+                },
+                "stake": "stanc",
+                "loading": "Llwytho"
+            }
+        }
+    }
+}

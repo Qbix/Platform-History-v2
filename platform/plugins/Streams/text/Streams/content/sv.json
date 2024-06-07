@@ -175,7 +175,8 @@
         },
         "chat": {
             "prompt": "Du kommer att bjuda in människor till en konversation där ni kan hålla kontakten, dela foton tillsammans och mer. Ge det ett namn:"
-        }
+        },
+        "Participants": "Bjuda folk"
     },
     "messages": {
         "html": {

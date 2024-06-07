@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "Myydään Token",
+                        "timestamps": "Ajat",
+                        "prices": "hinnat",
+                        "endTime": "Loppu aika",
+                        "thresholds": "Kynnykset",
+                        "bonuses": "Bonukset"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "Omistaja ei voi peruuttaa",
+                            "option1": "Omistaja voi nostaa tokeneja vasta endTime-ajan kuluttua",
+                            "option2": "Omistaja voi nostaa rahakkeita milloin tahansa"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "Yhteisön osoite",
+                    "methodkeccack": "Keccak256 hash-toiminto",
+                    "roleId": "Roolin tunnus",
+                    "sellingToken": "Myydään Token osoite",
+                    "prices": "ETH, hinta",
+                    "thresholds": "# tokeneja",
+                    "bonuses": "Bonus %"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "Varoja ei ole"
+                },
+                "btns": {
+                    "createFund": "Luo rahasto",
+                    "createFundInForm": "Luoda"
+                },
+                "fundAddress": "Rahaston osoite",
+                "createFund": "Luo rahasto",
+                "fundInfo": "Tiedot",
+                "produce": "Tuottaa",
+                "loading": "Ladataan",
+                "viewInstancesList": "Päivitä lista"
+            }
+        }
+    }
+}

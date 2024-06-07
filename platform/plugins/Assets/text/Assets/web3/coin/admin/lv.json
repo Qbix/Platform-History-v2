@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Ilgums",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "ziedojumi",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "skaitītājs",
+                    "denominator": "saucējs"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Ilgums dienās",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "ziedojumi",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "skaitītājs",
+                    "denominator": "saucējs"
+                }
+            },
+            "placeholders": {
+                "optional": "(neobligāti)",
+                "tuple": "tuple[]",
+                "number": "numuru",
+                "address": "adrese",
+                "fraction": "frakcija",
+                "integer": "vesels skaitlis",
+                "seconds": "sekundes",
+                "days": "dienas",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Nav baseinu"
+            },
+            "btns": {
+                "createPool": "Izveidojiet baseinu",
+                "createPoolInForm": "Izveidot"
+            },
+            "createPool": "Izveidojiet baseinu",
+            "produce": "Ražot",
+            "loading": "Notiek ielāde",
+            "viewInstancesList": "Atsvaidzināt sarakstu"
+        }
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "coin": {
+        "presale": {
+            "buy": {
+                "form": {
+                    "labels": {
+                        "amount": "Koliko uložiti?"
+                    },
+                    "placeholders": {
+                        "amount": "Iznos od {{nativeCoin}}",
+                        "max": "Maksimalno: {{nativeCoinBalance}}"
+                    }
+                },
+                "btns": {
+                    "buy": "Kupiti",
+                    "execute": "Izvršiti"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "የሽያጭ ማስመሰያ",
+                        "timestamps": "ጊዜያት",
+                        "prices": "ዋጋዎች",
+                        "endTime": "የመጨረሻ ጊዜ",
+                        "thresholds": "ገደቦች",
+                        "bonuses": "ጉርሻዎች"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "ባለቤቱ ማንሳት አይችልም።",
+                            "option1": "ባለቤቱ ቶከኖችን ማውጣት የሚችለው የመጨረሻ ጊዜ ካለፈ በኋላ ነው።",
+                            "option2": "ባለቤቱ በማንኛውም ጊዜ ማስመሰያዎችን ማውጣት ይችላል።"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "የማህበረሰብ አድራሻ",
+                    "methodkeccack": "Keccak256 hash ተግባር",
+                    "roleId": "የሚና መታወቂያ",
+                    "sellingToken": "የሽያጭ ማስመሰያ አድራሻ",
+                    "prices": "ETH፣ ዋጋ",
+                    "thresholds": "# ማስመሰያዎች",
+                    "bonuses": "ጉርሻ%"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "ምንም ፈንዶች የሉም"
+                },
+                "btns": {
+                    "createFund": "ፈንድ ፍጠር",
+                    "createFundInForm": "ፍጠር"
+                },
+                "fundAddress": "የገንዘብ አድራሻ",
+                "createFund": "ፈንድ ፍጠር",
+                "fundInfo": "መረጃ",
+                "produce": "ማምረት",
+                "loading": "በመጫን ላይ",
+                "viewInstancesList": "ዝርዝር አድስ"
+            }
+        }
+    }
+}

@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "该用户没有分配钱包",
         "TheWalletOfThisUserInvalid": "该用户钱包无效",
         "WalletInvalid": "钱包地址无效",
-        "CantManageFrozenSeries": "你无法管理《冰雪奇缘》系列"
+        "CantManageFrozenSeries": "你无法管理《冰雪奇缘》系列",
+        "SubscriptionStreamNotPaid": "您尚未付费查看该内容。请点击{{subscriptionUrl}}并订阅相应的计划。"
     },
     "admin": {
         "Title": "资产管理",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "价格",
             "DescriptionPlaceholder": "订阅计划说明",
             "SavePlan": "保存计划",
-            "NewPlan": "新计划"
+            "NewPlan": "新计划",
+            "SubscriptionTitle": "订阅计划",
+            "AreYouSureDeletePlan": "您确实要删除此计划吗？",
+            "Duration": "期间",
+            "Discount": "折扣",
+            "Interrupt": "打断",
+            "Continue": "继续",
+            "SelectDisplayType": "选择{{displayType}}",
+            "EndDate": "结束日期"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "加载中",
             "viewInstancesList": "刷新列表"
         }
+    },
+    "fundrise": {
+        "placeholder": "输入一些关于此贡献的内容..."
     }
 }

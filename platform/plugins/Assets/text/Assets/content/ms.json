@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "Pengguna ini tidak mempunyai dompet yang diberikan",
         "TheWalletOfThisUserInvalid": "Dompet pengguna ini tidak sah",
         "WalletInvalid": "Alamat dompet tidak sah",
-        "CantManageFrozenSeries": "Anda tidak boleh mengurus siri beku"
+        "CantManageFrozenSeries": "Anda tidak boleh mengurus siri beku",
+        "SubscriptionStreamNotPaid": "Anda belum membayar untuk melihat kandungan ini. Sila klik {{subscriptionUrl}} dan langgan pelan yang sesuai."
     },
     "admin": {
         "Title": "Pentadbiran aset",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "harga",
             "DescriptionPlaceholder": "penerangan pelan langganan",
             "SavePlan": "Simpan Pelan",
-            "NewPlan": "Rancangan Baharu"
+            "NewPlan": "Rancangan Baharu",
+            "SubscriptionTitle": "Pelan langganan",
+            "AreYouSureDeletePlan": "Adakah anda pasti mahu memadamkan rancangan ini?",
+            "Duration": "Tempoh",
+            "Discount": "Diskaun",
+            "Interrupt": "menyampuk",
+            "Continue": "teruskan",
+            "SelectDisplayType": "Pilih {{displayType}}",
+            "EndDate": "tarikh tamat"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "Memuatkan",
             "viewInstancesList": "Muat semula Senarai"
         }
+    },
+    "fundrise": {
+        "placeholder": "taip sesuatu tentang sumbangan ini..."
     }
 }

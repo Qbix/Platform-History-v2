@@ -1,0 +1,21 @@
+{
+    "coin": {
+        "presale": {
+            "buy": {
+                "form": {
+                    "labels": {
+                        "amount": "Faint i&#39;w fuddsoddi?"
+                    },
+                    "placeholders": {
+                        "amount": "Swm o {{nativeCoin}}",
+                        "max": "Uchafswm: {{nativeCoinBalance}}"
+                    }
+                },
+                "btns": {
+                    "buy": "Prynwch",
+                    "execute": "Dienyddio"
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "coin": {
+        "presale": {
+            "buy": {
+                "form": {
+                    "labels": {
+                        "amount": "Nə qədər investisiya etmək lazımdır?"
+                    },
+                    "placeholders": {
+                        "amount": "Məbləğ {{nativeCoin}}",
+                        "max": "Maksimum: {{nativeCoinBalance}}"
+                    }
+                },
+                "btns": {
+                    "buy": "al",
+                    "execute": "İcra etmək"
+                }
+            }
+        }
+    }
+}

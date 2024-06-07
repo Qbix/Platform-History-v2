@@ -1,0 +1,27 @@
+{
+    "title": "يدفع",
+    "steps": {
+        "sending_native_coins": "إرسال العملات المحلية",
+        "sending_tokens": "إرسال الرموز",
+        "swap": "تبديل",
+        "approve": "يعتمد",
+        "one_tx": "يجب عليك إرسال معاملة واحدة",
+        "two_tx": "يجب عليك إرسال معاملتين"
+    },
+    "form": {
+        "fields": {
+            "labels": {
+                "funds_to_pay": "الأموال للدفع"
+            }
+        },
+        "btns": {
+            "pay": "يدفع"
+        }
+    },
+    "msgs": {
+        "need_to_pay": "تحتاج إلى دفع &quot; {{amountOut}} &quot; الرموز"
+    },
+    "errmsgs": {
+        "chain_is_not_supported": "هذه السلسلة ذات المعرف &quot; {{chainId}} &quot; غير مدعومة"
+    }
+}

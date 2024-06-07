@@ -175,7 +175,8 @@
         },
         "chat": {
             "prompt": "Du vil invitere folk til en samtale, hvor du kan holde kontakten, dele billeder sammen og meget mere. Giv det et navn:"
-        }
+        },
+        "Participants": "Inviter folk"
     },
     "messages": {
         "html": {

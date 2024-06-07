@@ -175,7 +175,8 @@
         },
         "chat": {
             "prompt": "Þú munt bjóða fólki í samtal þar sem þú getur verið í sambandi, deilt myndum saman og fleira. Gefðu því nafn:"
-        }
+        },
+        "Participants": "Bjóddu fólki"
     },
     "messages": {
         "html": {

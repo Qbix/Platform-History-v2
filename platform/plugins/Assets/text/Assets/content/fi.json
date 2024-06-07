@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "Tälle käyttäjälle ei ole määritetty lompakkoa",
         "TheWalletOfThisUserInvalid": "Tämän käyttäjän lompakko on virheellinen",
         "WalletInvalid": "Lompakon osoite on virheellinen",
-        "CantManageFrozenSeries": "Et voi hallita jäädytettyjä sarjoja"
+        "CantManageFrozenSeries": "Et voi hallita jäädytettyjä sarjoja",
+        "SubscriptionStreamNotPaid": "Et ole maksanut tämän sisällön katsomisesta. Napsauta {{subscriptionUrl}} ja tilaa sopiva paketti."
     },
     "admin": {
         "Title": "Omaisuuden hallinto",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "hinta",
             "DescriptionPlaceholder": "tilaussuunnitelman kuvaus",
             "SavePlan": "Tallenna suunnitelma",
-            "NewPlan": "Uusi suunnitelma"
+            "NewPlan": "Uusi suunnitelma",
+            "SubscriptionTitle": "Tilaussuunnitelmat",
+            "AreYouSureDeletePlan": "Haluatko varmasti poistaa tämän suunnitelman?",
+            "Duration": "Kesto",
+            "Discount": "Alennus",
+            "Interrupt": "Keskeyttää",
+            "Continue": "Jatkaa",
+            "SelectDisplayType": "Valitse {{displayType}}",
+            "EndDate": "päättymispäivä"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "Ladataan",
             "viewInstancesList": "Päivitä lista"
         }
+    },
+    "fundrise": {
+        "placeholder": "kirjoita jotain tästä panoksesta..."
     }
 }

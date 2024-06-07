@@ -175,7 +175,8 @@
         },
         "chat": {
             "prompt": "Convidarás persoas a unha conversa na que podes estar en contacto, compartir fotos xuntos e moito máis. Ponlle un nome:"
-        }
+        },
+        "Participants": "Invitar persoas"
     },
     "messages": {
         "html": {

@@ -1,0 +1,21 @@
+{
+    "coin": {
+        "presale": {
+            "buy": {
+                "form": {
+                    "labels": {
+                        "amount": "कितना निवेश करना होगा?"
+                    },
+                    "placeholders": {
+                        "amount": "राशि {{nativeCoin}}",
+                        "max": "अधिकतम: {{nativeCoinBalance}}"
+                    }
+                },
+                "btns": {
+                    "buy": "खरीदना",
+                    "execute": "निष्पादित करना"
+                }
+            }
+        }
+    }
+}

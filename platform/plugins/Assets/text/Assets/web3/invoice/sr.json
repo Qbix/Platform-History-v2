@@ -1,0 +1,27 @@
+{
+    "title": "Плати",
+    "steps": {
+        "sending_native_coins": "Слање домаћих новчића",
+        "sending_tokens": "Слање токена",
+        "swap": "Свап",
+        "approve": "Одобре",
+        "one_tx": "Требало би да пошаљете једну трансакцију",
+        "two_tx": "Требало би да пошаљете две трансакције"
+    },
+    "form": {
+        "fields": {
+            "labels": {
+                "funds_to_pay": "Средства за плаћање"
+            }
+        },
+        "btns": {
+            "pay": "Плати"
+        }
+    },
+    "msgs": {
+        "need_to_pay": "Треба да платите &quot; {{amountOut}} &quot; токене"
+    },
+    "errmsgs": {
+        "chain_is_not_supported": "Такав ланац са ИД-ом &quot; {{chainId}} &quot; није подржан"
+    }
+}

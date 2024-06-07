@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "Token satılır",
+                        "timestamps": "Vaxt",
+                        "prices": "Qiymətlər",
+                        "endTime": "Bitmə vaxtı",
+                        "thresholds": "Eşiklər",
+                        "bonuses": "Bonuslar"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "Sahibi geri götürə bilməz",
+                            "option1": "Sahibi tokenləri yalnız bitmə vaxtı keçdikdən sonra geri ala bilər",
+                            "option2": "Sahibi istənilən vaxt tokenləri geri ala bilər"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "İcma ünvanı",
+                    "methodkeccack": "Keccak256 hash funksiyası",
+                    "roleId": "Rol ID",
+                    "sellingToken": "Token ünvanı satılır",
+                    "prices": "ETH, Qiymət",
+                    "thresholds": "# token",
+                    "bonuses": "Bonus %"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "Vəsait yoxdur"
+                },
+                "btns": {
+                    "createFund": "Fond yaradın",
+                    "createFundInForm": "Yaradın"
+                },
+                "fundAddress": "Fondun ünvanı",
+                "createFund": "Fond yaradın",
+                "fundInfo": "Məlumat",
+                "produce": "istehsal",
+                "loading": "Yüklənir",
+                "viewInstancesList": "Siyahını yeniləyin"
+            }
+        }
+    }
+}

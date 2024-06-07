@@ -1,0 +1,27 @@
+{
+    "title": "จ่าย",
+    "steps": {
+        "sending_native_coins": "ส่งเหรียญพื้นเมือง",
+        "sending_tokens": "กำลังส่งโทเค็น",
+        "swap": "แลกเปลี่ยน",
+        "approve": "อนุมัติ",
+        "one_tx": "คุณควรส่งหนึ่งธุรกรรม",
+        "two_tx": "คุณควรส่งธุรกรรมสองรายการ"
+    },
+    "form": {
+        "fields": {
+            "labels": {
+                "funds_to_pay": "เงินทุนที่จะจ่าย"
+            }
+        },
+        "btns": {
+            "pay": "จ่าย"
+        }
+    },
+    "msgs": {
+        "need_to_pay": "จำเป็นต้องจ่ายโทเค็น &quot; {{amountOut}} &quot;"
+    },
+    "errmsgs": {
+        "chain_is_not_supported": "ไม่รองรับเชนที่มีรหัส &quot; {{chainId}} &quot; ดังกล่าว"
+    }
+}

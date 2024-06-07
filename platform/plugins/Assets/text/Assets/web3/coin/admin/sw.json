@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "isharaErc20",
+                    "duration": "Muda",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "maarufuToken",
+                    "donations": "michango",
+                    "rewardsRateFraction": "tuzoRateFraction",
+                    "numerator": "namba",
+                    "denominator": "dhehebu"
+                },
+                "small": {
+                    "tokenErc20": "isharaErc20",
+                    "duration": "Muda katika siku",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "maarufuToken",
+                    "donations": "michango",
+                    "rewardsRateFraction": "tuzoRateFraction",
+                    "numerator": "namba",
+                    "denominator": "dhehebu"
+                }
+            },
+            "placeholders": {
+                "optional": "(si lazima)",
+                "tuple": "tuple[]",
+                "number": "nambari",
+                "address": "anwani",
+                "fraction": "sehemu",
+                "integer": "nambari kamili",
+                "seconds": "sekunde",
+                "days": "siku",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Hakuna mabwawa"
+            },
+            "btns": {
+                "createPool": "Unda Dimbwi",
+                "createPoolInForm": "Unda"
+            },
+            "createPool": "Unda Dimbwi",
+            "produce": "Kuzalisha",
+            "loading": "Inapakia",
+            "viewInstancesList": "Onyesha upya Orodha"
+        }
+    }
+}

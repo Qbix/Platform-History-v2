@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "token cadangan",
+                        "duration": "Durasi",
+                        "amount": "Jumlah"
+                    },
+                    "small": {
+                        "reserveToken": "token cadangan",
+                        "duration": "Durasi",
+                        "amount": "Jumlah"
+                    }
+                },
+                "placeholders": {
+                    "duration": "Durasi",
+                    "amount": "jumlah"
+                },
+                "btns": {
+                    "stake": "Mempertaruhkan"
+                },
+                "stake": "Mempertaruhkan",
+                "loading": "Memuat"
+            }
+        }
+    }
+}

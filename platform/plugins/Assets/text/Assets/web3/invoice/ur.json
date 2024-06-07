@@ -1,0 +1,27 @@
+{
+    "title": "ادا کریں۔",
+    "steps": {
+        "sending_native_coins": "دیسی سکے بھیجنا",
+        "sending_tokens": "ٹوکن بھیج رہا ہے۔",
+        "swap": "تبادلہ",
+        "approve": "منظور کرو",
+        "one_tx": "آپ کو ایک لین دین بھیجنا چاہئے۔",
+        "two_tx": "آپ کو دو لین دین بھیجنے چاہئیں"
+    },
+    "form": {
+        "fields": {
+            "labels": {
+                "funds_to_pay": "ادا کرنے کے لیے فنڈز"
+            }
+        },
+        "btns": {
+            "pay": "ادا کریں۔"
+        }
+    },
+    "msgs": {
+        "need_to_pay": "&quot; {{amountOut}} &quot; ٹوکن ادا کرنے کی ضرورت ہے۔"
+    },
+    "errmsgs": {
+        "chain_is_not_supported": "id &quot; {{chainId}} &quot; کے ساتھ اس طرح کا سلسلہ تعاون یافتہ نہیں ہے۔"
+    }
+}

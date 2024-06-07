@@ -1,0 +1,27 @@
+{
+    "title": "A plati",
+    "steps": {
+        "sending_native_coins": "Trimiterea de monede native",
+        "sending_tokens": "Trimiterea de jetoane",
+        "swap": "Schimbați",
+        "approve": "Aproba",
+        "one_tx": "Ar trebui să trimiteți o singură tranzacție",
+        "two_tx": "Ar trebui să trimiteți două tranzacții"
+    },
+    "form": {
+        "fields": {
+            "labels": {
+                "funds_to_pay": "Fonduri de plătit"
+            }
+        },
+        "btns": {
+            "pay": "A plati"
+        }
+    },
+    "msgs": {
+        "need_to_pay": "Trebuie să plătiți jetoane „ {{amountOut}} ”."
+    },
+    "errmsgs": {
+        "chain_is_not_supported": "Un astfel de lanț cu id-ul „ {{chainId}} ” nu este acceptat"
+    }
+}

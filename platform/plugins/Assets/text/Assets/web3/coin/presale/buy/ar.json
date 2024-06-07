@@ -1,0 +1,21 @@
+{
+    "coin": {
+        "presale": {
+            "buy": {
+                "form": {
+                    "labels": {
+                        "amount": "كم للاستثمار؟"
+                    },
+                    "placeholders": {
+                        "amount": "المبلغ {{nativeCoin}}",
+                        "max": "الحد الأقصى: {{nativeCoinBalance}}"
+                    }
+                },
+                "btns": {
+                    "buy": "يشتري",
+                    "execute": "ينفذ"
+                }
+            }
+        }
+    }
+}

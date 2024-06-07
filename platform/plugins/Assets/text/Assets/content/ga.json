@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "Níl aon sparán sannta don úsáideoir seo",
         "TheWalletOfThisUserInvalid": "Tá sparán an úsáideora seo neamhbhailí",
         "WalletInvalid": "Seoladh sparán neamhbhailí",
-        "CantManageFrozenSeries": "Ní féidir leat sraith reoite a bhainistiú"
+        "CantManageFrozenSeries": "Ní féidir leat sraith reoite a bhainistiú",
+        "SubscriptionStreamNotPaid": "Níor íoc tú chun féachaint ar an ábhar seo. Cliceáil {{subscriptionUrl}} le do thoil agus liostáil don phlean cuí."
     },
     "admin": {
         "Title": "Sócmhainní riaracháin",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "praghas",
             "DescriptionPlaceholder": "cur síos ar phlean síntiús",
             "SavePlan": "Sábháil Plean",
-            "NewPlan": "Plean Nua"
+            "NewPlan": "Plean Nua",
+            "SubscriptionTitle": "Pleananna síntiús",
+            "AreYouSureDeletePlan": "An bhfuil tú cinnte gur mhaith leat an plean seo a scriosadh?",
+            "Duration": "Fad",
+            "Discount": "Lascaine",
+            "Interrupt": "Cur isteach",
+            "Continue": "Leanúint ar aghaidh",
+            "SelectDisplayType": "Roghnaigh {{displayType}}",
+            "EndDate": "dáta deiridh"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "Ag lódáil",
             "viewInstancesList": "Liosta Athnuaigh"
         }
+    },
+    "fundrise": {
+        "placeholder": "clóscríobh rud éigin faoin ranníocaíocht seo..."
     }
 }

@@ -1,0 +1,21 @@
+{
+    "coin": {
+        "presale": {
+            "buy": {
+                "form": {
+                    "labels": {
+                        "amount": "ลงทุนเท่าไหร่?"
+                    },
+                    "placeholders": {
+                        "amount": "จำนวน {{nativeCoin}}",
+                        "max": "สูงสุด: {{nativeCoinBalance}}"
+                    }
+                },
+                "btns": {
+                    "buy": "ซื้อ",
+                    "execute": "ดำเนินการ"
+                }
+            }
+        }
+    }
+}

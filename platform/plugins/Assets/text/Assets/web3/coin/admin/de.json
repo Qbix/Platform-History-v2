@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "TokenErc20",
+                    "duration": "Dauer",
+                    "bonusTokenFraction": "BonusTokenFraction",
+                    "popularToken": "beliebtToken",
+                    "donations": "Spenden",
+                    "rewardsRateFraction": "Belohnungsrate-Anteil",
+                    "numerator": "Zähler",
+                    "denominator": "Nenner"
+                },
+                "small": {
+                    "tokenErc20": "TokenErc20",
+                    "duration": "Dauer in Tagen",
+                    "bonusTokenFraction": "BonusTokenFraction",
+                    "popularToken": "beliebtToken",
+                    "donations": "Spenden",
+                    "rewardsRateFraction": "Belohnungsrate-Anteil",
+                    "numerator": "Zähler",
+                    "denominator": "Nenner"
+                }
+            },
+            "placeholders": {
+                "optional": "(Optional)",
+                "tuple": "Tupel[]",
+                "number": "Nummer",
+                "address": "Adresse",
+                "fraction": "Fraktion",
+                "integer": "ganze Zahl",
+                "seconds": "Sekunden",
+                "days": "Tage",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Es gibt keine Pools"
+            },
+            "btns": {
+                "createPool": "Pool erstellen",
+                "createPoolInForm": "Erstellen"
+            },
+            "createPool": "Pool erstellen",
+            "produce": "Produzieren",
+            "loading": "Wird geladen",
+            "viewInstancesList": "Liste aktualisieren"
+        }
+    }
+}

@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "Diesem Benutzer ist kein Wallet zugewiesen",
         "TheWalletOfThisUserInvalid": "Die Brieftasche dieses Benutzers ist ungültig",
         "WalletInvalid": "Wallet-Adresse ungültig",
-        "CantManageFrozenSeries": "Sie können keine eingefrorenen Serien verwalten"
+        "CantManageFrozenSeries": "Sie können keine eingefrorenen Serien verwalten",
+        "SubscriptionStreamNotPaid": "Sie haben für die Anzeige dieses Inhalts nicht bezahlt. Klicken Sie bitte auf {{subscriptionUrl}} und abonnieren Sie den entsprechenden Plan."
     },
     "admin": {
         "Title": "Vermögen administrativ",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "Preis",
             "DescriptionPlaceholder": "Beschreibung des Abonnementplans",
             "SavePlan": "Plan speichern",
-            "NewPlan": "Neuer Plan"
+            "NewPlan": "Neuer Plan",
+            "SubscriptionTitle": "Abonnements",
+            "AreYouSureDeletePlan": "Möchten Sie diesen Plan wirklich löschen?",
+            "Duration": "Dauer",
+            "Discount": "Rabatt",
+            "Interrupt": "Unterbrechen",
+            "Continue": "Weitermachen",
+            "SelectDisplayType": "Wählen Sie {{displayType}}",
+            "EndDate": "Endtermin"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "Wird geladen",
             "viewInstancesList": "Liste aktualisieren"
         }
+    },
+    "fundrise": {
+        "placeholder": "schreiben Sie etwas zu diesem Beitrag..."
     }
 }

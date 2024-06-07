@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "Σε αυτόν τον χρήστη δεν έχει εκχωρηθεί πορτοφόλι",
         "TheWalletOfThisUserInvalid": "Το πορτοφόλι αυτού του χρήστη δεν είναι έγκυρο",
         "WalletInvalid": "Μη έγκυρη διεύθυνση πορτοφολιού",
-        "CantManageFrozenSeries": "Δεν μπορείς να διαχειριστείς παγωμένη σειρά"
+        "CantManageFrozenSeries": "Δεν μπορείς να διαχειριστείς παγωμένη σειρά",
+        "SubscriptionStreamNotPaid": "Δεν έχετε πληρώσει για να δείτε αυτό το περιεχόμενο. Κάντε κλικ {{subscriptionUrl}} και εγγραφείτε στο κατάλληλο πρόγραμμα."
     },
     "admin": {
         "Title": "Περιουσιακά στοιχεία διοικητικά",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "τιμή",
             "DescriptionPlaceholder": "περιγραφή του προγράμματος συνδρομής",
             "SavePlan": "Αποθήκευση σχεδίου",
-            "NewPlan": "Νέο Σχέδιο"
+            "NewPlan": "Νέο Σχέδιο",
+            "SubscriptionTitle": "Σχέδια συνδρομής",
+            "AreYouSureDeletePlan": "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτό το σχέδιο;",
+            "Duration": "Διάρκεια",
+            "Discount": "Εκπτωση",
+            "Interrupt": "Διακοπή",
+            "Continue": "Να συνεχίσει",
+            "SelectDisplayType": "Επιλέξτε {{displayType}}",
+            "EndDate": "ημερομηνία λήξης"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "Φόρτωση",
             "viewInstancesList": "Ανανέωση λίστας"
         }
+    },
+    "fundrise": {
+        "placeholder": "πληκτρολογήστε κάτι για αυτήν τη συνεισφορά..."
     }
 }

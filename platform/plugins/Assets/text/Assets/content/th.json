@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "ผู้ใช้รายนี้ไม่ได้กำหนดกระเป๋าเงิน",
         "TheWalletOfThisUserInvalid": "กระเป๋าเงินของผู้ใช้รายนี้ไม่ถูกต้อง",
         "WalletInvalid": "ที่อยู่ Wallet ไม่ถูกต้อง",
-        "CantManageFrozenSeries": "คุณไม่สามารถจัดการซีรีส์แช่แข็งได้"
+        "CantManageFrozenSeries": "คุณไม่สามารถจัดการซีรีส์แช่แข็งได้",
+        "SubscriptionStreamNotPaid": "คุณยังไม่ได้จ่ายเงินเพื่อดูเนื้อหานี้ กรุณาคลิก {{subscriptionUrl}} และสมัครแผนที่เหมาะสม"
     },
     "admin": {
         "Title": "การบริหารสินทรัพย์",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "ราคา",
             "DescriptionPlaceholder": "คำอธิบายแผนการสมัครสมาชิก",
             "SavePlan": "บันทึกแผน",
-            "NewPlan": "แผนใหม่"
+            "NewPlan": "แผนใหม่",
+            "SubscriptionTitle": "แผนการสมัครสมาชิก",
+            "AreYouSureDeletePlan": "คุณแน่ใจหรือไม่ว่าต้องการลบแผนนี้",
+            "Duration": "ระยะเวลา",
+            "Discount": "การลดราคา",
+            "Interrupt": "ขัดจังหวะ",
+            "Continue": "ดำเนินการต่อ",
+            "SelectDisplayType": "เลือก {{displayType}}",
+            "EndDate": "วันที่สิ้นสุด"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "กำลังโหลด",
             "viewInstancesList": "รีเฟรชรายการ"
         }
+    },
+    "fundrise": {
+        "placeholder": "พิมพ์บางอย่างเกี่ยวกับการสนับสนุนนี้..."
     }
 }

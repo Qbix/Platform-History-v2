@@ -1,0 +1,27 @@
+{
+    "title": "Membayar",
+    "steps": {
+        "sending_native_coins": "Mengirim koin asli",
+        "sending_tokens": "Mengirim token",
+        "swap": "Menukar",
+        "approve": "Menyetujui",
+        "one_tx": "Anda harus mengirim satu transaksi",
+        "two_tx": "Anda harus mengirim dua transaksi"
+    },
+    "form": {
+        "fields": {
+            "labels": {
+                "funds_to_pay": "Dana yang harus dibayar"
+            }
+        },
+        "btns": {
+            "pay": "Membayar"
+        }
+    },
+    "msgs": {
+        "need_to_pay": "Perlu membayar token &quot; {{amountOut}} &quot;."
+    },
+    "errmsgs": {
+        "chain_is_not_supported": "Rantai dengan id &quot; {{chainId}} &quot; tidak didukung"
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "coin": {
+        "presale": {
+            "buy": {
+                "form": {
+                    "labels": {
+                        "amount": "얼마나 투자해야합니까?"
+                    },
+                    "placeholders": {
+                        "amount": "금액 {{nativeCoin}}",
+                        "max": "최대: {{nativeCoinBalance}}"
+                    }
+                },
+                "btns": {
+                    "buy": "구입하다",
+                    "execute": "실행하다"
+                }
+            }
+        }
+    }
+}

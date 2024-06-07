@@ -1,0 +1,21 @@
+{
+    "coin": {
+        "presale": {
+            "buy": {
+                "form": {
+                    "labels": {
+                        "amount": "ఎంత పెట్టుబడి పెట్టాలి?"
+                    },
+                    "placeholders": {
+                        "amount": "మొత్తం {{nativeCoin}}",
+                        "max": "గరిష్టం: {{nativeCoinBalance}}"
+                    }
+                },
+                "btns": {
+                    "buy": "కొనుగోలు",
+                    "execute": "అమలు చేయండి"
+                }
+            }
+        }
+    }
+}

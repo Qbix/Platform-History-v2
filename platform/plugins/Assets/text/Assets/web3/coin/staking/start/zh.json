@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "储备代币",
+                        "duration": "期间",
+                        "amount": "数量"
+                    },
+                    "small": {
+                        "reserveToken": "储备代币",
+                        "duration": "期间",
+                        "amount": "数量"
+                    }
+                },
+                "placeholders": {
+                    "duration": "期间",
+                    "amount": "数量"
+                },
+                "btns": {
+                    "stake": "赌注"
+                },
+                "stake": "赌注",
+                "loading": "加载中"
+            }
+        }
+    }
+}

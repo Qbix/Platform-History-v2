@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "Token müüa",
+                        "timestamps": "Ajad",
+                        "prices": "Hinnad",
+                        "endTime": "Lõpuaeg",
+                        "thresholds": "Künnised",
+                        "bonuses": "Boonused"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "Omanik ei saa taganeda",
+                            "option1": "Omanik saab žetoone välja võtta alles pärast lõpuaja möödumist",
+                            "option2": "Omanik saab žetoone igal ajal välja võtta"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "kogukonna aadress",
+                    "methodkeccack": "Keccak256 räsifunktsioon",
+                    "roleId": "Rolli ID",
+                    "sellingToken": "Müüa Token aadress",
+                    "prices": "ETH, hind",
+                    "thresholds": "märkide arv",
+                    "bonuses": "boonus %"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "Rahalisi vahendeid pole"
+                },
+                "btns": {
+                    "createFund": "Loo fond",
+                    "createFundInForm": "Loo"
+                },
+                "fundAddress": "Fondi aadress",
+                "createFund": "Loo fond",
+                "fundInfo": "Info",
+                "produce": "Toota",
+                "loading": "Laadimine",
+                "viewInstancesList": "Värskenda loendit"
+            }
+        }
+    }
+}

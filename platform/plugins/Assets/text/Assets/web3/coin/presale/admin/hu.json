@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "Token eladása",
+                        "timestamps": "Times",
+                        "prices": "Árak",
+                        "endTime": "Idő vége",
+                        "thresholds": "Küszöbértékek",
+                        "bonuses": "Bónuszok"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "A tulajdonos nem tud visszavonni",
+                            "option1": "A tulajdonos csak az endTime lejárta után vonhatja ki a tokeneket",
+                            "option2": "A tulajdonos bármikor visszavonhatja a tokeneket"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "Közösségi cím",
+                    "methodkeccack": "Keccak256 hash függvény",
+                    "roleId": "Szerep azonosító",
+                    "sellingToken": "Eladó Token cím",
+                    "prices": "ETH, ár",
+                    "thresholds": "tokenek száma",
+                    "bonuses": "bónusz %"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "Nincsenek alapok"
+                },
+                "btns": {
+                    "createFund": "Alap létrehozása",
+                    "createFundInForm": "Teremt"
+                },
+                "fundAddress": "Pénztár címe",
+                "createFund": "Alap létrehozása",
+                "fundInfo": "Info",
+                "produce": "előállítani",
+                "loading": "Betöltés",
+                "viewInstancesList": "Lista frissítése"
+            }
+        }
+    }
+}

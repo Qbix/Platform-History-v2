@@ -1,0 +1,27 @@
+{
+    "title": "Paga",
+    "steps": {
+        "sending_native_coins": "Invio di monete native",
+        "sending_tokens": "Invio di token",
+        "swap": "Scambio",
+        "approve": "Approvare",
+        "one_tx": "Dovresti inviare una transazione",
+        "two_tx": "Dovresti inviare due transazioni"
+    },
+    "form": {
+        "fields": {
+            "labels": {
+                "funds_to_pay": "Fondi da pagare"
+            }
+        },
+        "btns": {
+            "pay": "Paga"
+        }
+    },
+    "msgs": {
+        "need_to_pay": "È necessario pagare gettoni &quot; {{amountOut}} &quot;."
+    },
+    "errmsgs": {
+        "chain_is_not_supported": "Tale catena con ID &quot; {{chainId}} &quot; non è supportata"
+    }
+}

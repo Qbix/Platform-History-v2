@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "erreserbaToken",
+                        "duration": "Iraupena",
+                        "amount": "Zenbatekoa"
+                    },
+                    "small": {
+                        "reserveToken": "erreserbaToken",
+                        "duration": "Iraupena",
+                        "amount": "Zenbatekoa"
+                    }
+                },
+                "placeholders": {
+                    "duration": "Iraupena",
+                    "amount": "zenbatekoa"
+                },
+                "btns": {
+                    "stake": "Partaidetza"
+                },
+                "stake": "Partaidetza",
+                "loading": "Kargatzen"
+            }
+        }
+    }
+}

@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "ಟೋಕನ್ ಮಾರಾಟ",
+                        "timestamps": "ಟೈಮ್ಸ್",
+                        "prices": "ಬೆಲೆಗಳು",
+                        "endTime": "ಅಂತಿಮ ಸಮಯ",
+                        "thresholds": "ಮಿತಿಗಳು",
+                        "bonuses": "ಬೋನಸ್ಗಳು"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "ಮಾಲೀಕರು ಹಿಂಪಡೆಯಲು ಸಾಧ್ಯವಿಲ್ಲ",
+                            "option1": "ಎಂಡ್‌ಟೈಮ್ ಕಳೆದ ನಂತರವೇ ಮಾಲೀಕರು ಟೋಕನ್‌ಗಳನ್ನು ಹಿಂಪಡೆಯಬಹುದು",
+                            "option2": "ಮಾಲೀಕರು ಯಾವಾಗ ಬೇಕಾದರೂ ಟೋಕನ್‌ಗಳನ್ನು ಹಿಂಪಡೆಯಬಹುದು"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "ಸಮುದಾಯದ ವಿಳಾಸ",
+                    "methodkeccack": "Keccak256 ಹ್ಯಾಶ್ ಕಾರ್ಯ",
+                    "roleId": "ಪಾತ್ರ ID",
+                    "sellingToken": "ಟೋಕನ್ ವಿಳಾಸವನ್ನು ಮಾರಾಟ ಮಾಡಲಾಗುತ್ತಿದೆ",
+                    "prices": "ETH, ಬೆಲೆ",
+                    "thresholds": "# ಟೋಕನ್‌ಗಳು",
+                    "bonuses": "ಬೋನಸ್ %"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "ಯಾವುದೇ ನಿಧಿಗಳಿಲ್ಲ"
+                },
+                "btns": {
+                    "createFund": "ನಿಧಿಯನ್ನು ರಚಿಸಿ",
+                    "createFundInForm": "ರಚಿಸಿ"
+                },
+                "fundAddress": "ನಿಧಿಯ ವಿಳಾಸ",
+                "createFund": "ನಿಧಿಯನ್ನು ರಚಿಸಿ",
+                "fundInfo": "ಮಾಹಿತಿ",
+                "produce": "ಉತ್ಪಾದಿಸು",
+                "loading": "ಲೋಡ್ ಆಗುತ್ತಿದೆ",
+                "viewInstancesList": "ಪಟ್ಟಿಯನ್ನು ರಿಫ್ರೆಶ್ ಮಾಡಿ"
+            }
+        }
+    }
+}

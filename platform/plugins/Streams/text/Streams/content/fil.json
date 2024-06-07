@@ -175,7 +175,8 @@
         },
         "chat": {
             "prompt": "Mag-iimbita ka ng mga tao sa isang pag-uusap kung saan maaari kang makipag-ugnayan, magbahagi ng mga larawan nang magkasama, at higit pa. Bigyan ito ng pangalan:"
-        }
+        },
+        "Participants": "Mag-imbita ng mga tao"
     },
     "messages": {
         "html": {

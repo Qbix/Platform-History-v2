@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "トークンErc20",
+                    "duration": "間隔",
+                    "bonusTokenFraction": "ボーナストークン分数",
+                    "popularToken": "人気のトークン",
+                    "donations": "寄付",
+                    "rewardsRateFraction": "報酬率分数",
+                    "numerator": "分子",
+                    "denominator": "分母"
+                },
+                "small": {
+                    "tokenErc20": "トークンErc20",
+                    "duration": "期間（日数）",
+                    "bonusTokenFraction": "ボーナストークン分数",
+                    "popularToken": "人気のトークン",
+                    "donations": "寄付",
+                    "rewardsRateFraction": "報酬率分数",
+                    "numerator": "分子",
+                    "denominator": "分母"
+                }
+            },
+            "placeholders": {
+                "optional": "（オプション）",
+                "tuple": "タプル[]",
+                "number": "番号",
+                "address": "住所",
+                "fraction": "分数",
+                "integer": "整数",
+                "seconds": "秒",
+                "days": "日々",
+                "uint256": "uint256",
+                "uint192": "単位192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "プールはありません"
+            },
+            "btns": {
+                "createPool": "プールを作成",
+                "createPoolInForm": "作成する"
+            },
+            "createPool": "プールを作成",
+            "produce": "生産する",
+            "loading": "読み込み中",
+            "viewInstancesList": "リストを更新"
+        }
+    }
+}

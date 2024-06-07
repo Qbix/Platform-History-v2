@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "ይህ ተጠቃሚ የተመደበ የኪስ ቦርሳ የለውም",
         "TheWalletOfThisUserInvalid": "የዚህ ተጠቃሚ ቦርሳ ልክ ያልሆነ ነው።",
         "WalletInvalid": "የኪስ ቦርሳ አድራሻ ልክ አይደለም።",
-        "CantManageFrozenSeries": "የታሰሩ ተከታታይን ማስተዳደር አይችሉም"
+        "CantManageFrozenSeries": "የታሰሩ ተከታታይን ማስተዳደር አይችሉም",
+        "SubscriptionStreamNotPaid": "ይህንን ይዘት ለማየት ምንም ክፍያ አልከፈሉም። እባክዎ {{subscriptionUrl}} ጠቅ ያድርጉ እና ተገቢውን እቅድ ይመዝገቡ።"
     },
     "admin": {
         "Title": "ንብረቶች አስተዳደራዊ",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "ዋጋ",
             "DescriptionPlaceholder": "የደንበኝነት ምዝገባ ዕቅድ መግለጫ",
             "SavePlan": "እቅድ አስቀምጥ",
-            "NewPlan": "አዲስ እቅድ"
+            "NewPlan": "አዲስ እቅድ",
+            "SubscriptionTitle": "የደንበኝነት ምዝገባ ዕቅዶች",
+            "AreYouSureDeletePlan": "እርግጠኛ ነዎት ይህን እቅድ መሰረዝ ይፈልጋሉ?",
+            "Duration": "ቆይታ",
+            "Discount": "ቅናሽ",
+            "Interrupt": "ማቋረጥ",
+            "Continue": "ቀጥል",
+            "SelectDisplayType": "{{displayType}} ይምረጡ",
+            "EndDate": "የመጨረሻ ቀን"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "በመጫን ላይ",
             "viewInstancesList": "ዝርዝር አድስ"
         }
+    },
+    "fundrise": {
+        "placeholder": "ስለዚህ አስተዋፅዖ የሆነ ነገር ይፃፉ…"
     }
 }

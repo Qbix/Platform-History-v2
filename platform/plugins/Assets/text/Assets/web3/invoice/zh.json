@@ -1,0 +1,27 @@
+{
+    "title": "支付",
+    "steps": {
+        "sending_native_coins": "发送原生代币",
+        "sending_tokens": "发送代币",
+        "swap": "交换",
+        "approve": "批准",
+        "one_tx": "你应该发送一笔交易",
+        "two_tx": "你应该发送两笔交易"
+    },
+    "form": {
+        "fields": {
+            "labels": {
+                "funds_to_pay": "支付资金"
+            }
+        },
+        "btns": {
+            "pay": "支付"
+        }
+    },
+    "msgs": {
+        "need_to_pay": "需要支付“ {{amountOut}} ”代币"
+    },
+    "errmsgs": {
+        "chain_is_not_supported": "不支持 ID 为“ {{chainId}} ” 的此类链"
+    }
+}

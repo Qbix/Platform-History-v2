@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "Walang nakatalagang wallet ang user na ito",
         "TheWalletOfThisUserInvalid": "Di-wasto ang wallet ng user na ito",
         "WalletInvalid": "Di-wasto ang address ng pitaka",
-        "CantManageFrozenSeries": "Hindi mo mapamahalaan ang mga nakapirming serye"
+        "CantManageFrozenSeries": "Hindi mo mapamahalaan ang mga nakapirming serye",
+        "SubscriptionStreamNotPaid": "Hindi ka pa nagbabayad para matingnan ang nilalamang ito. Mangyaring i-click ang {{subscriptionUrl}} at mag-subscribe sa naaangkop na plano."
     },
     "admin": {
         "Title": "Administratibo ng mga asset",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "presyo",
             "DescriptionPlaceholder": "paglalarawan ng plano ng subscription",
             "SavePlan": "I-save ang Plano",
-            "NewPlan": "Bagong Plano"
+            "NewPlan": "Bagong Plano",
+            "SubscriptionTitle": "Mga plano sa subscription",
+            "AreYouSureDeletePlan": "Sigurado ka bang gusto mong tanggalin ang planong ito?",
+            "Duration": "Tagal",
+            "Discount": "Diskwento",
+            "Interrupt": "Makagambala",
+            "Continue": "Magpatuloy",
+            "SelectDisplayType": "Piliin {{displayType}}",
+            "EndDate": "petsa ng pagtatapos"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "Naglo-load",
             "viewInstancesList": "I-refresh ang Listahan"
         }
+    },
+    "fundrise": {
+        "placeholder": "mag-type ng isang bagay tungkol sa kontribusyon na ito..."
     }
 }

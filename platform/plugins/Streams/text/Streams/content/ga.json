@@ -175,7 +175,8 @@
         },
         "chat": {
             "prompt": "Beidh tú ag tabhairt cuireadh do dhaoine chuig comhrá inar féidir leat fanacht i dteagmháil, grianghraif a roinnt le chéile agus tuilleadh. Tabhair ainm dó:"
-        }
+        },
+        "Participants": "Tabhair cuireadh do Dhaoine"
     },
     "messages": {
         "html": {

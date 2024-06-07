@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "Token salmenta",
+                        "timestamps": "Garaiak",
+                        "prices": "Prezioak",
+                        "endTime": "Amaiera Ordua",
+                        "thresholds": "Atalaseak",
+                        "bonuses": "Hobariak"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "Jabeak ezin du erretiratu",
+                            "option1": "Jabeak tokenak atera ditzake amaiera-ordua igaro ondoren",
+                            "option2": "Jabeak edonoiz atera ditzake tokenak"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "Komunitatearen helbidea",
+                    "methodkeccack": "Keccak256 hash funtzioa",
+                    "roleId": "Rolaren IDa",
+                    "sellingToken": "Token helbidea saltzen",
+                    "prices": "ETH, prezioa",
+                    "thresholds": "token kopurua",
+                    "bonuses": "Hobaria %"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "Ez dago funtsik"
+                },
+                "btns": {
+                    "createFund": "Sortu Funtsa",
+                    "createFundInForm": "Sortu"
+                },
+                "fundAddress": "Funtsaren helbidea",
+                "createFund": "Sortu Funtsa",
+                "fundInfo": "Info",
+                "produce": "Ekoiztu",
+                "loading": "Kargatzen",
+                "viewInstancesList": "Freskatu zerrenda"
+            }
+        }
+    }
+}

@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reserveToken",
+                        "duration": "Duur",
+                        "amount": "Hoeveelheid"
+                    },
+                    "small": {
+                        "reserveToken": "reserveToken",
+                        "duration": "Duur",
+                        "amount": "Hoeveelheid"
+                    }
+                },
+                "placeholders": {
+                    "duration": "Duur",
+                    "amount": "hoeveelheid"
+                },
+                "btns": {
+                    "stake": "Inzet"
+                },
+                "stake": "Inzet",
+                "loading": "Bezig met laden"
+            }
+        }
+    }
+}

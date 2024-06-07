@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "токенErc20",
+                    "duration": "Працягласць",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "ахвяраванні",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "лічнік",
+                    "denominator": "назоўнік"
+                },
+                "small": {
+                    "tokenErc20": "токенErc20",
+                    "duration": "Працягласць у днях",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "ахвяраванні",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "лічнік",
+                    "denominator": "назоўнік"
+                }
+            },
+            "placeholders": {
+                "optional": "(неабавязкова)",
+                "tuple": "картэж []",
+                "number": "лік",
+                "address": "адрас",
+                "fraction": "доля",
+                "integer": "цэлы лік",
+                "seconds": "секунд",
+                "days": "дзён",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Басейнаў няма"
+            },
+            "btns": {
+                "createPool": "Стварыць пул",
+                "createPoolInForm": "Ствараць"
+            },
+            "createPool": "Стварыць пул",
+            "produce": "Прадукцыя",
+            "loading": "Загрузка",
+            "viewInstancesList": "Абнавіць спіс"
+        }
+    }
+}

@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reserveToken",
+                        "duration": "Muda",
+                        "amount": "Kiasi"
+                    },
+                    "small": {
+                        "reserveToken": "reserveToken",
+                        "duration": "Muda",
+                        "amount": "Kiasi"
+                    }
+                },
+                "placeholders": {
+                    "duration": "Muda",
+                    "amount": "kiasi"
+                },
+                "btns": {
+                    "stake": "Wadau"
+                },
+                "stake": "Wadau",
+                "loading": "Inapakia"
+            }
+        }
+    }
+}

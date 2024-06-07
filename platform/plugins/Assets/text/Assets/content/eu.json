@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "Erabiltzaile honek ez du diru-zorrorik esleitu",
         "TheWalletOfThisUserInvalid": "Erabiltzaile honen zorroa baliogabea",
         "WalletInvalid": "Diru-zorroaren helbidea baliogabea",
-        "CantManageFrozenSeries": "Ezin dituzu kudeatu izoztutako serieak"
+        "CantManageFrozenSeries": "Ezin dituzu kudeatu izoztutako serieak",
+        "SubscriptionStreamNotPaid": "Ez duzu ordaindu eduki hau ikusteko. Mesedez, sakatu {{subscriptionUrl}} eta harpidetu dagokion planera."
     },
     "admin": {
         "Title": "Ondasunen administrazioa",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "prezioa",
             "DescriptionPlaceholder": "harpidetza planaren deskribapena",
             "SavePlan": "Gorde plana",
-            "NewPlan": "Plan Berria"
+            "NewPlan": "Plan Berria",
+            "SubscriptionTitle": "Harpidetza planak",
+            "AreYouSureDeletePlan": "Ziur plan hau ezabatu nahi duzula?",
+            "Duration": "Iraupena",
+            "Discount": "Deskontua",
+            "Interrupt": "Eten",
+            "Continue": "Jarraitu",
+            "SelectDisplayType": "Hautatu {{displayType}}",
+            "EndDate": "amaiera data"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "Kargatzen",
             "viewInstancesList": "Freskatu zerrenda"
         }
+    },
+    "fundrise": {
+        "placeholder": "idatzi ekarpen honi buruz zerbait..."
     }
 }

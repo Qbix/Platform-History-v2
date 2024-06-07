@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reserveToken",
+                        "duration": "Tul ta&#39; żmien",
+                        "amount": "Ammont"
+                    },
+                    "small": {
+                        "reserveToken": "reserveToken",
+                        "duration": "Tul ta&#39; żmien",
+                        "amount": "Ammont"
+                    }
+                },
+                "placeholders": {
+                    "duration": "Tul ta&#39; żmien",
+                    "amount": "ammont"
+                },
+                "btns": {
+                    "stake": "Stake"
+                },
+                "stake": "Stake",
+                "loading": "Tagħbija"
+            }
+        }
+    }
+}

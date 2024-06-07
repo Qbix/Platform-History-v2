@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "టోకెన్ విక్రయిస్తోంది",
+                        "timestamps": "టైమ్స్",
+                        "prices": "ధరలు",
+                        "endTime": "ముగింపు సమయం",
+                        "thresholds": "థ్రెషోల్డ్స్",
+                        "bonuses": "బోనస్‌లు"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "యజమాని ఉపసంహరించుకోలేరు",
+                            "option1": "ముగింపు సమయం ముగిసిన తర్వాత మాత్రమే యజమాని టోకెన్‌లను ఉపసంహరించుకోవచ్చు",
+                            "option2": "యజమాని ఎప్పుడైనా టోకెన్‌లను ఉపసంహరించుకోవచ్చు"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "సంఘం చిరునామా",
+                    "methodkeccack": "Keccak256 హాష్ ఫంక్షన్",
+                    "roleId": "పాత్ర ID",
+                    "sellingToken": "టోకెన్ చిరునామాను విక్రయిస్తోంది",
+                    "prices": "ETH, ధర",
+                    "thresholds": "# టోకెన్లు",
+                    "bonuses": "అదనపు %"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "నిధులు లేవు"
+                },
+                "btns": {
+                    "createFund": "నిధిని సృష్టించండి",
+                    "createFundInForm": "సృష్టించు"
+                },
+                "fundAddress": "ఫండ్ చిరునామా",
+                "createFund": "నిధిని సృష్టించండి",
+                "fundInfo": "సమాచారం",
+                "produce": "ఉత్పత్తి",
+                "loading": "లోడ్",
+                "viewInstancesList": "జాబితాను రిఫ్రెష్ చేయండి"
+            }
+        }
+    }
+}

@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "Bu kullanıcıya atanmış bir cüzdan yok",
         "TheWalletOfThisUserInvalid": "Bu kullanıcının cüzdanı geçersiz",
         "WalletInvalid": "Cüzdan adresi geçersiz",
-        "CantManageFrozenSeries": "Dondurulmuş dizileri yönetemezsin"
+        "CantManageFrozenSeries": "Dondurulmuş dizileri yönetemezsin",
+        "SubscriptionStreamNotPaid": "Bu içeriği görüntülemek için ödeme yapmadınız. Lütfen {{subscriptionUrl}} tıklayın ve uygun plana abone olun."
     },
     "admin": {
         "Title": "Yönetimsel varlıklar",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "fiyat",
             "DescriptionPlaceholder": "abonelik planı açıklaması",
             "SavePlan": "Planı Kaydet",
-            "NewPlan": "Yeni plan"
+            "NewPlan": "Yeni plan",
+            "SubscriptionTitle": "Abonelik planları",
+            "AreYouSureDeletePlan": "Bu planı silmek istediğinizden emin misiniz?",
+            "Duration": "Süre",
+            "Discount": "İndirim",
+            "Interrupt": "Yarıda kesmek",
+            "Continue": "Devam etmek",
+            "SelectDisplayType": "{{displayType}} seçin",
+            "EndDate": "bitiş tarihi"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "Yükleniyor",
             "viewInstancesList": "Listeyi Yenile"
         }
+    },
+    "fundrise": {
+        "placeholder": "Bu katkı hakkında bir şeyler yazın..."
     }
 }

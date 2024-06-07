@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "ტოკენის გაყიდვა",
+                        "timestamps": "ჯერ",
+                        "prices": "ფასები",
+                        "endTime": "Დროის დასასრული",
+                        "thresholds": "ზღურბლები",
+                        "bonuses": "ბონუსები"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "მფლობელს არ შეუძლია გაყვანა",
+                            "option1": "მფლობელს შეუძლია ტოკენების გატანა მხოლოდ endTime-ის გასვლის შემდეგ",
+                            "option2": "მფლობელს შეუძლია ტოკენების გატანა ნებისმიერ დროს"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "საზოგადოების მისამართი",
+                    "methodkeccack": "Keccak256 ჰეშის ფუნქცია",
+                    "roleId": "როლის ID",
+                    "sellingToken": "იყიდება Token მისამართი",
+                    "prices": "ETH, ფასი",
+                    "thresholds": "# ჟეტონები",
+                    "bonuses": "ბონუსი %"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "თანხები არ არის"
+                },
+                "btns": {
+                    "createFund": "ფონდის შექმნა",
+                    "createFundInForm": "Შექმნა"
+                },
+                "fundAddress": "ფონდის მისამართი",
+                "createFund": "ფონდის შექმნა",
+                "fundInfo": "ინფორმაცია",
+                "produce": "აწარმოე",
+                "loading": "Ჩატვირთვა",
+                "viewInstancesList": "Განახლებული სია"
+            }
+        }
+    }
+}

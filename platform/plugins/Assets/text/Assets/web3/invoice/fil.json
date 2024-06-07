@@ -1,0 +1,27 @@
+{
+    "title": "Magbayad",
+    "steps": {
+        "sending_native_coins": "Nagpapadala ng mga katutubong barya",
+        "sending_tokens": "Nagpapadala ng mga token",
+        "swap": "Magpalit",
+        "approve": "Aprubahan",
+        "one_tx": "Dapat kang magpadala ng isang transaksyon",
+        "two_tx": "Dapat kang magpadala ng dalawang transaksyon"
+    },
+    "form": {
+        "fields": {
+            "labels": {
+                "funds_to_pay": "Mga pondong babayaran"
+            }
+        },
+        "btns": {
+            "pay": "Magbayad"
+        }
+    },
+    "msgs": {
+        "need_to_pay": "Kailangang magbayad ng &quot; {{amountOut}} &quot; na mga token"
+    },
+    "errmsgs": {
+        "chain_is_not_supported": "Ang naturang chain na may id na &quot; {{chainId}} &quot; ay hindi suportado"
+    }
+}

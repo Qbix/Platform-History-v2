@@ -1,0 +1,21 @@
+{
+    "coin": {
+        "presale": {
+            "buy": {
+                "form": {
+                    "labels": {
+                        "amount": "Cé mhéad a infheistiú?"
+                    },
+                    "placeholders": {
+                        "amount": "Méid {{nativeCoin}}",
+                        "max": "Uasmhéid: {{nativeCoinBalance}}"
+                    }
+                },
+                "btns": {
+                    "buy": "Ceannaigh",
+                    "execute": "Rith"
+                }
+            }
+        }
+    }
+}

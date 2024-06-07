@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "Este usuario no tiene billetera asignada",
         "TheWalletOfThisUserInvalid": "La billetera de este usuario no es válida",
         "WalletInvalid": "Dirección de billetera no válida",
-        "CantManageFrozenSeries": "No puedes gestionar series congeladas"
+        "CantManageFrozenSeries": "No puedes gestionar series congeladas",
+        "SubscriptionStreamNotPaid": "No has pagado para ver este contenido. Haga clic en {{subscriptionUrl}} y suscríbase al plan apropiado."
     },
     "admin": {
         "Title": "Administrativo de bienes",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "precio",
             "DescriptionPlaceholder": "descripción del plan de suscripción",
             "SavePlan": "Guardar plan",
-            "NewPlan": "Nuevo plan"
+            "NewPlan": "Nuevo plan",
+            "SubscriptionTitle": "Planes de suscripción",
+            "AreYouSureDeletePlan": "¿Estás seguro de que deseas eliminar este plan?",
+            "Duration": "Duración",
+            "Discount": "Descuento",
+            "Interrupt": "Interrumpir",
+            "Continue": "Continuar",
+            "SelectDisplayType": "Seleccione {{displayType}}",
+            "EndDate": "fecha final"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "Cargando",
             "viewInstancesList": "Actualizar lista"
         }
+    },
+    "fundrise": {
+        "placeholder": "escribe algo sobre esta contribución..."
     }
 }

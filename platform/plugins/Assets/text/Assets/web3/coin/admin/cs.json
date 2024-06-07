@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Doba trvání",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "populární token",
+                    "donations": "dary",
+                    "rewardsRateFraction": "odměnyRateFraction",
+                    "numerator": "čitatel",
+                    "denominator": "jmenovatel"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Doba trvání ve dnech",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "populární token",
+                    "donations": "dary",
+                    "rewardsRateFraction": "odměnyRateFraction",
+                    "numerator": "čitatel",
+                    "denominator": "jmenovatel"
+                }
+            },
+            "placeholders": {
+                "optional": "(volitelný)",
+                "tuple": "n-tice[]",
+                "number": "číslo",
+                "address": "adresa",
+                "fraction": "zlomek",
+                "integer": "celé číslo",
+                "seconds": "sekundy",
+                "days": "dní",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Nejsou zde žádné bazény"
+            },
+            "btns": {
+                "createPool": "Vytvořit bazén",
+                "createPoolInForm": "Vytvořit"
+            },
+            "createPool": "Vytvořit bazén",
+            "produce": "Vyrobit",
+            "loading": "načítání",
+            "viewInstancesList": "Obnovit seznam"
+        }
+    }
+}

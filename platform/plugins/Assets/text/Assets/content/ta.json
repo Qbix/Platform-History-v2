@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "இந்தப் பயனருக்கு வாலட் எதுவும் ஒதுக்கப்படவில்லை",
         "TheWalletOfThisUserInvalid": "இந்தப் பயனரின் பணப்பை தவறானது",
         "WalletInvalid": "வாலட் முகவரி தவறானது",
-        "CantManageFrozenSeries": "உறைந்த தொடர்களை உங்களால் நிர்வகிக்க முடியாது"
+        "CantManageFrozenSeries": "உறைந்த தொடர்களை உங்களால் நிர்வகிக்க முடியாது",
+        "SubscriptionStreamNotPaid": "இந்த உள்ளடக்கத்தைப் பார்க்க நீங்கள் பணம் செலுத்தவில்லை. {{subscriptionUrl}} கிளிக் செய்து, பொருத்தமான திட்டத்திற்கு குழுசேரவும்."
     },
     "admin": {
         "Title": "சொத்துக்கள் நிர்வாக",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "விலை",
             "DescriptionPlaceholder": "சந்தா திட்ட விளக்கம்",
             "SavePlan": "திட்டத்தை சேமிக்கவும்",
-            "NewPlan": "புதிய திட்டம்"
+            "NewPlan": "புதிய திட்டம்",
+            "SubscriptionTitle": "சந்தா திட்டங்கள்",
+            "AreYouSureDeletePlan": "இந்தத் திட்டத்தை நிச்சயமாக நீக்க விரும்புகிறீர்களா?",
+            "Duration": "கால அளவு",
+            "Discount": "தள்ளுபடி",
+            "Interrupt": "குறுக்கிடவும்",
+            "Continue": "தொடரவும்",
+            "SelectDisplayType": "{{displayType}} தேர்ந்தெடுக்கவும்",
+            "EndDate": "கடைசி தேதி"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "ஏற்றுகிறது",
             "viewInstancesList": "பட்டியலைப் புதுப்பிக்கவும்"
         }
+    },
+    "fundrise": {
+        "placeholder": "இந்தப் பங்களிப்பைப் பற்றி ஏதாவது தட்டச்சு செய்யவும்..."
     }
 }

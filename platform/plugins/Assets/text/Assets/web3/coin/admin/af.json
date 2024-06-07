@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Duur",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "gewilde Token",
+                    "donations": "skenkings",
+                    "rewardsRateFraction": "beloningsRateFraksie",
+                    "numerator": "teller",
+                    "denominator": "noemer"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Duur in dae",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "gewilde Token",
+                    "donations": "skenkings",
+                    "rewardsRateFraction": "beloningsRateFraksie",
+                    "numerator": "teller",
+                    "denominator": "noemer"
+                }
+            },
+            "placeholders": {
+                "optional": "(opsioneel)",
+                "tuple": "tupel[]",
+                "number": "nommer",
+                "address": "adres",
+                "fraction": "breuk",
+                "integer": "heelgetal",
+                "seconds": "sekondes",
+                "days": "dae",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Daar is geen swembaddens nie"
+            },
+            "btns": {
+                "createPool": "Skep swembad",
+                "createPoolInForm": "Skep"
+            },
+            "createPool": "Skep swembad",
+            "produce": "Produseer",
+            "loading": "Laai tans",
+            "viewInstancesList": "Herlaai lys"
+        }
+    }
+}

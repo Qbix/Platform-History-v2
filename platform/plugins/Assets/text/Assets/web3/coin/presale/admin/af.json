@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "Verkoop teken",
+                        "timestamps": "Tye",
+                        "prices": "Pryse",
+                        "endTime": "Eind tyd",
+                        "thresholds": "Drempels",
+                        "bonuses": "Bonusse"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "Eienaar kan nie onttrek nie",
+                            "option1": "Eienaar kan tekens onttrek slegs nadat eindtyd verby is",
+                            "option2": "Eienaar kan enige tyd tokens onttrek"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "Gemeenskapsadres",
+                    "methodkeccack": "Keccak256 hash funksie",
+                    "roleId": "Rol ID",
+                    "sellingToken": "Verkoop Token adres",
+                    "prices": "ETH, prys",
+                    "thresholds": "# tekens",
+                    "bonuses": "Bonus %"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "Daar is geen fondse nie"
+                },
+                "btns": {
+                    "createFund": "Skep Fonds",
+                    "createFundInForm": "Skep"
+                },
+                "fundAddress": "Fonds adres",
+                "createFund": "Skep Fonds",
+                "fundInfo": "Inligting",
+                "produce": "Produseer",
+                "loading": "Laai tans",
+                "viewInstancesList": "Herlaai lys"
+            }
+        }
+    }
+}

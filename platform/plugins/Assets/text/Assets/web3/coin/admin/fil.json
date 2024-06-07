@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Tagal",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "mga donasyon",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "numerator",
+                    "denominator": "denominador"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Tagal sa mga araw",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "mga donasyon",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "numerator",
+                    "denominator": "denominador"
+                }
+            },
+            "placeholders": {
+                "optional": "(opsyonal)",
+                "tuple": "tuple []",
+                "number": "numero",
+                "address": "tirahan",
+                "fraction": "maliit na bahagi",
+                "integer": "integer",
+                "seconds": "segundo",
+                "days": "araw",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Walang mga pool"
+            },
+            "btns": {
+                "createPool": "Lumikha ng Pool",
+                "createPoolInForm": "Lumikha"
+            },
+            "createPool": "Lumikha ng Pool",
+            "produce": "Gumawa",
+            "loading": "Naglo-load",
+            "viewInstancesList": "I-refresh ang Listahan"
+        }
+    }
+}

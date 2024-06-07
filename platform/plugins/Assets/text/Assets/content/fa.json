@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "این کاربر هیچ کیف پولی اختصاص ندارد",
         "TheWalletOfThisUserInvalid": "کیف پول این کاربر نامعتبر است",
         "WalletInvalid": "آدرس کیف پول نامعتبر است",
-        "CantManageFrozenSeries": "شما نمی توانید سریال های فریز شده را مدیریت کنید"
+        "CantManageFrozenSeries": "شما نمی توانید سریال های فریز شده را مدیریت کنید",
+        "SubscriptionStreamNotPaid": "برای مشاهده این محتوا پولی پرداخت نکرده اید. لطفا روی {{subscriptionUrl}} کلیک کنید و در طرح مناسب مشترک شوید."
     },
     "admin": {
         "Title": "اداری دارایی ها",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "قیمت",
             "DescriptionPlaceholder": "شرح طرح اشتراک",
             "SavePlan": "ذخیره طرح",
-            "NewPlan": "طرح جدید"
+            "NewPlan": "طرح جدید",
+            "SubscriptionTitle": "طرح های اشتراک",
+            "AreYouSureDeletePlan": "آیا مطمئنید که می خواهید این طرح را حذف کنید؟",
+            "Duration": "مدت زمان",
+            "Discount": "تخفیف",
+            "Interrupt": "قطع کنید",
+            "Continue": "ادامه هید",
+            "SelectDisplayType": "{{displayType}} انتخاب کنید",
+            "EndDate": "تاریخ پایان"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "بارگذاری",
             "viewInstancesList": "فهرست بازخوانی کنید"
         }
+    },
+    "fundrise": {
+        "placeholder": "چیزی در مورد این مشارکت تایپ کنید..."
     }
 }

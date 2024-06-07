@@ -1,0 +1,21 @@
+{
+    "coin": {
+        "presale": {
+            "buy": {
+                "form": {
+                    "labels": {
+                        "amount": "Hoeveel te investeren?"
+                    },
+                    "placeholders": {
+                        "amount": "Bedrag van {{nativeCoin}}",
+                        "max": "Maximaal: {{nativeCoinBalance}}"
+                    }
+                },
+                "btns": {
+                    "buy": "Kopen",
+                    "execute": "Uitvoeren"
+                }
+            }
+        }
+    }
+}

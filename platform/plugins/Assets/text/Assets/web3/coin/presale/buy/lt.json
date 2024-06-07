@@ -1,0 +1,21 @@
+{
+    "coin": {
+        "presale": {
+            "buy": {
+                "form": {
+                    "labels": {
+                        "amount": "Kiek investuoti?"
+                    },
+                    "placeholders": {
+                        "amount": "Suma {{nativeCoin}}",
+                        "max": "Maksimalus: {{nativeCoinBalance}}"
+                    }
+                },
+                "btns": {
+                    "buy": "Pirkti",
+                    "execute": "Vykdyti"
+                }
+            }
+        }
+    }
+}

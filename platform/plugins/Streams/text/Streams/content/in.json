@@ -175,7 +175,8 @@
         },
         "chat": {
             "prompt": "Anda akan mengundang orang-orang ke percakapan di mana Anda dapat tetap berhubungan, berbagi foto bersama, dan banyak lagi. Beri nama:"
-        }
+        },
+        "Participants": "Mengundang orang"
     },
     "messages": {
         "html": {

@@ -1,0 +1,21 @@
+{
+    "coin": {
+        "presale": {
+            "buy": {
+                "form": {
+                    "labels": {
+                        "amount": "Cât de mult să investești?"
+                    },
+                    "placeholders": {
+                        "amount": "Suma de {{nativeCoin}}",
+                        "max": "Max: {{nativeCoinBalance}}"
+                    }
+                },
+                "btns": {
+                    "buy": "Cumpără",
+                    "execute": "A executa"
+                }
+            }
+        }
+    }
+}

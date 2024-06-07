@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "Bán mã thông báo",
+                        "timestamps": "lần",
+                        "prices": "Giá cả",
+                        "endTime": "Thời gian kết thúc",
+                        "thresholds": "Ngưỡng",
+                        "bonuses": "Tiền thưởng"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "Chủ sở hữu không thể rút tiền",
+                            "option1": "Chủ sở hữu chỉ có thể rút mã thông báo sau khi hết thời gian",
+                            "option2": "Chủ sở hữu có thể rút token bất cứ lúc nào"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "Địa chỉ cộng đồng",
+                    "methodkeccack": "Hàm băm Keccak256",
+                    "roleId": "ID vai trò",
+                    "sellingToken": "Địa chỉ mã thông báo bán",
+                    "prices": "ETH, Giá",
+                    "thresholds": "# token",
+                    "bonuses": "Thưởng %"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "Không có tiền"
+                },
+                "btns": {
+                    "createFund": "Tạo quỹ",
+                    "createFundInForm": "Tạo nên"
+                },
+                "fundAddress": "Địa chỉ quỹ",
+                "createFund": "Tạo quỹ",
+                "fundInfo": "Thông tin",
+                "produce": "Sản xuất",
+                "loading": "Đang tải",
+                "viewInstancesList": "Làm mới danh sách"
+            }
+        }
+    }
+}

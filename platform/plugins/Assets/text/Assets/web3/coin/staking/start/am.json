@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reserveToken",
+                        "duration": "ቆይታ",
+                        "amount": "መጠን"
+                    },
+                    "small": {
+                        "reserveToken": "reserveToken",
+                        "duration": "ቆይታ",
+                        "amount": "መጠን"
+                    }
+                },
+                "placeholders": {
+                    "duration": "ቆይታ",
+                    "amount": "መጠን"
+                },
+                "btns": {
+                    "stake": "ካስማ"
+                },
+                "stake": "ካስማ",
+                "loading": "በመጫን ላይ"
+            }
+        }
+    }
+}

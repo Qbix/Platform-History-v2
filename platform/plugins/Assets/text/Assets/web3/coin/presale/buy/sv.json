@@ -1,0 +1,21 @@
+{
+    "coin": {
+        "presale": {
+            "buy": {
+                "form": {
+                    "labels": {
+                        "amount": "Hur mycket ska man investera?"
+                    },
+                    "placeholders": {
+                        "amount": "Belopp på {{nativeCoin}}",
+                        "max": "Max: {{nativeCoinBalance}}"
+                    }
+                },
+                "btns": {
+                    "buy": "köpa",
+                    "execute": "Kör"
+                }
+            }
+        }
+    }
+}

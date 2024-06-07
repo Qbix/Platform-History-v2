@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "Selja tákn",
+                        "timestamps": "Tímar",
+                        "prices": "Verð",
+                        "endTime": "Lokatími",
+                        "thresholds": "Þröskuldar",
+                        "bonuses": "Bónusar"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "Eigandi getur ekki afturkallað",
+                            "option1": "Eigandi getur aðeins tekið út tákn eftir að endTime er liðinn",
+                            "option2": "Eigandi getur tekið út tákn hvenær sem er"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "Heimilisfang samfélagsins",
+                    "methodkeccack": "Keccak256 kjötkássaaðgerð",
+                    "roleId": "Auðkenni hlutverks",
+                    "sellingToken": "Heimilisfang Selling Token",
+                    "prices": "ETH, verð",
+                    "thresholds": "# af táknum",
+                    "bonuses": "Bónus %"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "Það eru engir fjármunir"
+                },
+                "btns": {
+                    "createFund": "Stofna sjóð",
+                    "createFundInForm": "Búa til"
+                },
+                "fundAddress": "Heimilisfang sjóðsins",
+                "createFund": "Stofna sjóð",
+                "fundInfo": "Upplýsingar",
+                "produce": "Framleiða",
+                "loading": "Hleðsla",
+                "viewInstancesList": "Endurnýja lista"
+            }
+        }
+    }
+}

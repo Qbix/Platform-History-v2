@@ -175,7 +175,8 @@
         },
         "chat": {
             "prompt": "Budete pozývať ľudí na konverzáciu, kde môžete zostať v kontakte, zdieľať spoločné fotografie a podobne. Daj tomu názov:"
-        }
+        },
+        "Participants": "Pozvať ľudí"
     },
     "messages": {
         "html": {

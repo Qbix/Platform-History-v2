@@ -175,7 +175,8 @@
         },
         "chat": {
             "prompt": "Bạn sẽ mời mọi người tham gia cuộc trò chuyện nơi bạn có thể giữ liên lạc, chia sẻ ảnh cùng nhau và hơn thế nữa. Đặt tên cho nó:"
-        }
+        },
+        "Participants": "Mời mọi người"
     },
     "messages": {
         "html": {

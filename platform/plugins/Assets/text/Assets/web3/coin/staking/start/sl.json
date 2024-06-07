@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reserveToken",
+                        "duration": "Trajanje",
+                        "amount": "Znesek"
+                    },
+                    "small": {
+                        "reserveToken": "reserveToken",
+                        "duration": "Trajanje",
+                        "amount": "Znesek"
+                    }
+                },
+                "placeholders": {
+                    "duration": "Trajanje",
+                    "amount": "znesek"
+                },
+                "btns": {
+                    "stake": "Stake"
+                },
+                "stake": "Stake",
+                "loading": "nalaganje"
+            }
+        }
+    }
+}

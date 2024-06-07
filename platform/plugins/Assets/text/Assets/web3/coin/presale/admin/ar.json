@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "بيع رمز",
+                        "timestamps": "مرات",
+                        "prices": "الأسعار",
+                        "endTime": "وقت النهاية",
+                        "thresholds": "الحدود القصوى",
+                        "bonuses": "المكافآت"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "لا يمكن للمالك الانسحاب",
+                            "option1": "لا يمكن للمالك سحب الرموز المميزة إلا بعد مرور وقت الانتهاء",
+                            "option2": "يمكن للمالك سحب الرموز في أي وقت"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "عنوان المجتمع",
+                    "methodkeccack": "وظيفة التجزئة Keccak256",
+                    "roleId": "معرف الدور",
+                    "sellingToken": "عنوان بيع الرمز المميز",
+                    "prices": "إيثريوم، السعر",
+                    "thresholds": "# من الرموز",
+                    "bonuses": "نسبة المكافأة"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "لا توجد أموال"
+                },
+                "btns": {
+                    "createFund": "إنشاء صندوق",
+                    "createFundInForm": "يخلق"
+                },
+                "fundAddress": "عنوان الصندوق",
+                "createFund": "إنشاء صندوق",
+                "fundInfo": "معلومات",
+                "produce": "ينتج",
+                "loading": "تحميل",
+                "viewInstancesList": "تحديث القائمة"
+            }
+        }
+    }
+}

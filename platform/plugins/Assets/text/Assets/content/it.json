@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "A questo utente non è assegnato alcun portafoglio",
         "TheWalletOfThisUserInvalid": "Il portafoglio di questo utente non è valido",
         "WalletInvalid": "Indirizzo del portafoglio non valido",
-        "CantManageFrozenSeries": "Non puoi gestire serie congelate"
+        "CantManageFrozenSeries": "Non puoi gestire serie congelate",
+        "SubscriptionStreamNotPaid": "Non hai pagato per visualizzare questo contenuto. Fai clic su {{subscriptionUrl}} e iscriviti al piano appropriato."
     },
     "admin": {
         "Title": "Beni amministrativi",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "prezzo",
             "DescriptionPlaceholder": "descrizione del piano di abbonamento",
             "SavePlan": "Salva Piano",
-            "NewPlan": "Nuovo Piano"
+            "NewPlan": "Nuovo Piano",
+            "SubscriptionTitle": "Piani di abbonamento",
+            "AreYouSureDeletePlan": "Sei sicuro di voler eliminare questo piano?",
+            "Duration": "Durata",
+            "Discount": "Sconto",
+            "Interrupt": "Interrompere",
+            "Continue": "Continua",
+            "SelectDisplayType": "Seleziona {{displayType}}",
+            "EndDate": "data di fine"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "Caricamento",
             "viewInstancesList": "Aggiorna la lista"
         }
+    },
+    "fundrise": {
+        "placeholder": "scrivi qualcosa su questo contributo..."
     }
 }

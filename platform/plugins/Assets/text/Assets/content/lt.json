@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "Šiam vartotojui nepriskirta piniginė",
         "TheWalletOfThisUserInvalid": "Šio naudotojo piniginė negalioja",
         "WalletInvalid": "Netinkamas piniginės adresas",
-        "CantManageFrozenSeries": "Negalite valdyti šaldytų serijų"
+        "CantManageFrozenSeries": "Negalite valdyti šaldytų serijų",
+        "SubscriptionStreamNotPaid": "Jūs nemokėjote už šio turinio peržiūrą. Spustelėkite {{subscriptionUrl}} ir užsiprenumeruokite atitinkamą planą."
     },
     "admin": {
         "Title": "Turtas administracinis",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "kaina",
             "DescriptionPlaceholder": "prenumeratos plano aprašymas",
             "SavePlan": "Išsaugoti planą",
-            "NewPlan": "Naujas planas"
+            "NewPlan": "Naujas planas",
+            "SubscriptionTitle": "Prenumeratos planai",
+            "AreYouSureDeletePlan": "Ar tikrai norite ištrinti šį planą?",
+            "Duration": "Trukmė",
+            "Discount": "Nuolaida",
+            "Interrupt": "Pertraukite",
+            "Continue": "Tęsti",
+            "SelectDisplayType": "Pasirinkite {{displayType}}",
+            "EndDate": "pabaigos data"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "Įkeliama",
             "viewInstancesList": "Atnaujinti sąrašą"
         }
+    },
+    "fundrise": {
+        "placeholder": "parašyk ką nors apie šį indėlį..."
     }
 }

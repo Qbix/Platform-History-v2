@@ -1,0 +1,27 @@
+{
+    "title": "Platiti",
+    "steps": {
+        "sending_native_coins": "Slanje nativnih kovanica",
+        "sending_tokens": "Slanje tokena",
+        "swap": "Zamjena",
+        "approve": "Odobriti",
+        "one_tx": "Trebali biste poslati jednu transakciju",
+        "two_tx": "Trebali biste poslati dvije transakcije"
+    },
+    "form": {
+        "fields": {
+            "labels": {
+                "funds_to_pay": "Sredstva za plaćanje"
+            }
+        },
+        "btns": {
+            "pay": "Platiti"
+        }
+    },
+    "msgs": {
+        "need_to_pay": "Treba platiti &quot; {{amountOut}} &quot; tokena"
+    },
+    "errmsgs": {
+        "chain_is_not_supported": "Takav lanac s ID-om &quot; {{chainId}} &quot; nije podržan"
+    }
+}

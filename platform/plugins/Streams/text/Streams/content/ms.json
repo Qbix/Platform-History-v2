@@ -175,7 +175,8 @@
         },
         "chat": {
             "prompt": "Anda akan menjemput orang ke perbualan yang membolehkan anda terus berhubung, berkongsi foto bersama dan banyak lagi. Beri nama:"
-        }
+        },
+        "Participants": "Jemput Orang"
     },
     "messages": {
         "html": {

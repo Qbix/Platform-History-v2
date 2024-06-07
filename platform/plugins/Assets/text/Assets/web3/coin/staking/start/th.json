@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "สำรองโทเค็น",
+                        "duration": "ระยะเวลา",
+                        "amount": "จำนวน"
+                    },
+                    "small": {
+                        "reserveToken": "สำรองโทเค็น",
+                        "duration": "ระยะเวลา",
+                        "amount": "จำนวน"
+                    }
+                },
+                "placeholders": {
+                    "duration": "ระยะเวลา",
+                    "amount": "จำนวน"
+                },
+                "btns": {
+                    "stake": "เดิมพัน"
+                },
+                "stake": "เดิมพัน",
+                "loading": "กำลังโหลด"
+            }
+        }
+    }
+}

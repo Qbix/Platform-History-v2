@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Trvanie",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "populárnyToken",
+                    "donations": "darov",
+                    "rewardsRateFraction": "odmenyRateFraction",
+                    "numerator": "čitateľ",
+                    "denominator": "menovateľ"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Trvanie v dňoch",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "populárnyToken",
+                    "donations": "darov",
+                    "rewardsRateFraction": "odmenyRateFraction",
+                    "numerator": "čitateľ",
+                    "denominator": "menovateľ"
+                }
+            },
+            "placeholders": {
+                "optional": "(voliteľné)",
+                "tuple": "násobný[]",
+                "number": "číslo",
+                "address": "adresu",
+                "fraction": "zlomok",
+                "integer": "celé číslo",
+                "seconds": "sekúnd",
+                "days": "dni",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Nie sú tam žiadne bazény"
+            },
+            "btns": {
+                "createPool": "Vytvoriť fond",
+                "createPoolInForm": "Vytvorte"
+            },
+            "createPool": "Vytvoriť fond",
+            "produce": "Produkovať",
+            "loading": "Načítava",
+            "viewInstancesList": "Obnoviť zoznam"
+        }
+    }
+}

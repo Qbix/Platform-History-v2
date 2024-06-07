@@ -1,0 +1,21 @@
+{
+    "coin": {
+        "presale": {
+            "buy": {
+                "form": {
+                    "labels": {
+                        "amount": "چقدر سرمایه گذاری کنیم؟"
+                    },
+                    "placeholders": {
+                        "amount": "مبلغ {{nativeCoin}}",
+                        "max": "حداکثر: {{nativeCoinBalance}}"
+                    }
+                },
+                "btns": {
+                    "buy": "خرید کنید",
+                    "execute": "اجرا کردن"
+                }
+            }
+        }
+    }
+}

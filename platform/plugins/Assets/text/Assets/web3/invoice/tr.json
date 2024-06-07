@@ -1,0 +1,27 @@
+{
+    "title": "Ödemek",
+    "steps": {
+        "sending_native_coins": "Yerel paraların gönderilmesi",
+        "sending_tokens": "Jeton gönderme",
+        "swap": "Takas",
+        "approve": "Onaylamak",
+        "one_tx": "Bir işlem göndermelisiniz",
+        "two_tx": "İki işlem göndermelisiniz"
+    },
+    "form": {
+        "fields": {
+            "labels": {
+                "funds_to_pay": "Ödenecek fonlar"
+            }
+        },
+        "btns": {
+            "pay": "Ödemek"
+        }
+    },
+    "msgs": {
+        "need_to_pay": "&quot; {{amountOut}} &quot; token ödemeniz gerekiyor"
+    },
+    "errmsgs": {
+        "chain_is_not_supported": "&quot; {{chainId}} &quot; kimliğine sahip bu tür zincir desteklenmiyor"
+    }
+}

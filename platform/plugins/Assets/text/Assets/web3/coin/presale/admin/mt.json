@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "Token tal-bejgħ",
+                        "timestamps": "Times",
+                        "prices": "Prezzijiet",
+                        "endTime": "Ħin tat-Tmiem",
+                        "thresholds": "Limiti",
+                        "bonuses": "Bonuses"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "Is-sid ma jistax jirtira",
+                            "option1": "Is-sid jista’ jirtira t-tokens biss wara li għadda l-endTime",
+                            "option2": "Is-sid jista’ jirtira t-tokens f’kull ħin"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "indirizz tal-Komunità",
+                    "methodkeccack": "Funzjoni tal-hash Keccak256",
+                    "roleId": "ID tar-rwol",
+                    "sellingToken": "Indirizz tat-Token tal-bejgħ",
+                    "prices": "ETH, Prezz",
+                    "thresholds": "# ta&#39; tokens",
+                    "bonuses": "Bonus %"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "M&#39;hemm l-ebda fondi"
+                },
+                "btns": {
+                    "createFund": "Oħloq Fond",
+                    "createFundInForm": "Oħloq"
+                },
+                "fundAddress": "Indirizz tal-fond",
+                "createFund": "Oħloq Fond",
+                "fundInfo": "Info",
+                "produce": "Ipproduċi",
+                "loading": "Tagħbija",
+                "viewInstancesList": "Aġġorna l-Lista"
+            }
+        }
+    }
+}

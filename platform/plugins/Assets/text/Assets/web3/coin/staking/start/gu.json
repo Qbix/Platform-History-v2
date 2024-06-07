@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "અનામત ટોકન",
+                        "duration": "અવધિ",
+                        "amount": "રકમ"
+                    },
+                    "small": {
+                        "reserveToken": "અનામત ટોકન",
+                        "duration": "અવધિ",
+                        "amount": "રકમ"
+                    }
+                },
+                "placeholders": {
+                    "duration": "અવધિ",
+                    "amount": "રકમ"
+                },
+                "btns": {
+                    "stake": "દાવ"
+                },
+                "stake": "દાવ",
+                "loading": "લોડ કરી રહ્યું છે"
+            }
+        }
+    }
+}

@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "reserveToken",
+                        "duration": "Durada",
+                        "amount": "Import"
+                    },
+                    "small": {
+                        "reserveToken": "reserveToken",
+                        "duration": "Durada",
+                        "amount": "Import"
+                    }
+                },
+                "placeholders": {
+                    "duration": "Durada",
+                    "amount": "quantitat"
+                },
+                "btns": {
+                    "stake": "Estaca"
+                },
+                "stake": "Estaca",
+                "loading": "Carregant"
+            }
+        }
+    }
+}

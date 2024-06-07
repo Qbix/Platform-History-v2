@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "токенЕрц20",
+                    "duration": "Трајање",
+                    "bonusTokenFraction": "бонусТокенФрацтион",
+                    "popularToken": "популарТокен",
+                    "donations": "донације",
+                    "rewardsRateFraction": "ревардсРатеФрацтион",
+                    "numerator": "бројилац",
+                    "denominator": "именилац"
+                },
+                "small": {
+                    "tokenErc20": "токенЕрц20",
+                    "duration": "Трајање у данима",
+                    "bonusTokenFraction": "бонусТокенФрацтион",
+                    "popularToken": "популарТокен",
+                    "donations": "донације",
+                    "rewardsRateFraction": "ревардсРатеФрацтион",
+                    "numerator": "бројилац",
+                    "denominator": "именилац"
+                }
+            },
+            "placeholders": {
+                "optional": "(опционо)",
+                "tuple": "тупле[]",
+                "number": "број",
+                "address": "адреса",
+                "fraction": "фракција",
+                "integer": "цео број",
+                "seconds": "секунди",
+                "days": "дана",
+                "uint256": "уинт256",
+                "uint192": "уинт192",
+                "uint64": "уинт64",
+                "uint32": "уинт32",
+                "uint16": "уинт16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Нема базена"
+            },
+            "btns": {
+                "createPool": "Цреате Поол",
+                "createPoolInForm": "Креирај"
+            },
+            "createPool": "Цреате Поол",
+            "produce": "Производити",
+            "loading": "Лоадинг",
+            "viewInstancesList": "Освежи листу"
+        }
+    }
+}

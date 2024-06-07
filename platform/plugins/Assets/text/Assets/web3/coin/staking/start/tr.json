@@ -1,0 +1,29 @@
+{
+    "coin": {
+        "staking": {
+            "start": {
+                "form": {
+                    "labels": {
+                        "reserveToken": "rezervToken",
+                        "duration": "Süre",
+                        "amount": "Miktar"
+                    },
+                    "small": {
+                        "reserveToken": "rezervToken",
+                        "duration": "Süre",
+                        "amount": "Miktar"
+                    }
+                },
+                "placeholders": {
+                    "duration": "Süre",
+                    "amount": "miktar"
+                },
+                "btns": {
+                    "stake": "Bahis"
+                },
+                "stake": "Bahis",
+                "loading": "Yükleniyor"
+            }
+        }
+    }
+}

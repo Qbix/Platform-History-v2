@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Süre",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popülerToken",
+                    "donations": "bağışlar",
+                    "rewardsRateFraction": "ödüllerOranKesir",
+                    "numerator": "pay",
+                    "denominator": "payda"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Gün cinsinden süre",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popülerToken",
+                    "donations": "bağışlar",
+                    "rewardsRateFraction": "ödüllerOranKesir",
+                    "numerator": "pay",
+                    "denominator": "payda"
+                }
+            },
+            "placeholders": {
+                "optional": "(isteğe bağlı)",
+                "tuple": "demet[]",
+                "number": "sayı",
+                "address": "adres",
+                "fraction": "kesir",
+                "integer": "tamsayı",
+                "seconds": "saniye",
+                "days": "günler",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Havuz yok"
+            },
+            "btns": {
+                "createPool": "Havuz Oluştur",
+                "createPoolInForm": "Yaratmak"
+            },
+            "createPool": "Havuz Oluştur",
+            "produce": "Üretmek",
+            "loading": "Yükleniyor",
+            "viewInstancesList": "Listeyi Yenile"
+        }
+    }
+}

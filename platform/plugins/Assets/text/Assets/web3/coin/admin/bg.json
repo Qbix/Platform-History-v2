@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Продължителност",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "дарения",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "числител",
+                    "denominator": "знаменател"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "Продължителност в дни",
+                    "bonusTokenFraction": "bonusTokenFraction",
+                    "popularToken": "popularToken",
+                    "donations": "дарения",
+                    "rewardsRateFraction": "rewardsRateFraction",
+                    "numerator": "числител",
+                    "denominator": "знаменател"
+                }
+            },
+            "placeholders": {
+                "optional": "(по избор)",
+                "tuple": "кортеж[]",
+                "number": "номер",
+                "address": "адрес",
+                "fraction": "фракция",
+                "integer": "цяло число",
+                "seconds": "секунди",
+                "days": "дни",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "Няма басейни"
+            },
+            "btns": {
+                "createPool": "Създаване на басейн",
+                "createPoolInForm": "Създавайте"
+            },
+            "createPool": "Създаване на басейн",
+            "produce": "Продукция",
+            "loading": "Зареждане",
+            "viewInstancesList": "Опресняване на списъка"
+        }
+    }
+}

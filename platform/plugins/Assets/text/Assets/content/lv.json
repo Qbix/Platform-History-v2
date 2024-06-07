@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "Šim lietotājam nav piešķirts maks",
         "TheWalletOfThisUserInvalid": "Šī lietotāja maks nav derīgs",
         "WalletInvalid": "Maka adrese nav derīga",
-        "CantManageFrozenSeries": "Jūs nevarat pārvaldīt iesaldētas sērijas"
+        "CantManageFrozenSeries": "Jūs nevarat pārvaldīt iesaldētas sērijas",
+        "SubscriptionStreamNotPaid": "Jūs neesat maksājis, lai skatītu šo saturu. Lūdzu, noklikšķiniet uz {{subscriptionUrl}} un abonējiet atbilstošo plānu."
     },
     "admin": {
         "Title": "Aktīvi administratīvi",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "cena",
             "DescriptionPlaceholder": "abonēšanas plāna apraksts",
             "SavePlan": "Saglabāt plānu",
-            "NewPlan": "Jauns plāns"
+            "NewPlan": "Jauns plāns",
+            "SubscriptionTitle": "Abonēšanas plāni",
+            "AreYouSureDeletePlan": "Vai tiešām vēlaties dzēst šo plānu?",
+            "Duration": "Ilgums",
+            "Discount": "Atlaide",
+            "Interrupt": "Pārtraukt",
+            "Continue": "Turpināt",
+            "SelectDisplayType": "Izvēlieties {{displayType}}",
+            "EndDate": "beigu datums"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "Notiek ielāde",
             "viewInstancesList": "Atsvaidzināt sarakstu"
         }
+    },
+    "fundrise": {
+        "placeholder": "ierakstiet kaut ko par šo ieguldījumu..."
     }
 }

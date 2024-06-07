@@ -1,0 +1,21 @@
+{
+    "coin": {
+        "presale": {
+            "buy": {
+                "form": {
+                    "labels": {
+                        "amount": "Kuinka paljon sijoittaa?"
+                    },
+                    "placeholders": {
+                        "amount": "Summa {{nativeCoin}}",
+                        "max": "Max: {{nativeCoinBalance}}"
+                    }
+                },
+                "btns": {
+                    "buy": "Ostaa",
+                    "execute": "Suorittaa"
+                }
+            }
+        }
+    }
+}

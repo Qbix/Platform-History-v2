@@ -1,0 +1,47 @@
+{
+    "coin": {
+        "presale": {
+            "admin": {
+                "form": {
+                    "labels": {
+                        "sellingToken": "Продажа токена",
+                        "timestamps": "Время",
+                        "prices": "Цены",
+                        "endTime": "Время окончания",
+                        "thresholds": "Пороги",
+                        "bonuses": "Бонусы"
+                    },
+                    "fields": {
+                        "ownerWithdrawOptions": {
+                            "option0": "Владелец не может отказаться",
+                            "option1": "Владелец может вывести токены только после того, как пройдет endTime.",
+                            "option2": "Владелец может вывести токены в любое время"
+                        }
+                    }
+                },
+                "placeholders": {
+                    "communityAddress": "Адрес сообщества",
+                    "methodkeccack": "Хэш-функция Keccak256",
+                    "roleId": "Идентификатор роли",
+                    "sellingToken": "Продажа адреса токена",
+                    "prices": "ETH, Цена",
+                    "thresholds": "количество токенов",
+                    "bonuses": "Бонус %"
+                },
+                "errmsgs": {
+                    "ThereAreNoFunds": "Нет средств"
+                },
+                "btns": {
+                    "createFund": "Создать фонд",
+                    "createFundInForm": "Создавать"
+                },
+                "fundAddress": "Адрес фонда",
+                "createFund": "Создать фонд",
+                "fundInfo": "Информация",
+                "produce": "Производить",
+                "loading": "Загрузка",
+                "viewInstancesList": "Обновить список"
+            }
+        }
+    }
+}

@@ -18,7 +18,8 @@
         "ThisUserHaveNoWallet": "Ehhez a felhasználóhoz nincs hozzárendelve pénztárca",
         "TheWalletOfThisUserInvalid": "A felhasználó pénztárcája érvénytelen",
         "WalletInvalid": "A Wallet-cím érvénytelen",
-        "CantManageFrozenSeries": "A fagyasztott sorozatokat nem tudod kezelni"
+        "CantManageFrozenSeries": "A fagyasztott sorozatokat nem tudod kezelni",
+        "SubscriptionStreamNotPaid": "Nem fizetett a tartalom megtekintéséhez. Kérjük, kattintson {{subscriptionUrl}} , és iratkozzon fel a megfelelő csomagra."
     },
     "admin": {
         "Title": "Vagyonkezelés",
@@ -160,7 +161,15 @@
             "PricePlaceholder": "ár",
             "DescriptionPlaceholder": "előfizetési terv leírása",
             "SavePlan": "Terv mentése",
-            "NewPlan": "Új terv"
+            "NewPlan": "Új terv",
+            "SubscriptionTitle": "Előfizetési tervek",
+            "AreYouSureDeletePlan": "Biztosan törli ezt a tervet?",
+            "Duration": "Időtartam",
+            "Discount": "Kedvezmény",
+            "Interrupt": "Megszakítás",
+            "Continue": "Folytatni",
+            "SelectDisplayType": "Válassza {{displayType}}",
+            "EndDate": "befejezés dátuma"
         }
     },
     "payments": {
@@ -676,5 +685,8 @@
             "loading": "Betöltés",
             "viewInstancesList": "Lista frissítése"
         }
+    },
+    "fundrise": {
+        "placeholder": "írj valamit erről a hozzájárulásról..."
     }
 }

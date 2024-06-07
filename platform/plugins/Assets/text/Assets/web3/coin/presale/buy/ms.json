@@ -1,0 +1,21 @@
+{
+    "coin": {
+        "presale": {
+            "buy": {
+                "form": {
+                    "labels": {
+                        "amount": "Berapa banyak yang perlu dilaburkan?"
+                    },
+                    "placeholders": {
+                        "amount": "Jumlah {{nativeCoin}}",
+                        "max": "Maks: {{nativeCoinBalance}}"
+                    }
+                },
+                "btns": {
+                    "buy": "Beli",
+                    "execute": "Laksanakan"
+                }
+            }
+        }
+    }
+}

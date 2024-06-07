@@ -1,0 +1,54 @@
+{
+    "coin": {
+        "admin": {
+            "form": {
+                "labels": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "সময়কাল",
+                    "bonusTokenFraction": "বোনাস টোকেনফ্রাকশন",
+                    "popularToken": "জনপ্রিয় টোকেন",
+                    "donations": "অনুদান",
+                    "rewardsRateFraction": "পুরস্কারের হার ভগ্নাংশ",
+                    "numerator": "অংক",
+                    "denominator": "হর"
+                },
+                "small": {
+                    "tokenErc20": "tokenErc20",
+                    "duration": "দিনের মধ্যে সময়কাল",
+                    "bonusTokenFraction": "বোনাস টোকেনফ্রাকশন",
+                    "popularToken": "জনপ্রিয় টোকেন",
+                    "donations": "অনুদান",
+                    "rewardsRateFraction": "পুরস্কারের হার ভগ্নাংশ",
+                    "numerator": "অংক",
+                    "denominator": "হর"
+                }
+            },
+            "placeholders": {
+                "optional": "(ঐচ্ছিক)",
+                "tuple": "টিপল",
+                "number": "সংখ্যা",
+                "address": "ঠিকানা",
+                "fraction": "ভগ্নাংশ",
+                "integer": "পূর্ণসংখ্যা",
+                "seconds": "সেকেন্ড",
+                "days": "দিন",
+                "uint256": "uint256",
+                "uint192": "uint192",
+                "uint64": "uint64",
+                "uint32": "uint32",
+                "uint16": "uint16"
+            },
+            "errmsgs": {
+                "ThereAreNoPools": "কোন পুল আছে"
+            },
+            "btns": {
+                "createPool": "পুল তৈরি করুন",
+                "createPoolInForm": "সৃষ্টি"
+            },
+            "createPool": "পুল তৈরি করুন",
+            "produce": "উৎপাদন করা",
+            "loading": "লোড হচ্ছে",
+            "viewInstancesList": "তালিকা পুনরুজ্জীবিত করা"
+        }
+    }
+}

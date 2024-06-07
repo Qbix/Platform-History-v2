@@ -1,0 +1,21 @@
+{
+    "coin": {
+        "presale": {
+            "buy": {
+                "form": {
+                    "labels": {
+                        "amount": "Hversu mikið á að fjárfesta?"
+                    },
+                    "placeholders": {
+                        "amount": "Upphæð {{nativeCoin}}",
+                        "max": "Hámark: {{nativeCoinBalance}}"
+                    }
+                },
+                "btns": {
+                    "buy": "Kaupa",
+                    "execute": "Framkvæma"
+                }
+            }
+        }
+    }
+}
