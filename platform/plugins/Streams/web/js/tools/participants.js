@@ -25,7 +25,7 @@
  *   @param {Function} [options.filter]
  *    Takes (userId, element) and can modify them.
  *    If this function returns false, the element is not appended.
- *   @param {Function} [options.hideIfNoParticipants=false] If true hide tool element when no participants and show when somebody join
+ *   @param {Function} [options.hideIfNoParticipants=false] If true hide tool element when no participants and show when somebody joins
  *   @param {Q.Event} [options.onRefresh] An event that occurs when the tool is refreshed
  */
 Q.Tool.define("Streams/participants",
@@ -44,8 +44,9 @@ function _Streams_participants(options) {
 		throw new Q.Error("Streams/participants: missing streamName option");
 	}
 	
+	tool.element.addClass('Streams_noParticipants');
 	if (state.hideIfNoParticipants) {
-		tool.element.addClass('Streams_noParticipants');
+		tool.addClass('Streams_hideIfNoParticipants');
 	}
 	
 	tool.Q.onStateChanged('count').set(function (name) {
@@ -57,13 +58,11 @@ function _Streams_participants(options) {
 			tool.$summary.hide();
 		}
 
-		if (state.hideIfNoParticipants) {
-			if (c <= 0) {
-				tool.cssDisplay = $toolElement.css("display");
-				tool.element.addClass('Streams_noParticipants');
-			} else {
-				tool.element.removeClass('Streams_noParticipants');
-			}
+		if (c <= 0) {
+			tool.cssDisplay = $toolElement.css("display");
+			tool.element.addClass('Streams_noParticipants');
+		} else {
+			tool.element.removeClass('Streams_noParticipants');
 		}
 	}, tool);
 
@@ -190,6 +189,10 @@ function _Streams_participants(options) {
 			.appendTo($te);
 		}
 		if (!tool.$avatars.length) {
+			tool.$inviteButton = $("<button class='Streams_participants_invite_button Q_button' />")
+			.append('<img class="Streams_invite_icon Q_lazy_load Q_lazy_loaded" src="https://local.qbix.com/JGR/Q/plugins/Streams/img/icons/labels/Streams/invited/40.png?Q.cb=1713119947" alt="Invite">')
+			.append($('<span />').html(tool.text.invite.Participants))
+			.appendTo(tool.$pc)
 			tool.$avatars = $("<span class='Streams_participants_avatars' />")
 			.appendTo(tool.$pc);
 		}
@@ -284,6 +287,7 @@ function _Streams_participants(options) {
 	addAvatar: function (userId, prepend) {
 		var tool = this;
 		var state = this.state;
+		var $te = $(tool.element);
 		var $e = userId ? tool.$avatars : tool.$blanks;
 		if (userId && tool.avatarExists(userId)) {
 			return;

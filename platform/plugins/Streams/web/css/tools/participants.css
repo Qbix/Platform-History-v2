@@ -5,7 +5,6 @@
 }
 
 .Streams_participants_tool .Streams_invite_label {
-	color: #228822;
 	font-weight: bold;
 }
 
@@ -60,4 +59,19 @@
 .Streams_participants_tool .Streams_participants_container {
 	overflow: hidden;
 	margin-right: 10px;
+}
+
+.Streams_participants_tool.Streams_noParticipants .Streams_participants_container > * {
+	display: none;
+}
+
+.Streams_participants_tool > .Streams_participants_container > .Streams_participants_invite_button {
+	display: none;
+}
+
+.Streams_participants_tool.Streams_noParticipants .Streams_participants_container > .Streams_participants_invite_button {
+	display: block;
+	width: 100%;
+	max-width: 300px;
+	margin: 10px auto;
 }

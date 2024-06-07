@@ -185,7 +185,7 @@
 	text-align: left;
 }
 
-.Streams_participants_tool.Streams_noParticipants {
+.Streams_participants_tool.Streams_hideIfNoParticipants.Streams_noParticipants {
 	display: none;
 }
 
