@@ -10,6 +10,7 @@ Q.exports(function (Users, priv) {
      * @method activate
      * @param {String} activateLink
      * @param {Object} [options] options for the dialog
+     * @param {Function} [options.onSuccess] receives (data)
      */
     return function Users_Dialogs_activate(activateLink, options) {
         if (!activateLink) {

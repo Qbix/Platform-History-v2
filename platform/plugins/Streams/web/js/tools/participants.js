@@ -189,10 +189,12 @@ function _Streams_participants(options) {
 			.appendTo($te);
 		}
 		if (!tool.$avatars.length) {
-			tool.$inviteButton = $("<button class='Streams_participants_invite_button Q_button' />")
-			.append('<img class="Streams_invite_icon Q_lazy_load Q_lazy_loaded" src="' + Q.url("{{Streams}}/img/icons/labels/Streams/invited/40.png") + '" alt="Invite">')
+			tool.$inviteButton = $("<button class='Streams_participants_inviteButton Q_button Streams_inviteTrigger ' />")
+			.append($(
+				'<img class="Streams_invite_icon Q_lazy_load Q_lazy_loaded"" alt="Invite" />'
+			).attr('src', Q.url('{{Streams}}/img/icons/labels/Streams/invited/40.png')))
 			.append($('<span />').html(tool.text.invite.Participants))
-			.appendTo(tool.$pc)
+			.appendTo(tool.$pc);
 			tool.$avatars = $("<span class='Streams_participants_avatars' />")
 			.appendTo(tool.$pc);
 		}
@@ -489,7 +491,7 @@ function _continue(tool, callback) {
 					});
 
 					if (si.clickable) {
-						$('.Streams_inviteTrigger img', $element).plugin(
+						$('.Streams_inviteTrigger', $element).plugin(
 							'Q/clickable', Q.extend({
 								triggers: $element
 							}, si.clickable)
