@@ -3965,27 +3965,22 @@ Pp.getExtra = function _Participant_prototype_getExtra (extraName) {
  */
 Pp.testRoles = function _Participant_prototype_testRoles (roles) {
 	var extras = this.getAllExtras();
-	if (typeof roles === 'string') {
-		if (extras.role === roles) {
-			return true;
-		}
-		roles = [roles];
-	} else if (roles.length == 1 && extras.role === roles[0]) {
-		return true;
-	}
-	if (!extras.roles) {
+	if (Q.isEmpty(extras.role) || Q.isEmpty(roles)) {
 		return false;
 	}
+	if (typeof extras.role === 'string') {
+		extras.role = [extras.role];
+	}
+	if (typeof roles === 'string') {
+		roles = [roles];
+	}
+
 	// convert to array if object
-	if (Q.typeOf(extras.roles) === "object") {
-		extras.roles = Object.values(extras.roles);
+	if (!Array.isArray(extras.role)) {
+		extras.role = Object.values(extras.role);
 	}
-	for (var i=0, l=roles.length; i<l; ++i) {
-		if (extras.roles.indexOf(roles[i]) < 0) {
-			return false;
-		}
-	}
-	return true;
+
+	return !Q.isEmpty(extras.role.filter(value => roles.includes(value)));
 };
 
 /**
