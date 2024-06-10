@@ -101,23 +101,22 @@ Pp.getExtra = function _Participant_prototype_getExtra (extraName) {
  */
 Pp.testRoles = function _Participant_prototype_testRoles (roles) {
 	var extras = this.getAllExtras();
-	if (typeof roles === 'string') {
-		if (extras.role === roles) {
-			return true;
-		}
-		roles = [roles];
-	} else if (roles.length == 1 && extras.role === roles[0]) {
-		return true;
-	}
-	if (!extras.roles) {
+	if (Q.isEmpty(extras.role) || Q.isEmpty(roles)) {
 		return false;
 	}
-	for (var i=0, l=roles.length; i<l; ++i) {
-		if (extras.roles.indexOf(roles[i]) < 0) {
-			return false;
-		}
+	if (typeof extras.role === 'string') {
+		extras.role = [extras.role];
 	}
-	return true;
+	if (typeof roles === 'string') {
+		roles = [roles];
+	}
+
+	// convert to array if object
+	if (!Array.isArray(extras.role)) {
+		extras.role = Object.values(extras.role);
+	}
+
+	return !Q.isEmpty(extras.role.filter(value => roles.includes(value)));
 };
 
 /**
