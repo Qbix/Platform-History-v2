@@ -465,7 +465,7 @@ function _continue(tool, callback) {
 				function (err, html) {
 					if (err) return;
 					var $element = tool.$invite = $(html).insertBefore(tool.$avatars);
-					var filter = '.Streams_inviteTrigger, .Streams_participants_inviteButton, .Users_avatar_icon_blank';
+					var filter = '.Streams_inviteTrigger, .Streams_participants_invite_button, .Users_avatar_icon_blank';
 					$te.on(Q.Pointer.fastclick, filter, function () {
 						var options = Q.extend({
 							identifier: si.identifier
