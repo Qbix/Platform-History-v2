@@ -194,7 +194,8 @@ function _Streams_participants(options) {
 				'<img class="Streams_invite_icon Q_lazy_load Q_lazy_loaded"" alt="Invite" />'
 			).attr('src', Q.url('{{Streams}}/img/icons/labels/Streams/invited/40.png')))
 			.append($('<span />').html(tool.text.invite.Participants))
-			.appendTo(tool.$pc)
+			.appendTo(tool.$pc);
+			tool.$inviteTrigger = tool.$inviteTrigger.add(tool.$inviteButton);
 			tool.$avatars = $("<span class='Streams_participants_avatars' />")
 			.appendTo(tool.$pc);
 		}
@@ -490,8 +491,13 @@ function _continue(tool, callback) {
 						$(window).on(Q.Pointer.end, _pointerEndHandler);
 					});
 
+					tool.$inviteTrigger = $('.Streams_inviteTrigger img', $element);
+					if (tool.$inviteButton) {
+						tool.$inviteTrigger = tool.$inviteTrigger.add(tool.$inviteButton);
+					}
+
 					if (si.clickable) {
-						$('.Streams_inviteTrigger img', $element).plugin(
+						tool.$inviteTrigger.plugin(
 							'Q/clickable', Q.extend({
 								triggers: $element
 							}, si.clickable)
