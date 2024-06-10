@@ -46,7 +46,7 @@ function _Streams_participants(options) {
 	
 	tool.element.addClass('Streams_noParticipants');
 	if (state.hideIfNoParticipants) {
-		tool.addClass('Streams_hideIfNoParticipants');
+		tool.element.addClass('Streams_hideIfNoParticipants');
 	}
 	
 	tool.Q.onStateChanged('count').set(function (name) {
