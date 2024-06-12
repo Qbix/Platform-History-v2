@@ -149,24 +149,77 @@ class Streams_Participant extends Base_Streams_Participant
 	 * @return {boolean} whether the user has all the roles
 	 */
 	function testRoles ($roles) {
-		if (is_string($roles)) {
-			if ($this->getExtra('role') === $roles) {
-				return true;
-			}
+		$extraRoles = $this->getExtra('role');
+		if (empty($extraRoles) || empty($roles)) {
+			return false;
+		}
+		if (gettype($extraRoles) === 'string') {
+			$extraRoles = array($extraRoles);
+		} elseif (Q::isAssociative($extraRoles)) {
+			$extraRoles = array_keys($extraRoles);
+		}
+		if (gettype($roles) === 'string') {
 			$roles = array($roles);
-		} else if (count($roles) == 1
-		&& $this->getExtra('role') === $roles[0]) {
-			return true;
 		}
-		$eroles = $this->getExtra($roles);
-		foreach ($roles as $role) {
-			if (!in_array($role, $eroles)) {
-				return false;
+
+		return !empty(array_intersect($extraRoles, $roles));
+	}
+
+	/**
+	 * @method grantRoles
+	 * @param {string|array} $roles
+	 * @return Streams_Participant
+	 */
+	function grantRoles($roles) {
+		if (empty($roles)) {
+			return $this;
+		}
+		$extraRoles = $this->getExtra('role');
+		if (is_string($roles)) {
+			$roles = array($roles);
+		}
+		if (is_string($extraRoles)) {
+			$extraRoles = array($extraRoles);
+		}
+		foreach ($roles as $v) {
+			if (in_array($v, $extraRoles)) {
+				continue;
+			}
+			$extraRoles[] = $v;
+		}
+		$this->setExtra('role', array_values($extraRoles));
+		return $this;
+	}
+
+	/**
+	 * @method revokeRoles
+	 * @param {string|array} $roles
+	 * @return Streams_Participant
+	 */
+	function revokeRoles($roles) {
+		$extraRoles = $this->getExtra('role');
+		if (empty($extraRoles) || empty($roles)) {
+			return $this;
+		}
+		if (is_string($roles)) {
+			$roles = array($roles);
+		}
+		if (is_string($extraRoles)) {
+			$extraRoles = array($extraRoles);
+		}
+		foreach ($roles as $v) {
+			if (($i = array_search($v, $extraRoles)) !== false) {
+				unset($extraRoles[$i]);
 			}
 		}
-		return true;
+		if (empty($extraRoles)) {
+			$this->clearExtra('role');
+		} else {
+			$this->setExtra('role', array_values($extraRoles));
+		}
+		return $this;
 	}
-	
+
 	/**
 	 * @method beforeSave
 	 * @param {array} $modifiedFields
