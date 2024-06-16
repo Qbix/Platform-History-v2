@@ -72,6 +72,11 @@
 				],
 				"styleHashes": false,
 				"worker": ["'self'"]
+			},
+			"metas": {
+				"robots": "nosnippet",
+				"googlebot": "nosnippet",
+				"googlebot-news": "nosnippet"
 			}
 		},
 		"static": {
