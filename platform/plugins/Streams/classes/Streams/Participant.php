@@ -161,8 +161,12 @@ class Streams_Participant extends Base_Streams_Participant
 		if (is_string($roles)) {
 			$roles = array($roles);
 		}
-
-		return !empty(array_intersect($extraRoles, $roles));
+		foreach ($roles as $role) {
+			if (!in_array($role, $extraRoles, true)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	/**
