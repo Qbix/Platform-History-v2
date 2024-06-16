@@ -301,40 +301,56 @@ Streams.ADMIN_LEVEL = {
  * @final
  */
 /**
+ * From participant
+ * @config ACCESS_SOURCES['participant']
+ * @type integer
+ * @default 2
+ * @final
+ */
+/**
  * Direct access
  * @config ACCESS_SOURCES['direct']
  * @type integer
- * @default 2
+ * @default 3
  * @final
  */
 /**
  * Inherited public access
  * @config ACCESS_SOURCES['inherited_public']
  * @type integer
- * @default 3
+ * @default 4
  * @final
  */
 /**
  * Inherited from contact
  * @config ACCESS_SOURCES['inherited_contact']
  * @type integer
- * @default 4
+ * @default 5
+ * @final
+ */
+/**
+ * Inherited from participant
+ * @config ACCESS_SOURCES['inherited_participant']
+ * @type integer
+ * @default 6
  * @final
  */
 /**
  * Inherited direct access
  * @config ACCESS_SOURCES['inherited_direct']
  * @type integer
- * @default 5
+ * @default 7
  * @final
  */
 Streams.ACCESS_SOURCES = {
-	'public':				0,
-	'contact':				1,
-	'direct':				2,
-	'inherited_public':		3,
-	'inherited_contact':	4,
-	'inherited_direct':		5
+	'public':                0,
+	'contact':               1,
+	'participant':           2,
+	'direct':                3,
+	'inherited_public':      4,
+	'inherited_contact':     5,
+	'inherited_participant': 6,
+	'inherited_direct':      7
 };
 
 Streams.defined = {};

@@ -107,6 +107,7 @@ abstract class Users extends Base_Users
 	{
 		return Q_Config::get('Users', 'community', 'suffix', null);
 	}
+	
 	/**
 	 * Get default user language from users_user table
 	 * @method getLanguage
@@ -124,9 +125,9 @@ abstract class Users extends Base_Users
 	 * Return an array of the user's roles relative to a publisher
 	 * @method roles
 	 * @static
-	 * @param string [$publisherId=Users::communityId()]
+	 * @param string [$publisherId=Users::currentCommunityId()]
 	 *  The id of the publisher relative to whom to calculate the roles.
-	 *  Defaults to the community id.
+	 *  Defaults to the current community ID.
 	 * @param {string|array|Db_Expression} [$filter=null] 
 	 *  You can pass additional criteria here for the label field
 	 *  in the `Users_Contact::select`, such as an array or Db_Range

@@ -534,67 +534,113 @@ Sp.calculateAccess = function(asUserId, callback) {
 	}
 
 	var p = new Q.Pipe(['rows1', 'rows2'], function (res) {
+		var i, j, row;
 		var err = res.rows1[0] || res.rows2[0];
 		if (err) {
 			return callback.call(subj, err);
 		}
-		var rows = res.rows1[1].concat(res.rows2[1]);
+		var rows1 = res.rows1[1];
+		var rows2 = res.rows2[1];
+		var rows = rows1.concat([]);
+		theloop:
+		for (i=0; i<rows2.length; ++i) {
+			var row2 = rows2[i];
+			for (j=0; j<rows1.length; ++j) {
+				var row1 = rows1[j];
+				if (row2.fields.streamName
+				=== row1.fields.streamName + '*') {
+					// skip the mutable access, because
+					// explicit stream access overrides it
+					continue theloop;
+				}
+			}
+			rows.push(row2);
+		}
 		var labels = [];
-		for (var i=0; i<rows.length; i++) {
-			if (rows[i].fields.ofContactLabel) {
-				labels.push(rows[i].fields.ofContactLabel);
+		var fetchParticipantRow = false;
+		for (i=0; i<rows.length; i++) {
+			row = rows[i];
+			if (row.fields.ofContactLabel) {
+				labels.push(row.fields.ofContactLabel);
+			}
+			if (row.fields.ofParticipantRole) {
+				fetchParticipantRow = true;
 			}
 		}
-		if (!labels.length) {
+		if (!labels.length && !fetchParticipantRow) {
 			return _perUserData(subj, rows, callback);
 		}
-		Users.Contact.SELECT('*').where({
-			'userId':  subj.fields.publisherId,
-			'label': labels,
-			'contactUserId': asUserId
-		}).execute(function (err, result) {
-			if (err) {
+		var p = new Q.Pipe(['contacts', 'participants'], 		function (res) {
+			if (res.contacts[0] || res.participants[0]) {
 				return callback.call(subj, err);
 			}
 
+			var contacts = res.contacts[1];
+			var participants = res.participants[1];
+
 			// NOTE: we load arrays into memory and hope they are not too large
-			var row;
 			var contact_source = Streams.ACCESS_SOURCES['contact'];
-			for (var i=0; i<result.length; i++) {
-				for (var j=0; j<rows.length; j++) {
-					row = rows[j];
-					if (row.fields.ofContactLabel !== result[i].fields.label) {
-						continue;
+			var participant_source = Streams.ACCESS_SOURCES['participant'];
+			var i, j;
+			for (i=0; i<rows.length; ++i) {
+				var row = rows[i];
+				for (j=0; i<contacts.length; j++) {
+					if (row.fields.ofContactLabel === contacts[j].fields.label) {
+						_setStreamAccess(subj, rows[i], contact_source);
 					}
-					var readLevel =  subj.get('readLevel', 0);
-					var writeLevel = subj.get('writeLevel', 0);
-					var adminLevel = subj.get('adminLevel', 0);
-					if (row.fields.readLevel >= 0 && row.fields.readLevel > readLevel) {
-						subj.set('readLevel', row.fields.readLevel);
-						subj.set('readLevel_source', contact_source);
-					}
-					if (row.fields.writeLevel >= 0 && row.fields.writeLevel > writeLevel) {
-						subj.set('writeLevel', row.fields.writeLevel);
-						subj.set('writeLevel_source', contact_source);
-					}
-					if (row.fields.adminLevel >= 0 && row.fields.adminLevel > adminLevel) {
-						subj.set('adminLevel', row.fields.adminLevel);
-						subj.set('adminLevel_source', contact_source);
-					}
-					var p1 = subj.get('permissions', []);
-					var p2 = row.getAllPermissions();
-					var p3 = [].concat(p1);
-					for (var k=0; k<p2.length; ++k) {
-						if (p3.indexOf(p2[k]) < 0) {
-							p3.push(p2[k]);
-						}
-					}
-					subj.set('permissions', p3);
-					subj.set('permissions_source', contact_source);
+				}
+				var p = participants[0];
+				if (p && p.testRoles(row.fields.ofParticipantRole)) {
+					_setStreamAccess(subj, rows[i], participant_source);
 				}
 			}
 			_perUserData(subj, rows, callback);
 		});
+		if (labels.length > 0) {
+			Users.Contact.SELECT('*').where({
+				'userId':  subj.fields.publisherId,
+				'label': labels,
+				'contactUserId': asUserId
+			}).execute(p.fill('contacts'));
+		} else {
+			p.fill('contacts')(null, []);
+		}
+		if (fetchParticipantRow) {
+			Streams.Participant.SELECT('*').where({
+				'publisherId': subj.fields.publisherId,
+				'streamName': subj.fields.name,
+				'userId': asUserId
+			}).execute(p.fill('participants'));
+		} else {
+			p.fill('participants')(null, []);
+		}
+		function _setStreamAccess(stream, access, source) {
+			var readLevel =  stream.get('readLevel', 0);
+			var writeLevel = stream.get('writeLevel', 0);
+			var adminLevel = stream.get('adminLevel', 0);
+			if (access.fields.readLevel >= 0 && access.fields.readLevel > readLevel) {
+				stream.set('readLevel', access.fields.readLevel);
+				stream.set('readLevel_source', source);
+			}
+			if (access.fields.writeLevel >= 0 && access.fields.writeLevel > writeLevel) {
+				stream.set('writeLevel', access.fields.writeLevel);
+				stream.set('writeLevel_source', source);
+			}
+			if (access.fields.adminLevel >= 0 && access.fields.adminLevel > adminLevel) {
+				stream.set('adminLevel', access.fields.adminLevel);
+				stream.set('adminLevel_source', source);
+			}
+			var p1 = stream.get('permissions', []);
+			var p2 = access.getAllPermissions();
+			var p3 = [].concat(p1);
+			for (var k=0; k<p2.length; ++k) {
+				if (p3.indexOf(p2[k]) < 0) {
+					p3.push(p2[k]);
+				}
+			}
+			stream.set('permissions', p3);
+			stream.set('permissions_source', contact_source);
+		}
 	});
 
 	// Get the per-label access data
@@ -679,9 +725,11 @@ Sp.inheritAccess = function (callback) {
 
 	var public_source = Streams.ACCESS_SOURCES['public'];
 	var contact_source = Streams.ACCESS_SOURCES['contact'];
+	var participant_source = Streams.ACCESS_SOURCES['participant'];
 	var direct_source = Streams.ACCESS_SOURCES['direct'];
 	var inherited_public_source = Streams.ACCESS_SOURCES['inherited_public'];
 	var inherited_contact_source = Streams.ACCESS_SOURCES['inherited_contact'];
+	var inherited_participant_source = Streams.ACCESS_SOURCES['inherited_participant'];
 	var inherited_direct_source = Streams.ACCESS_SOURCES['inherited_direct'];
 	var direct_sources = [inherited_direct_source, direct_source];
 	

@@ -276,40 +276,56 @@ abstract class Streams extends Base_Streams
 	 * @final
 	 */
 	/**
+	 * From participant
+	 * @property $ACCESS_SOURCES['participant']
+	 * @type integer
+	 * @default 2
+	 * @final
+	 */
+	/**
 	 * Direct access
 	 * @property $ACCESS_SOURCES['direct']
 	 * @type integer
-	 * @default 2
+	 * @default 3
 	 * @final
 	 */
 	/**
 	 * Inherited public access
 	 * @property $ACCESS_SOURCES['inherited_public']
 	 * @type integer
-	 * @default 3
+	 * @default 4
 	 * @final
 	 */
 	/**
 	 * Inherited from contact
 	 * @property $ACCESS_SOURCES['inherited_contact']
 	 * @type integer
-	 * @default 4
+	 * @default 5
+	 * @final
+	 */
+	/**
+	 * Inherited from participant
+	 * @property $ACCESS_SOURCES['inherited_participant']
+	 * @type integer
+	 * @default 6
 	 * @final
 	 */
 	/**
 	 * Inherited direct access
 	 * @property $ACCESS_SOURCES['inherited_direct']
 	 * @type integer
-	 * @default 5
+	 * @default 7
 	 * @final
 	 */
 	public static $ACCESS_SOURCES = array(
-		'public' => 0,
-		'contact' => 1,
-		'direct' => 2,
-		'inherited_public' => 3,
-		'inherited_contact' => 4,
-		'inherited_direct' => 5,
+		'public'                => 0,
+		'contact'               => 1,
+		'participant'           => 2,
+		'direct'                => 3,
+		'inherited_public'      => 4,
+		'inherited_contact'     => 5,
+		'inherited_participant' => 6,
+		'inherited_direct'      => 7
 	);
 
 	/**
@@ -729,9 +745,11 @@ abstract class Streams extends Base_Streams
 
 		$public_source = Streams::$ACCESS_SOURCES['public'];
 		$contact_source = Streams::$ACCESS_SOURCES['contact'];
+		$participant_source = Streams::$ACCESS_SOURCES['participant'];
 		$direct_source = Streams::$ACCESS_SOURCES['direct'];
 
 		$streams3 = array();
+		$streams3ByName = array();
 		$names = array();
 		foreach ($streams2 as $s) {
 			if ($s->get('asUserId', null) === $asUserId) {
@@ -767,6 +785,7 @@ abstract class Streams extends Base_Streams
 			$names[] = $s->name;
 			$names[] = $s->type."*";
 			$streams3[] = $s;
+			$streams3ByName[$s->name] = $s;
 		}
 
 		if (empty($streams3)) {
@@ -785,9 +804,13 @@ abstract class Streams extends Base_Streams
 			))->ignoreCache()->fetchDbRows();
 
 		$labels = array();
+		$proles = array();
 		foreach ($accesses as $access) {
 			if ($access->ofContactLabel) {
 				$labels[] = $access->ofContactLabel;
+			}
+			if (!empty($access->ofParticipantRole)) {
+				$proles[$access->streamName] = $access->ofParticipantRole;
 			}
 		}
 		if (!empty($labels)) {
@@ -798,35 +821,31 @@ abstract class Streams extends Base_Streams
 			));
 			foreach ($contacts as $contact) {
 				foreach ($accesses as $access) {
-					if ($access->ofContactLabel !== $contact->label) {
-						continue;
+					if ($access->ofContactLabel === $contact->label) {
+						foreach ($streams3 as $s) {
+							self::_setStreamAccess($s, $access, $contact_source);
+						}
 					}
-					foreach ($streams3 as $stream) {
-						$tail = substr($access->streamName, -1);
-						$head = substr($access->streamName, 0, -1);
-						if ($stream->name !== $access->streamName
-							and ($tail !== '*' or $head !== $stream->type)) {
-							continue;
-						}
-						$readLevel = $stream->get('readLevel', 0);
-						$writeLevel = $stream->get('writeLevel', 0);
-						$adminLevel = $stream->get('adminLevel', 0);
-						if ($access->readLevel >= 0 and $access->readLevel > $readLevel) {
-							$stream->set('readLevel', $access->readLevel);
-							$stream->set('readLevel_source', $contact_source);
-						}
-						if ($access->writeLevel >= 0 and $access->writeLevel > $writeLevel) {
-							$stream->set('writeLevel', $access->writeLevel);
-							$stream->set('writeLevel_source', $contact_source);
-						}
-						if ($access->adminLevel >= 0 and $access->adminLevel > $adminLevel) {
-							$stream->set('adminLevel', $access->adminLevel);
-							$stream->set('adminLevel_source', $contact_source);
-						}
-						$p1 = $access->getAllPermissions();
-						$p2 = $stream->get('permissions', array());
-						$stream->set('permissions', array_unique(array_merge($p1, $p2)));
-						$stream->set('permissions_source', $contact_source);
+				}
+			}
+		}
+		if (!empty($proles)) {
+			$participants = Users_Participant::select()
+			->where(array(
+				'publisherId' => $publisherId,
+				'streamName' => array_keys($proles),
+				'userId' => $asUserId
+			))->fetchDbRows(null, '', 'streamName');
+			foreach ($participants as $streamName => $p) {
+				$role = $proles[$streamName];
+				if (!$p->testRoles($proles[$streamName])) {
+					continue;
+				}
+				foreach ($accesses as $access) {
+					if (!empty($access->ofParticipantRole)
+					and $access->ofParticipantRole === $role) {
+						$s = Q::ifset($streams3ByName, $streamName, null);
+						self::_setStreamAccess($s, $access, $participant_source);
 					}
 				}
 			}
@@ -834,11 +853,20 @@ abstract class Streams extends Base_Streams
 
 		// Override with per-user access data
 		foreach ($accesses as $access) {
+			$tail = substr($access->streamName, -1);
+			$head = substr($access->streamName, 0, -1);
+			if ($tail === '*') {
+				foreach ($accesses as $a) {
+					if ($access->streamName === $head) {
+						// skip the mutable access, because 
+						// explicit stream access overrides it
+						continue 2;
+					}
+				}
+			}
 			foreach ($streams3 as $stream) {
-				$tail = substr($access->streamName, -1);
-				$head = substr($access->streamName, 0, -1);
 				if ($stream->name !== $access->streamName
-					and ($tail !== '*' or $head !== $stream->type)) {
+				and ($tail !== '*' or $head !== $stream->type)) {
 					continue;
 				}
 				if ($access->ofUserId === $asUserId) {
@@ -892,6 +920,35 @@ abstract class Streams extends Base_Streams
 		}
 
 		return count($streams2);
+	}
+
+	private function _setStreamAccess($stream, $access, $source)
+	{
+		$tail = substr($access->streamName, -1);
+		$head = substr($access->streamName, 0, -1);
+		if ($stream->name !== $access->streamName
+			and ($tail !== '*' or $head !== $stream->type)) {
+			return;
+		}
+		$readLevel = $stream->get('readLevel', 0);
+		$writeLevel = $stream->get('writeLevel', 0);
+		$adminLevel = $stream->get('adminLevel', 0);
+		if ($access->readLevel >= 0 and $access->readLevel > $readLevel) {
+			$stream->set('readLevel', $access->readLevel);
+			$stream->set('readLevel_source', $source);
+		}
+		if ($access->writeLevel >= 0 and $access->writeLevel > $writeLevel) {
+			$stream->set('writeLevel', $access->writeLevel);
+			$stream->set('writeLevel_source', $source);
+		}
+		if ($access->adminLevel >= 0 and $access->adminLevel > $adminLevel) {
+			$stream->set('adminLevel', $access->adminLevel);
+			$stream->set('adminLevel_source', $source);
+		}
+		$p1 = $access->getAllPermissions();
+		$p2 = $stream->get('permissions', array());
+		$stream->set('permissions', array_unique(array_merge($p1, $p2)));
+		$stream->set('permissions_source', $source);
 	}
 	
 	/**
