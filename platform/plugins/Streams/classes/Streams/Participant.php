@@ -153,12 +153,12 @@ class Streams_Participant extends Base_Streams_Participant
 		if (empty($extraRoles) || empty($roles)) {
 			return false;
 		}
-		if (gettype($extraRoles) === 'string') {
+		if (is_string($extraRoles)) {
 			$extraRoles = array($extraRoles);
-		} elseif (Q::isAssociative($extraRoles)) {
+		} else if (Q::isAssociative($extraRoles)) {
 			$extraRoles = array_keys($extraRoles);
 		}
-		if (gettype($roles) === 'string') {
+		if (is_string($roles)) {
 			$roles = array($roles);
 		}
 
