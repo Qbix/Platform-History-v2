@@ -830,7 +830,7 @@ abstract class Streams extends Base_Streams
 			}
 		}
 		if (!empty($proles)) {
-			$participants = Users_Participant::select()
+			$participants = Streams_Participant::select()
 			->where(array(
 				'publisherId' => $publisherId,
 				'streamName' => array_keys($proles),
