@@ -810,7 +810,7 @@ abstract class Streams extends Base_Streams
 				$labels[] = $access->ofContactLabel;
 			}
 			if (!empty($access->ofParticipantRole)) {
-				$proles[$access->streamName] = $access->ofParticipantRole;
+				$proles[] = $access->ofParticipantRole;
 			}
 		}
 		if (!empty($labels)) {
@@ -833,18 +833,14 @@ abstract class Streams extends Base_Streams
 			$participants = Streams_Participant::select()
 			->where(array(
 				'publisherId' => $publisherId,
-				'streamName' => array_keys($proles),
-				'userId' => $asUserId
-			))->fetchDbRows(null, '', 'streamName');
-			foreach ($participants as $streamName => $p) {
-				$role = $proles[$streamName];
-				if (!$p->testRoles($proles[$streamName])) {
-					continue;
-				}
+				'streamName' => array_keys($streams3ByName),
+				'userId' => $asUserId,
+				'state' => 'participating'
+			))->fetchDbRows();
+			foreach ($participants as $p) {
 				foreach ($accesses as $access) {
-					if (!empty($access->ofParticipantRole)
-					and $access->ofParticipantRole === $role) {
-						$s = Q::ifset($streams3ByName, $streamName, null);
+					if (in_array($access->streamName, array($p->streamName, $p->streamType.'*')) && !empty($access->ofParticipantRole) && $p->testRoles($access->ofParticipantRole)) {
+						$s = Q::ifset($streams3ByName, $p->streamName, null);
 						self::_setStreamAccess($s, $access, $participant_source);
 					}
 				}
@@ -924,10 +920,7 @@ abstract class Streams extends Base_Streams
 
 	static private function _setStreamAccess($stream, $access, $source)
 	{
-		$tail = substr($access->streamName, -1);
-		$head = substr($access->streamName, 0, -1);
-		if ($stream->name !== $access->streamName
-			and ($tail !== '*' or $head !== $stream->type)) {
+		if (!in_array($access->streamName, array($stream->name, $stream->type.'*'))) {
 			return;
 		}
 		$readLevel = $stream->get('readLevel', 0);
