@@ -922,7 +922,7 @@ abstract class Streams extends Base_Streams
 		return count($streams2);
 	}
 
-	private function _setStreamAccess($stream, $access, $source)
+	static private function _setStreamAccess($stream, $access, $source)
 	{
 		$tail = substr($access->streamName, -1);
 		$head = substr($access->streamName, 0, -1);
