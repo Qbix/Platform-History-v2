@@ -749,7 +749,6 @@ abstract class Streams extends Base_Streams
 		$direct_source = Streams::$ACCESS_SOURCES['direct'];
 
 		$streams3 = array();
-		$streams3ByName = array();
 		$names = array();
 		foreach ($streams2 as $s) {
 			if ($s->get('asUserId', null) === $asUserId) {
@@ -784,8 +783,7 @@ abstract class Streams extends Base_Streams
 
 			$names[] = $s->name;
 			$names[] = $s->type."*";
-			$streams3[] = $s;
-			$streams3ByName[$s->name] = $s;
+			$streams3[$s->name] = $s;
 		}
 
 		if (empty($streams3)) {
@@ -833,15 +831,14 @@ abstract class Streams extends Base_Streams
 			$participants = Streams_Participant::select()
 			->where(array(
 				'publisherId' => $publisherId,
-				'streamName' => array_keys($streams3ByName),
+				'streamName' => array_keys($streams3),
 				'userId' => $asUserId,
 				'state' => 'participating'
 			))->fetchDbRows();
 			foreach ($participants as $p) {
 				foreach ($accesses as $access) {
-					if (in_array($access->streamName, array($p->streamName, $p->streamType.'*')) && !empty($access->ofParticipantRole) && $p->testRoles($access->ofParticipantRole)) {
-						$s = Q::ifset($streams3ByName, $p->streamName, null);
-						self::_setStreamAccess($s, $access, $participant_source);
+					if (in_array($access->streamName, array($p->streamName, $p->streamType.'*')) && $p->testRoles($access->ofParticipantRole)) {
+						self::_setStreamAccess($streams3[$p->streamName], $access, $participant_source);
 					}
 				}
 			}
