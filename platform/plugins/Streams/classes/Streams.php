@@ -749,7 +749,6 @@ abstract class Streams extends Base_Streams
 		$direct_source = Streams::$ACCESS_SOURCES['direct'];
 
 		$streams3 = array();
-		$streams3ByName = array();
 		$names = array();
 		foreach ($streams2 as $s) {
 			if ($s->get('asUserId', null) === $asUserId) {
@@ -784,8 +783,7 @@ abstract class Streams extends Base_Streams
 
 			$names[] = $s->name;
 			$names[] = $s->type."*";
-			$streams3[] = $s;
-			$streams3ByName[$s->name] = $s;
+			$streams3[$s->name] = $s;
 		}
 
 		if (empty($streams3)) {
@@ -810,7 +808,7 @@ abstract class Streams extends Base_Streams
 				$labels[] = $access->ofContactLabel;
 			}
 			if (!empty($access->ofParticipantRole)) {
-				$proles[$access->streamName] = $access->ofParticipantRole;
+				$proles[] = $access->ofParticipantRole;
 			}
 		}
 		if (!empty($labels)) {
@@ -830,22 +828,17 @@ abstract class Streams extends Base_Streams
 			}
 		}
 		if (!empty($proles)) {
-			$participants = Users_Participant::select()
+			$participants = Streams_Participant::select()
 			->where(array(
 				'publisherId' => $publisherId,
-				'streamName' => array_keys($proles),
-				'userId' => $asUserId
-			))->fetchDbRows(null, '', 'streamName');
-			foreach ($participants as $streamName => $p) {
-				$role = $proles[$streamName];
-				if (!$p->testRoles($proles[$streamName])) {
-					continue;
-				}
+				'streamName' => array_keys($streams3),
+				'userId' => $asUserId,
+				'state' => 'participating'
+			))->fetchDbRows();
+			foreach ($participants as $p) {
 				foreach ($accesses as $access) {
-					if (!empty($access->ofParticipantRole)
-					and $access->ofParticipantRole === $role) {
-						$s = Q::ifset($streams3ByName, $streamName, null);
-						self::_setStreamAccess($s, $access, $participant_source);
+					if (in_array($access->streamName, array($p->streamName, $p->streamType.'*')) && $p->testRoles($access->ofParticipantRole)) {
+						self::_setStreamAccess($streams3[$p->streamName], $access, $participant_source);
 					}
 				}
 			}
@@ -922,12 +915,9 @@ abstract class Streams extends Base_Streams
 		return count($streams2);
 	}
 
-	private function _setStreamAccess($stream, $access, $source)
+	static private function _setStreamAccess($stream, $access, $source)
 	{
-		$tail = substr($access->streamName, -1);
-		$head = substr($access->streamName, 0, -1);
-		if ($stream->name !== $access->streamName
-			and ($tail !== '*' or $head !== $stream->type)) {
+		if (!in_array($access->streamName, array($stream->name, $stream->type.'*'))) {
 			return;
 		}
 		$readLevel = $stream->get('readLevel', 0);

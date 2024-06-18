@@ -570,7 +570,7 @@ Sp.calculateAccess = function(asUserId, callback) {
 		if (!labels.length && !fetchParticipantRow) {
 			return _perUserData(subj, rows, callback);
 		}
-		var p = new Q.Pipe(['contacts', 'participants'], 		function (res) {
+		var p = new Q.Pipe(['contacts', 'participants'], function (res) {
 			if (res.contacts[0] || res.participants[0]) {
 				return callback.call(subj, err);
 			}
@@ -579,19 +579,17 @@ Sp.calculateAccess = function(asUserId, callback) {
 			var participants = res.participants[1];
 
 			// NOTE: we load arrays into memory and hope they are not too large
-			var contact_source = Streams.ACCESS_SOURCES['contact'];
-			var participant_source = Streams.ACCESS_SOURCES['participant'];
 			var i, j;
 			for (i=0; i<rows.length; ++i) {
 				var row = rows[i];
-				for (j=0; i<contacts.length; j++) {
+				for (j=0; j<contacts.length; j++) {
 					if (row.fields.ofContactLabel === contacts[j].fields.label) {
-						_setStreamAccess(subj, rows[i], contact_source);
+						_setStreamAccess(subj, rows[i], Streams.ACCESS_SOURCES['contact']);
 					}
 				}
 				var p = participants[0];
 				if (p && p.testRoles(row.fields.ofParticipantRole)) {
-					_setStreamAccess(subj, rows[i], participant_source);
+					_setStreamAccess(subj, rows[i], Streams.ACCESS_SOURCES['participant']);
 				}
 			}
 			_perUserData(subj, rows, callback);
@@ -639,7 +637,7 @@ Sp.calculateAccess = function(asUserId, callback) {
 				}
 			}
 			stream.set('permissions', p3);
-			stream.set('permissions_source', contact_source);
+			stream.set('permissions_source', Streams.ACCESS_SOURCES['contact']);
 		}
 	});
 

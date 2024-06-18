@@ -187,14 +187,8 @@ class Streams_Access extends Base_Streams_Access
 	{
 		if (!$this->retrieved) {
 			$table = $this->getTable();
-			if (empty($value['ofUserId']) && empty($value['ofContactLabel'])
-			or !empty($value['ofUserId']) && !empty($value['ofContactLabel'])) {
+			if (empty($value['ofUserId']) && empty($value['ofContactLabel']) && empty($value['ofParticipantRole'])) {
 				throw new Exception("exactly one of fields 'ofUserId' and 'ofContactLabel' can be set in table $table.");
-			}
-		}
-		foreach (array('ofUserId', 'ofContactLabel') as $f) {
-			if (isset($value[$f]) and $value[$f] != $this->fields[$f]) {
-				throw new Q_Exception_WrongValue(array('field' => $f, 'range' => 'no change'));
 			}
 		}
 		// set safe defaults
