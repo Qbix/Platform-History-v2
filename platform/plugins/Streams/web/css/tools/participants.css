@@ -68,11 +68,16 @@
 
 .Streams_participants_tool > .Streams_participants_container > .Streams_participants_invite_button {
 	display: none;
+	opacity: 0;
 }
 
 .Streams_participants_tool.Streams_noParticipants .Streams_participants_container > .Streams_participants_invite_button {
 	display: block;
-	width: 100%;
+	opacity: 1;
+	margin: 3% auto;
 	max-width: 300px;
-	margin: 10px auto;
+	opacity: 0.97;
+	width: 94%;
+	border: 1px outset rgba(0, 0, 0, 0.5);
+	transition: opacity 0.3s 1s;
 }
