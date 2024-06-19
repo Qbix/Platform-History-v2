@@ -52,4 +52,6 @@ function Assets_before_Q_responseExtras() {
         
 	Q_Response::setScriptData('Q.plugins.Assets.Web3.contracts', Q_Config::get('Assets', 'Web3', 'factories'));
 	Q_Response::setScriptData('Q.plugins.Assets.Subscriptions.plan.relationType', Assets_Subscription::$relationType);
+
+	Q_Response::setScriptData('Q.plugins.Assets.plan.defaults', Q_Config::get('Streams', 'types', 'Assets/plan', 'defaults', array()));
 }
