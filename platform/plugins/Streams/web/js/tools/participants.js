@@ -44,7 +44,7 @@ function _Streams_participants(options) {
 		throw new Q.Error("Streams/participants: missing streamName option");
 	}
 	
-	tool.element.addClass('Streams_noParticipants');
+	tool.element.addClass('Streams_participants_loading');
 	if (state.hideIfNoParticipants) {
 		tool.element.addClass('Streams_hideIfNoParticipants');
 	}
