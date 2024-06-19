@@ -153,6 +153,7 @@ function _Streams_participants(options) {
 		tool.$blanks = $('.Streams_participants_blanks', $te);
 		
 		if (tool.element.toolWasRendered) {
+			state.count = tool.element.toolWasRendered.count;
 			_continue(tool, callback);
 			return false;
 		}
@@ -270,7 +271,9 @@ function _Streams_participants(options) {
 		// We will leave this even after tool is removed,
 		// so that when its element is retained, we don't refresh it.
 		// To remove pollution we could have used a WeakMap.
-		tool.element.toolWasRendered = true;
+		tool.element.toolWasRendered = {
+			count: state.count
+		};
 	},
 	/**
 	 * Check if avatar exists
