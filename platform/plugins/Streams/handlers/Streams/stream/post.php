@@ -107,6 +107,10 @@ function Streams_stream_post($params = array())
 			$publisherId, $type, 'Streams_Stream'
 		);
 		$asOwner = $streamTemplate ? $streamTemplate->testAdminLevel('own') : false;
+
+		if (!$asOwner) {
+			$asOwner = (bool)Users::roles($publisherId, Streams_Stream::getConfigField($type, 'admins', array()), array(), $user->id);
+		}
 	}
 	
 	// Check if client can set the name of this stream
