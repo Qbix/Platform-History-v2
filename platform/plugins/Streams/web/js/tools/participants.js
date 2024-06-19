@@ -267,13 +267,6 @@ function _Streams_participants(options) {
 				state.overflowed = overflowed;
 			}
 		}, tool); 
-
-		// We will leave this even after tool is removed,
-		// so that when its element is retained, we don't refresh it.
-		// To remove pollution we could have used a WeakMap.
-		tool.element.toolWasRendered = {
-			count: state.count
-		};
 	},
 	/**
 	 * Check if avatar exists
@@ -392,6 +385,13 @@ function _continue(tool, callback) {
 	if (state.max) {
 		tool.$max.text('/' + state.max);
 	}
+	
+	// We will leave this even after tool is removed,
+	// so that when its element is retained, we don't refresh it.
+	// To remove pollution we could have used a WeakMap.
+	tool.element.toolWasRendered = {
+		count: state.count
+	};
 	
 	// set expand icon click event
 	tool.$pei.plugin('Q/clickable').on(Q.Pointer.fastclick, function () {
