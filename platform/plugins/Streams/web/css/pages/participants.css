@@ -57,7 +57,6 @@ table.Streams_participating_stream {
 	position: relative;
 }
 .Streams_participating_stream .Streams_participants_tool .Streams_participants_summary {
-	font-weight: bold;
 	position: absolute;
 	right: 40px;
 }
