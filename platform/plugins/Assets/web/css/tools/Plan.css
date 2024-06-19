@@ -79,5 +79,9 @@
     display: block;
     width: 100%;
     height: auto;
-    margin: 0 auto 10px;
+    margin: 0 auto;
+}
+.Assets_plan_tool .Streams_participants_tool {
+    margin-top: -20px;
+    margin-bottom: 10px;
 }

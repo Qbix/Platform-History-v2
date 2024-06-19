@@ -68,7 +68,6 @@ Q.Tool.define("Assets/plan", function(options) {
 		var $toolElement = $(tool.element);
 
 		var period = tool.planStream.getAttribute("period");
-		var price = tool.planStream.getAttribute('amount');
 		var currency = tool.planStream.getAttribute('currency');
 		var lastChargeTime = null;
 		var started = null;
@@ -138,6 +137,9 @@ Q.Tool.define("Assets/plan", function(options) {
 		$toolElement.attr("data-subscribed", subscribed);
 		$toolElement.attr("data-stopped", stopped);
 		Q.Template.render('Assets/plan', {
+			publisherId: tool.planStream.fields.publisherId,
+			streamName: tool.planStream.fields.name,
+			isAdmin: tool.planStream.testAdminLevel(40),
 			status: subscribed ? tool.text.subscriptions.Subscribed : tool.text.subscriptions.Unsubscribed,
 			started: started,
 			endsIn: {
@@ -387,6 +389,9 @@ Q.Tool.define("Assets/plan", function(options) {
 
 Q.Template.set('Assets/plan',
 `<img class="Assets_plan_image" />
+	{{#if isAdmin}}
+		{{{tool "Streams/participants" maxShow=100 showSummary=true showControls=true publisherId=publisherId streamName=streamName}}}
+	{{/if}}
 	<button class="Q_button" name="unsubscribe">{{subscriptions.Unsubscribe}}</button>
 	<button class="Q_button" name="subscribe">{{subscriptions.Subscribe}}</button>
 	<div class="Assets_plan_period">{{subscriptions.Period}}: <span></span></div>
