@@ -19,7 +19,7 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 			var endDate = $("input[name=endDate]", dialog).val();
 			endDate = endDate ? Date.parse(endDate) : null;
 			endDate = Number.isInteger(endDate) ? endDate/1000 : null;
-			Q.handle(_proceed, preview, [{
+			var fields = {
 				title: $("input[name=title]", dialog).val(),
 				content: $("textarea[name=description]", dialog).val(),
 				attributes: {
@@ -28,7 +28,11 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 					period: $("select[name=period]", dialog).val(),
 					endDate: endDate
 				}
-			}]);
+			};
+			if ($("input[name=private]", dialog)[0].checked) {
+				fields.readLevel = 0;
+			}
+			Q.handle(_proceed, preview, [fields]);
 		}, function () {
 			Q.handle(_proceed, preview, [false]);
 		});
@@ -82,11 +86,14 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 		$(tool.element).attr("data-interrupted", interrupted);
 
 		Q.Template.render('Assets/plan/preview', {
+			publisherId: stream.fields.publisherId,
+			streamName: stream.fields.name,
 			title: stream.fields.title,
 			description: stream.fields.content.encodeHTML(),
 			price: '$' + parseFloat(stream.getAttribute('amount')).toFixed(2),
 			periods: state.periods,
-			period: stream.getAttribute('period')
+			period: stream.getAttribute('period'),
+			isAdmin: stream.testAdminLevel(40)
 		}, function (err, html) {
 			if (err) return;
 			Q.replace(tool.element, html);
@@ -121,6 +128,7 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 
 						stream.set('title', $("input[name=title]", dialog).val());
 						stream.set('content', $("textarea[name=description]", dialog).val());
+						stream.set('readLevel', $("input[name=private]", dialog)[0].checked ? 0 : Q.getObject("plan.defaults.readLevel", Q.Assets) || 40);
 						stream.setAttribute("amount", $("input[name=amount]", dialog).val());
 						stream.setAttribute("period", $("select[name=period]", dialog).val());
 						stream.setAttribute("endDate", endDate);
@@ -139,6 +147,7 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 						description: stream.fields.content,
 						amount: stream.getAttribute("amount"),
 						period: stream.getAttribute("period"),
+						readLevel: stream.fields.readLevel,
 						endDate: endDate,
 						interrupted: stream.getAttribute("interrupted") || false
 					});
@@ -264,6 +273,9 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 Q.Template.set('Assets/plan/preview',
 `<div class="Streams_preview_container Streams_preview_view Q_clearfix">
 	<img class="Streams_preview_icon Q_square">
+	{{#if isAdmin}}
+		{{{tool "Streams/participants" maxShow=100 showSummary=false showControls=true publisherId=publisherId streamName=streamName}}}
+	{{/if}}
 	<div class="Streams_preview_contents">
 		<h3 class="Streams_preview_title Streams_preview_view">{{title}}</h3>
 		<span class="Assets_plan_preview_price">{{price}}</span>
@@ -283,8 +295,11 @@ Q.Template.set("Assets/plan/composer",
 	{{/each}}
 	</select>
 	
-	<label class="Assets_plan_endDate">{{subscriptions.plan.EndDate}} <input name="endDate" type="date" value="{{endDate}}"></label>
+	<label class="Assets_plan_endDate"><input name="endDate" type="date" value="{{endDate}}"> {{subscriptions.plan.EndDate}}</label>
 	<textarea name="description" placeholder="{{subscriptions.plan.DescriptionPlaceholder}}">{{description}}</textarea>
+	
+	<label class="Assets_plan_private"><input name="private" {{#ifEquals readLevel 0}}checked{{/ifEquals}} type="checkbox"> {{subscriptions.plan.InviteOnly}}</label>
+	
 	<div class="Assets_plan_composer_buttons">
 		<button name="save" class="Q_button" type="button">{{subscriptions.plan.SavePlan}}</button>
 		<button name="interrupt" class="Q_button" type="button">{{subscriptions.plan.Interrupt}}</button>
