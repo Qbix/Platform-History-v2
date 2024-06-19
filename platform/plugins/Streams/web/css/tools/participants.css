@@ -29,14 +29,14 @@
 	color: white;
 	float: right;
 	text-shadow: rgba(0, 0, 0, 0.5) 0 0 5px;
-	width: 40px;
+	min-width: 40px;
+	max-width: 100px;
 	height: 25px;
 	line-height: 25px;
     border-radius: 5px;
 	font-size: 14px;
-	font-weight: bold;
-	background: rgba(50, 50, 50, 0.4);
-	font-weight: 100;
+	background: rgbag28(50, 50, 50, 0.4);
+	font-weight: 700;
 	margin-top: 10px;
 	text-align: center;
 	overflow: hidden;
