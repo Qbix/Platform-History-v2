@@ -385,7 +385,7 @@ function _continue(tool, callback) {
 	if (state.max) {
 		tool.$max.text('/' + state.max);
 	}
-	
+
 	// We will leave this even after tool is removed,
 	// so that when its element is retained, we don't refresh it.
 	// To remove pollution we could have used a WeakMap.
@@ -430,6 +430,9 @@ function _continue(tool, callback) {
 			tool.addAvatar(message.byUserId, true);
 			++tool.state.count;
 			tool.stateChanged('count');
+			if (tool.element.wasRendered) {
+				tool.element.wasRendered.count = tool.state.count;
+			}
 		}, tool);
 		stream.onMessage("Streams/left")
 		.set(function (message) {
@@ -440,6 +443,9 @@ function _continue(tool, callback) {
 			tool.removeAvatar(message.byUserId);
 			--tool.state.count;
 			tool.stateChanged('count');
+			if (tool.element.wasRendered) {
+				tool.element.wasRendered.count = tool.state.count;
+			}
 		}, tool);
 		var si = state.invite;
 		if (!si || !stream.testAdminLevel('invite')) {
