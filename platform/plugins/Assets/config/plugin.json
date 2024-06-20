@@ -272,6 +272,7 @@
 				"create": true, 
 				"edit": true,
 				"canCreate": ["Users/admins", "Users/owners", "Assets/admins"],
+				"inheritAccess": false,
 				"defaults": {
 					"title": "Subscription plan",
 					"readLevel": 40,

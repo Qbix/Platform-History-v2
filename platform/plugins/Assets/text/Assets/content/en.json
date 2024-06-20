@@ -171,7 +171,8 @@
             "Continue": "Continue",
             "NewPlan": "New Plan",
             "SelectDisplayType": "Select {{displayType}}",
-            "EndDate": "end date"
+            "EndDate": "end date",
+            "InviteOnly": "Invite-only"
         }
     },
     "payments": {

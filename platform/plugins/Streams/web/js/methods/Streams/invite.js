@@ -520,10 +520,7 @@ Q.exports(function() {
                         if (Q.isEmpty(r)) {
                             return;
                         }
-                        Q.take(r, [
-                            'appUrl', 'data', 'identifier', 
-                            'sendBy', 'token'
-                        ], fields);
+                        Q.take(r, ['appUrl', 'data', 'identifier', 'sendBy', 'token', 'userId'], fields);
                         if (r.sendBy) {
                             _sendBy(r, text);
                         } else {

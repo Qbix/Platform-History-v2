@@ -4547,7 +4547,7 @@ Q.onInit.add(function _Streams_onInit() {
 							html += "<br>" + content.labels.JoinItNow;
 							Q.confirm(html, function (res) {
 								if (res) {
-									Q.handle(inviteUrl);
+									Q.handle(inviteUrl, null, null, {loadUsingAjax:false});
 								}
 							}, {
 								ok: content.labels.Yes,

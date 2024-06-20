@@ -26,6 +26,7 @@
 }
 
 .Streams_participants_tool .Streams_participants_summary {
+	position: relative;
 	color: white;
 	float: right;
 	text-shadow: rgba(0, 0, 0, 0.5) 0 0 5px;

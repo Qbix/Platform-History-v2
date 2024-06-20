@@ -66,7 +66,7 @@ Q.exports(function(Users, Streams) {
 							};
 	
 							if (obj.prefix === "user") {
-								inviteParams.userId = obj["id"];
+								inviteParams.userId = obj.id;
 							} else {
 								inviteParams.identifier = obj[obj.prefix];
 							}

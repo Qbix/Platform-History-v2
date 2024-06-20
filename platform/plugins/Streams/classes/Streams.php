@@ -1161,20 +1161,23 @@ abstract class Streams extends Base_Streams
 		}
 	
 		// ready to persist this stream to the database
-		if (!empty($relate['streamName']) && Q::ifset($relate, 'inheritAccess', true)) {
-			$rs = Streams_Stream::fetch(
+		if (
+			!empty($relate['streamName'])
+			&& Q_Config::get("Streams", "types", $type, "inheritAccess", Q::ifset($relate, 'inheritAccess', true))
+		) {
+			/*$rs = Streams_Stream::fetch(
 				$asUserId,
 				$relate['publisherId'],
 				$relate['streamName']
 			);
-			// $inheritAccess = ($rs and $rs->inheritAccess)
-			// 	? Q::json_decode($rs->inheritAccess)
-			// 	: array();
-			// $newInheritAccess = array($relate['publisherId'], $relate['streamName']);
-			// if (!in_array($newInheritAccess, $inheritAccess)) {
-			// 	$inheritAccess[] = $newInheritAccess;
-			// }
-			// $stream->inheritAccess = Q::json_encode($inheritAccess);
+			 $inheritAccess = ($rs and $rs->inheritAccess)
+			 	? Q::json_decode($rs->inheritAccess)
+			 	: array();
+			 $newInheritAccess = array($relate['publisherId'], $relate['streamName']);
+			 if (!in_array($newInheritAccess, $inheritAccess)) {
+			 	$inheritAccess[] = $newInheritAccess;
+			 }
+			 $stream->inheritAccess = Q::json_encode($inheritAccess);*/
 			$stream->inheritAccess = Q::json_encode(array(
 				array($relate['publisherId'], $relate['streamName'])
 			));
@@ -1264,7 +1267,7 @@ abstract class Streams extends Base_Streams
 			} else {
 				$f['attributes'] = null;
 			}
-			$a = isset($f['inheritAccess']) ? $f['inheritAccess'] : '';
+			$a = Q::ifset($f, 'inheritAccess', '');
 			if (is_array($a)) {
 				$a = Q::json_encode($a);
 				$f['inheritAccess'] = $a;
