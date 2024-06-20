@@ -138,17 +138,22 @@ class Assets_Subscription {
 			$user = Users::loggedInUser(true);
 		}
 
-		$streams = $plan->related(null, true, array(
-			'type' => self::$streamType,
-			'where' => array(
-				'fromPublisherId' => $user->id,
-				'fromStreamName' => new Db_Range(self::$streamType.'/', false, false, true)
-			),
-			'streamsOnly' => true,
-			'skipAccess' => true
-		));
-		$stream = reset($streams);
-		return $stream ? $stream : null;
+		$relation = Streams_RelatedTo::select("srt.*, ss.*", "srt")->where(array(
+			'srt.toPublisherId' => $plan->publisherId,
+			'srt.toStreamName' => $plan->name,
+			'srt.type' => self::$streamType,
+			'srt.fromPublisherId' => $user->id,
+			'ss.type' => self::$streamType
+		))->join(Streams_Stream::table(true, "ss"), array(
+			"srt.fromPublisherId" => "ss.publisherId",
+			"srt.fromStreamName" => "ss.name"
+		), "LEFT")->fetchDbRow();
+
+		if ($relation) {
+			return Streams::fetchOne($relation->fromPublisherId, $relation->fromPublisherId, $relation->fromStreamName, true);
+		}
+
+		return null;
 	}
 
 	/**
