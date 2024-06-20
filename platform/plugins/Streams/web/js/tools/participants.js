@@ -51,6 +51,11 @@ function _Streams_participants(options) {
 	
 	tool.Q.onStateChanged('count').set(function (name) {
 		var c = state.count || 0;
+
+		if (tool.element.wasRendered) {
+			tool.element.wasRendered.count = c;
+		}
+
 		tool.$count.text(c >= 100 ? '99+' : c.toString());
 		if (state.showSummary) {
 			tool.$summary.show().plugin('Q/textfill', 'refresh');
@@ -233,9 +238,7 @@ function _Streams_participants(options) {
 				}
 			}, { sort: 'insertedTime', ascending: false });
 			state.count = c;
-			if (tool.element.wasRendered) {
-				tool.element.wasRendered.count = state.count;
-			}
+			tool.stateChanged('count');
 			if (state.showBlanks) {
 				var opacity = 50;
 				Q.each(c, state.maxShow-1, 1, function () {
@@ -433,9 +436,6 @@ function _continue(tool, callback) {
 			tool.addAvatar(message.byUserId, true);
 			++tool.state.count;
 			tool.stateChanged('count');
-			if (tool.element.wasRendered) {
-				tool.element.wasRendered.count = tool.state.count;
-			}
 		}, tool);
 		stream.onMessage("Streams/left")
 		.set(function (message) {
@@ -446,9 +446,6 @@ function _continue(tool, callback) {
 			tool.removeAvatar(message.byUserId);
 			--tool.state.count;
 			tool.stateChanged('count');
-			if (tool.element.wasRendered) {
-				tool.element.wasRendered.count = tool.state.count;
-			}
 		}, tool);
 		var si = state.invite;
 		if (!si || !stream.testAdminLevel('invite')) {
