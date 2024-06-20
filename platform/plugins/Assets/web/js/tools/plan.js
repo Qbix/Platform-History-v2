@@ -67,8 +67,8 @@ Q.Tool.define("Assets/plan", function(options) {
 		var state = this.state;
 		var $toolElement = $(tool.element);
 
+		var isAdmin = tool.planStream.testAdminLevel(40);
 		var period = tool.planStream.getAttribute("period");
-		var price = tool.planStream.getAttribute('amount');
 		var currency = tool.planStream.getAttribute('currency');
 		var lastChargeTime = null;
 		var started = null;
@@ -138,6 +138,7 @@ Q.Tool.define("Assets/plan", function(options) {
 		$toolElement.attr("data-subscribed", subscribed);
 		$toolElement.attr("data-stopped", stopped);
 		Q.Template.render('Assets/plan', {
+			isAdmin,
 			status: subscribed ? tool.text.subscriptions.Subscribed : tool.text.subscriptions.Unsubscribed,
 			started: started,
 			endsIn: {
@@ -153,6 +154,21 @@ Q.Tool.define("Assets/plan", function(options) {
 			}
 
 			Q.replace(tool.element, html);
+
+			if (isAdmin) {
+				$(".Assets_plan_participants", tool.element).tool("Streams/participants", {
+					maxShow: 100,
+					showSummary: true,
+					showControls: true,
+					publisherId: state.publisherId,
+					streamName: state.streamName,
+					invite: {
+						readLevel: 40,
+						appUrl: Q.url("Assets/plan/" + state.publisherId + "/" + state.streamName.split("/").pop())
+					}
+				});
+			}
+
 			$toolElement.activate();
 
 			$("<div>").tool("Streams/preview", {
@@ -169,10 +185,12 @@ Q.Tool.define("Assets/plan", function(options) {
 				});
 			});
 
-			$(".Assets_plan_description", tool.element).tool("Streams/inplace", {
-				stream: tool.planStream,
-				field: "content"
-			}).activate();
+			if (tool.planStream.fields.content) {
+				$(".Assets_plan_description", tool.element).tool("Streams/inplace", {
+					stream: tool.planStream,
+					field: "content"
+				}).activate();
+			}
 			$(".Assets_plan_amount", tool.element).tool("Streams/inplace", {
 				stream: tool.planStream,
 				attribute: "amount",
@@ -387,6 +405,9 @@ Q.Tool.define("Assets/plan", function(options) {
 
 Q.Template.set('Assets/plan',
 `<img class="Assets_plan_image" />
+	{{#if isAdmin}}
+		<div class="Assets_plan_participants"></div>
+	{{/if}}
 	<button class="Q_button" name="unsubscribe">{{subscriptions.Unsubscribe}}</button>
 	<button class="Q_button" name="subscribe">{{subscriptions.Subscribe}}</button>
 	<div class="Assets_plan_period">{{subscriptions.Period}}: <span></span></div>

@@ -10,7 +10,7 @@ Q.exports(function () {
      */
     return function getFundConfig(contractAddress, chainId, userAddress, callback) {
         return Q.Users.Web3.getContract(
-            'Assets/templates/R1/Fund/contract', {
+            'Assets/templates/R1/Sales/contract', {
                 chainId: chainId,
                 contractAddress: contractAddress,
                 readOnly: true
