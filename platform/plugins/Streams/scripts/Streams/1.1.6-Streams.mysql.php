@@ -3,30 +3,44 @@
 function Streams_1_1_6_Streams()
 {
 	$offset = 0;
-	$i = 0;
+	$streamName = "Streams/user/profile";
+
+	echo "Update and create $streamName streams".PHP_EOL;
 	while (1) {
-		$userIds = Users_User::select('id')
+		$users = Users_User::select()
+			->where(array("signedUpWith != " => "none"))
 			->limit(100, $offset)
-			->fetchAll(PDO::FETCH_COLUMN, 0);
-		if (!$userIds) {
+			->fetchDbRows();
+		if (empty($users)) {
 			break;
 		}
-        $streamName = 'Streams/user/profile';
-        $toInsert = array();
-        $publisherIds = Streams_Stream::select('publisherId')->where(array(
-            'publisherId' => $userIds,
-            'name' => $streamName
-        ))->fetchAll(PDO::FETCH_COLUMN, 0);
-		foreach (array_diff($userIds, $publisherIds) as $userId) {
-            Streams::create($userId, $userId, 'Streams/user/profile', array(
-                'name' => $streamName,
-                'title' => Streams::displayName(
-                    $userId, 
-                    array('asUserId' => '', 'short' => false)
-                )
-            ));
-            echo "\033[100D";
-            echo "Created $i profiles";
+		foreach ($users as $i => $user) {
+			if (Users::isCommunityId($user->id)) {
+				continue;
+			}
+
+			$title = Streams::displayName(
+				$user->id,
+				array('asUserId' => '', 'short' => false)
+			);
+			$avatar = Streams_Avatar::fetch("", $user->id);
+			$icon = $avatar->icon;
+
+			$stream = Streams::fetchOne($user->id, $user->id, $streamName);
+			if ($stream) {
+				$stream->title = $title;
+				$stream->icon = $icon;
+				$stream->save();
+			} else {
+				Streams::create($user->id, $user->id, $streamName, array(
+					"title" => $title,
+					"icon" => $icon,
+					"name" => $streamName
+				));
+			}
+
+			echo "\033[100D";
+			echo "Updated $i profiles";
 		}
 		$offset += 100;
 	};
