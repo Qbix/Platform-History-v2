@@ -233,6 +233,9 @@ function _Streams_participants(options) {
 				}
 			}, { sort: 'insertedTime', ascending: false });
 			state.count = c;
+			if (tool.element.wasRendered) {
+				tool.element.wasRendered.count = state.count;
+			}
 			if (state.showBlanks) {
 				var opacity = 50;
 				Q.each(c, state.maxShow-1, 1, function () {
