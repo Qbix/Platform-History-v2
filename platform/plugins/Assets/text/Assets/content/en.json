@@ -157,7 +157,7 @@
         "Period": "Period",
         "Price": "Price",
         "AreYouSureUnsubscribe": "Are you sure you want to unsubscribe from this plan?",
-        "YouUnsubscribedFromPlan": "You have unsubscribed from the plan \"{{planTitle}}\". You will not be charged, but your subscription will continue until {{endsIn}}",
+        "YouUnsubscribedFromPlan": "You have unsubscribed from the plan \"{{planTitle}}\". You will not be charged next time, but your subscription will continue until {{endsIn}}",
         "plan": {
             "TitlePlaceholder": "plan title",
             "PricePlaceholder": "price",
