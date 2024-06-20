@@ -125,7 +125,7 @@
 		tool.refresh();
 	},
 	{ // default options here
-		abiPathF: "Assets/templates/R1/Fund/factory",
+		abiPathF: "Assets/templates/R1/Sales/factory",
 		chainId: null,
 		fields: {
 			

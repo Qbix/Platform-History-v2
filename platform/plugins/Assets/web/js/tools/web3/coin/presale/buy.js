@@ -57,8 +57,8 @@
 		tool.refresh();
 	},
 	{ // default options here
-		abiPathF: "Assets/templates/R1/Fund/factory",
-		abiPath: "Assets/templates/R1/Fund/contract",
+		abiPathF: "Assets/templates/R1/Sales/factory",
+		abiPath: "Assets/templates/R1/Sales/contract",
 		chainId: null,
 		fund: null,
 		showShortInfo: false,

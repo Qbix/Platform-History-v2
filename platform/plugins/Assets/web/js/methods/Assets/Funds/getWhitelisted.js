@@ -8,7 +8,7 @@ Q.exports(function () {
      */
     return function getWhitelisted(contractAddress, userAddress, chainId, callback){
         return Q.Users.Web3.getContract(
-            'Assets/templates/R1/Fund/contract', 
+            'Assets/templates/R1/Sales/contract', 
             {
                 contractAddress: contractAddress,
                 readOnly: true,

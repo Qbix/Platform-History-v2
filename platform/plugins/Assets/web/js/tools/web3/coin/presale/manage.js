@@ -48,7 +48,7 @@
 		tool.refresh();
 	},
 	{ // default options here
-		abiPath: "Assets/templates/R1/Fund/contract",
+		abiPath: "Assets/templates/R1/Sales/contract",
 		chainId: null,
 		fund: null
 	},
