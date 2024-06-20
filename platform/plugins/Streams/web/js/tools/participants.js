@@ -52,8 +52,8 @@ function _Streams_participants(options) {
 	tool.Q.onStateChanged('count').set(function (name) {
 		var c = state.count || 0;
 
-		if (tool.element.wasRendered) {
-			tool.element.wasRendered.count = c;
+		if (tool.element.toolWasRendered) {
+			tool.element.toolWasRendered.count = c;
 		}
 
 		tool.$count.text(c >= 100 ? '99+' : c.toString());
