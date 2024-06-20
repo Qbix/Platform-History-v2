@@ -67,6 +67,7 @@ Q.Tool.define("Assets/plan", function(options) {
 		var state = this.state;
 		var $toolElement = $(tool.element);
 
+		var isAdmin = tool.planStream.testAdminLevel(40);
 		var period = tool.planStream.getAttribute("period");
 		var currency = tool.planStream.getAttribute('currency');
 		var lastChargeTime = null;
@@ -137,9 +138,7 @@ Q.Tool.define("Assets/plan", function(options) {
 		$toolElement.attr("data-subscribed", subscribed);
 		$toolElement.attr("data-stopped", stopped);
 		Q.Template.render('Assets/plan', {
-			publisherId: tool.planStream.fields.publisherId,
-			streamName: tool.planStream.fields.name,
-			isAdmin: tool.planStream.testAdminLevel(40),
+			isAdmin,
 			status: subscribed ? tool.text.subscriptions.Subscribed : tool.text.subscriptions.Unsubscribed,
 			started: started,
 			endsIn: {
@@ -155,6 +154,21 @@ Q.Tool.define("Assets/plan", function(options) {
 			}
 
 			Q.replace(tool.element, html);
+
+			if (isAdmin) {
+				$(".Assets_plan_participants", tool.element).tool("Streams/participants", {
+					maxShow: 100,
+					showSummary: true,
+					showControls: true,
+					publisherId: state.publisherId,
+					streamName: state.streamName,
+					invite: {
+						readLevel: 40,
+						appUrl: Q.url("Assets/plan/" + state.publisherId + "/" + state.streamName.split("/").pop())
+					}
+				});
+			}
+
 			$toolElement.activate();
 
 			$("<div>").tool("Streams/preview", {
@@ -390,7 +404,7 @@ Q.Tool.define("Assets/plan", function(options) {
 Q.Template.set('Assets/plan',
 `<img class="Assets_plan_image" />
 	{{#if isAdmin}}
-		{{{tool "Streams/participants" maxShow=100 showSummary=true showControls=true publisherId=publisherId streamName=streamName}}}
+		<div class="Assets_plan_participants"></div>
 	{{/if}}
 	<button class="Q_button" name="unsubscribe">{{subscriptions.Unsubscribe}}</button>
 	<button class="Q_button" name="subscribe">{{subscriptions.Subscribe}}</button>

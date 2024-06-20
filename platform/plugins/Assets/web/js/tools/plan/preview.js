@@ -73,6 +73,10 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 		var tool = this;
 		tool.stream = stream;
 		var state = this.state;
+
+		var publisherId = stream.fields.publisherId;
+		var streamName = stream.fields.name;
+		var isAdmin = stream.testAdminLevel(40);
 		var previewState = tool.preview.state;
 		var interrupted = stream.getAttribute("interrupted");
 
@@ -86,14 +90,14 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 		$(tool.element).attr("data-interrupted", interrupted);
 
 		Q.Template.render('Assets/plan/preview', {
-			publisherId: stream.fields.publisherId,
-			streamName: stream.fields.name,
+			publisherId,
+			streamName,
 			title: stream.fields.title,
 			description: stream.fields.content.encodeHTML(),
 			price: '$' + parseFloat(stream.getAttribute('amount')).toFixed(2),
 			periods: state.periods,
 			period: stream.getAttribute('period'),
-			isAdmin: stream.testAdminLevel(40)
+			isAdmin
 		}, function (err, html) {
 			if (err) return;
 			Q.replace(tool.element, html);
@@ -103,6 +107,20 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 					'': state.icon.defaultSize
 				}
 			});
+
+			if (isAdmin) {
+				$(".Assets_plan_participants", tool.element).tool("Streams/participants", {
+					maxShow: 100,
+					showSummary: false,
+					showControls: false,
+					publisherId,
+					streamName,
+					invite: {
+						readLevel: 40,
+						appUrl: Q.url("Assets/plan/" + publisherId + "/" + streamName.split("/").pop())
+					}
+				}).activate();
+			}
 
 			$(".Assets_plan_preview_description", tool.element).on(Q.Pointer.fastclick, function (e) {
 				e.preventDefault();
@@ -152,6 +170,7 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 						interrupted: stream.getAttribute("interrupted") || false
 					});
 				};
+				tool.preview.actions();
 			}
 		});
 	},
@@ -274,7 +293,7 @@ Q.Template.set('Assets/plan/preview',
 `<div class="Streams_preview_container Streams_preview_view Q_clearfix">
 	<img class="Streams_preview_icon Q_square">
 	{{#if isAdmin}}
-		{{{tool "Streams/participants" maxShow=100 showSummary=false showControls=true publisherId=publisherId streamName=streamName}}}
+		<div class="Assets_plan_participants"></div>
 	{{/if}}
 	<div class="Streams_preview_contents">
 		<h3 class="Streams_preview_title Streams_preview_view">{{title}}</h3>
