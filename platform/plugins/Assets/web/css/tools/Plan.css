@@ -36,14 +36,13 @@
 .Assets_plan_tool[data-subscribed=false] button[name=subscribe],
 .Assets_plan_tool[data-subscribed=true] button[name=unsubscribe] {
     display: block;
-    margin-bottom: 10px;
+    margin: 10px auto;
 }
 .Assets_plan_tool .Assets_plan_related_streams:empty {
     display: none;
 }
 .Assets_plan_tool .Assets_plan_related_streams {
     border-top: 1px solid;
-    border-bottom: 1px solid;
     margin: 10px 0;
     padding: 10px 0;
 }
@@ -83,5 +82,4 @@
 }
 .Assets_plan_tool .Streams_participants_tool {
     margin-top: -20px;
-    margin-bottom: 10px;
 }

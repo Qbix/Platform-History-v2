@@ -185,10 +185,12 @@ Q.Tool.define("Assets/plan", function(options) {
 				});
 			});
 
-			$(".Assets_plan_description", tool.element).tool("Streams/inplace", {
-				stream: tool.planStream,
-				field: "content"
-			}).activate();
+			if (tool.planStream.fields.content) {
+				$(".Assets_plan_description", tool.element).tool("Streams/inplace", {
+					stream: tool.planStream,
+					field: "content"
+				}).activate();
+			}
 			$(".Assets_plan_amount", tool.element).tool("Streams/inplace", {
 				stream: tool.planStream,
 				attribute: "amount",
