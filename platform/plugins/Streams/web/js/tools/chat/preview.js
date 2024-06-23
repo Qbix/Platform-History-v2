@@ -80,8 +80,8 @@
 					{ unseenClass: 'Streams_preview_nonzero' }
 				);
 
-				// get participants and create Users/pale
-				Q.Streams.Participant.get.force(
+				// get participants and create Users/pile
+				Q.Streams.Participant.get(
 					stream.fields.publisherId,
 					stream.fields.name,
 					{

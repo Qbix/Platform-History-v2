@@ -8801,7 +8801,7 @@ Q.action = function _Q_action(uri, fields, options) {
  *  * @param {String} [options.method] if set, adds a &Q.method=$method to the querystring
  *  * @param {String|Function} [options.callback] if a string, adds a "&Q.callback="+encodeURIComponent(callback) to the querystring.
  *  * @param {Boolean} [options.iframe] if true, tells the server to render the response as HTML in an iframe, which should call the specified callback
- *  * @param {String} [options.loadExtras] if 'all, asks the server to load the extra scripts, stylesheets, etc. that are loaded on first page load, can also be "response", "session" or "response,session"
+ *  * @param {String} [options.loadExtras] if "all", asks the server to load the extra scripts, stylesheets, etc. that are loaded on first page load, can also be "response", "session" or "response,session"
  *  * @param {Array} [options.idPrefixes] optional array of Q_Html::pushIdPrefix values for each slotName
  *  * @param {number} [options.timestamp] whether to include a timestamp (e.g. as a cache-breaker)
  * @return {String|Object}
@@ -9109,7 +9109,9 @@ Q.request = function (url, slotNames, callback, options) {
 		
 		function xhr(onSuccess, onCancel) {
 			if (o.extend !== false) {
-				url = Q.ajaxExtend(url, slotNames, overrides);
+				request.urlRequested
+				= url
+				= Q.ajaxExtend(url, slotNames, overrides);
 			}			
 			var xmlhttp;
 			xmlhttp = new XMLHttpRequest();

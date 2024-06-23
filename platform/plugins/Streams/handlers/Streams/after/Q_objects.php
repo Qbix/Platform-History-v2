@@ -65,6 +65,7 @@ function Streams_after_Q_objects () {
 		'icon' => $user && $user->iconUrl(false),
 		'token' => $invite->token,
 		'invitingUser' => array(
+			'id' => $invitingUser->id,
 			'icon' => $invitingUser->iconUrl(false),
 			'displayName' => $invitingUser->displayName(array(
 				'fullAccess' => true,

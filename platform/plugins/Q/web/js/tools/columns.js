@@ -765,6 +765,7 @@ Q.Tool.define("Q/columns", function(options) {
 	 * @param {Function} callback Called when the column is closed, or if no column
 	 *  Receives (index, column) where the column could be null if it wasn't found.
 	 * @param {Object} options Can be used to override some values taken from tool state
+	 * @param {Boolean} [pagePushUrl=true] Set to false to not call Q.Page.push()
 	 * @param {Boolean} skipUpdateAttributes Whether to skip updating the attributes
 	 *  of the tool element because some columns are about to be opened, and we want
 	 *  to avoid thrashing.
