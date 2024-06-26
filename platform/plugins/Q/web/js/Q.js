@@ -4450,7 +4450,7 @@ Q.getter = function _Q_getter(original, options) {
 		gw.cache = null;
 	} else if (gw.cache === true || gw.cache === undefined) {
 		// create our own Object that will cache locally in the page
-		gw.cache = Q.Cache.document(++_Q_getter_i);
+		gw.cache = Q.Cache.document('Q_getter_' + ++_Q_getter_i);
 	} // else assume we were passed an Object that supports the cache interface
 
 	gw.throttle = gw.throttle || null;
@@ -11408,7 +11408,7 @@ function _activateTools(toolElement, options, shared) {
 		}
 		if (pendingParentEvent) {
 			var eventKey = toolId + ' ' + toolName;
-			var eventKeyPrefix = 0;
+			var eventKeyPrefix = 2;
 			// in order to avoid replace handlers in pendingParentEvent we need to avoid adding handlers with same keys
 			// So while key exists in pendingParentEvent.keys we update new id with counter.
 			while(pendingParentEvent.keys.includes(eventKey)) {
