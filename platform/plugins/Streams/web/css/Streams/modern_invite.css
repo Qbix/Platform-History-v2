@@ -29,11 +29,7 @@
 	cursor: pointer;
 }
 .Streams_invite_option:hover {
-	background: rgba(180, 180, 180, 0.2);
-	color: var(--dialog-color);
-}
-.Streams_invite_option:hover svg {
-	fill: var(--dialog-color);
+	background: rgba(150, 150, 150, 0.2);
 }
 .Streams_invite_share_link{
 	margin-right:0;

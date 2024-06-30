@@ -44,7 +44,8 @@ var dataKey_opening = 'opening';
  *  @param {Boolean|String} [options.pagePushUrl=true] if this is true and the url of the column
  *    is specified, then Q.Page.push() is called with this URL. You can also pass a string here,
  *    to override the url (in case, for example, the url of the column is not specified, because it is rendered client-side).
- *  @param {Boolean|String} [options.pagePushUrlOnClose=false] Whether to call Q.Page.pushUrl(), if pagePushUrl is true as well
+ *  @param {Boolean|Number} [options.pagePushUrlOnClose=300] Whether to call Q.Page.pushUrl(), if pagePushUrl is true as well
+ *    You can also put a number of milliseconds to wait and pushUrl (if pagePushUrl is true) as long as columns.open() isn't called during that time.
  *  @param {Q.Event} [options.beforeOpen] Event that happens before a column is opened. Return false to prevent opening. Receives (options, index).
  *  @param {Q.Event} [options.beforeClose] Event that happens before a column is closed. Receives (index, indexAfterClose, columnElement). Return false to prevent closing.
  *  @param {Q.Event} [options.onActivate] Event that happens after a column is opened and activated. Receives (options, index, columnElement).
@@ -162,7 +163,7 @@ Q.Tool.define("Q/columns", function(options) {
 	columns: [],
 	controls: undefined,
 	pagePushUrl: true,
-	pagePushUrlOnClose: false,
+	pagePushUrlOnClose: 300,
 	scrollbarsAutoHide: {},
 	closeFromTitleClick: false,
 	closeFromSwipeDown: true,
@@ -767,7 +768,8 @@ Q.Tool.define("Q/columns", function(options) {
 	 * @param {Function} callback Called when the column is closed, or if no column
 	 *  Receives (index, column) where the column could be null if it wasn't found.
 	 * @param {Object} options Can be used to override some values taken from tool state
-	 * @param {Boolean} [pagePushUrlOnClose=false] Set to true to call Q.Page.push() even when closing a column
+	 * @param {Boolean} [pagePushUrlOnClose] Set to true to call Q.Page.push() even when closing a column
+ 	 *  You can also put a number of milliseconds to wait and pushUrl (if pagePushUrl is true) as long as columns.open() isn't called during that time.
 	 * @param {Boolean} skipUpdateAttributes Whether to skip updating the attributes
 	 *  of the tool element because some columns are about to be opened, and we want
 	 *  to avoid thrashing.
@@ -887,15 +889,26 @@ Q.Tool.define("Q/columns", function(options) {
 		function _close() {
 			Q.removeElement(div, true); // remove it correctly)
 
-			var data = tool.data(index);
 			presentColumn(tool);
 			Q.Pointer.clearSelection();
 			Q.handle(callback, tool, [index, div]);
 			state.onClose.handle.call(tool, index, div, skipUpdateAttributes);
 			var url = $prev.attr('data-url') || $div.attr('data-prevUrl');
 			var title = $prev.attr('data-title') || $div.attr('data-prevTitle');
-			if (o.pagePushUrl && o.pagePushUrlOnClose && url && url !== location.href) {
-				Q.Page.push(url, title);
+			if (o.pagePushUrl && url && url !== location.href) {
+				var t, k;
+				if (o.pagePushUrlOnClose == true) {
+					_pagePushUrl();
+				} else if (Number.isFinite(o.pagePushUrlOnClose)) {
+					t = setTimeout(_pagePushUrl);
+					k = tool.beforeOpen.setOnce(function () {
+						clearInterval(t);
+					});
+				}
+				function _pagePushUrl(url, title) {
+					Q.Page.push(url, title);
+					tool.beforeOpen.remove(k);
+				}
 			}
 			Q.layout(tool.element);
 			Q.Visual.animationStarted(state.animation.duration);
