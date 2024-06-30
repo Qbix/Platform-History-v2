@@ -21,6 +21,8 @@
  *   @param {Stream} [options.seen] Whether the tool should mark rendered chat messages as seen
  *   @param {String} [options.animations] Options for animations, which can include:
  *   @param {String} [options.animations.duration=300] The duration of the animation
+ *   @param {Object} [options.invoke] options for Q.invoke()
+ *   @param {Object} [options.invoke.skipColumns=true] set to false, to invoke items in a column, otherwise it uses dialogs
  *   @param {Object} [options.controls={}] Controls to show next to each chat message
  *   @param {Boolean|Array} [options.controls.up] Can be true or an array of [off, on] image urls.
  *   @param {Boolean|Array} [options.controls.down] Can be true or an array of [off, on] image urls.
@@ -615,13 +617,13 @@ Q.Tool.define('Streams/chat', function(options) {
 							});
 
 							element = Q.Tool.setUpElement(element, toolName, fields);
-							Q.invoke({
+							Q.invoke(Q.extend({
 								title: stream.fields.title,
 								className: "Streams_chat_" + Q.normalize(stream.fields.type),
 								content: element,
 								trigger: $toolElement[0],
 								columnIndex: state.openInSameColumn.includes(stream.fields.type) ? "current" : null
-							});
+							}, state.invoke));
 						});
 					}, tool);
 				}, tool);

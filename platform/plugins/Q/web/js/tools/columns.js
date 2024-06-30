@@ -816,7 +816,8 @@ Q.Tool.define("Q/columns", function(options) {
 			}).run();
 			return false;
 		}
-		if (!div) {
+		options = options || {};
+		if (!div || options.skipColumns) {
 			Q.handle(callback, tool, [index, div]);
 			return false;
 		}
