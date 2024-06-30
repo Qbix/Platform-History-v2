@@ -901,13 +901,13 @@ Q.Tool.define("Q/columns", function(options) {
 					_pagePushUrl();
 				} else if (Number.isFinite(o.pagePushUrlOnClose)) {
 					t = setTimeout(_pagePushUrl);
-					k = tool.beforeOpen.setOnce(function () {
+					k = state.beforeOpen.setOnce(function () {
 						clearInterval(t);
 					});
 				}
 				function _pagePushUrl(url, title) {
 					Q.Page.push(url, title);
-					tool.beforeOpen.remove(k);
+					state.beforeOpen.remove(k);
 				}
 			}
 			Q.layout(tool.element);
