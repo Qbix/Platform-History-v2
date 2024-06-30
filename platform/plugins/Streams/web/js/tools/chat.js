@@ -140,6 +140,9 @@ Q.Tool.define('Streams/chat', function(options) {
 		duration: 300
 	},
 	drafts: true,
+	invoke: {
+		skipColumns: true
+	},
 	vote: {
 		up: {
 			src: '{{Streams}}/img/chat/vote-up.png',
