@@ -85,7 +85,14 @@ Q.makeEventEmitter(Streams);
  * Can play stream in a player
  * @property READ_LEVEL.messages
  * @type integer
- * @default 40
+ * @default 35
+ * @final
+ */
+/**
+ * Can see other users' play receipts
+ * @property READ_LEVEL.receipts
+ * @type integer
+ * @default 35
  * @final
  */
 /**
@@ -101,7 +108,8 @@ Streams.READ_LEVEL = {
 	'content':		20,		// can preview stream and its content
 	'relations':	25,		// can see relations to other streams
 	'participants':	30,		// can see participants in the stream
-	'messages':		40,		// can play stream in a player
+	'messages':		35,		// can play stream in a player
+	'receipts':     40, 	// can see other users' play receipts
 	'max':      	40  	// max read level
 };
 /**

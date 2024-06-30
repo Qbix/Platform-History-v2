@@ -138,6 +138,13 @@ Q.text.Streams = {
  * Can play stream in a player
  * @property READ_LEVEL.messages
  * @type integer
+ * @default 35
+ * @final
+ */
+/**
+ * Can see other users' play receipts
+ * @property READ_LEVEL.messages
+ * @type integer
  * @default 40
  * @final
  */
@@ -154,8 +161,9 @@ Streams.READ_LEVEL = {
 	'content':		20, // can see the stream's content
 	'relations':	25,	// can see relations to other streams
 	'participants':	30, // can see participants in the stream
-	'messages':		40, // can play stream in a player
-	'max':	  	40  // max read level
+	'messages':		35, // can play stream in a player,
+	'receipts':     40, // can see other users' play receipts
+	'max':          40  // max read level
 };
 
 /**
@@ -1233,6 +1241,9 @@ Streams.get = Q.getter(function _Streams_get(publisherId, streamName, callback, 
 }, {
 	callbackIndex: 2,
 	throttle: 'Streams.get',
+	cache: {
+		
+	},
 	prepare: function (subject, params, callback) {
 		if (Streams.isStream(subject)) {
 			return callback(subject, params);
