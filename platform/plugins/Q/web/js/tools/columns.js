@@ -41,9 +41,10 @@ var dataKey_opening = 'opening';
  *  @param {Boolean} [options.fullscreen] Whether to use fullscreen mode on mobile phones, using document to scroll instead of relying on possibly buggy "overflow" CSS implementation. Defaults to true on Android stock browser, false everywhere else.
  *  @param {Boolean} [options.hideOverlappedColumns=true] Whether to hide background columns on mobile (perhaps improving browser rendering).
  *  @param {Boolean} [options.stretchFirstColumn=true] If true, stretch first column to whole page width if no other columns appear.
- *  @param {Boolean|String} [options.pagePushUrl] if this is true and the url of the column
+ *  @param {Boolean|String} [options.pagePushUrl=true] if this is true and the url of the column
  *    is specified, then Q.Page.push() is called with this URL. You can also pass a string here,
  *    to override the url (in case, for example, the url of the column is not specified, because it is rendered client-side).
+ *  @param {Boolean|String} [options.pagePushUrlOnClose=false] Whether to call Q.Page.pushUrl(), if pagePushUrl is true as well
  *  @param {Q.Event} [options.beforeOpen] Event that happens before a column is opened. Return false to prevent opening. Receives (options, index).
  *  @param {Q.Event} [options.beforeClose] Event that happens before a column is closed. Receives (index, indexAfterClose, columnElement). Return false to prevent closing.
  *  @param {Q.Event} [options.onActivate] Event that happens after a column is opened and activated. Receives (options, index, columnElement).
@@ -161,6 +162,7 @@ Q.Tool.define("Q/columns", function(options) {
 	columns: [],
 	controls: undefined,
 	pagePushUrl: true,
+	pagePushUrlOnClose: false,
 	scrollbarsAutoHide: {},
 	closeFromTitleClick: false,
 	closeFromSwipeDown: true,
@@ -765,7 +767,7 @@ Q.Tool.define("Q/columns", function(options) {
 	 * @param {Function} callback Called when the column is closed, or if no column
 	 *  Receives (index, column) where the column could be null if it wasn't found.
 	 * @param {Object} options Can be used to override some values taken from tool state
-	 * @param {Boolean} [pagePushUrl=true] Set to false to not call Q.Page.push()
+	 * @param {Boolean} [pagePushUrlOnClose=false] Set to true to call Q.Page.push() even when closing a column
 	 * @param {Boolean} skipUpdateAttributes Whether to skip updating the attributes
 	 *  of the tool element because some columns are about to be opened, and we want
 	 *  to avoid thrashing.
@@ -892,7 +894,7 @@ Q.Tool.define("Q/columns", function(options) {
 			state.onClose.handle.call(tool, index, div, skipUpdateAttributes);
 			var url = $prev.attr('data-url') || $div.attr('data-prevUrl');
 			var title = $prev.attr('data-title') || $div.attr('data-prevTitle');
-			if (o.pagePushUrl && url && url !== location.href) {
+			if (o.pagePushUrl && o.pagePushUrlOnClose && url && url !== location.href) {
 				Q.Page.push(url, title);
 			}
 			Q.layout(tool.element);
