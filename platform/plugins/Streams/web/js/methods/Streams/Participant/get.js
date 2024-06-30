@@ -41,10 +41,9 @@ Q.exports(function(priv, Streams, Stream, Participant) {
             var participants = {};
             var msg = Q.firstErrorMessage(err, data);
             if (msg) {
-                var args = [err, data];
-                Streams.onError.handle.call(this, msg, args);
-                Participant.get.onError.handle.call(this, msg, args);
-                return callback && callback.call(this, msg, args);
+                Streams.onError.handle.call(this, msg, data);
+                Participant.get.onError.handle.call(this, msg, data);
+                return callback && callback.call(this, msg, data);
             }
             if ('participants' in data) {
                 participants = data.participants;
