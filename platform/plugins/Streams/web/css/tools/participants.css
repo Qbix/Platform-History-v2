@@ -70,8 +70,8 @@
 }
 
 .Streams_participants_tool > .Streams_participants_container > .Streams_participants_invite_button {
-	display: none;
-	opacity: 0;
+	display: none !important;
+	opacity: 0 !important;
 }
 
 .Streams_participants_tool.Streams_noParticipants .Streams_participants_container > .Streams_participants_invite_button {
