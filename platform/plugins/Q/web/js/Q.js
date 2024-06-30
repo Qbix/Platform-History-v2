@@ -4450,7 +4450,9 @@ Q.getter = function _Q_getter(original, options) {
 		gw.cache = null;
 	} else if (gw.cache === true || gw.cache === undefined) {
 		// create our own Object that will cache locally in the page
-		gw.cache = Q.Cache.document('Q_getter_' + ++_Q_getter_i);
+		gw.cache = Q.Cache.document('Q_getter_' + (++_Q_getter_i));
+	} else if (gw.cache && (!gw.cache.get || !gw.cache.set || !gw.cache.clear)) {
+		gw.cache = Q.Cache.document('Q_getter_' + (++_Q_getter_i), options && options.cache);
 	} // else assume we were passed an Object that supports the cache interface
 
 	gw.throttle = gw.throttle || null;
@@ -7101,7 +7103,7 @@ Cp.removeEach = function _Q_Cache_prototype_each(args, options) {
 };
 Q.Cache.document = function _Q_Cache_document(name, max, options) {
 	if (!Q.Cache.document.caches[name]) {
-		var cache = Q.Cache.document.caches[name] = new Q.Cache(Q.extend({
+		Q.Cache.document.caches[name] = new Q.Cache(Q.extend({
 			max: max,
 			name: name
 		}, options));

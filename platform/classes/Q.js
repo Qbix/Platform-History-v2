@@ -900,7 +900,9 @@ Q.getter = function _Q_getter(original, options) {
 		gw.cache = null;
 	} else if (gw.cache === true || gw.cache === undefined) {
 		// create our own Object that will cache locally in the page
-		gw.cache = Q.Cache.process(++_Q_getter_i);
+		gw.cache = Q.Cache.process('Q_getter_' + (++_Q_getter_i));
+	} else if (gw.cache && (!gw.cache.get || !gw.cache.set || !gw.cache.clear)) {
+		gw.cache = Q.Cache.process('Q_getter_' + (++_Q_getter_i), options && options.cache);
 	} // else assume we were passed an Object that supports the cache interface
 
 	gw.throttle = gw.throttle || null;
