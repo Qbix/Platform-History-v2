@@ -816,8 +816,7 @@ Q.Tool.define("Q/columns", function(options) {
 			}).run();
 			return false;
 		}
-		options = options || {};
-		if (!div || options.skipColumns) {
+		if (!div) {
 			Q.handle(callback, tool, [index, div]);
 			return false;
 		}
@@ -1210,7 +1209,7 @@ function _updateAttributes() {
 Q.invoke.handlers.unshift(function (options, methods) {
 	var index, columns;
 	var node = options.trigger;
-	if (!node) {
+	if (!node || (options && options.skipColumns)) {
 		return;
 	}
 
