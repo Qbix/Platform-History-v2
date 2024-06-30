@@ -586,5 +586,5 @@ html.Users_loggedIn .Users_whenLoggedOut {
 }
 
 @media (prefers-color-scheme: dark) {
-	#Users_login_identifierExists { color: white; }
+	#Users_login_identifierExists { color: inherit; }
 }

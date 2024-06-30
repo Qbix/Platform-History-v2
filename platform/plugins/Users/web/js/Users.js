@@ -17,7 +17,8 @@
 		icon: {
 			defaultSize: 40 // might be overridden, but is required by some tools
 		},
-		roles: {}
+		roles: {},
+		urls: {}
 	};
     
 	var dc = Q.extend.dontCopy;
@@ -2619,6 +2620,7 @@
 	Users.disconnect.web3 = Web3.disconnect;
 
 	Q.onReady.add(function () {
+		Users.urls.onComplete = Q.urls['Communities/home'];
 		Users.Facebook.construct();
 		_subscribeToEvents(window.ethereum || Web3.ethereumProvider);
 	}, 'Users');
