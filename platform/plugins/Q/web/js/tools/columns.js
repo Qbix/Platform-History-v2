@@ -905,7 +905,7 @@ Q.Tool.define("Q/columns", function(options) {
 						clearInterval(t);
 					});
 				}
-				function _pagePushUrl(url, title) {
+				function _pagePushUrl() {
 					Q.Page.push(url, title);
 					state.beforeOpen.remove(k);
 				}
