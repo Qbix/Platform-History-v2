@@ -65,7 +65,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
     
     if (state.contactUserId){
         Q.Streams.get(state.contactUserId, 'Streams/user/xid/web3', function(err, stream){
-            if (!Q.isEmpty(stream.fields.content)) {
+            if (stream && stream.fields && !Q.isEmpty(stream.fields.content)) {
                 state.contactUserId_xid = stream.fields.content;
             }
             tool.refresh();    
