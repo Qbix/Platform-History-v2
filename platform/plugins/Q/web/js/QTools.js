@@ -344,7 +344,9 @@
 						return;
 					}
 
-					Q.Pointer.cancelClick(true, e, null);
+					if (info.curScroll !== 'iScroll') {
+						Q.Pointer.cancelClick(true, e, null);
+					}
 
 					var current = Q.Contextual.collection[Q.Contextual.current];
 					var contextual = current.contextual;
