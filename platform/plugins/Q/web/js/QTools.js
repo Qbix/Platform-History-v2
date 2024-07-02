@@ -344,10 +344,6 @@
 						return;
 					}
 
-					if (info.curScroll !== 'iScroll') {
-						Q.Pointer.cancelClick(true, e, null);
-					}
-
 					var current = Q.Contextual.collection[Q.Contextual.current];
 					var contextual = current.contextual;
 					var conOffset = contextual.offset();
@@ -358,6 +354,10 @@
 					{
 						conOffset.top -= window.scrollY;
 						triggerOffset.top -= window.scrollY;
+					}
+
+					if (info.curScroll !== 'iScroll') {
+						Q.Pointer.cancelClick(true, e, null);
 					}
 
 					var event = (Q.info.useTouchEvents ? e.originalEvent.changedTouches[0] : e);
