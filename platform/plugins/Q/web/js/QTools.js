@@ -356,7 +356,7 @@
 						triggerOffset.top -= window.scrollY;
 					}
 
-					if (info.curScroll !== 'iScroll') {
+					if (info.curScroll !== 'scroller') {
 						Q.Pointer.cancelClick(true, e, null);
 					}
 
