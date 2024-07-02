@@ -344,6 +344,8 @@
 						return;
 					}
 
+					Q.Pointer.cancelClick(true, e, null));
+
 					var current = Q.Contextual.collection[Q.Contextual.current];
 					var contextual = current.contextual;
 					var conOffset = contextual.offset();
@@ -515,7 +517,9 @@
 
 						if (element)
 						{
-							Q.Contextual.itemSelectHandler(element, event);
+							if (!Q.Pointed.canceledClick) {
+								Q.Contextual.itemSelectHandler(element, event);
+							}
 						}
 						else
 						{
