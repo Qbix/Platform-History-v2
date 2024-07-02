@@ -517,7 +517,7 @@
 
 						if (element)
 						{
-							if (!Q.Pointed.canceledClick) {
+							if (!Q.Pointer.canceledClick) {
 								Q.Contextual.itemSelectHandler(element, event);
 							}
 						}
