@@ -14149,7 +14149,9 @@ Q.Visual = Q.Pointer = {
                     Q.each(imgs, function (i, img) {
                         if (typeof img.target === 'string') {
                             img.target = document.querySelector(img.target);
-                        }
+                        } else if (!img.target) {
+							return;
+						}
                         var point;
                         var target = img.target;
                         if (Q.instanceOf(target, Element)) {
