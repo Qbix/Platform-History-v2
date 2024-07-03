@@ -86,6 +86,10 @@ Q.Tool.define("Streams/userChooser", function(o) {
 
 	var doQuery = Q.debounce(function (event) {
 
+		if (tool.suppressQuery) {
+			return;
+		}
+
 		var cur = $('.Q_selected', tool.$results);
 		var query = tool.$input.val();
 
@@ -306,6 +310,10 @@ Q.Tool.define("Streams/userChooser", function(o) {
 {
 	end: function () {
 		this.focusedResults = false;
+		tool.suppressQuery = true;
+		setTimeout(function () {
+			tool.suppressQuery = false;
+		}, 300);
 		if (this.$input) {
 			this.$input.blur().trigger('Q_refresh');	
 		}
