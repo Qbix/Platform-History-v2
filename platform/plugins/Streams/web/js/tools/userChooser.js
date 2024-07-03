@@ -173,7 +173,8 @@ Q.Tool.define("Streams/userChooser", function(o) {
 				}
 				tool.$input.css({
 					'background-image': 'url(' +Q.url('/{{Q}}/img/throbbers/loading.gif') + ')',
-					'background-repeat': 'no-repeat'
+					'background-repeat': 'no-repeat',
+					'animation': 'Q_fadeIn 1s'
 				});
 				Q.Streams.Avatar.byPrefix(tool.$input.val().toLowerCase(), onResponse, options);
 		}
