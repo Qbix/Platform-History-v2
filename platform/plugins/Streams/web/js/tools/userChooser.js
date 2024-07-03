@@ -309,8 +309,9 @@ Q.Tool.define("Streams/userChooser", function(o) {
 
 {
 	end: function () {
-		this.focusedResults = false;
-		this.suppressQuery = true;
+		var tool = this;
+		tool.focusedResults = false;
+		tool.suppressQuery = true;
 		setTimeout(function () {
 			tool.suppressQuery = false;
 		}, 300);
