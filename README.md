@@ -135,4 +135,5 @@ We are currently in the process of growing our developer community. If you feel 
 ## Tested on Multiple Platforms
 Thanks to BrowserStack, we are able to test both web apps and native apps made with the Qbix Platform, across browsers on Desktops, Laptops, Tablets and Mobile Phones, as well as native apps in the iOS and Android stores.
 We are grateful to BrowserStack for their support of open source projects like ours! Check them out for yourselves:
-[![Browserstack](https://bstacksupport.zendesk.com/attachments/token/jvQ50EmA3bZbXIM990W7hBLsN/?name=browserstack-logo-600x315.png)](https://www.browserstack.com/)
+
+[![Browserstack](https://d2ogrdw2mh0rsl.cloudfront.net/production/images/static/header/header-logo.svg)](https://www.browserstack.com/)
