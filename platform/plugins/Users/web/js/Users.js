@@ -1072,7 +1072,7 @@
 
 	Label.labelTitle = function (label) {
 		return Q.getObject([label, 'title'], Q.Users.labels)
-			|| label.split('/').pop();
+			|| label.split('/').pop().toUpperCase();
 	};
 
 	Label.get = new Q.Method();
