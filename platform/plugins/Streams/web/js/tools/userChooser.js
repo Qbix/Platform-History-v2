@@ -86,7 +86,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 
 	var _byPrefix = Q.debounce(function (onResponse, options) {
 		Q.Streams.Avatar.byPrefix(tool.$input.val().toLowerCase(), onResponse, options);
-	});
+	}, 500);
 
 	var doQuery = function (event) {
 
