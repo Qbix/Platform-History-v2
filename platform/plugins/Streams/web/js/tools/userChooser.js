@@ -305,7 +305,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 
 {
 	end: function () {
-		tool.focusedResults = false;
+		this.focusedResults = false;
 		if (this.$input) {
 			this.$input.blur().trigger('Q_refresh');	
 		}
