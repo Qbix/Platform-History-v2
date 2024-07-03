@@ -58,7 +58,7 @@ The other thing Qbix Platform does is provide a standard set of features that pe
 
 Here are some more features you can use out of the box:
 
-[![Chat](https://img.youtube.com/vi/QJg3ZwKalmU/3.jpg)](https://www.youtube.com/watch?v=QJg3ZwKalmU) [![Videoconferencing](https://img.youtube.com/vi/opeLeOStuPU/3.jpg)](https://www.youtube.com/watch?v=opeLeOStuPU) [![Events](https://img.youtube.com/vi/RTFcFGZeCsw/3.jpg)](https://www.youtube.com/watch?v=RTFcFGZeCsw) [![Rides](https://img.youtube.com/vi/Z7Q7IzVv1VU/3.jpg)](https://www.youtube.com/watch?v=Z7Q7IzVv1VU) [![People](https://img.youtube.com/vi/ZRfOKuacdqI/3.jpg)](https://www.youtube.com/watch?v=ZRfOKuacdqI) [![Payments](https://img.youtube.com/vi/g9VV1eEbDww/3.jpg)](https://www.youtube.com/watch?v=g9VV1eEbDww) [![Notifications](https://img.youtube.com/vi/rtf7e0lAg8w/3.jpg)](https://www.youtube.com/watch?v=rtf7e0lAg8w) [![Edit HTML](https://img.youtube.com/vi/-DgaTwG1csc/3.jpg)](https://www.youtube.com/watch?v=-DgaTwG1csc)
+[![Chat](https://img.youtube.com/vi/QJg3ZwKalmU/3.jpg)](https://www.youtube.com/watch?v=QJg3ZwKalmU) [![Videoconferencing](https://img.youtube.com/vi/opeLeOStuPU/3.jpg)](https://www.youtube.com/watch?v=opeLeOStuPU) [![Events](https://img.youtube.com/vi/RTFcFGZeCsw/3.jpg)](https://www.youtube.com/watch?v=RTFcFGZeCsw) [![Rides](https://img.youtube.com/vi/Z7Q7IzVv1VU/3.jpg)](https://www.youtube.com/watch?v=Z7Q7IzVv1VU) [![People](https://img.youtube.com/vi/ZRfOKuacdqI/3.jpg)](https://www.youtube.com/watch?v=ZRfOKuacdqI) Payments Notifications Edit HTML
 
 Oh, and now out of the box you can even use web based videoconferencing, or livestream to facebook.
 
@@ -135,4 +135,4 @@ We are currently in the process of growing our developer community. If you feel 
 ## Tested on Multiple Platforms
 Thanks to BrowserStack, we are able to test both web apps and native apps made with the Qbix Platform, across browsers on Desktops, Laptops, Tablets and Mobile Phones, as well as native apps in the iOS and Android stores.
 We are grateful to BrowserStack for their support of open source projects like ours! Check them out for yourselves:
-[![Browserstack](https://bstacksupport.zendesk.com/attachments/token/jvQ50EmA3bZbXIM990W7hBLsN/?name=browserstack-logo-600x315.png)](https://www.browserstack.com/)
+[![Browserstack]([https://bstacksupport.zendesk.com/attachments/token/jvQ50EmA3bZbXIM990W7hBLsN/?name=browserstack-logo-600x315.png)](https://www.browserstack.com/](https://d2ogrdw2mh0rsl.cloudfront.net/production/images/static/header/header-logo.svg))
