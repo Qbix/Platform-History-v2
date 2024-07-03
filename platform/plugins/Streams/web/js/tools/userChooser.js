@@ -117,7 +117,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 
 		switch (event.keyCode) {
 			case 38: // up arrow
-				if (event.type === 'keyup') {
+				if (event.type === 'keypress') {
 					return;
 				}
 				var prev = cur.prev();
@@ -134,7 +134,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 				}
 				return false;
 			case 40: // down arrow
-				if (event.type === 'keyup') {
+				if (event.type === 'keypress') {
 					return;
 				}
 				var next = cur.next();
@@ -151,7 +151,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 				next.addClass('Q_selected');
 				return false;
 			case 13: // enter
-				if (event.type === 'keyup') {
+				if (event.type === 'keypress') {
 					return;
 				}
 				if (cur) {
