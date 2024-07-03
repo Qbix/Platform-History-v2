@@ -1070,6 +1070,11 @@
 		return label.startsWith(Label.externalPrefix);
 	};
 
+	Label.labelTitle = function (label) {
+		return Q.getObject([label, 'title'], Q.Users.labels)
+			|| label.split('/').pop();
+	};
+
 	Label.get = new Q.Method();
 	Label.add = new Q.Method();
 	Label.update = new Q.Method();
