@@ -85,6 +85,10 @@ Q.Tool.define("Streams/userChooser", function(o) {
 	}, 300);
 
 	var _byPrefix = Q.debounce(function (onResponse, options) {
+		tool.$input.css({
+			'background-image': 'url(' +Q.url('/{{Q}}/img/throbbers/loading.gif') + ')',
+			'background-repeat': 'no-repeat'
+		});
 		Q.Streams.Avatar.byPrefix(tool.$input.val().toLowerCase(), onResponse, options);
 	}, 500);
 
@@ -175,10 +179,6 @@ Q.Tool.define("Streams/userChooser", function(o) {
 					tool.$results.remove();
 					return;
 				}
-				tool.$input.css({
-					'background-image': 'url(' +Q.url('/{{Q}}/img/throbbers/loading.gif') + ')',
-					'background-repeat': 'no-repeat'
-				});
 				_byPrefix(onResponse, options);
 		}
 
