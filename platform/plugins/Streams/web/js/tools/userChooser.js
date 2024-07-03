@@ -84,7 +84,11 @@ Q.Tool.define("Streams/userChooser", function(o) {
 		}
 	}, 300);
 
-	var doQuery = Q.debounce(function (event) {
+	var _byPrefix = Q.debounce(function (onResponse, options) {
+		Q.Streams.Avatar.byPrefix(tool.$input.val().toLowerCase(), onResponse, options);
+	});
+
+	var doQuery = function (event) {
 
 		if (tool.suppressQuery) {
 			return;
@@ -175,7 +179,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 					'background-image': 'url(' +Q.url('/{{Q}}/img/throbbers/loading.gif') + ')',
 					'background-repeat': 'no-repeat'
 				});
-				Q.Streams.Avatar.byPrefix(tool.$input.val().toLowerCase(), onResponse, options);
+				_byPrefix(onResponse, options);
 		}
 
 		function onChoose (cur) {
@@ -269,9 +273,9 @@ Q.Tool.define("Streams/userChooser", function(o) {
 				tool.$results.remove();
 			}
 		}
-	}, 200);
+	};
 
-	$(window).on('blur', this.end.bind(this));
+	$(window).on('blur', tool.end.bind(this));
 
 	tool.$input.on('blur', function (event) {
 		setTimeout(function () {
