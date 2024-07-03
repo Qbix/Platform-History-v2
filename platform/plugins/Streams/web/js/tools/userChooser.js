@@ -173,8 +173,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 				}
 				tool.$input.css({
 					'background-image': 'url(' +Q.url('/{{Q}}/img/throbbers/loading.gif') + ')',
-					'background-repeat': 'no-repeat',
-					'animation': 'Q_fadeIn 1s'
+					'background-repeat': 'no-repeat'
 				});
 				Q.Streams.Avatar.byPrefix(tool.$input.val().toLowerCase(), onResponse, options);
 		}
@@ -272,6 +271,8 @@ Q.Tool.define("Streams/userChooser", function(o) {
 		}
 	}, 200);
 
+	$(window).on('blur', this.end.bind(this));
+
 	tool.$input.on('blur', function (event) {
 		setTimeout(function () {
 			if (!tool.focusedResults) {
@@ -327,6 +328,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 	Q: {
 		beforeRemove: function () {
 			this.end();
+			$(window).off('blur', this.end.bind(this));
 		}
 	}
 }
