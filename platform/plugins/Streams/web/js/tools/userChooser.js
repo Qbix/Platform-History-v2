@@ -54,7 +54,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 	if (!offset) {
 		return; // some error
 	}
-	var focusedResults = false;
+	tool.focusedResults = false;
 	tool.$results = $('<div style="text-align: left;" class="Streams_userChooser_results" />').css({
 		display: 'none',
 		position: 'absolute',
@@ -67,7 +67,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 		height: state.resultsHeight,
 		'tab-index': 9000
 	}).on(Q.Pointer.start.eventName + ' focusin', function () {
-		focusedResults = true;
+		tool.focusedResults = true;
 	}).appendTo('body');
 
 	tool.Q.onStateChanged('resultsHeight').set(function () {
@@ -232,7 +232,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 				}).data('userId', k)
 				.data('avatar', avatars[k])
 				.on(Q.Pointer.start.eventName + ' focusin', function () {
-					focusedResults = true;
+					tool.focusedResults = true;
 				}).appendTo(tool.$results);
 				if (!show) {
 					result.addClass('Q_selected');
@@ -269,7 +269,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 
 	tool.$input.on('blur', function (event) {
 		setTimeout(function () {
-			if (!focusedResults) {
+			if (!tool.focusedResults) {
 				tool.$results.remove();
 			} else {
 				function _handlePointerEnd() {
@@ -280,7 +280,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 					setTimeout(_handlePointerEnd, 0);
 				});
 			}
-			focusedResults = false;
+			tool.focusedResults = false;
 		}, 10);
 	}).on('focus change keyup keydown', doQuery)
 
@@ -305,6 +305,7 @@ Q.Tool.define("Streams/userChooser", function(o) {
 
 {
 	end: function () {
+		tool.focusedResults = false;
 		if (this.$input) {
 			this.$input.blur().trigger('Q_refresh');	
 		}
