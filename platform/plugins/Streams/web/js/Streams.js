@@ -1088,6 +1088,22 @@ Streams.Tool = Q.Method.define({
 });
 
 /**
+ * Does querySelectorAll for elements corresponding to Streams/preview tools.
+ * Use Q.each() with the result.
+ * @method previews
+ * @static
+ * @param {String} streamName
+ * @return NodeList
+ */
+Streams.Tool.previews = function (publisherId, streamName) {
+	document.querySelectorAll(
+		".Streams_preview_tool[data-publisherid='"
+		+ publisherId.encodeHTML() + "'][data-streamname='" 
+		+ streamName.encodeHTML() + "']"
+	);
+};
+
+/**
  * @class Streams
  */
 

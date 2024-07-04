@@ -1054,7 +1054,8 @@ Elp.removeClass = function (className) {
 };
 
 /**
- * Add a CSS class to an element
+ * Add a CSS class to an element.
+ * Can be string of CSS classes separated by spaces.
  * @method addClass
  * @chainable
  * @param {String} className
