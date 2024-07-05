@@ -1113,7 +1113,7 @@ Streams.Tool.highlightPreviews = function (toolName, options) {
 			if ((!o.filter || o.filter(this))
 			&& !this.hasClass('Streams_internal_preview')) {
 				this.addClass(addClassToPreviews);
-				_removeClass(this.Q(toolName));
+				_removeClass(this.Q('Streams/preview'));
 			}
 		});
 		Q.Tool.onActivate('Streams/preview').set(function () {
