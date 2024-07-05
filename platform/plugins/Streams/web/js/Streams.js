@@ -1108,7 +1108,7 @@ Streams.Tool.highlightPreviews = function (toolName, options) {
 		var o = options || {};
 		var tool = this;
 		var state = tool.state;
-		addClassToPreviews = addClassToPreviews || 'Q_selected';
+		var addClassToPreviews = o.addClassToPreviews || 'Q_selected';
 		Q.each(Streams.Tool.previews(state.publisherId, state.streamName), function () {
 			if ((!o.filter || o.filter(this))
 			&& !this.hasClass('Streams_internal_preview')) {
