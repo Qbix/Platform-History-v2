@@ -1095,7 +1095,7 @@ Streams.Tool = Q.Method.define({
  * @param {String} streamName
  * @return NodeList
  */
-Streams.Tool.forEachPreview = function (publisherId, streamName, callback) {
+Streams.Tool.previews = function (publisherId, streamName, callback) {
 	return document.querySelectorAll(
 		".Streams_preview_tool[data-publisherid='"
 		+ publisherId.encodeHTML() + "'][data-streamname='" 
