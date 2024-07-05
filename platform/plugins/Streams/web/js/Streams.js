@@ -1121,7 +1121,7 @@ Streams.Tool.highlightPreviews = function (toolName, options) {
 			&& this.state.streamName == state.streamName
 			&& !this.element.hasClass('Streams_internal_preview')) {
 				this.element.addClass(o.addClassToPreviews);
-				tool.state.Q.beforeRemove.setOnce(function () {
+				tool.Q.beforeRemove.setOnce(function () {
 					var state = this.state;
 					Q.each(Streams.Tool.previews(state.publisherId, state.streamName), function () {
 						this.removeClass(o.addClassToPreviews);
