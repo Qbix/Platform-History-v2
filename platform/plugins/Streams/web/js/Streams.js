@@ -1113,7 +1113,6 @@ Streams.Tool.highlightPreviews = function (toolName, options) {
 			if ((!o.filter || o.filter(this))
 			&& !this.hasClass('Streams_internal_preview')) {
 				this.addClass(addClassToPreviews);
-				_removeClass(this.Q('Streams/preview'));
 			}
 		});
 		Q.Tool.onActivate('Streams/preview').set(function () {
@@ -1122,10 +1121,9 @@ Streams.Tool.highlightPreviews = function (toolName, options) {
 			&& this.state.streamName == state.streamName
 			&& !this.element.hasClass('Streams_internal_preview')) {
 				this.element.addClass(addClassToPreviews);
-				_removeClass(this);
 			}
 		}, o.key);
-		function _removeClass(tool) {
+		if (!o.filter || o.filter(this)) {
 			tool.Q.beforeRemove.setOnce(function () {
 				var state = this.state;
 				Q.each(Streams.Tool.previews(state.publisherId, state.streamName), function () {
