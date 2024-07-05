@@ -1095,12 +1095,42 @@ Streams.Tool = Q.Method.define({
  * @param {String} streamName
  * @return NodeList
  */
-Streams.Tool.previews = function (publisherId, streamName) {
+Streams.Tool.forEachPreview = function (publisherId, streamName, callback) {
 	return document.querySelectorAll(
 		".Streams_preview_tool[data-publisherid='"
 		+ publisherId.encodeHTML() + "'][data-streamname='" 
 		+ streamName.encodeHTML() + "']"
 	);
+};
+
+Streams.Tool.highlightPreviews = function (toolName, options) {
+	return Q.Tool.onActivate(toolName).set(function () {
+		var o = options || {};
+		var tool = this;
+		var state = tool.state;
+		addClassToPreviews = addClassToPreviews || 'Q_selected';
+		Q.each(Streams.Tool.previews(state.publisherId, state.streamName), function () {
+			if ((!o.filter || o.filter(this))
+			&& !this.hasClass('Streams_internal_preview')) {
+				this.addClass(o.addClassToPreviews);
+			}
+		});
+		Q.Tool.onActivate('Streams/preview').set(function () {
+			if ((!o.filter || o.filter(this))
+			&& this.state.publisherId == state.publisherId
+			&& this.state.streamName == state.streamName
+			&& !this.element.hasClass('Streams_internal_preview')) {
+				this.element.addClass(o.addClassToPreviews);
+				tool.state.Q.beforeRemove.setOnce(function () {
+					var state = this.state;
+					Q.each(Streams.Tool.previews(state.publisherId, state.streamName), function () {
+						this.removeClass(o.addClassToPreviews);
+					});
+				});
+		
+			}
+		}, o.key);
+	});
 };
 
 /**
