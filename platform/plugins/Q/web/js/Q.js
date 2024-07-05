@@ -2342,7 +2342,7 @@ Q.calculateKey = function _Q_calculateKey(key, container, start) {
 			key = 'AUTOKEY_' + (++i);
 		}
 	} else if (key !== undefined && typeof key !== 'string') {
-		throw new Q.Error("Q.calculateKey: key must be a String, Q.Tool, true, or undefined");
+		throw new Q.Error("Q.calculateKey: key must be a String, Q.Tool, true, null, or undefined");
 	}
 	return key;
 };
@@ -3039,12 +3039,15 @@ Evp.occurring = false;
  * @param {String|Boolean|Q.Tool} key Optional key to associate with the handler.
  *  Used to replace handlers previously added under the same key.
  *  Also used for removing handlers with .remove(key).
- *  If the key is not provided, a unique one is computed.
  *  Pass true here to associate the handler to the current page,
  *  and it will be automatically removed when the current page is removed.
  *  Pass a Q.Tool object here to associate the handler to the tool,
  *  and it will be automatically removed when the tool is removed.
  *  But note that passing the same tool on same event again will overwrite the previous handler.
+ *  If the key is undefined, a unique one is computed.
+ *  However, if this function is being called while activating a tool or page,
+ *  then the key will be automatically derived from that tool, or page.
+ *  Pass null (instead of leaving key undefined) to avoid this.
  * @param {boolean} prepend If true, then prepends the handler to the chain
  * @return {String|null} The key under which the handler was set, or null if handler and key were both empty
  */
@@ -3094,10 +3097,15 @@ Evp.set = function _Q_Event_prototype_set(handler, key, prepend) {
  * @param {String|Boolean|Q.Tool} Optional key to associate with the handler.
  *  Used to replace handlers previously added under the same key.
  *  Also used for removing handlers with .remove(key).
- *  If the key is not provided, a unique one is computed.
+ *  Pass true here to associate the handler to the current page,
+ *  and it will be automatically removed when the current page is removed.
  *  Pass a Q.Tool object here to associate the handler to the tool,
  *  and it will be automatically removed when the tool is removed.
  *  But note that passing the same tool on same event again will overwrite the previous handler.
+ *  If the key is undefined, a unique one is computed.
+ *  However, if this function is being called while activating a tool or page,
+ *  then the key will be automatically derived from that tool, or page.
+ *  Pass null (instead of leaving key undefined) to avoid this.
  * @param {boolean} prepend If true, then prepends the handler to the chain
  * @return {String|null} The key under which the handler was set, or null if handler is empty
  */
@@ -3127,7 +3135,7 @@ Evp.setOnce = function _Q_Event_prototype_setOnce(handler, key, prepend) {
 	return key = event.set(function _setOnce() {
 		handler.apply(this, arguments);
 		event.remove(key);
-	}, key, prepend);
+	}, key === undefined ? null : key, prepend);
 };
 
 /**
