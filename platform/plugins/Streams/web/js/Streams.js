@@ -1112,7 +1112,7 @@ Streams.Tool.highlightPreviews = function (toolName, options) {
 		Q.each(Streams.Tool.previews(state.publisherId, state.streamName), function () {
 			if ((!o.filter || o.filter(this))
 			&& !this.hasClass('Streams_internal_preview')) {
-				this.addClass(o.addClassToPreviews);
+				this.addClass(addClassToPreviews);
 			}
 		});
 		Q.Tool.onActivate('Streams/preview').set(function () {
@@ -1120,11 +1120,11 @@ Streams.Tool.highlightPreviews = function (toolName, options) {
 			&& this.state.publisherId == state.publisherId
 			&& this.state.streamName == state.streamName
 			&& !this.element.hasClass('Streams_internal_preview')) {
-				this.element.addClass(o.addClassToPreviews);
+				this.element.addClass(addClassToPreviews);
 				tool.Q.beforeRemove.setOnce(function () {
 					var state = this.state;
 					Q.each(Streams.Tool.previews(state.publisherId, state.streamName), function () {
-						this.removeClass(o.addClassToPreviews);
+						this.removeClass(addClassToPreviews);
 					});
 				});
 		
