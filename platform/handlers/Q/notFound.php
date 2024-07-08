@@ -6,7 +6,7 @@
  */
 function Q_notFound($params)
 {
-	header("HTTP/1.0 404 Not Found");
+	Q_Response::code(404);
 	Q_Dispatcher::result("Nothing found");
 	$url = Q_Request::url();
 	echo Q::view('Q/notFound.php', @compact('url'));

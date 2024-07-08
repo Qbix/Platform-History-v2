@@ -369,7 +369,7 @@ class Q_Valid
 			return true;
 		}
 		if ($throwIfInvalid) {
-			header("HTTP/1.0 403 Forbidden");
+			Q_Response::code(403);
 			$message = Q_Config::get('Q', 'internal', 'sigMessage', "The signature did not match.");
 			throw new Q_Exception_FailedValidation(@compact('message'), array("Q.$sgf", "_[$sgf]"));
 		}

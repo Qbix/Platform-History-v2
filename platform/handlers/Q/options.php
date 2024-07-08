@@ -43,7 +43,7 @@ function Q_options($params)
 		$allowedMethods = implode(', ', $allowed);
 		$allowedHeaders = 'Content-Type';
 
-		header('HTTP/1.1 204 No Content');
+		Q_Response::code(204, 'No Content');
 		header("Access-Control-Allow-Origin: $origin");
 		header("Access-Control-Allow-Methods: $allowedMethods");
 		header("Access-Control-Allow-Headers: $allowedHeaders");

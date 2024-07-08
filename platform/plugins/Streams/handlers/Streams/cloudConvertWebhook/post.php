@@ -22,7 +22,7 @@ function Streams_cloudConvertWebhook_post()
 	Q::log("signature: ".$signature, "cloudConvert");
 
 	function Streams_cloudConvert_post_exit () {
-		header("HTTP/1.1 200 OK");
+		Q_Response::code(202, 'OK');
 		exit;
 	}
 

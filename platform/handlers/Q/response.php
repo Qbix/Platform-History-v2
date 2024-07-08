@@ -76,7 +76,7 @@ function Q_response($params)
 	if ($isAjax) {
 		$to_encode = array();
 		if (Q_Response::$redirected) {
-			// We already called Q_Response::redirect from Q/response
+			// We already called Q_Response::redirect while handling previous events
 			$to_encode['redirect']['url'] = Q_Uri::url(Q_Response::$redirected);
 			try {
 				$to_encode['redirect']['uri'] = Q_Uri::from(Q_Response::$redirected)->toArray();
@@ -139,8 +139,8 @@ function Q_response($params)
 				}
 			}
 		}
-		if (Q_Response::$redirected) {
-			// We already called Q_Response::redirect
+		if (empty($to_encode['redirect']) and Q_Response::$redirected) {
+			// We called Q_Response::redirect while rendering page
 			$to_encode['redirect']['url'] = Q_Uri::url(Q_Response::$redirected);
 			try {
 				$to_encode['redirect']['uri'] = Q_Uri::from(Q_Response::$redirected)->toArray();

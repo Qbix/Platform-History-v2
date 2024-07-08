@@ -2040,7 +2040,7 @@ class Q_Response
 		}
 		if (!Q_Request::isAjax()) {
 			if (!empty($permanently)) {
-				header("HTTP/1.1 301 Moved Permanently");
+				Q_Response::code(301, 'Moved Permanently');
 			} else
 			header("Location: $url");
 		}
@@ -2096,6 +2096,36 @@ class Q_Response
 		}
 		return $latest;
 	}
+
+	/**
+	 * Sets the HTTP response code via header().
+	 * This function exits if it was already called before.
+	 * @method code
+	 * @static
+	 * @param {integer} $code
+	 * @param {string} [$message]
+	 * $param {string} [$httpVersion="1.1"]
+	 */
+	static function code($code, $message = null, $httpVersion = '1.1')
+	{
+		static $called = false;
+		if ($called) {
+			return;
+		}
+		$called = true;
+		if (!isset($message)) {
+			$text = Q_Text::get('Q/content');
+			if (!empty($text['request'][$code])) {
+				$message = $text['request']['code'];
+			}
+		}
+		$url = Q_Request::url();
+		$message = Q::interpolate($message, compact('url'));
+		// this automatically sets the status code
+		// without needing to call http_response_code
+		header("HTTP/$httpVersion $code $message");
+	}
+
 
 	/**
 	 * Get the value for a cookie that will be sent to the client,

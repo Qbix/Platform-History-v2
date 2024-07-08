@@ -22,7 +22,7 @@
  */
 function Q_noModule($params)
 {
-        header("HTTP/1.0 404 Not Found");
+        header("HTTP/1.1 404 Not Found");
         $url = Q_Request::url();
         Q_Dispatcher::uri()->module = 'myModule';
         Q::event('Q/response', array());
