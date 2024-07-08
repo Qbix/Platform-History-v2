@@ -85,17 +85,24 @@ function Q_response($params)
 			}
 		}
 		if (is_array($slotNames)) {
-			foreach ($slotNames as $slotName) {
-				Q_Response::fillSlot($slotName, 'default',
-					Q::ifset($idPrefixes, $slotName, null)
-				);
-			}
-			// Go through the slots again, because other handlers may have overwritten
-			// their contents using Q_Response::setSlot()
-			foreach ($slotNames as $sn) {
-				Q_Response::fillSlot($sn, 'default',
-					Q::ifset($idPrefixes, $slotName, null)
-				);
+			try {
+				foreach ($slotNames as $slotName) {
+					Q_Response::fillSlot($slotName, 'default',
+						Q::ifset($idPrefixes, $slotName, null)
+					);
+				}
+				// Go through the slots again, because other handlers may have overwritten
+				// their contents using Q_Response::setSlot()
+				foreach ($slotNames as $sn) {
+					Q_Response::fillSlot($sn, 'default',
+						Q::ifset($idPrefixes, $slotName, null)
+					);
+				}
+			} catch (Exception $e) {
+				if (!($e instanceof Q_Exception_MissingSlot)
+				or !Q_Response::$redirected) {
+					throw $e; // otherwise, just ignore missing slots, since we are redirecting anyway
+				}
 			}
 			if (Q_Request::shouldLoadExtras()) {
 				Q_Response::processResponseExtras('after');
