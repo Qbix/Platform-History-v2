@@ -25,6 +25,7 @@ function Streams_1_1_6_Streams()
                     array('asUserId' => '', 'short' => false)
                 )
             ));
+            ++$i;
             echo "\033[100D";
             echo "Created $i profiles";
 		}
