@@ -9929,7 +9929,7 @@ Q.findScript = function (src) {
  * @return {Object} object with properties "src", "path" and "file"
  */
 Q.currentScript = function (stackLevels) {
-	var src = Q.currentScript.src || Q.getObject('document.currentScript.src');
+	var src = window._Q_currentScript_src || Q.getObject('document.currentScript.src');
 	if (!src) {
 		var index = 0, lines, i, l;
 		try {
