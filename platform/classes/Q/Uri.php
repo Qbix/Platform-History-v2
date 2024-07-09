@@ -238,7 +238,7 @@ class Q_Uri
 	
 	/**
 	 * Set cache base url, relative to which this particular client may store cached
-	 * versions of files.
+	 * versions of files. An example if "https://foo.intercept"
 	 * @method cacheBaseUrl
 	 * @static
 	 * @param {array} [$base_url=null] If no arguments are passed, just returns the current cache base url.
@@ -1017,7 +1017,8 @@ class Q_Uri
 	 */
 	static function cachedUrlAndHash($url, $options = array())
 	{
-		if (Q::startsWith($url, self::$cacheBaseUrl)) {
+		if (self::$cacheBaseUrl
+		&& Q::startsWith($url, self::$cacheBaseUrl)) {
 			$fileSHA1 = null;
 			if (!empty($config['integrity'])) {
 				$fileSHA1 = Q::ifset($info, 'h', null);
