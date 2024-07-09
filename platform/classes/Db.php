@@ -941,6 +941,17 @@ abstract class Db
 	    list($Y,$m,$d) = explode("-",$date);
 	    return( date("md") < $m.$d ? date("Y")-$Y-1 : date("Y")-$Y );
 	}
+
+	/**
+	 * Shorthand for when you want to use CURRENT_TIMESTAMP in the SQL
+	 * @method now
+	 * @static
+	 * @return {Db_Expression} The expression CURRENT_TIMESTAMP
+	 */
+	static function now()
+	{
+		return new Db_Expression("CURRENT_TIMESTAMP");
+	}
 	
 	/**
 	 * Registers the autoloader bundled with Db on the autoload stack.

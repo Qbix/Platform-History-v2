@@ -442,13 +442,13 @@ class Q_Dispatcher
 
 				self::response();
 				
-				// You can calculate some analytics here, and store them somewhere
-				$eventName = 'Q/analytics';
+				// You can gather soe metrics here, and store them somewhere
+				$eventName = 'Q/metrics';
 				self::startSessionBeforeEvent($eventName);
 				if (!isset(self::$skip[$eventName])) {
 					/**
 					 * Gives the app a chance to gather analytics from the request.
-					 * @event Q/analytics
+					 * @event Q/metrics
 					 * @param {array} $routed
 					 */
 					Q::event($eventName, self::$routed, true);
@@ -690,11 +690,11 @@ class Q_Dispatcher
 			self::$skip = $e->skip;
 		} else {
 			// Don't process any non-GET methods this time around,
-			// Do not collect any analytics
+			// Do not collect any metrics
 			// And also ignore any accumulated errors
 			self::$skip = array(
 				'Q/method' => true,
-				'Q/analytics' => true,
+				'Q/metrics' => true,
 				'Q/errors' => true
 			);
 		}

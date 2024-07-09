@@ -117,7 +117,7 @@
 				}
 			}
 		},
-		"analytics": {
+		"metrics": {
 			"gather": false
 		},
 		"response": {
