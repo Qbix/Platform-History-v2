@@ -1752,6 +1752,10 @@ class Q_Utils
 			exec('mklink ' . $pswitch . ' "' . $link . '" "' . $target . '"');
 		}
 
+		if (self::$echoVerbose) {
+			echo "Made symlink $link -> $target" . PHP_EOL;
+		}
+
 		if (!file_exists($link)) {
 			throw new Q_Exception("Link $link to target $target was not created");
 		}
@@ -2096,5 +2100,7 @@ class Q_Utils
 	protected static $urand;
 	protected static $sockets = array();
 	
-	public $nodeUrlRouters = array();
+	public static $nodeUrlRouters = array();
+
+	public static $echoVerbose = false;
 }
