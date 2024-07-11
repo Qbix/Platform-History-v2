@@ -242,7 +242,7 @@ Q.Template.set('Streams/topic/composer',
             <input type="text" name="title" value="{{title}}" class="Streams_topic_composer_form_control" placeholder="{{topic.TitlePlaceholder}}">
         </div>
         <div class="Streams_topic_composer_form_group">
-            <textarea name="description" class="Streams_topic_composer_form_control" placeholder="{{topic.DescribeTopic}}">{{content}}</textarea>
+            <textarea name="description" class="Q_tool Q_autogrow_tool Streams_topic_composer_form_control" placeholder="{{topic.DescribeTopic}}">{{content}}</textarea>
         </div>
         <div class="Streams_topic_composer_form_group" data-type="icon">
             <div class="Streams_topic_composer_container">
