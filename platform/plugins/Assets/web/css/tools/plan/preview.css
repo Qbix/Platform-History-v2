@@ -119,12 +119,12 @@
 	position: relative;
 	margin-top: 10px;
 	white-space: normal;
-	text-align: justify;
+	text-align: left;
 	border-top: 1px solid silver;
 }
 .Assets_plan_preview_tool .Assets_plan_preview_description span {
 	display: block;
-	text-align: justify;
+	text-align: left;
 	border-top: 1px solid silver;
 }
 .Assets_plan_preview_tool .Assets_plan_preview_description[data-state=minimised] span {
