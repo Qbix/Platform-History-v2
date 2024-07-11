@@ -241,6 +241,7 @@ class Q_Bootstrap
 			$plugin = is_numeric($k) ? $v : $k;
 			$plugin_path = Q::realPath('plugins'.DS.$plugin);
 			if (!$plugin_path) {
+				require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Exception'.DS.'MissingPlugin.php');
 				throw new Q_Exception_MissingPlugin(@compact('plugin'));
 			}
 			array_splice($paths, 1, 0, array($plugin_path));

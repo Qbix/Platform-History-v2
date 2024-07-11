@@ -146,6 +146,8 @@ class Q_Plugin
 	 */
 	static function installLocal($base_dir, $name, $type)
 	{
+		Q_Utils::$echoVerbose = true;
+
 		$localField =  $type . 'Local';
 		$infoField = $type . 'Info';
 

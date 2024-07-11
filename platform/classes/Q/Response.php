@@ -1330,8 +1330,8 @@ class Q_Response
 					Q::includeFile($filename);
 				} catch (Exception $e) {}
 				$src_json = json_encode($src, JSON_UNESCAPED_SLASHES);
-				$currentScriptCode = "window.Q && Q.currentScript && (Q.currentScript.src = $src_json);\n\n";
-				$currentScriptEndCode = "\n\nwindow.Q && Q.currentScript && (Q.currentScript.src = null);";
+				$currentScriptCode = "window._Q_currentScript_src = $src_json;\n\n";
+				$currentScriptEndCode = "\n\ndelete window._Q_currentScript_src";
 				$scripts_for_slots[$slot][$src] = ''
 					. $currentScriptCode
 			 		. $ob->getClean()
@@ -2340,7 +2340,7 @@ class Q_Response
 		$code = null;
 		if ($errors = Q_Response::getErrors()) {
 			foreach ($errors as $error) {
-				if ($error->httpResponseCode) {
+				if (!empty($error->httpResponseCode)) {
 					$code = $error->httpResponseCode;
 					http_response_code($code);
 					break;

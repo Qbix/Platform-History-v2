@@ -142,6 +142,7 @@ class Q_Cache
 				}
 			}
 			$store = array();
+			opcache_reset(); // also reset all the files
 			return $store;
 		}
 		if (array_key_exists($key, $store)) {

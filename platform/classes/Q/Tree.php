@@ -509,6 +509,7 @@ class Q_Tree
 		$args2 = array_merge($args, array(null));
 		$result = call_user_func_array(array($this, 'get'), $args2);
 		if (!isset($result)) {
+			require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Exception'.DS.'MissingConfig.php');
 			throw new Q_Exception_MissingConfig(array(
 				'fieldpath' => '"' . implode('"/"', $args) . '"'
 			));

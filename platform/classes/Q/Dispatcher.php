@@ -434,15 +434,8 @@ class Q_Dispatcher
 						return false;
 					}
 				}
-				
-				// When handling all further events, you should probably
-				// refrain from changing server state, and only do reading.
-				// That is because GET in HTTP is not supposed to have side effects
-				// for which the client is responsible.
 
-				self::response();
-				
-				// You can gather soe metrics here, and store them somewhere
+				// You can gather some metrics here, and store them somewhere
 				$eventName = 'Q/metrics';
 				self::startSessionBeforeEvent($eventName);
 				if (!isset(self::$skip[$eventName])) {
@@ -453,6 +446,13 @@ class Q_Dispatcher
 					 */
 					Q::event($eventName, self::$routed, true);
 				}
+				
+				// When handling all further events, you should probably
+				// refrain from changing server state, and only do reading.
+				// That is because GET in HTTP is not supposed to have side effects
+				// for which the client is responsible.
+
+				self::response();
 
 				return true;
 			} catch (Q_Exception_DispatcherForward $e) {
