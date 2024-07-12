@@ -1004,12 +1004,30 @@ Elp.restoreSelections = function (deep) {
  * Check whether this Element comes before another one, in a certain context
  * @method isBefore
  * @param {Element} element
- * @param {Element} context optional containing element, defaults ot the document element
+ * @param {Element} context The method finds and traverses their mutual parent.
+ *   If you know the mutual parent element, you can pass it here directly.
  * @return {boolean}
  */
 Elp.isBefore = function (element, context) {
 	var before = true, that = this;
-	context = context || document.documentElement; // TODO: can triangulate a parentElement instead
+	if (!context) {
+		var a = this;
+		while (a) {
+			a = a.parentNode;
+			var b = element;
+			while (b) {
+				b = b.parentNode;
+				if (a === b) {
+					context = b;
+					break;
+				}
+			}
+			if (context) {
+				break;
+			}
+		}
+	}
+	context = context || this.parentNode;
 	Q.find(context, null, function (elem) {
 		if (elem === element) {
 			before = false;
