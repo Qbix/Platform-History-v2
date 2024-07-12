@@ -159,6 +159,15 @@ Q.Tool.jQuery('Q/sortable', function _Q_sortable(options) {
 		Q.Pointer.cancelClick(true, event, {
 			comingFromSortable: true
 		});
+	
+		Q.addEventListener(document.body, Q.Pointer.end, _complete);
+		Q.addEventListener(document.body, Q.Pointer.cancel, _complete);
+
+		function _complete() {
+			Q.removeEventListener(document.body, Q.Pointer.end, _complete);
+			Q.removeEventListener(document.body, Q.Pointer.cancel, _complete);
+			complete(true);
+		}
 
 		if (Q.Pointer.touchCount(event) !== 1) return;
 
