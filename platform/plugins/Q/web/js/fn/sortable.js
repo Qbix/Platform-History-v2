@@ -460,18 +460,20 @@ Q.Tool.jQuery('Q/sortable', function _Q_sortable(options) {
 					beyond = (y > $t.offset().top + $t.height());
 				}
 			}
-			var $w = $(window);
-			if (x - document.body.scrollLeft < $w.innerWidth() * state.scroll.distanceWindow) {
-				dx = -speed; isWindow = true;
-			}
-			if (x - document.body.scrollLeft > $w.innerWidth() * (1 - state.scroll.distanceWindow)) {
-				dx = speed; isWindow = true;
-			}
-			if (y - document.body.scrollTop < $w.innerHeight() * state.scroll.distanceWindow) {
-				dy = -speed; isWindow = true;
-			}
-			if (y - document.body.scrollTop > $w.innerHeight() * (1 - state.scroll.distanceWindow)) {
-				dy = speed; isWindow = true;
+			if (!dx && !dy) {
+				var $w = $(window);
+				if (x - document.body.scrollLeft < $w.innerWidth() * state.scroll.distanceWindow) {
+					dx = -speed; isWindow = true;
+				}
+				if (x - document.body.scrollLeft > $w.innerWidth() * (1 - state.scroll.distanceWindow)) {
+					dx = speed; isWindow = true;
+				}
+				if (y - document.body.scrollTop < $w.innerHeight() * state.scroll.distanceWindow) {
+					dy = -speed; isWindow = true;
+				}
+				if (y - document.body.scrollTop > $w.innerHeight() * (1 - state.scroll.distanceWindow)) {
+					dy = speed; isWindow = true;
+				}
 			}
 			if (dx || dy) {
 				$scrolling = $t;
