@@ -110,7 +110,8 @@ Q.Tool.define("Assets/subscription", function (options) {
 			relationType: "Assets/plan",
 			creatable: {
 				'Assets/plan': {title: tool.text.subscriptions.plan.NewPlan}
-			}
+			},
+			sortable: true
 		}).activate();
 	}
 });

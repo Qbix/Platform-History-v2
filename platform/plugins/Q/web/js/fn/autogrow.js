@@ -192,14 +192,19 @@ function _Q_autogrow(o) {
 				(newWidth < currentWidth && newWidth >= minWidth) || (newWidth > minWidth)
 			);
 
+			$container = input.parent('.Q_placeholders_container');
+
 			// Animate width
 			if (isValidWidthChange) {
-				input.add(input.parent('.Q_placeholders_container')).width(newWidth);
+				input.add($container).width(newWidth);
 				Q.handle(o.onResize, $t, [newWidth]);
 			} else if (input.width() < minWidth) {
-				input.add(input.parent('.Q_placeholders_container')).width(minWidth);
+				input.add($container).width(minWidth);
 			}
-
+			$container.css({
+				width: $this.css('width'),
+				height: $this.css('height')
+			});
 		};
 
 		$(this).off(possibleEvents).on(possibleEvents, updateWidth);

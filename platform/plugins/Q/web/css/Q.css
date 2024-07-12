@@ -508,6 +508,7 @@ box-shadow:0 0 10px #000; }
 .Q_rating_tool div.Q_rating_star * { position: absolute; top: 0; right: 0; }
 .Q_rating_tool div.Q_rating_star_occlusion { width: 0; overflow: hidden; }
 .Q_paging_tool { text-align: center; }
+.Q_autogrow_container .Q_placeholders_container { width: 100 !important; }
 .Q_placeholders_container,
 .Q_placeholder { display: inline-block; color: #999; font-style: italic; zoom: 1; }
 .Q_placeholders_container input,
