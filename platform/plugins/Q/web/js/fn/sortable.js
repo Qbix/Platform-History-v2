@@ -69,7 +69,9 @@ Q.Tool.jQuery('Q/sortable', function _Q_sortable(options) {
 
 	state.onCancelClickEventKey = Q.Pointer.onCancelClick.set(
 	function (event, extraInfo) {
-		if (!extraInfo || !extraInfo.comingFromSortable) {
+		if (!extraInfo || !(
+			extraInfo.comingFromSortable || extraInfo.comingFromScroll
+		)) {
 			complete(true);
 		}
 		if (tLift) {

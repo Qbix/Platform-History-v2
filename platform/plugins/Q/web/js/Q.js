@@ -14616,7 +14616,9 @@ function _handleScroll(event) {
 	setTimeout(_setRecentlyScrolledFalse, 100);
 	var shouldStopCancelClick = !Q.Pointer.movedTooMuchForClickLastTime
 		&& !Q.Pointer.startedWhileRecentlyScrolled;
-	Q.Pointer.cancelClick(true, null, null, shouldStopCancelClick ? 300 : 0);
+	Q.Pointer.cancelClick(true, null, {
+		comingFromScroll: true
+	}, shouldStopCancelClick ? 300 : 0);
 }
 
 function _stopHint(img, container) {
