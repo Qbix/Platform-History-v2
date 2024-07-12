@@ -70,7 +70,9 @@ Q.Tool.jQuery('Q/sortable', function _Q_sortable(options) {
 	state.onCancelClickEventKey = Q.Pointer.onCancelClick.set(
 	function (event, extraInfo) {
 		if (!extraInfo || !(
-			extraInfo.comingFromSortable || extraInfo.comingFromScroll
+			extraInfo.comingFromSortable
+			|| extraInfo.comingFromScroll
+			|| extraInfo.comingFromPointerMovement
 		)) {
 			complete(true);
 		}
@@ -154,7 +156,7 @@ Q.Tool.jQuery('Q/sortable', function _Q_sortable(options) {
 			return;
 		}
 
-		Q.Pointer.cancelClick(false, event, {
+		Q.Pointer.cancelClick(true, event, {
 			comingFromSortable: true
 		});
 
