@@ -15,6 +15,7 @@
  * @param {Number} [options.zIndex=999999] CSS z-index for sortable elements
  * @param {Number} [options.draggedOpacity=0.8] Element Drag effect opacity
  * @param {Number} [options.placeholderOpacity=0.1] Opacity for elements placeholder
+ * @param {Number} [options.buffer=1] Number of pixels the user needs to drag into a target from its edge
  * @param {Object} [options.lift] parameters object for vertical movement
  *   @param {Number} [options.lift.delay=300] movement delay in milliseconds
  *   @param {Number} [options.lift.delayTouchscreen=300] movement delay for touchscreens in milliseconds
@@ -28,7 +29,7 @@
  *   @param {Number} [options.scroll.distance=1.5] Scrolling distance
  *   @param {Number} [options.scroll.distanceWindow=0.1] distance to block corner
  *   @param {Number} [options.scroll.speed=30] Element horizontal movement , scrolling speed
- *   @param {Number} [options.scroll.acceleration=0.1] Movement Step value
+ *   @param {Number} [options.scroll.acceleration=0.2] Movement Step value
  * @param {Object} [options.drop] object for dropping effect options
  *   @param {Number} [options.drop.duration] Duration of dropping effect
  *   @default 300
@@ -560,37 +561,60 @@ Q.Tool.jQuery('Q/sortable', function _Q_sortable(options) {
 			return;
 		}
 		var direction;
-		var $n = $target.next(), $p = $target.prev();
-		while ($n.length && !$n.is(':visible')) {
-			$n = $n.next();
-		}
-		while ($p.length && !$p.is(':visible')) {
-			$p = $p.prev();
-		}
-		var tw = $target.width(),
-			th = $target.height(),
-			toff = $target.offset(),
-			nh = $n.height(),
-			noff = $n.offset(),
-			ph = $p.height(),
-			poff = $p.offset();
-		var condition = ((poff && poff.top + ph <= toff.top) || (noff && toff.top + th <= noff.top))
-			? (y < toff.top + th/2)
-			: (x < toff.left + tw/2);
+		// var $n = $target.next(), $p = $target.prev();
+		// while ($n.length && !$n.is(':visible')) {
+		// 	$n = $n.next();
+		// }
+		// while ($p.length && !$p.is(':visible')) {
+		// 	$p = $p.prev();
+		// }
+		// var tw = $target.width(),
+		// 	th = $target.height(),
+		// 	toff = $target.offset(),
+		// 	nh = $n.height(),
+		// 	noff = $n.offset(),
+		// 	ph = $p.height(),
+		// 	poff = $p.offset();
+		// var condition = ((poff && poff.top + ph <= toff.top) || (noff && toff.top + th <= noff.top))
+		// 	? (y < toff.top + th/2)
+		// 	: (x < toff.left + tw/2);
+
+		var tr = $target[0].getBoundingClientRect();
+		var pr = $placeholder[0].getBoundingClientRect()
+		var isBefore = $target[0].isBefore($placeholder[0]);
+		var intersectVertically = (tr.bottom >= pr.top && pr.bottom >= tr.top);
+		// assume items are laid out in horizontal rows that wrap around
+		var mw = Math.min(pr.width, tr.width);
+		var mh = Math.min(pr.height, tr.height);
+		var buffer = state.buffer || 0;
+		var condition = isBefore ? (
+			intersectVertically
+				? x < tr.left + mw - buffer
+				: y < tr.top + mh - buffer
+		) : (
+			intersectVertically
+				? x > tr.right - mw + buffer
+				: y > tr.bottom - mh + buffer
+		);
+		var switched = false;
 		if (condition) {
-			$target.before($placeholder);
-			direction = 'before';
-		} else {
-			$target.after($placeholder);
-			direction = 'after';
+			if (isBefore) {
+				$placeholder.insertBefore($target);
+				direction = 'before';
+			} else {
+				$placeholder.insertAfter($target);
+				direction = 'after';
+			}
+			switched = data.$prevTarget;
+			data.$prevTarget = $target;
 		}
-		data.$prevTarget = $target;
 		Q.handle(state.onIndicate, $this, [$item, {
 			$target: $target,
 			direction: direction,
 			$placeholder: $placeholder,
 			$dragged: data.$dragged,
-			$scrolling: $scrolling
+			$scrolling: $scrolling,
+			switched: switched
 		}]);
 	}
 
@@ -630,6 +654,7 @@ Q.Tool.jQuery('Q/sortable', function _Q_sortable(options) {
 	zIndex: 999999,
 	draggedOpacity: 0.8,
 	placeholderOpacity: 0.1,
+	buffer: 1,
 	lift: {
 		delay: 300,
 		delayTouchscreen: 300,

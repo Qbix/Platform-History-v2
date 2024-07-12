@@ -1010,7 +1010,7 @@ Elp.restoreSelections = function (deep) {
  */
 Elp.isBefore = function (element, context) {
 	var before = true, that = this;
-	if (!context) {
+	if (!(context instanceof Element)) {
 		var a = this;
 		while (a) {
 			a = a.parentNode;
@@ -1027,7 +1027,6 @@ Elp.isBefore = function (element, context) {
 			}
 		}
 	}
-	context = context || this.parentNode;
 	Q.find(context, null, function (elem) {
 		if (elem === element) {
 			before = false;
