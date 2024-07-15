@@ -88,7 +88,7 @@ Text.set = function (name, content, options) {
 /**
  * Synchronously loads data from text file and parse to JSON
  * @method get
- * @param {String} name The name of the file to load, e.g. "Streams/content".
+ * @param {Strin|Arrayg} name The name of the file to load, e.g. "Streams/content".
  * @param {Object} [options]
  * @param {String} [options.language=Q.Text.language] Preferred language, e.g. "en"
  * @param {String} [options.locale=Q.Text.locale] Preferred locale, e.g. "US"
@@ -96,6 +96,13 @@ Text.set = function (name, content, options) {
  * @return {Object} the object containing text tree data
  */
 Text.get = function (name, options) {
+	if (Q.isArrayLike(name)) {
+		var tree = new Q.Tree();
+		name.filter(onlyUnique).forEach(function (item) {
+			tree.merge(Text.get(text, options));
+		});
+		return tree.getAll();
+	}
 	var o = options || {};
 	var language, locale;
 	language = o.language || Text.language;
