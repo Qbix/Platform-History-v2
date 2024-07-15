@@ -39,6 +39,7 @@ Base.tableClasses = [
 	"Users_Permission",
 	"Users_Quota",
 	"Users_Session",
+	"Users_Setting",
 	"Users_Total",
 	"Users_User",
 	"Users_Vote",
@@ -148,6 +149,13 @@ Base.Quota = Q.require('Users/Quota');
  * @type Users.Session
  */
 Base.Session = Q.require('Users/Session');
+
+/**
+ * Link to Users.Setting model
+ * @property Setting
+ * @type Users.Setting
+ */
+Base.Setting = Q.require('Users/Setting');
 
 /**
  * Link to Users.Total model

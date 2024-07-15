@@ -1,5 +1,5 @@
 ALTER TABLE {{prefix}}access
-ADD COLUMN `ofParticipantRole` VARCHAR(63) NOT NULL DEFAULT "" AFTER `ofContactLabel`,
+ADD COLUMN `ofParticipantRole` VARBINARY(255) NOT NULL DEFAULT "" AFTER `ofContactLabel`,
 DROP PRIMARY KEY,
 ADD PRIMARY KEY (`publisherId`,`streamName`,`ofUserId`,`ofContactLabel`,`ofParticipantRole`),
 ADD INDEX `participant` (`ofParticipantRole`);

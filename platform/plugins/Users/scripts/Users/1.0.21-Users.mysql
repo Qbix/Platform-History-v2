@@ -1,0 +1,8 @@
+CREATE TABLE `{{prefix}}setting` (
+  `userId` varbinary(31) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `content` varchar(255) DEFAULT NULL,
+  `insertedTime` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedTime` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`userId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

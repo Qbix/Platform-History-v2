@@ -32,11 +32,12 @@ abstract class Base_Users
   9 => 'Users_Permission',
   10 => 'Users_Quota',
   11 => 'Users_Session',
-  12 => 'Users_Total',
-  13 => 'Users_User',
-  14 => 'Users_Vote',
-  15 => 'Users_Web3',
-  16 => 'Users_Web3Transaction',
+  12 => 'Users_Setting',
+  13 => 'Users_Total',
+  14 => 'Users_User',
+  15 => 'Users_Vote',
+  16 => 'Users_Web3',
+  17 => 'Users_Web3Transaction',
 );
 
 	/**
