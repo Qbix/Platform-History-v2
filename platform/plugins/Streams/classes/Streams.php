@@ -115,11 +115,18 @@ abstract class Streams extends Base_Streams
 	 * @default 13
 	 * @final
 	 */
-	/**
-	 * Can suggest actions, but manager must approve
+/**
+	 * Can privately suggest actions for stream managers to consider
 	 * @property $WRITE_LEVEL['suggest']
 	 * @type integer
-	 * @default 15
+	 * @default 14
+	 * @final
+	 */
+	/**
+	 * Can send ephemeral payloads to the stream to be broadcast
+	 * @property $WRITE_LEVEL['ephemeral']
+	 * @type integer
+	 * @default 16
 	 * @final
 	 */
 	/**
@@ -127,13 +134,6 @@ abstract class Streams extends Base_Streams
 	 * @property $WRITE_LEVEL['contribute']
 	 * @type integer
 	 * @default 18
-	 * @final
-	 */
-	/**
-	 * Can send ephemeral payloads to the stream to be broadcast
-	 * @property $WRITE_LEVEL['ephemeral']
-	 * @type integer
-	 * @default 19
 	 * @final
 	 */
 	/**
@@ -190,7 +190,9 @@ abstract class Streams extends Base_Streams
 		'none' => 0,
 		'join' => 10,
 		'vote' => 13,
-		'contribute' => 18,		
+		'suggest' => 14,	
+		'ephemeral' => 16,
+		'contribute' => 18,	
 		'post' => 20,
 		'relate' => 23,
 		'relations' => 25,
