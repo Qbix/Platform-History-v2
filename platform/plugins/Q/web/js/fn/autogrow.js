@@ -202,8 +202,8 @@ function _Q_autogrow(o) {
 				input.add($container).width(minWidth);
 			}
 			$container.css({
-				width: $this.css('width'),
-				height: $this.css('height')
+				width: input.css('width'),
+				height: input.css('height')
 			});
 		};
 
