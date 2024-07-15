@@ -102,7 +102,7 @@ Text.get = function (name, options) {
 		}
 		var tree = new Q.Tree();
 		name.filter(onlyUnique).forEach(function (item) {
-			tree.merge(Text.get(name, options));
+			tree.merge(Text.get(item, options));
 		});
 		return tree.getAll();
 	}
