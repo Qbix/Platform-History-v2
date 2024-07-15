@@ -97,6 +97,9 @@ Text.set = function (name, content, options) {
  */
 Text.get = function (name, options) {
 	if (Q.isArrayLike(name)) {
+		function onlyUnique(value, index, array) {
+			return array.indexOf(value) === index;
+		}
 		var tree = new Q.Tree();
 		name.filter(onlyUnique).forEach(function (item) {
 			tree.merge(Text.get(text, options));
