@@ -15575,8 +15575,8 @@ Aup.recorderInit = function (options) {
 
 	// load recorder
 	Q.addScript("{{Q}}/js/audioRecorder/recorder.js", function(){
-	//new Recorder({leaveStreamOpen: true, encoderPath: Q.url("{{Q}}/js/audioRecorder/encoderWorker.min.js")}); - ogg format encoder
-		tool.recorder = tool.recorder || new Recorder({leaveStreamOpen: true, encoderPath: Q.url("{{Q}}/js/audioRecorder/recorderWorkerMP3.js")}); // mp3 format encoder
+		tool.recorder = tool.recorder || new Recorder({leaveStreamOpen: true, encoderPath: Q.url("{{Q}}/js/audioRecorder/encoderWorker.js")}); // ogg format encoder
+		//tool.recorder = tool.recorder || new Recorder({leaveStreamOpen: true, encoderPath: Q.url("{{Q}}/js/audioRecorder/recorderWorkerMP3.js")}); // mp3 format encoder
 
 		tool.recorder.addEventListener("streamReady", function(e){
 			if (typeof options.onStreamReady === "function") options.onStreamReady.call();
