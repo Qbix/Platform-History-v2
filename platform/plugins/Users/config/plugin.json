@@ -431,10 +431,11 @@
 			"chains": {
 				"0x1": {
 					"name": "Ethereum Mainnet",
-					"publicRPC": "https://main-light.eth.linkpool.io/",
-					"publicWebsocket": "wss://main-light.eth.linkpool.io/ws",
+					"publicRPC": "https://ethereum-rpc.publicnode.com",
+					"publicWebsocket": "wss://ethereum-rpc.publicnode.com",
 					"blockExplorerUrl": "https://etherscan.io/",
 					"rpcUrl": "https://mainnet.infura.io/v3/{{infuraId}}",
+					"websocketUrl": "wss://mainnet.infura.io/ws/v3/{{infuraId}}",
 					"abiUrl": "https://api.etherscan.io/api?module=contract&action=getabi&address={{contractAddress}}",
 					"currency": {
 						"name": "Ethereum",
@@ -442,15 +443,14 @@
 						"decimals": 18
 					}
 				},
-				"0x3": {
-					"name": "Ropsten"
-				},
-				"0x5": {
-					"name": "Goerli",
-					"publicRPC": "https://goerli-light.eth.linkpool.io/",
-					"publicWebsocket": "wss://goerli-light.eth.linkpool.io/ws",
+				"0xa": {
+					"name": "Optimism",
+					"publicRPC": "https://optimism-rpc.publicnode.com",
+					"publicWebsocket": "wss://optimism-rpc.publicnode.com",
+					"blockExplorerUrl": "https://optimistic.etherscan.io/",
+					"rpcUrl": "https://optimism-mainnet.infura.io/v3/{{infuraId}}",
 					"currency": {
-						"name": "Goerli Ethereum",
+						"name": "Op Ethereum",
 						"symbol": "ETH",
 						"decimals": 18
 					}
@@ -475,13 +475,13 @@
 					"blockExplorerUrl": "https://testnet.bscscan.com",
 					"abiUrl": "https://api-testnet.bscscan.com/api?module=contract&action=getabi&address={{contractAddress}}",
 					"currency": {
-						"name": "Binance Coin",
+						"name": "Binance Testnet Coin",
 						"symbol": "BNB",
 						"decimals": 18
 					}
 				},
 				"0x89": {
-					"name": "Polygon Mainnet",
+					"name": "Polygon PoS Mainnet",
 					"publicRPC": "https://polygon-rpc.com/",
 					"rpcUrl": "https://polygon-rpc.com/",
 					"blockExplorerUrl": "https://polygonscan.com/",
@@ -492,6 +492,76 @@
 						"decimals": 18
 					}
 				},
+				"0xee": {
+					"name": "Blast",
+					"publicRPC": "https://rpc.blastblockchain.com",
+					"blockExplorerUrl": "https://blastscan.io/",
+					"rpcUrl": "https://blast-mainnet.infura.io/v3/{{infuraId}}",
+					"currency": {
+						"name": "Blast Ethereum",
+						"symbol": "ETH",
+						"decimals": 18
+					}
+				},
+				"0x12c": {
+					"name": "zkSync Sepolia Testnet",
+					"publicRPC": "https://ethereum-rpc.publicnode.com",
+					"publicWebsocket": "wss://zksync-sepolia.drpc.org",
+					"blockExplorerUrl": "https://sepolia.etherscan.io/",
+					"rpcUrl": "https://sepolia.infura.io/v3/{{infuraId}}",
+					"websocketUrl": "wss://sepolia.infura.io/ws/v3/{{infuraId}}",
+					"currency": {
+						"name": "zkSync Ethereum",
+						"symbol": "ETH",
+						"decimals": 18
+					}
+				},
+				"0x44d": {
+					"name": "Polygon zkEVM",
+					"publicRPC": "https://zkevm-rpc.com",
+					"publicWebsocket": "wss://polygon-zkevm.drpc.org",
+					"blockExplorerUrl": "https://zkevm.polygonscan.com/",
+					"currency": {
+						"name": "zkEVM ETH",
+						"symbol": "ETH",
+						"decimals": 18
+					}
+				},
+				"0xafa": {
+					"name": "Holesky Testnet",
+					"publicRPC": "https://rpc-holesky.morphl2.io",
+					"publicWebsocket": "wss://rpc-quicknode-holesky.morphl2.io",
+					"blockExplorerUrl": "https://holesky.etherscan.io/",
+					"rpcUrl": "https://holesky.infura.io/v3/{{infuraId}}",
+					"currency": {
+						"name": "Holesky Ethereum",
+						"symbol": "ETH",
+						"decimals": 18
+					}
+				},
+				"0x2105": {
+					"name": "Base",
+					"publicRPC": "https://base-rpc.publicnode.com",
+					"publicWebsocket": "wss://base-rpc.publicnode.com",
+					"blockExplorerUrl": "https://basescan.org/",
+					"rpcUrl": "https://base-mainnet.infura.io/v3/{{infuraId}}",
+					"currency": {
+						"name": "Base Ethereum",
+						"symbol": "ETH",
+						"decimals": 18
+					}
+				},
+				"0xe708": {
+					"name": "Linea",
+					"publicRPC": "https://linea.decubate.com",
+					"blockExplorerUrl": "https://lineascan.build/",
+					"rpcUrl": "https://linea-mainnet.infura.io/v3/{{infuraId}}",
+					"currency": {
+						"name": "Linea Ethereum",
+						"symbol": "ETH",
+						"decimals": 18
+					}
+				},
 				"0x13881": {
 					"name": "Polygon MUMBAI",
 					"publicRPC": "https://rpc-mumbai.maticvigil.com",
@@ -499,7 +569,18 @@
 					"blockExplorerUrl": "https://mumbai.polygonscan.com/",
 					"abiUrl": "https://api-testnet.polygonscan.com/api?module=contract&action=getabi&address={{contractAddress}}",
 					"currency": {
-						"name": "MATIC",
+						"name": "Mumbai MATIC",
+						"symbol": "MATIC",
+						"decimals": 18
+					}
+				},
+				"0x13882": {
+					"name": "Polygon Amoy",
+					"publicRPC": "https://polygon-amoy-bor-rpc.publicnode.com",
+					"rpcUrl": "https://polygon-amoy-bor-rpc.publicnode.com",
+					"blockExplorerUrl": "https://amoy.polygonscan.com/",
+					"currency": {
+						"name": "Amoy MATIC",
 						"symbol": "MATIC",
 						"decimals": 18
 					}
