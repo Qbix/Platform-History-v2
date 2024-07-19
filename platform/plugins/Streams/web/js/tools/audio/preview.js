@@ -22,7 +22,6 @@
 			tool.preview = preview;
 			var ps = preview.state;
 			var state = this.state;
-
 			// if false added tab "Edit" to composer where user can edit stream
 			state.isComposer = true;
 
@@ -542,8 +541,16 @@
 						$(".Q_tabbing_tabs .Q_tabbing_tab", mainDialog).on(Q.Pointer.fastclick, _selectTab);
 
 						// Reset button
+						if(tool.state.showResetButton) {
+							$("button[name=reset]").css("display", "inline-block");
+							$("button[name=reset]").css("margin-right", "5px");
+							$(".Streams_audio_composer_submit").css("display", "flex");
+							$(".Streams_audio_composer_submit").css("flex-direction", "row-reverse");
+						}
+
 						$("button[name=reset]", mainDialog).on(Q.Pointer.click, function (e) {
 							state.dataBlob = undefined;
+							state.recorder && state.recorder.recorderStateChange("clear");
 							state.recorder && state.recorder.recorderStateChange("init");
 
 							Q.each($(".Q_tabbing_container [data-content=link], .Q_tabbing_container [data-content=upload]", mainDialog), function (i, content) {
