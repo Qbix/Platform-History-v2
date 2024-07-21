@@ -135,13 +135,14 @@ Q.Tool.define("Q/columns", function(options) {
 	flat: false,
 	animation: { 
 		duration: 300, // milliseconds
+		scrollDuration: 300, //milliseconds
 		css: {
 			hide: {
 				opacity: 0.1, 
 				top: '40%',
 				height: '0'
 			}
-		},
+		}
 	},
 	delay: {
 		duration: 300 // until it's safe to register clicks
@@ -677,9 +678,13 @@ Q.Tool.define("Q/columns", function(options) {
 						: $te;
 					$toScroll.each(function () {
 						var $this = $(this);
-						$this.animate({
-							scrollLeft: this.scrollWidth
-						});
+						if (options.animate.scrollDuration) {
+							$this.animate({
+								scrollLeft: this.scrollWidth
+							}, options.animate.scrollDuration);
+						} else {
+							$this.scrollLeft(this.scrollWidth);
+						}
 						if ($this.css('overflow') !== 'visible') {
 							return false;
 						}
@@ -1231,8 +1236,9 @@ Q.invoke.handlers.unshift(function (options, methods) {
 		node = node.parentNode;
 	}
 	if (columns) {
-		columns.close({min: index+1}, null, {animation: {duration: 0}});
+		var closed = columns.close({min: index+1}, null, {animation: {duration: 0}});
 		columns.push(Q.extend({}, options, {
+			animate: closed ? { scrollDuration: 0 } : {},
 			column: options.content,
 			onActivate: options.onActivate || function () {}
 		}));
