@@ -678,10 +678,10 @@ Q.Tool.define("Q/columns", function(options) {
 						: $te;
 					$toScroll.each(function () {
 						var $this = $(this);
-						if (options.animate.scrollDuration) {
+						if (options.animation.scrollDuration) {
 							$this.animate({
 								scrollLeft: this.scrollWidth
-							}, options.animate.scrollDuration);
+							}, options.animation.scrollDuration);
 						} else {
 							$this.scrollLeft(this.scrollWidth);
 						}
@@ -1238,7 +1238,7 @@ Q.invoke.handlers.unshift(function (options, methods) {
 	if (columns) {
 		var closed = columns.close({min: index+1}, null, {animation: {duration: 0}});
 		columns.push(Q.extend({}, options, {
-			animate: closed ? { scrollDuration: 0 } : {},
+			animation: closed ? { scrollDuration: 0 } : {},
 			column: options.content,
 			onActivate: options.onActivate || function () {}
 		}));
