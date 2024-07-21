@@ -449,6 +449,7 @@ function _continue(tool, callback) {
 		}, tool);
 		if (!stream.testReadLevel('participants')) {
 			state.showSummary = false;
+			tool.stateChanged('count');
 		}
 		var si = state.invite;
 		if (!si || !stream.testAdminLevel('invite')) {
