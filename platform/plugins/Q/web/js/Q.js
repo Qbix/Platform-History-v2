@@ -15024,6 +15024,7 @@ Q.Dialogs = {
 				title = dialog.querySelector('.Q_title_slot');
 				contentElement = dialog.querySelector('.Q_dialog_slot');
 			}
+			contentElement.addClass('.Q_content_container');
 			var $dialog = $(dialog);
 			if (o.title) {
 				if (typeof o.title === 'string') {

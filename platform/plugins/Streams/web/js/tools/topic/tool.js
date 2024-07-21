@@ -117,7 +117,7 @@ Q.Tool.define("Streams/topic", function(options) {
 						className: "Streams_topic_" + Q.normalize(streamType),
 						trigger: tool.element,
 						onActivate: function (div) {
-							$("<div>").appendTo($(".Q_column_slot", div)).tool(toolName, toolOptions).activate();
+							$("<div>").appendTo($(".Q_content_container", div)).tool(toolName, toolOptions).activate();
 						}
 					});
 				});
@@ -146,7 +146,7 @@ Q.Tool.define("Streams/topic", function(options) {
 							className: "Streams_topic_metrics",
 							trigger: tool.element,
 							onActivate: function (div) {
-								$("<div>").appendTo($(".Q_column_slot", div)).tool("Streams/metrics", {
+								$("<div>").appendTo($(".Q_content_container", div)).tool("Streams/metrics", {
 									publisherId: streamsPreviewTool.state.publisherId,
 									streamName: streamsPreviewTool.state.streamName
 								}).activate();

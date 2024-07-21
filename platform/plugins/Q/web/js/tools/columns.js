@@ -325,6 +325,7 @@ Q.Tool.define("Q/columns", function(options) {
 			controlsSlot = $('.Q_controls_slot', div)[0];
 			$div.attr('data-title', $(titleSlot).text() || document.title);
 		}
+		columnSlot.addClass('Q_content_container');
 		if (state.closeFromSwipeDown && index > 0) {
 			Q.addEventListener($title[0], 'touchstart', function (e1) {
 				var x1 = Q.Pointer.getX(e1);
