@@ -99,6 +99,7 @@ function _Streams_default_preview(options, preview) {
 		var fields = Q.extend({}, state.templates[mode].fields, f, {
 			alt: 'icon',
 			title: stream.fields.title,
+			title: stream.fields.title.encodeHTML(),
 			inplace: inplace
 		});
 		var tpl = (ps.editable !== false && editable) ? 'edit' : 'view';
@@ -147,7 +148,7 @@ Q.Template.set('Streams/default/preview/view',
 	'<div class="Streams_preview_container Streams_preview_view Q_clearfix">'
 	+ '<img alt="{{alt}}" class="Streams_preview_icon Q_square" src="">'
 	+ '<div class="Streams_preview_contents {{titleClass}}">'
-	+ '<{{titleTag}} class="Streams_preview_title Streams_preview_view">{{title}}</{{titleTag}}>'
+	+ '<{{titleTag}} class="Streams_preview_title Streams_preview_view">{{{titleEncoded}}}</{{titleTag}}>'
 	+ '</div></div>'
 );
 
