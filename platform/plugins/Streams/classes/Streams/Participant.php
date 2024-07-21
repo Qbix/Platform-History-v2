@@ -149,7 +149,7 @@ class Streams_Participant extends Base_Streams_Participant
 	 * @return {boolean} whether the user has all the roles
 	 */
 	function testRoles ($roles) {
-		$extraRoles = $this->getExtra('role');
+		$extraRoles = $this->getExtra('role', array());
 		if (empty($extraRoles) || empty($roles)) {
 			return false;
 		}
@@ -178,7 +178,7 @@ class Streams_Participant extends Base_Streams_Participant
 		if (empty($roles)) {
 			return $this;
 		}
-		$extraRoles = $this->getExtra('role');
+		$extraRoles = $this->getExtra('role', array());
 		if (is_string($roles)) {
 			$roles = array($roles);
 		}
@@ -201,7 +201,7 @@ class Streams_Participant extends Base_Streams_Participant
 	 * @return Streams_Participant
 	 */
 	function revokeRoles($roles) {
-		$extraRoles = $this->getExtra('role');
+		$extraRoles = $this->getExtra('role', array());
 		if (empty($extraRoles) || empty($roles)) {
 			return $this;
 		}
