@@ -99,7 +99,7 @@ function _Streams_default_preview(options, preview) {
 		var fields = Q.extend({}, state.templates[mode].fields, f, {
 			alt: 'icon',
 			title: stream.fields.title,
-			title: stream.fields.title.encodeHTML(),
+			titleEncoded: stream.fields.title.encodeHTML(),
 			inplace: inplace
 		});
 		var tpl = (ps.editable !== false && editable) ? 'edit' : 'view';
