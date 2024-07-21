@@ -61,7 +61,6 @@
 .Streams_participants_tool .Streams_participants_container {
 	overflow: hidden;
 	position: relative;
-	margin-right: 10px;
 }
 
 .Streams_participants_tool.Streams_participants_loading.Streams_hideIfNoParticipants,
