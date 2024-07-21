@@ -19,7 +19,7 @@
 .Assets_web3_transfer_tool input[name=amount],
 .Assets_web3_transfer_tool input[name=wallet] {
     width: 100%;
-    font-size: 20px;
+    font-size: 16px;
     vertical-align: middle;
 }
 .Assets_web3_transfer_tool input[name=wallet] {

@@ -397,7 +397,9 @@ button:focus:disabled,
 button.basic16 { background-color: #eee; color: black; }
 .Q_notTouchscreen button.basic16:active { background-color: #ccc; color: black; }
 .Q_button { padding: 0.4em 1em 0.4em 1em; box-sizing: border-box; }
-input { box-sizing: border-box; }
+input { box-sizing: border-box; padding: 5px; }
+input::placeholder { font-style: italic; }
+select { padding: 5px; }
 
 .Q_aspect_who, .Q_aspect_who::before { color: #394ad5; border-color: #394ad5; }
 .Q_aspect_what, .Q_aspect_what::before { color: #bf1118; border-color: #bf1118; }
@@ -1116,5 +1118,16 @@ body.Q_columns_animationFX {
 	.Q_overlay a, .Q_fullscreen_dialog a {
 		color: white;
 		fill: white;
+	}
+	.Q_overlay select,
+	.Q_overlay input,
+	.Q_fullscreen_dialog select,
+	.Q_fullscreen_dialog input {
+		color: white;
+		background-color: rgba(0, 0, 0, 0.2);
+	}
+	.Q_overlay input::placeholder,
+	.Q_fullscreen_dialog input::placeholder {
+		color: rgba(255, 255, 255, 0.5);
 	}
 }
