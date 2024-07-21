@@ -68,7 +68,7 @@ Q.mixin(Base, Row);
  * @property ofParticipantRole
  * @type String|Buffer
  * @default ""
- * 
+ * to grant access to all stream participants with a given participantRole
  */
 /**
  * @property grantedByUserId
@@ -526,7 +526,7 @@ Base.prototype.maxSize_ofParticipantRole = function () {
 	 */
 Base.column_ofParticipantRole = function () {
 
-return [["varbinary","255","",false],false,"PRI",null];
+return [["varbinary","255","",false],false,"PRI",""];
 };
 
 /**
@@ -766,7 +766,7 @@ return [["varchar","255","",false],true,"",null];
  * @throws {Error} If e.g. mandatory field is not set or a bad values are supplied
  */
 Base.prototype.beforeSave = function (value) {
-	var fields = ['publisherId','streamName','ofParticipantRole'], i;
+	var fields = ['publisherId','streamName'], i;
 	if (!this._retrieved) {
 		var table = this.table();
 		for (i=0; i<fields.length; i++) {

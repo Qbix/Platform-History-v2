@@ -59,7 +59,7 @@ abstract class Base_Streams_Access extends Db_Row
 	 * @property $ofParticipantRole
 	 * @type string
 	 * @default ""
-	 * 
+	 * to grant access to all stream participants with a given participantRole
 	 */
 	/**
 	 * @property $grantedByUserId
@@ -592,7 +592,7 @@ return array (
   ),
   1 => false,
   2 => 'PRI',
-  3 => NULL,
+  3 => '',
 );			
 	}
 
@@ -979,7 +979,7 @@ return array (
 	{
 		if (!$this->retrieved) {
 			$table = $this->getTable();
-			foreach (array('publisherId','streamName','ofParticipantRole') as $name) {
+			foreach (array('publisherId','streamName') as $name) {
 				if (!isset($value[$name])) {
 					throw new Exception("the field $table.$name needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
 				}
