@@ -829,3 +829,10 @@
 .basic32_metrics {
 	background-position: 0 -1164px;
 }
+
+
+.Q_overlay.Streams_topic_streams_pdf,
+.Q_overlay.Streams_topic_streams_video {
+	min-width: 90% !important;
+	min-height: 90% !important;
+}

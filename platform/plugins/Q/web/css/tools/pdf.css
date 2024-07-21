@@ -1,7 +1,8 @@
 .Q_pdf_tool {
     position: relative;
     width: 100%;
-    height: 250px;
+    min-height: 250px;
+    height: 100%;
     overflow: auto;
 }
 .Q_column_slot .Q_pdf_tool:only-child {
@@ -114,4 +115,12 @@
 .Q_pdf_tool canvas {
     display: block;
     width: 100%;
+}
+
+.Q_dialog_content > .Q_pdf_tool {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
 }

@@ -226,8 +226,10 @@ html[xmlns] .Q_clearfix { display: block; }
 .Q_forceDisplayNone { display: none !important; }
 
 /* the overlayed element */
-.Q_overlay { background: url(../img/bg/overlay.png); display:none; padding: 0; border: 2px solid #444; z-index: 9000;
- opacity: 1; border-radius: 7px; box-shadow: 0 0 20px #333; }
+.Q_overlay { 
+	background: url(../img/bg/overlay.png); display:none; padding: 0; border: 2px solid #444; z-index: 9000;
+	opacity: 1; border-radius: 7px; box-shadow: 0 0 20px #333; display: flex; flex-direction: column;
+}
 
 .Q_notMobile .Q_overlay { max-width: 500px; }
 .Q_mobile .Q_overlay { max-width: 95%; }
@@ -279,6 +281,8 @@ body.Q_preventScroll {
 .Q_dialog_content {
 	overflow: auto;
 	-webkit-overflow-scrolling: touch;
+	position: relative;
+	flex-grow: 2;
 }
 .Q_alert .Q_dialog_content,
 .Q_confirm .Q_dialog_content,
@@ -1104,7 +1108,7 @@ body.Q_columns_animationFX {
 	min-width: 200px;
 	transition: transform 200ms, opacity 200ms;
 }
-.Q_dialogs_animationFX .Q_overlay_open {
+.Q_dialogs_animationFX .Q_overlay.Q_overlay_open {
 	opacity: 1;
 	transform: scale(1);
 }
