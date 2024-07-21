@@ -718,7 +718,7 @@ Q.Tool.define("Q/columns", function(options) {
 					$div.prev().addClass('Q_columns_overlapped');
 				}
 				$div.addClass('Q_columns_latest');
-				$div.prev().removeClass('Q_columns_latest');
+				$div.prevAll('.Q_columns_column').removeClass('Q_columns_latest');
 			}
 
 			function afterAnimation($cs, $sc, $ct){

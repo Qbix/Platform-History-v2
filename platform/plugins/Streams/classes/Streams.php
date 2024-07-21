@@ -5166,82 +5166,83 @@ abstract class Streams extends Base_Streams
 		$publisherId = $publisherId ?: Users::communityId();
 
 		$stream = Streams_Stream::fetch(null, $publisherId, $streamName);
-		if (!$stream) {
-			$parts = array_map('trim', explode(":", $title));
-			if (sizeof($parts) > 1) {
-				$title = $parts[0].": ".$parts[1];
-			}
-
-			// Check if interest in the list of interests defined in app by file files/Streams/interests/<communityId>/en.json and allow to create this stream for common user
-			// doesn't listed interests can be created by admins
-			$tree = new Q_Tree();
-			$tree->load("files/Streams/interests/".Users::communityId()."/".Q_Text::basename().".json");
-			$interests = $tree->getAll();
-			$arr = Q::ifset($interests, $parts[0], array());
-			$skipAccess = false;
-			foreach ($arr as $section => $list) {
-				$c = isset($section[0]) ? $section[0] : '';
-				if ($c === '@' or $c === '#') {
-					continue;
-				}
-				if (isset($list[$parts[1]])) {
-					$skipAccess = true;
-					break;
-				}
-			}
-			$stream = Streams::create(null, $publisherId, 'Streams/interest', array(
-				'name' => $streamName,
-				'title' => $title,
-				'skipAccess' => $skipAccess
-			));
-			if (is_dir(APP_WEB_DIR.DS."plugins".DS."Streams".DS."img".DS."icons".DS.$streamName)) {
-				$stream->icon = $streamName;
-			} else {
-				// if char colon exists, remove from title colon and all before
-				if (strstr($title, ':')) {
-					$title = preg_replace("/.+:\s*/", '', $title);
-				}
-				$keywords = explode(' ', $title);
-				$data = null;
-				while (sizeof($keywords)) {
-					$subpath = "Streams/interest/".strtolower(implode("_", $keywords));
-					if (is_dir(STREAMS_PLUGIN_FILES_DIR.DS."Streams".DS."icons".DS.$subpath)) {
-						$stream->icon = $subpath;
-						break;
-					}
-
-					try {
-						$data = Q_Image::pixabay(strtolower(implode(" ", $keywords)), array(
-							'orientation' => 'horizontal',
-							'min_width' => '500',
-							'safesearch' => 'true',
-							'image_type' => 'photo'
-						), true);
-					} catch (Exception $e) {
-						Q::log("Exception during Streams/interest post: " . $e->getMessage());
-						$data = null;
-					}
-					if (empty($data)) {
-						array_pop($keywords);
-					} else {
-						break;
-					}
-				}
-				if ($data) {
-					$params = array(
-						'data' => $data,
-						'path' => "{{Streams}}/img/icons",
-						'subpath' => $subpath,
-						'save' => 'Streams/interest',
-						'skipAccess' => true
-					);
-					Q_Image::save($params);
-					$stream->icon = $subpath;
-				}
-			}
-			$stream->save();
+		if ($stream) {
+			return $stream;
 		}
 
+		$parts = array_map('trim', explode(":", $title));
+		if (sizeof($parts) > 1) {
+			$title = $parts[0].": ".$parts[1];
+		}
+
+		// Check if interest in the list of interests defined in app by file files/Streams/interests/<communityId>/en.json and allow to create this stream for common user
+		// doesn't listed interests can be created by admins
+		$tree = new Q_Tree();
+		$tree->load("files/Streams/interests/".Users::communityId()."/".Q_Text::basename().".json");
+		$interests = $tree->getAll();
+		$arr = Q::ifset($interests, $parts[0], array());
+		$skipAccess = false;
+		foreach ($arr as $section => $list) {
+			$c = isset($section[0]) ? $section[0] : '';
+			if ($c === '@' or $c === '#') {
+				continue;
+			}
+			if (isset($list[$parts[1]])) {
+				$skipAccess = true;
+				break;
+			}
+		}
+		$stream = Streams::create(null, $publisherId, 'Streams/interest', array(
+			'name' => $streamName,
+			'title' => $title,
+			'skipAccess' => $skipAccess,
+			'icon' => 'Streams/interest/default'
+		));
+		if (is_dir(APP_WEB_DIR.DS."plugins".DS."Streams".DS."img".DS."icons".DS.$streamName)) {
+			$stream->icon = $streamName;
+		} else {
+			// if char colon exists, remove from title colon and all before
+			if (strstr($title, ':')) {
+				$title = preg_replace("/.+:\s*/", '', $title);
+			}
+			$keywords = explode(' ', $title);
+			$data = null;
+			while (sizeof($keywords)) {
+				$subpath = "Streams/interest/".strtolower(implode("_", $keywords));
+				if (is_dir(STREAMS_PLUGIN_FILES_DIR.DS."Streams".DS."icons".DS.$subpath)) {
+					$stream->icon = $subpath;
+					break;
+				}
+
+				try {
+					$data = Q_Image::pixabay(strtolower(implode(" ", $keywords)), array(
+						'orientation' => 'horizontal',
+						'min_width' => '500',
+						'safesearch' => 'true',
+						'image_type' => 'photo'
+					), true);
+				} catch (Exception $e) {
+					Q::log("Exception during Streams/interest post: " . $e->getMessage());
+					$data = null;
+				}
+				if (!empty($data)) {
+					break;
+				}
+				array_pop($keywords);
+			}
+			if ($data) {
+				$params = array(
+					'data' => $data,
+					'path' => "{{Streams}}/img/icons",
+					'subpath' => $subpath,
+					'save' => 'Streams/interest',
+					'skipAccess' => true
+				);
+				Q_Image::save($params);
+				$stream->icon = $subpath;
+			}
+		}
+		$stream->changed();
 		return $stream;
 	}
 
