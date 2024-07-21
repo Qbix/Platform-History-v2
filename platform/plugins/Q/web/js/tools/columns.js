@@ -669,28 +669,6 @@ Q.Tool.define("Q/columns", function(options) {
 				var $prev = $div.prev();
 				$div.css('z-index', parseInt($prev.css('z-index'))+1 || 1);
 				
-				if (Q.info.isMobile) {
-					$div.add($ct).css('width', '100%');
-				} else {
-					var width = 0;
-					var $toScroll = ($te.css('overflow') === 'visible')
-						? $te.parents()
-						: $te;
-					$toScroll.each(function () {
-						var $this = $(this);
-						if (options.animation.scrollDuration) {
-							$this.animate({
-								scrollLeft: this.scrollWidth
-							}, options.animation.scrollDuration);
-						} else {
-							$this.scrollLeft(this.scrollWidth);
-						}
-						if ($this.css('overflow') !== 'visible') {
-							return false;
-						}
-					});
-				}
-				
 				$div.data(dataKey_lastShow, show)
 					.data(dataKey_opening, true);
 				tool.oldMinHeight = $div.css('min-height');
@@ -724,6 +702,30 @@ Q.Tool.define("Q/columns", function(options) {
 				}
 				$div.addClass('Q_columns_latest');
 				$div.prevAll('.Q_columns_column').removeClass('Q_columns_latest');
+
+				setTimeout(function () {
+					if (Q.info.isMobile) {
+						$div.add($ct).css('width', '100%');
+					} else {
+						var width = 0;
+						var $toScroll = ($te.css('overflow') === 'visible')
+							? $te.parents()
+							: $te;
+						$toScroll.each(function () {
+							var $this = $(this);
+							if (options.animation.scrollDuration) {
+								$this.animate({
+									scrollLeft: this.scrollWidth
+								}, options.animation.scrollDuration);
+							} else {
+								$this.scrollLeft(this.scrollWidth);
+							}
+							if ($this.css('overflow') !== 'visible') {
+								return false;
+							}
+						});
+					}
+				}, 0);
 			}
 
 			function afterAnimation($cs, $sc, $ct){
