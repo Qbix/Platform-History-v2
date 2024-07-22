@@ -4547,7 +4547,7 @@ Q.Exception = function (message, fields) {
 	this.message = message || "";
 };
 
-Q.Exception.prototype = Error;
+Q.Exception.prototype = Error.prototype;
 
 /**
  * The root mixin added to all tools.
@@ -10750,8 +10750,8 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 		}
 		if (!Q.isEmpty(err)) {
 			e = Q.firstErrorMessage(err);
-			_reject && _reject(e);
-			return Q.handle(onError, this, [e]);
+			_reject && _reject(err);
+			return Q.handle(onError, this, [err]);
 		}
 		// if (Q.isEmpty(response)) {
 		// 	e = "Response is empty";
@@ -15190,6 +15190,7 @@ Q.Dialogs.push.options = {
 * @return {HTMLElement} The HTML element of the dialog that was just pushed.
  */
 Q.alert = function(message, options) {
+	message = String(message);
 	if (options === undefined) options = {};
 	if (options.title === undefined) {
 		options.title = Q.alert.options.title;
