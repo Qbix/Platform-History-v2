@@ -1945,18 +1945,18 @@ class Q_Response
 
 	/**
 	 * Used mostly internally, to determine whether or not we should be firing the
-	 * Q/landingExtras handlers, to add data to a top-level page load (not AJAX).
-	 * @method processLandingExtras
+	 * Q/initialExtras handlers, to add data to a top-level page load (not AJAX).
+	 * @method processInitialExtras
 	 * @param {string} $hookType can be "before" or "after"
 	 * @static
-	 * @return {boolean} true if the Q/landingExtras was processed
+	 * @return {boolean} true if the Q/initialExtras was processed
 	 */
-	static function processLandingExtras($hookType)
+	static function processInitialExtras($hookType)
 	{
-		if (self::$skipLandingExtras || Q_Request::isAjax()) {
+		if (self::$skipInitialExtras || Q_Request::isAjax()) {
 			return false;
 		}
-		Q::event('Q/landingExtras', array(), $hookType);
+		Q::event('Q/initialExtras', array(), $hookType);
 		return true;
 	}
 	
@@ -2625,7 +2625,7 @@ class Q_Response
 	public static $preload = array();
 
 	static public $skipResponseExtras = false;
-	static public $skipLandingExtras = false;
+	static public $skipInitialExtras = false;
 	static public $skipSessionExtras = false;
 	
 	static protected $captureScriptDataForSession = false;
