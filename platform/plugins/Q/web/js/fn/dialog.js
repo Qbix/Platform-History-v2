@@ -674,6 +674,7 @@ function _handlePosAndScroll(o)
 				$this.data('Q/overlay').calculatePosition();
 			}
 		}
+		$this.css('max-height', parentHeight - topMargin - bottomMargin);
 
 		if (!o.fullscreen && o.topMargin !== undefined) {
 			// calculate and update height of the dialog slot
