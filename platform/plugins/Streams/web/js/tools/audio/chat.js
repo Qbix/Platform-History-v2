@@ -46,9 +46,10 @@
 			handler: function () {
 				$("<div>").tool("Streams/preview", {
 					publisherId: userId
-				}).tool("Streams/audio/preview").activate(function () {
+				}).tool("Streams/audio/preview", {
+					showResetButton: true
+				}).activate(function () {
 					var audioPreview = Q.Tool.from(this.element, "Streams/audio/preview");
-
 					audioPreview.composer(function (params) {
 						var fields = Q.extend({
 							publisherId: userId,
@@ -64,7 +65,6 @@
 								return err;
 							}
 
-							console.log(this);
 						}, {
 							publisherId: tool.chatTool.state.publisherId,
 							streamName: tool.chatTool.state.streamName,
