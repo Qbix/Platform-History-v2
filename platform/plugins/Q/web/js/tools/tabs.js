@@ -208,7 +208,7 @@ Q.Tool.define("Q/tabs", function(options) {
 
 				Q.handle(state.onActivate, tool, [tab, name]);
 			}, "Q/tabs"),
-			loadExtras: 'session',
+			loadExtras: 'response,session',
 			ignorePage: tool.isInDialog(),
 			ignoreHistory: tool.isInDialog(),
 			slotContainer: slotContainer,
