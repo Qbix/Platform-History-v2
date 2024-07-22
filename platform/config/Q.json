@@ -3,6 +3,7 @@
 		"defaultTimezone": "UTC",
 		"handlersBeforeEvent": {
 			"Q/reroute": ["Q/before/Q_reroute"],
+			"Q/initialExtras": ["Q/before/Q_initialExtras"],
 			"Q/responseExtras": ["Q/before/Q_responseExtras"],
 			"Q/sessionExtras": ["Q/before/Q_sessionExtras"],
 			"Q/tool/render": ["Q/before/Q_tool_render"],
@@ -204,10 +205,12 @@
 			"allowHijack": true
 		},
 		"javascript": {
-			"responseExtras": {
-				"{{Q}}/js/jquery-3.7.1.min.js": true,
-				"{{Q}}/js/handlebars-v4.0.10.min.js": true,
-				"{{Q}}/js/Q.js": true
+			"initialExtras": {
+				"Q": {
+					"{{Q}}/js/jquery-3.7.1.min.js": true,
+					"{{Q}}/js/handlebars-v4.0.10.min.js": true,
+					"{{Q}}/js/Q.js": true
+				}
 			},
 			"serviceWorker": {
 				"modules": {
@@ -223,8 +226,10 @@
 			"preload": null /* can be "inline", "header" or null */
 		},
 		"stylesheets": {
-			"responseExtras": {
-				"{{Q}}/css/Q.css": true
+			"initialExtras": {
+				"Q": {
+					"{{Q}}/css/Q.css": true
+				}
 			},
 			"preload": "inline" /* can be "inline", "header" or null */
 		},

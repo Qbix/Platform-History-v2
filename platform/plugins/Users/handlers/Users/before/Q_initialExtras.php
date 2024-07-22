@@ -2,8 +2,6 @@
 
 function Users_before_Q_initialExtras()
 {
-	Q_Response::addScript('{{Users}}/js/Users.js', 'Users');
-	Q_Response::addScript('{{Users}}/js/UsersDevice.js', 'Users');
 	$app = Q::app();
 	Q_Response::setScriptData("Q.plugins.Users.signatures", 
 		Q_Config::get('Users', 'signatures', array())
@@ -58,7 +56,6 @@ function Users_before_Q_initialExtras()
 	Q_Response::setScriptData('Q.plugins.Users.currentCommunityId', Users::currentCommunityId(true));
 	Q_Response::setImageSizes('Users/icon');
 	Q_Response::setImageSizes('Users/cover');
-	Q_Response::addStylesheet("{{Users}}/css/Users.css", 'Users');
 	$platforms = array(Q_Request::platform());
 	foreach (Q_Config::get('Users', 'apps', 'export', array()) as $platform) {
 		$platforms[] = $platform;

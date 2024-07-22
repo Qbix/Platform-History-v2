@@ -77,11 +77,24 @@
 			}
 		},
 		"javascript": {
+			"initialExtras": {
+				"Users": {
+					"{{Users}}/js/Users.js": true,
+					"{{Users}}/js/UsersDevice.js": true
+				}
+			},
 			"serviceWorker": {
 				"latest": {
 					"Users": {
 						"timestamp": 1689521256
 					}
+				}
+			}
+		},
+		"stylesheets": {
+			"initialExtras": {
+				"Users": {
+					"{{Users}}/css/Users.css": true
 				}
 			}
 		},
