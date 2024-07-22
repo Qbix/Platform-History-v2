@@ -50,6 +50,7 @@ function Q_response($params)
 	}
 
 	Q_Response::processResponseExtras('before');
+	Q_Response::processLandingExtras('before');
 	Q_Response::processSessionExtras('before');
 
 	$action = $uri->action;
@@ -106,6 +107,7 @@ function Q_response($params)
 			}
 			if (Q_Request::shouldLoadExtras()) {
 				Q_Response::processResponseExtras('after');
+				Q_Response::processLandingExtras('after');
 				Q_Response::processSessionExtras('after');
 				$to_encode['slots'] = Q_Response::slots(true);
 				// add stylesheets, stylesinline, scripts, scriptlines, scriptdata, templates
@@ -238,6 +240,7 @@ Q.init();
 	}
 
 	Q_Response::processResponseExtras('after');
+	Q_Response::processLandingExtras('after');
 	Q_Response::processSessionExtras('after');
 
 	$slots = Q_Response::slots(false);

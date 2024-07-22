@@ -1942,11 +1942,28 @@ class Q_Response
 		Q::event('Q/responseExtras', array(), $hookType);
 		return true;
 	}
+
+	/**
+	 * Used mostly internally, to determine whether or not we should be firing the
+	 * Q/landingExtras handlers, to add data to a top-level page load (not AJAX).
+	 * @method processLandingExtras
+	 * @param {string} $hookType can be "before" or "after"
+	 * @static
+	 * @return {boolean} true if the Q/landingExtras was processed
+	 */
+	static function processLandingExtras($hookType)
+	{
+		if (self::$skipLandingExtras || Q_Request::isAjax()) {
+			return false;
+		}
+		Q::event('Q/landingExtras', array(), $hookType);
+		return true;
+	}
 	
 	/**
 	 * Used mostly internally, to determine whether or not we should be firing the
 	 * Q/sessionExtras handlers, to add information specific to the user's session.
-	 * This is false when rendering a static page, or just a regular AJAX call.
+	 * This is false when rendering a static page, or AJAX calls for logged-out users
 	 * @method processSessionExtras
 	 * @param {string} $hookType can be "before" or "after"
 	 * @static
