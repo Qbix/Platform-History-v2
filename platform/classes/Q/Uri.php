@@ -1019,11 +1019,11 @@ class Q_Uri
 	{
 		if (self::$cacheBaseUrl
 		&& Q::startsWith($url, self::$cacheBaseUrl)) {
-			$fileSHA1 = null;
+			$fileHash = null;
 			if (!empty($config['integrity'])) {
-				$fileSHA1 = Q::ifset($info, 'h', null);
+				$fileHash = Q::ifset($info, 'h', null);
 			}
-			return array($url, $fileSHA1);
+			return array($url, $fileHash);
 		}
 		$cacheTimestamp = Q_Request::cacheTimestamp();
 		$environment = Q_Config::get('Q', 'environment', '');
@@ -1032,7 +1032,7 @@ class Q_Uri
 			return array($url, null);
 		}
 		$fileTimestamp = null;
-		$fileSHA1 = null;
+		$fileHash = null;
 		$relativeUrl = null;
 		if ((!empty($config['caching']) or !empty($config['integrity']))) {
 			// $ignoreUrls = Q_Config::get('Q', 'urls', 'ignore', array());
@@ -1057,7 +1057,7 @@ class Q_Uri
 					$fileTimestamp = Q::ifset($info, 't', null);
 				}
 				if (!empty($config['integrity'])) {
-					$fileSHA1 = Q::ifset($info, 'h', null);
+					$fileHash = Q::ifset($info, 'h', null);
 				}
 			}
 		}
@@ -1065,16 +1065,16 @@ class Q_Uri
 		and isset($fileTimestamp)
 		and $fileTimestamp <= $cacheTimestamp
 		and self::$cacheBaseUrl) {
-			return array(self::$cacheBaseUrl . $relativeUrl, $fileSHA1);
+			return array(self::$cacheBaseUrl . $relativeUrl, $fileHash);
 		}
 		if ($fileTimestamp) {
 			$field = Q_Config::get(Q::app(), 'response', 'cacheBustField', 'Q.cb');
 			Q::parse_str($tail, $fields);
 			$fields[$field] = $fileTimestamp;
 			$qs = http_build_query($fields);
-			return array(Q_Uri::fixUrl("$head?$qs"), $fileSHA1);
+			return array(Q_Uri::fixUrl("$head?$qs"), $fileHash);
 		}
-		return array($url, $fileSHA1);
+		return array($url, $fileHash);
 	}
 
 	/**

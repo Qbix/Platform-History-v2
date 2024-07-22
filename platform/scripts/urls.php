@@ -104,6 +104,7 @@ $tree = new Q_Tree($result);
 //file_put_contents($arrays_dir.DS."$time.json", Q::json_encode($array));
 $diffs = Q_script_urls_diffs($tree, $urls_dir, $diffs_dir, $time);
 echo PHP_EOL;
+Q_Cache::clear(true);
 
 function Q_script_urls_glob(
 	$dir, 
@@ -185,8 +186,8 @@ function Q_script_urls_glob(
 		++$i;
 		echo "\033[100D";
 		echo "Processed $i of $n files                 ";
-		usleep(1); // garbage collection
 	}
+	gc_collect_cycles();
 	return $result;
 }
 
