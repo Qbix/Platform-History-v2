@@ -1977,7 +1977,7 @@ class Q_Response
 			return false;
 		}
 		if (Q_Request::isAjax()
-		and Users::loggedInUser(false, false)) {
+		and Q_Session::isAuthenticated()) {
 			Q_Request::requireValidNonce(true); // SECURITY: prevent CSRF attacks
 		}
 		Q::event('Q/sessionExtras', array(), $hookType);

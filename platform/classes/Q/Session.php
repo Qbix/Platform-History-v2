@@ -1242,6 +1242,20 @@ class Q_Session
 	}
 
 	/**
+	 * Returns whether the session is authenticated, based on the name
+	 * of the session cookie and Q/session/id/prefixes/authencated config
+	 * @method isAuthenticated
+	 * @static
+	 * @return {boolean}
+	 */
+	static function isAuthenticated()
+	{
+		return ($prefix = Q_Config::get(
+			'Q', 'session', 'id', 'prefixes', 'authenticated', null
+		) and Q::startsWith($sessionId, $prefix));
+	}
+
+	/**
 	 * Unserialize a session string stored by PHP using the same
 	 * session.serialize_handler as the current one.
 	 * @param {string} $session_data
