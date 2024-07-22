@@ -452,7 +452,7 @@ Q.Tool.define("Q/audio", function (options) {
 		// set some elements text
 		$recordTextElement.html(tool.text.audio.recording);
 		$recordElapsedElement.html(tool.text.audio.remains);
-		$recordTimeElement.html(tool.formatRecordTime(state.maxRecordTime) + '/' + tool.formatRecordTime(state.maxRecordTime));
+		$recordTimeElement.html(tool.formatRecordTime(state.maxRecordTime));
 
 		// start recorder timer to handle all recorder interface actions
 		state.recordIntervalID = setInterval(function(){
@@ -463,7 +463,7 @@ Q.Tool.define("Q/audio", function (options) {
 			state.currentRecordTime -= 100;
 
 			// set time element text
-			$recordTimeElement.html(tool.formatRecordTime(state.currentRecordTime) + '/' + tool.formatRecordTime(state.maxRecordTime));
+			$recordTimeElement.html(tool.formatRecordTime(state.currentRecordTime));
 
 			// set Q/pie tool position (percents of currentRecordTime time from max maxRecordTime)
 			tool.pieTool.state.fraction = 100*(state.maxRecordTime - state.currentRecordTime)/state.maxRecordTime;
