@@ -2625,6 +2625,7 @@ class Q_Response
 	public static $preload = array();
 
 	static public $skipResponseExtras = false;
+	static public $skipLandingExtras = false;
 	static public $skipSessionExtras = false;
 	
 	static protected $captureScriptDataForSession = false;
