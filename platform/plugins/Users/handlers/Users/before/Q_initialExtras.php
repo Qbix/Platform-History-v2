@@ -1,6 +1,6 @@
 <?php
 
-function Users_before_Q_responseExtras()
+function Users_before_Q_initialExtras()
 {
 	Q_Response::addScript('{{Users}}/js/Users.js', 'Users');
 	Q_Response::addScript('{{Users}}/js/UsersDevice.js', 'Users');

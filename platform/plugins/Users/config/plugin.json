@@ -19,7 +19,7 @@
 		"handlersBeforeEvent": {
 			"Q/json_encode/toArrays": ["Users/before/Q_json_encode_toArrays"],
 			"Q/objects": ["Users/before/Q_objects"],
-			"Q/responseExtras": ["Users/before/Q_responseExtras"],
+			"Q/initialExtras": ["Users/before/Q_initialExtras"],
 			"Q/sessionExtras": ["Users/before/Q_sessionExtras"],
 			"Q/response/notices": ["Users/before/Q_response_notices"],
 			"Q/session/save": ["Users/before/Q_session_save"],
