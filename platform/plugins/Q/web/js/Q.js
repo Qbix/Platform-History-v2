@@ -11152,7 +11152,8 @@ Q.loadUrl.loading = {};
 					if (callables.search(baseUrl) === 0) {
 						// Use AJAX to refresh the page whenever the request is for a local page
 						Q.loadUrl(callables, Q.extend({
-							loadExtras: 'all',
+							// shouldn't need to re-load responseExtras, they're the same across sessions
+							loadExtras: 'session',
 							ignoreHistory: false,
 							onActivate: function () {
 								if (callback) callback();
