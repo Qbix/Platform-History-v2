@@ -225,22 +225,10 @@ class Assets_Subscription {
 	 * @return {boolean|Array}
 	 */
 	static function checkStreamRelated ($stream) {
-		$relations = Streams_RelatedTo::select()->where(array(
-			'type' => self::$relationType,
-			'fromPublisherId' => $stream->publisherId,
-			'fromStreamName' => $stream->name
-		))->fetchDbRows();
-
-		if (empty($relations)) {
-			return false;
-		}
-
-		$assetsPlans = [];
-		foreach ($relations as $relation) {
-			$assetsPlans[] = Streams::fetchOne(null, $relation->toPublisherId, $relation->toStreamName, true);
-		}
-
-		return $assetsPlans;
+		list($relations, $plans) = $stream->related(null, false, array(
+			'type' => self::$relationType
+		));
+		return $relations ? $plans : false;
 	}
 
 	/**
@@ -284,9 +272,11 @@ class Assets_Subscription {
 
 		if ($throwIfNotPaid) {
 			$text = Q_Text::get("Assets/content");
-			throw new Exception(Q::interpolate($text['errors']['SubscriptionStreamNotPaid'], array(
-				"subscriptionUrl" => '<a href="'.Q_Uri::url("Assets/subscription").'">here</a>'
-			)));
+			throw new Assets_Exception_PaymentNeeded(array(
+				'publisherId' => $stream->publisherId,
+				'streamName' => $stream->name,
+				'subscriptionPlans' => Db::exportArray($assetsPlans)
+			));
 		}
 
 		return false;
