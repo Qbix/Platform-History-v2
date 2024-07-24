@@ -9304,9 +9304,12 @@ Q.firstError = function _Q_firstErro(data /*, data2, ... */) {
  */
 Q.firstErrorMessage = function _Q_firstErrorMessage(data /*, data2, ... */) {
 	var error = Q.firstError.apply(this, arguments);
+	if (!error) {
+		return undefined;
+	}
 	return (typeof error === 'string')
 		? error
-		: (error.message ? error.message : JSON.stringify(error));
+		: (error && error.message ? error.message : JSON.stringify(error));
 };
 
 /**
@@ -10758,7 +10761,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 			return; // a newer request was sent
 		}
 		if (!Q.isEmpty(err)) {
-			e = Q.firstError(err);
+			e = new Q.Exception(Q.firstErrorMessage(err), Q.firstError(err));
 			_reject && _reject(e);
 			return Q.handle(onError, this, [e]);
 		}
