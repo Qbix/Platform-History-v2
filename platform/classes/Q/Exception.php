@@ -293,7 +293,7 @@ class Q_Exception extends Exception
 			}
 			$params = null;
 			if (is_callable(array($e, 'params'))) {
-				$params = $e->inputFields();
+				$params = $e->params();
 			}
 			$inputFields = null;
 			if (is_callable(array($e, 'inputFields'))) {
