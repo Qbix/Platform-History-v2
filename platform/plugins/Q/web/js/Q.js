@@ -9125,11 +9125,11 @@ Q.request = function (url, slotNames, callback, options) {
 			t.cancelled = true;
 			_onResponse();
 			var errors = {
-				errors: [{
+				errors: [Q.extend({}, data.errors[0], {
 					message: msg || "Request was canceled",
 					code: code || status,
 					httpStatus: status
-				}]
+				})]
 			};
 			o.onCancel.handle.call(this, errors, o);
 			_Q_Response_callback.call(this, errors, errors);
