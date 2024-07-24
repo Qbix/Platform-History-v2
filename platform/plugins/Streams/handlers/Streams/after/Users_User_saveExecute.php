@@ -191,7 +191,7 @@ function Streams_after_Users_User_saveExecute($params)
 	Streams::createStreams($user->id, $user->id, $toCreate);
 	Streams::join($user->id, $user->id, $streamsToJoin);
 	Streams::subscribe($user->id, $user->id, $streamsToSubscribe, array('skipAccess' => true));
-	usleep(1); // garbage collection
+	Q_Utils::garbageCollect();
 	
 	if ($params['inserted']) {
 		

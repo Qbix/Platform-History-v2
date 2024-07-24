@@ -2066,6 +2066,18 @@ class Q_Utils
 		return uksort($arr, array('Q_Utils', 'compareKeysByLargestNumber'));
 	}
 
+	/**
+	 * Call this function to attempt garbage collection
+	 * @method garbageCollect
+	 * @static
+	 */
+	static function garbageCollect()
+	{
+		if (is_callable('gc_collect_cycles')) {
+			gc_collect_cycles();
+		}
+	}
+
 	private static function compareKeysNumerically($a, $b)
 	{
 		$ap = preg_split('/\D/', $a, -1);

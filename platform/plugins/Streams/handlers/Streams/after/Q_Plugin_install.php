@@ -56,9 +56,7 @@ function Streams_after_Q_Plugin_install($params)
 			echo "\033[100D";
 			echo "$plugin_name: processed streams for ".($j + $offset + 1)." of $c users"
 				. str_repeat(' ', 20);
-			if (is_callable('gc_collect_cycles')) {
-				gc_collect_cycles();
-			}
+			Q_Utils::garbageCollect();
 		}
 		$offset += $batch;
 	}
