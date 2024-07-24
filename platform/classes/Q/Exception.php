@@ -291,12 +291,16 @@ class Q_Exception extends Exception
 					$trace = $e->getTrace();
 				}
 			}
-			$fields = null;
+			$params = null;
+			if (is_callable(array($e, 'params'))) {
+				$params = $e->inputFields();
+			}
+			$inputFields = null;
 			if (is_callable(array($e, 'inputFields'))) {
-				$fields = $e->inputFields();
+				$inputFields = $e->inputFields();
 			}
 			$classname = get_class($e);
-			$results[] = @compact('message', 'code', 'line', 'file', 'trace', 'fields', 'classname');
+			$results[] = @compact('message', 'code', 'line', 'file', 'trace', 'params', 'inputFields', 'classname');
 		}
 		if ($array_was_passed) {
 			return $results;
