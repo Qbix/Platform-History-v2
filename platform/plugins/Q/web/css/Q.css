@@ -1125,14 +1125,18 @@ body.Q_columns_animationFX {
 	}
 	.Q_overlay select,
 	.Q_overlay input,
+	.Q_overlay textarea,
 	.Q_fullscreen_dialog select,
-	.Q_fullscreen_dialog input {
+	.Q_fullscreen_dialog input,
+	.Q_fullscreen_dialog textarea {
 		color: white;
 		background-color: rgba(0, 0, 0, 0.2);
 		border: solid 1px rgba(255, 255, 255, 0.2);
 	}
 	.Q_overlay input::placeholder,
-	.Q_fullscreen_dialog input::placeholder {
+	.Q_fullscreen_dialog input::placeholder,
+	.Q_overlay textarea::placeholder,
+	.Q_fullscreen_dialog textarea::placeholder {
 		color: rgba(255, 255, 255, 0.5);
 	}
 }
