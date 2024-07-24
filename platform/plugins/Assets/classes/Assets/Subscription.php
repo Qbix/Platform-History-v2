@@ -226,7 +226,8 @@ class Assets_Subscription {
 	 */
 	static function checkStreamRelated ($stream) {
 		list($relations, $plans) = $stream->related(null, false, array(
-			'type' => self::$relationType
+			'type' => self::$relationType,
+			'skipAccess' => true
 		));
 		return $relations ? $plans : false;
 	}
