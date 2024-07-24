@@ -651,11 +651,6 @@ function _handlePosAndScroll(o)
 				inputWasFocused = false;
 			}, 400);
 		}
-		if ($this.css('display') !== 'block') {
-			clearInterval(interval);
-			$this.css('visibility', 'visible');
-			return;
-		}
 		
 		topMargin = o.topMargin || 0;
 		parentHeight = (!o.alignByParent || parent[0] === document.body)
@@ -666,15 +661,19 @@ function _handlePosAndScroll(o)
 		bottomMargin = o.bottomMargin || 0;
 		if (typeof(bottomMargin) === 'string') // percentage
 			bottomMargin = Math.round(parseInt(bottomMargin) / 100 * parentHeight);
-		
+		var prevDisplay = $this.css('display');
 		$this.css('visibility', 'visible');
+		$this.css('max-height', parentHeight - topMargin - bottomMargin);
+		if (prevDisplay !== 'block') {
+			clearInterval(interval);
+			return;
+		}
 		if (!isInput) {
 			if (!o.noCalculatePosition
 			&& (!Q.info.isTouchscreen || !inputWasFocused)) {
 				$this.data('Q/overlay').calculatePosition();
 			}
 		}
-		$this.css('max-height', parentHeight - topMargin - bottomMargin);
 
 		if (!o.fullscreen && o.topMargin !== undefined) {
 			// calculate and update height of the dialog slot
