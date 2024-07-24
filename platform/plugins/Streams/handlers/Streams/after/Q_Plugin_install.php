@@ -48,7 +48,7 @@ function Streams_after_Q_Plugin_install($params)
 			$simulated = array(
 				'row' => $user,
 				'inserted' => true,
-				'modifiedFields' => $user->fields,
+				'modifiedFields' => array(),
 				'query' => null
 			);
 			$user->set('Streams', 'skipExistingOnInsert', true);
