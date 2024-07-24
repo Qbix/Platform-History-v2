@@ -242,6 +242,10 @@ class Assets_Subscription {
 	 * @throws Exception
 	 */
 	static function checkStreamPaid ($stream, $user, $throwIfNotPaid=false) {
+		$assetsPlans = self::checkStreamRelated($stream);
+		if (!(boolean)$assetsPlans) {
+			return true;
+		}
 		if ($user) {
 			if (is_string($user)) {
 				$user = Users_User::fetch($user, true);
@@ -249,11 +253,6 @@ class Assets_Subscription {
 			
 			// admins have access
 			if ($user and self::isAdmin($user->id)) {
-				return true;
-			}
-
-			$assetsPlans = self::checkStreamRelated($stream);
-			if (!(boolean)$assetsPlans) {
 				return true;
 			}
 
