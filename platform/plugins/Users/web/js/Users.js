@@ -2042,7 +2042,7 @@
 					host: location.host,
 					timestamp: Math.floor(Date.now() / 1000)
 				});
-				(new ethers.providers.Web3Provider(provider))
+				(new ethers.providers.Web3Provider(provider, 'any'))
 				.listAccounts().then(function (accounts) {
 					var web3Address = Q.cookie('Q_Users_web3_address') || '';
 					if (web3Address && accounts.includes(web3Address)) {
