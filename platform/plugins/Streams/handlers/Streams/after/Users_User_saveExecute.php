@@ -274,7 +274,7 @@ function Streams_after_Users_User_saveExecute($params)
 			$name = $names[$field];
 			if (is_array($name)) {
 				foreach ($name as $streamName) {
-					$stream = Streams_Stream::fetch($user->id, $user->id, $streamName);
+					$stream = Streams_Stream::fetch($user->id, $user->id, $streamName, array('dontCache' => true));
 					if (!$stream) {
 						continue;
 					}
