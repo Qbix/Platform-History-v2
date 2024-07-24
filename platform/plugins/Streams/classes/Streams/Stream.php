@@ -615,7 +615,11 @@ class Streams_Stream extends Base_Streams_Stream
 					'accessRows' => &$accessRows
 				));
 			}
-			Streams_Access::insertManyAndExecute($accessRows);
+			Streams_Access::insertManyAndExecute($accessRows, array(
+				'onDuplicateKeyUpdate' => array(
+					'ofContactLabel' => new Db_Expression('ofContactLabel')
+				)
+			));
 		}
 	}
 
