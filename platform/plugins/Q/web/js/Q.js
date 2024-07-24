@@ -4539,11 +4539,13 @@ Q.getter.THROTTLING = 3;
  * Custom exception constructor
  * @class Q.Exception
  * @constructor
- * @param [message=""] {string} The error message
- * @param {object} fields={}
+ * @param {String} [message=""] The error message
+ * @param {Object} fields={} Any additional fields to set on the error
  */
 Q.Exception = function (message, fields) {
-	this.fields = fields || {};
+	for (var k in fields) {
+		this[k] = fields;
+	}
 	this.message = message || "";
 };
 
