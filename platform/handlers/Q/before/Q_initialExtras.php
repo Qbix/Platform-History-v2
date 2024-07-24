@@ -60,7 +60,7 @@ function Q_before_Q_initialExtras()
         }
 	}
 	foreach (Q_Config::get('Q', 'stylesheets', 'initialExtras', array()) as $key => $extras) {
-        foreach ($extas as $src => $media) {
+        foreach ($extras as $src => $media) {
             if (!$media) {
                 continue;
             }
