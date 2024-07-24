@@ -9268,13 +9268,13 @@ Q.request.once = Q.getter(Q.request, {
 });
 
 /**
- * Try to find an error message assuming typical error data structures for the arguments
+ * Try to find an error assuming typical error data structures for the arguments
  * @static
- * @method firstErrorMessage
+ * @method firstError
  * @param {Object} data An object where the errors may be found. You can pass as many of these as you want. If it contains "errors" property, then errors[0] is the first error. If it contains an "error" property, than that's the first error. Otherwise, for the first argument only, if it is nonempty, then it's considered an error.
  * @return {String|null} The first error message found, or null
  */
-Q.firstErrorMessage = function _Q_firstErrorMessage(data /*, data2, ... */) {
+Q.firstError = function _Q_firstErro(data /*, data2, ... */) {
 	var error = undefined;
 	for (var i=0; i<arguments.length; ++i) {
 		var d = arguments[i];
@@ -9292,9 +9292,18 @@ Q.firstErrorMessage = function _Q_firstErrorMessage(data /*, data2, ... */) {
 			break;
 		}
 	}
-	if (!error) {
-		return undefined;
-	}
+	return error || undefined;
+};
+
+/**
+ * Try to find an error message assuming typical error data structures for the arguments
+ * @static
+ * @method firstErrorMessage
+ * @param {Object} data An object where the errors may be found. You can pass as many of these as you want. If it contains "errors" property, then errors[0] is the first error. If it contains an "error" property, than that's the first error. Otherwise, for the first argument only, if it is nonempty, then it's considered an error.
+ * @return {String|null} The first error message found, or null
+ */
+Q.firstErrorMessage = function _Q_firstErrorMessage(data /*, data2, ... */) {
+	var error = Q.firstError.apply(this, arguments);
 	return (typeof error === 'string')
 		? error
 		: (error.message ? error.message : JSON.stringify(error));
@@ -10749,9 +10758,9 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 			return; // a newer request was sent
 		}
 		if (!Q.isEmpty(err)) {
-			e = Q.firstErrorMessage(err);
-			_reject && _reject(err);
-			return Q.handle(onError, this, [err]);
+			e = Q.firstError(err);
+			_reject && _reject(e);
+			return Q.handle(onError, this, [e]);
 		}
 		// if (Q.isEmpty(response)) {
 		// 	e = "Response is empty";
