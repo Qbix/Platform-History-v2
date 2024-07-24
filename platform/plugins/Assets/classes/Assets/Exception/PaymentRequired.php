@@ -13,4 +13,4 @@ class Assets_Exception_PaymentRequired extends Q_Exception
 	 */
 };
 
-Q_Exception::add('Assets_Exception_PaymentRequirement', 'Payment is needed to access this.');
+Q_Exception::add('Assets_Exception_PaymentRequired', 'Payment is needed to access this.');
