@@ -245,34 +245,33 @@ class Assets_Subscription {
 			if (is_string($user)) {
 				$user = Users_User::fetch($user, true);
 			}
-		} else {
-			$user = Users::loggedInUser(true);
-		}
-
-		// admins have access
-		if (self::isAdmin($user->id)) {
-			return true;
-		}
-
-		$assetsPlans = self::checkStreamRelated($stream);
-		if (!(boolean)$assetsPlans) {
-			return true;
-		}
-
-		foreach ($assetsPlans as $assetsPlan) {
-			$subscriptionStream = self::getStream($assetsPlan, $user);
-			if (!$subscriptionStream) {
-				continue;
-			}
-
-			if (self::isCurrent($subscriptionStream)) {
+			
+			// admins have access
+			if ($user and self::isAdmin($user->id)) {
 				return true;
 			}
+
+			$assetsPlans = self::checkStreamRelated($stream);
+			if (!(boolean)$assetsPlans) {
+				return true;
+			}
+
+			foreach ($assetsPlans as $assetsPlan) {
+				$subscriptionStream = self::getStream($assetsPlan, $user);
+				if (!$subscriptionStream) {
+					continue;
+				}
+
+				if (self::isCurrent($subscriptionStream)) {
+					return true;
+				}
+			}
+
 		}
 
 		if ($throwIfNotPaid) {
 			$text = Q_Text::get("Assets/content");
-			throw new Assets_Exception_PaymentNeeded(array(
+			throw new Assets_Exception_PaymentRequired(array(
 				'publisherId' => $stream->publisherId,
 				'streamName' => $stream->name,
 				'subscriptionPlans' => Db::exportArray($assetsPlans)
