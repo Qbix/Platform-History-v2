@@ -112,7 +112,7 @@ class FacebookApp implements \Serializable
     /**
      * Serializes the FacebookApp entity as a string.
      *
-     * @return string
+     * @return array
      */
     public function __serialize()
     {
@@ -122,7 +122,7 @@ class FacebookApp implements \Serializable
     /**
      * Unserializes a string as a FacebookApp entity.
      *
-     * @param string $serialized
+     * @param array $serialized
      */
     public function __unserialize($serialized)
     {
