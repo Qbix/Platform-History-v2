@@ -4543,8 +4543,10 @@ Q.getter.THROTTLING = 3;
  * @param {Object} fields={} Any additional fields to set on the error
  */
 Q.Exception = function (message, fields) {
-	for (var k in fields) {
-		this[k] = fields;
+	if (fields) {
+		for (var k in fields) {
+			this[k] = fields[k];
+		}
 	}
 	this.message = message || "";
 };
