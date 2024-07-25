@@ -1953,7 +1953,9 @@ class Q_Response
 	 */
 	static function processInitialExtras($hookType)
 	{
-		if (self::$skipInitialExtras || Q_Request::isAjax()) {
+		if (self::$skipInitialExtras
+		|| Q_Request::isAjax()
+		|| !Q_Request::shouldLoadExtras('initial')) {
 			return false;
 		}
 		Q::event('Q/initialExtras', array(), $hookType);
