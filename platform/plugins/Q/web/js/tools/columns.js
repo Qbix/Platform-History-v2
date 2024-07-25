@@ -714,10 +714,10 @@ Q.Tool.define("Q/columns", function(options) {
 							: $te;
 						$toScroll.each(function () {
 							var $this = $(this);
-							if (options.animation.scrollDuration) {
+							if (o.animation.scrollDuration) {
 								$this.animate({
 									scrollLeft: this.scrollWidth
-								}, options.animation.scrollDuration);
+								}, o.animation.scrollDuration);
 							} else {
 								$this.scrollLeft(this.scrollWidth);
 							}
