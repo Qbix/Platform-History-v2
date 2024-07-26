@@ -9129,7 +9129,7 @@ Q.request = function (url, slotNames, callback, options) {
 			t.cancelled = true;
 			_onResponse();
 			var errors = {
-				errors: [Q.extend({}, data.errors[0], {
+				errors: [Q.extend({}, data && data.errors[0], {
 					message: msg || "Request was canceled",
 					code: code || status,
 					httpStatus: status
