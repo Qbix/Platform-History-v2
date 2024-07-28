@@ -589,13 +589,6 @@ abstract class Streams extends Base_Streams
 		if ($fields === '*') {
 			$fields = join(',', Streams_Stream::fieldNames());
 		}
-		$userIds = array_keys($publishersAndNames);
-		$userIds = Q::event('Users/filter/users', array(
-			'from' => 'Streams::fetchPublicStreams'
-		), 'after', false, $userIds, $handlersCalled);
-		if ($handlersCalled) {
-			$publishersAndNames = Q::take($publishersAndNames, $userIds);
-		}
 		$pns = array();
 		foreach ($publishersAndNames as $publisherId => $names) {
 			foreach ($names as $name) {
