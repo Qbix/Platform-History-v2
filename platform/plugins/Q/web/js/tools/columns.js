@@ -1163,6 +1163,8 @@ function presentColumn(tool, $column, fullscreen, recalculateHeights) {
 	} else {
 		$column.css('min-height', tool.oldMinHeight);
 	}
+
+	$(state.columns[state.columns.length-1]).removeClass('Q_columns_overlapped');
 }
 
 function prepareColumns(tool) {
