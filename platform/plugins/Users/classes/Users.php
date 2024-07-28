@@ -33,6 +33,27 @@ abstract class Users extends Base_Users
 		$first = mb_substr($userId, 0, 1, "UTF-8");
 		return (mb_strtolower($first, "UTF-8") != $first);
 	}
+
+	/**
+	 * Split an array of userIds into community and person userIds
+	 * @method splitIntoCommunityAndPersonIds
+	 * @static
+	 * @param {array} $userIds
+	 * @return {array} An array of two arrays: communityIds and userIds
+	 */
+	static function splitIntoCommunityAndPersonIds($userIds)
+	{
+		$communityIds = array();
+		$personIds = array();
+		foreach ($userIds as $userId) {
+			if (Users::isCommunityId($userId)) {
+				$communityIds[] = $userId;
+			} else {
+				$personIds = $userId;
+			}
+		}
+		return array($communityIds, $personIds);
+	}
 	
 	/**
 	 * Check if an icon is custom or whether it's been automatically generated

@@ -2634,6 +2634,7 @@ class Streams_Stream extends Base_Streams_Stream
 				'baseUrl' => $baseUrl ? $baseUrl : Q_Request::baseUrl()
 			)
 		);
+		$url = Q_Uri::interpolateUrl($url);
 		$urlString = Q_Handlebars::renderSource($url, $fields);
 		$qs = $messageOrdinal ? "?$messageOrdinal" : "";
 		return Q_Uri::url($urlString . $qs);

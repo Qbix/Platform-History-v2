@@ -592,7 +592,7 @@ abstract class Streams extends Base_Streams
 		$userIds = array_keys($publishersAndNames);
 		$userIds = Q::event('Users/filter/users', array(
 			'from' => 'Streams::fetchPublicStreams'
-		), 'after', $userIds, $handlersCalled);
+		), 'after', false, $userIds, $handlersCalled);
 		if ($handlersCalled) {
 			$publishersAndNames = Q::take($publishersAndNames, $userIds);
 		}
@@ -2495,6 +2495,7 @@ abstract class Streams extends Base_Streams
 	 * @param {array} [$options.fetchPublicStreams] If true, when fetching streams, also gets those published by others, using Streams::fetchPublicStreams() method which doesn't check access
 	 * @param {array} [$options.streamFields] If specified, fetches only the fields listed here for any streams.
 	 * @param {callable} [$options.filter] Optional function to call to filter the relations. It should return a filtered array of relations.
+	 * @param {array} [$options.skipUsersFilterEvent] Pass true to skip filtering using Users/filter/users event
 	 * @param {boolean} [$options.skipAccess=false] If true, skips the access checks and just fetches the relations and related streams
 	 * @param {array} [$options.skipFields] Optional array of field names. If specified, skips these fields when fetching streams
 	 * @param {array} [$options.skipTypes] Optional array of ($streamName => $relationTypes) to skip when fetching relations.
@@ -2639,8 +2640,10 @@ abstract class Streams extends Base_Streams
 			$query = $query->where($options['where']);
 		}
 		$FT = $isCategory ? 'from' : 'to';
+		$col = $isCategory ? 'fromStreamName' : 'toStreamName';
+		$col2 = $isCategory ? 'toStreamName' : 'fromStreamName';
+		$col3 = $isCategory ? 'fromPublisherId' : 'toPublisherId';
 		if (empty($options['includeTemplates'])) {
-			$col = $FT.'StreamName';
 			$query = $query->where(new Db_Expression(
 				"SUBSTRING($col, -1, 1) != '/'"
 			));
@@ -2648,7 +2651,6 @@ abstract class Streams extends Base_Streams
 		if (Q::ifset($options, "ignoreCache", false)) {
 			$query->ignoreCache();
 		}
-		$col2 = $isCategory ? 'toStreamName' : 'fromStreamName';
 
 		$relations = $query->fetchDbRows();
 		foreach ($relations as $k => $v) {
@@ -2671,6 +2673,28 @@ abstract class Streams extends Base_Streams
 		
 		if (!empty($options['filter'])) {
 			$relations = call_user_func($options['filter'], $relations);
+		}
+
+		if (empty($options['skipUsersFilterEvent'])) {
+			// filter userIds and manipulate their order as well
+			$userIds = array();
+			foreach ($relations as $r) {
+				$userIds[] = $userId = $r->$col3;
+			}
+			$userIds = Q::event('Users/filter/users', array(
+				'from' => 'Streams::related'
+			), 'after', false, array_unique($userIds), $handlersCalled);
+			if ($handlersCalled) {
+				$temp = array();
+				foreach ($userIds as $userId) {
+					foreach ($relations as $k => $r) {
+						if ($r->$col3 == $userId) {
+							$temp[$k] = $r;
+						}
+					}
+				}
+				$relations = $temp;
+			}
 		}
 		
 		if (!empty($options['relationsOnly'])) {
