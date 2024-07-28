@@ -255,19 +255,19 @@ html.Q_ios.Q_standalone .Q_columns_title {
 }
 
 .Q_mobile.Q_columns_animationFX .Q_columns_tool .Q_column_1 {
-	transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) translateX(0px) translateY(25px) translateZ(2px) skewX(0deg) skewY(0deg);
+	transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) translateX(0) translateY(0) translateZ(0) skewX(0deg) skewY(0deg);
 }
 
 .Q_mobile.Q_columns_animationFX .Q_columns_tool .Q_column_2 {
-	transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) translateX(0px) translateY(30px) translateZ(2px) skewX(0deg) skewY(0deg);
+	transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) translateX(0) translateY(30px) translateZ(2px) skewX(0deg) skewY(0deg);
 }
 
 .Q_mobile.Q_columns_animationFX .Q_columns_tool .Q_column_3 {
-	transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) translateX(0px) translateY(45px) translateZ(2px) skewX(0deg) skewY(0deg);
+	transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) translateX(0) translateY(45px) translateZ(2px) skewX(0deg) skewY(0deg);
 }
 
 .Q_mobile.Q_columns_animationFX .Q_columns_tool .Q_column_4 {
-	transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) translateX(0px) translateY(55px) translateZ(2px) skewX(0deg) skewY(0deg);
+	transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) translateX(0) translateY(55px) translateZ(2px) skewX(0deg) skewY(0deg);
 }
 
 .Q_mobile.Q_columns_animationFX .Q_columns_tool .Q_column_5 {
