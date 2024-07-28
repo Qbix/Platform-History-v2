@@ -2175,14 +2175,20 @@ class Streams_Stream extends Base_Streams_Stream
 	 * Then it fetches relations from the template of this stream type, with relation types "attribute/$attributeName",
 	 * taking note of toPublisherId and toStreamName
 	 * and for each one, it may unrelate / relate relations of the type "attribute/$attributeName=$value",
-	 * updating indexes used for searching by that attribute name and value (range).
+	 * updating indexes used for searching by that attribute name and value (range).\
+	 * @param {array} [$options=array()]
+	 * @param {array} [$firstTimeAddingAttributes=false] pass an array with keys = attribute names
+	 *  that are being newly added, to save new relations even if attribute value
+	 *  didn't change. Mostly used internally, e.g. in installer scripts.
 	 * @return {array} Multidimensional array detailing which relations were removed and added, if any
 	 */
-	function updateRelations()
+	function updateRelations($options)
 	{
 		$changes = $this->changedFields();
 		$updateRelations = self::getConfigField($this->type, 'updateRelations', array());
-		if (!$changes || !$updateRelations) {
+		if (!$updateRelations or (
+			empty($changes['attributes']) and empty($options['firstTimeAddingAttributes'])
+		)) {
 			return array();
 		}
 		$relationTypes = array();
@@ -2190,26 +2196,25 @@ class Streams_Stream extends Base_Streams_Stream
 		// foreach ($changes as $k => $v) {
 		// 	$relationTypes[] = "field/$k";
 		// }
-		if (!empty($changes['attributes'])) {
-			// see what attributes have changed
-			$orig = $this->getAllAttributes(true);
-			$attr = $this->getAllAttributes(false);
-			foreach ($orig as $k => $v) {
-				if (!isset($orig[$k]) and !isset($attr[$k])) {
-					continue;
-				}
-				if ((!isset($attr[$k]) && isset($v))
-				|| ($attr[$k] !== $v)) { // was removed or changed
-					$attributesChanged[$k] = $v;
-					$relationTypes[] = "attribute/$k";
-				}
+		// see what attributes have changed
+		$orig = $this->getAllAttributes(true);
+		$attr = $this->getAllAttributes(false);
+		foreach ($orig as $k => $v) {
+			if (!isset($orig[$k]) and !isset($attr[$k])) {
+				continue;
 			}
-			foreach ($attr as $k => $v) {
-				if (!isset($orig[$k]) && isset($attr[$k])) {
-					$attributesAdded[$k] = $v; // new value
-					if (!in_array("attribute/$k", $relationTypes)) {
-						$relationTypes[] = "attribute/$k";
-					}
+			if ((!isset($attr[$k]) && isset($v))
+			|| ($attr[$k] !== $v)) { // was removed or changed
+				$attributesChanged[$k] = $v;
+				$relationTypes[] = "attribute/$k";
+			}
+		}
+		foreach ($attr as $k => $v) {
+			if (!empty($options['firstTimeAddingAttributes'][$k])
+			or (!isset($orig[$k]) && isset($attr[$k]))) {
+				$attributesAdded[$k] = $v; // new value
+				if (!in_array("attribute/$k", $relationTypes)) {
+					$relationTypes[] = "attribute/$k";
 				}
 			}
 		}

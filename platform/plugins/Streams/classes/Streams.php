@@ -2027,8 +2027,8 @@ abstract class Streams extends Base_Streams
 			}
 			foreach ($types as $type) {
 				$tsn = ($arrayField === 'toStreamName') ? $sn : $toStreamName;
-				$key = "$sn\t$t";
-				$key2 = "$tsn\t$t";
+				$key = "$sn\t$type";
+				$key2 = "$tsn\t$type";
 				$newRT[$key] = $newRF[$key] = @compact(
 					'toPublisherId', 'fromPublisherId', 'type'
 				);
@@ -2391,6 +2391,7 @@ abstract class Streams extends Base_Streams
 					if (empty($options['skipMessageTo'])) {
 						Streams_Message::post($asUserId, $toPublisherId, $toStreamName, array(
 							'type' => 'Streams/unrelatedTo',
+							'content' => "Removed relation from " . $stream->title,
 							'instructions' => @compact(
 								'fromPublisherId', 'fromStreamName', 'type', 'options', 'weight'
 							)
@@ -2420,6 +2421,7 @@ abstract class Streams extends Base_Streams
 						// node server will be notified by Streams_Message::post
 						Streams_Message::post($asUserId, $fromPublisherId, $fromStreamName, array(
 							'type' => 'Streams/unrelatedFrom',
+							'contents' => "Removed relation to " . $category->title,
 							'instructions' => @compact(
 								'toPublisherId', 'toStreamName', 'type', 'options'
 							)
@@ -2523,29 +2525,32 @@ abstract class Streams extends Base_Streams
 		}
 		$skipTypes = Q::ifset($options, 'skipTypes', array());
 
-		// Check access to stream
-		$fetchOptions = isset($options['fetchOptions']) ? $options['fetchOptions'] : null;
-		$rows = Streams::fetch($asUserId, $publisherId, $streamName, '*', $fetchOptions);
-		$streams = array();
-		foreach($rows as $n => $row) {
-			if (!$row) continue;
-			if (empty($options['skipAccess'])
-			and !$row->testReadLevel('relations')) {
-				throw new Users_Exception_NotAuthorized();
+		if (empty($options['relationsOnly'])
+		or empty($options['skipAccess'])) {
+			// Check access to stream
+			$fetchOptions = isset($options['fetchOptions']) ? $options['fetchOptions'] : null;
+			$rows = Streams::fetch($asUserId, $publisherId, $streamName, '*', $fetchOptions);
+			$streams = array();
+			foreach($rows as $n => $row) {
+				if (!$row) continue;
+				if (empty($options['skipAccess'])
+				&& !$row->testReadLevel('relations')) {
+					throw new Users_Exception_NotAuthorized();
+				}
+				if (!$row->testReadLevel('participants')) {
+					$skipTypes[$n][] = 'Streams/participating';
+				}
+				$streams[$n] = $row;
 			}
-			if (!$row->testReadLevel('participants')) {
-				$skipTypes[$n][] = 'Streams/participating';
+			if (!$streams) {
+				if (!empty($options['relationsOnly'])
+				|| !empty($options['streamsOnly'])) {
+					return array();
+				}
+				return array(array(), array(), $returnMultiple ? array() : null);
 			}
-			$streams[$n] = $row;
+			$stream = reset($streams);
 		}
-		if (!$streams) {
-			if (!empty($options['relationsOnly'])
-			|| !empty($options['streamsOnly'])) {
-				return array();
-			}
-			return array(array(), array(), $returnMultiple ? array() : null);
-		}
-		$stream = reset($streams);
 
 		if ($isCategory) {
 			$query = Streams_RelatedTo::select()
