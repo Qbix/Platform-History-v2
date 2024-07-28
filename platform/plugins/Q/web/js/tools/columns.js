@@ -1071,6 +1071,8 @@ function presentColumn(tool, $column, fullscreen, recalculateHeights) {
 	var state = tool.state;
 	var $currentColumn = Q.getObject('$currentColumn', state);
 
+	$currentColumn.removeClass('Q_columns_overlapped');
+
 	if (!$column) {
 		$column = $currentColumn;
 		fullscreen = tool.state.fullscreen;
@@ -1163,8 +1165,6 @@ function presentColumn(tool, $column, fullscreen, recalculateHeights) {
 	} else {
 		$column.css('min-height', tool.oldMinHeight);
 	}
-
-	$(state.columns[state.columns.length-1]).removeClass('Q_columns_overlapped');
 }
 
 function prepareColumns(tool) {
