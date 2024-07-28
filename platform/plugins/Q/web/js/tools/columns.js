@@ -898,7 +898,9 @@ Q.Tool.define("Q/columns", function(options) {
 			Q.removeElement(div, true); // remove it correctly)
 
 			if (!Q.info.isMobile) {
-				tool.element.scrollTo(tool.element.scrollWidth, 0);
+				setTimeout(function () {
+					tool.element.scrollTo(tool.element.scrollWidth, 0);
+				}, state.animation.duration + 10);
 			}
 
 			presentColumn(tool);
