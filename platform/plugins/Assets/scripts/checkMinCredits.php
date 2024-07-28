@@ -30,8 +30,12 @@ while (1) {
 		$user = Users::fetch($creditsStream->publisherId);
 		$communityId = Users::communityId();
 		$creditsAmount = $creditsStream->getAttribute("amount");
-		$creditsMin = (int)$creditsStream->getAttribute("creditsMin") ?: Q_Config::expect("Assets", "credits", "amount", "min");
-		$creditsAdd = (int)$creditsStream->getAttribute("creditsAdd") ?: Q_Config::expect("Assets", "credits", "amount", "add");
+		$creditsMin = (int)$creditsStream->getAttribute("creditsMin", 
+			Q_Config::expect("Assets", "credits", "amount", "min")
+		);
+		$creditsAdd = (int)$creditsStream->getAttribute("creditsAdd", 
+			Q_Config::expect("Assets", "credits", "amount", "add")
+		);
 
 		if ($creditsAmount > $creditsMin) {
 			continue;

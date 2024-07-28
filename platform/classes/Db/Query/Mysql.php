@@ -49,8 +49,10 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 
 		$conn = $this->db->connection();
 		$prefix = empty($conn['prefix']) ? '' : $conn['prefix'];
+		$app = Q::app();
 		$this->replacements = array(
-			'{{prefix}}' => $prefix
+			'{{prefix}}' => $prefix,
+			'{{app}}' => $app
 		);
 		if (isset($db->dbname)) {
 			$this->replacements['{{dbname}}'] = $db->dbname;

@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Assets": {
-				"version": "1.0.171",
+				"version": "1.0.172",
 				"compatible": "0.7",
 				"requires": {"Q": "0.9", "Streams": "0.9"},
 				"connections": ["Assets", "Streams"]
@@ -19,6 +19,7 @@
 		"handlersAfterEvent": {
 			"Users/insertUser": ["Assets/after/Users_insertUser"],
 			"Users/updateUserIds": ["Assets/after/Users_updateUserIds"],
+			"Users/filter/users": ["Assets/after/Users_filter_users"],
 			"Assets/charge": ["Assets/after/Assets_charge"],
 			"Assets/credits/spent": ["Assets/after/Assets_credits_spent"],
 			"Assets/startSubscription": ["Assets/after/Assets_startSubscription"],
@@ -253,7 +254,7 @@
 				"create": false,
 				"edit": false,
 				"defaults": {
-					"title": "Subscription plan",
+					"title": "Credits",
 					"readLevel": 0,
 					"writeLevel": 0,
 					"adminLevel": 0
@@ -265,7 +266,8 @@
 							"timeout": 60
 						}
 					}
-				}
+				},
+				"updateRelations": ["from"]
 			},
 			"Assets/plan": {
 				"emoji": "📊",

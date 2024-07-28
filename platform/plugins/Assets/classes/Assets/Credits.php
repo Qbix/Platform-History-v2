@@ -162,7 +162,7 @@ class Assets_Credits extends Base_Assets_Credits
 			throw new Q_Exception_RequiredField(array('field' => 'reason'));
 		}
 
-		$userId = $userId ?: Users::loggedInUser(true)->id;
+		$userId = $userId ? $userId : Users::loggedInUser(true)->id;
 
 		$toPublisherId = Q::ifset($more, "toPublisherId", null);
 		$toStreamName = Q::ifset($more, "toStreamName", null);
@@ -257,7 +257,7 @@ class Assets_Credits extends Base_Assets_Credits
 			throw new Q_Exception_RequiredField(array('field' => 'reason'));
 		}
 
-		$userId = $userId ?: Users::loggedInUser(true)->id;
+		$userId = $userId ? $userId : Users::loggedInUser(true)->id;
 
 		$stream = self::userStream($userId, $userId);
 		$stream->setAttribute('amount', $stream->getAttribute('amount') + $amount);
@@ -321,7 +321,7 @@ class Assets_Credits extends Base_Assets_Credits
 			throw new Q_Exception_RequiredField(array('field' => 'reason'));
 		}
 
-		$fromUserId = $fromUserId ?: Users::loggedInUser(true)->id;
+		$fromUserId = $fromUserId ? $fromUserId : Users::loggedInUser(true)->id;
 
 		if ($toUserId == $fromUserId) {
 			throw new Q_Exception_WrongValue(array('field' => 'fromUserId', 'range' => 'you can\'t transfer to yourself'));
@@ -411,8 +411,8 @@ class Assets_Credits extends Base_Assets_Credits
 		$more['messageId'] = $assetsCredits->id;
 		$more['toStreamTitle'] = $assetsCredits->getAttribute("toStreamTitle");
 		$more['fromStreamTitle'] = $assetsCredits->getAttribute("fromStreamTitle");
-		$more['toUserId'] = $assetsCredits->toUserId ?: $assetsCredits->getAttribute("toUserId");
-		$more['fromUserId'] = $assetsCredits->fromUserId ?: $assetsCredits->getAttribute("fromUserId");
+		$more['toUserId'] = $assetsCredits->toUserId ? $assetsCredits->toUserId : $assetsCredits->getAttribute("toUserId");
+		$more['fromUserId'] = $assetsCredits->fromUserId ? $assetsCredits->fromUserId : $assetsCredits->getAttribute("fromUserId");
 		$more['invitedUserId'] = $assetsCredits->getAttribute("invitedUserId");
 		$more['fromPublisherId'] = $assetsCredits->fromPublisherId;
 		$more['fromStreamName'] = $assetsCredits->fromStreamName;
@@ -612,7 +612,7 @@ class Assets_Credits extends Base_Assets_Credits
 	static function payBonus ($amount, $userId=null) {
 		$amount = (int)$amount;
 
-		$userId = $userId ?: Users::loggedInUser(true)->id;
+		$userId = $userId ? $userId : Users::loggedInUser(true)->id;
 
 		$bonuses = Q_Config::get("Assets", "credits", "bonus", "bought", null);
 		if (!is_array($bonuses) || empty($bonuses)) {

@@ -1165,12 +1165,8 @@ class Q_Session
 	{
 		if ($seed === true) {
 			$seed = null;
-			$payload = $_REQUEST;
 			try {
-				if ($publicKey = Users::verify($payload, false)) {
-					// valid payload and public key provided
-					$seed = $publicKey;
-				}
+				$seed = Q::event('Q/session/generateId', compact('seed', 'prefixType'), 'before', false, $seed);
 			} catch (Q_Exception_MissingPHPVersion $e) {
 				// we can't check the signature because PHP is too old,
 				// so we can silently exit, or write to the log
