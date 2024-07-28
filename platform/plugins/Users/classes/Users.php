@@ -49,7 +49,7 @@ abstract class Users extends Base_Users
 			if (Users::isCommunityId($userId)) {
 				$communityIds[] = $userId;
 			} else {
-				$personIds = $userId;
+				$personIds[] = $userId;
 			}
 		}
 		return array($communityIds, $personIds);
