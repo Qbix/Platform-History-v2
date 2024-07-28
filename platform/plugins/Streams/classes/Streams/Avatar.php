@@ -163,7 +163,15 @@ class Streams_Avatar extends Base_Streams_Avatar
 				break;
 			}
 		}
-		return $avatars;
+		$userIds = array_keys($avatars);
+		$userIds = Q::event('Users/filter/users', array(
+			'from' => 'Streams_Avatar::fetchByPrefix'
+		), 'after', false,$userIds);
+		$result = array();
+		foreach ($userIds as $userId) {
+			$result[$userId] = $avatars[$userId];
+		}
+		return $result;
 	}
 
 	/**
