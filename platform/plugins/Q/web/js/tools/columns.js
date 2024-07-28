@@ -719,7 +719,7 @@ Q.Tool.define("Q/columns", function(options) {
 									scrollLeft: this.scrollWidth
 								}, o.animation.scrollDuration);
 							} else {
-								$this.scrollLeft(this.scrollWidth);
+								this.scrollTo(this.scrollWidth, 0);
 							}
 							if ($this.css('overflow') !== 'visible') {
 								return false;
@@ -896,6 +896,10 @@ Q.Tool.define("Q/columns", function(options) {
 		
 		function _close() {
 			Q.removeElement(div, true); // remove it correctly)
+
+			if (!Q.info.isMobile) {
+				tool.element.scrollTo(tool.element.scrollWidth, 0);
+			}
 
 			presentColumn(tool);
 			Q.Pointer.clearSelection();
