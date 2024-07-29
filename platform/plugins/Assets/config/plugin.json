@@ -171,22 +171,25 @@
 					"0x13881": "0x12Fa616220E1c55c98268690e2eAa5024a3F8BD7"
 				},
 				"Assets/templates/R1/Sales/factory": {
-					"all": "0x0801010000205568f8F4C54C84c2e71Ac8E987f8",
-					"0x38": "0x0801010000205568f8F4C54C84c2e71Ac8E987f8",
-                    "0x89": "0x0801010000205568f8F4C54C84c2e71Ac8E987f8",
-					"0x13881": "0x6f495e3e57BA06ACA868f3F782cb864bb091a324"
+					"all": "0x080101006379fcb14e08a24388888bbb8fbfa8c9",
+					"0x38": "0x080101006379fcb14e08a24388888bbb8fbfa8c9",
+                    "0x89": "0x080101006379fcb14e08a24388888bbb8fbfa8c9",
+                    "0x2105": "0x080101006379fcb14e08a24388888bbb8fbfa8c9",
+                    "0xa": "0x080101006379fcb14e08a24388888bbb8fbfa8c9"
 				},
-				"Assets/templates/R1/SalesAggregator/factory": {
-					"all": "0x0801010000205568f8F4C54C84c2e71Ac8E987f8",
-					"0x38": "0x0801010000205568f8F4C54C84c2e71Ac8E987f8",
-					"0x89": "0x0801010000205568f8F4C54C84c2e71Ac8E987f8",
-					"0x13881": "0x6f495e3e57BA06ACA868f3F782cb864bb091a324"
+				"Assets/templates/R1/SalesWithStablePrices/factory": {
+					"all": "0x080101006379fcb14e08a24388888bbb8fbfa8c9",
+					"0x38": "0x080101006379fcb14e08a24388888bbb8fbfa8c9",
+                    "0x89": "0x080101006379fcb14e08a24388888bbb8fbfa8c9",
+                    "0x2105": "0x080101006379fcb14e08a24388888bbb8fbfa8c9",
+                    "0xa": "0x080101006379fcb14e08a24388888bbb8fbfa8c9"
 				},
-				"Assets/templates/R1/SalesToken/factory": {
-					"all": "0x0801010000205568f8F4C54C84c2e71Ac8E987f8",
-					"0x38": "0x0801010000205568f8F4C54C84c2e71Ac8E987f8",
-					"0x89": "0x0801010000205568f8F4C54C84c2e71Ac8E987f8",
-					"0x13881": "0x6f495e3e57BA06ACA868f3F782cb864bb091a324"
+				"Assets/templates/R1/SalesForToken/factory": {
+					"all": "0x080101006379fcb14e08a24388888bbb8fbfa8c9",
+					"0x38": "0x080101006379fcb14e08a24388888bbb8fbfa8c9",
+                    "0x89": "0x080101006379fcb14e08a24388888bbb8fbfa8c9",
+                    "0x2105": "0x080101006379fcb14e08a24388888bbb8fbfa8c9",
+                    "0xa": "0x080101006379fcb14e08a24388888bbb8fbfa8c9"
 				},
 				"Assets/templates/R1/Income/factory": {
 					"all": "<put address here>",
