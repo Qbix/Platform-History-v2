@@ -1,5 +1,3 @@
-
-
 <?php
 
 function Users_before_Q_session_generateId($params, &$result)
