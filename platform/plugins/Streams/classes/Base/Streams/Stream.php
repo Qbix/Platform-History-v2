@@ -1422,6 +1422,9 @@ return array (
 
 	function beforeSet_arrivedRatio($value)
 	{
+		if (!isset($value)) {
+			return array('arrivedRatio', $value);
+		}
 		if ($value instanceof Db_Expression
                or $value instanceof Db_Range) {
 			return array('arrivedRatio', $value);
@@ -1447,7 +1450,7 @@ return array (
     2 => '',
     3 => false,
   ),
-  1 => false,
+  1 => true,
   2 => 'MUL',
   3 => NULL,
 );			
@@ -1455,6 +1458,9 @@ return array (
 
 	function beforeSet_joinedRatio($value)
 	{
+		if (!isset($value)) {
+			return array('joinedRatio', $value);
+		}
 		if ($value instanceof Db_Expression
                or $value instanceof Db_Range) {
 			return array('joinedRatio', $value);
@@ -1480,7 +1486,7 @@ return array (
     2 => '',
     3 => false,
   ),
-  1 => false,
+  1 => true,
   2 => 'MUL',
   3 => NULL,
 );			

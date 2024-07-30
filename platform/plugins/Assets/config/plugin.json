@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Assets": {
-				"version": "1.0.171",
+				"version": "1.0.173",
 				"compatible": "0.7",
 				"requires": {"Q": "0.9", "Streams": "0.9"},
 				"connections": ["Assets", "Streams"]
@@ -19,6 +19,7 @@
 		"handlersAfterEvent": {
 			"Users/insertUser": ["Assets/after/Users_insertUser"],
 			"Users/updateUserIds": ["Assets/after/Users_updateUserIds"],
+			"Users/filter/users": ["Assets/after/Users_filter_users"],
 			"Assets/charge": ["Assets/after/Assets_charge"],
 			"Assets/credits/spent": ["Assets/after/Assets_credits_spent"],
 			"Assets/startSubscription": ["Assets/after/Assets_startSubscription"],
@@ -170,22 +171,25 @@
 					"0x13881": "0x12Fa616220E1c55c98268690e2eAa5024a3F8BD7"
 				},
 				"Assets/templates/R1/Sales/factory": {
-					"all": "0x0801010000205568f8F4C54C84c2e71Ac8E987f8",
-					"0x38": "0x0801010000205568f8F4C54C84c2e71Ac8E987f8",
-                    "0x89": "0x0801010000205568f8F4C54C84c2e71Ac8E987f8",
-					"0x13881": "0x6f495e3e57BA06ACA868f3F782cb864bb091a324"
+					"all": "0x080101006379fcb14e08a24388888bbb8fbfa8c9",
+					"0x38": "0x080101006379fcb14e08a24388888bbb8fbfa8c9",
+                    "0x89": "0x080101006379fcb14e08a24388888bbb8fbfa8c9",
+                    "0x2105": "0x080101006379fcb14e08a24388888bbb8fbfa8c9",
+                    "0xa": "0x080101006379fcb14e08a24388888bbb8fbfa8c9"
 				},
-				"Assets/templates/R1/SalesAggregator/factory": {
-					"all": "0x0801010000205568f8F4C54C84c2e71Ac8E987f8",
-					"0x38": "0x0801010000205568f8F4C54C84c2e71Ac8E987f8",
-					"0x89": "0x0801010000205568f8F4C54C84c2e71Ac8E987f8",
-					"0x13881": "0x6f495e3e57BA06ACA868f3F782cb864bb091a324"
+				"Assets/templates/R1/SalesWithStablePrices/factory": {
+					"all": "0x080101006379fcb14e08a24388888bbb8fbfa8c9",
+					"0x38": "0x080101006379fcb14e08a24388888bbb8fbfa8c9",
+                    "0x89": "0x080101006379fcb14e08a24388888bbb8fbfa8c9",
+                    "0x2105": "0x080101006379fcb14e08a24388888bbb8fbfa8c9",
+                    "0xa": "0x080101006379fcb14e08a24388888bbb8fbfa8c9"
 				},
-				"Assets/templates/R1/SalesToken/factory": {
-					"all": "0x0801010000205568f8F4C54C84c2e71Ac8E987f8",
-					"0x38": "0x0801010000205568f8F4C54C84c2e71Ac8E987f8",
-					"0x89": "0x0801010000205568f8F4C54C84c2e71Ac8E987f8",
-					"0x13881": "0x6f495e3e57BA06ACA868f3F782cb864bb091a324"
+				"Assets/templates/R1/SalesForToken/factory": {
+					"all": "0x080101006379fcb14e08a24388888bbb8fbfa8c9",
+					"0x38": "0x080101006379fcb14e08a24388888bbb8fbfa8c9",
+                    "0x89": "0x080101006379fcb14e08a24388888bbb8fbfa8c9",
+                    "0x2105": "0x080101006379fcb14e08a24388888bbb8fbfa8c9",
+                    "0xa": "0x080101006379fcb14e08a24388888bbb8fbfa8c9"
 				},
 				"Assets/templates/R1/Income/factory": {
 					"all": "<put address here>",
@@ -253,7 +257,7 @@
 				"create": false,
 				"edit": false,
 				"defaults": {
-					"title": "Subscription plan",
+					"title": "Credits",
 					"readLevel": 0,
 					"writeLevel": 0,
 					"adminLevel": 0
@@ -265,7 +269,8 @@
 							"timeout": 60
 						}
 					}
-				}
+				},
+				"updateRelations": ["from"]
 			},
 			"Assets/plan": {
 				"emoji": "📊",
@@ -399,6 +404,13 @@
 		}
 	},
 	"Assets": {
+		"users": {
+			"filter": {
+				"credits": {
+					"min": 0
+				}
+			}
+		},
 		"payments": {
 			"stripe": {
 				"jsLibrary": "https://js.stripe.com/v3/",

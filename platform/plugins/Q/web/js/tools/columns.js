@@ -714,12 +714,12 @@ Q.Tool.define("Q/columns", function(options) {
 							: $te;
 						$toScroll.each(function () {
 							var $this = $(this);
-							if (options.animation.scrollDuration) {
+							if (o.animation.scrollDuration) {
 								$this.animate({
 									scrollLeft: this.scrollWidth
-								}, options.animation.scrollDuration);
+								}, o.animation.scrollDuration);
 							} else {
-								$this.scrollLeft(this.scrollWidth);
+								this.scrollTo(this.scrollWidth, 0);
 							}
 							if ($this.css('overflow') !== 'visible') {
 								return false;
@@ -897,6 +897,15 @@ Q.Tool.define("Q/columns", function(options) {
 		function _close() {
 			Q.removeElement(div, true); // remove it correctly)
 
+			if (!Q.info.isMobile) {
+				var ival = setInterval(function () {
+					tool.element.scrollTo(tool.element.scrollWidth, 0);
+				}, 25);
+				setTimeout(function () {
+					clearTimeout(ival);
+				}, state.animation.duration + 25);
+			}
+
 			presentColumn(tool);
 			Q.Pointer.clearSelection();
 			Q.handle(callback, tool, [index, div]);
@@ -1061,6 +1070,8 @@ Q.Template.set('Q/columns/column',
 function presentColumn(tool, $column, fullscreen, recalculateHeights) {
 	var state = tool.state;
 	var $currentColumn = Q.getObject('$currentColumn', state);
+
+	$currentColumn.removeClass('Q_columns_overlapped');
 
 	if (!$column) {
 		$column = $currentColumn;

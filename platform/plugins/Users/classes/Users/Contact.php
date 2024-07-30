@@ -320,6 +320,9 @@ class Users_Contact extends Base_Users_Contact
 			->limit($limit)
 			->execute()
 			->fetchAll(PDO::FETCH_COLUMN, 0);
+		$userIds = Q::event('Users/filter/users', array(
+			'from' => 'Users_Contact::fetchUserIds'
+		), 'after', false, $userIds);
 		return $userIds;
 	}
 

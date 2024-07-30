@@ -98,7 +98,7 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 			'display': (display === 'inline' || display === 'inline-block') ? 'inline-block' : display,
 			'zoom': 1,
 			'position': position === 'static' ? 'relative' : position,
-			'left': position === 'static' ? 0 : $this.css('left'),
+			'left': position === 'static' ? 0 : ($this.css('right') === 'auto' ? $this.css('left') : 'auto'),
 			'right': position === 'static' ? 'auto' : $this.css('right'),
 			'top': position === 'static' ? 0 : $this.css('top'),
 			'margin': '0px',

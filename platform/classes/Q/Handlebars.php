@@ -56,7 +56,7 @@ class Q_Handlebars {
 				'loader' => new Q_Handlebars_Loader(),
 				'partials_loader' => new Q_Handlebars_Loader(),
 				'escape' => function($value) {
-					return htmlspecialchars($value, ENT_COMPAT, 'UTF-8');
+					return $value ? htmlspecialchars($value, ENT_COMPAT, 'UTF-8') : $value;
 				}
 			));
 			self::$handlebars->addHelper('call', array('Q_Handlebars', 'helperCall'));

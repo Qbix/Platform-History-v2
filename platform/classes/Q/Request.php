@@ -555,6 +555,9 @@ class Q_Request
 			return $result;
 		}
 		$loadExtras = Q_Request::special('loadExtras', false);
+		if ($loadExtras && $type === 'response') {
+			return true; // if any extras are requested, then send responseExtras
+		}
 		if (filter_var($loadExtras, FILTER_VALIDATE_BOOLEAN)) {
 			$loadExtras = 'all';
 		}

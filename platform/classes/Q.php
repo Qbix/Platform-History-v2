@@ -1040,6 +1040,9 @@ class Q
 	 *  It will be returned by this function when event handling
 	 *  has finished, or has been aborted by an event handler.
 	 *  It is passed to all the event handlers, which can modify it.
+	 * @param {reference} $handlersCalled=array()
+	 *  If passed, fills a variable with array of names of handlers
+	 *  that were called, in the order they were called.
 	 * @return {mixed}
 	 *  Whatever the default event handler returned, or the final
 	 *  value of $result if it is modified by any event handlers.
@@ -1052,7 +1055,8 @@ class Q
 	 $params = array(),
 	 $pure = false,
 	 $skipIncludes = false,
-	 &$result = null)
+	 &$result = null,
+	 &$handlersCalled = array())
 	{
 		// for now, handle only event names which are strings
 		if (!is_string($eventName)) {
@@ -1061,6 +1065,7 @@ class Q
 		if (!is_array($params)) {
 			$params = array();
 		}
+		$handlersCalled = array();
 
 		static $event_stack_limit = null;
 		if (!isset($event_stack_limit)) {
@@ -1084,6 +1089,7 @@ class Q
 				}
 				if (is_array($handlers)) {
 					foreach ($handlers as $handler) {
+						$handlersCalled[] = $handler;
 						if (false === self::handle($handler, $params, $skipIncludes, $result)) {
 							// return this result instead
 							return $result;
@@ -1096,6 +1102,7 @@ class Q
 			if (!$pure) {
 				// If none of the "after" handlers return anything,
 				// the following result will be returned:
+				$handlersCalled[] = $eventName;
 				$result = self::handle($eventName, $params, $skipIncludes, $result);
 			}
 
@@ -1107,6 +1114,7 @@ class Q
 				}
 				if (is_array($handlers)) {
 					foreach ($handlers as $handler) {
+						$handlersCalled[] = $handler;
 						if (false === self::handle($handler, $params, $skipIncludes, $result)) {
 							// return this result instead
 							return $result;

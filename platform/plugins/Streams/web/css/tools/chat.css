@@ -466,6 +466,7 @@
 .Q_notMobile .Q_columns_column.Streams_chat_streams_video .Q_video_tool {
 	height: 100%;
 }
+
 /* phones */
 @media (min-width: 320px) and (max-width: 580px) {
 	.Streams_chat_date {

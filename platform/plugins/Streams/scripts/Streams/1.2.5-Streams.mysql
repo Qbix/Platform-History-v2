@@ -1,0 +1,3 @@
+ALTER TABLE {{prefix}}stream
+MODIFY COLUMN arrivedRatio decimal(10,4) NULL DEFAULT NULL,
+MODIFY COLUMN joinedRatio decimal(10,4) NULL DEFAULT NULL;

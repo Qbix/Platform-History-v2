@@ -1091,6 +1091,7 @@ return [["int",null,null,null],false,"","0"];
  * @throws {Error} If 'value' is not number
  */
 Base.prototype.beforeSet_arrivedRatio = function (value) {
+		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		value = Number(value);
 		if (isNaN(value))
@@ -1104,7 +1105,7 @@ Base.prototype.beforeSet_arrivedRatio = function (value) {
 	 */
 Base.column_arrivedRatio = function () {
 
-return [["decimal","10,4","",false],false,"MUL",null];
+return [["decimal","10,4","",false],true,"MUL",null];
 };
 
 /**
@@ -1115,6 +1116,7 @@ return [["decimal","10,4","",false],false,"MUL",null];
  * @throws {Error} If 'value' is not number
  */
 Base.prototype.beforeSet_joinedRatio = function (value) {
+		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
 		value = Number(value);
 		if (isNaN(value))
@@ -1128,7 +1130,7 @@ Base.prototype.beforeSet_joinedRatio = function (value) {
 	 */
 Base.column_joinedRatio = function () {
 
-return [["decimal","10,4","",false],false,"MUL",null];
+return [["decimal","10,4","",false],true,"MUL",null];
 };
 
 /**

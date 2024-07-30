@@ -1056,7 +1056,7 @@ class Streams_Stream extends Base_Streams_Stream
 			$attributeName = array($attributeName => $value);
 		}
 		if (!$privilegedAccess) {
-			$prefixes = Streams_Stream::getConfigField($stream->type, array(
+			$prefixes = Streams_Stream::getConfigField($this->type, array(
 				'restricted', 'attributes', 'prefixes'
 			), array());
 			foreach ($attributeName as $k => $value) {
@@ -1232,7 +1232,7 @@ class Streams_Stream extends Base_Streams_Stream
 		if (is_array($value)) {
 			$value = Q::json_encode($value);
 		}
-		if (is_string($value)) {
+		if (is_string($value) and $value) {
 			$decoded = Q::json_decode($value, true);
 			if (!is_array($decoded) or Q::isAssociative($decoded)) {
 				throw new Q_Exception_WrongValue(array('field' => 'permissions', 'range' => 'JSON array'));
@@ -2175,14 +2175,20 @@ class Streams_Stream extends Base_Streams_Stream
 	 * Then it fetches relations from the template of this stream type, with relation types "attribute/$attributeName",
 	 * taking note of toPublisherId and toStreamName
 	 * and for each one, it may unrelate / relate relations of the type "attribute/$attributeName=$value",
-	 * updating indexes used for searching by that attribute name and value (range).
+	 * updating indexes used for searching by that attribute name and value (range).\
+	 * @param {array} [$options=array()]
+	 * @param {array} [$firstTimeAddingAttributes=false] pass an array with keys = attribute names
+	 *  that are being newly added, to save new relations even if attribute value
+	 *  didn't change. Mostly used internally, e.g. in installer scripts.
 	 * @return {array} Multidimensional array detailing which relations were removed and added, if any
 	 */
-	function updateRelations($asUserId = null)
+	function updateRelations($options)
 	{
 		$changes = $this->changedFields();
 		$updateRelations = self::getConfigField($this->type, 'updateRelations', array());
-		if (!$changes || !$updateRelations) {
+		if (!$updateRelations or (
+			empty($changes['attributes']) and empty($options['firstTimeAddingAttributes'])
+		)) {
 			return array();
 		}
 		$relationTypes = array();
@@ -2190,28 +2196,33 @@ class Streams_Stream extends Base_Streams_Stream
 		// foreach ($changes as $k => $v) {
 		// 	$relationTypes[] = "field/$k";
 		// }
-		if (!empty($changes['attributes'])) {
-			// see what attributes have changed
-			$orig = $this->getAllAttributes(true);
-			$attr = $this->getAllAttributes(false);
-			foreach ($orig as $k => $v) {
-				if (!isset($orig[$k]) and !isset($attr[$k])) {
-					continue;
-				}
-				if ((!isset($attr[$k]) && isset($v))
-				|| ($attr[$k] !== $v)) { // was removed or changed
-					$attributesChanged[$k] = $v;
-					$relationTypes[] = "attribute/$k";
-				}
+		// see what attributes have changed
+		$orig = $this->getAllAttributes(true);
+		$attr = $this->getAllAttributes(false);
+		foreach ($orig as $k => $v) {
+			if (!isset($orig[$k]) and !isset($attr[$k])) {
+				continue;
 			}
-			foreach ($attr as $k => $v) {
-				if (!isset($orig[$k]) || $orig[$k] !== $v) {
-					$attributesAdded[$k] = $v; // new value
+			if ((!isset($attr[$k]) && isset($v))
+			|| ($attr[$k] !== $v)) { // was removed or changed
+				$attributesChanged[$k] = $v;
+				$relationTypes[] = "attribute/$k";
+			}
+		}
+		foreach ($attr as $k => $v) {
+			if (!empty($options['firstTimeAddingAttributes'][$k])
+			or (!isset($orig[$k]) && isset($attr[$k]))) {
+				$attributesAdded[$k] = $v; // new value
+				if (!in_array("attribute/$k", $relationTypes)) {
+					$relationTypes[] = "attribute/$k";
 				}
 			}
 		}
 		if ($updateRelations === true) {
 			$updateRelations = array('from');
+		}
+		if (!is_array($updateRelations)) {
+			throw new Q_Exception_WrongType(array('field' => 'updateRelations', 'type' => 'array'));
 		}
 		foreach ($updateRelations as $direction) {
 			if ($direction !== 'from') {
@@ -2225,6 +2236,7 @@ class Streams_Stream extends Base_Streams_Stream
 			))->fetchDbRows();
 			$weight = time(); // is_numeric($attr[$k]) ? $attr[$k] : 1;
 			$removeRelationTypes = array();
+			$addRelationTypes = array();
 			foreach ($attributesChanged as $ak => $av) {
 				$found = false;
 				foreach ($rfroms as $rf) {
@@ -2237,19 +2249,32 @@ class Streams_Stream extends Base_Streams_Stream
 				}
 				if (is_numeric($av)) {
 					// this form for numbers makes lexicographical comparisons agree with numeric ones
-					$av = sprintf("%+015.2f", $av);
+					$av = sprintf("%015.2f", $av);
 				}
 				if (is_array($av)) {
 					$toRemove = array_diff($orig[$ak], $av);
 					foreach ($toRemove as $r) {
-						$removeRelationTypes[] = "attribute/$ak=" . json_encode($r);
+						$removeRelationTypes[] = "attribute/$ak=$r";
 					}
 				} else {
 					// handle regular scalar values
-					$removeRelationTypes[] = "attribute/$ak=" . json_encode($av);
+					$removeRelationTypes[] = "attribute/$ak=$av";
+				}
+				$av_new = $attr[$ak];
+				if (is_numeric($av_new)) {
+					// this form for numbers makes lexicographical comparisons agree with numeric ones
+					$av_new = sprintf("%015.2f", $av_new);
+				}
+				if (is_array($av_new)) {
+					$toAdd = array_diff($av_new, $orig[$ak]);
+					foreach ($toAdd as $a) {
+						$addRelationTypes[] = "attribute/$ak=$r";
+					}
+				} else {
+					// handle regular scalar values
+					$addRelationTypes[] = "attribute/$ak=$av_new";
 				}
 			}
-			$addRelationTypes = array();
 			foreach ($attributesAdded as $ak => $av) {
 				$found = false;
 				foreach ($rfroms as $rf) {
@@ -2265,21 +2290,21 @@ class Streams_Stream extends Base_Streams_Stream
 					foreach ($toAdd as $a) {
 						if (is_numeric($a)) {
 							// this form for numbers makes lexicographical comparisons agree with numeric ones
-							$av = sprintf("%+015.2f", $av);
+							$a = sprintf("%015.2f", $a);
 						}
-						$addRelationTypes[] = "attribute/$ak=" . json_encode($a);
+						$addRelationTypes[] = "attribute/$ak=$a";
 					}
 				} else {
 					// handle regular scalar values
 					if (is_numeric($av)) {
 						// this form for numbers makes lexicographical comparisons agree with numeric ones
-						$av = sprintf("%+015.2f", $av);
+						$av = sprintf("%015.2f", $av);
 					}
-					$addRelationTypes[] = "attribute/$ak=" . json_encode($av);
+					$addRelationTypes[] = "attribute/$ak=$av";
 				}
 			}
 			$toStreams = array();
-			foreach ($froms as $rf) {
+			foreach ($rfroms as $rf) {
 				$toStreams[$rf->type][$rf->toPublisherId][] = $rf->toStreamName;
 			}
 			foreach ($toStreams as $relationType => $info) {
@@ -2299,7 +2324,7 @@ class Streams_Stream extends Base_Streams_Stream
 				}
 				foreach ($info as $toPublisherId => $toStreamNames) {
 					Streams::unrelate(
-						$asUserId, 
+						Q::app(), 
 						$toPublisherId,
 						$toStreamNames,
 						$unrelateRelationTypes,
@@ -2307,9 +2332,9 @@ class Streams_Stream extends Base_Streams_Stream
 						array('skipAccess' => true)
 					);
 					Streams::relate(
-						$asUserId, 
-						$rfrom->fromPublisherId,
-						$rfrom->fromStreamName,
+						Q::app(), 
+						$toPublisherId,
+						$toStreamNames,
 						$relateRelationTypes,
 						$this->publisherId, $this->name,
 						array('skipAccess' => true, 'weight' => $weight)
@@ -2609,6 +2634,7 @@ class Streams_Stream extends Base_Streams_Stream
 				'baseUrl' => $baseUrl ? $baseUrl : Q_Request::baseUrl()
 			)
 		);
+		$url = Q_Uri::interpolateUrl($url);
 		$urlString = Q_Handlebars::renderSource($url, $fields);
 		$qs = $messageOrdinal ? "?$messageOrdinal" : "";
 		return Q_Uri::url($urlString . $qs);
