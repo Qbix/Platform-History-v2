@@ -113,9 +113,9 @@
 				}).val(vidHeight);
 				$end.val(parseInt(exactVideoDuration));
 				$settings.show();
-				tool.videoObj.removeEventListener('canplay', _canPlayHandler);
+				tool.videoObj.removeEventListener('loadedmetadata', _canPlayHandler);
 			};
-			tool.videoObj.addEventListener('canplay', _canPlayHandler);
+			tool.videoObj.addEventListener('loadedmetadata', _canPlayHandler);
 
 			$("button[name=start]", element).on(Q.Pointer.fastclick, function () {
 				const $startButton = $(this);
