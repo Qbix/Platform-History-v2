@@ -1246,6 +1246,7 @@ class Q_Session
 	 */
 	static function isAuthenticated()
 	{
+		$sessionId = Q_Session::id();
 		return ($prefix = Q_Config::get(
 			'Q', 'session', 'id', 'prefixes', 'authenticated', null
 		) and Q::startsWith($sessionId, $prefix));
