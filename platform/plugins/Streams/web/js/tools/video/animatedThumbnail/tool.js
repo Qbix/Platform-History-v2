@@ -18,7 +18,7 @@
 
 		Q.Dialogs.push({
 			title: tool.text.animatedThumbnail.CreateAnimatedThumbnail,
-			className: "Streams_video_animatedThumbnail",
+			className: "Streams_video_animatedThumbnail Q_loading",
 			onActivate: function (dialog) {
 				Q.addScript(["{{Streams}}/js/tools/video/animatedThumbnail/GIFEncoder.js", "{{Streams}}/js/tools/video/animatedThumbnail/LZWEncoder.js", "{{Streams}}/js/tools/video/animatedThumbnail/NeuQuant.js"], function () {
 					Q.Template.render("Streams/video/animatedThumbnail", {
@@ -46,12 +46,13 @@
 	},
 
 	{
-		process: function (element) {
+		process: function (dialog) {
 			var tool = this;
 			const byteToKBScale = 0.0009765625;
-			const scale = window.devicePixelRatio;
-			tool.videoObj = $("video", element)[0];
-			const $settings = $(".Streams_video_animatedThumbnail_settings", element);
+			//const scale = window.devicePixelRatio;
+			const scale = 1;
+			tool.videoObj = $("video", dialog)[0];
+			const $settings = $(".Streams_video_animatedThumbnail_settings", dialog);
 			const $width = $("input[name=width]", $settings);
 			const $height = $("input[name=height]", $settings);
 			const $start = $("input[name=start]", $settings);
@@ -59,7 +60,7 @@
 			const $fps = $("input[name=fps]", $settings);
 			const $delay = $("input[name=delay]", $settings);
 			const $quality = $("input[name=quality]", $settings);
-			const $result = $(".Streams_video_animatedThumbnail_result", element);
+			const $result = $(".Streams_video_animatedThumbnail_result", dialog);
 			const getContextSettings = {willReadFrequently: true};
 			function encode64(input) {
 				var output = '', i = 0, l = input.length,
@@ -104,20 +105,23 @@
 				const exactVideoDuration = tool.videoObj.duration;
 				const vidHeight = tool.videoObj.videoHeight;
 				const vidWidth = tool.videoObj.videoWidth;
-				const ratio =  vidWidth > vidHeight ? vidWidth/vidHeight : vidHeight/vidWidth;
+				const ratio =  vidWidth/vidHeight;
 				$width.on('input', function () {
-					$height.val(Math.round($(this).val() / ratio));
+					var val = $(this).val();
+					$height.val(Math.round( val / ratio));
 				}).val(vidWidth);
 				$height.on('input', function () {
-					$width.val(Math.round($(this).val() * ratio));
+					var val = $(this).val();
+					$width.val(Math.round(val * ratio));
 				}).val(vidHeight);
 				$end.val(parseInt(exactVideoDuration));
 				$settings.show();
 				tool.videoObj.removeEventListener('loadedmetadata', _canPlayHandler);
+				dialog.classList.remove("Q_loading");
 			};
 			tool.videoObj.addEventListener('loadedmetadata', _canPlayHandler);
 
-			$("button[name=start]", element).on(Q.Pointer.fastclick, function () {
+			$("button[name=start]", dialog).on(Q.Pointer.fastclick, function () {
 				const $startButton = $(this);
 				$startButton.addClass("Q_disabled");
 				$result.hide();
@@ -187,9 +191,9 @@
 				tool.videoObj.currentTime = start;
 				tool.videoObj.play();
 			});
-			$("button[name=useThis]", element).on(Q.Pointer.fastclick, function () {
-				Q.handle(tool.state.onReady, tool, [$("img.animatedThumbnail", element)]);
-				Q.Dialogs.close(element);
+			$("button[name=useThis]", dialog).on(Q.Pointer.fastclick, function () {
+				Q.handle(tool.state.onReady, tool, [$("img.animatedThumbnail", dialog)]);
+				Q.Dialogs.close(dialog);
 			});
 		}, Q: {
 			beforeRemove: function () {
@@ -200,12 +204,12 @@
 	});
 
 	Q.Template.set("Streams/video/animatedThumbnail",
-`<video src="{{videoUrl}}" preload="auto" playsinline="playsinline" muted crossorigin="anonymous"></video>
+`<video src="{{{videoUrl}}}" preload="auto" playsinline muted crossorigin="anonymous"></video>
 	<table class="Streams_video_animatedThumbnail_settings">
-		<tr><td>{{animatedThumbnail.Width}} <i>(px)</i>:</td><td><input name="width"></td><td>{{animatedThumbnail.Height}} <i>(px)</i>:</td><td><input name="height"></td></tr>
-		<tr><td>{{animatedThumbnail.Start}} <i>(sec)</i>:</td><td><input name="start" value="0"></td><td>{{animatedThumbnail.End}} <i>(sec)</i>:</td><td><input name="end"></td></tr>
-		<tr><td>FPS:</td><td><input name="fps" value="10"></td><td>{{animatedThumbnail.Delay}} <i>(ms)</i>:</td><td><input name="delay" value="0"></td></tr>
-		<tr><td>{{animatedThumbnail.Quality}} <i>(1-256)</i>:</td><td><input name="quality" value="1"></td></tr>
+		<tr><td>{{animatedThumbnail.Width}} <i>(px)</i>:</td><td><input type="number" name="width"></td><td>{{animatedThumbnail.Height}} <i>(px)</i>:</td><td><input type="number" name="height"></td></tr>
+		<tr><td>{{animatedThumbnail.Start}} <i>(sec)</i>:</td><td><input type="number" name="start" value="0"></td><td>{{animatedThumbnail.End}} <i>(sec)</i>:</td><td><input type="number" name="end"></td></tr>
+		<tr><td>FPS:</td><td><input type="number" name="fps" value="10"></td><td>{{animatedThumbnail.Delay}} <i>(ms)</i>:</td><td><input type="number" name="delay" value="0"></td></tr>
+		<tr><td>{{animatedThumbnail.Quality}} <i>(1-256)</i>:</td><td><input type="number" name="quality" value="1"></td></tr>
 		<tr><td colspan="4"><button name="start">{{animatedThumbnail.Start}}</button></td></tr>
 	</table>
 	<div class="Streams_video_animatedThumbnail_result">

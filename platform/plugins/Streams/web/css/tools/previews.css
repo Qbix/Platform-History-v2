@@ -89,6 +89,7 @@
 	display: block;
 	margin: 0 auto;
 	white-space: nowrap;
+	max-width: 100%;
 }
 .Streams_dialog_audio .Q_tabbing_container .Streams_audio_composer_upload_limit,
 .Streams_dialog_video .Q_tabbing_container .Streams_video_composer_upload_limit,
