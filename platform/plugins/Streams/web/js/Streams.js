@@ -114,6 +114,13 @@ Q.text.Streams = {
  * @final
  */
 /**
+ * Can see promotional clip of content
+ * @property READ_LEVEL.teaser
+ * @type integer
+ * @default 15
+ * @final
+ */
+/**
  * Can see the stream's content
  * @property READ_LEVEL.content
  * @type integer
@@ -158,6 +165,7 @@ Q.text.Streams = {
 Streams.READ_LEVEL = {
 	'none':			0,  // can't see the stream
 	'see':			10, // can see icon and title
+	'teaser':		15, // can see promotional clip of content
 	'content':		20, // can see the stream's content
 	'relations':	25,	// can see relations to other streams
 	'participants':	30, // can see participants in the stream
