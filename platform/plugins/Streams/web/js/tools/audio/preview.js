@@ -489,14 +489,34 @@
 									return _error("Error: recorder not found");
 								}
 
+								function processRecording(dataBlob) {
+									state.file = dataBlob;
+									state.file.name = "audio.mp3";
+									Q.handle(_process, mainDialog);
+								}
+								
 								var dataBlob = Q.getObject("recorder.state.dataBlob", state);
+								var recorderState = Q.getObject("recorder.state.recorderState", state);
 								// wait while track encoded
 								if (Q.isEmpty(dataBlob)) {
-									return _error(tool.text.errorNoSource);
+									if(recorderState == 'recording') {
+										function checkIfBlobIsReady() {
+											var dataBlob = Q.getObject("recorder.state.dataBlob", state);
+											if(Q.isEmpty(dataBlob)) {
+												setTimeout(checkIfBlobIsReady, 500)
+											} else {
+												processRecording(dataBlob);
+											}
+										}
+										checkIfBlobIsReady();
+										state.recorder.recorderStateChange("recorded");
+									} else {
+										return _error(tool.text.errorNoSource);
+									}
+								} else {
+									processRecording(dataBlob);
 								}
-
-								state.file = dataBlob;
-								state.file.name = "audio.mp3";
+								return;
 							} else if (action === 'upload') {
 								if (!$("input[type=file]", mainDialog).val()) {
 									return _error(tool.text.invalidFile);
