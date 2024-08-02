@@ -428,7 +428,7 @@ class Q_Session
 		 * @param {boolean} $isNew Whether a new session has just been started
 		 * @param {string} $id The id of the session
 		 */
-		Q::event('Q/session/start', array('original', 'changed', 'isNew', 'id'), 'after');
+		Q::event('Q/session/start', @compact('original', 'changed', 'isNew', 'id'), 'after');
 		return true;
 	}
 

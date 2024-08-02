@@ -380,13 +380,18 @@ Q.Tool.define("Q/audio", function (options) {
 			_resetPie();
 
 			// if recorder exists - just change state to "ready"
-			if(state.recorder && state.recorder.stream){
-				tool.recorderStateChange("ready");
+			if(state.recorder /* && state.recorder.stream */){
+				//tool.recorderStateChange("ready");
+				state.recorder.open(function() {
+					tool.recorderStateChange("ready");
+				}, function(msg, isUserNotAllow) {
+					console.error("Open recorder failed: " + msg);
+				});
 				return;
 			}
 
 			//if recorder don't exist - create one
-			tool.audio.recorderInit({
+			/* tool.audio.recorderInit({
 				onStreamReady: function(){
 					state.recorder = tool.audio.recorder;
 
@@ -399,6 +404,24 @@ Q.Tool.define("Q/audio", function (options) {
 					state.dataBlob = new Blob( [e.detail], { type: 'audio/mp3', name: "audio.mp3" } );
 					tool.audioElement.src = URL.createObjectURL(state.dataBlob);
 				}
+			}); */
+
+			Q.addScript("{{Q}}/js/audioRecorder/recorder.mp3.min.js", function(){ //https://github.com/xiangyuecn/Recorder
+				state.recorder = Recorder({
+					type: "mp3",
+					sampleRate: 16000,
+					bitRate: 16,
+					onProcess: function(buffers, powerLevel, bufferDuration, bufferSampleRate, newBufferIdx, asyncEnd) {
+						// Optional: handle real-time processing
+					}
+				});
+
+				state.recorder.open(function() {
+					tool.recorderStateChange("ready");
+
+				}, function(msg, isUserNotAllow) {
+					console.error("Open recorder failed: " + msg);
+				});
 			});
 		}
 
@@ -408,9 +431,10 @@ Q.Tool.define("Q/audio", function (options) {
 			_resetPie();
 
 			tool.audioElement.pause();
-
+			state.dataBlob = null;
 			if(state.recorder){
-				state.recorder.clearStream();
+				//state.recorder.clearStream();
+				state.recorder.close();
 			}
 			return;
 		}
@@ -433,12 +457,23 @@ Q.Tool.define("Q/audio", function (options) {
 		// recorder stoped
 		if(newState === "recorded"){
 			tool.pieTool.initPos();
+			state.recorder.stop(function(blob, duration) {
+				var url = URL.createObjectURL(blob);
+				state.dataBlob = blob;
+				tool.audioElement.src = url;
+				tool.recorderStateChange("play");
+
+				state.recorder.close();
+			}, function(msg) {
+				console.error("Recording failed: " + msg);
+				state.recorder.close();
+			});
 		}
 
 		// stop recording
 		if(newState !== "recording"){
 			// stop recording if recorder exist
-			if(state.recorder){ state.recorder.stop(); }
+			//if(state.recorder){ state.recorder.stop(); }
 
 			// stop recorder timer if exist
 			tool.clearPlayInterval();
@@ -716,7 +751,19 @@ Q.Tool.define("Q/audio", function (options) {
 			Q.handle(state.onSeek, tool, [state.currentPosition]);
 		});
 
-		tool.audioElement.addEventListener("canplay", function(){
+		/* tool.audioElement.addEventListener("canplay", function(){
+			state.duration = Math.trunc(tool.audioElement.duration * 1000);
+
+			Q.handle(state.onLoad, tool);
+
+			if(state.action === "recorder"){
+				tool.recorderStateChange("play");
+			}
+		}); */
+
+		//Safari doesn't fire canplay event unless web-site is in the user-controlled white-list:
+		//https://stackoverflow.com/questions/50051639/javascript-html5-video-event-canplay-not-firing-on-safari
+		tool.audioElement.addEventListener("loadedmetadata", function(){
 			state.duration = Math.trunc(tool.audioElement.duration * 1000);
 
 			Q.handle(state.onLoad, tool);

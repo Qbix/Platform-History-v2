@@ -21,6 +21,21 @@
     },
     {
       "inputs": [],
+      "name": "CompensationNotFound",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "CompensationTimeExpired",
+      "type": "error"
+    },
+    {
+      "inputs": [],
+      "name": "CompensationTimeShouldBePassed",
+      "type": "error"
+    },
+    {
+      "inputs": [],
       "name": "DeniedForForwarder",
       "type": "error"
     },
@@ -243,6 +258,19 @@
     },
     {
       "inputs": [],
+      "name": "_compensationEndTime",
+      "outputs": [
+        {
+          "internalType": "uint64",
+          "name": "",
+          "type": "uint64"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
       "name": "_endTime",
       "outputs": [
         {
@@ -296,13 +324,6 @@
       "name": "burnAllUnsoldTokens",
       "outputs": [],
       "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "buy",
-      "outputs": [],
-      "stateMutability": "payable",
       "type": "function"
     },
     {
@@ -366,6 +387,13 @@
         }
       ],
       "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "compensation",
+      "outputs": [],
+      "stateMutability": "nonpayable",
       "type": "function"
     },
     {
@@ -643,6 +671,18 @@
           ],
           "internalType": "struct ISalesStructs.LockedInPrice",
           "name": "_lockedInPrice",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint64",
+              "name": "endTime",
+              "type": "uint64"
+            }
+          ],
+          "internalType": "struct ISalesStructs.CompensationSettings",
+          "name": "_compensationSettings",
           "type": "tuple"
         },
         {
