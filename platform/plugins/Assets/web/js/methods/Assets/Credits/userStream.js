@@ -7,8 +7,9 @@ Q.exports(function(){
     * @param {Object} [options]
     * @param {String|true} [options.retainWith] key to retain the stream with, if any
     */
-    return function userStream(callback, options) {
-        if (!Q.Users.loggedInUser) {
+    return function getStream(callback, options) {
+        var liu = Q.Users.loggedInUser;
+        if (!liu) {
             callback(new Q.Error("Credits/userStream: not logged in"), null);
             return false;
         }
@@ -16,6 +17,6 @@ Q.exports(function(){
         if (options && options.retainWith) {
             S = S.retainWith(options.retainWith);
         }
-        S.get(Q.Users.loggedInUser.id, "Assets/user/credits", callback);
+        S.get(Q.Users.communityId, 'Assets/credits/' + liu.id, callback);
     }
 })

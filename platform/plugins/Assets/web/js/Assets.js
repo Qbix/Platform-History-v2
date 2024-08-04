@@ -18,7 +18,7 @@
 		 */
         
 		Credits: Q.Method.define({
-			userStream: new Q.Method(),
+			stream: new Q.Method(),
 			buy: new Q.Method(),
 			pay: new Q.Method(),
 			/**
@@ -585,7 +585,7 @@
 		// Listen for Assets/user/credits stream changes to update Q.Assets.Credits on client.
 		// and listem messages to show Q.Notices
 		var _listenUserStream = function () {
-			Assets.Credits.userStream(function (err) {
+			Assets.Credits.getStream(function (err) {
 				if (err) {
 					return;
 				}

@@ -51,7 +51,7 @@ Q.Tool.define("Assets/credits/balance", function (options) {
 				});
 			}
 		};
-		Q.Assets.Credits.userStream(function (err) {
+		Q.Assets.Credits.getStream(function (err) {
 			if (err) {
 				return;
 			}
