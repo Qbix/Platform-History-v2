@@ -84,6 +84,7 @@ class Assets_Credits extends Base_Assets_Credits
 		$publisherId = $communityId;
 		$streamName = "Assets/credits/$userId";
 		$stream = Streams::fetchOneOrCreate($asUserId, $publisherId, $streamName, array(
+			'type' => 'Assets/credits',
 			'subscribe' => true
 		), $results);
 		if ($results['created']) {
