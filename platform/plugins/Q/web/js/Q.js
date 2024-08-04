@@ -6226,7 +6226,7 @@ Q.Links = {
 		var botcommands = false;
 		for (var k in {
 			start:1, startgroup:1, startchannel:1, admin:1,
-			startapp:1, appname:1, startattach:1, choose:1
+			startapp:1, appname:1, startattach:1, choose:1, game:1
 		}) {
 			if (options[k]) {
 				botcommands = true;
