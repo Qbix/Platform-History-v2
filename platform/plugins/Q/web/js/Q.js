@@ -6239,7 +6239,7 @@ Q.Links = {
 					options.choose = options.choose.join('+');
 				}
 			}
-			return 'tg://resolve?' + where + '&' + urlParams.join('&') + to;
+			return 'tg://resolve?' + where + '&' + urlParams.join('&');
 		}
 		urlParams.push('to=' + to);
 		if (text) {
