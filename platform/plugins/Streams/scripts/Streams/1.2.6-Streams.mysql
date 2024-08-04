@@ -1,0 +1,4 @@
+ALTER TABLE {{prefix}}access
+MODIFY COLUMN readLevel int(11) NOT NULL DEFAULT -1 COMMENT '0=none, 10=''see'', 15=''teaser'', 20=''content'', 30=''participants'', 35=''messages'', 40=''receipts''',
+MODIFY COLUMN writeLevel int(11) NOT NULL DEFAULT -1 COMMENT '0=none, 10=join, 13=vote, 15=suggest, 18=contribute, 20=post, 23=relate',
+MODIFY COLUMN adminLevel int(11) NOT NULL DEFAULT -1 COMMENT '0=none, 10=''publish'', 20=''invite'', 30=''manage'', 40=''own''';

@@ -7,11 +7,11 @@ function Assets_1_0_174_Streams()
     Streams_Access::insert(array(
         'publisherId', 'streamName', 'ofUserId',
         'ofContactLabel', 'ofParticipantRole',
-        'readLevel'
+        'readLevel', 'writeLevel', 'adminlevel'
     ))->select(array(
         new Db_Expression("'$communityId'"), 'name', 'publisherId',
         new Db_Expression("''"), new Db_Expression("''"),
-        new Db_Expression("40")
+        new Db_Expression(40), new Db_Expression(-1), new Db_Expression(20)
     ), Streams_Stream::table())->where(array(
         'name' => 'Assets/user/credits'
     ))->execute();

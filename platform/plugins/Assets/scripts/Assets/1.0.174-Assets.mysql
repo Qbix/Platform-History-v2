@@ -1,0 +1,4 @@
+ALTER TABLE {{prefix}}credits
+ADD COLUMN communityId varbinary(31) NOT NULL DEFAULT {{communityId}} COMMENT 'community managing the credits'
+AFTER reason,
+CHANGE COLUMN `credits` `amount` DECIMAL(10, 4) NOT NULL;
