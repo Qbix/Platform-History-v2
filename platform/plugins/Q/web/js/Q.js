@@ -6219,7 +6219,7 @@ Q.Links = {
 		}
 		var where = (to[0] === '@' ? 'domain=' : 'phone=');
 		if (options.action) {
-			return 'tg://resolve?' + where + '&' + action;
+			return 'tg://resolve?' + where + '&' + options.action;
 		}
 		var botcommands = false;
 		for (var k in {
