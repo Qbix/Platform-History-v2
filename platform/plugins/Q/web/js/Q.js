@@ -6228,7 +6228,7 @@ Q.Links = {
 			start:1, startgroup:1, startchannel:1, admin:1,
 			startapp:1, appname:1, startattach:1, choose:1
 		}) {
-			if (options.startgroup) {
+			if (options[k]) {
 				botcommands = true;
 				urlParams.push(k + '=' + encodeURIComponent(options[k]));
 			}
