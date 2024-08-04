@@ -9,7 +9,9 @@ function Assets_1_0_174_Streams()
         'ofContactLabel', 'ofParticipantRole',
         'readLevel', 'writeLevel', 'adminlevel'
     ))->select(array(
-        new Db_Expression("'$communityId'"), 'name', 'publisherId',
+        new Db_Expression("'$communityId'"), 
+        new Db_Expression("CONCAT('Assets/credits/', publisherId)"),
+        'publisherId',
         new Db_Expression("''"), new Db_Expression("''"),
         new Db_Expression(40), new Db_Expression(-1), new Db_Expression(20)
     ), Streams_Stream::table())->where(array(
