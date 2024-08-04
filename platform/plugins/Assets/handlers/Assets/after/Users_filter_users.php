@@ -13,12 +13,17 @@ function Assets_after_Users_filter_users($params, &$result)
     foreach ($personIds as $pid) {
         $streamNames[] = "Assets/credits/$pid";
     }
-    $filteredPersonIds = Streams_RelatedTo::select('streamName')->where(array(
+    $sns = Streams_RelatedTo::select('fromStreamName')->where(array(
         'toPublisherId' => Users::communityId(),
         'toStreamName' => 'Assets/category/credits',
         'type' => new Db_Range("attribute/amount=$credits", true, false, null)
     ))->where(array(
         'fromStreamName' => $streamNames
     ))->fetchAll(PDO::FETCH_COLUMN, 0);
+    $filteredPersonIds = array();
+    foreach ($sns as $sn) {
+        $parts = explode('/', $sn);
+        $filteredPersonIds[] = end($parts);
+    }
     $result = array_merge($communityIds, $filteredPersonIds);
 }
