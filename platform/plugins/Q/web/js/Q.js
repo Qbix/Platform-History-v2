@@ -6156,7 +6156,8 @@ Q.Links = {
 		return url;
 	},
 	/**
-	 * Generates a link for opening a WhatsApp message to a number
+	 * Generates a link for opening a WhatsApp chat to a number,
+	 * witha an optional pre-filled message.
 	 * @static
 	 * @method whatsApp
 	 * @param {String} [phoneNumber] This should include the country code, without the "+"
@@ -6176,23 +6177,27 @@ Q.Links = {
 		return 'whatsapp://send/?' + urlParams.join('&');
 	},
 	/**
-	 * Generates a link for sharing a link in Telegram
+	 * Generates a link for opening Telegram to a channel and taking an action,
+	 * or prefilling text and URL and/or offering to share it with contacts.
 	 * @static
 	 * @method telegram
 	 * @param {String} [to] Phone number with country code e.g. "+1", or username starting with "@".
-	 *  If a username, then don't supply text or url, it can only open a window to chat.
 	 *  Or pass null here and supply text (and optional url) to open Telegram and let the user
 	 *  choose Telegram users, channels and groups to share to.
-	 * @param {String} [text] The text to share. Although it can contain a URL, try using options.url
+	 * @param {String} [text] The text to share. Although it can contain a URL, try using options.url when "to" is empty
 	 * @param {Object} [options]
 	 * @param {String} [options.url] Optionally put a URL to share here, which will appear ahead of the text
 	 * @param {String} [options.start] “start” parameter for a bot
 	 * @param {String} [options.startgroup] “startgroup” parameter for a bot
+	 * @param {String} [options.action] Can be "voicechat", "videochat" or "livestream"
 	 * @return {String}
 	 */
 	telegram: function (to, text, options) {
 		var urlParams = [];
 		options = options || {};
+		if (options.action) {
+			return 'tg://resolve?domain=' + to + '&' + options.action;
+		}
 		if (!to) { //share URL with some users to select in telegram
 			var command = 'msg';
 			if (options.url) {
