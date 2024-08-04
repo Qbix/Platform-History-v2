@@ -10,7 +10,7 @@ function Assets_after_Users_filter_users($params, &$result)
     list($communityIds, $personIds) = Users::splitIntoCommunityAndPersonIds($result);
     $credits = $av = sprintf("%015.2f", $min);
     $filteredPersonIds = Streams_RelatedTo::select('DISTINCT fromPublisherId')->where(array(
-        'toPublisherId' => 'Assets',
+        'toPublisherId' => Users::communityId(),
         'toStreamName' => 'Assets/category/credits',
         'type' => new Db_Range("attribute/amount=$credits", true, false, null)
     ))->where(array(

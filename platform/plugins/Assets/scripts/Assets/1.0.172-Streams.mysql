@@ -2,7 +2,7 @@ INSERT INTO {{prefix}}stream(publisherId, name, type, title, icon, content, attr
 VALUES ("", "Assets/credits/", "Assets/credits", "Credits", "{{Assets}}/img/credits.png", "", "", 0, 0, 0, "", NULL);
 
 INSERT INTO {{prefix}}stream(publisherId, name, type, title, icon, content, attributes, readLevel, writeLevel, adminLevel, permissions, inheritAccess)
-VALUES ("Assets", "Assets/category/credits", "Streams/category", "Index of Credits", "{{Assets}}/img/credits.png", "", "", 0, 0, 0, "", NULL);
+VALUES ({{communityId}}, "Assets/category/credits", "Streams/category", "Index of Credits", "{{Assets}}/img/credits.png", "", "", 0, 0, 0, "", NULL);
 
 INSERT INTO {{prefix}}related_from(fromPublisherId, fromStreamName, type, toPublisherId, toStreamName)
-VALUES ("", "Assets/credits/", "attribute/amount", "Assets", "Assets/category/credits");
+VALUES ("", "Assets/credits/", "attribute/amount", {{communityId}}, "Assets/category/credits");
