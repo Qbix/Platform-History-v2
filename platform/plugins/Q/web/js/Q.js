@@ -6188,6 +6188,7 @@ Q.Links = {
 	 * @param {String} [text] The text to share. Although it can contain a URL, try using options.url when "to" is empty
 	 * @param {Object} [options]
 	 * @param {String} [options.action] Can be "voicechat", "videochat" or "livestream" if it was scheduled already
+	 * @param {String} [options.actionValue] If action is specified, optionally provide an invite hash here
 	 * @param {String} [options.url] Optionally put a URL to share here, which will appear ahead of the text
 	 * @param {String} [options.start] “start” parameter for a bot
 	 * @param {String} [options.startgroup] “startgroup” parameter for a bot
@@ -6219,7 +6220,8 @@ Q.Links = {
 		}
 		var where = (to[0] === '@' ? 'domain=' : 'phone=') + to;
 		if (options.action) {
-			return 'tg://resolve?' + where + '&' + options.action;
+			var v = options.actionValue ? ('=' + options.actionValue) : '';
+			return 'tg://resolve?' + where + '&' + options.action + v;
 		}
 		var botcommands = false;
 		for (var k in {
