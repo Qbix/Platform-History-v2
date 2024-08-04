@@ -62,7 +62,7 @@ function Assets_grant_credits_for_filling_personal_streams($params) {
 		return;
 	}
 
-	// check if this stream already paid
+	// check if user already paid for this stream
 	$alreadyPaid = Assets_Credits::select()->where(array(
 		"toUserId" => $stream->publisherId,
 		"toStreamName" => $stream->name,
@@ -72,7 +72,7 @@ function Assets_grant_credits_for_filling_personal_streams($params) {
 		return;
 	}
 
-	Assets_Credits::grant($credits, $reason, $stream->publisherId, array(
+	Assets_Credits::grant(null, $credits, $reason, $stream->publisherId, array(
 		'toStreamName' => $stream->name,
 		'FilledStreamTitle' => $stream->title,
 		'invitedUserId' => $stream->publisherId
@@ -147,7 +147,7 @@ function Assets_grant_credits_for_invited_users ($params) {
 		return;
 	}
 
-	Assets_Credits::grant($credits, "InvitedUserFilledStream", $inviteRow->invitingUserId, array(
+	Assets_Credits::grant(null, $credits, "InvitedUserFilledStream", $inviteRow->invitingUserId, array(
 		'invitedUserId' => $invitedUser->id,
 		'FilledStreamTitle' => $stream->title
 	));

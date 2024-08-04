@@ -19,7 +19,7 @@ function Assets_credits_post($params = array())
 	$userId = Q::ifset($params, "userId", null) ?: $userId = Users::loggedInUser(true)->id;
 	$user = Users::fetch($userId);
 	$amount = floatval($req['amount']);
-	$credits = Assets_Credits::amount($userId);
+	$credits = Assets_Credits::amount(null, $userId);
 	$currency = $req['currency'];
 	$needCredits = Assets_Credits::convert($amount, $currency, "credits");
 	$payments = Q::ifset($req, "payments", "stripe");
@@ -61,12 +61,12 @@ function Assets_credits_post($params = array())
 
 	if ($toPublisherId && $toStreamName) {
 		$reason = Q::ifset($req, 'reason', Assets::JOINED_PAID_STREAM);
-		Assets_Credits::spend($needCredits, $reason, $userId, @compact(
+		Assets_Credits::spend(null, $needCredits, $reason, $userId, @compact(
 			"toPublisherId", "toStreamName", "items"
 		));
 	} elseif ($toUserId) {
 		$reason = Q::ifset($req, 'reason', Assets::PAYMENT_TO_USER);
-		Assets_Credits::transfer($needCredits, $reason, $toUserId, $userId, @compact(
+		Assets_Credits::transfer(null, $needCredits, $reason, $toUserId, $userId, @compact(
 			"toPublisherId", "toStreamName", "items"
 		));
 	}

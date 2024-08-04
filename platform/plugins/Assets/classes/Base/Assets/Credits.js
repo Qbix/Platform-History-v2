@@ -29,7 +29,8 @@ var Row = Q.require('Db/Row');
  * @param {String|Buffer} [fields.toPublisherId] defaults to null
  * @param {String|Buffer} [fields.toStreamName] defaults to null
  * @param {String} [fields.reason] defaults to ""
- * @param {Number} [fields.credits] defaults to 0
+ * @param {String|Buffer} [fields.communityId] defaults to null
+ * @param {Number} [fields.amount] defaults to 0
  * @param {String} [fields.attributes] defaults to null
  * @param {String|Db.Expression} [fields.insertedTime] defaults to new Db.Expression("CURRENT_TIMESTAMP")
  * @param {String|Db.Expression} [fields.updatedTime] defaults to null
@@ -89,7 +90,13 @@ Q.mixin(Base, Row);
  * human-readable description of the charge
  */
 /**
- * @property credits
+ * @property communityId
+ * @type String|Buffer
+ * @default null
+ * community managing the credits
+ */
+/**
+ * @property amount
  * @type Number
  * @default 0
  * 
@@ -328,7 +335,8 @@ Base.fieldNames = function () {
 		"toPublisherId",
 		"toStreamName",
 		"reason",
-		"credits",
+		"communityId",
+		"amount",
 		"attributes",
 		"insertedTime",
 		"updatedTime"
@@ -628,25 +636,61 @@ return [["varchar","255","",false],false,"MUL",null];
 };
 
 /**
- * Method is called before setting the field to verify if value is a number
- * @method beforeSet_credits
- * @param {number} value
- * @return {number} The value
- * @throws {Error} If 'value' is not number
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_communityId
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
  */
-Base.prototype.beforeSet_credits = function (value) {
+Base.prototype.beforeSet_communityId = function (value) {
+		if (value == undefined) return value;
 		if (value instanceof Db.Expression) return value;
-		value = Number(value);
-		if (isNaN(value))
-			throw new Error('Non-number value being assigned to '+this.table()+".credits");
+		if (typeof value !== "string" && typeof value !== "number" && !(value instanceof Buffer))
+			throw new Error('Must pass a String or Buffer to '+this.table()+".communityId");
+		if (typeof value === "string" && value.length > 31)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".communityId");
 		return value;
 };
 
 	/**
-	 * Returns schema information for credits column
+	 * Returns the maximum string length that can be assigned to the communityId field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_communityId = function () {
+
+		return 31;
+};
+
+	/**
+	 * Returns schema information for communityId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.column_credits = function () {
+Base.column_communityId = function () {
+
+return [["varbinary","31","",false],true,"",null];
+};
+
+/**
+ * Method is called before setting the field to verify if value is a number
+ * @method beforeSet_amount
+ * @param {number} value
+ * @return {number} The value
+ * @throws {Error} If 'value' is not number
+ */
+Base.prototype.beforeSet_amount = function (value) {
+		if (value instanceof Db.Expression) return value;
+		value = Number(value);
+		if (isNaN(value))
+			throw new Error('Non-number value being assigned to '+this.table()+".amount");
+		return value;
+};
+
+	/**
+	 * Returns schema information for amount column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_amount = function () {
 
 return [["decimal","10,4","",false],false,"MUL",null];
 };

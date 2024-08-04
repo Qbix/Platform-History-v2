@@ -54,8 +54,8 @@ function Assets_history_response_tool($options)
 		$rows = $queryRows->fetchDbRows();
 
 		foreach ($rows as $i => $row) {
-			$attributes = (array)Q::json_decode($row->attributes);
-			$attributes['amount'] = $row->credits;
+			$attributes = Q::json_decode($row->attributes, true);
+			$attributes['amount'] = $row->amount;
 			$attributes['toPublisherId'] = $row->toPublisherId;
 			$attributes['toStreamName'] = $row->toStreamName;
 			$attributes['fromPublisherId'] = $row->fromPublisherId;
@@ -74,7 +74,7 @@ function Assets_history_response_tool($options)
 				$attributes['fromUserName'] = Streams::displayName($attributes['fromUserId']);
 			}
 
-			$amount = $row->credits;
+			$amount = $row->amount;
 			$sign = $direction = $clientInfo = $clientId = null;
 			if ($row->fromUserId == $userId) {
 				$clientId = $row->toUserId;
@@ -114,19 +114,19 @@ function Assets_history_response_tool($options)
 
 		// clean rows
 		foreach ($rows as $i => $row) {
-			$attributes = Q::json_decode($row->attributes);
+			$attributes = Q::json_decode($row->attributes, true);
 			$description = Q::ifset($texts, 'history', $row->description, null);
-			if ($description && $attributes->credits) {
-				$description = Q::interpolate($description, array('amount' => $attributes->credits));
+			if ($description && $attributes['credits']) {
+				$description = Q::interpolate($description, array('amount' => $attributes['credits']));
 			} else {
 				$description = $row->description;
 			}
 			$res[] = array(
 				'id' => $row->id,
-				'gateway' => $attributes->payments,
-				'amount' => $attributes->amount,
-				'currency' => $attributes->currency,
-				'communityId' => $attributes->communityId,
+				'gateway' => $attributes['payments'],
+				'amount' => $attributes['amount'],
+				'currency' => $attributes['currency'],
+				'communityId' => $attributes['communityId'],
 				'description' => $description,
 				'date' => $row->insertedTime
 			);

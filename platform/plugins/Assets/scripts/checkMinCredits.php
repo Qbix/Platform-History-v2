@@ -42,7 +42,7 @@ while (1) {
 		}
 
 		try {
-			Assets::charge("stripe", Assets_Credits::convert($creditsAmount + $creditsAdd, 'credits', 'USD'), 'USD', array(
+			Assets::charge("stripe", (float)Assets_Credits::convert($creditsAmount + $creditsAdd, 'credits', 'USD'), 'USD', array(
 				'user' => $user,
 				'description' => 'check min credits'
 			));

@@ -13,13 +13,15 @@ function Assets_after_Assets_charge($params)
 	// rate for currency required
 	$credits = Assets_Credits::convert($amount, $currency, "credits");
 
-	Assets_Credits::grant($credits, 'BoughtCredits', $user->id, array(
+	// issue main community's currency to user
+	Assets_Credits::grant(null, $credits, 'BoughtCredits', $user->id, array(
 		"charge" => @compact("amount", "currency"),
 		"token" => Q::ifset($options, 'token', null)
 	));
+
 	// check Assets/credits/bonus
 	if ($reason == 'BoughtCredits') {
-		Assets_Credits::payBonus($amount, $userId);
+		Assets_Credits::payBonus(null, $amount, $userId);
 	}
 
 	$text = Q_Text::get('Assets/content', array('language' => Users::getLanguage($user->id)));

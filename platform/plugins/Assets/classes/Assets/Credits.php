@@ -52,9 +52,12 @@ class Assets_Credits extends Base_Assets_Credits
 		return $this;
 	}
 	/**
-	 * Get the logged-in user's credits stream
-	 * @method userStream
-	 * @param {string} [$userId=null]
+	 * Get a community's stream of credits for  auser
+	 * @method stream
+	 * @static
+	 * @param {string} [$communityId=Users::communityId()]
+	 *   The community managing the credits. Defaults to Users::communityId()
+	 * @param {string} [$userId=Users::loggedInUser()]
 	 *   The id of the user for which the stream is obtained. Defaults to logged-in user.
 	 * @param {string} [$asUserId=null]
 	 *   The id of the user who is trying to obtain it. Defaults to logged-in user.
@@ -64,8 +67,11 @@ class Assets_Credits extends Base_Assets_Credits
 	 * @throws {Users_Exception_NotLoggedIn} If user is not logged in and
 	 *   $throwIfNotLoggedIn is true
 	 */
-	static function userStream($userId = null, $asUserId = null, $throwIfNotLoggedIn = false)
+	static function stream($communityId = null, $userId = null, $asUserId = null, $throwIfNotLoggedIn = false)
 	{
+		if (!$communityId) {
+			$communityId = Users::communityId();
+		}
 		if (!isset($userId)) {
 			$user = Users::loggedInUser($throwIfNotLoggedIn, false);
 			if (!$user) {
@@ -75,16 +81,25 @@ class Assets_Credits extends Base_Assets_Credits
 			$user = Users_User::fetch($userId, true);
 		}
 		$userId = $user->id;
-		$streamName = 'Assets/user/credits';
-		$stream = Streams::fetchOneOrCreate($asUserId, $userId, $streamName, array(
+		$publisherId = $communityId;
+		$streamName = "Assets/credits/$userId";
+		$stream = Streams::fetchOneOrCreate($asUserId, $publisherId, $streamName, array(
 			'subscribe' => true
 		), $results);
 		if ($results['created']) {
+			Streams_Access::insert(array(
+				'publisherId' => $communityId,
+				'streamName' => $streamName,
+				'ofUserId' => $userId,
+				'ofContactLabel' => '',
+				'ofParticipantRole' => '',
+				'readLevel' => 40,
+				'writeLevel' => -1,
+				'adminLevel' => 20
+			))->execute();
 			$amount = Q_Config::get('Assets', 'credits', 'grant', 'Users/insertUser', self::DEFAULT_AMOUNT);
 			if ($amount > 0) {
-				self::grant($amount, 'YouHaveCreditsToStart', $userId, array(
-					'communityId' => Users::communityId()
-				));
+				self::grant($communityId, $amount, 'YouHaveCreditsToStart', $userId);
 			}
 		}
 		return $stream;
@@ -94,15 +109,21 @@ class Assets_Credits extends Base_Assets_Credits
 	 * Amount of credits
 	 * @method amount
 	 * @static
-	 * @param {string} [$userId = null] User which credits to return. Null = logged user.
-	 * @return {string} The amount of credits
+	 * @param {string} [$communityId=Users::communityid()]
+	 *   The community managing the credits, defaults to Users::communityId()
+	 * @param {string} [$userId=Users::loggedInUser()]
+	 *   The id of the user for which the stream is obtained. Defaults to logged-in user.
+	 * @return {float} The amount of credits
 	 * @throws {Users_Exception_NotLoggedIn} If user is not logged in
 	 */
-	static function amount($userId = null)
+	static function amount($communityId = null, $userId = null)
 	{
-		$stream = self::userStream($userId, $userId);
+		if (!$communityId) {
+			$communityId = Users::communityId();
+		}
+		$stream = self::stream($communityId, $userId, $userId);
 		if ($stream instanceof Streams_Stream) {
-			return (int)$stream->getAttribute('amount');
+			return (float)$stream->getAttribute('amount');
 		}
 		return 0;
 	}
@@ -139,6 +160,7 @@ class Assets_Credits extends Base_Assets_Credits
 	 * Make a user spend credits. Use the $more array to send credits to a publisher of a stream, instead.
 	 * @method spend
 	 * @static
+	 * @param {string} $communityId The community managing the credits, pass null for Users::currentCommunity()
 	 * @param {integer} $amount The amount of credits to spend.
 	 * @param {string} $reason Identifies the reason for spending. Can't be null.
 	 * @param {string} [$userId=null] User which is spendings the credits. Defaults to logged-in user.
@@ -148,8 +170,11 @@ class Assets_Credits extends Base_Assets_Credits
 	 * @param {array} [$more.items] an array of items, each with "publisherId", "streamName" and "amount"
 	 * @throws {Users_Exception_NotLoggedIn} If user is not logged in
 	 */
-	static function spend($amount, $reason, $userId = null, $more = array())
+	static function spend($communityId, $amount, $reason, $userId = null, $more = array())
 	{
+		if (!$communityId) {
+			$communityId = Users::communityId();
+		}
 		$amount = (int)$amount;
 		if ($amount < 0) {
 			throw new Q_Exception_WrongType(array(
@@ -173,7 +198,7 @@ class Assets_Credits extends Base_Assets_Credits
 
 		// if user spend credits to stream, make it send credits to stream publisher
 		if ($toPublisherId && $toStreamName) {
-			self::transfer($amount, $reason, $toPublisherId, $userId, $more);
+			self::transfer($communityId, $amount, $reason, $toPublisherId, $userId, $more);
 
 			/**
 			 * @event Assets/credits/spend {after}
@@ -185,7 +210,7 @@ class Assets_Credits extends Base_Assets_Credits
 			return;
 		}
 
-		$stream = self::userStream($userId, $userId);
+		$stream = self::stream($communityId, $userId, $userId);
 		$existing_amount = $stream->getAttribute('amount');
 		if ($existing_amount < $amount) {
 			throw new Assets_Exception_NotEnoughCredits(array(
@@ -197,10 +222,10 @@ class Assets_Credits extends Base_Assets_Credits
 			foreach ($items as $item) {
 				$more['fromPublisherId'] = $item['publisherId'];
 				$more['fromStreamName'] = $item['streamName'];
-				$assets_credits = self::createRow($item['amount'], $reason, null, $userId, $more);
+				$assets_credits = self::createRow($communityId, $item['amount'], $reason, null, $userId, $more);
 			}
 		} else {
-			$assets_credits = self::createRow($amount, $reason, null, $userId, $more);
+			$assets_credits = self::createRow($communityId, $amount, $reason, null, $userId, $more);
 		}
 
 		// decrease credits only after credit rows created
@@ -235,17 +260,21 @@ class Assets_Credits extends Base_Assets_Credits
 	 * Grant credits to a user
 	 * @method grant
 	 * @static
+	 * @param {string} $communityId The community managing the credits, pass null for Users::currentCommunity()
 	 * @param {integer} $amount The amount of credits to grant.
 	 * @param {string} $reason Identifies the reason for granting the credits. Can't be null.
-	 * @param {string} [$userId=null] User who is granted the credits. Null = logged user.
+	 * @param {string} [$userId=Users::loggedInUser()] User who is granted the credits. Null = logged user.
 	 * @param {array} [$more=array()] An array supplying more optional info, including
 	 * @param {string} [$more.publisherId] The publisher of the stream representing the purchase
 	 * @param {string} [$more.streamName] The name of the stream representing the purchase
 	 * @param {string} [$more.fromUserId=Q::app()] Consider passing Users::communityId() here instead
 	 * @return {boolean} Whether the grant occurred
 	 */
-	static function grant($amount, $reason, $userId = null, $more = array())
+	static function grant($communityId, $amount, $reason, $userId = null, $more = array())
 	{
+		if (!$communityId) {
+			$communityId = Users::communityId();
+		}
 		$amount = (int)$amount;
 		if ($amount <= 0) {
 			return false;
@@ -259,13 +288,13 @@ class Assets_Credits extends Base_Assets_Credits
 
 		$userId = $userId ? $userId : Users::loggedInUser(true)->id;
 
-		$stream = self::userStream($userId, $userId);
+		$stream = self::stream($communityId, $userId, $userId);
 		$stream->setAttribute('amount', $stream->getAttribute('amount') + $amount);
-		$stream->changed(Users::currentCommunityId(true));
+		$stream->changed(Users::communityId(true));
 
 		$fromUserId = Q::ifset($more, 'fromUserId', Q::app());
 
-		$assets_credits = self::createRow($amount, $reason, $userId, $fromUserId, $more);
+		$assets_credits = self::createRow($communityId, $amount, $reason, $userId, $fromUserId, $more);
 
 		// Post that this user granted $amount credits by $reason
 		$text = Q_Text::get('Assets/content');
@@ -299,6 +328,7 @@ class Assets_Credits extends Base_Assets_Credits
 	 * Transfer credits, as the logged-in user, to another user
 	 * @method transfer
 	 * @static
+	 * @param {string} $communityId The community managing the credits, pass null for Users::currentCommunity()
 	 * @param {integer} $amount The amount of credits to transfer.
 	 * @param {string} $toUserId The id of the user to whom you will transfer the credits
 	 * @param {string} $reason Identifies the reason for transfer. Can't be null.
@@ -307,8 +337,11 @@ class Assets_Credits extends Base_Assets_Credits
 	 * @param {array} [$more.items] an array of items, each with "publisherId", "streamName" and "amount"
 	 * @param {array} [$more.forcePayment=false] If true and not enough credits, try to charge credits
 	 */
-	static function transfer($amount, $reason, $toUserId, $fromUserId = null, $more = array())
+	static function transfer($communityId, $amount, $reason, $toUserId, $fromUserId = null, $more = array())
 	{
+		if (!$communityId) {
+			$communityId = Users::communityId();
+		}
 		$amount = floatval($amount);
 		if ($amount < 0) {
 			throw new Q_Exception_WrongType(array(
@@ -330,7 +363,7 @@ class Assets_Credits extends Base_Assets_Credits
 		$more['amount'] = $amount;
 
 		$payments = Q::ifset($more, "payments", "stripe");
-		$from_stream = self::userStream($fromUserId, $fromUserId);
+		$from_stream = self::stream($communityId, $fromUserId, $fromUserId);
 		$existing_amount = $from_stream->getAttribute('amount');
 		if ($existing_amount < $amount) {
 			// if forcePayment true, try to charge more funds for credits
@@ -343,7 +376,7 @@ class Assets_Credits extends Base_Assets_Credits
 
 				// if charge success, turn off forcePayment and try again
 				$more["forcePayment"] = false;
-				return self::transfer($amount, $reason, $toUserId, $fromUserId, $more);
+				return self::transfer($communityId, $amount, $reason, $toUserId, $fromUserId, $more);
 			}
 
 			throw new Assets_Exception_NotEnoughCredits(array(
@@ -360,10 +393,10 @@ class Assets_Credits extends Base_Assets_Credits
 			foreach ($items as $item) {
 				$more['fromPublisherId'] = $item['publisherId'];
 				$more['fromStreamName'] = $item['streamName'];
-				$assets_credits = self::createRow($item['amount'], $reason, $toUserId, $fromUserId, $more);
+				$assets_credits = self::createRow($communityId,$item['amount'], $reason, $toUserId, $fromUserId, $more);
 			}
 		} else {
-			$assets_credits = self::createRow($amount, $reason, $toUserId, $fromUserId, $more);
+			$assets_credits = self::createRow($communityId, $amount, $reason, $toUserId, $fromUserId, $more);
 		}
 
 		// decrease credits only after credits rows created
@@ -386,7 +419,7 @@ class Assets_Credits extends Base_Assets_Credits
 		// TODO: add journaling system
 		// Because if the following fails, then someone will lose credits
 		// without the other person getting them. For now we will rely on the user complaining.
-		$to_stream = self::userStream($toUserId, $toUserId, true);
+		$to_stream = self::stream($communityId, $toUserId, $toUserId, true);
 		$to_stream->setAttribute('amount', $to_stream->getAttribute('amount') + $amount);
 		$to_stream->changed();
 		$instructions['operation'] = '+';
@@ -434,6 +467,7 @@ class Assets_Credits extends Base_Assets_Credits
 	 * Create row in Assets_Credits table
 	 * @method createRow
 	 * @static
+	 * @param {string} $communityId The community managing the credits, pass null for Users::currentCommunity()
 	 * @param {int} $amount Amount of credits. Required,
 	 * @param {string} $reason Identifies the reason for the transfer. Required.
 	 * @param {string} $toUserId User id who gets the credits.
@@ -445,7 +479,11 @@ class Assets_Credits extends Base_Assets_Credits
 	 * @param {string} [$more.fromStreamName] The name of the value-consuming stream on whose behalf the payment is made
 	 * @return {Assets_Credits} Assets_Credits row
 	 */
-	private static function createRow ($amount, $reason, $toUserId = null, $fromUserId = null, $more = array()) {
+	private static function createRow ($communityId, $amount, $reason, $toUserId = null, $fromUserId = null, $more = array())
+	{
+		if (!$communityId) {
+			$communityId = Users::communityId();
+		}
 		$toPublisherId = null;
 		$toStreamName = null;
 		$fromPublisherId = null;
@@ -491,7 +529,8 @@ class Assets_Credits extends Base_Assets_Credits
 		$assets_credits->fromPublisherId = $fromPublisherId;
 		$assets_credits->fromStreamName = $fromStreamName;
 		$assets_credits->reason = $reason;
-		$assets_credits->credits = $amount;
+		$assets_credits->communityId = $communityId;
+		$assets_credits->amount = $amount;
 		$assets_credits->attributes = Q::json_encode($more);
 		$assets_credits->save();
 
@@ -504,19 +543,21 @@ class Assets_Credits extends Base_Assets_Credits
 	 * @param {number} $amount
 	 * @param {string} $fromCurrency
 	 * @param {string} $toCurrency
-	 * @return {string}
+	 * @return {float}
 	 */
 	static function convert($amount, $fromCurrency, $toCurrency)
 	{
 		$amount = floatval($amount);
 		if ($fromCurrency == $toCurrency) {
-			return $amount;
-		} elseif ($fromCurrency == "credits") {
+			return (float)$amount;
+		} elseif (!$fromCurrency or $fromCurrency == "credits") {
 			$rate = Q_Config::expect('Assets', 'credits', 'exchange', $toCurrency);
-			$amount = $amount / $rate;
-		} else {
+			$amount = (float)$amount / $rate;
+		} elseif (!$toCurrency or !$toCurrency == "credits") {
 			$rate = Q_Config::expect('Assets', 'credits', 'exchange', $fromCurrency);
-			$amount = $amount * $rate;
+			$amount = (float)$amount * $rate;
+		} else {
+			throw new Assets_Exception_Convert(compact('fromCurrency', 'toCurrency'));
 		}
 
 		return $amount;
@@ -606,10 +647,14 @@ class Assets_Credits extends Base_Assets_Credits
 	 * Pay bonus to user if credits amount
 	 * @method payBonus
 	 * @static
+	 * @param {string} $communityId The community issuing the credits, pass null for Users::currentCommunity()
 	 * @param {string|number} $amount Amount of credits to pay bonus from
 	 * @param {string} [$userId] User id to pay bonus. If empty - logged in user.
 	 */
-	static function payBonus ($amount, $userId=null) {
+	static function payBonus ($communityId, $amount, $userId=null) {
+		if (!$communityId) {
+			$communityId = Users::communityId();
+		}
 		$amount = (int)$amount;
 
 		$userId = $userId ? $userId : Users::loggedInUser(true)->id;
@@ -622,7 +667,7 @@ class Assets_Credits extends Base_Assets_Credits
 		krsort($bonuses, SORT_NUMERIC);
 		foreach ($bonuses as $key => $bonus) {
 			if ($amount >= $key) {
-				self::grant($bonus, "BonusCredits", $userId);
+				self::grant($communityId, $bonus, "BonusCredits", $userId);
 				return;
 			}
 		}

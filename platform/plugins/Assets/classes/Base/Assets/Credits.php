@@ -24,7 +24,8 @@
  * @param {string} [$fields.toPublisherId] defaults to null
  * @param {string} [$fields.toStreamName] defaults to null
  * @param {string} [$fields.reason] defaults to ""
- * @param {float} [$fields.credits] defaults to 0
+ * @param {string} [$fields.communityId] defaults to null
+ * @param {float} [$fields.amount] defaults to 0
  * @param {string} [$fields.attributes] defaults to null
  * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
  * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
@@ -80,7 +81,13 @@ abstract class Base_Assets_Credits extends Db_Row
 	 * human-readable description of the charge
 	 */
 	/**
-	 * @property $credits
+	 * @property $communityId
+	 * @type string
+	 * @default null
+	 * community managing the credits
+	 */
+	/**
+	 * @property $amount
 	 * @type float
 	 * @default 0
 	 * 
@@ -757,23 +764,78 @@ return array (
 );			
 	}
 
-	function beforeSet_credits($value)
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_communityId
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_communityId($value)
 	{
+		if (!isset($value)) {
+			return array('communityId', $value);
+		}
 		if ($value instanceof Db_Expression
                or $value instanceof Db_Range) {
-			return array('credits', $value);
+			return array('communityId', $value);
 		}
-		if (!is_numeric($value))
-			throw new Exception('Non-numeric value being assigned to '.$this->getTable().".credits");
-		$value = floatval($value);
-		return array('credits', $value);			
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".communityId");
+		if (strlen($value) > 31)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".communityId");
+		return array('communityId', $value);			
 	}
 
 	/**
-	 * Returns schema information for credits column
+	 * Returns the maximum string length that can be assigned to the communityId field
+	 * @return {integer}
+	 */
+	function maxSize_communityId()
+	{
+
+		return 31;			
+	}
+
+	/**
+	 * Returns schema information for communityId column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	static function column_credits()
+	static function column_communityId()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varbinary',
+    1 => '31',
+    2 => '',
+    3 => false,
+  ),
+  1 => true,
+  2 => '',
+  3 => NULL,
+);			
+	}
+
+	function beforeSet_amount($value)
+	{
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
+			return array('amount', $value);
+		}
+		if (!is_numeric($value))
+			throw new Exception('Non-numeric value being assigned to '.$this->getTable().".amount");
+		$value = floatval($value);
+		return array('amount', $value);			
+	}
+
+	/**
+	 * Returns schema information for amount column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_amount()
 	{
 
 return array (
@@ -974,7 +1036,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('id', 'fromUserId', 'toUserId', 'fromPublisherId', 'fromStreamName', 'toPublisherId', 'toStreamName', 'reason', 'credits', 'attributes', 'insertedTime', 'updatedTime');
+		$field_names = array('id', 'fromUserId', 'toUserId', 'fromPublisherId', 'fromStreamName', 'toPublisherId', 'toStreamName', 'reason', 'communityId', 'amount', 'attributes', 'insertedTime', 'updatedTime');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

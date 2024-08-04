@@ -2,7 +2,7 @@
 function Assets_billing_response_column (&$params, &$result) {
 	$texts = Q_Text::get('Assets/content')['billing'];
 	$user = Users::loggedInUser(true);
-	$creditsStream = Assets_Credits::userStream();
+	$creditsStream = Assets_Credits::stream();
 	$creditsMinimum = (int)$creditsStream->getAttribute("creditsMin") ?: Q_Config::expect("Assets", "credits", "amount", "min");
 	$creditsAdd = (int)$creditsStream->getAttribute("creditsAdd") ?: Q_Config::expect("Assets", "credits", "amount", "add");
 

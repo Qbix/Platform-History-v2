@@ -448,8 +448,16 @@ class Q_Plugin
 
 					echo "Processing SQL file: $script ";
 					$sqltext = file_get_contents($scriptsdir.DS.$script);
-					$sqltext = str_replace('{{prefix}}', $prefix, $sqltext);
-					$sqltext = str_replace('{{dbname}}', $db->dbname, $sqltext);
+					$replacements = array(
+						'prefix' => $prefix,
+						'dbname' => $db->dbname,
+						'app' => Q::app(),
+						'plugin' => $name
+					);
+					$replacements = Q::event('Q/plugin/sql/replacements', compact(
+						'name', 'script', 'dir', 'base_dir', 'options'
+					), 'before', false, $replacements);
+					$sqltext = Q::interpolate($sqltext, $replacements);
 
 					/**
 					 * @event Q/Plugin/installSchema {before}

@@ -17,6 +17,7 @@
 			}
 		},
 		"handlersBeforeEvent": {
+			"Q/plugin/sql/replacements": ["Users/before/Q_plugin_sql_replacements"],
 			"Q/json_encode/toArrays": ["Users/before/Q_json_encode_toArrays"],
 			"Q/objects": ["Users/before/Q_objects"],
 			"Q/initialExtras": ["Users/before/Q_initialExtras"],

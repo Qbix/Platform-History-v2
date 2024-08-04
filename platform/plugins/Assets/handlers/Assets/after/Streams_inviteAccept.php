@@ -14,7 +14,7 @@ function Assets_after_Streams_inviteAccept($params)
 
 	$credits = Q_Config::get('Assets', 'credits', 'grant', 'Users/newUserAcceptedYourInvite', 0);
 	if ($credits > 0) {
-		Assets_Credits::grant($credits, 'InviteAcceptedBy', $invite->invitingUserId, array(
+		Assets_Credits::grant(null, $credits, 'InviteAcceptedBy', $invite->invitingUserId, array(
 			'publisherId' => $stream->publisherId,
 			'streamName' => $stream->name,
 			'invitedUserId' => $invitedUser->id
