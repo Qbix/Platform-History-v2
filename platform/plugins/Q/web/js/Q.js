@@ -6227,9 +6227,9 @@ Q.Links = {
 			startapp:1, appname:1, startattach:1, choose:1
 		}) {
 			if (options.startgroup) {
+				botcommands = true;
 				urlParams.push(k + '=' + encodeURIComponent(options[k]));
 			}
-			botcommands = true;
 		}
 		if (botcommands) {
 			if (options.choose) {
@@ -6237,7 +6237,7 @@ Q.Links = {
 					options.choose = options.choose.join('+');
 				}
 			}
-			return 'tg://resolve?' + where + '&' + urlParams.join('&');
+			return 'tg://resolve?' + where + '&' + urlParams.join('&') + to;
 		}
 		urlParams.push('to=' + to);
 		if (text) {
