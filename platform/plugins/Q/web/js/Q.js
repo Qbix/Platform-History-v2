@@ -6217,7 +6217,7 @@ Q.Links = {
 			}
 			return 'tg://' + command + '?' + urlParams.join('&');
 		}
-		var where = (to[0] === '@' ? 'domain=' : 'phone=');
+		var where = (to[0] === '@' ? 'domain=' : 'phone=') + to;
 		if (options.action) {
 			return 'tg://resolve?' + where + '&' + options.action;
 		}
