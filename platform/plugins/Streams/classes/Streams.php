@@ -5534,13 +5534,15 @@ abstract class Streams extends Base_Streams
 	 * Also, other plugins can add a hook to create their own updates.
 	 * @method updateStreamNames
 	 * @static
-	 * @param {string} $publisherId
 	 * @param {array} $updates pairs of (oldStreamName => newStreamName)
-	 * @param {boolean} [$accumulateErrors=false] set to true to keep going
+	 * @param {array} [$options=array()]
+	 * @param {boolean} [$options.accumulateErrors=false] set to true to keep going
 	 *  even if an update fails, accumulating errors
+	 * @param {string|array} [$publisherId=null] can be used to limit to only streams by certain publishers
+	 * @param {string} [$newPublisherId=null] set a new publisherId for the streams, in addition to name
 	 * @return {array} any errors that have accumulated, if accumulateErrors is true, otherwise empty array
 	 */
-	static function updateStreamNames($publisherId, array $updates, $accumulateErrors = false)
+	static function updateStreamNames(array $updates, $options = array())
 	{
 		$chunkSize = 100;
 		$chunks = array_chunk($updates, $chunkSize, true);
@@ -5584,16 +5586,23 @@ abstract class Streams extends Base_Streams
 					$publisherIdField = Q::ifset($publisherIdFields, $Connection, $Table, $i, 'publisherId');
 					foreach ($chunks as $chunk) {
 						$criteria = array($field => array_keys($chunk));
-						if (isset($publisherId)) {
-							$criteria[$publisherIdField] = $publisherId;
+						if (isset($options['publisherId'])) {
+							$criteria[$publisherIdField] = $options['publisherId'];
 						}
 						try {
+							$values = Db_Expression::interpolateArray($chunk, array(
+								'publisherId' => $publisherIdField
+							));
+							$changes = array($field => $values);
+							if (!empty($options['newPublisherId'])) {
+								$changes[$publisherIdField] = $options['newPublisherId'];
+							}
 							call_user_func(array($ClassName, 'update'))
-							->set(array($field => $chunk))
+							->set($changes)
 							->where($criteria)
 							->execute();
 						} catch (Exception $e) {
-							if ($accumulateErrors) {
+							if (!empty($options['accumulateErrors'])) {
 								$errors[] = $e;
 							} else {
 								throw $e;
@@ -5603,7 +5612,10 @@ abstract class Streams extends Base_Streams
 				}
 			}
 		}
-		$params = compact('publisherId', 'updates', 'accumulateErrors', 'chunks', 'fields', 'publisherIdFields');
+		$params = array_merge(compact(
+			'updates', 'accumulateErrors', 
+			'chunks', 'fields', 'publisherIdFields'
+		), $options);
 		$params['errors'] =& $errors;
 		/**
 		 * Gives any plugin or app a chance to update stream names in its own tables

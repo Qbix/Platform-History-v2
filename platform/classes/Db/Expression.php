@@ -67,6 +67,30 @@ class Db_Expression
 	}
 
 	/**
+	 * Walks through an array and calls Q::interpolate() on
+	 * expressions inside Db_Expression objects.
+	 * @method interpolateArray
+	 * @static
+	 * @param {array} $arr
+	 * @param {array} $params
+	 * @return {array}
+	 */
+	static function interpolateArray(array $arr, array $params)
+	{
+		$result = array();
+		foreach ($arr as $k => $v) {
+			if ($v instanceof Db_Expression) {
+				$v2 = clone $v;
+				$v2->expression = Q::interpolate($v->expression, $params);
+				$result[$k] = $v2;
+			} else {
+				$result[$k] = $v;
+			}
+		}
+		return $result;
+	}
+
+	/**
 	 * The expression as a string
 	 * @property $expression
 	 * @type string

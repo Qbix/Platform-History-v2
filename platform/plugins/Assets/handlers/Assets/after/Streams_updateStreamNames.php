@@ -2,7 +2,8 @@
 
 function Assets_after_Streams_updateStreamNames($params)
 {
-    $publisherId = $params['publisherId'];
+    $publisherId = Q::ifset($params, 'publisherId', null);
+    $newPublisherId = Q::ifset($params, 'newPublisherId', null);
     $chunks = $params['chunks'];
     $errors = &$params['errors'];
     $accumulateErrors = $params['accumulateErrors'];
@@ -25,14 +26,22 @@ function Assets_after_Streams_updateStreamNames($params)
             $ClassName = $Connection . '_' . $Table;
             foreach ($f2 as $publisherIdField => $streamNameField) {
                 foreach ($chunks as $chunk) {
-                    $criteria = isset($publisherId)
-						? array(
-							$publisherIdField => $publisherId,
-							$streamNameField => array_keys($chunk)
-						) : array($streamNameField => array_keys($chunk));
+                    $criteria = array(
+                        $streamNameField => array_keys($chunk)
+                    );
+                    if (isset($publisherId)) {
+                        $criteria[$publisherIdField] = $publisherId;
+                    }
                     try {
+                        $values = Db_Expression::interpolateArray($chunk, array(
+                            'publisherId' => $publisherIdField
+                        ));
+                        $changes = array($streamNameField => $values);
+                        if (isset($newPublisherId)) {
+                            $changes[$publisherIdField] = $newPublisherId;
+                        }
                         call_user_func(array($ClassName, 'update'))
-                            ->set(array($streamNameField => $chunk))
+                            ->set($changes)
                             ->where($criteria)
                             ->execute();
                     }  catch (Exception $e) {
