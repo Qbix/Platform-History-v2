@@ -3,7 +3,7 @@
 function Assets_1_0_174_Streams()
 {
     $communityId = Users::communityId();
-    echo "Renaming Assets/credits streams";
+    echo "Inserting Assets/credits access rows...";
     Streams_Access::insert(array(
         'publisherId', 'streamName', 'ofUserId',
         'ofContactLabel', 'ofParticipantRole',
@@ -15,6 +15,7 @@ function Assets_1_0_174_Streams()
     ), Streams_Stream::table())->where(array(
         'name' => 'Assets/user/credits'
     ))->execute();
+    echo "Renaming Assets/credits streams...";
     Streams::updateStreamNames(array(
         'Assets/user/credits' => new Db_Expression('CONCAT("Assets/credits/", {{publisherId}})')
     ), array(
