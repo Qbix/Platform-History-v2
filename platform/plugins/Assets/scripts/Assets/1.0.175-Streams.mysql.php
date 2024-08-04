@@ -7,7 +7,6 @@ function Assets_1_0_175()
     $i = 0;
     echo "Creating Assets/category/credits relations for each user".PHP_EOL;
     while (1) {
-        Streams::fetch();
         $users = Users_User::select()
             ->limit(100, $offset)
             ->fetchDbRows();
