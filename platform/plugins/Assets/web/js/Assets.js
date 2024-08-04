@@ -18,7 +18,7 @@
 		 */
         
 		Credits: Q.Method.define({
-			stream: new Q.Method(),
+			getStream: new Q.Method(),
 			buy: new Q.Method(),
 			pay: new Q.Method(),
 			/**
