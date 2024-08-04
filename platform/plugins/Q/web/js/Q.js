@@ -6179,6 +6179,7 @@ Q.Links = {
 	/**
 	 * Generates a link for opening Telegram to a channel and taking an action,
 	 * or prefilling text and URL and/or offering to share it with contacts.
+	 * More info here: https://core.telegram.org/api/links#group-channel-bot-links
 	 * @static
 	 * @method telegram
 	 * @param {String} [to] Phone number with country code e.g. "+1", or username starting with "@".
@@ -6186,18 +6187,23 @@ Q.Links = {
 	 *  choose Telegram users, channels and groups to share to.
 	 * @param {String} [text] The text to share. Although it can contain a URL, try using options.url when "to" is empty
 	 * @param {Object} [options]
+	 * @param {String} [options.action] Can be "voicechat", "videochat" or "livestream" if it was scheduled already
 	 * @param {String} [options.url] Optionally put a URL to share here, which will appear ahead of the text
 	 * @param {String} [options.start] “start” parameter for a bot
 	 * @param {String} [options.startgroup] “startgroup” parameter for a bot
-	 * @param {String} [options.action] Can be "voicechat", "videochat" or "livestream"
+	 * @param {String} [options.startchannel] "startchannel" parameter for a bot
+	 * @param {String} [options.startapp] “startapp” parameter for a bot to launch a mini-app
+	 * @param {String} [options.admin] admin permissions for a bot to have in a group or channel
+	 * @param {String} [options.appname] "appname" name of the mini-app for the bot to launch, if it has several
+	 * @param {String} [options.startattach] "startattach" parameter for a bot after being attached to a user, group, channel
+	 * @param {String|Array} [options.choose] can be one or more of "users", "bots", "groups", "channels"
+	 * @param {String} [options.attach] if to is a chat, then this is the name of a bot to attach to a chat
+	 * @param {String} [options.game] the short_name of a game to share with a bot
 	 * @return {String}
 	 */
 	telegram: function (to, text, options) {
 		var urlParams = [];
 		options = options || {};
-		if (options.action) {
-			return 'tg://resolve?domain=' + to + '&' + options.action;
-		}
 		if (!to) { //share URL with some users to select in telegram
 			var command = 'msg';
 			if (options.url) {
@@ -6211,15 +6217,31 @@ Q.Links = {
 			}
 			return 'tg://' + command + '?' + urlParams.join('&');
 		}
+		var where = (to[0] === '@' ? 'domain=' : 'phone=');
+		if (options.action) {
+			return 'tg://resolve?' + where + '&' + action;
+		}
+		var botcommands = false;
+		for (var k in {
+			start:1, startgroup:1, startchannel:1, admin:1,
+			startapp:1, appname:1, startattach:1, choose:1
+		}) {
+			if (options.startgroup) {
+				urlParams.push(k + '=' + encodeURIComponent(options[k]));
+			}
+			botcommands = true;
+		}
+		if (botcommands) {
+			if (options.choose) {
+				if (Q.isArrayLike(options.choose)) {
+					options.choose = options.choose.join('+');
+				}
+			}
+			return 'tg://resolve?' + where + '&' + urlParams.join('&');
+		}
 		urlParams.push('to=' + to);
 		if (text) {
 			urlParams.push('text=' + encodeURIComponent(text));
-		}
-		if (options.start) {
-			urlParams.push('start=' + encodeURIComponent(options.start));
-		}
-		if (options.startgroup) {
-			urlParams.push('startgroup=' + encodeURIComponent(options.startgroup));
 		}
 		return 'tg://msg?' + urlParams.join('&');
 	},
