@@ -307,10 +307,13 @@ class Db_Mysql implements Db_Interface
 	 * Creates a query to insert a row into a table
 	 * @method insert
 	 * @param {string} $table_into The name of the table to insert into
-	 * @param {array} $fields=array() The fields as an array of column=>value pairs
+	 * @param {array} $fields=array()
+	 *   The fields as an array of column=>value pairs.
+	 *   Or you can pass an array of column names here,
+	 *   if doing insert()->select() queries.
 	 * @return {Db_Query_Mysql} The resulting Db_Query_Mysql object
 	 */
-	function insert ($table_into, array $fields = array())
+	function insert ($table_into, $fields = array())
 	{
 		if (empty($table_into))
 			throw new Exception("table not specified in call to 'insert'.");
@@ -320,19 +323,28 @@ class Db_Mysql implements Db_Interface
 		
 		$columnsList = array();
 		$valuesList = array();
-		foreach ($fields as $column => $value) {
-			$columnsList[] = Db_Query_Mysql::column($column);
-			if ($value instanceof Db_Expression) {
-				$valuesList[] = "$value";
-			} else {
-				$valuesList[] = ":$column";
+		if (Q::isAssociative($fields)) {
+			foreach ($fields as $column => $value) {
+				$columnsList[] = Db_Query_Mysql::column($column);
+				if ($value instanceof Db_Expression) {
+					$valuesList[] = "$value";
+				} else {
+					$valuesList[] = ":$column";
+				}
 			}
+			$columnsString = implode(', ', $columnsList);
+			$valuesString = implode(', ', $valuesList);
+		} else {
+			foreach ($fields as $column) {
+				$columnsList[] = Db_Query_Mysql::column($column);
+			}
+			$columnsString = implode(', ', $columnsList);
+			$valuesString = ''; // won't be used
 		}
-		$columnsString = implode(', ', $columnsList);
-		$valuesString = implode(', ', $valuesList);
 		
 		$clauses = array(
-			'INTO' => "$table_into ($columnsString)", 'VALUES' => $valuesString
+			'INTO' => "$table_into ($columnsString)",
+			'VALUES' => $valuesString
 		);
 		
 		return new Db_Query_Mysql($this, Db_Query::TYPE_INSERT, $clauses, $fields, $table_into);
@@ -345,8 +357,8 @@ class Db_Mysql implements Db_Interface
 	 * @method insertManyAndExecute
 	 * @param {string} $table_into The name of the table to insert into
 	 * @param {array} [$rows=array()] The array of rows to insert. 
-	 * Each row should be an array of ($field => $value) pairs, with the exact
-	 * same set of keys (field names) in each array. It can also be a Db_Row.
+	 *    Each row should be an array of ($field => $value) pairs, with the exact
+	 *    same set of keys (field names) in each array. It can also be a Db_Row.
 	 * @param {array} [$options=array()] An associative array of options, including:
 	 * @param {array} [$options.columns] Pass an array of column names, otherwise
 	 *    they are automatically taken from the first row being inserted.

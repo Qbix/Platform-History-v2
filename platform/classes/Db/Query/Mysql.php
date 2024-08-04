@@ -259,6 +259,28 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 					? $this->clauses['RAW']
 					: '';
 				break;
+			case Db_Query::TYPE_INSERT:
+				// INTO
+				if (empty($this->clauses['INTO']))
+					throw new Exception("missing INTO clause in DB query.", -2);
+				$into = empty($this->clauses['INTO']) ? '' : $this->clauses['INTO'];
+				$into .= !isset($this->after['INTO']) ? '' : $this->after['INTO'];
+				if (empty($this->clauses['SELECT'])) {
+					// VALUES
+					if (!isset($this->clauses['VALUES']))
+					throw new Exception("Missing VALUES clause in DB query.", -3);
+					$values = $this->clauses['VALUES'];
+					$afterValues = !isset($this->after['VALUES']) ? '' : "\n".$this->after['VALUES'];
+					if (empty($this->clauses['ON DUPLICATE KEY UPDATE']))
+						$onDuplicateKeyUpdate = '';
+					else
+						$onDuplicateKeyUpdate = "\nON DUPLICATE KEY UPDATE " . $this->clauses['ON DUPLICATE KEY UPDATE'];
+					$q = "INSERT INTO $into \nVALUES ( $values ) $afterValues$onDuplicateKeyUpdate";
+					break;
+				}
+				// SELECT
+				$q = "INSERT INTO $into \n"; 
+				// fall through to next clause
 			case Db_Query::TYPE_SELECT:
 				// SELECT
 				$select = empty($this->clauses['SELECT']) ? '*' : $this->clauses['SELECT'];
@@ -280,29 +302,13 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 				// LOCK
 				$lock = empty($this->clauses['LOCK']) ? '' : "\n".$this->clauses['LOCK'];
 				$lock .= !isset($this->after['LOCK']) ? '' : "\n".$this->after['LOCK'];
-				$q = "SELECT $select$from$join$where $groupBy $having $orderBy $limit $lock";
+				$q2 = "SELECT $select$from$join$where $groupBy $having $orderBy $limit $lock";
 				if (!empty($this->clauses['EXISTS'])) {
-					$q = "EXISTS(\n$q\n)";
+					$q2 = "EXISTS(\n$q\n)";
 				} else if (!empty($this->clauses['NOT EXISTS'])) {
-					$q = "NOT EXISTS(\n$q\n)";
+					$q2 = "NOT EXISTS(\n$q\n)";
 				}
-				break;
-			case Db_Query::TYPE_INSERT:
-				// INTO
-				if (empty($this->clauses['INTO']))
-					throw new Exception("missing INTO clause in DB query.", -2);
-				$into = empty($this->clauses['INTO']) ? '' : $this->clauses['INTO'];
-				$into .= !isset($this->after['INTO']) ? '' : $this->after['INTO'];
-				// VALUES
-				if (!isset($this->clauses['VALUES']))
-				   throw new Exception("Missing VALUES clause in DB query.", -3);
-				$values = $this->clauses['VALUES'];
-				$afterValues = !isset($this->after['VALUES']) ? '' : "\n".$this->after['VALUES'];
-				if (empty($this->clauses['ON DUPLICATE KEY UPDATE']))
-					$onDuplicateKeyUpdate = '';
-				else
-					$onDuplicateKeyUpdate = "\nON DUPLICATE KEY UPDATE " . $this->clauses['ON DUPLICATE KEY UPDATE'];
-				$q = "INSERT INTO $into \nVALUES ( $values ) $afterValues$onDuplicateKeyUpdate";
+				$q .= $q2; // also handles INSERT ... SELECT queries
 				break;
 			case Db_Query::TYPE_UPDATE:
 				// UPDATE
@@ -973,6 +979,9 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 	 */
 	function select ($fields, $tables = '', $repeat = false)
 	{
+		if ($this->type === Db_Query::TYPE_INSERT) {
+			$this->isInsertSelectQuery = true;
+		}
 		$as = ' '; // was: ' AS ', but now we made it more standard SQL
 		if (is_array($fields)) {
 			$fields_list = array();
@@ -1052,8 +1061,13 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 			case Db_Query::TYPE_UPDATE:
 				break;
 			case Db_Query::TYPE_DELETE:
-				if (!empty($this->after['FROM']))
+				if (!empty($this->after['FROM'])) {
 					break;
+				}
+			case Db_Query::TYPE_INSERT:
+				if ($this->isInsertSelectQuery) {
+					break;
+				}
 			default:
 				throw new Exception("the JOIN clause does not belong in this context.", - 1);
 		}
@@ -1134,6 +1148,10 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 			case Db_Query::TYPE_UPDATE:
 			case Db_Query::TYPE_DELETE:
 				break;
+			case Db_Query::TYPE_INSERT:
+				if ($this->isInsertSelectQuery) {
+					break;
+				}
 			default:
 				throw new Exception("The WHERE clause does not belong in this context.", -1);
 		}
@@ -1186,6 +1204,10 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 			case Db_Query::TYPE_UPDATE:
 			case Db_Query::TYPE_DELETE:
 				break;
+			case Db_Query::TYPE_INSERT:
+				if ($this->isInsertSelectQuery) {
+					break;
+				}
 			default:
 				throw new Exception("The WHERE clause does not belong in this context.", -1);
 		}
@@ -1256,6 +1278,10 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 			case Db_Query::TYPE_UPDATE:
 			case Db_Query::TYPE_DELETE:
 				break;
+			case Db_Query::TYPE_INSERT:
+				if ($this->isInsertSelectQuery) {
+					break;
+				}
 			default:
 				throw new Exception("The WHERE clause does not belong in this context.", -1);
 		}
@@ -1326,6 +1352,10 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 		switch ($this->type) {
 			case Db_Query::TYPE_SELECT:
 				break;
+			case Db_Query::TYPE_INSERT:
+				if ($this->isInsertSelectQuery) {
+					break;
+				}
 			default:
 				throw new Exception("The GROUP BY clause does not belong in this context.", -1);
 		}
@@ -1365,6 +1395,10 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 		switch ($this->type) {
 			case Db_Query::TYPE_SELECT:
 				break;
+			case Db_Query::TYPE_INSERT:
+				if ($this->isInsertSelectQuery) {
+					break;
+				}
 			default:
 				throw new Exception(
 					"The HAVING clause does not belong in this context.",
@@ -1404,6 +1438,10 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 			case Db_Query::TYPE_SELECT:
 			case Db_Query::TYPE_UPDATE:
 				break;
+			case Db_Query::TYPE_INSERT:
+				if ($this->isInsertSelectQuery) {
+					break;
+				}
 			default:
 				throw new Exception("The ORDER BY clause does not belong in this context.",-1);
 		}
@@ -1469,13 +1507,16 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 		}
 		switch ($this->type) {
 			case Db_Query::TYPE_SELECT:
-
 				break;
 			case Db_Query::TYPE_UPDATE:
 			case Db_Query::TYPE_DELETE:
 				if (isset($offset))
 					throw new Exception("the LIMIT clause cannot have an OFFSET in this context");
 				break;
+			case Db_Query::TYPE_INSERT:
+				if ($this->isInsertSelectQuery) {
+					break;
+				}
 			default:
 				throw new Exception("The LIMIT clause does not belong in this context.");
 		}
@@ -1771,6 +1812,9 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 
 	static function column($column)
 	{
+		if ($column instanceof Db_Expression) {
+			return $column;
+		}
 		$len = strlen($column);
 		$part = $column;
 		$pos = false;
@@ -2056,6 +2100,8 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 	public $startedTime = null;
 	public $endedTime = null;
 	public $useDeferredJoin = false;
+
+	protected $isInsertSelectQuery = false;
 	protected $transactionKey = null;
 
 	protected static $setTimezoneDone;
