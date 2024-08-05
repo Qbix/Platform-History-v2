@@ -65,6 +65,11 @@ Q.Tool.define("Streams/topic", function(options) {
 
 					var toolName, toolOptions;
 					var stream = this;
+
+					if (!stream.testReadLevel('content')) {
+						return Q.alert("Error: Payment is needed to access this.");
+					}
+
 					switch(streamType) {
 						case "Streams/video":
 							toolName = "Q/video";
