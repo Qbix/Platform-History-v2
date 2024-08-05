@@ -582,7 +582,7 @@
 
 		Q.extend(Q.Users.Web3.chains, Q.Assets.Web3.chains);
 
-		// Listen for Assets/user/credits stream changes to update Q.Assets.Credits on client.
+		// Listen for Assets/credits stream changes to update Q.Assets.Credits on client.
 		// and listem messages to show Q.Notices
 		var _listenUserStream = function () {
 			Assets.Credits.getStream(function (err) {

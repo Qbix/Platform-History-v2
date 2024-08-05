@@ -1,6 +1,6 @@
 Q.exports(function(){
     /**
-    * Get the Assets/user/credits stream published by the logged-in user, if any
+    * Get the Assets/credits stream for logged-in user, if any
     * @method userStream
     * @static
     * @param {Function} [callback] The function to call, receives (err, stream)
