@@ -176,8 +176,8 @@ Q.exports(function(priv){
                     throw new Q.Exception('token empty');
                 }
 
-                // listen Assets/user/credits stream for message
-                Q.Streams.Stream.onMessage(Q.Users.loggedInUser.id, 'Assets/user/credits', 'Assets/credits/bought')
+                // listen Assets/credits stream for message
+                Q.Streams.Stream.onMessage(Q.Users.currentCommunityId, 'Assets/credits/' + Q.Users.loggedInUser.id, 'Assets/credits/bought')
                     .set(function(message) {
                         if (token !== message.getInstruction('token')) {
                             return;
