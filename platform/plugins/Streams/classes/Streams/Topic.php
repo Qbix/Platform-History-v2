@@ -37,8 +37,7 @@ class Streams_Topic {
 		$stream = Streams::create(null, $publisherId, "Streams/topic", array(), array(
 			"publisherId" => $category->publisherId,
 			"streamName" => $category->name,
-			"type" => "new",
-			"inheritAccess" => false
+			"type" => "new"
 		));
 		if ($publisherId != $loggedInUserId) {
 			Streams_Access::insert(array(
