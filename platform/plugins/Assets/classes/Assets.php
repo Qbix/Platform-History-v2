@@ -186,6 +186,34 @@ abstract class Assets extends Base_Assets
 		}
 	}
 
+	/**
+	 * 
+	 * @method canPayForStream
+	 * @static
+	 * @return {array} Array of array(publisherId, streamName) arrays
+	 */
+	static function canPayForStream(Streams_Stream $stream)
+	{
+		$types = Q_Config::get('Assets', 'canPayForStreams', 'types', array());
+		if (!$types || !$streams->inheritAccess) {
+			return array();
+		}
+		$ia = Q::json_decode($streams->inheritAccess, true);
+		$result = array();
+		foreach ($ia as $pn) {
+			list($publisherId, $streamName) = $pn;
+			$canPay = false;
+			foreach ($types as $type) {
+				if (Q::startsWith($streamName, $type.'/')) {
+					$canPay = true;
+					$result[] = array($publisherId, $streamName);
+					break;
+				}
+			}
+		}
+		return $result;
+	}
+
 	static $columns = array();
 	static $options = array();
 	const PAYMENT_TO_USER = 'PaymentToUser';
