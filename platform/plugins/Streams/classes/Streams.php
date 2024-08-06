@@ -1178,27 +1178,22 @@ abstract class Streams extends Base_Streams
 			}
 		}
 	
-		// ready to persist this stream to the database
-		if (
-			!empty($relate['streamName'])
-			&& Q_Config::get("Streams", "types", $type, "inheritAccess", Q::ifset($relate, 'inheritAccess', true))
-		) {
-			/*$rs = Streams_Stream::fetch(
+		if (!empty($relate['streamName'])) {
+			$rs = Streams_Stream::fetch(
 				$asUserId,
 				$relate['publisherId'],
 				$relate['streamName']
 			);
-			 $inheritAccess = ($rs and $rs->inheritAccess)
-			 	? Q::json_decode($rs->inheritAccess)
-			 	: array();
-			 $newInheritAccess = array($relate['publisherId'], $relate['streamName']);
-			 if (!in_array($newInheritAccess, $inheritAccess)) {
-			 	$inheritAccess[] = $newInheritAccess;
-			 }
-			 $stream->inheritAccess = Q::json_encode($inheritAccess);*/
-			$stream->inheritAccess = Q::json_encode(array(
-				array($relate['publisherId'], $relate['streamName'])
-			));
+
+			// check for defaults from category stream type
+			$relatedToDefaults = Q_Config::get("Streams", "types", $rs->type, "relatedTo", $type, "defaults", null);
+			if (!empty($relatedToDefaults)) {
+				foreach ($fieldNames as $f) {
+					if (isset($relatedToDefaults[$f])) {
+						$stream->$f = $relatedToDefaults[$f];
+					}
+				}
+			}
 		}
 		$stream->set('createdAsUserId', $asUserId);
 		$stream->save();
@@ -1213,7 +1208,12 @@ abstract class Streams extends Base_Streams
 			$relationType = isset($relate['type']) ? $relate['type'] : '';
 			$options = array(
 				'weight' => isset($relate['weight']) ? $relate['weight'] : null,
-				'skipAccess' => $skipAccess
+				'skipAccess' => $skipAccess,
+				'inheritAccess' => Q_Config::get("Streams", "types", $rs->type, "relatedTo", $type, "inheritAccess",
+					Q_Config::get("Streams", "types", $type, "inheritAccess",
+						Q::ifset($relate, 'inheritAccess', true)
+					)
+				)
 			);
 			if (isset($relate['extra'])) {
 				$options['extra'] = $relate['extra'];

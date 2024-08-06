@@ -13,7 +13,7 @@ $limit = 10;
 $i = 0;
 while (1) {
 	$creditsStreams = Streams_Stream::select()->where(array(
-		"name" => "Assets/user/credits"
+		"type" => "Assets/credits"
 	))->limit($limit, $offset)->fetchDbRows();
 
 	if (!$creditsStreams) {
@@ -21,14 +21,17 @@ while (1) {
 	}
 
 	foreach ($creditsStreams as $creditsStream) {
-		if (Users::isCommunityId($creditsStream->publisherId)) {
+		$parts = explode('/', $creditsStream->name);
+		$userId = end($parts);
+
+		if (!$userId || Users::isCommunityId($userId)) {
 			continue;
 		}
 
-		echo ++$i.". Processing user: ".$creditsStream->publisherId."\n";
+		echo ++$i.". Processing user: ".$userId."\n";
 
-		$user = Users::fetch($creditsStream->publisherId);
-		$communityId = Users::communityId();
+		$user = Users::fetch($userId);
+		$communityId = $creditsStream->publisherId;
 		$creditsAmount = $creditsStream->getAttribute("amount");
 		$creditsMin = (int)$creditsStream->getAttribute("creditsMin", 
 			Q_Config::expect("Assets", "credits", "amount", "min")
