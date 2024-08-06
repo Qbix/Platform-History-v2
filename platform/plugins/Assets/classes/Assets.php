@@ -188,11 +188,12 @@ abstract class Assets extends Base_Assets
 
 	/**
 	 * 
-	 * @method canPayForStream
+	 * @method canPayForStreams
 	 * @static
+	 * @param {Streams_Stream} $stream
 	 * @return {array} Array of array(publisherId, streamName) arrays
 	 */
-	static function canPayForStream(Streams_Stream $stream)
+	static function canPayForStreams(Streams_Stream $stream)
 	{
 		$types = Q_Config::get('Assets', 'canPayForStreams', 'types', array());
 		if (!$types || !$streams->inheritAccess) {
