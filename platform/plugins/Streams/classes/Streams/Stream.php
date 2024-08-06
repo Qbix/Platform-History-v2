@@ -2111,8 +2111,7 @@ class Streams_Stream extends Base_Streams_Stream
 			$result['attributes'] = Q::json_encode(Q::take($attributes, $canSeeAttributes));
 			if ($this->testReadLevel('teaser')) {
 				foreach ($attributes as $k => $v) {
-					if ($k == 'Streams/teaser'
-					or Q::startsWith($k, 'Streams/teaser/')) {
+					if (Q::startsWith($k, 'Streams/teaser/')) {
 						$result['attributes'][$k] = $v;
 					}
 				}

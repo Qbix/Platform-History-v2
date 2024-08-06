@@ -61,7 +61,7 @@ Q.makeEventEmitter(Streams);
  * @final
  */
 /**
- * Can see promotional clip of content
+ * Can see Streams/teaser/.. attributes
  * @property READ_LEVEL.teaser
  * @type integer
  * @default 15
@@ -112,7 +112,7 @@ Q.makeEventEmitter(Streams);
 Streams.READ_LEVEL = {
 	'none':			0,		// can't see the stream
 	'see':			10,		// can see icon and title
-	'teaser':		15, 	// can see promotional clip of content
+	'teaser':		15, 	// can see Streams/teaser/.. attributes
 	'relations':	20,		// can see relations to other streams
 	'content':		25,		// can preview stream and its content
 	'participants':	30,		// can see participants in the stream
