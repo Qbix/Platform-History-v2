@@ -55,7 +55,8 @@ class Users_Session extends Base_Users_Session
 		if (isset($req['deviceId'])) {
 			$payload['Q.Users.deviceId'] = $req['deviceId'];
 		}
-		$newSessionId = Q_Session::generateId();
+		$prefixType = Q_Session::isAuthenticated() ? 'authenticated' : null;
+		$newSessionId = Q_Session::generateId(null, $prefixType);
 		$payload['Q.Users.newSessionId'] = $newSessionId;
 		$payload['Q.Users.appId'] = $appId;
 		$payload['Q.Users.platform'] = $req['platform'];
