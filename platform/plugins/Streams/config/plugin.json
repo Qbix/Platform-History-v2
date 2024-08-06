@@ -417,26 +417,6 @@
 					"readLevel": 40,
 					"writeLevel": 0,
 					"adminLevel": 0
-				},
-				"relatedTo": {
-					"Streams/video": {
-						"inheritAccess": false,
-						"defaults": {
-							"readLevel": 10
-						}
-					},
-					"Streams/audio": {
-						"inheritAccess": false,
-						"defaults": {
-							"readLevel": 10
-						}
-					},
-					"Streams/pdf": {
-						"inheritAccess": false,
-						"defaults": {
-							"readLevel": 10
-						}
-					}
 				}
 			},
 			"Streams/text": {
