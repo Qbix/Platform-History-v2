@@ -137,3 +137,7 @@
 .Assets_plan_preview_tool .Assets_plan_preview_description span:empty {
 	display: none;
 }
+
+.Assets_plan_composer textarea {
+	width: 100%;
+}
