@@ -2139,6 +2139,10 @@ class Streams_Stream extends Base_Streams_Stream
 		if ($relatedFromTotals = $this->get('relatedFromTotals')) {
 			$result['relatedFromTotals'] = $relatedFromTotals;
 		}
+		$result = Q::event('Streams/exportArray', array(
+			'stream' => $this,
+			'classes' => $classes
+		), 'after', $result);
 		return $result;
 	}
 
