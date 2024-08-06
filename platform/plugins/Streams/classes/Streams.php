@@ -1108,7 +1108,6 @@ abstract class Streams extends Base_Streams
 			$fields = array();
 		}
 		$skipAccess = Q::ifset($fields, 'skipAccess', false);
-		$private = Q::ifset($fields, 'private', false);
 		if (!isset($asUserId)) {
 			$asUserId = Users::loggedInUser(true)->id;
 		} else if ($asUserId instanceof Users_User) {
@@ -1177,29 +1176,7 @@ abstract class Streams extends Base_Streams
 				$stream->$f = $fields[$f];
 			}
 		}
-	
-		// ready to persist this stream to the database
-		if (
-			!empty($relate['streamName'])
-			&& Q_Config::get("Streams", "types", $type, "inheritAccess", Q::ifset($relate, 'inheritAccess', true))
-		) {
-			/*$rs = Streams_Stream::fetch(
-				$asUserId,
-				$relate['publisherId'],
-				$relate['streamName']
-			);
-			 $inheritAccess = ($rs and $rs->inheritAccess)
-			 	? Q::json_decode($rs->inheritAccess)
-			 	: array();
-			 $newInheritAccess = array($relate['publisherId'], $relate['streamName']);
-			 if (!in_array($newInheritAccess, $inheritAccess)) {
-			 	$inheritAccess[] = $newInheritAccess;
-			 }
-			 $stream->inheritAccess = Q::json_encode($inheritAccess);*/
-			$stream->inheritAccess = Q::json_encode(array(
-				array($relate['publisherId'], $relate['streamName'])
-			));
-		}
+
 		$stream->set('createdAsUserId', $asUserId);
 		$stream->save();
 		$stream->post($asUserId, array(
@@ -1213,7 +1190,8 @@ abstract class Streams extends Base_Streams
 			$relationType = isset($relate['type']) ? $relate['type'] : '';
 			$options = array(
 				'weight' => isset($relate['weight']) ? $relate['weight'] : null,
-				'skipAccess' => $skipAccess
+				'skipAccess' => $skipAccess,
+				'inheritAccess' => Q_Config::get("Streams", "types", $type, "inheritAccess", Q::ifset($relate, 'inheritAccess', true))
 			);
 			if (isset($relate['extra'])) {
 				$options['extra'] = $relate['extra'];
