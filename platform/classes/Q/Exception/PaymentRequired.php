@@ -13,4 +13,4 @@ class Q_Exception_PaymentRequired extends Q_Exception
 	 */
 };
 
-Q_Exception::add('Q_Exception_PaymentRequired', 'Payment required: {{message}}');
+Q_Exception::add('Q_Exception_PaymentRequired', 'Payment required: {{message}}', 402);

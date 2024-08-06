@@ -2085,9 +2085,12 @@ class Streams_Stream extends Base_Streams_Stream
 				$canSeeFields = array_merge($canSeeFields, 
 					Q::ifset($configPermissions, $p, 'fields', array())
 				);
-				$canSeeAttributes = array_merge($canSeeFields, 
+				$canSeeAttributes = array_merge($canSeeAttributes, 
 					Q::ifset($configPermissions, $p, 'attributes', array())
 				);
+			}
+			if ($this->testReadLevel('teaser')) {
+				$canSeeAttributes[] = 'Streams/teaser';
 			}
 		}
 		$result['icon'] = Q_Html::themedUrl($this->iconUrl(false), array(
