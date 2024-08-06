@@ -84,7 +84,6 @@ class Assets_Credits extends Base_Assets_Credits
 		$publisherId = $communityId;
 		$streamName = "Assets/credits/$userId";
 		$stream = Streams::fetchOneOrCreate($asUserId, $publisherId, $streamName, array(
-			'type' => 'Assets/credits',
 			'subscribe' => true
 		), $results);
 		if ($results['created']) {
@@ -337,6 +336,10 @@ class Assets_Credits extends Base_Assets_Credits
 	 * @param {array} [$more] An array supplying more information
 	 * @param {array} [$more.items] an array of items, each with "publisherId", "streamName" and "amount"
 	 * @param {array} [$more.forcePayment=false] If true and not enough credits, try to charge credits
+	 * @param {string} [$more.toPublisherId] The publisher of the value-producing stream for which the payment is made
+	 * @param {string} [$more.toStreamName] The name of the stream value-producing for which the payment is made
+	 * @param {string} [$more.fromPublisherId] The publisher of the value-consuming stream on whose behalf the payment is made
+	 * @param {string} [$more.fromStreamName] The name of the value-consuming stream on whose behalf the payment is made
 	 */
 	static function transfer($communityId, $amount, $reason, $toUserId, $fromUserId = null, $more = array())
 	{
