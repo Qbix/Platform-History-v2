@@ -78,7 +78,7 @@ abstract class Base_Assets_Credits extends Db_Row
 	 * @property $reason
 	 * @type string
 	 * @default ""
-	 * human-readable description of the charge
+	 * key in Q.Text file with human-readable description of the charge
 	 */
 	/**
 	 * @property $communityId

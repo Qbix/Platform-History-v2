@@ -2,7 +2,7 @@ CREATE TABLE IF NOT EXISTS `{{prefix}}charge` (
   `userId` varbinary(31) NOT NULL,
   `id` varbinary(255) NOT NULL,
   `subscriptionId` varbinary(255) NOT NULL,
-  `description` varchar(255) COLLATE utf8_bin NOT NULL COMMENT 'human-readable description of the charge',
+  `description` varchar(255) COLLATE utf8_bin NOT NULL COMMENT 'key in Q.Text file with human-readable description of the charge',
   `attributes` varchar(1023) COLLATE utf8_bin NOT NULL COMMENT 'additional information for the charge in JSON format',
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedTime` timestamp NULL DEFAULT NULL
