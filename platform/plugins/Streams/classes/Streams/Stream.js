@@ -702,9 +702,9 @@ Sp.inheritAccess = function (callback) {
 	if (!this.fields.inheritAccess) {
 		callback.call(this, null, false);
 	}
-	var names;
+	var inheritAccess;
 	try {
-		names = JSON.parse(this.fields.inheritAccess);
+		inheritAccess = JSON.parse(this.fields.inheritAccess);
 	} catch (e) {
 		return callback.call(subj, e);
 	}
@@ -713,11 +713,11 @@ Sp.inheritAccess = function (callback) {
 	}
 	this.set('inheritAccess', this.fields.inheritAccess);
 
-	if (!Q.isArrayLike(names)) {
-		var temp = names;
-		names = [];
+	if (!Q.isArrayLike(inheritAccess)) {
+		var temp = inheritAccess;
+		inheritAccess = [];
 		for (var k in temp) {
-			names.push(JSON.stringify(temp[k]));
+			inheritAccess.push(JSON.stringify(temp[k]));
 		}
 	}
 
@@ -738,7 +738,7 @@ Sp.inheritAccess = function (callback) {
 	var adminLevel = this.get('adminLevel', 0);
 	var adminLevel_source = this.get('adminLevel_source', public_source);
 	
-	var p = new Q.Pipe(names.map(JSON.stringify), function (params) {
+	var p = new Q.Pipe(inheritAccess.map(JSON.stringify), function (params) {
 		subj.set('readLevel', readLevel);
 		subj.set('writeLevel', writeLevel);
 		subj.set('adminLevel', adminLevel);
@@ -752,12 +752,12 @@ Sp.inheritAccess = function (callback) {
 	// To implement several "generations" of inheritance, you can do things like:
 	// 'inheritAccess': [["publisherId","grandparentStreamName"],
 	//                  ["publisherId","parentStreamName"]]
-	Q.each(names, function (i, name) {
-		var publisherId;
-		var key = JSON.stringify(name);
-		if (Q.isArrayLike(name)) {
-			publisherId = name[0];
-			name = name[1];
+	Q.each(inheritAccess, function (i, ia) {
+		var publisherId, name;
+		var key = JSON.stringify(ia);
+		if (Q.isArrayLike(ia)) {
+			publisherId = ia[0];
+			name = ia[1];
 		} else {
 			publisherId = subj.fields.publisherId;
 			name = subj.fields.name;
