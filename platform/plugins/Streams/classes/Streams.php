@@ -957,6 +957,7 @@ abstract class Streams extends Base_Streams
 		$p2 = $stream->get('permissions', array());
 		$stream->set('permissions', array_unique(array_merge($p1, $p2)));
 		$stream->set('permissions_source', $source);
+		 // NOTE: permissions are merged from more than one source
 	}
 	
 	/**
