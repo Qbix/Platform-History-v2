@@ -288,9 +288,9 @@
 					"icon": "default",
 					"content": "",
 					"attributes": "",
-					"readLevel": 40,
-					"writeLevel": 10,
-					"adminLevel": 20,
+					"readLevel": 0,
+					"writeLevel": 0,
+					"adminLevel": 0,
 					"messageCount": 0,
 					"invitedCount": 0,
 					"arrivedCount": 0,
@@ -414,7 +414,7 @@
 				"defaults": {
 					"title": "",
 					"icon": "Streams/topic",
-					"readLevel": 40,
+					"readLevel": 20,
 					"writeLevel": 0,
 					"adminLevel": 0
 				}
