@@ -1827,9 +1827,8 @@ class Streams_Stream extends Base_Streams_Stream
 				+ (($s_adminLevel_source > $ips) ? 0 : $ips);
 			}
 			if (!in_array($permissions_source, $direct_sources)) {
-				if ($s_permissions_source === $direct_source) {
-					$p2 = $s_permissions_source;
-				} else {
+				$p2 = $s_permissions_source;
+				if ($s_permissions_source !== $direct_source) {
 					$p = $this->get('permissions', array());
 					$p2 = array_unique(array_merge($p, $s_permissions));
 				}
