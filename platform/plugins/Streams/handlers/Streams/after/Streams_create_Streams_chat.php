@@ -19,7 +19,7 @@ function Streams_after_Streams_create_Streams_chat($params)
 		foreach ($categoryTypes as $categoryType) {
 			$name = $categoryType."/".$experienceId;
 			$categoryStream = Streams_Stream::fetchOrCreate($communityId, $communityId, $name, array(
-				'type' => 'Streams/category'
+				'type' => $categoryType
 			));
 			$stream->relateTo($categoryStream, 'Streams/chat', null, array(
 				'skipAccess' => true,
