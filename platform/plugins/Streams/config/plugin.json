@@ -473,7 +473,10 @@
 				"edit": true,
 				"defaults": {
 					"icon": "Streams/image",
-					"title": "Untitled Image"
+					"title": "Untitled Image",
+					"readLevel": 40,
+					"writeLevel": 10,
+					"adminLevel": 20
 				}
 			},
 			"Streams/file": {
@@ -547,7 +550,22 @@
 				"edit": true,
 				"defaults": {
 					"title": "Untitled Category",
-					"icon": "Streams/category"
+					"icon": "Streams/category",
+					"readLevel": 40,
+					"writeLevel": 10,
+					"adminLevel": 20
+				},
+				"see": ["relatedTo"]
+			},
+			"Streams/chats": {
+				"create": false,
+				"edit": false,
+				"defaults": {
+					"title": "Category for chats",
+					"icon": "Streams/category",
+					"readLevel": 40,
+					"writeLevel": 10,
+					"adminLevel": 20
 				},
 				"see": ["relatedTo"]
 			},
@@ -607,7 +625,10 @@
 				"emoji": "👋",
 				"edit": true,
 				"defaults": {
-					"title": "Community Greeting"
+					"title": "Community Greeting",
+					"readLevel": 40,
+					"writeLevel": 10,
+					"adminLevel": 20
 				}
 			},
 			"Streams/user/profile": {
@@ -621,6 +642,13 @@
 					"icon": "Streams/external/post"
 				},
 				"url": "{{attributes.topicUrl}}"
+			},
+			"Streams/template": {
+				"defaults": {
+					"readLevel": 40,
+					"writeLevel": 10,
+					"adminLevel": 20
+				}
 			}
 		},
 		"categorize": {
