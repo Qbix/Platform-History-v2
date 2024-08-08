@@ -122,7 +122,10 @@
 			"Places/nearby": {
 				"emoji": "🎯",
 				"defaults": {
-					"title": "Nearby Timeslot"
+					"title": "Nearby Timeslot",
+					"readLevel": 40,
+					"writeLevel": 10,
+					"adminLevel": 20
 				},
 				"relatedTo": {
 					"*": {
@@ -133,7 +136,10 @@
 			"Places/interest": {
 				"emoji": "💘",
 				"defaults": {
-					"title": "Nearby Interest"
+					"title": "Nearby Interest",
+					"readLevel": 40,
+					"writeLevel": 10,
+					"adminLevel": 20
 				},
 				"relatedTo": {
 					"*": {
