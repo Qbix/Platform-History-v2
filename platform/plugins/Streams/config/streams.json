@@ -91,6 +91,9 @@
 		"type": "Streams/text/name",
 		"title": "First Name",
 		"icon": "",
+		"readLevel": 20,
+		"writeLevel": 10,
+		"adminLevel": 20,
 		"platforms": {
 			"facebook": "first_name",
 			"twitter": [
@@ -104,6 +107,9 @@
 		"type": "Streams/text/name",
 		"title": "Middle Name",
 		"icon": "",
+		"readLevel": 20,
+		"writeLevel": 10,
+		"adminLevel": 20,
 		"platforms": {
 			"facebook": "middle_name",
 			"twitter": [
@@ -161,6 +167,9 @@
 		"type": "Streams/text/small",
 		"title": "Description",
 		"icon": "",
+		"readLevel": 40,
+		"writeLevel": 10,
+		"adminLevel": 20,
 		"platforms": {
 			"facebook": "profile_blurb"
 		}
@@ -173,7 +182,10 @@
 	"Streams/contacts": {
 		"type": "Streams/resource",
 		"title": "Contacts",
-		"icon": ""
+		"icon": "",
+		"readLevel": 40,
+		"writeLevel": 10,
+		"adminLevel": 20
 	},
 	"Streams/labels": {
 		"type": "Streams/resource",
@@ -181,7 +193,10 @@
 		"icon": "",
 		"attributes": {
 			"prefixes": ["Users/", "Streams/"]
-		}
+		},
+		"readLevel": 40,
+		"writeLevel": 10,
+		"adminLevel": 20
 	},
 	"Streams/user/interests": {
 		"type": "Streams/category",
@@ -301,5 +316,12 @@
 		"type": "Streams/album",
 		"title": "Quotes",
 		"icon": ""
+	},
+	"Streams/participating/tasks": {
+		"title": "Participating List",
+		"icon": "Streams/category",
+		"readLevel": 40,
+		"writeLevel": 10,
+		"adminLevel": 20
 	}
 }
