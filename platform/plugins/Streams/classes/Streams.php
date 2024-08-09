@@ -957,6 +957,7 @@ abstract class Streams extends Base_Streams
 		$p2 = $stream->get('permissions', array());
 		$stream->set('permissions', array_unique(array_merge($p1, $p2)));
 		$stream->set('permissions_source', $source);
+		 // NOTE: permissions are merged from more than one source
 	}
 	
 	/**
@@ -1076,6 +1077,7 @@ abstract class Streams extends Base_Streams
 	 * @param {string|integer} [$fields.adminLevel=null] You can set the stream's admin access level, see Streams::$ADMIN_LEVEL
 	 * @param {string} [$fields.name=null] Here you can specify an exact name for the stream to be created. Otherwise a unique one is generated automatically.
 	 * @param {boolean} [$fields.skipAccess=false] Skip all access checks when creating and relating the stream.
+	 * @param {string} [$fields.accessProfileName] The name of the access profile in the config, for this type of stream, if specified it overrides public access saved in templates
 	 * @param {boolean} [$fields.private] Pass true to mark this stream as private, can also be an array containing ["invite"]
 	 * @param {boolean} [$fields.notices] Pass true to mark this stream as generating notices even if user retained it
 	 * @param {array} [$relate=array()]
@@ -1108,6 +1110,8 @@ abstract class Streams extends Base_Streams
 			$fields = array();
 		}
 		$skipAccess = Q::ifset($fields, 'skipAccess', false);
+		$private = Q::ifset($fields, 'private', false);
+		$accessProfile = Q::ifset($fields, 'accessProfile', null);
 		if (!isset($asUserId)) {
 			$asUserId = Users::loggedInUser(true)->id;
 		} else if ($asUserId instanceof Users_User) {
@@ -1168,12 +1172,39 @@ abstract class Streams extends Base_Streams
 			}
 		}
 
+		$accessProfileInherit = array();
+		if ($accessProfileName) {
+			$ap = Streams_Stream::getConfigField($type, array('access', 'profiles', $accessProfileName), null);
+			Q::take($ap, array(
+				'readLevel', 'writeLevel', 'adminLevel', 'permissions'
+			), $stream);
+			if (isset($ap['inheritAccess'])) {
+				$accessProfileInherit = $ap['inheritAccess'];
+			}
+		}
+
 		// extend with any config defaults for this stream type
 		$fieldNames = Streams::getExtendFieldNames($type);
 		$fieldNames[] = 'name';
 		foreach ($fieldNames as $f) {
 			if (isset($fields[$f])) {
 				$stream->$f = $fields[$f];
+			}
+		}
+	
+		// ready to persist this stream to the database
+		if (!empty($relate['publisherId'])
+		&&  !empty($relate['streamName'])) {
+			if (!empty($relate['inheritAccess'])
+			or !empty($accessProfileInherit)) {
+				$item = array($relate['publisherId'], $relate['streamName']);
+				if (isset($accessProfileInherit['levels'])) {
+					$item[] = $accessProfileInherit['levels'];
+				}
+				if (isset($accessProfileInherit['permissions'])) {
+					$item[] = $accessProfileInherit['permissions'];
+				}
+				$stream->inheritAccess = Q::json_encode(array($item));
 			}
 		}
 

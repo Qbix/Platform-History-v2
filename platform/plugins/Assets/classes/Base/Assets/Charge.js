@@ -64,7 +64,7 @@ Q.mixin(Base, Row);
  * @property description
  * @type String
  * @default ""
- * human-readable description of the charge
+ * key in Q.Text file with human-readable description of the charge
  */
 /**
  * @property attributes

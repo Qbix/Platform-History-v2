@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS {{prefix}}credits (
   fromStreamName varbinary(255) NULL COMMENT 'name of the stream from which charge was made',
   toPublisherId varbinary(31) NULL COMMENT 'publisherId of the stream regarding which the charge was made',
   toStreamName varbinary(255) NULL COMMENT 'name of the stream regarding which the charge was made',
-  reason varchar(255) COLLATE utf8_bin  NOT NULL COMMENT 'human-readable description of the charge',
+  reason varchar(255) COLLATE utf8_bin  NOT NULL COMMENT 'key in Q.Text file with human-readable description of the charge',
   credits SMALLINT NOT NULL,
   attributes varchar(1023) NULL COMMENT 'additional information for the charge in JSON format',
   insertedTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,

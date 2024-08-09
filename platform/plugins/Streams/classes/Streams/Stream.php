@@ -1721,6 +1721,10 @@ class Streams_Stream extends Base_Streams_Stream
 	}
 	/**
 	 * Inherits access from any streams specified in the inheritAccess field.
+	 * It consists of a JSON-encoded array, containing arrays of the forms:
+	 * [publisherId, streamName]
+	 * [publisherId, streamName, [readLevel, writeLevel, adminLevel]]
+	 * [publisherId, streamName, [readLevel, writeLevel, adminLevel], [permission1, permission2]]
 	 * @method inheritAccess
 	 * @return {boolean}
 	 *  Returns whether the access potentially changed.
@@ -1766,6 +1770,10 @@ class Streams_Stream extends Base_Streams_Stream
 			}
 			$publisherId = reset($ia);
 			$name = next($ia);
+			$accessLevels = next($ia);
+			$permissions = next($ia);
+			// NOTE: this fetch might already pull from a cache,
+			// after a bulk fetch in Streams::calculateAccess()
 			$stream = Streams_Stream::fetch(
 				$asUserId,
 				$publisherId,
@@ -1778,28 +1786,55 @@ class Streams_Stream extends Base_Streams_Stream
 			$s_readLevel = $stream->get('readLevel', 0);
 			$s_writeLevel = $stream->get('writeLevel', 0);
 			$s_adminLevel = $stream->get('adminLevel', 0);
+			$s_permissions = $stream->get('permissions', array());
 			$s_readLevel_source = $stream->get('readLevel_source', $public_source);
 			$s_writeLevel_source = $stream->get('writeLevel_source', $public_source);
 			$s_adminLevel_source = $stream->get('adminLevel_source', $public_source);
+			$s_permissions_source = $stream->get('permissions_source', $public_source);
+			
+			$readLevelCap = $writeLevelCap = $adminLevelCap = null;
+			if (is_array($accessLevels)) {
+				list($readLevelCap, $writeLevelCap, $adminLevelCap) = $accessLevels;
+			}
+			if (is_array($permissions)) {
+				$s_permissions = array_intersect($s_permissions, $permissions);
+			}
 
 			// Inherit read, write and admin levels
-			// But once we obtain a level via a direct_source,
+			// But once we obtain a level via a
+			// direct_source or inherited_direct_source,
 			// we don't override it anymore.
 			$ips = $inherited_public_source;
 			if (!in_array($readLevel_source, $direct_sources)) {
-				$readLevel = ($s_readLevel_source === $direct_source) ? $s_readLevel : max($readLevel, $s_readLevel);
-				$readLevel_source = $s_readLevel_source + 
-					(($s_readLevel_source > $ips) ? 0 : $ips);
+				$min = isset($readLevelCap) ? min($s_readLevel, $readLevelCap) : $s_readLevel;
+				$readLevel = ($s_readLevel_source === $direct_source)
+				? $min : max($readLevel, $min);
+				$readLevel_source = $s_readLevel_source 
+				+ (($s_readLevel_source > $ips) ? 0 : $ips);
 			}
 			if (!in_array($writeLevel_source, $direct_sources)) {
-				$writeLevel = ($s_writeLevel_source === $direct_source) ? $s_writeLevel : max($writeLevel, $s_writeLevel);
-				$writeLevel_source = $s_writeLevel_source + 
-					(($s_writeLevel_source > $ips) ? 0 : $ips);
+				$min = isset($writeLevelCap) ? min($s_writeLevel, $writeLevelCap) : $s_writeLevel;
+				$writeLevel = ($s_writeLevel_source === $direct_source)
+				? $min : max($writeLevel, $min);
+				$writeLevel_source = $s_writeLevel_source
+				+ (($s_writeLevel_source > $ips) ? 0 : $ips);
 			}
 			if (!in_array($adminLevel_source, $direct_sources)) {
-				$adminLevel = ($s_adminLevel_source === $direct_source) ? $s_adminLevel : max($adminLevel, $s_adminLevel);
-				$adminLevel_source = $s_adminLevel_source + 
-				(($s_adminLevel_source > $ips) ? 0 : $ips);
+				$min = isset($adminLevelCap) ? min($s_adminLevel, $adminLevelCap) : $s_adminLevel;
+				$adminLevel = ($s_adminLevel_source === $direct_source)
+				? $min : max($adminLevel, $min);
+				$adminLevel_source = $s_adminLevel_source
+				+ (($s_adminLevel_source > $ips) ? 0 : $ips);
+			}
+			if (!in_array($permissions_source, $direct_sources)) {
+				$p2 = $s_permissions_source;
+				if ($s_permissions_source !== $direct_source) {
+					$p = $this->get('permissions', array());
+					$p2 = array_unique(array_merge($p, $s_permissions));
+				}
+				$this->set('permissions', $p2);
+				$this->set('permissions_source', $s_permissions_source
+				+ (($s_permissions_source > $ips) ? 0 : $ips));
 			}
 		}
 		

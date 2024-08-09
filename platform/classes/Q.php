@@ -1283,6 +1283,9 @@ class Q
 		if (!isset($dest)) {
 			$dest = array();
 		}
+		if (!$source) {
+			return $dest;
+		}
 		if (Q::isAssociative($fields)) {
 			if (is_array($source)) {
 				if (is_array($dest)) {

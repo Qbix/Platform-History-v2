@@ -175,7 +175,9 @@
 				"defaults": {
 					"title": "Web page",
 					"icon": "{{Websites}}/img/icons/Websites/webpage",
-					"writeLevel": 23
+					"readLevel": 40,
+					"writeLevel": 23,
+					"adminLevel": 20
 				},
 				"messages": {
 					"Streams/chat/message": {

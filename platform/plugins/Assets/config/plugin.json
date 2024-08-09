@@ -379,7 +379,10 @@
 				"edit": ["content", "icon"],
 				"defaults": {
 					"title": "fundraise",
-					"icon": "Assets/product"
+					"icon": "Assets/product",
+					"readLevel": 40,
+					"writeLevel": 10,
+					"adminLevel": 20
 				}
 			},
 			"Assets/invoice": {

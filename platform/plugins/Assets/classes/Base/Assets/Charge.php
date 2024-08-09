@@ -55,7 +55,7 @@ abstract class Base_Assets_Charge extends Db_Row
 	 * @property $description
 	 * @type string
 	 * @default ""
-	 * human-readable description of the charge
+	 * key in Q.Text file with key in Q.Text file with human-readable description of the charge
 	 */
 	/**
 	 * @property $attributes
