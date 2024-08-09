@@ -2143,14 +2143,15 @@ class Streams_Stream extends Base_Streams_Stream
 		}
 		if (!$readLevelAtLeastContent) {
 			$attributes = $this->getAllAttributes();
-			$result['attributes'] = Q::json_encode(Q::take($attributes, $canSeeAttributes));
+			$a = Q::take($attributes, $canSeeAttributes);
 			if ($this->testReadLevel('teaser')) {
 				foreach ($attributes as $k => $v) {
 					if (Q::startsWith($k, 'Streams/teaser/')) {
-						$result['attributes'][$k] = $v;
+						$a[$k] = $v;
 					}
 				}
 			}
+			$result['attributes'] = Q::json_encode($a);
 		}
 		$result['access'] = array(
 			'readLevel' => $this->getReadLevel($options),
