@@ -1078,7 +1078,7 @@ abstract class Streams extends Base_Streams
 	 * @param {string} [$fields.name=null] Here you can specify an exact name for the stream to be created. Otherwise a unique one is generated automatically.
 	 * @param {boolean} [$fields.skipAccess=false] Skip all access checks when creating and relating the stream.
 	 * @param {string} [$fields.accessProfileName] The name of the access profile in the config, for this type of stream, if specified it overrides public access saved in templates
-	 * @param {boolean} [$fields.private] Pass true to mark this stream as private, can also be an array containing ["invite"]
+	 * @param {boolean|array} [$fields.private] Pass true to mark this stream as private, can also be an array containing ["invite"]
 	 * @param {boolean} [$fields.notices] Pass true to mark this stream as generating notices even if user retained it
 	 * @param {array} [$relate=array()]
 	 *  Fill this out in order to relate the newly created stream to a category stream,
@@ -1111,7 +1111,16 @@ abstract class Streams extends Base_Streams
 		}
 		$skipAccess = Q::ifset($fields, 'skipAccess', false);
 		$private = Q::ifset($fields, 'private', false);
-		$accessProfile = Q::ifset($fields, 'accessProfile', null);
+		$accessProfileName = Q::ifset($fields, 'accessProfileName', null);
+		if ($private) {
+			if ($private !== true && $private !== array('invite')) {
+				throw new Q_Exception_WrongValue(array(
+					'field' => 'private',
+					'range' => 'true or ["invite"]',
+					'value' => $private
+				));
+			}
+		}
 		if (!isset($asUserId)) {
 			$asUserId = Users::loggedInUser(true)->id;
 		} else if ($asUserId instanceof Users_User) {
