@@ -1207,6 +1207,7 @@ abstract class Streams extends Base_Streams
 				$stream->inheritAccess = Q::json_encode(array($item));
 			}
 		}
+
 		$stream->set('createdAsUserId', $asUserId);
 		$stream->save();
 		$stream->post($asUserId, array(
@@ -1220,7 +1221,8 @@ abstract class Streams extends Base_Streams
 			$relationType = isset($relate['type']) ? $relate['type'] : '';
 			$options = array(
 				'weight' => isset($relate['weight']) ? $relate['weight'] : null,
-				'skipAccess' => $skipAccess
+				'skipAccess' => $skipAccess,
+				'inheritAccess' => Q_Config::get("Streams", "types", $type, "inheritAccess", Q::ifset($relate, 'inheritAccess', true))
 			);
 			if (isset($relate['extra'])) {
 				$options['extra'] = $relate['extra'];
