@@ -82,7 +82,7 @@
 				},
 				"defaults": {
 					"icon": "{{Places}}/img/icons/area",
-					"title": "Area"
+					"title": "Area within Location"
 				},
 				"relatedFrom": {
 					"*": {
@@ -96,7 +96,7 @@
 				"edit": true,
 				"defaults": {
 					"icon": "{{Places}}/img/icons/floor",
-					"title": "Floor"
+					"title": "Building Floor"
 				},
 				"relatedFrom": {
 					"*": {
@@ -110,7 +110,7 @@
 				"edit": true,
 				"defaults": {
 					"icon": "{{Places}}/img/icons/column",
-					"title": "Column"
+					"title": "Building Column"
 				},
 				"relatedFrom": {
 					"*": {
@@ -122,7 +122,10 @@
 			"Places/nearby": {
 				"emoji": "🎯",
 				"defaults": {
-					"title": "Nearby Timeslot"
+					"title": "Nearby",
+					"readLevel": 40,
+					"writeLevel": 10,
+					"adminLevel": 20
 				},
 				"relatedTo": {
 					"*": {
@@ -133,7 +136,10 @@
 			"Places/interest": {
 				"emoji": "💘",
 				"defaults": {
-					"title": "Nearby Interest"
+					"title": "Nearby Interest",
+					"readLevel": 40,
+					"writeLevel": 10,
+					"adminLevel": 20
 				},
 				"relatedTo": {
 					"*": {

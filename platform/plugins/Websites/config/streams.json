@@ -26,5 +26,33 @@
 		"readLevel": "0",
 		"writeLevel": "0",
 		"adminLevel": "0"
+	},
+	"Websites/header": {
+		"type": "Streams/image/icon",
+		"title": "Header image",
+		"readLevel": 40,
+		"writeLevel": 10,
+		"adminLevel": 20
+	},
+	"Websites/participating/webpages": {
+		"title": "Participating List",
+		"icon": "Streams/category",
+		"readLevel": 40,
+		"writeLevel": 10,
+		"adminLevel": 20
+	},
+	"Websites/slogan": {
+		"title": "Website slogan",
+		"type": "Streams/text/small",
+		"readLevel": 40,
+		"writeLevel": 10,
+		"adminLevel": 20
+	},
+	"Websites/title": {
+		"title": "Website title",
+		"type": "Streams/text/small",
+		"readLevel": 40,
+		"writeLevel": 10,
+		"adminLevel": 20
 	}
 }
