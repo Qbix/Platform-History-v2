@@ -175,6 +175,16 @@
 					"participatingCount",
 					"leftCount"
 				],
+				"access": {
+					"profiles": {
+						"private": {
+							"readLevel": 0,
+							"writeLevel": 0,
+							"adminLevel": 0,
+							"permissions": []
+						}
+					}
+				},
 				"admins": ["Users/owners", "Users/admins"],
 				"canCreate": ["Users/owners", "Users/admins"],
 				"invite": {
