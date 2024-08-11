@@ -313,7 +313,7 @@ class Db_Mysql implements Db_Interface
 	 *   if doing insert()->select() queries.
 	 * @return {Db_Query_Mysql} The resulting Db_Query_Mysql object
 	 */
-	function insert ($table_into, $fields = array())
+	function insert ($table_into, array $fields = array())
 	{
 		if (empty($table_into))
 			throw new Exception("table not specified in call to 'insert'.");
