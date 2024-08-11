@@ -4,20 +4,20 @@ trait Q_MetaTrait
 {
     private $_methods = array();
  
-    public function addMethod($methodName, $methodCallable)
+    public function addMethod($method, $callable)
     {
-        if (!is_callable($methodCallable)) {
-            throw new InvalidArgumentException('Second param must be callable');
+        if (!is_callable($callable)) {
+            throw new InvalidArgumentException('addMethod: Second param must be callable');
         }
-        $this->_methods[$methodName] = Closure::bind($methodCallable, $this, get_class());
+        $this->_methods[$method] = Closure::bind($callable, $this, get_class());
     }
  
-    public function __call($methodName, array $args)
+    public function __call($method, array $args)
     {
-        if (isset($this->_methods[$methodName])) {
-            return call_user_func_array($this->_methods[$methodName], $args);
+        if (isset($this->_methods[$method])) {
+            return call_user_func_array($this->_methods[$method], $args);
         }
  
-        throw RunTimeException('There is no method with the given name to call');
+        throw Q_Exception_MethodNotSupported(compact('method'));
     }
 }
