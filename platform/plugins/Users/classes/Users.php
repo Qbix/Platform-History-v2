@@ -1566,10 +1566,11 @@ abstract class Users extends Base_Users
 	 * @param {array} [$sources=array()] Array of $basename => $filename (of an existing file)
 	 *   or $basename => $url to download from, or
 	 *   of $basename => arrays("hash"=>..., "size"=>...) for gravatar icons.
+	 *   If this object is empty, then the function returns null
 	 * @param {string} [$directory=null] Set this unless $obj is a Users_User, in which case it will
 	 *   defaults to APP/files/APP/uploads/Users/USERID/icon/imported
 	 * @param {string|array} [$cookies=null] The cookies to pass, if downloading from URLs
-	 * @return {string} the path to the icon directory, or null if files weren't created
+	 * @return {string|null} the path to the icon directory, or null if files weren't created
 	 */
 	static function importIcon($obj, $sources = array(), $directory = null, $cookies = null)
 	{
@@ -1682,7 +1683,7 @@ abstract class Users extends Base_Users
 					$sy = round(($sh - $h2) / 2);
 					$image = imagecreatetruecolor($w, $h);
 					imagealphablending($image, false);
-					imagecopyresampled($image, $source, 0, 0, $sx, $sy, $w, $h, $w2, $h2);
+					imagecopyresampled($image, $source, 0, 0, (int)$sx, (int)$sy, (int)$w, (int)$h, (int)$w2, (int)$h2);
 				}
 				$info = pathinfo($filename);
 				switch ($info['extension']) {

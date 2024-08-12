@@ -84,7 +84,10 @@ function Streams_after_Users_User_saveExecute($params)
 					$values['Streams/user/icon'] = $modifiedFields['icon'] = $updates['icon'] = $user->icon;
 					break 2;
 				}
-			} catch (Exception $e) {}
+			} catch (Exception $e) {
+				// ignore exceptions and continue
+				$a = 2;
+			}
 		}
 	}
 	$toInsert = array();

@@ -199,7 +199,8 @@ class Q_Image
      * @throws {Q_Exception} If GD is not supported
      * @throws {Q_Exception_WrongValue} If avatar type is not supported
 	 */
-	static function avatar($hash, $size = Q_AVATAR_SIZE, $type = 'wavatar', $gravatar = false) {
+	static function avatar($hash, $size = Q_AVATAR_SIZE, $type = 'wavatar', $gravatar = false)
+	{
 		if (is_string($size)) {
 			$parts = explode('x', $size);
 			$size = max((integer)reset($parts), (integer)next($parts));
@@ -243,6 +244,7 @@ class Q_Image
 	 * @param {array} [$options=array()] Any additional options for pixabay api as per its documentation
 	 * @param {boolean} [$returnFirstImage=false] If true, downloads and returns the first image as data
 	 * @return {string} JSON according to pixabay api documentation
+	 * @throws Q_Exception_MissingConfig
 	 */
 	static function pixabay($keywords, $options = array(), $returnFirstImage = false)
 	{
@@ -270,6 +272,7 @@ class Q_Image
 	 * @param {array} [$options=array()] Any additional options for pixabay api as per its documentation
 	 * @param {boolean} [$returnFirstImage=false] If true, downloads and returns the first image as data
 	 * @return {array} An array of image URLs representing large photos
+	 * @throws Q_Exception_MissingConfig
 	 */
 	static function facebook($keywords, $options = array(), $returnFirstImage = false)
 	{
@@ -297,6 +300,7 @@ class Q_Image
 	 * @param {array} [$options=array()] Any additional options for pixabay api as per its documentation
 	 * @param {boolean} [$returnFirstImage=false] If true, downloads and returns the first image as data
 	 * @return {array} An array of image URLs representing large photos
+	 * @throws Q_Exception_MissingConfig
 	 */
 	static function google($keywords, $options = array(), $returnFirstImage = false)
 	{
