@@ -86,7 +86,8 @@ class Assets_Credits extends Base_Assets_Credits
 		$stream = Streams::fetchOneOrCreate($asUserId, $publisherId, $streamName, array(
 			'fields' => array(
 				'type' => "Assets/credits",
-				'skipAccess' => true
+				'skipAccess' => true,
+				'attributes' => array('amount' => 0)
 			),
 			'subscribe' => true
 		), $results);
