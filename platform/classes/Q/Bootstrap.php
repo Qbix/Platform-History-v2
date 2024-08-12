@@ -39,7 +39,7 @@ class Q_Bootstrap
 		spl_autoload_register(array('Q', 'autoload'), true, true);
 		// Register SodiumCompat first
 		require_once(Q_CLASSES_DIR.DS.'SodiumCompat'.DS.'autoload.php');
-		// Integrating with Composer first (TODO: think of optimizations)
+		// Integrating with Composer first (TODO: think of optimizations)lear
 		// requires "vendor/autoload.php" from all plugins, implementing PSR-4
 		$composerAutoload = Q_Config::get('Q', 'composer', 'autoload', '*');
 		if (!$composerAutoload) {
