@@ -90,7 +90,7 @@ class Users_Label extends Base_Users_Label
 		$updateIfExists = false,
 		$skipAccess = false)
 	{
-		if (!isset($label)) {
+		if (empty($label)) {
 			throw new Q_Exception_RequiredField(array('field' => 'label'));
 		}
 		if (is_array($label)) {
