@@ -4856,6 +4856,9 @@ Q.Tool.remove = function _Q_Tool_remove(elem, removeCached, removeElementAfterLa
  *  or a function that will take a tool name and return a boolean, false means don't remove tool.
  */
 Q.Tool.clear = function _Q_Tool_clear(elem, removeCached, removeElementAfterLastTool, filter) {
+	if (!elem) {
+		return;
+	}
 	if (typeof elem === 'string') {
 		var tool = Q.Tool.byId(elem);
 		if (!tool) return false;
