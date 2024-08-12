@@ -6,6 +6,13 @@ function Assets_after_Users_filter_users($params, &$result)
     if ($min == 0) {
         return;
     }
+    $exceptRoles = Q_Config::get('Assets', 'users', 'filter', 'credits', 'exceptRoles', Q_Config::get(
+        'Users', 'communities', 'admins', array('Users/owners', 'Users/admins')
+    ));
+    if (Users::roles(Users::currentCommunityId(), $exceptRoles)
+     && Users::roles(Users::communityId(), $exceptRoles)) {
+        return;
+    }
     // filter by users with at least $min credits
     list($communityIds, $personIds) = Users::splitIntoCommunityAndPersonIds($result);
     $credits = $av = sprintf("%015.2f", $min);
