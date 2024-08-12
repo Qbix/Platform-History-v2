@@ -2093,11 +2093,11 @@ class Streams_Stream extends Base_Streams_Stream
 			$readLevel = max($readLevel, $invite->readLevel);
 		}
 
-		if ($skip or $this->testReadLevel('content', $options)) {
-			$readLevelAtLeastContent = true;
+		if ($skip or $this->testReadLevel('fields', $options)) {
+			$readLevelAtLeastFields = true;
 			$result = $this->toArray();
 		} else {
-			$readLevelAtLeastContent = false;
+			$readLevelAtLeastFields = false;
 			if (!$this->testReadLevel('see')) {
 				return array();
 			}
@@ -2110,6 +2110,9 @@ class Streams_Stream extends Base_Streams_Stream
 				'insertedTime',
 				'updatedTime'
 			);
+			if ($skip or $this->testReadLevel('content', $options)) {
+				$fields[] = 'content';
+			}
 			if (isset($this->type)) {
 				$fields = array_merge($fields, Q_Config::get(
 					'Streams', 'types', $this->type, 'see', array()
@@ -2145,13 +2148,13 @@ class Streams_Stream extends Base_Streams_Stream
 			foreach ($v as $f) {
 				if (!isset($options['fields'])
 				or in_array($f, $options['fields'])) {
-					if ($readLevelAtLeastContent or in_array($f, $canSeeFields, true)) {
+					if ($readLevelAtLeastFields or in_array($f, $canSeeFields, true)) {
 						$result[$f] = isset($this->$f) ? $this->$f : null;
 					}
 				}
 			}
 		}
-		if (!$readLevelAtLeastContent) {
+		if (!$readLevelAtLeastFields) {
 			$attributes = $this->getAllAttributes();
 			$a = Q::take($attributes, $canSeeAttributes);
 			if ($this->testReadLevel('teaser')) {
