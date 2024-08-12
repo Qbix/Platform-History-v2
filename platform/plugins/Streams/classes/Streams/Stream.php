@@ -1523,8 +1523,7 @@ class Streams_Stream extends Base_Streams_Stream
 		and $invite
 		and $invite->publisherId == $this->publisherId
 		and $invite->streamName == $this->name
-		and $invite->readLevel >= 0
-		and !Users::loggedInUser(false, false)) {
+		and $invite->readLevel >= 0) {
 			// set the readLevel, but not writeLevel or adminLevel
 			$readLevel = max($readLevel, $invite->readLevel);
 		}
@@ -2081,6 +2080,17 @@ class Streams_Stream extends Base_Streams_Stream
 		} else {
 			$this->calculateAccess($asUserId);
 			$skip = false;
+		}
+
+		$fields = Q::ifset($_SESSION, 'Streams', 'invite', array());
+		$invite = $fields ? new Streams_Invite($fields) : Streams::$followedInvite;
+		if (empty($options['ignoreInvite'])
+		and $invite
+		and $invite->publisherId == $this->publisherId
+		and $invite->streamName == $this->name
+		and $invite->readLevel >= 0) {
+			// set the readLevel, but not writeLevel or adminLevel
+			$readLevel = max($readLevel, $invite->readLevel);
 		}
 
 		if ($skip or $this->testReadLevel('content', $options)) {

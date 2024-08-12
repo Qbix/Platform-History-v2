@@ -1456,6 +1456,7 @@ Streams.release = function (key) {
 
 Streams.invite = new Q.Method({
     options: {
+		readLevel: 15, // readLevel "teaser" by default
         followup: "future",
         identifierTypes: ["email", "mobile"],
         youCanNowPasteDuration: 10000

@@ -9,11 +9,12 @@
  * Each item in the list is presented with an avatar and also can have a contextual associated with it.
  * @class Streams participants
  * @constructor
- * @param {Object} options Provide options for this tool
+ * @param {Objec t} options Provide options for this tool
  *   @param {String} options.publisherId The id of the publisher
  *   @param {String} options.streamName The name of the stream
  *   @param {Object} [options.invite] Pass an object here to pass as fields to 
  *     Streams/participants/invite template, otherwise the invite button doesn't appear.
+ *     This object can also contain options to be passed to Streams.invite()
  *   @param {Boolean} [options.showSummary] Whether to show a summary
  *   @param {Array} [options.ordering] Array of user id's to order avatars in participants list.
  *   Only users mentioned in this array will ordered. Other users order none change.
@@ -194,7 +195,7 @@ function _Streams_participants(options) {
 			tool.$pc = $("<div class='Streams_participants_container' />")
 			.appendTo($te);
 		}
-		if (!tool.$avatars.length) {
+		if (!tool.$avatars.length && state.invite) {
 			tool.$inviteButton = $("<button class='Streams_participants_invite_button Q_button ' />")
 			.append($(
 				'<img class="Streams_invite_icon Q_lazy_load Q_lazy_loaded"" alt="Invite" />'
