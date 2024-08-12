@@ -195,13 +195,15 @@ function _Streams_participants(options) {
 			tool.$pc = $("<div class='Streams_participants_container' />")
 			.appendTo($te);
 		}
-		if (!tool.$avatars.length && state.invite) {
-			tool.$inviteButton = $("<button class='Streams_participants_invite_button Q_button ' />")
-			.append($(
-				'<img class="Streams_invite_icon Q_lazy_load Q_lazy_loaded"" alt="Invite" />'
-			).attr('src', Q.url('{{Streams}}/img/icons/labels/Streams/invited/40.png')))
-			.append($('<span />').html(tool.text.invite.Participants))
-			.appendTo(tool.$pc);
+		if (!tool.$avatars.length) {
+			if (state.invite) {
+				tool.$inviteButton = $("<button class='Streams_participants_invite_button Q_button ' />")
+				.append($(
+					'<img class="Streams_invite_icon Q_lazy_load Q_lazy_loaded"" alt="Invite" />'
+				).attr('src', Q.url('{{Streams}}/img/icons/labels/Streams/invited/40.png')))
+				.append($('<span />').html(tool.text.invite.Participants));
+				.appendTo(tool.$pc);
+			}
 			tool.$avatars = $("<span class='Streams_participants_avatars' />")
 			.appendTo(tool.$pc);
 		}
