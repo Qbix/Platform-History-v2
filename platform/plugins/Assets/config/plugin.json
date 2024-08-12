@@ -259,6 +259,11 @@
 				"edit": false,
 				"defaults": {
 					"title": "Credits",
+					"icon": "{{Assets}}/img/credits.png",
+					"content": "",
+					"attributes": {
+						"amount": 0
+					},
 					"readLevel": 0,
 					"writeLevel": 0,
 					"adminLevel": 0

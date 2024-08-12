@@ -1,13 +1,4 @@
 {
-  "Assets/user/credits": {
-    "type": "Assets/credits",
-    "title": "Credits",
-    "icon": "{{Assets}}/img/credits.png",
-    "content": "",
-    "attributes": {
-      "amount": 0
-    }
-  },
   "Assets/plans": {
     "type": "Streams/category",
     "title": "Assets subscription plans",
