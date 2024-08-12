@@ -71,14 +71,20 @@ Q.makeEventEmitter(Streams);
  * Can see relations to other streams
  * @property READ_LEVEL.relations
  * @type integer
- * @default 25
+ * @default 20
  * @final
  */
 /**
  * Can see the stream's content
  * @property READ_LEVEL.content
  * @type integer
- * @default 20
+ * @default 23
+ * @final
+ *//**
+ * Can see most of the stream's fields
+ * @property READ_LEVEL.fields
+ * @type integer
+ * @default 25
  * @final
  */
 /**
@@ -114,7 +120,8 @@ Streams.READ_LEVEL = {
 	'see':			10,		// can see icon and title
 	'teaser':		15, 	// can see Streams/teaser/.. attributes
 	'relations':	20,		// can see relations to other streams
-	'content':		25,		// can preview stream and its content
+	'content':		23,		// can see the stream's content
+	'fields':		25,		// can see most of the stream's fields
 	'participants':	30,		// can see participants in the stream
 	'messages':		35,		// can play stream in a player
 	'receipts':     40, 	// can see other users' play receipts

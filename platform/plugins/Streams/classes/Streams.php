@@ -52,8 +52,15 @@ abstract class Streams extends Base_Streams
 	 * @final
 	 */
 	/**
-	 * Can see the stream's content
-	 * @property $READ_LEVEL['content']
+	 * Can see the stream content field
+	 * @property $READ_LEVEL['fields']
+	 * @type integer
+	 * @default 23
+	 * @final
+	 */
+	/**
+	 * Can see most of the stream's fields
+	 * @property $READ_LEVEL['fields']
 	 * @type integer
 	 * @default 25
 	 * @final
@@ -91,7 +98,8 @@ abstract class Streams extends Base_Streams
 		'see' => 10,				// can see icon and title
 		'teaser' => 15,				// can see Streams/teaser/.. attributes
 		'relations' => 20,			// can see relations to other streams
-		'content' => 25,			// can see the stream's content
+		'content' => 23,			// can see the stream's content
+		'fields' => 25,			// can see most of the stream's fields
 		'participants' => 30,		// can see participants in the stream
 		'messages' => 35,			// can play stream in a player
 		'receipts' => 40,			// can see other users' play receipts
