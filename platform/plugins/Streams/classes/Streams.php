@@ -769,7 +769,7 @@ abstract class Streams extends Base_Streams
 		$streams3 = array();
 		$names = array();
 		foreach ($streams2 as $s) {
-			if ($s->get('asUserId', null) === $asUserId) {
+			if (!$recalculate && $s->get('asUserId', null) === $asUserId) {
 				continue;
 			}
 			$s->set('asUserId', $asUserId);
