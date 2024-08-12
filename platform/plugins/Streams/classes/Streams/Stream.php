@@ -2111,6 +2111,7 @@ class Streams_Stream extends Base_Streams_Stream
 				'updatedTime'
 			);
 			if ($skip or $this->testReadLevel('content', $options)) {
+				$fields[] = 'icon';
 				$fields[] = 'content';
 			}
 			if (isset($this->type)) {
