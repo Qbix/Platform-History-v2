@@ -9481,9 +9481,6 @@ Q.queryString = function _Q_queryString(fields, keys, returnAsObject, options) {
 	var result = {};
 	
 	function _add(key, value) {
-		// If value is a function, invoke it and return its value
-		value = Q.typeOf(value) === "function" ? value() : value;
-		if (value == undefined) return;
 		if (options && options.convertBooleanToInteger) {
 			value = (value === true) ? 1 : (value === false ? 0 : value);
 		}
