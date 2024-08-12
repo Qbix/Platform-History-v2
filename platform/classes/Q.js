@@ -2797,7 +2797,9 @@ Q.queryString = function _Q_queryString(fields, keys, returnAsObject) {
 	var result = {};
 	
 	function _add(key, value) {
-		if (value == undefined) return;
+		if (value == undefined || Q.typeOf(value) == 'function') {
+			return;
+		}
 		if (returnAsObject) {
 			result[key] = value;
 		} else {

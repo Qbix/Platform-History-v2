@@ -9481,6 +9481,9 @@ Q.queryString = function _Q_queryString(fields, keys, returnAsObject, options) {
 	var result = {};
 	
 	function _add(key, value) {
+		if (value == undefined || Q.typeOf(value) == 'function') {
+			return;
+		}
 		if (options && options.convertBooleanToInteger) {
 			value = (value === true) ? 1 : (value === false ? 0 : value);
 		}
