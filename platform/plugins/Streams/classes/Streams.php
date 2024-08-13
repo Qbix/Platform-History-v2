@@ -677,7 +677,7 @@ abstract class Streams extends Base_Streams
 	 *   if you want to relate the newly created stream to a category
 	 * @param {array} [$options.type] to pass to create function,
 	 *   not required if the stream is described in Streams::userStreams (streams.json files)
-	 * @param {reference} [$results=array()] pass an array to fill with intermediate results
+	 * @param {reference} [&$results=array()] pass an array to fill with intermediate results
 	 *   such as "created" => boolean
 	 * @return {Streams_Stream|null} Returns the created stream, if any
 	 * @throws {Users_Exception_NotAuthorized}

@@ -227,6 +227,8 @@ class Streams_Stream extends Base_Streams_Stream
 	 *   if you want to set some fields besides "name".
 	 * @param {array} [$options.relate] to pass to create function,
 	 *   if you want to relate the newly created stream to a category
+	 * @param {array} [$options.skipAccess] to pass to create function,
+	 *   if you want to skip access checks
 	 * @param {array} [$options.type] to pass to create function,
 	 *   not required if the stream is described in Streams::userStreams (streams.json files)
 	 * @param {reference} [$options.&results=array()] pass an array to fill with intermediate results
@@ -238,7 +240,8 @@ class Streams_Stream extends Base_Streams_Stream
 		$asUserId,
 		$publisherId,
 		$name,
-		$options = array())
+		$options = array(),
+		&$results = array())
 	{
 		$begin = Streams_Stream::begin();
 		$commit = Streams_Stream::commit();
@@ -259,6 +262,7 @@ class Streams_Stream extends Base_Streams_Stream
 			$fields, 
 			array(
 				'relate' => Q::ifset($options, 'relate', null),
+				'skipAccess' => Q::ifset($options, 'skipAccess', false),
 				'result' => &$relateResult
 			)
 		);
