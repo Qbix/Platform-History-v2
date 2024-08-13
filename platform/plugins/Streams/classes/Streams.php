@@ -3182,7 +3182,7 @@ abstract class Streams extends Base_Streams
 		Streams_Message::postMessages($asUserId, $messages, true);
 		// Relate to participating streams
 		$relateStreams = array();
-		foreach ($results as $sn => $p) {
+		foreach ($results['participants'] as $sn => $p) {
 			$participatingNames = Streams_Stream::getConfigField(
 				$p->streamType, array('participating'), array()
 			);
