@@ -22,7 +22,8 @@ function Streams_0_1_9_Streams()
 				continue;
 			}
 			Streams::create($user->id, $user->id, 'Streams/mentioned', array(
-				'name' => "Streams/mentioned",
+				'name' => "Streams/mentioned"
+			), array(
 				'skipAccess' => true
 			))->subscribe(array('userId' => $user->id));
 			++$i;

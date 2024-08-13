@@ -46,11 +46,12 @@ function Streams_0_8_1_Streams_mysql()
     $stream->name = 'Streams/experience/main';
 	if (!$stream->retrieve()) {
         Streams::create($communityId, $communityId, 'Streams/experience', array(
-            'skipAccess' => true,
             'name' => $stream->name,
 		    'title' => Users::communityName(),
 		    'icon' => $user ? $user->iconUrl(false) : null
-	    ));
+	    ), array(
+			'skipAccess' => true
+		));
     }
 }
 

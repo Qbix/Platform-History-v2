@@ -152,13 +152,12 @@ class Places_Location extends Base_Places_Location
 			$location = Streams::create($asUserId, $publisherId, 'Places/location', array(
 				'name' => $streamName,
 				'title' => $result['name'],
-				'attributes' => Q::json_encode($attributes),
-				'skipAccess' => true
-			), array(
+				'attributes' => Q::json_encode($attributes)
+			), array('relate' => array(
 				'publisherId' => $publisherId,
 				'streamName' => 'Places/user/locations',
 				'type' => 'Places/locations'
-			));
+			), 'skipAccess' => true));
 			$pl = new Places_Location(@compact(
 				'geohash', 'publisherId','streamName'
 			));
@@ -208,7 +207,8 @@ class Places_Location extends Base_Places_Location
 				'columnName' => $columnName
 			);
 			$area = Streams::create($asUserId, $publisherId, 'Places/area',
-				@compact('name', 'title', 'skipAccess', 'attributes')
+				@compact('name', 'title', 'attributes'),
+				@compact('skipAccess')
 			);
 			$area->relateTo($location, 'Places/areas', $asUserId, $options);
 			if ($floorName) {
@@ -216,7 +216,8 @@ class Places_Location extends Base_Places_Location
 				$title = $location->title." floor $floor";
 				if (!($floor = Streams_Stream::fetch($asUserId, $publisherId, $name))) {
 					$floor = Streams::create($asUserId, $publisherId, 'Places/floor',
-						@compact('name', 'title', 'skipAccess')
+						@compact('name', 'title'),
+						@compact('skipAccess')
 					);
 				}
 				$area->relateTo($floor, 'Places/floor', $asUserId, $options);
@@ -226,7 +227,8 @@ class Places_Location extends Base_Places_Location
 				$title = $location->title." column $column";
 				if (!($column = Streams_Stream::fetch($asUserId, $publisherId, $name))) {
 					$column = Streams::create($asUserId, $publisherId, 'Places/column',
-						@compact('name', 'title', 'skipAccess')
+						@compact('name', 'title'),
+						@compact('skipAccess')
 					);
 				}
 				$area->relateTo($column, 'Places/column', $asUserId, $options);

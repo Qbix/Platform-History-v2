@@ -10,7 +10,7 @@ function Streams_1_0_10()
 	if (!$stream) {
 		$stream = Streams::create($communityId, $communityId, 'Streams/category', array(
 			'name' => $streamName,
-			'title' => "Assets Services for ".$communityId,
+			'title' => "Services for ".$communityId,
 			'readLevel' => 40,
 			'writeLevel' => 0,
 			'adminLevel' => 0

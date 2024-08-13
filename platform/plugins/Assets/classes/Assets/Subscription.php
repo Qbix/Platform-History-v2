@@ -50,14 +50,13 @@ class Assets_Subscription {
 			$stream = Streams::create($user->id, $user->id, self::$streamType,
 				array(
 					'title' => $plan->title,
-					'attributes' => $attributes,
-					'skipAccess' => true
+					'attributes' => $attributes
 				),
-				array(
+				array('relate' => array(
 					'publisherId' => $plan->publisherId,
 					'streamName' => $plan->name,
 					'type' => self::$streamType
-				)
+				))		
 			);
 
 		}

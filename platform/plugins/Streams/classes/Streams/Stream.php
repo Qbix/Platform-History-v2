@@ -229,7 +229,7 @@ class Streams_Stream extends Base_Streams_Stream
 	 *   if you want to relate the newly created stream to a category
 	 * @param {array} [$options.type] to pass to create function,
 	 *   not required if the stream is described in Streams::userStreams (streams.json files)
-	 * @param {reference} [$results=array()] pass an array to fill with intermediate results
+	 * @param {reference} [$options.&results=array()] pass an array to fill with intermediate results
 	 *   such as "created" => boolean
 	 * @return {Streams_Stream|null} Returns the created stream, if any
 	 * @throws {Users_Exception_NotAuthorized}
@@ -238,8 +238,7 @@ class Streams_Stream extends Base_Streams_Stream
 		$asUserId,
 		$publisherId,
 		$name,
-		$options = array(),
-		&$results = array())
+		$options = array())
 	{
 		$begin = Streams_Stream::begin();
 		$commit = Streams_Stream::commit();
@@ -253,19 +252,22 @@ class Streams_Stream extends Base_Streams_Stream
 		}
 		$fields = Q::ifset($options, 'fields', array());
 		$fields['name'] = $name;
+		$relateResult = null;
 		$stream = Streams::create($asUserId, 
 			$publisherId, 
 			Q::ifset($options, 'type', Q::ifset($options, 'fields', 'type', null)),
 			$fields, 
-			Q::ifset($options, 'relate', null),
-			$relateResults
+			array(
+				'relate' => Q::ifset($options, 'relate', null),
+				'result' => &$relateResult
+			)
 		);
 		$commit->execute(null, $commit->shard(null, $criteria));
 		if (!$stream) {
 			return null;
 		}
 		if (is_array($results)) {
-			$results['related'] = $relateResults;
+			$results['related'] = $relateResult;
 		}
 		if (!empty($options['subscribe'])) {
 			$so = is_array($options['subscribe'])
@@ -1436,7 +1438,8 @@ class Streams_Stream extends Base_Streams_Stream
 	
 	/**
 	 * Take actions to reflect the stream has changed: save it and post a message.
-	 * @method post
+	 * Does not perform any access checks.
+	 * @method changed
 	 * @param {string} [$asUserId=null]
 	 *  The user to post as. Defaults to the logged-in user.
 	 * @param {boolean} [$commit=false] If this is TRUE, then the current transaction is committed right after the save.
@@ -1445,7 +1448,7 @@ class Streams_Stream extends Base_Streams_Stream
 	 *  The type of the message.
 	 * @param {array} [$fieldNames=null]
 	 *  The names of the fields to check for changes.
-	 *  By default, checks all the standard stream fields.
+	 *  By default, checks all the standard stream fields
 	 * @return {false|Db_Query}
 	 *  Returns false if nothing changed, otherwise the Db_Query
 	 */
