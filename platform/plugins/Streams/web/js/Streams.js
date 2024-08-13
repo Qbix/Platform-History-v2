@@ -4220,7 +4220,7 @@ Ap.displayName = function _Avatar_prototype_displayName (options, fallback) {
 		return parts.join(' ').trim() || f2;
 	}
 	if (options && options.short) {
-		return fn ? fn2 : (u ? u2 : f2);
+		return fn ? fn2 : (u ? u2 : (l ? l2 : f2));
 	} else if (fn && ln) {
 		return fn2 + ' ' + ln2;
 	} else if (fn && !ln) {
