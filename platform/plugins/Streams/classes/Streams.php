@@ -2066,7 +2066,7 @@ abstract class Streams extends Base_Streams
 				}
 				if ($calculateWeights) {
 					if (!isset($weights2[$key2])) {
-						$weights2[$key2] = isset($maxWeights[$key2]) ? $maxWeights[$key2] : 0;
+						$weights2[$key2] = Q::ifset($maxWeights, $key2, Q::ifset($maxWeights, $key, Q::ifset($maxWeights, $tsn, Q::ifset($maxWeights, $sn, 0))));
 					}
 					$weights2[$key2] += $calculateWeights;
 					$newRT[$key]['weight'] = $weights2[$key2];
@@ -2118,7 +2118,7 @@ abstract class Streams extends Base_Streams
 			$weight = (isset($options['weight']) && is_numeric($options['weight']))
 				? $options['weight']
 				: null;
-			$weight = Q::ifset($weights2, $category->name, $weight);
+			$weight = Q::ifset($weights2, $category->name."\t$type", $weight);
 			if (!$stream) {
 				continue;
 			}
@@ -3419,6 +3419,7 @@ abstract class Streams extends Base_Streams
 			'noVisit' => true
 		));
 		$participants = Streams::join($asUserId, $publisherId, $streams2, $o);
+		$participants = Q::ifset($participants, "participants", array());
 		$shouldUpdate = false;
 		if (isset($options['filter'])) {
 			$filter = Q::json_encode($options['filter']);
