@@ -17,7 +17,7 @@ Q.page("Assets/NFT", function () {
                 return Q.alert(text.NFT.OwnerUserNotFound);
             }
 
-            Q.handle(Q.url('{{TokenSociety}}/profile/' + ownerId));
+            Q.handle(Q.url('profile/' + ownerId));
         });
     });
 

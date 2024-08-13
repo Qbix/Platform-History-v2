@@ -25,6 +25,7 @@
 			"Assets/startSubscription": ["Assets/after/Assets_startSubscription"],
 			"Streams/invite/accept": ["Assets/after/Streams_inviteAccept"],
 			"Streams/Stream/exportArray": ["Assets/after/Streams_Stream_exportArray"],
+			"Db/Row/Streams_Stream/insertManyAndExecute": ["Assets/after/Db_Row_Streams_Stream_insertManyAndExecute"],
 			"Db/Row/Streams_Stream/saveExecute": ["Assets/after/Streams_save"],
 			"Streams/fetch/Assets/NFT/contract": ["Assets/after/Streams_fetch_Assets_NFT_contract"],
 			"Streams/updateStreamNames": ["Assets/after/Streams_updateStreamNames"],

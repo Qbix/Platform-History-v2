@@ -358,7 +358,10 @@ class Db_Mysql implements Db_Interface
 	 * @param {string} $table_into The name of the table to insert into
 	 * @param {array} [$rows=array()] The array of rows to insert. 
 	 *    Each row should be an array of ($field => $value) pairs, with the exact
-	 *    same set of keys (field names) in each array. It can also be a Db_Row.
+	 *    same set of keys (field names) in each array. This results in bulk insertion.
+	 *    Some or all rows can also be Db_Row instead of an array. 
+	 *    In this case, hooks will be triggered for events, such as
+	 *    "before" hook for "Db/Row/{{className}}/save" -- which may cause other queries to run.
 	 * @param {array} [$options=array()] An associative array of options, including:
 	 * @param {array} [$options.columns] Pass an array of column names, otherwise
 	 *    they are automatically taken from the first row being inserted.
@@ -611,6 +614,13 @@ class Db_Mysql implements Db_Interface
 					}
 				}
 			}
+			/**
+			 * @event Db/Row/$class_name/insertManyAndExecute {after}
+			 * @param {array} rows
+			 */
+			Q::event("Db/Row/$className/insertManyAndExecute", array(
+				'rows' => $rowObjects,
+			), 'after');
 		}
 	}
 
