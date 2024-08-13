@@ -186,45 +186,15 @@ Q.exports(function (Users, priv) {
 			Users.login.occurring = false;
 		}
 
-		function _activationComplete(data, user) {
-			user = Q.getObject('slots.user', data) || user;
-			if (!o.accountStatusURL) {
-				_onComplete(user);
-				return;
-			}
-			Q.request(o.accountStatusURL, 'accountStatus', function (err, response2) {
-				var fem = Q.firstErrorMessage(err, response2);
-				if (fem) {
-					return alert(fem);
-				}
-				// DEBUGGING: For debugging purposes
-				Users.login.occurring = false;
-				if (!o.onRequireComplete
-				|| response2.slots.accountStatus === 'complete') {
-					_onComplete(user);
-				} else if (response2.slots.accountStatus === 'refresh') {
-					// we are logged in, refresh the page
-					Q.handle(window.location.href);
-					return;
-				} else {
-					// take the user to the profile page which will ask
-					// the user to complete their registration process
-					// by entering additional information
-					if (false !== Q.handle(o.onResult, this, [user, response2, o])) {
-						Q.handle(o.onRequireComplete, this, [user, response2, o]);
-					}
-				}
-			});
-		}
-
 	};
 
 	/*
 	 * Private functions
 	 */
 	// login complete - run onSuccess handler
-	function _onComplete(user) {
+	function _onComplete(user, o) {
 		var p = Q.copy(priv);
+		o = o || Users.login.options;
 		Q.setObject('Q.Socket.connect.options.auth.capability', JSON.stringify(Users.capability));
 		var pn = priv.used || 'native';
 		var ret = Q.handle(o.onResult, this, [user, o, p, pn]);
@@ -233,6 +203,38 @@ Q.exports(function (Users, priv) {
 		}
 		Users.onLogin.handle(user);
 		Users.login.occurring = false;
+	}
+
+	function _activationComplete(data, user, o) {
+		user = Q.getObject('slots.user', data) || user;
+		o = o || Users.login.options;
+		if (!o.accountStatusURL) {
+			_onComplete(user);
+			return;
+		}
+		Q.request(o.accountStatusURL, 'accountStatus', function (err, response2) {
+			var fem = Q.firstErrorMessage(err, response2);
+			if (fem) {
+				return alert(fem);
+			}
+			// DEBUGGING: For debugging purposes
+			Users.login.occurring = false;
+			if (!o.onRequireComplete
+			|| response2.slots.accountStatus === 'complete') {
+				_onComplete(user);
+			} else if (response2.slots.accountStatus === 'refresh') {
+				// we are logged in, refresh the page
+				Q.handle(window.location.href);
+				return;
+			} else {
+				// take the user to the profile page which will ask
+				// the user to complete their registration process
+				// by entering additional information
+				if (false !== Q.handle(o.onResult, this, [user, response2, o])) {
+					Q.handle(o.onRequireComplete, this, [user, response2, o]);
+				}
+			}
+		});
 	}
 
 	function login_callback(err, response) {
