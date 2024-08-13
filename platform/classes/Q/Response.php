@@ -2135,7 +2135,7 @@ class Q_Response
 		if (!isset($message)) {
 			$text = Q_Text::get('Q/content');
 			if (!empty($text['request'][$code])) {
-				$message = $text['request']['code'];
+				$message = $text['request'][$code];
 			}
 		}
 		$url = Q_Request::url();
