@@ -118,14 +118,27 @@ class Streams_Stream extends Base_Streams_Stream
 		'icon' => 'default',
 		'content' => '',
 		'attributes' => '',
-		'readLevel' => 40,
-		'writeLevel' => 10,
-		'adminLevel' => 20,
+		'readLevel' => 0,
+		'writeLevel' => 0,
+		'adminLevel' => 0,
 		'messageCount' => 0,
 		'invitedCount' => 0,
 		'participatingCount' => 0,
 		'leftCount' => 0
 	);
+
+	/**
+	 * Get defaults for a given stream type
+	 * @method defaults
+	 * @static
+	 * @param {string} $type
+	 * @param {string} $fieldName
+	 * @return {number|string}
+	 */
+	static function defaults($type, $fieldName)
+	{
+		return self::getConfigField($type, array('defaults', $fieldName), self::$DEFAULTS[$fieldName]);
+	}
 
 	/**
 	 * Fetches one stream from the database.

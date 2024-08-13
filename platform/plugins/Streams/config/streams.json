@@ -78,7 +78,7 @@
 		"type": "Streams/text/name",
 		"title": "Username",
 		"icon": "",
-		"readLevel": 20,
+		"readLevel": 23,
 		"writeLevel": 10,
 		"adminLevel": 20,
 		"userField": "username",
@@ -91,7 +91,7 @@
 		"type": "Streams/text/name",
 		"title": "First Name",
 		"icon": "",
-		"readLevel": 20,
+		"readLevel": 23,
 		"writeLevel": 10,
 		"adminLevel": 20,
 		"platforms": {
@@ -107,7 +107,7 @@
 		"type": "Streams/text/name",
 		"title": "Middle Name",
 		"icon": "",
-		"readLevel": 20,
+		"readLevel": 15,
 		"writeLevel": 10,
 		"adminLevel": 20,
 		"platforms": {
@@ -123,6 +123,9 @@
 		"type": "Streams/text/name",
 		"title": "Last Name",
 		"icon": "",
+		"readLevel": 15,
+		"writeLevel": 10,
+		"adminLevel": 20,
 		"platforms": {
 			"facebook": "last_name"
 		}
