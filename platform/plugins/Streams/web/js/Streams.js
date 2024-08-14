@@ -303,7 +303,6 @@ Streams.WRITE_LEVEL = {
 	'post':			20,		// can post durable messages which take effect immediately
 	'relate':	    23,		// can relate other streams to this one
 	'relations':	25,		// can update weights and relations directly
-	'suggest':      28,     // can suggest actions, but manager must approve
 	'edit':			30,		// can edit stream content immediately
 	'closePending':	35,		// can post a message requesting to close the stream
 	'close':		40,		// don't delete, just prevent any new changes to stream

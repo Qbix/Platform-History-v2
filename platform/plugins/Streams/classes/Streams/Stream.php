@@ -1282,6 +1282,7 @@ class Streams_Stream extends Base_Streams_Stream
 		$participants = Streams::join(
 			$userId, $this->publisherId, array($this), $options
 		);
+		$participants = Q::ifset($participants, "participants", array());
 		$participant = reset($participants);
 		return $participant ? $participant : null;
 	} 
