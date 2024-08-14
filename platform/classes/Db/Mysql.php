@@ -487,7 +487,7 @@ class Db_Mysql implements Db_Interface
 						if (array_key_exists($name, $row->fields)) {
 							$record[$name] = $row->fields[$name];
 						} else if (in_array($name, $possibleMagicInsertFields)) {
-							$record[$field] = new Db_Expression('CURRENT_TIMESTAMP');
+							$record[$name] = new Db_Expression('CURRENT_TIMESTAMP');
 						}
 					}
 				} else {
@@ -608,7 +608,7 @@ class Db_Mysql implements Db_Interface
 						$rowObject->afterSaveExecute(
 							$result, $query, $rowObject->fields,
 							$rowObject->calculatePKValue(true)
-						);	
+						);
 					} catch (Exception $e) {
 						// swallow errors and continue the simulation
 					}
