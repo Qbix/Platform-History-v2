@@ -643,26 +643,6 @@ class Streams_Stream extends Base_Streams_Stream
 	}
 
 	/**
-	 * Called by Db_Row_Mysql->insertManyAndExecute() instead of afterSaveExecute()
-	 * Can trigger events in bulk
-	 */
-	static function afterInsertManyAndExecute($rows)
-	{
-		foreach ($rows as $row) {
-			/**
-			 * @event Db/Row/$class_name/saveExecute {after}
-			 * @param {Db_Row} row
-			 * @param {Db_Query} query
-			 * @param {array} modifiedFields
-			 * @param {Db_Result} result
-			 */
-			Q::event("Db/Row/$this_class/insertManyAndExecute", array(
-				'rows' => $rows,
-			), 'after');
-		}
-	}
-
-	/**
 	 * Does necessary preparations for saving a stream in the database.
 	 * @method beforeSave
 	 * @param {array} $modifiedFields
