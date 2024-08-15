@@ -1,0 +1,2 @@
+ALTER TABLE {{prefix}}setting
+ADD COLUMN access varbinary(31) NULL DEFAULT NULL COMMENT 'JSON with possible keys ''read'' and ''write'' and values as arrays of labels';

@@ -22,7 +22,7 @@ if (Q.Assets.Web3.defaultChain) {
  *   @param {String|Array} [options.filter="Users/"] Pass any prefix here, to filter labels by this prefix
  *   	Alternatively pass an array of label names here, to filter by.
  *   @param {Array} [exclude] - array of labels needed to exclude from result
- *   @param {String} [options.contactUserId] Pass a user id here to var the tool add/remove contacts with the various labels, between userId and contactUserId
+ *   @param {String} [options.contactUserId] Pass a user id here to let the tool add/remove contacts with the various labels, between userId and contactUserId
  *   @param {Boolean|String} [options.canAdd=false] Pass true here to allow the user to add a new label, or a string to override the title of the command.
  *   @param {String|Object} [options.all] To show "all labels" option, whose value is "*", pass here its title or object with "title" and "icon" properties.
  *   @param {String} options.abiPath="Users/templates/R1/Community/contract". 

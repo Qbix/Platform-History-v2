@@ -23,6 +23,7 @@ function Users_after_Q_Plugin_install($params)
 		$labelsToInstall = $arr;
 	}
 	if (Q::isAssociative($rolesToInstall)) {
+		$arr = array();
 		foreach ($rolesToInstall as $k => $v) {
 			if (is_integer($k)) {
 				$arr[] = $v;
