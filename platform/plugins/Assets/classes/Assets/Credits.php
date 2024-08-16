@@ -12,6 +12,29 @@ class Assets_Credits extends Base_Assets_Credits
 	const DEFAULT_AMOUNT = 0;
 
 	/**
+	 * Formats an amount of credits for display
+	 * @method format
+	 * @static
+	 * @param {float} $amount
+	 * @return {array} The 
+	 */
+	static function format($amount)
+	{
+		return number_format($amount, 2);
+	}
+
+	/**
+	 * @method getAllAttributes
+	 * @static
+	 * @return {array} The array of all attributes set in the stream
+	 */
+	function getAllAttributes()
+	{
+		return empty($this->attributes) ? array() : json_decode($this->attributes, true);
+	}
+	/**
+
+	/**
 	 * @method getAllAttributes
 	 * @return {array} The array of all attributes set in the stream
 	 */
