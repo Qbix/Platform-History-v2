@@ -2339,8 +2339,10 @@ abstract class Streams extends Base_Streams
 		}
 
 		if (empty($options['skipAccess'])) {
-			if (!$category->testWriteLevel('relations')) {
-				throw new Users_Exception_NotAuthorized();
+			foreach ($categories as $category) {
+				if (!$category->testWriteLevel('relations')) {
+					throw new Users_Exception_NotAuthorized();
+				}
 			}
 		}
 
@@ -2352,12 +2354,14 @@ abstract class Streams extends Base_Streams
 		 * @param {string} asUserId
 		 * @return {false} To cancel further processing
 		 */
-		if (Q::event(
-			"Streams/unrelateTo/{$category->type}",
-			@compact('relatedTo', 'relatedFrom', 'asUserId'),
-			'before') === false
-		) {
-			return false;
+		foreach ($categories as $category) {
+			if (Q::event(
+					"Streams/unrelateTo/{$category->type}",
+					@compact('relatedTo', 'relatedFrom', 'asUserId'),
+					'before') === false
+			) {
+				return false;
+			}
 		}
 
 		/**
@@ -2367,12 +2371,14 @@ abstract class Streams extends Base_Streams
 		 * @param {string} asUserId
 		 * @return {false} To cancel further processing
 		 */
-		if (Q::event(
-			"Streams/unrelateFrom/{$stream->type}",
-			@compact('relatedTo', 'relatedFrom', 'asUserId'),
-			'before') === false
-		) {
-			return false;
+		foreach ($streams as $stream) {
+			if (Q::event(
+					"Streams/unrelateFrom/{$stream->type}",
+					@compact('relatedTo', 'relatedFrom', 'asUserId'),
+					'before') === false
+			) {
+				return false;
+			}
 		}
 
 		/*
@@ -2710,9 +2716,10 @@ abstract class Streams extends Base_Streams
 			foreach ($relations as $r) {
 				$userIds[] = $userId = $r->$col3;
 			}
+			$userIdsUniq = array_unique($userIds);
 			$userIds = Q::event('Users/filter/users', array(
 				'from' => 'Streams::related'
-			), 'after', false, array_unique($userIds), $handlersCalled);
+			), 'after', false, $userIdsUniq, $handlersCalled);
 			if ($handlersCalled) {
 				$temp = array();
 				foreach ($userIds as $userId) {
@@ -4080,7 +4087,7 @@ abstract class Streams extends Base_Streams
 				if (!empty($assign['icon'])) {
 					try {
 						Q::event('Q/image/post', array(
-							'data' => $icon,
+							'data' => $assign['icon'],
 							'path' => "Q/uploads/Users",
 							'subpath' => Q_Utils::splitId($userId, 3, '/')."/icon/".time(),
 							'save' => "Users/icon",
