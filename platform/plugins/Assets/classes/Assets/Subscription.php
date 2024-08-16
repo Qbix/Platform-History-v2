@@ -269,7 +269,6 @@ class Assets_Subscription {
 		}
 
 		if ($throwIfNotPaid) {
-			$text = Q_Text::get("Assets/content");
 			throw new Assets_Exception_PaymentRequired(array(
 				'publisherId' => $stream->publisherId,
 				'streamName' => $stream->name,

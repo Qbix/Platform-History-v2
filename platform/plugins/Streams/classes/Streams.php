@@ -1213,8 +1213,7 @@ abstract class Streams extends Base_Streams
 		// ready to persist this stream to the database
 		if (!empty($relate['publisherId'])
 		&&  !empty($relate['streamName'])) {
-			if (!empty($relate['inheritAccess'])
-			or !empty($accessProfileInherit)) {
+			if (!empty($accessProfileInherit)) {
 				$item = array($relate['publisherId'], $relate['streamName']);
 				if (isset($accessProfileInherit['levels'])) {
 					$item[] = $accessProfileInherit['levels'];
