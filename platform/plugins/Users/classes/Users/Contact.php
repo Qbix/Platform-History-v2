@@ -88,6 +88,20 @@ class Users_Contact extends Base_Users_Contact
 			$contact->save(true);
 			$contacts[] = $contact;
 		}
+		// Update the Users_Setting table
+		if (in_array('Users/hidden', $labels)) {
+			$s = new Users_Setting(array(
+				'userId' => $contactUserId,
+				'name' => 'Users/hidden'
+			));
+			$s->retrieve();
+			$hiddenFromUserIds = !empty($s->content) ? Q::json_decode($s->content, true) : array();
+			if (!in_array($userId, $hiddenFromUserIds)) {
+				$hiddenFromUserIds[] = $userId;
+				$s->content = Q::json_encode($hiddenFromUserIds);
+				$s->save();
+			}
+		}
 		/**
 		 * @event Users/Contact/addContact {after}
 		 * @param {string} contactUserId
@@ -172,7 +186,22 @@ class Users_Contact extends Base_Users_Contact
 		$contact->userId = $userId;
 		$contact->label = $label;
 		$contact->contactUserId = $contactUserId;
-		return $contact->remove();
+		$removed = $contact->remove();
+		if ($removed) {
+			// Update the Users_Setting table
+			if ($label === 'Users/hidden') {
+				$s = new Users_Setting(array(
+					'userId' => $contactUserId,
+					'name' => 'Users/hidden'
+				));
+				$s->retrieve();
+				$hiddenFromUserIds = !empty($s->content) ? Q::json_decode($s->content, true) : array();
+				$hiddenFromUserIds = array_diff($hiddenFromUserIds, array($userId));
+				$s->content = Q::json_encode($hiddenFromUserIds);
+				$s->save();
+			}
+		}
+		return $removed;
 	}
 
 	/**
@@ -196,7 +225,11 @@ class Users_Contact extends Base_Users_Contact
 			throw new Q_Exception_RequiredField(array('field' => 'userId'));
 		}
 		if (empty($options['skipAccess']) and $label) {
-			$asUserId = Q::ifset($options, 'asUserId', null) ?: Users::loggedInUser(true)->id;
+			$asUserId = Q::ifset($options, 'asUserId', null);
+			if (!$asUserId) {
+				$liu = Users::loggedInUser();
+				$asUserId = $liu ? $liu->id : '';
+			}
 			Users::canManageContacts($asUserId, $userId, $label, true, true);
 		}
 		$limit = isset($options['limit']) ? $options['limit'] : null;
@@ -346,7 +379,7 @@ class Users_Contact extends Base_Users_Contact
 			$authorized = in_array($this->label, $can['see']);
 		}
 
-		return $authorized ? $this->fields : array();
+		return $authorized ? $this->fields : array('@NotAuthorized' => true);
 	}
 
 	/* * * */

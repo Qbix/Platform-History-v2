@@ -169,7 +169,8 @@
 				"Users/owners": ["Owners", "labels/Users/owners"],
 				"Users/admins": ["Admins", "labels/Users/admins"],
 				"Users/members": ["Members", "labels/Users/members"],
-				"Users/guests": ["Guests", "labels/Users/guests"]
+				"Users/guests": ["Guests", "labels/Users/guests"],
+				"Users/hidden": ["Hidden", "labels/Users/hidden"]
 			}
 		},
 		"quotas": {

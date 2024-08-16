@@ -2,6 +2,9 @@
 
 function Assets_after_Users_filter_users($params, &$result)
 {
+    if (!$result) {
+        return;
+    }
     $min = Q_Config::get('Assets', 'users', 'filter', 'credits', 'min', 0);
     if ($min == 0) {
         return;
@@ -9,7 +12,7 @@ function Assets_after_Users_filter_users($params, &$result)
     $exceptRoles = Q_Config::get('Assets', 'users', 'filter', 'credits', 'exceptRoles', Q_Config::get(
         'Users', 'communities', 'admins', array('Users/owners', 'Users/admins')
     ));
-    if (Users::roles(Users::currentCommunityId(), $exceptRoles)
+    if (Users::roles(Users::currentCommunityId(true), $exceptRoles)
      && Users::roles(Users::communityId(), $exceptRoles)) {
         return;
     }
