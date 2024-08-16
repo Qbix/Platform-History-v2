@@ -1,4 +1,5 @@
 <?php
+
 function Assets_after_Streams_save($params) {
 	Assets_NFT_update_attributes_relations($params);
 	Assets_grant_credits_for_filling_personal_streams($params);
@@ -11,7 +12,7 @@ function Assets_NFT_update_attributes_relations ($params) {
 		return;
 	}
 
-	if (!in_array($stream->type, array("Assets/NFT", "TokenSociety/NFT"))) {
+	if (!in_array($stream->type, array("Assets/NFT"))) {
 		return;
 	}
 

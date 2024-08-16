@@ -74,3 +74,7 @@
 .Users_labels_form_group img {
     border-radius: 5%;
 }
+
+.Q_overlay > .Users_labels_tool {
+    margin: 10px;
+}

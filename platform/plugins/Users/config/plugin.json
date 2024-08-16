@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Users": {
-				"version": "1.0.22",
+				"version": "1.0.23",
 				"compatible": "1.0",
 				"requires": {"Q": "1.0"},
 				"permissions": ["Users/icons"],
@@ -35,6 +35,7 @@
 			"Q/reroute": ["Users/after/Q_reroute"],
 			"Q/image/save": ["Users/after/Q_image_save"],
 			"Q/sessionExtras": ["Users/after/Q_sessionExtras"],
+			"Users/filter/users": ["Users/after/Users_filter_users"],
 			"Users/setEmailAddress": ["Users/after/Users_setEmailAddress"],
 			"Users/setMobileNumber": ["Users/after/Users_setMobileNumber"],
 			"Users/addIdentifier": ["Users/after/Users_addIdentifier"],
@@ -373,17 +374,17 @@
 			"Users/owners": {
 				"title": "Owners",
 				"icon": "{{baseUrl}}/Q/plugins/Users/img/icons/labels/Users/owners",
-				"canGrant": ["Users/admins", "Users/members", "Users/guests", "Users/testers" ,"Users/speakers"],
-				"canRevoke": ["Users/admins", "Users/members", "Users/guests", "Users/testers" ,"Users/speakers"],
-				"canSee": ["Users/owners", "Users/admins", "Users/members", "Users/guests", "Users/testers" ,"Users/speakers"],
+				"canGrant": ["Users/admins", "Users/members", "Users/guests", "Users/testers" ,"Users/speakers", "Users/hidden"],
+				"canRevoke": ["Users/admins", "Users/members", "Users/guests", "Users/testers" ,"Users/speakers", "Users/hidden"],
+				"canSee": ["Users/owners", "Users/admins", "Users/members", "Users/guests", "Users/testers" ,"Users/speakers", "Users/hidden"],
 				"canManageLabels": ["Users/"]
 			},
 			"Users/admins": {
 				"title": "Admins",
 				"icon": "{{baseUrl}}/Q/plugins/Users/img/icons/labels/Users/admins",
-				"canGrant": ["Users/members", "Users/guests", "Users/testers" ,"Users/speakers"],
-				"canRevoke": ["Users/members", "Users/guests", "Users/testers" ,"Users/speakers"],
-				"canSee": ["Users/owners", "Users/admins", "Users/members", "Users/guests", "Users/testers" ,"Users/speakers"]
+				"canGrant": ["Users/members", "Users/guests", "Users/testers" ,"Users/speakers", "Users/hidden"],
+				"canRevoke": ["Users/members", "Users/guests", "Users/testers" ,"Users/speakers", "Users/hidden"],
+				"canSee": ["Users/owners", "Users/admins", "Users/members", "Users/guests", "Users/testers" ,"Users/speakers", "Users/hidden"]
 			},
 			"Users/members": {
 				"title": "Members",

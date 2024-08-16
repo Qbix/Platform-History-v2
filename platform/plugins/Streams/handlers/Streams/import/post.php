@@ -51,14 +51,13 @@ function Streams_import_post()
 	$task = isset($_REQUEST['taskStreamName'])
 		? Streams_Stream::fetch($luid, $communityId, $_REQUEST['taskStreamName'], true)
 		: Streams::create($luid, $communityId, 'Streams/task', array(
-			'skipAccess' => true,
 			'title' => Q::interpolate($streamTitle, @compact('communityName')),
 			'name' => "Streams/task/$sha1"
-		), array(
+		), array('relate' => array(
 			'publisherId' => $app,
 			'streamName' => "Streams/tasks/app",
 			'type' => 'Streams/import'
-		));
+		), 'skipAccess' => true));
 	$task->addPreloaded();
 	Q_Response::setSlot('taskStreamName', $task->name);
 

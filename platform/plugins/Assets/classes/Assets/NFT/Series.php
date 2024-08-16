@@ -41,11 +41,11 @@ class Assets_NFT_Series
 			"attributes" => array(
 				"author" => $data["wallet"]
 			)
-		), array(
+		), array('relate' => array(
 			"publisherId" => $userId,
 			"streamName" => self::$categoryStreamName,
 			"type" => "new"
-		));
+		)));
 		$maxWeight = Streams_RelatedTo::select()->where(array(
 			"toPublisherId" => $userId,
 			"toStreamName" => self::$categoryStreamName,

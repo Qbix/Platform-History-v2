@@ -1460,6 +1460,8 @@ class Db_Row
 		// beforeSave
 		// beforeSaveExecute
 		// afterSaveExecute
+		// otherwise tries calling Table_Classname::methodName($row, $args1, $arg2) if it exists
+		// and if not, tries calling Table/Classname/method/methodName($row, $arg1, $arg2, ...)
 		switch ($name) {
 			case 'get':
 			case 'set':
@@ -1552,12 +1554,17 @@ class Db_Row
 
 		if (class_exists('Q')) {
 			$class_name = get_class($this);
-			$class_event = implode('/', explode('_', $class_name));
 			$args2 = array_merge(array($this), $args);
+			$callable = array($class_name, $name);
+			if (is_callable($callable)) {
+				return call_user_func_array($callable, $args2);
+			}
+			$class_event = implode('/', explode('_', $class_name));
 			$result = Q::event("$class_event/method/$name", $args2, 'before');
 			if (!isset($result)) {
 				throw new Exception("calling method {$class_name}->{$name}, which doesn't exist");
 			}
+			return $result;
 		}
 		
 		// otherwise, function doesn't exist.

@@ -23,6 +23,7 @@ function Users_after_Q_Plugin_install($params)
 		$labelsToInstall = $arr;
 	}
 	if (Q::isAssociative($rolesToInstall)) {
+		$arr = array();
 		foreach ($rolesToInstall as $k => $v) {
 			if (is_integer($k)) {
 				$arr[] = $v;
@@ -58,6 +59,7 @@ function Users_after_Q_Plugin_install($params)
 		if (!$users) {
 			break;
 		}
+		$c = count($users);
 		foreach ($users as $j => $user) {
             if (Users::isCommunityId($user->id)) {
                 Users_Label::addLabel($rolesNeedToInstall, $user->id, null, null, $user->id, false, true);

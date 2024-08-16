@@ -52,8 +52,15 @@ abstract class Streams extends Base_Streams
 	 * @final
 	 */
 	/**
-	 * Can see the stream's content
-	 * @property $READ_LEVEL['content']
+	 * Can see the stream content field
+	 * @property $READ_LEVEL['fields']
+	 * @type integer
+	 * @default 23
+	 * @final
+	 */
+	/**
+	 * Can see most of the stream's fields
+	 * @property $READ_LEVEL['fields']
 	 * @type integer
 	 * @default 25
 	 * @final
@@ -91,7 +98,8 @@ abstract class Streams extends Base_Streams
 		'see' => 10,				// can see icon and title
 		'teaser' => 15,				// can see Streams/teaser/.. attributes
 		'relations' => 20,			// can see relations to other streams
-		'content' => 25,			// can see the stream's content
+		'content' => 23,			// can see the stream's content
+		'fields' => 25,			// can see most of the stream's fields
 		'participants' => 30,		// can see participants in the stream
 		'messages' => 35,			// can play stream in a player
 		'receipts' => 40,			// can see other users' play receipts
@@ -669,7 +677,7 @@ abstract class Streams extends Base_Streams
 	 *   if you want to relate the newly created stream to a category
 	 * @param {array} [$options.type] to pass to create function,
 	 *   not required if the stream is described in Streams::userStreams (streams.json files)
-	 * @param {reference} [$results=array()] pass an array to fill with intermediate results
+	 * @param {reference} [&$results=array()] pass an array to fill with intermediate results
 	 *   such as "created" => boolean
 	 * @return {Streams_Stream|null} Returns the created stream, if any
 	 * @throws {Users_Exception_NotAuthorized}
@@ -769,7 +777,7 @@ abstract class Streams extends Base_Streams
 		$streams3 = array();
 		$names = array();
 		foreach ($streams2 as $s) {
-			if ($s->get('asUserId', null) === $asUserId) {
+			if (!$recalculate && $s->get('asUserId', null) === $asUserId) {
 				continue;
 			}
 			$s->set('asUserId', $asUserId);
@@ -1076,11 +1084,12 @@ abstract class Streams extends Base_Streams
 	 * @param {string|integer} [$fields.writeLevel=null] You can set the stream's write access level, see Streams::$WRITE_LEVEL
 	 * @param {string|integer} [$fields.adminLevel=null] You can set the stream's admin access level, see Streams::$ADMIN_LEVEL
 	 * @param {string} [$fields.name=null] Here you can specify an exact name for the stream to be created. Otherwise a unique one is generated automatically.
-	 * @param {boolean} [$fields.skipAccess=false] Skip all access checks when creating and relating the stream.
-	 * @param {string} [$fields.accessProfileName] The name of the access profile in the config, for this type of stream, if specified it overrides public access saved in templates
-	 * @param {boolean|array} [$fields.private] Pass true to mark this stream as private, can also be an array containing ["invite"]
-	 * @param {boolean} [$fields.notices] Pass true to mark this stream as generating notices even if user retained it
-	 * @param {array} [$relate=array()]
+	 * @param {array} [$options=array()]
+	 * @param {boolean} [$options.skipAccess=false] Skip all access checks when creating and relating the stream.
+	 * @param {string} [$options.accessProfileName] The name of the access profile in the config, for this type of stream, if specified it overrides public access saved in templates
+	 * @param {boolean|array} [$options.private] Pass true to mark this stream as private, can also be an array containing ["invite"]
+	 * @param {boolean} [$options.notices] Pass true to mark this stream as generating notices even if user retained it
+	 * @param {array} [$options.relate=array()]
 	 *  Fill this out in order to relate the newly created stream to a category stream,
 	 *  and also inheritAccess from it. When using this option, a user may be authorized
 	 *  to create a stream they would otherwise not be authorized to create.
@@ -1088,13 +1097,13 @@ abstract class Streams extends Base_Streams
 	 *  existing category stream, and the publisherId user has a template for this stream
 	 *  type that is related to either the category stream, or a template for the
 	 *  category stream's type.
-	 * @param {string} [$relate.publisherId] The id of the user publishing the category stream, defaults to $publisherId
-	 * @param {string} [$relate.streamName] The name of the category stream
-	 * @param {string} [$relate.type] The type of relation, defaults to ""
-	 * @param {string} [$relate.weight] To set the weight for the relation. You can pass a numeric value here, or something like "max+1" to make the weight 1 greater than the current MAX(weight)
-	 * @param {string} [$relate.inheritAccess=true] If false skip inherit access from category.
-	 * @param {array} [$relate.extra=array()] Any extra information to pass to Streams::relate()
-	 * @param {array} [&$result=null] Optionally pass a reference here to hold the result of calling Streams::relate().
+	 * @param {string} [$options.relate.publisherId] The id of the user publishing the category stream, defaults to $publisherId
+	 * @param {string} [$options.relate.streamName] The name of the category stream
+	 * @param {string} [$options.relate.type] The type of relation, defaults to ""
+	 * @param {string} [$optionsrelate.weight] To set the weight for the relation. You can pass a numeric value here, or something like "max+1" to make the weight 1 greater than the current MAX(weight)
+	 * @param {string} [$options.relate.inheritAccess=true] If false skip inherit access from category.
+	 * @param {array} [$options.relate.extra=array()] Any extra information to pass to Streams::relate()
+	 * @param {array} [$options.&result=null] Optionally pass a reference here to hold the result of calling Streams::relate().
 	 * @return {Streams_Stream} Returns the stream that was created.
 	 * @throws {Users_Exception_NotAuthorized}
 	 */
@@ -1103,15 +1112,15 @@ abstract class Streams extends Base_Streams
 		$publisherId, 
 		$type = null,
 		$fields = array(), 
-		$relate = null,
-		&$result = null)
+		$options = array())
 	{
 		if (!isset($fields)) {
 			$fields = array();
 		}
-		$skipAccess = Q::ifset($fields, 'skipAccess', false);
-		$private = Q::ifset($fields, 'private', false);
-		$accessProfileName = Q::ifset($fields, 'accessProfileName', null);
+		$relate = isset($options['relate']) ? $options['relate'] : null;
+		$skipAccess = Q::ifset($options, 'skipAccess', false);
+		$private = Q::ifset($options, 'private', false);
+		$accessProfileName = Q::ifset($options, 'accessProfileName', null);
 		if ($private) {
 			if ($private !== true && $private !== array('invite')) {
 				throw new Q_Exception_WrongValue(array(
@@ -1176,8 +1185,8 @@ abstract class Streams extends Base_Streams
 		// privileged setting of attributes
 		$privileged = array('private', 'notices');
 		foreach ($privileged as $p) {
-			if (!empty($fields[$p])) {
-				$stream->setAttribute("Streams/$p", $fields[$p], true);
+			if (!empty($options[$p])) {
+				$stream->setAttribute("Streams/$p", $options[$p], true);
 			}
 		}
 
@@ -1245,6 +1254,7 @@ abstract class Streams extends Base_Streams
 				$stream->name,
 				$options
 			);
+			$options['result'] = $result;
 		}
 
 		self::$fetch[$asUserId][$publisherId][$stream->name] = array('*' => $stream);
@@ -2056,7 +2066,7 @@ abstract class Streams extends Base_Streams
 				}
 				if ($calculateWeights) {
 					if (!isset($weights2[$key2])) {
-						$weights2[$key2] = isset($maxWeights[$key2]) ? $maxWeights[$key2] : 0;
+						$weights2[$key2] = Q::ifset($maxWeights, $key2, Q::ifset($maxWeights, $key, Q::ifset($maxWeights, $tsn, Q::ifset($maxWeights, $sn, 0))));
 					}
 					$weights2[$key2] += $calculateWeights;
 					$newRT[$key]['weight'] = $weights2[$key2];
@@ -2108,7 +2118,7 @@ abstract class Streams extends Base_Streams
 			$weight = (isset($options['weight']) && is_numeric($options['weight']))
 				? $options['weight']
 				: null;
-			$weight = Q::ifset($weights2, $category->name, $weight);
+			$weight = Q::ifset($weights2, $category->name."\t$type", $weight);
 			if (!$stream) {
 				continue;
 			}
@@ -3115,7 +3125,7 @@ abstract class Streams extends Base_Streams
 					)
 				);
 			}
-			$results[$sn] = $participant;
+			$results['participants'][$sn] = $participant;
 		}
 		if ($streamNamesUpdate) {
 			Streams_Participant::update()
@@ -3137,7 +3147,7 @@ abstract class Streams extends Base_Streams
 				if (is_array($extra)) {
 					$extra = Q::json_encode($extra);
 				}
-				$results[$sn] = $rows[$sn] = new Streams_Participant(array(
+				$results['participants'][$sn] = $rows[$sn] = new Streams_Participant(array(
 					'publisherId' => $publisherId,
 					'streamName' => $sn,
 					'userId' => $asUserId,
@@ -3172,7 +3182,7 @@ abstract class Streams extends Base_Streams
 		Streams_Message::postMessages($asUserId, $messages, true);
 		// Relate to participating streams
 		$relateStreams = array();
-		foreach ($results as $sn => $p) {
+		foreach ($results['participants'] as $sn => $p) {
 			$participatingNames = Streams_Stream::getConfigField(
 				$p->streamType, array('participating'), array()
 			);
@@ -3187,7 +3197,7 @@ abstract class Streams extends Base_Streams
 				}
 				$extraArray = array();
 				foreach ($streamNames as $sn) {
-					$extraArray[$sn] = $results[$sn]->extra;
+					$extraArray[$sn] = $results['participants'][$sn]->extra;
 				}
 				Streams::relate(
 					$asUserId, $asUserId, $pn,
@@ -3409,6 +3419,7 @@ abstract class Streams extends Base_Streams
 			'noVisit' => true
 		));
 		$participants = Streams::join($asUserId, $publisherId, $streams2, $o);
+		$participants = Q::ifset($participants, "participants", array());
 		$shouldUpdate = false;
 		if (isset($options['filter'])) {
 			$filter = Q::json_encode($options['filter']);
@@ -5261,8 +5272,9 @@ abstract class Streams extends Base_Streams
 		$stream = Streams::create(null, $publisherId, 'Streams/interest', array(
 			'name' => $streamName,
 			'title' => $title,
-			'skipAccess' => $skipAccess,
 			'icon' => 'Streams/interest/default'
+		), array(
+			'skipAccess' => $skipAccess
 		));
 		if (is_dir(APP_WEB_DIR.DS."plugins".DS."Streams".DS."img".DS."icons".DS.$streamName)) {
 			$stream->icon = $streamName;

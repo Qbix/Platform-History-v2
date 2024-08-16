@@ -199,7 +199,7 @@ class Places_Interest
 			return $stream;
 		}
 
-		return Streams::create(null, $params['publisherId'], 'Places/interest', $options);
+		return Streams::create(null, $params['publisherId'], 'Places/interest', $options, $options);
 	}
 	
 }

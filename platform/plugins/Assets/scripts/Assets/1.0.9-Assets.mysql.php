@@ -38,7 +38,8 @@ while (1) {
 				continue;
 			}
 			Streams::create($user->id, $user->id, "Streams/category", array(
-				"name" => $categoryStreamName,
+				"name" => $categoryStreamName
+			), array(
 				"skipAccess" => true
 			));
 		}

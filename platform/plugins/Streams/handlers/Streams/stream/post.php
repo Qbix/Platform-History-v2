@@ -16,9 +16,9 @@
  *   @param {string} [$params.Q_Streams_related_publisherId] Optionally indicate the publisher of the stream to relate the newly created to. Used together with the related.streamName option.
  *   @param {string} [$params.Q_Streams_related_streamName] Optionally indicate the name of a stream to relate the newly crated stream to. This is often necessary in order to obtain permissions to create the stream.
  *   @param {bool} [$params.dontSubscribe=false] Pass 1 or true here in order to skip auto-subscribing to the newly created stream.
- *   @param {string} [$fields.accessProfileName] The name of the access profile in the config, for this type of stream, if specified it overrides public access saved in templates
- *   @param {boolean|array} [$fields.private] Pass true to mark this stream as private, can also be an array containing ["invite"]
- *   @param {boolean} [$fields.notices] Pass true to mark this stream as generating notices even if user retained it
+ *   @param {string} [$params.accessProfileName] The name of the access profile in the config, for this type of stream, if specified it overrides public access saved in templates
+ *   @param {boolean|array} [$params.private] Pass true to mark this stream as private, can also be an array containing ["invite"]
+ *   @param {boolean} [$params.notices] Pass true to mark this stream as generating notices even if user retained it
  *   @param {array} [$params.icon] This is used to upload a custom icon for the stream which will then be saved in different sizes. See fields for Q/image/post method
  *     @param {string} [$params.icon.data]  Required if $_FILES is empty. Base64-encoded  data URI - see RFC 2397
  *     @param {string} [$params.icon.path="uploads"] parent path under web dir (see subpath)
@@ -126,10 +126,16 @@ function Streams_stream_post($params = array())
 	
 	// Get allowed fields
 	$allowedFields = array_merge(
-		array('publisherId', 'name', 'type', 'icon', 'file', 'private', 'accessProfileName'),
+		array('publisherId', 'name', 'type', 'icon', 'file'),
 		Streams::getExtendFieldNames($type, $asOwner)
 	);
 	$fields = Q::take($req, $allowedFields);
+
+	// Set up options
+	$result = null;
+	$options = compact('private', 'accessProfileName', 'notices');
+	$options['relate'] = $relate;
+	$options['result'] = &$result;
 
 	// Prevent setting restricted fields
 	if (is_array($create)) {
@@ -160,7 +166,7 @@ function Streams_stream_post($params = array())
 
 	// if $stream is null - Create new stream
 	if (!$stream instanceof Streams_Stream) {
-		$stream =  Streams::create($user->id, $publisherId, $type, $fields, $relate, $result);
+		$stream =  Streams::create($user->id, $publisherId, $type, $fields, $options);
 		$streamName = $stream->name;
 	}
 	$messageTo = false;

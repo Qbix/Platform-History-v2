@@ -135,7 +135,7 @@ Q.Tool.define("Q/columns", function(options) {
 	flat: false,
 	animation: { 
 		duration: 300, // milliseconds
-		scrollDuration: 300, //milliseconds
+		scrollDuration: 600, //milliseconds
 		css: {
 			hide: {
 				opacity: 0.1, 

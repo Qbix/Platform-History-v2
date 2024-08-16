@@ -39,11 +39,12 @@ class Assets_NFT_Collections
 		}
 
 		$data = Q::event("Users/external/response/data", array("userId"));
-		$stream = Streams::create($userId, $userId, self::$streamType, array(), array(
+		$stream = Streams::create($userId, $userId, self::$streamType, array(),
+		array('relate' => array(
 			"publisherId" => $communityId,
 			"streamName" => self::$categoryStreamName,
 			"type" => "new"
-		));
+		)));
 		$maxWeight = Streams_RelatedTo::select()->where(array(
 			"toPublisherId" => $communityId,
 			"toStreamName" => self::$categoryStreamName,

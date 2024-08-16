@@ -118,14 +118,27 @@ class Streams_Stream extends Base_Streams_Stream
 		'icon' => 'default',
 		'content' => '',
 		'attributes' => '',
-		'readLevel' => 40,
-		'writeLevel' => 10,
-		'adminLevel' => 20,
+		'readLevel' => 0,
+		'writeLevel' => 0,
+		'adminLevel' => 0,
 		'messageCount' => 0,
 		'invitedCount' => 0,
 		'participatingCount' => 0,
 		'leftCount' => 0
 	);
+
+	/**
+	 * Get defaults for a given stream type
+	 * @method defaults
+	 * @static
+	 * @param {string} $type
+	 * @param {string} $fieldName
+	 * @return {number|string}
+	 */
+	static function defaults($type, $fieldName)
+	{
+		return self::getConfigField($type, array('defaults', $fieldName), self::$DEFAULTS[$fieldName]);
+	}
 
 	/**
 	 * Fetches one stream from the database.
@@ -227,9 +240,11 @@ class Streams_Stream extends Base_Streams_Stream
 	 *   if you want to set some fields besides "name".
 	 * @param {array} [$options.relate] to pass to create function,
 	 *   if you want to relate the newly created stream to a category
+	 * @param {array} [$options.skipAccess] to pass to create function,
+	 *   if you want to skip access checks
 	 * @param {array} [$options.type] to pass to create function,
 	 *   not required if the stream is described in Streams::userStreams (streams.json files)
-	 * @param {reference} [$results=array()] pass an array to fill with intermediate results
+	 * @param {reference} [$options.&results=array()] pass an array to fill with intermediate results
 	 *   such as "created" => boolean
 	 * @return {Streams_Stream|null} Returns the created stream, if any
 	 * @throws {Users_Exception_NotAuthorized}
@@ -253,19 +268,23 @@ class Streams_Stream extends Base_Streams_Stream
 		}
 		$fields = Q::ifset($options, 'fields', array());
 		$fields['name'] = $name;
+		$relateResult = null;
 		$stream = Streams::create($asUserId, 
 			$publisherId, 
 			Q::ifset($options, 'type', Q::ifset($options, 'fields', 'type', null)),
 			$fields, 
-			Q::ifset($options, 'relate', null),
-			$relateResults
+			array(
+				'relate' => Q::ifset($options, 'relate', null),
+				'skipAccess' => Q::ifset($options, 'skipAccess', false),
+				'result' => &$relateResult
+			)
 		);
 		$commit->execute(null, $commit->shard(null, $criteria));
 		if (!$stream) {
 			return null;
 		}
 		if (is_array($results)) {
-			$results['related'] = $relateResults;
+			$results['related'] = $relateResult;
 		}
 		if (!empty($options['subscribe'])) {
 			$so = is_array($options['subscribe'])
@@ -869,7 +888,6 @@ class Streams_Stream extends Base_Streams_Stream
 		if (!$wasModified) {
 			return $result;
 		}
-		
 		$publicField = $fields[$this->name];
 		if ($publicField = $fields[$this->name]
 		and !Q::eventStack('Db/Row/Users_User/saveExecute')) {
@@ -1264,6 +1282,7 @@ class Streams_Stream extends Base_Streams_Stream
 		$participants = Streams::join(
 			$userId, $this->publisherId, array($this), $options
 		);
+		$participants = Q::ifset($participants, "participants", array());
 		$participant = reset($participants);
 		return $participant ? $participant : null;
 	} 
@@ -1436,7 +1455,8 @@ class Streams_Stream extends Base_Streams_Stream
 	
 	/**
 	 * Take actions to reflect the stream has changed: save it and post a message.
-	 * @method post
+	 * Does not perform any access checks.
+	 * @method changed
 	 * @param {string} [$asUserId=null]
 	 *  The user to post as. Defaults to the logged-in user.
 	 * @param {boolean} [$commit=false] If this is TRUE, then the current transaction is committed right after the save.
@@ -1445,7 +1465,7 @@ class Streams_Stream extends Base_Streams_Stream
 	 *  The type of the message.
 	 * @param {array} [$fieldNames=null]
 	 *  The names of the fields to check for changes.
-	 *  By default, checks all the standard stream fields.
+	 *  By default, checks all the standard stream fields
 	 * @return {false|Db_Query}
 	 *  Returns false if nothing changed, otherwise the Db_Query
 	 */
@@ -1523,8 +1543,7 @@ class Streams_Stream extends Base_Streams_Stream
 		and $invite
 		and $invite->publisherId == $this->publisherId
 		and $invite->streamName == $this->name
-		and $invite->readLevel >= 0
-		and !Users::loggedInUser(false, false)) {
+		and $invite->readLevel >= 0) {
 			// set the readLevel, but not writeLevel or adminLevel
 			$readLevel = max($readLevel, $invite->readLevel);
 		}
@@ -2083,11 +2102,22 @@ class Streams_Stream extends Base_Streams_Stream
 			$skip = false;
 		}
 
-		if ($skip or $this->testReadLevel('content', $options)) {
-			$readLevelAtLeastContent = true;
+		$fields = Q::ifset($_SESSION, 'Streams', 'invite', array());
+		$invite = $fields ? new Streams_Invite($fields) : Streams::$followedInvite;
+		if (empty($options['ignoreInvite'])
+		and $invite
+		and $invite->publisherId == $this->publisherId
+		and $invite->streamName == $this->name
+		and $invite->readLevel >= 0) {
+			// set the readLevel, but not writeLevel or adminLevel
+			$readLevel = max($readLevel, $invite->readLevel);
+		}
+
+		if ($skip or $this->testReadLevel('fields', $options)) {
+			$readLevelAtLeastFields = true;
 			$result = $this->toArray();
 		} else {
-			$readLevelAtLeastContent = false;
+			$readLevelAtLeastFields = false;
 			if (!$this->testReadLevel('see')) {
 				return array();
 			}
@@ -2100,6 +2130,10 @@ class Streams_Stream extends Base_Streams_Stream
 				'insertedTime',
 				'updatedTime'
 			);
+			if ($skip or $this->testReadLevel('content', $options)) {
+				$fields[] = 'icon';
+				$fields[] = 'content';
+			}
 			if (isset($this->type)) {
 				$fields = array_merge($fields, Q_Config::get(
 					'Streams', 'types', $this->type, 'see', array()
@@ -2135,13 +2169,13 @@ class Streams_Stream extends Base_Streams_Stream
 			foreach ($v as $f) {
 				if (!isset($options['fields'])
 				or in_array($f, $options['fields'])) {
-					if ($readLevelAtLeastContent or in_array($f, $canSeeFields, true)) {
+					if ($readLevelAtLeastFields or in_array($f, $canSeeFields, true)) {
 						$result[$f] = isset($this->$f) ? $this->$f : null;
 					}
 				}
 			}
 		}
-		if (!$readLevelAtLeastContent) {
+		if (!$readLevelAtLeastFields) {
 			$attributes = $this->getAllAttributes();
 			$a = Q::take($attributes, $canSeeAttributes);
 			if ($this->testReadLevel('teaser')) {

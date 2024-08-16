@@ -369,7 +369,8 @@ class Places_Nearby
 		$stream = Streams::create($publisherId, $publisherId, 'Places/nearby', array(
 			'name' => $streamName,
 			'title' => $title,
-			'attributes' => Q::json_encode($attributes),
+			'attributes' => Q::json_encode($attributes)
+		), array(
 			'skipAccess' => true
 		));
 		return $stream;

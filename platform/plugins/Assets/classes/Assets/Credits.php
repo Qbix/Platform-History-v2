@@ -84,6 +84,11 @@ class Assets_Credits extends Base_Assets_Credits
 		$publisherId = $communityId;
 		$streamName = "Assets/credits/$userId";
 		$stream = Streams::fetchOneOrCreate($asUserId, $publisherId, $streamName, array(
+			'fields' => array(
+				'type' => "Assets/credits",
+				'attributes' => array('amount' => 0)
+			),
+			'skipAccess' => true,
 			'subscribe' => true
 		), $results);
 		if ($results['created']) {
@@ -94,9 +99,10 @@ class Assets_Credits extends Base_Assets_Credits
 				'ofContactLabel' => '',
 				'ofParticipantRole' => '',
 				'readLevel' => 40,
-				'writeLevel' => -1,
+				'writeLevel' => 10,
 				'adminLevel' => 20
 			))->execute();
+			$stream->calculateAccess($userId, true);
 			$amount = Q_Config::get('Assets', 'credits', 'grant', 'Users/insertUser', self::DEFAULT_AMOUNT);
 			if ($amount > 0) {
 				self::grant($communityId, $amount, 'YouHaveCreditsToStart', $userId);

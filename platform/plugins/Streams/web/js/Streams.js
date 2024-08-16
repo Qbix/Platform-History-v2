@@ -131,6 +131,13 @@ Q.text.Streams = {
  * Can see the stream's content
  * @property READ_LEVEL.content
  * @type integer
+ * @default 23
+ * @final
+ */
+/**
+ * Can see most of the stream's fields
+ * @property READ_LEVEL.fields
+ * @type integer
  * @default 25
  * @final
  */
@@ -167,7 +174,8 @@ Streams.READ_LEVEL = {
 	'see':			10, // can see icon and title
 	'teaser':		15, // can see Streams/teaser/.. attributes
 	'relations':	20,	// can see relations to other streams
-	'content':		25, // can see the stream's content
+	'content':		23, // can see the stream's content
+	'fields':		25, // can see most of the stream's fields
 	'participants':	30, // can see participants in the stream
 	'messages':		35, // can play stream in a player,
 	'receipts':     40, // can see other users' play receipts
@@ -295,7 +303,6 @@ Streams.WRITE_LEVEL = {
 	'post':			20,		// can post durable messages which take effect immediately
 	'relate':	    23,		// can relate other streams to this one
 	'relations':	25,		// can update weights and relations directly
-	'suggest':      28,     // can suggest actions, but manager must approve
 	'edit':			30,		// can edit stream content immediately
 	'closePending':	35,		// can post a message requesting to close the stream
 	'close':		40,		// don't delete, just prevent any new changes to stream
@@ -1456,6 +1463,7 @@ Streams.release = function (key) {
 
 Streams.invite = new Q.Method({
     options: {
+		readLevel: 15, // readLevel "teaser" by default
         followup: "future",
         identifierTypes: ["email", "mobile"],
         youCanNowPasteDuration: 10000
@@ -4211,7 +4219,7 @@ Ap.displayName = function _Avatar_prototype_displayName (options, fallback) {
 		return parts.join(' ').trim() || f2;
 	}
 	if (options && options.short) {
-		return fn ? fn2 : (u ? u2 : f2);
+		return fn ? fn2 : (u ? u2 : (ln ? ln2 : f2));
 	} else if (fn && ln) {
 		return fn2 + ' ' + ln2;
 	} else if (fn && !ln) {

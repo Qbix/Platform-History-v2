@@ -261,7 +261,7 @@ class Streams_Avatar extends Base_Streams_Avatar
 		}
 
 		if (!empty($options['short'])) {
-			return $fn ? $fn2 : ($u ? $u2 : $f2);
+			return $fn ? $fn2 : ($u ? $u2 : ($ln ? $ln2 : $f2));
 		} else if ($fn and $ln) {
 			return "$fn2 $ln2";
 		} else if ($fn and !$ln) {

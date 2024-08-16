@@ -4856,6 +4856,9 @@ Q.Tool.remove = function _Q_Tool_remove(elem, removeCached, removeElementAfterLa
  *  or a function that will take a tool name and return a boolean, false means don't remove tool.
  */
 Q.Tool.clear = function _Q_Tool_clear(elem, removeCached, removeElementAfterLastTool, filter) {
+	if (!elem) {
+		return;
+	}
 	if (typeof elem === 'string') {
 		var tool = Q.Tool.byId(elem);
 		if (!tool) return false;
@@ -9478,9 +9481,9 @@ Q.queryString = function _Q_queryString(fields, keys, returnAsObject, options) {
 	var result = {};
 	
 	function _add(key, value) {
-		// If value is a function, invoke it and return its value
-		value = Q.typeOf(value) === "function" ? value() : value;
-		if (value == undefined) return;
+		if (value == undefined || Q.typeOf(value) == 'function') {
+			return;
+		}
 		if (options && options.convertBooleanToInteger) {
 			value = (value === true) ? 1 : (value === false ? 0 : value);
 		}
