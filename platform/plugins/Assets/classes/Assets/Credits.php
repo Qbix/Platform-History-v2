@@ -25,17 +25,6 @@ class Assets_Credits extends Base_Assets_Credits
 
 	/**
 	 * @method getAllAttributes
-	 * @static
-	 * @return {array} The array of all attributes set in the stream
-	 */
-	function getAllAttributes()
-	{
-		return empty($this->attributes) ? array() : json_decode($this->attributes, true);
-	}
-	/**
-
-	/**
-	 * @method getAllAttributes
 	 * @return {array} The array of all attributes set in the stream
 	 */
 	function getAllAttributes()
