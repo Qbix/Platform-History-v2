@@ -33,7 +33,7 @@ function Assets_1_0_177_Streams_mysql()
             )));
 			++$i;
 			echo "\033[100D";
-			echo "Updated $i streams";
+			echo "Created $i relations";
 		}
 		$offset += 100;
 	};

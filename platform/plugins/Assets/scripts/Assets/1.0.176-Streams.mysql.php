@@ -23,7 +23,7 @@ function Assets_1_0_176_Streams_mysql()
             $stream->setAttribute('peak', $amount);
 			++$i;
 			echo "\033[100D";
-			echo "Created $i streams";
+			echo "Updated $i streams";
 		}
 		$offset += 100;
 	};
