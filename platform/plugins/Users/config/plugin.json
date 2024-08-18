@@ -463,7 +463,7 @@
 					"name": "Optimism",
 					"publicRPC": "https://optimism-rpc.publicnode.com",
 					"publicWebsocket": "wss://optimism-rpc.publicnode.com",
-					"blockExplorerUrl": "https://optimistic.etherscan.io/",
+					"blockExplorerUrl": "https://optimistic.etherscan.io",
 					"rpcUrl": "https://optimism-mainnet.infura.io/v3/{{infuraId}}",
 					"currency": {
 						"name": "Op Ethereum",
