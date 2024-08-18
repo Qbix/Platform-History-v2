@@ -5,7 +5,7 @@ function Assets_after_Users_filter_users($params, &$result)
     if (!$result) {
         return;
     }
-    $min = Q_Config::get('Assets', 'users', 'filter', 'credits', 'min', 0);
+    $min = Q_Config::get('Assets', 'users', 'filter', 'credits', 'peak', 0);
     if ($min == 0) {
         return;
     }

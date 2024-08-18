@@ -417,8 +417,8 @@
 	"Assets": {
 		"users": {
 			"filter": {
-				"credits": {
-					"min": 0
+				"peak": {
+					"min": 20
 				}
 			}
 		},
