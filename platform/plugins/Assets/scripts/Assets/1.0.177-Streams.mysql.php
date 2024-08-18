@@ -6,7 +6,7 @@ function Assets_1_0_177_Streams_mysql()
     Streams::updateStreamNames(array(
         'Assets/category/credits' => 'Assets/category/credits'
     ), array(
-        'publsherId' => 'Assets',
+        'publisherId' => 'Assets',
         'newPublisherId' => Users::communityId()
     ));
 
