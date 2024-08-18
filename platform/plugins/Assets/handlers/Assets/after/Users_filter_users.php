@@ -29,7 +29,8 @@ function Assets_after_Users_filter_users($params, &$result)
         'type' => new Db_Range("attribute/peak=$credits", true, false, null)
     ))->where(array(
         'fromStreamName' => $streamNames
-    ))->fetchAll(PDO::FETCH_COLUMN, 0);
+    ))->orderBy('type', false)
+    ->fetchAll(PDO::FETCH_COLUMN, 0);
     $filteredPersonIds = array();
     foreach ($sns as $sn) {
         $parts = explode('/', $sn);
