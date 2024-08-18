@@ -5,7 +5,7 @@ function Assets_after_Users_filter_users($params, &$result)
     if (!$result) {
         return;
     }
-    $min = Q_Config::get('Assets', 'users', 'filter', 'credits', 'peak', 0);
+    $min = Q_Config::get('Assets', 'users', 'filter', 'peak', 0);
     if ($min == 0) {
         return;
     }
@@ -32,6 +32,9 @@ function Assets_after_Users_filter_users($params, &$result)
     ))->orderBy('type', false)
     ->fetchAll(PDO::FETCH_COLUMN, 0);
     $filteredPersonIds = array();
+    foreach ($personIds as $personId) {
+        if ()
+    }
     foreach ($sns as $sn) {
         $parts = explode('/', $sn);
         $filteredPersonIds[] = end($parts);
