@@ -325,7 +325,7 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
                 var instance;
                 [instance, /*instancesCount*/] = event.args;
 
-                var txChaindId = txData["tx"].chainId == 0 ? userParams.selectedChainId : txData["tx"].chainId;
+                var txChainId = txData["tx"].chainId == 0 ? userParams.selectedChainId : txData["tx"].chainId;
                 Q.req("Users/transaction", ["result"], function (err, response) {
 
                     var fem = Q.firstErrorMessage(err, response);
@@ -335,7 +335,7 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
                     method: "put",
                     fields: {
                         communityId: state.communityId,
-                        chainId: txChaindId,
+                        chainId: txChainId,
                         transactionId: txData["tx"].hash,
                         status: "mined",
                         contract: instance,
@@ -347,7 +347,7 @@ Q.Tool.define("Users/web3/community", function Users_web3_community_tool(options
                 //update xid in state.chains
 
                 state.chains.forEach(function(item, index) {
-                    if (item["chainId"] === txChaindId) {
+                    if (item["chainId"] === txChainId) {
                         item["xid"] = instance;
                     }
 
