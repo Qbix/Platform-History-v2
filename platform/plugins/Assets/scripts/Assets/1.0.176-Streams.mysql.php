@@ -21,6 +21,7 @@ function Assets_1_0_176_Streams_mysql()
             }
             // set the peak to current amount, best we can do:
             $stream->setAttribute('peak', $amount);
+            $stream->save();
 			++$i;
 			echo "\033[100D";
 			echo "Updated $i streams";
