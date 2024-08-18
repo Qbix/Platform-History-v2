@@ -606,6 +606,39 @@ class Q_Utils
 	}
 
 	/**
+	 * Does a diff similar to array_diff but recursive
+	 * Taken from https://stackoverflow.com/a/29526501/467460
+	 * @method diffRecursive
+	 * @static
+	 * @param {array} $arr1
+	 * @param {array} $arr2
+	 * @return {$array}
+	 */
+	function diffRecursive($arr1, $arr2)
+	{
+		$outputDiff = array();
+		foreach ($arr1 as $key => $value) {
+			// if the key exists in the second array, recursively call this function 
+			// if it is an array, otherwise check if the value is in arr2
+			if (array_key_exists($key, $arr2)) {
+				if (is_array($value)) {
+					$recursiveDiff = diffRecursive($value, $arr2[$key]);
+					if (count($recursiveDiff)) {
+						$outputDiff[$key] = $recursiveDiff;
+					}
+				} else if (!in_array($value, $arr2)) {
+					$outputDiff[$key] = $value;
+				}
+			} else if (!in_array($value, $arr2)) {
+				// if the key is not in the second array, check if the value is in 
+				// the second array (this is a quirk of how array_diff works)
+				$outputDiff[$key] = $value;
+			}
+		}
+		return $outputDiff;
+	}
+
+	/**
 	 * A polyfill for hash_equals
 	 * @param string $a
 	 * @param string $b
