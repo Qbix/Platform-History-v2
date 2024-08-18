@@ -20,12 +20,10 @@ function Assets_1_0_176_Streams_mysql()
                 continue;
             }
             // set the peak to current amount, best we can do:
-            $stream->updateRelations(array('firstTimeAddingAttributes' => array(
-                'amount' => true
-            )));
+            $stream->setAttribute('peak', $amount);
 			++$i;
 			echo "\033[100D";
-			echo "Created $i relations";
+			echo "Created $i streams";
 		}
 		$offset += 100;
 	};
