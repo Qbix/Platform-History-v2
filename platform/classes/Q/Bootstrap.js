@@ -267,7 +267,7 @@ Bootstrap.loadHandlers = function (callback) {
 				var len = dir.length + 1;
 				for (var i = 0; i<result.files.length; ++i) {
 					var filename = result.files[i];
-					if (filename.substr(-3) !== '.js') {
+					if (filename.slice(-3) !== '.js') {
 						continue;
 					}
 					var parts = filename.substring(len, filename.length-3).split(Q.DS);

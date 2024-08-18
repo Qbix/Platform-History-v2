@@ -38,7 +38,7 @@ function Expression(chain, chain2) {
 					str = ":_dbExpr_"+i;
 					this.parameters["_dbExpr_"+i] = value;
 				}
-				if (/\W/.test(expr.substr(-1))) {
+				if (/\W/.test(expr.slice(-1))) {
 					expr_list.push("(" + expr + str + ")");
 				} else {
 					expr_list.push("(" + expr + '=' + str + ")");

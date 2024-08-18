@@ -139,7 +139,7 @@ function Db_Mysql(connName, dsn) {
 		    var dt = new Date(
 				Math.abs(offset) * 60000 + new Date(2000, 0).getTime()
 		    ).toTimeString();
-		    var tz = (offset < 0 ? '-' : '+') + dt.substr(0,2) + ':' + dt.substr(3,2);
+		    var tz = (offset < 0 ? '-' : '+') + dt.substring(0,2) + ':' + dt.substring(3,5);
 			connection.query('SET NAMES UTF8; SET time_zone = "'+tz+'"');
 
 			function _Db_Mysql_onConnectionError(err, mq) {

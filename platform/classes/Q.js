@@ -97,7 +97,7 @@ Q.typeOf = function _Q_typeOf(value) {
 				return 'object';
 			}
 			return value.constructor.name;
-		} else if ((x = Object.prototype.toString.apply(value)).substr(0, 8) === "[object ") {
+		} else if ((x = Object.prototype.toString.apply(value)).substring(0, 8) === "[object ") {
 			return x.substring(8, x.length-1);
 		} else {
 			return 'object';
@@ -2257,8 +2257,8 @@ Q.normalize = function _Q_normalize(text, replacement, characters, numChars, kee
 	}
 	var result = text.replace(characters, replacement);
 	if (result.length > numChars) {
-		result = result.substr(0, numChars-11) + '_'
-			+ Math.abs(result.substr(numChars-11).hashCode());
+		result = result.substring(0, numChars-11) + '_'
+			+ Math.abs(result.substring(numChars-11).hashCode());
 	}
 	return result;
 };
@@ -2721,7 +2721,7 @@ Q.realPath = function _Q_realPath(filename, ignoreCache) {
 	var result = false, paths = (process.env.NODE_PATH || '').split(Q.PS);
 	for (var i = 0; i<=paths.length; ++i) {
 		var p = (i == paths.length) ? '' : paths[i];
-		var fullpath = path.normalize((p.substr(-1) === Q.DS) ? p + filename : p + Q.DS + filename);
+		var fullpath = path.normalize((p.slice(-1) === Q.DS) ? p + filename : p + Q.DS + filename);
 		if (fs.existsSync(fullpath)) {
 			result = fullpath;
 			break;
@@ -3090,7 +3090,7 @@ Q.date = function (format, timestamp) {
 		},
 		P: function () { // Difference to GMT w/colon; e.g. +02:00
 			var O = f.O();
-			return (O.substr(0, 3) + ":" + O.substr(3, 2));
+			return (O.substring(0, 3) + ":" + O.substring(3, 5));
 		},
 		T: function () { // Timezone abbreviation; e.g. EST, MDT, ...
 			// The following works, but requires inclusion of the very
@@ -3308,7 +3308,7 @@ Q.url = function _Q_url(what, fields, options) {
 	} else if (what3.isUrl()) {
 		result = what3;
 	} else {
-		result = baseUrl + ((what3.substr(0, 1) === '/') ? '' : '/') + what3;
+		result = baseUrl + ((what3.substring(0, 1) === '/') ? '' : '/') + what3;
 	}
 	return result;
 };
@@ -3686,7 +3686,7 @@ Sp.deobfuscate = function (key) {
  * @return {String}
  */
 Sp.hexToDecimal = function () {
-	var hex = this.substr(0, 2) == '0x' ? this : '0x' + this;
+	var hex = this.substring(0, 2) == '0x' ? this : '0x' + this;
 	return BigInt(hex).toString();
 };
 

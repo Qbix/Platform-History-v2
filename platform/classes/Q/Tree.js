@@ -61,7 +61,7 @@ module.exports = function (linked) {
 		});
 		for (var i=0; i<filenames.length; ++i) {
 			(function (i) {
-				var isPHP = (filenames[i].substr(-4).toLowerCase() === '.php');
+				var isPHP = (filenames[i].slice(-4).toLowerCase() === '.php');
 				fs.readFile(filenames[i].replace('/', Q.DS), 'utf-8', function (err, data) {
 					if (err) {
 						p.fill(filenames[i])(err, null);

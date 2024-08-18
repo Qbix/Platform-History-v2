@@ -688,7 +688,7 @@ Utils.listen = function(callback) {
 					extName = path.extname(baseName);
 				// baseName is the name of the file without extension
 				if ((i = baseName.lastIndexOf(extName)) >= 0)
-					baseName = baseName.substr(0, i);
+					baseName = baseName.substring(0, i);
 				if (!baseName.length) {
 					// who knows how creative user is...
 					baseName = 'Db/config/shards';

@@ -195,7 +195,7 @@
                                             onActivate: function (dialog) {
                                                 $("button[name=create]", dialog).on(Q.Pointer.fastclick, function () {
                                                     var name = $("input[name=name]", dialog).val();
-                                                    var symbol = $("input[name=symbol]", dialog).val().substr(0,10).toUpperCase();
+                                                    var symbol = $("input[name=symbol]", dialog).val().substring(0,10).toUpperCase();
 
                                                     if (!name) {
                                                         return Q.alert(tool.text.NFT.contract.TitleRequired);

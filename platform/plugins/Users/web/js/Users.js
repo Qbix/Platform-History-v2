@@ -1806,7 +1806,7 @@
                 return address;
             }
             var t = Q.Users.Web3.chains[chainId].blockExplorerUrls;
-			if (t.substr(-1) !== '/') {
+			if (t.slice(-1) !== '/') {
 				t += '/';
 			}
             t = Q.isArrayLike(t) ? t[0] : t;
