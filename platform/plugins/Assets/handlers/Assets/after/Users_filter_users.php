@@ -35,7 +35,7 @@ function Assets_after_Users_filter_users($params, &$result)
     $filteredPersonIds = array();
     foreach ($personIds as $pid) {
         if (!empty($filteredStreamNames["Assets/credits/$pid"])) {
-            $filterPersonIds[] = $pid;
+            $filteredPersonIds[] = $pid;
         }
     }
     $result = array_merge($communityIds, $filteredPersonIds);
