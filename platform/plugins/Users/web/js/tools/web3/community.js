@@ -384,7 +384,7 @@ Q.Template.set('Users/web3/community/list',
         <td>{{this.chainId}}</td>
         <td>
     {{#if this.xid}}
-            <a target="_blank" href="{{call "Q.Users.Web3.getExplorerLink" this.xid this.chainId}}">
+            <a target="_blank" href="{{call "Q.Users.Web3.getExplorerLink" this.xid this.chainId "address/"}}">
                 {{call "Q.Users.Web3.abbreviateAddress" this.xid}}
             </a>
     {{else}}
