@@ -31,13 +31,12 @@ function Assets_after_Users_filter_users($params, &$result)
         'fromStreamName' => $streamNames
     ))->orderBy('type', false)
     ->fetchAll(PDO::FETCH_COLUMN, 0);
+    $keys = array_keys($sns);
     $filteredPersonIds = array();
     foreach ($personIds as $personId) {
-        if ()
-    }
-    foreach ($sns as $sn) {
-        $parts = explode('/', $sn);
-        $filteredPersonIds[] = end($parts);
+        if (!empty($keys[$personId])) {
+            $filterPersonIds[] = $personId;
+        }
     }
     $result = array_merge($communityIds, $filteredPersonIds);
 }
