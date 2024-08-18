@@ -36,8 +36,6 @@ function Users_transaction_put($params)
 		throw new Q_Exception_MissingObject(array('name' => 'transaction'));
 	}
 	
-    $quota->used(1);
-	
     if ($transaction->status == "pending"
 	&& $params["status"] == 'mined') {
 		
@@ -47,15 +45,13 @@ function Users_transaction_put($params)
 		if (!$transaction->updateFromBlockchainReceipt(compact('attempts'))) {
 			throw new Q_Exception_AttemptsExceeded();
 		}
-		$transaction->save(true);
+		
 //		if (empty($transaction->contract)) {
 //			throw new Q_Exception_MissingObject(array('name' => 'transaction->contract'));
 //		}
 		$contract = $params['contract'];
 		$chainId = $params['chainId'];
 		$communityId = $params['communityId'];
-		// ask Greg why and how we wil be descrypt instance address from event 
-		//		inside transaction_mined and update ExternalTo
 		if (!empty($transaction->contractABIName)) {
 			Q::event("Users/transaction/mined/"
 				. $transaction->contractABIName . '/'
@@ -64,6 +60,9 @@ function Users_transaction_put($params)
 				'after'
 			);
 		}
+
+		$transaction->save(true);
+
 		// WARNING: not recommended to add hooks with these names,
 		// since the same method name might be shared
 		// among multiple types of smart contracts
@@ -74,6 +73,8 @@ function Users_transaction_put($params)
 //		);
 		
     }
+
+	$quota->used(1);
     
     Q_Response::setSlot("result", true);
 
