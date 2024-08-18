@@ -1,0 +1,2 @@
+INSERT INTO {{prefix}}related_from(fromPublisherId, fromStreamName, type, toPublisherId, toStreamName)
+VALUES ("", "Assets/credits/", "attribute/peak", {{communityId}}, "Assets/category/credits");

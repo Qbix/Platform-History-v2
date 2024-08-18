@@ -675,6 +675,7 @@ abstract class Streams extends Base_Streams
 	 *   if you want to set some fields besides "name"
 	 * @param {array} [$options.relate] to pass to create function,
 	 *   if you want to relate the newly created stream to a category
+	 * @param {boolean} [$options.skipAccess=false] Skip all access checks when creating and relating the stream.
 	 * @param {array} [$options.type] to pass to create function,
 	 *   not required if the stream is described in Streams::userStreams (streams.json files)
 	 * @param {reference} [&$results=array()] pass an array to fill with intermediate results
@@ -2075,6 +2076,12 @@ abstract class Streams extends Base_Streams
 				}
 				foreach (array('toStreamName', 'fromStreamName') as $f) {
 					$newRT[$key][$f] = $newRF[$key][$f] = ($f === $arrayField) ? $sn : $$f;
+				}
+				if (empty($category)) {
+					throw new Q_Exception_MissingRow(array(
+						'table' => 'stream',
+						'criteria' => Q::json_encode(compact('toPublisherId', 'toStreamName'))
+					));
 				}
 				$newRTT[] = array(
 					'toPublisherId' => $category->publisherId,
@@ -4811,9 +4818,9 @@ abstract class Streams extends Base_Streams
 	 * @param {string} $streamType
 	 * @param {string} $publisherId=''
 	 * @param {array} [$overrides=array()]
-	 * @param {array} [$overrides.readLevel]
-	 * @param {array} [$overrides.writeLevel]
-	 * @param {array} [$overrides.adminLevel]
+	 * @param {array} [$overrides.readLevel] override public default readLevel
+	 * @param {array} [$overrides.writeLevel] override public default writeLevel
+	 * @param {array} [$overrides.adminLevel] override public default adminLevel
 	 * @param {array} [$accessLabels=null] Pass labels for which to save access rows.
 	 * @param {array} [$accessLevels=array('max','max','max')]
 	 *  Pass here the array of readLevel, writeLevel, adminLevel to save in access rows

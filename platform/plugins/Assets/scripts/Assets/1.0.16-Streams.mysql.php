@@ -1,7 +1,7 @@
 <?php
 
 
-function Streams_1_0_16()
+function Assets_1_0_16_Streams_mysql()
 {
 	$streamType = "Assets/plan";
 	$admins = Q_Config::get("Streams", "types", $streamType, "canCreate", []);
@@ -17,4 +17,4 @@ function Streams_1_0_16()
 	}
 }
 
-Streams_1_0_16();
+Assets_1_0_16_Streams_mysql();

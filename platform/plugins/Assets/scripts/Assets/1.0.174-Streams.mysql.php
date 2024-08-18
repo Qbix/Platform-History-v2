@@ -1,6 +1,6 @@
 <?php
 
-function Assets_1_0_174_Streams()
+function Assets_1_0_174_Streams_mysql()
 {
     $communityId = Users::communityId();
     echo "Inserting Assets/credits access rows...".PHP_EOL;
@@ -25,4 +25,4 @@ function Assets_1_0_174_Streams()
     ));
 }
 
-Assets_1_0_174_Streams();
+Assets_1_0_174_Streams_mysql();

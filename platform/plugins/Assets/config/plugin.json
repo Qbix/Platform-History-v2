@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Assets": {
-				"version": "1.0.175",
+				"version": "1.0.177",
 				"compatible": "0.7",
 				"requires": {"Q": "0.9", "Streams": "0.9"},
 				"connections": ["Assets", "Streams"]
@@ -263,7 +263,8 @@
 					"icon": "{{Assets}}/img/credits.png",
 					"content": "",
 					"attributes": {
-						"amount": 0
+						"amount": 0,
+						"peak": 0
 					},
 					"readLevel": 0,
 					"writeLevel": 0,

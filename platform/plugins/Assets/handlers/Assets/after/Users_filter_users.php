@@ -26,7 +26,7 @@ function Assets_after_Users_filter_users($params, &$result)
     $sns = Streams_RelatedTo::select('fromStreamName')->where(array(
         'toPublisherId' => Users::communityId(),
         'toStreamName' => 'Assets/category/credits',
-        'type' => new Db_Range("attribute/amount=$credits", true, false, null)
+        'type' => new Db_Range("attribute/peak=$credits", true, false, null)
     ))->where(array(
         'fromStreamName' => $streamNames
     ))->fetchAll(PDO::FETCH_COLUMN, 0);

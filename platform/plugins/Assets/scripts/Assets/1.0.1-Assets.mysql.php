@@ -1,6 +1,6 @@
 <?php
 
-function Assets_1_0_1()
+function Assets_1_0_1_Assets_mysql()
 {
 	$filename = 'apple-developer-merchantid-domain-association';
 	$from = ASSETS_PLUGIN_WEB_DIR.DS.'.well-known'.DS.$filename;
@@ -12,4 +12,4 @@ function Assets_1_0_1()
 	}
 }
 
-Assets_1_0_1();
+Assets_1_0_1_Assets_mysql();
