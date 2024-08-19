@@ -52,11 +52,14 @@ class Assets_Subscription {
 					'title' => $plan->title,
 					'attributes' => $attributes
 				),
-				array('relate' => array(
-					'publisherId' => $plan->publisherId,
-					'streamName' => $plan->name,
-					'type' => self::$streamType
-				))		
+				array(
+					'relate' => array(
+						'publisherId' => $plan->publisherId,
+						'streamName' => $plan->name,
+						'type' => self::$streamType
+					),
+					'skipAccess' => true
+				)
 			);
 
 		}
@@ -269,7 +272,6 @@ class Assets_Subscription {
 		}
 
 		if ($throwIfNotPaid) {
-			$text = Q_Text::get("Assets/content");
 			throw new Assets_Exception_PaymentRequired(array(
 				'publisherId' => $stream->publisherId,
 				'streamName' => $stream->name,

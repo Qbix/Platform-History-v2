@@ -35,9 +35,11 @@ class Streams_Topic {
 		}
 
 		$stream = Streams::create(null, $publisherId, "Streams/topic", array(), array(
-			"publisherId" => $category->publisherId,
-			"streamName" => $category->name,
-			"type" => "new"
+			"relate" => array(
+				"publisherId" => $category->publisherId,
+				"streamName" => $category->name,
+				"type" => "new"
+			)
 		));
 		if ($publisherId != $loggedInUserId) {
 			Streams_Access::insert(array(

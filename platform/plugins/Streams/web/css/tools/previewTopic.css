@@ -56,6 +56,9 @@
     opacity: 0.5;
     font-style: italic;
 }
+.Streams_topic_preview_composer textarea.Streams_topic_composer_form_control {
+    min-height: 40px;
+}
 .Streams_topic_preview_composer .Streams_topic_composer_container {
     display: inline-block;
     text-align: center;

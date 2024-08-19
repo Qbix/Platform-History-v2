@@ -737,7 +737,7 @@ Sp.inheritAccess = function (callback) {
 	var adminLevel_source = this.get('adminLevel_source', public_source);
 	var permissions_source = this.get('permissions_source', public_source);
 	
-	var p = new Q.Pipe(inheritAccess.map(JSON.stringify), function (params) {
+	var pipe = new Q.Pipe(inheritAccess.map(JSON.stringify), function (params) {
 		subj.set('readLevel', readLevel);
 		subj.set('writeLevel', writeLevel);
 		subj.set('adminLevel', adminLevel);
@@ -778,7 +778,7 @@ Sp.inheritAccess = function (callback) {
 			var s_adminLevel_source = stream.get('adminLevel_source', public_source);
 			var s_permissions_source = stream.get('permissions_source', public_source);
 
-			var readLevelCap = writeLevelCap = adminLevelCap = undefined;
+			var readLevelCap, writeLevelCap, adminLevelCap;
 			if (Array.isArray(accessLevels)) {
 				readLevelCap = accessLevels[0];
 				writeLevelCap = accessLevels[1];
@@ -814,20 +814,20 @@ Sp.inheritAccess = function (callback) {
 				+ (s_adminLevel_source > ips ? 0 : ips);
 			}
 			if (direct_sources.indexOf(permissions_source) < 0) {
-				var p2 = s_permissions;
+				var permissions2 = s_permissions;
 				if (s_permissions_source !== direct_source) {
-					var p = stream.get('permissions', []);
-					var p2 = [].concat(p);
-					for (var i=0; i<p.length; ++i) {
-						if (p2.indexOf(p[i]) < 0) {
-							p2.push(p[i]);
+					var permissions = stream.get('permissions', []);
+					permissions2 = [].concat(permissions);
+					for (var i=0; i<permissions.length; ++i) {
+						if (permissions2.indexOf(permissions[i]) < 0) {
+							permissions2.push(permissions[i]);
 						}
 					}
 				}
-				stream.set('permissions', p2);
-				stream.set('permissions_source', source);
+				stream.set('permissions', permissions2);
+				stream.set('permissions_source', permissions_source);
 			}
-			p.fill(key)(null, true);
+			pipe.fill(key)(null, true);
 		});
 	});
 };
