@@ -174,7 +174,7 @@ class Q_Dispatcher
 				 */
 				$served = Q::event("Q/dir", @compact('filename', 'routed_uri'));
 				$dir_was_served = true;
-			} else {
+			} else if (file_exists($filename)) {
 				/**
 				 * @event Q/file
 				 * @param {string} filename
