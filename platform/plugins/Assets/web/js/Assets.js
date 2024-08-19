@@ -183,7 +183,7 @@
 				 */
 				getToken: function(chainId, tokenSymbolOrAddress) {
 					if (!tokenSymbolOrAddress
-					|| tokenSymbolOrAddress.substr(0, 2) !== '0x') {
+					|| tokenSymbolOrAddress.substring(0, 2) !== '0x') {
 						throw new Q.Exception("Assets.Currencies.Web3.getToken: token symbol or address required");
 					}
 					var tokens = Assets.Currencies.Web3.getTokens(chainId);
@@ -265,7 +265,7 @@
 						return str;
 					}
 
-					return str.substr(0, length - endChars - 3) + "..." + str.substr(-endChars, endChars);
+					return str.substring(0, length - endChars - 3) + "..." + str.slice(-endChars);
 				},
 				/**
 				 * Check if transaction successful
@@ -284,7 +284,7 @@
 			 * @returns {String} '0x' followed by 16 hexits
 			 */
 			seriesIdFromTokenId(tokenId) {
-				return '0x' + tokenId.decimalToHex().substr(0, 16);
+				return '0x' + tokenId.decimalToHex().substring(0, 16);
 			}
 		},
         CommunityCoins: Q.Method.define({

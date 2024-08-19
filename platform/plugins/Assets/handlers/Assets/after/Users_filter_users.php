@@ -5,7 +5,7 @@ function Assets_after_Users_filter_users($params, &$result)
     if (!$result) {
         return;
     }
-    $min = Q_Config::get('Assets', 'users', 'filter', 'credits', 'min', 0);
+    $min = Q_Config::get('Assets', 'users', 'filter', 'peak', 'min', 0);
     if ($min == 0) {
         return;
     }
@@ -26,14 +26,17 @@ function Assets_after_Users_filter_users($params, &$result)
     $sns = Streams_RelatedTo::select('fromStreamName')->where(array(
         'toPublisherId' => Users::communityId(),
         'toStreamName' => 'Assets/category/credits',
-        'type' => new Db_Range("attribute/amount=$credits", true, false, null)
+        'type' => new Db_Range("attribute/peak=$credits", true, false, null)
     ))->where(array(
         'fromStreamName' => $streamNames
-    ))->fetchAll(PDO::FETCH_COLUMN, 0);
+    ))->orderBy('type', false)
+    ->fetchAll(PDO::FETCH_COLUMN, 0);
+    $filteredStreamNames = array_flip($sns);
     $filteredPersonIds = array();
-    foreach ($sns as $sn) {
-        $parts = explode('/', $sn);
-        $filteredPersonIds[] = end($parts);
+    foreach ($personIds as $pid) {
+        if (!empty($filteredStreamNames["Assets/credits/$pid"])) {
+            $filteredPersonIds[] = $pid;
+        }
     }
     $result = array_merge($communityIds, $filteredPersonIds);
 }

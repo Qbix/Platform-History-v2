@@ -190,7 +190,7 @@ Dispatcher.route = function (url) {
 	} else {
 		tailStart = index+'/action.php/'.length;
 	}
-	var parts1 = url.substr(tailStart).split('?');
+	var parts1 = url.substring(tailStart).split('?');
 	var parts2 = parts1[0].split('/');
 	if (!parts2[1]) {
 		return false;

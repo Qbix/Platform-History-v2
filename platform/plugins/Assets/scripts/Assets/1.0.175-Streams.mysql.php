@@ -4,8 +4,8 @@ function Assets_1_0_175()
 {
     $communityId = Users::communityId();
     $offset = 0;
-    $i = 0;
     echo "Creating Assets/category/credits relations for each user".PHP_EOL;
+    $i = 0;
     while (1) {
         $users = Users_User::select()
             ->limit(100, $offset)

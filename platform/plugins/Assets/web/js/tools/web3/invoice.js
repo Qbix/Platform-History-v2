@@ -261,7 +261,7 @@ Q.Tool.define("Assets/web3/invoice", function (options) {
             payTitle: state.payTitle,
             recipient: tool.recipient,
             //minimizedWallet: Q.Assets.NFT.Web3.minimizeAddress(owner, 20, 3)
-            minimizedWallet: (tool.recipient.wallet).substr(0, 20 - 3 - 3) + "..." + (tool.recipient.wallet).substr(-3, 3)
+            minimizedWallet: (tool.recipient.wallet).substring(0, 20 - 3 - 3) + "..." + (tool.recipient.wallet).slice(-3)
         }, function (err, html) {
             if (err) {
                 return;

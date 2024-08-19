@@ -1282,7 +1282,7 @@ function criteria_internal (query, criteria, fillCriteria) {
 				criteria_list.push( "ISNULL(" + expr + ")");
 			} else if (value && value.typename === "Db.Expression") {
 				Q.extend(query.parameters, value.parameters);
-				if (/\W/.test(expr.substr(-1))) {
+				if (/\W/.test(expr.slice(-1))) {
 					criteria_list.push( "" + Query_Mysql.column(expr) + "(" + value + ")" );
 				} else {
 					criteria_list.push( "" + Query_Mysql.column(expr) + " = (" + value + ")");
@@ -1298,7 +1298,7 @@ function criteria_internal (query, criteria, fillCriteria) {
 					}
 					valueList = values.join(',');
 				}
-				if (/\W/.test(expr.substr(-1))) {
+				if (/\W/.test(expr.slice(-1))) {
 					criteria_list.push( "" + expr + "(" + valueList + ")" );
 				} else if (value.length === 0) {
 					criteria_list.push("FALSE"); // since value array is empty
@@ -1319,7 +1319,7 @@ function criteria_internal (query, criteria, fillCriteria) {
 					_valueCounter = (_valueCounter + 1) % 1000000;
 				}
 			} else {
-				var eq = /\W/.test(expr.substr(-1)) ? '' : ' = ';
+				var eq = /\W/.test(expr.slice(-1)) ? '' : ' = ';
 				criteria_list.push( "" + Query_Mysql.column(expr) + eq + ":_criteria_" + _valueCounter );
 				query.parameters["_criteria_" + _valueCounter] = value;
 				_valueCounter = (_valueCounter + 1) % 1000000;

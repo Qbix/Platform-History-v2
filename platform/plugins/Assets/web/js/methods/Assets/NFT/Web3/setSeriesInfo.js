@@ -25,7 +25,7 @@ Q.exports(function(){
         && !(contractAddress instanceof String)) {
             throw new Q.Error("contractAddress must be a string");
         }
-        if (seriesId.toString().substr(0, 2) !== '0x') {
+        if (seriesId.toString().substring(0, 2) !== '0x') {
             throw new Q.Error("seriesId must be a string starting with 0x");
         }
         var FRACTION = 100000;

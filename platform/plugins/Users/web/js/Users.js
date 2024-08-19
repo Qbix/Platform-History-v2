@@ -1805,8 +1805,11 @@
             if (Q.isEmpty(Q.Users.Web3.chains[chainId].blockExplorerUrls)) {
                 return address;
             }
-            let t = Q.Users.Web3.chains[chainId].blockExplorerUrls;
+            var t = Q.Users.Web3.chains[chainId].blockExplorerUrls;
             t = Q.isArrayLike(t) ? t[0] : t;
+			if (t.slice(-1) !== '/') {
+				t += '/';
+			}
             return t + partPrepend + address;
         },
 		/**

@@ -56,7 +56,7 @@ Query.prototype.shardIndex = function () {
 		return null;
 	}
 	var connName = this.db.connName;
-	var className = this.className.substr(connName.length + 1);
+	var className = this.className.substring(connName.length + 1);
 	var info = Q.Config.get(['Db', 'upcoming', connName], false);
 	if (!info) {
 		Q.Config.get(['Db', 'connections', connName], false);
@@ -154,7 +154,7 @@ Query.prototype.shard = function(index) {
 	}
 	var point, max, field, i, value, hash, parts, shards, len, hashed = [], missing = 0;
 	var connName = this.db.connName;
-	var className = this.className.substr(connName.length + 1);
+	var className = this.className.substring(connName.length + 1);
 	index = index || Q.Config.get(['Db', 'connections', connName, 'indexes', className], false);
 	if (!index) {
 		return {"": this};
@@ -219,10 +219,10 @@ function applyHash(value, hash, len)
 	}
 	switch (hash) {
 		case 'normalize':
-			hashed = Q.normalize(value).substr(0, len);
+			hashed = Q.normalize(value).substring(0, len);
 			break;
 		case 'md5':
-			hashed = Q.Crypto.MD5(value).substr(0, len).toString();
+			hashed = Q.Crypto.MD5(value).substring(0, len).toString();
 			break;
 		default:
 			throw new Q.Exception("Db.Query.Mysql: The hash " + hash + " is not supported");

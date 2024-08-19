@@ -21,7 +21,7 @@ function Range(min, includeMin, includeMax, max) {
 		if (typeof min !== 'string') {
 			throw new Exception("Db.Range: min is the wrong type, expected a string");
 		}
-		max = min.substr(0, min.length-1) + String.fromCharCode(min.charCodeAt(min.length-1)+1);
+		max = min.substring(0, min.length-1) + String.fromCharCode(min.charCodeAt(min.length-1)+1);
 	}
 	this.max = max;
 	this.typename = "Db.Range";

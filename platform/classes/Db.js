@@ -142,7 +142,7 @@ Db.connect = function(name) {
 
 	var dsn = Db.parseDsnString(info['dsn']);
 	var dbms = dsn['dbms'];
-	var moduleName =  dbms.charAt(0).toUpperCase() + dbms.substr(1);
+	var moduleName =  dbms.charAt(0).toUpperCase() + dbms.substring(1);
 	Db[moduleName] = Q.require('Db/' + moduleName);
 
 	return dbs[name] = new Db[moduleName](name, dsn);
@@ -155,9 +155,9 @@ Db.connect = function(name) {
  * @return {integer} The timestamp
  */
 Db.fromDate = function(date) {
-	var year = date.substr(0, 4),
-	    month = date.substr(5, 2),
-	    day = date.substr(8, 2);
+	var year = date.substring(0, 4),
+	    month = date.substring(5, 7),
+	    day = date.substring(8, 10);
 	return (new Date(year, month, day).getTime());
 };
 
@@ -171,12 +171,12 @@ Db.fromDateTime = function(datetime) {
 	if (datetime.constructor === Date) {
 		return datetime.getTime();
 	}
-	var year = datetime.substr(0, 4),
-	    month = datetime.substr(5, 2),
-	    day = datetime.substr(8, 2),
-	    hour = datetime.substr(11, 2),
-	    min = datetime.substr(14, 2),
-	    sec = datetime.substr(17, 2);
+	var year = datetime.substring(0, 4),
+	    month = datetime.substring(5, 7),
+	    day = datetime.substring(8, 10),
+	    hour = datetime.substring(11, 13),
+	    min = datetime.substring(14, 16),
+	    sec = datetime.substring(17, 19);
 	return (new Date(year, month, day, hour, min, sec, 0).getTime());
 };
 

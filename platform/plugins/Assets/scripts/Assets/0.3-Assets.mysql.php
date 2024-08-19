@@ -1,6 +1,6 @@
 <?php
 
-function Assets_0_3()
+function Assets_0_3_Assets_mysql()
 {
 	$app = Q::app();
 	$streamName = "Assets/plans";
@@ -28,4 +28,4 @@ function Assets_0_3()
 	}
 }
 
-Assets_0_3();
+Assets_0_3_Assets_mysql();

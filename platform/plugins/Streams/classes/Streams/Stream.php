@@ -2263,7 +2263,7 @@ class Streams_Stream extends Base_Streams_Stream
 	 *  didn't change. Mostly used internally, e.g. in installer scripts.
 	 * @return {array} Multidimensional array detailing which relations were removed and added, if any
 	 */
-	function updateRelations($options)
+	function updateRelations($options = array())
 	{
 		$changes = $this->changedFields();
 		$updateRelations = self::getConfigField($this->type, 'updateRelations', array());
