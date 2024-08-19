@@ -575,7 +575,7 @@ class Assets_Credits extends Base_Assets_Credits
 		} elseif (!$fromCurrency or $fromCurrency == "credits") {
 			$rate = Q_Config::expect('Assets', 'credits', 'exchange', $toCurrency);
 			$amount = (float)$amount / $rate;
-		} elseif (!$toCurrency or !$toCurrency == "credits") {
+		} elseif (!$toCurrency or $toCurrency == "credits") {
 			$rate = Q_Config::expect('Assets', 'credits', 'exchange', $fromCurrency);
 			$amount = (float)$amount * $rate;
 		} else {
