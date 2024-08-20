@@ -77,6 +77,7 @@
 		{
 			url: null,
 			isComposer: true,
+			teaser: false,
 			inplace: {
 				field: 'title',
 				inplaceType: 'text',
@@ -395,6 +396,7 @@
 							content: tool.stream && tool.stream.fields.content,
 							isComposer: state.isComposer,
 							text: tool.text,
+							teaser: state.teaser,
 							uploadLimit: tool.text.video.uploadLimit.interpolate({size: Q.humanReadable(Q.info.maxUploadSize, {bytes: true})})
 						}
 					},
@@ -677,38 +679,44 @@
 	);
 
 	Q.Template.set('Streams/video/composer',
-		`<div class="Streams_video_composer" data-composer="{{isComposer}}"><form>
-		  <div class="Q_tabbing_tabs">
+`<div class="Streams_video_composer" data-composer="{{isComposer}}"><form>
+			<div class="Q_tabbing_tabs">
 		  	<div data-name="edit" class="Q_tabbing_tab">{{video.edit}}</div>
 		  	<div data-name="upload" class="Q_tabbing_tab">{{video.upload}}</div>
 		  	<div data-name="link" class="Q_tabbing_tab">{{video.link}}</div>
-		  </div>
-		  <div class="Q_tabbing_container">
-			 	<div class="Q_tabbing_item" data-content="edit">
-					<input name="title" value="{{title}}">
-					<textarea name="content">{{content}}</textarea>
-					<div class="Streams_video_composer_preview"></div>
-					<div class="Streams_video_composer_clip"></div>
-					<button type="button" name="animatedThumbnail">{{video.createAnimatedThumbnail}}</button>
+		  	{{#if teaser}}
+		  	<div data-name="teaser" class="Q_tabbing_tab">{{preview.Teaser}}</div>
+		  	{{/if}}
+		</div>
+		<div class="Q_tabbing_container">
+			<div class="Q_tabbing_item" data-content="edit">
+				<input name="title" value="{{title}}">
+				<textarea name="content">{{content}}</textarea>
+				<div class="Streams_video_composer_preview"></div>
+				<div class="Streams_video_composer_clip"></div>
+				<button type="button" name="animatedThumbnail">{{video.createAnimatedThumbnail}}</button>
 		  	</div>
 		  	<div class="Q_tabbing_item" data-content="upload">
-			   		<input type="file" accept="video/*" class="Streams_video_file" />
-					<div class="Streams_video_composer_upload_limit">{{uploadLimit}}</div>
-					<div class="Streams_video_composer_preview"></div>
-					<div class="Streams_video_composer_clip"></div>
-					<button type="button" name="animatedThumbnail">{{video.createAnimatedThumbnail}}</button>
-				</div>
+				<input type="file" accept="video/*" class="Streams_video_file" />
+				<div class="Streams_video_composer_upload_limit">{{uploadLimit}}</div>
+				<div class="Streams_video_composer_preview"></div>
+				<div class="Streams_video_composer_clip"></div>
+				<button type="button" name="animatedThumbnail">{{video.createAnimatedThumbnail}}</button>
+			</div>
 		  	<div class="Q_tabbing_item" data-content="link">
-			   		<label>
-						<input name="url" placeholder="{{video.setUrl}}" type="url">
-						<button name="setClip" type="button" class="Q_button">{{video.setClip}}</button>
-					</label>
-					<div class="Streams_video_composer_preview"></div>
-					<div class="Streams_video_composer_clip"></div>
-				</div>
-		  </div>
-		  <div class="Streams_video_composer_submit"><button name="save" class="Q_button" type="button">{{video.save}}</button><button name="reset" type="reset" class="Q_button">{{video.reset}}</button></div>
-		</form></div>`,
+				<label>
+					<input name="url" placeholder="{{video.setUrl}}" type="url">
+					<button name="setClip" type="button" class="Q_button">{{video.setClip}}</button>
+				</label>
+				<div class="Streams_video_composer_preview"></div>
+				<div class="Streams_video_composer_clip"></div>
+			</div>
+		  	<div class="Q_tabbing_item" data-content="teaser">
+				
+			</div>
+		</div>
+		<div class="Streams_video_composer_submit"><button name="save" class="Q_button" type="button">{{video.save}}</button><button name="reset" type="reset" class="Q_button">{{video.reset}}</button></div>
+	</form></div>`,
 		{text: ['Streams/content']}
 	);
 
