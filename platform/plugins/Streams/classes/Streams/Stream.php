@@ -790,9 +790,9 @@ class Streams_Stream extends Base_Streams_Stream
 			), 'before', false, $this);
 		}
 		
-		foreach ($this->fields as $name => $value) {
+		foreach ($modifiedFields as $name => $value) {
 			if (!empty($this->fieldsModified[$name])) {
-				$modifiedFields[$name] = $value;
+				$this->fields[$name] = $value;
 			}
 		}
 
