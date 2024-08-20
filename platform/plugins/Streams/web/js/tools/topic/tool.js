@@ -202,16 +202,32 @@ Q.Tool.define("Streams/topic", function(options) {
 			});
 		}, tool);
 
+		var fullAccess = stream.testReadLevel(40);
+
+		$(tool.element).attr("data-fullAccess", fullAccess);
+
+		var content = fullAccess ? stream.fields.content : stream.getAttribute("Streams/teaser/description") || "";
+
 		Q.Template.render('Streams/topic/tool', {
-				src: stream.iconUrl(state.imagepicker.showSize),
-				title: stream.fields.title,
-				content: stream.fields.content
+			src: stream.iconUrl(state.imagepicker.showSize),
+			title: stream.fields.title,
+			content
 		}, function (err, html) {
 			if (err) {
 				return;
 			}
 
 			Q.replace(tool.element, html);
+
+			var teaserVideoUrl = stream.getAttribute("Streams/teaser/video");
+			if (teaserVideoUrl) {
+				$("<div>").tool("Q/video", {
+					url: teaserVideoUrl,
+					autoplay: true,
+					controls: false,
+					loop: true
+				}).appendTo($(".Streams_topic_image", tool.element).attr("data-video", true)).activate();
+			}
 
 			// relations
 			$(".Streams_topic_relations", tool.element).tool("Streams/related", {
@@ -223,6 +239,9 @@ Q.Tool.define("Streams/topic", function(options) {
 					ascending: true
 				},
 				sortable: true,
+				specificOptions: {
+					teaser: true
+				},
 				creatable: (function () {
 					var creatable = {};
 					Q.each(state.creatable, function (i, streamType) {
@@ -236,12 +255,8 @@ Q.Tool.define("Streams/topic", function(options) {
 });
 
 Q.Template.set('Streams/topic/tool',
-`<div class="Streams_topic_bg">
-		<div class="Streams_topic_front">
-			<div class="Streams_topic_image" style="background-image: url({{src}})"></div>
-			<div class="Streams_topic_text">{{content}}</div>
-		</div>
-	</div>
+`<div class="Streams_topic_image" style="background-image: url({{src}})"></div>
+	<div class="Streams_topic_description">{{{content}}}</div>
 	<div class="Streams_topic_conversation"><h2>{{topic.Conversation}}</h2></div>
 	<div class="Streams_topic_relations"></div>`,
 	{text: ['Streams/content']}
