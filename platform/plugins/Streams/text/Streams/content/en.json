@@ -4,7 +4,8 @@
         "InplaceTypeMustBe": "inplaceType must be 'textarea' or 'text'"
     },
     "preview": {
-        "NewItemTitle": "New Item"
+        "NewItemTitle": "New Item",
+        "Teaser": "Teaser"
     },
     "avatar": {
         "firstName": "first name",
@@ -498,7 +499,10 @@
         "TopicIcon": "Topic picture",
         "UploadIcon": "Upload Icon",
         "Conversation": "Conversation",
-        "Metrics": "Metrics"
+        "Metrics": "Metrics",
+        "Teaser": "Teaser",
+        "TeaserDescription": "teaser description...",
+        "TeaserVideo": "Teaser Video"
     },
     "animatedThumbnail": {
         "CreateAnimatedThumbnail": "Create animated thumbnail",

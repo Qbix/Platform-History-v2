@@ -193,6 +193,74 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
                     });
                 });
 
+                // teaser video
+                var $box = $(".Streams_topic_composer_form_group[data-type=teaser]", dialog);
+                var teaserVideoRelationType = "teaserVideo";
+                var _listenTeaserVideoStream = function (stream) {
+                    stream.retain(tool);
+                    stream.onAttribute("Streams.videoUrl").set(function (attributes, k) {
+                        tool.stream.setAttribute("Streams/teaser/video", attributes[k]).save({
+                            onSave: function () {
+                                tool.stream.refresh(null, {
+                                    messages: true,
+                                    evenIfNotRetained: true
+                                });
+                            }
+                        });
+                    }, tool);
+                };
+                Q.Streams.related.force(previewState.publisherId, previewState.streamName, teaserVideoRelationType, true, function () {
+                    var options = {
+                        publisherId: previewState.publisherId,
+                        creatable: {
+                            title: tool.text.topic.TeaserVideo,
+                            clickable: false,
+                            addIconSize: 0,
+                            streamType: "Streams/video"
+                        },
+                        related: {
+                            publisherId: previewState.publisherId,
+                            streamName: previewState.streamName,
+                            type: teaserVideoRelationType
+                        }
+                    };
+                    if (!Q.isEmpty(this.relatedStreams)) {
+                        tool.teaserVideoStream = Object.values(this.relatedStreams)[0];
+                        options.streamName = tool.teaserVideoStream.fields.name;
+                        _listenTeaserVideoStream(tool.teaserVideoStream);
+                    }
+
+                    $("<div>").tool("Streams/preview", options).tool("Streams/video/preview").appendTo($box).activate(function () {
+                        Q.Tool.from(this.element, "Streams/preview").state.onCreate.set(function (stream) {
+                            tool.teaserVideoStream = stream;
+                            tool.stream.setAttribute("Streams/teaser/video", stream.videoUrl()).save({
+                                onSave: function () {
+                                    tool.stream.refresh(null, {
+                                        messages: true,
+                                        evenIfNotRetained: true
+                                    });
+                                }
+                            });
+                            _listenTeaserVideoStream(tool.teaserVideoStream);
+                        }, tool);
+
+                        Q.Tool.from(this.element, "Streams/video/preview").state.onInvoke.set(function () {
+                            var videoPreviewTool = this;
+                            Q.invoke({
+                                title: videoPreviewTool.stream.fields.title,
+                                content: $("<div>").tool("Q/video", {
+                                    url: videoPreviewTool.stream.videoUrl()
+                                }),
+                                className: "Streams_topic_composer_teaser_video",
+                                trigger: videoPreviewTool.element,
+                                callback: function (options, index, div, data) {
+
+                                }
+                            });
+                        }, tool);
+                    });
+                });
+
                 // create topic
                 $save.on(Q.Pointer.fastclick, function (event) {
                     event.preventDefault();
@@ -209,6 +277,7 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
                     });
                     tool.stream.set('title', $("input[name=title]", dialog).val());
                     tool.stream.set('content', $("textarea[name=description]", dialog).val());
+                    tool.stream.setAttribute("Streams/teaser/description", $("textarea[name=teaserDescription]", dialog).val());
                     tool.stream.save({
                         onSave: pipe.fill("save")
                     });
@@ -250,6 +319,10 @@ Q.Template.set('Streams/topic/composer',
             </div>
             <label>{{topic.TopicIcon}}</label>
         </div>
+        <div class="Streams_topic_composer_form_group" data-type="teaser">
+		    <label>{{topic.Teaser}}</label>
+		    <textarea name="teaserDescription" class="Streams_topic_composer_form_control" placeholder="{{topic.TeaserDescription}}">{{teaserContent}}</textarea>
+	    </div>
         <button class="Q_button" name="save" type="button">{{saveButtonText}}</button>
     </form>`, {text: ['Streams/content']});
 
