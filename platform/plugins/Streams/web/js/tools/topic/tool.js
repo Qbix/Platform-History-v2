@@ -65,55 +65,57 @@ Q.Tool.define("Streams/topic", function(options) {
 
 					var toolName, toolOptions;
 					var stream = this;
-
-					if (!stream.testReadLevel('content') && !Q.isEmpty(stream.fields["Assets/canPayForStreams"])) {
-						return Q.alert("Error: Payment is needed to access this.");
-					}
+					var canReadContent = stream.testReadLevel('content');
+					var canPayForStreams = stream.fields["Assets/canPayForStreams"];
+					var teaser;
 
 					switch(streamType) {
 						case "Streams/video":
 							toolName = "Q/video";
-							toolOptions = {
-								url: stream.videoUrl() || stream.fileUrl(),
-								clipStart: stream.getAttribute('clipStart'),
-								clipEnd: stream.getAttribute('clipEnd'),
-								metrics: {
-									publisherId: stream.fields.publisherId,
-									streamName: stream.fields.name
-								}
-							};
 							break;
 						case "Streams/audio":
 							toolName = "Q/audio";
-							toolOptions = {
-								action: "implement",
-								url: stream.fileUrl(),
-								clipStart: stream.getAttribute('clipStart'),
-								clipEnd: stream.getAttribute('clipEnd'),
-								metrics: {
-									publisherId: stream.fields.publisherId,
-									streamName: stream.fields.name
-								}
-							};
 							break;
 						case "Streams/pdf":
 							toolName = "Q/pdf";
-							toolOptions = {
-								url: stream.fileUrl(),
-								clipStart: stream.getAttribute('clipStart'),
-								clipEnd: stream.getAttribute('clipEnd'),
-								metrics: {
-									publisherId: stream.fields.publisherId,
-									streamName: stream.fields.name
-								}
-							};
 							break;
 						case "Streams/topic":
 							toolName = "Streams/topic";
-							toolOptions = {};
 							break;
 						default:
 							throw new Q.Exception(streamType + " not recognised");
+					}
+
+					if (canReadContent) {
+						toolOptions = {
+							url: stream.videoUrl() || stream.fileUrl(),
+							clipStart: stream.getAttribute('clipStart'),
+							clipEnd: stream.getAttribute('clipEnd'),
+							metrics: {
+								publisherId: stream.fields.publisherId,
+								streamName: stream.fields.name
+							}
+						};
+					} else {
+						if (Q.isEmpty(canPayForStreams)) {
+							return Q.alert("Error: Not enough permissions to view this content.");
+						} else {
+							teaser = stream.getAttribute("Streams/teaser/" + streamType.split('/').pop());
+							if (teaser) {
+								toolOptions = {
+									url: teaser
+								};
+							} else {
+								return tool.payment();
+							}
+						}
+					}
+
+					if (streamType === "Streams/topic") {
+						toolOptions = {
+							publisherId: stream.fields.publisherId,
+							streamName: stream.fields.name
+						};
 					}
 
 					Q.invoke({
@@ -122,7 +124,12 @@ Q.Tool.define("Streams/topic", function(options) {
 						className: "Streams_topic_" + Q.normalize(streamType),
 						trigger: tool.element,
 						onActivate: function (div) {
-							$("<div>").appendTo($(".Q_content_container", div)).tool(toolName, toolOptions).activate();
+							$("<div>").appendTo($(".Q_content_container", div)).tool(toolName, toolOptions).activate(function () {
+								if (teaser) {
+									this.state.onEnded && this.state.onEnded.set(tool.payment.bind(tool), tool);
+									this.state.onPause && this.state.onPause.set(tool.payment.bind(tool), tool);
+								}
+							});
 						}
 					});
 				});
@@ -172,7 +179,7 @@ Q.Tool.define("Streams/topic", function(options) {
 		showSize: "200x",
 		fullSize: "1000x"
 	},
-	creatable: ["Streams/video", "Streams/audio", "Streams/pdf"] //TODO: make topics browser in topic preview tool and use it instead composer to select already created topic 'Streams/topic'
+	creatable: ["Streams/video", "Streams/audio", "Streams/pdf", "Streams/topic"] //TODO: make topics browser in topic preview tool and use it instead composer to select already created topic 'Streams/topic'
 
 },
 
@@ -251,6 +258,18 @@ Q.Tool.define("Streams/topic", function(options) {
 				})()
 			}).activate();
 		});
+	},
+	payment: function () {
+		var tool = this;
+		var state = this.state;
+
+		if (tool.paymentProcessing) {
+			return;
+		}
+
+		tool.paymentProcessing = true;
+
+		Q.alert("Error: Payment is needed to access this.");
 	}
 });
 
