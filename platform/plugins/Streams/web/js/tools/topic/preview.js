@@ -195,7 +195,7 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
 
                 // teaser video
                 var $box = $(".Streams_topic_composer_form_group[data-type=teaser]", dialog);
-                var teaserVideoRelationType = "teaserVideo";
+                var teaserVideoRelationType = tool.name + "_teaserVideo";
                 var _listenTeaserVideoStream = function (stream) {
                     stream.retain(tool);
                     stream.onAttribute("Streams.videoUrl").set(function (attributes, k) {
@@ -230,7 +230,9 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
                         _listenTeaserVideoStream(tool.teaserVideoStream);
                     }
 
-                    $("<div>").tool("Streams/preview", options).tool("Streams/video/preview").appendTo($box).activate(function () {
+                    $("<div>").tool("Streams/preview", options).tool("Streams/video/preview", {
+                        title: tool.text.video.TeaserVideo
+                    }).appendTo($box).activate(function () {
                         Q.Tool.from(this.element, "Streams/preview").state.onCreate.set(function (stream) {
                             tool.teaserVideoStream = stream;
                             tool.stream.setAttribute("Streams/teaser/video", stream.videoUrl()).save({
