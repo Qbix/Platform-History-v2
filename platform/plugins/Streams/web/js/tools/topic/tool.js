@@ -18,23 +18,7 @@ Q.Tool.define("Streams/topic", function(options) {
 			return;
 		}
 
-		var stream = this;
-
-		$toolElement.on(Q.Pointer.fastclick, ".Streams_topic_conversation", function () {
-			Q.invoke({
-				title: tool.text.topic.Conversation,
-				content: $("<div>").tool("Streams/chat", {
-					publisherId: stream.fields.publisherId,
-					streamName: stream.fields.name
-				}),
-				trigger: tool.element,
-				onActivate: function () {
-
-				}
-			});
-		});
-
-		Q.handle(tool.refresh, tool, [stream]);
+		Q.handle(tool.refresh, tool, [this]);
 	});
 
 	Q.each(state.creatable, function (index, streamType) {
@@ -66,7 +50,6 @@ Q.Tool.define("Streams/topic", function(options) {
 					var toolName, toolOptions;
 					var stream = this;
 					var canReadContent = stream.testReadLevel('content');
-					var canPayForStreams = stream.fields["Assets/canPayForStreams"];
 					var teaser;
 
 					switch(streamType) {
@@ -97,17 +80,13 @@ Q.Tool.define("Streams/topic", function(options) {
 							}
 						};
 					} else {
-						if (Q.isEmpty(canPayForStreams)) {
-							return Q.alert("Error: Not enough permissions to view this content.");
+						teaser = stream.getAttribute("teaser:Streams/" + streamType.split('/').pop());
+						if (teaser) {
+							toolOptions = {
+								url: teaser
+							};
 						} else {
-							teaser = stream.getAttribute("teaser:Streams/" + streamType.split('/').pop());
-							if (teaser) {
-								toolOptions = {
-									url: teaser
-								};
-							} else {
-								return tool.payment();
-							}
+							return tool.payment(stream);
 						}
 					}
 
@@ -126,8 +105,9 @@ Q.Tool.define("Streams/topic", function(options) {
 						onActivate: function (div) {
 							$("<div>").appendTo($(".Q_content_container", div)).tool(toolName, toolOptions).activate(function () {
 								if (teaser) {
-									this.state.onEnded && this.state.onEnded.set(tool.payment.bind(tool), tool);
-									this.state.onPause && this.state.onPause.set(tool.payment.bind(tool), tool);
+									var throttle = Q.throttle(tool.payment.bind(tool, stream), 300);
+									this.state.onEnded && this.state.onEnded.set(throttle, tool);
+									this.state.onPause && this.state.onPause.set(throttle, tool);
 								}
 							});
 						}
@@ -226,6 +206,20 @@ Q.Tool.define("Streams/topic", function(options) {
 
 			Q.replace(tool.element, html);
 
+			$(".Streams_topic_conversation", tool.element).on(Q.Pointer.fastclick, function () {
+				Q.invoke({
+					title: tool.text.topic.Conversation,
+					content: $("<div>").tool("Streams/chat", {
+						publisherId: state.publisherId,
+						streamName: state.streamName
+					}),
+					trigger: tool.element,
+					onActivate: function () {
+
+					}
+				});
+			});
+
 			var teaserVideoUrl = stream.getAttribute("teaser:Streams/video");
 			if (teaserVideoUrl) {
 				$("<div>").tool("Q/video", {
@@ -259,17 +253,72 @@ Q.Tool.define("Streams/topic", function(options) {
 			}).activate();
 		});
 	},
-	payment: function () {
+	payment: function (stream) {
 		var tool = this;
+		var $toolElement = $(this.element);
 		var state = this.state;
+		var canPayForStreams = stream.fields["Assets/canPayForStreams"];
 
-		if (tool.paymentProcessing) {
-			return;
+		if (Q.isEmpty(canPayForStreams)) {
+			return Q.alert("Error: Not enough permissions to view this content.");
 		}
 
-		tool.paymentProcessing = true;
+		Q.Dialogs.push({
+			title: "Please subscribe",
+			className: "Streams_topic_subscribe",
+			onActivate: function (dialog) {
+				var $content = $(".Q_dialog_content", dialog);
 
-		Q.alert("Error: Payment is needed to access this.");
+				Q.each(canPayForStreams, function (i, streamData) {
+					Q.Assets.Subscriptions.getPlansRelated(streamData, function (err, streams) {
+						if (err) {
+							return;
+						}
+
+						Q.each(streams, function (i, stream) {
+							$("<div>").tool("Streams/preview", {
+								publisherId: stream.fields.publisherId,
+								streamName: stream.fields.name
+							}).tool("Assets/plan/preview").appendTo($content).activate(function () {
+								var assetsPlanPreview = this;
+								this.state.onInvoke.set(function () {
+									Q.Dialogs.push({
+										title: "Please subscribe",
+										className: "Streams_topic_subscribe_plan",
+										content: $("<div>").tool("Assets/plan", {
+											publisherId: stream.fields.publisherId,
+											streamName: stream.fields.name
+										}),
+										onActivate: function (dialog) {
+											var assetsPlan = Q.Tool.from($(".Assets_plan_tool", dialog)[0], "Assets/plan");
+											assetsPlan.state.onSubscribe.set(function () {
+												Q.Dialogs.pop();
+												Q.Dialogs.pop();
+
+												var $column = $toolElement.closest('.Q_columns_column');
+												if ($column.length) {
+													var min = parseInt($column.data('index')) + 1;
+													var columns = Q.Tool.from($toolElement.closest(".Q_columns_tool"), "Q/columns");
+													columns.close({min: min}, null, {animation: {duration: 0}});
+												}
+
+												Q.Streams.get.force(state.publisherId, state.streamName, function (err) {
+													if (err) {
+														return;
+													}
+
+													tool.refresh(this);
+												});
+											}, assetsPlanPreview);
+										}
+									});
+								}, assetsPlanPreview);
+							});
+						});
+					});
+				});
+			}
+		});
 	}
 });
 
