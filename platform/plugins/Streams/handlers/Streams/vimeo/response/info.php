@@ -12,7 +12,7 @@ function Streams_vimeo_response_info ($params=[]) {
 		$stream = Streams::fetchOne($publisherId, $publisherId, $streamName);
 		if (!$stream->getAttribute('available')) {
 			if (!Streams::isCustomIcon($stream->icon)) {
-				Streams::importIcon($publisherId, $streamName, end($info['pictures']['sizes'])['link']);
+				Streams::importIcon($publisherId, $streamName, end($info['pictures']['sizes'])['link'], "Streams/image", true);
 			}
 			$stream->setAttribute('available', true);
 			$stream->changed();

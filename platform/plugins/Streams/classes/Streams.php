@@ -5534,7 +5534,7 @@ abstract class Streams extends Base_Streams
 	 * @param {string} $imageURL - URL or path to image
 	 * @param {string} [$save] - name of config under Q/image/sizes
 	 */
-	static function importIcon($publisherId, $streamName, $imageURL, $save="Streams/image")
+	static function importIcon($publisherId, $streamName, $imageURL, $save="Streams/image", $skipAccess=false)
 	{
 		if (!Q_Valid::url($imageURL) && !file_exists($imageURL)) {
 			return false;
@@ -5552,7 +5552,8 @@ abstract class Streams extends Base_Streams
 			'data' => $icon, // these frills, with base64 and comma, to format image data for Q/image/post handler.
 			'path' => "Q/uploads/Streams",
 			'subpath' => Q_Utils::splitId($publisherId, 3, '/')."/".$streamName."/icon/".time(),
-			'save' => $save
+			'save' => $save,
+			'skipAccess' => $skipAccess
 		));
 		return true;
 	}
