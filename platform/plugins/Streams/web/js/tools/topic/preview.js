@@ -170,6 +170,7 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
                 fields: {
                     title: Q.getObject("stream.fields.title", tool) || "",
                     content: Q.getObject("stream.fields.content", tool) || "",
+                    teaserDescription: tool.stream.getAttribute("teaser:Streams/description"),
                     saveButtonText: isNew ? tool.text.topic.CreateTopic : tool.text.topic.UpdateTopic
                 }
             },
@@ -323,7 +324,7 @@ Q.Template.set('Streams/topic/composer',
         </div>
         <div class="Streams_topic_composer_form_group" data-type="teaser">
 		    <label>{{topic.Teaser}}</label>
-		    <textarea name="teaserDescription" class="Streams_topic_composer_form_control" placeholder="{{topic.TeaserDescription}}">{{teaserContent}}</textarea>
+		    <textarea name="teaserDescription" class="Streams_topic_composer_form_control" placeholder="{{topic.TeaserDescription}}">{{teaserDescription}}</textarea>
 	    </div>
         <button class="Q_button" name="save" type="button">{{saveButtonText}}</button>
     </form>`, {text: ['Streams/content']});
