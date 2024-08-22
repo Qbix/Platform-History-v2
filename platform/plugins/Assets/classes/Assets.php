@@ -205,8 +205,7 @@ abstract class Assets extends Base_Assets
 			list($publisherId, $streamName) = $pn;
 			foreach ($types as $type) {
 				if (Q::startsWith($streamName, $type.'/')) {
-					$result[] = array($publisherId, $streamName);
-					break;
+					$result[] = compact("publisherId", "streamName");
 				}
 			}
 		}
