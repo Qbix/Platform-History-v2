@@ -2180,7 +2180,7 @@ class Streams_Stream extends Base_Streams_Stream
 			$a = Q::take($attributes, $canSeeAttributes);
 			if ($this->testReadLevel('teaser')) {
 				foreach ($attributes as $k => $v) {
-					if (Q::startsWith($k, 'teaser:Streams/')) {
+					if (Q::startsWith($k, 'teaser:')) {
 						$a[$k] = $v;
 					}
 				}
