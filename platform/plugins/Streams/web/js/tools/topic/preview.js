@@ -199,7 +199,7 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
                 var _listenTeaserVideoStream = function (stream) {
                     stream.retain(tool);
                     stream.onAttribute("Streams.videoUrl").set(function (attributes, k) {
-                        tool.stream.setAttribute("Streams/teaser/video", attributes[k]).save({
+                        tool.stream.setAttribute("teaser:Streams/video", attributes[k]).save({
                             onSave: function () {
                                 tool.stream.refresh(null, {
                                     messages: true,
@@ -235,7 +235,7 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
                     }).appendTo($box).activate(function () {
                         Q.Tool.from(this.element, "Streams/preview").state.onCreate.set(function (stream) {
                             tool.teaserVideoStream = stream;
-                            tool.stream.setAttribute("Streams/teaser/video", stream.videoUrl()).save({
+                            tool.stream.setAttribute("teaser:Streams/video", stream.videoUrl()).save({
                                 onSave: function () {
                                     tool.stream.refresh(null, {
                                         messages: true,
@@ -279,7 +279,7 @@ Q.Tool.define("Streams/topic/preview", ["Streams/preview"], function(options, pr
                     });
                     tool.stream.set('title', $("input[name=title]", dialog).val());
                     tool.stream.set('content', $("textarea[name=description]", dialog).val());
-                    tool.stream.setAttribute("Streams/teaser/description", $("textarea[name=teaserDescription]", dialog).val());
+                    tool.stream.setAttribute("teaser:Streams/description", $("textarea[name=teaserDescription]", dialog).val());
                     tool.stream.save({
                         onSave: pipe.fill("save")
                     });

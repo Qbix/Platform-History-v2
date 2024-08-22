@@ -100,7 +100,7 @@ Q.Tool.define("Streams/topic", function(options) {
 						if (Q.isEmpty(canPayForStreams)) {
 							return Q.alert("Error: Not enough permissions to view this content.");
 						} else {
-							teaser = stream.getAttribute("Streams/teaser/" + streamType.split('/').pop());
+							teaser = stream.getAttribute("teaser:Streams/" + streamType.split('/').pop());
 							if (teaser) {
 								toolOptions = {
 									url: teaser
@@ -213,7 +213,7 @@ Q.Tool.define("Streams/topic", function(options) {
 
 		$(tool.element).attr("data-fullAccess", fullAccess);
 
-		var content = fullAccess ? stream.fields.content : stream.getAttribute("Streams/teaser/description") || "";
+		var content = fullAccess ? stream.fields.content : stream.getAttribute("teaser:Streams/description") || "";
 
 		Q.Template.render('Streams/topic/tool', {
 			src: stream.iconUrl(state.imagepicker.showSize),
@@ -226,7 +226,7 @@ Q.Tool.define("Streams/topic", function(options) {
 
 			Q.replace(tool.element, html);
 
-			var teaserVideoUrl = stream.getAttribute("Streams/teaser/video");
+			var teaserVideoUrl = stream.getAttribute("teaser:Streams/video");
 			if (teaserVideoUrl) {
 				$("<div>").tool("Q/video", {
 					url: teaserVideoUrl,

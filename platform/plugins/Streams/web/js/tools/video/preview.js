@@ -226,9 +226,9 @@
 					attributes: {}
 				};
 
-				// stream not created yet, but teaser stream already exists, set attr Streams/teaser/video of future stream
+				// stream not created yet, but teaser stream already exists, set attr teaser:Streams/video of future stream
 				if (!tool.stream && tool.teaserVideoStream) {
-					params.attributes['Streams/teaser/video'] = tool.teaserVideoStream.videoUrl();
+					params.attributes['teaser:Streams/video'] = tool.teaserVideoStream.videoUrl();
 				}
 
 				if (action === "link") {
@@ -695,7 +695,7 @@
 
 				stream.retain(tool);
 				stream.onAttribute("Streams.videoUrl").set(function (attributes, k) {
-					tool.stream.setAttribute("Streams/teaser/video", attributes[k]).save({
+					tool.stream.setAttribute("teaser:Streams/video", attributes[k]).save({
 						onSave: function () {
 							tool.stream.refresh(null, {
 								messages: true,
@@ -740,7 +740,7 @@
 				}).appendTo($container).activate(function () {
 					Q.Tool.from(this.element, "Streams/preview").state.onCreate.set(function (stream) {
 						tool.teaserVideoStream = stream;
-						tool.stream && tool.stream.setAttribute("Streams/teaser/video", stream.videoUrl()).save({
+						tool.stream && tool.stream.setAttribute("teaser:Streams/video", stream.videoUrl()).save({
 							onSave: function () {
 								tool.stream.refresh(null, {
 									messages: true,
