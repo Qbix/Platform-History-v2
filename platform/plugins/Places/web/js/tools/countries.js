@@ -86,7 +86,7 @@ Q.Tool.define("Places/countries", function _Places_countries(options) {
 	firstCountryCodes: ['US'],
 	globe: null,
 	sort: false,
-	optionPrefix: '\u05D9', // Hebrew letter yud, needed for keyboard shortcuts to work
+	optionPrefix: '',
 	onChange: new Q.Event(),
 	onReady: new Q.Event()
 },
@@ -141,8 +141,9 @@ Q.Tool.define("Places/countries", function _Places_countries(options) {
 			}
 			var codes = {};
 			Q.each(state.firstCountryCodes, function (i, countryCode) {
-				var text = Places.countries[countryCode][3]
-					+ ' ' + Places.countries[countryCode][0];
+				// place flag at the end, for keyboard shortcuts to work
+				var text = Places.countries[countryCode][0]
+					+ ' ' + Places.countries[countryCode][3];
 				var $option = $('<option />')
 					.attr('value', countryCode)
 					.text(text)
