@@ -4,6 +4,7 @@ function Assets_1_0_174_Streams_mysql()
 {
     $communityId = Users::communityId();
     echo "Inserting Assets/credits access rows...".PHP_EOL;
+    $table = Streams_Access:table();
     Streams_Access::insert(array(
         'publisherId', 'streamName', 'ofUserId',
         'ofContactLabel', 'ofParticipantRole',
@@ -16,6 +17,8 @@ function Assets_1_0_174_Streams_mysql()
         new Db_Expression(40), new Db_Expression(-1), new Db_Expression(20)
     ), Streams_Stream::table())->where(array(
         'name' => 'Assets/user/credits'
+    ))->onDuplicateKeyUpdate(array(
+        "$table.publisherId" => new Db_Expression("$table.publisherId")
     ))->execute();
     echo "Renaming Assets/credits streams...".PHP_EOL;
     Streams::updateStreamNames(array(
