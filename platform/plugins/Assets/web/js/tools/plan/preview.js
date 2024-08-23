@@ -315,7 +315,7 @@ Q.Template.set("Assets/plan/composer",
 	</select>
 	
 	<label class="Assets_plan_endDate"><input name="endDate" type="date" value="{{endDate}}"> {{subscriptions.plan.EndDate}}</label>
-	<textarea class="Q_tool Q_autogrow_tool" name="description" placeholder="{{subscriptions.plan.DescriptionPlaceholder}}">{{description}}</textarea>
+	<textarea name="description" placeholder="{{subscriptions.plan.DescriptionPlaceholder}}">{{description}}</textarea>
 	
 	<label class="Assets_plan_private"><input name="private" {{#ifEquals readLevel 0}}checked{{/ifEquals}} type="checkbox"> {{subscriptions.plan.InviteOnly}}</label>
 	

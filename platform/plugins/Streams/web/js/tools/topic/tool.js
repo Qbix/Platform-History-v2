@@ -66,7 +66,7 @@ Q.Tool.define("Streams/topic", function(options) {
 					var toolName, toolOptions;
 					var stream = this;
 
-					if (!stream.testReadLevel('content')) {
+					if (!stream.testReadLevel('content') && !Q.isEmpty(stream.fields["Assets/canPayForStreams"])) {
 						return Q.alert("Error: Payment is needed to access this.");
 					}
 

@@ -138,7 +138,9 @@ function Streams_stream_put($params) {
 		if (!$stream->testWriteLevel('edit')) {
 			throw new Users_Exception_NotAuthorized();
 		}
-		$stream->saveAnimatedThumbnail($req['animatedThumbnail']);
+		$stream->icon = Q_Image::saveAnimatedThumbnail($req['animatedThumbnail'], Streams::iconDirectory($stream->publisherId, $stream->name).DS.'animated');
+		$stream->changed();
+
 		unset($req['animatedThumbnail']);
 	}
 
