@@ -309,6 +309,8 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 					$q2 = "NOT EXISTS(\n$q\n)";
 				}
 				$q .= $q2; // also handles INSERT ... SELECT queries
+				if (!empty($this->clauses['ON DUPLICATE KEY UPDATE']))
+					$q2 .= "\nON DUPLICATE KEY UPDATE " . $this->clauses['ON DUPLICATE KEY UPDATE'];
 				break;
 			case Db_Query::TYPE_UPDATE:
 				// UPDATE
