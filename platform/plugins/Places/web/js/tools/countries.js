@@ -160,9 +160,13 @@ Q.Tool.define("Places/countries", function _Places_countries(options) {
 			}
 			Q.each(state.countries, function (i, countryCode) {
 				var countryCode = countryCode;
-				if (codes[countryCode]) return;
-				var text = state.optionPrefix + Places.countries[countryCode][3]
-					+ ' ' + Places.countries[countryCode][0];
+				if (codes[countryCode]) {
+					return;
+				}
+				// place flag at the end, for keyboard shortcuts to work
+				var text = state.optionPrefix
+					+ Places.countries[countryCode][0]
+					+ ' ' + Places.countries[countryCode][3];
 				var $option = $('<option />')
 					.attr('value', countryCode)
 					.text(text)
