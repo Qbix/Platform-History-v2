@@ -4,7 +4,7 @@ function Assets_1_0_174_Streams_mysql()
 {
     $communityId = Users::communityId();
     echo "Inserting Assets/credits access rows...".PHP_EOL;
-    $table = Streams_Access:table();
+    $table = Streams_Access::table();
     Streams_Access::insert(array(
         'publisherId', 'streamName', 'ofUserId',
         'ofContactLabel', 'ofParticipantRole',
