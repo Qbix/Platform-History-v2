@@ -14,15 +14,12 @@ function Streams_before_Streams_save_Streams_video ($params) {
 		$provider = $originalAttributes["provider"];
 		$videoId = $originalAttributes["videoId"];
 		if ($provider == "vimeo" && $videoId) {
-			$newVideoId = Q::ifset($modifiedAttributes, 'videoId', null);
-			if ($newVideoId && $videoId == $newVideoId) {
-				unset($modifiedAttributes['videoId']);
-			}
 			try {
 				$video = new Q_Video_Vimeo();
 				$video->doDelete($videoId);
 			} catch (Exception $e) {}
 		}
+		$modifiedAttributes['available'] = false;
+		$params['modifiedFields']['attributes'] = Q::json_encode($modifiedAttributes);
 	}
-
 }

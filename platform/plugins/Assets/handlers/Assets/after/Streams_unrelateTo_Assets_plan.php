@@ -3,7 +3,15 @@
 function Assets_after_Streams_unrelateTo_Assets_plan ($params) {
 	$relatedTo = $params['relatedTo'];
 
-	if ($relatedTo->type != Assets_Subscription::$relationType) {
+	if (is_array($relatedTo)) {
+		foreach ($relatedTo as $rt) {
+			$params['relatedTo'] = $rt;
+			Assets_after_Streams_unrelateTo_Assets_plan ($params);
+		}
+		return;
+	}
+
+	if (!($relatedTo instanceof Streams_RelatedTo) || $relatedTo->type != Assets_Subscription::$relationType) {
 		return;
 	}
 

@@ -1,36 +1,29 @@
-.Streams_topic_tool .Streams_topic_bg, .Streams_topic_tool .Streams_topic_image {
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+.Streams_topic_tool > *:not(:last-child) {
+    border-bottom: 2px solid var(--separate-line-color);
 }
 .Streams_topic_tool .Streams_topic_image {
-    width: 100px;
-    height: 100px;
-    margin-right: 10px;
-    display: inline-block;
-    vertical-align: top;
-    border-radius: 5px;
+    height: 200px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
 }
-.Streams_topic_tool .Streams_topic_text {
-    width: calc(100% - 120px);
-    height: 100%;
-    display: inline-block;
-    vertical-align: top;
-    white-space: normal;
-    overflow-y: auto;
-    text-shadow: 0 0 1px #000, 0 0 2px #000, 0 0 3px #000;
+.Streams_topic_tool .Streams_topic_image[data-video=true] {
+    height: unset;
+    background-image: none;
 }
-.Streams_topic_tool .Streams_topic_front {
-    height: 150px;
+.Streams_topic_tool .Streams_topic_description {
+    min-height: 40px;
+    max-height: 100px;
     color: #fff;
-    padding: 15px 10px 10px 10px;
-    background-color: rgba(0, 0, 0, .6);
-    overflow-y: hidden;
-    white-space: nowrap;
+    padding: 5px;
+    overflow-y: auto;
 }
 .Q_tool.Streams_topic_tool .Streams_topic_conversation {
     padding-left: 55px;
     min-height: 50px;
+}
+.Q_tool.Streams_topic_tool[data-fullAccess=false] .Streams_topic_conversation {
+    display: none;
 }
 .Q_tool.Streams_topic_tool .Streams_topic_conversation:before {
     font-family: 'qplatform-calendars' !important;
@@ -43,7 +36,6 @@
 }
 .Streams_topic_tool .Streams_preview_tool,
 .Streams_topic_tool .Streams_topic_conversation {
-    border-bottom: 1px solid var(--separate-line-color);
     padding: 10px;
     position: relative;
     cursor: pointer;
@@ -113,4 +105,15 @@
 }
 .Q_notMobile .Q_columns_column.Streams_topic_streams_pdf .Q_pdf_tool {
     height: 100%;
+}
+.Streams_topic_subscribe .Q_dialog_content {
+    display: flex;
+    flex-direction: row;
+    max-width: 350px;
+    overflow-y: hidden;
+    overflow-x: auto;
+}
+.Streams_topic_subscribe .Q_dialog_content > * {
+    display: inline-block;
+    min-width: 250px;
 }

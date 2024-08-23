@@ -124,8 +124,13 @@ function Streams_stream_put($params) {
 	}
 
 	// special handler for attributes
-	if (isset($req['attributes'])
-		and is_array($req['attributes'])) {
+	if (isset($req['attributes'])) {
+		if (is_string($req['attributes'])) {
+			$req['attributes'] = Q::json_decode($req['attributes'], true);
+		}
+		if (!is_array($req['attributes'])) {
+			$req['attributes'] = (array)$req['attributes'];
+		}
 		foreach ($req['attributes'] as $k => $v) {
 			$v = $v == "null" ? null : $v;
 			$stream->setAttribute($k, $v);

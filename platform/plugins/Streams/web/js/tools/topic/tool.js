@@ -18,23 +18,7 @@ Q.Tool.define("Streams/topic", function(options) {
 			return;
 		}
 
-		var stream = this;
-
-		$toolElement.on(Q.Pointer.fastclick, ".Streams_topic_conversation", function () {
-			Q.invoke({
-				title: tool.text.topic.Conversation,
-				content: $("<div>").tool("Streams/chat", {
-					publisherId: stream.fields.publisherId,
-					streamName: stream.fields.name
-				}),
-				trigger: tool.element,
-				onActivate: function () {
-
-				}
-			});
-		});
-
-		Q.handle(tool.refresh, tool, [stream]);
+		Q.handle(tool.refresh, tool, [this]);
 	});
 
 	Q.each(state.creatable, function (index, streamType) {
@@ -65,55 +49,52 @@ Q.Tool.define("Streams/topic", function(options) {
 
 					var toolName, toolOptions;
 					var stream = this;
-
-					if (!stream.testReadLevel('content') && !Q.isEmpty(stream.fields["Assets/canPayForStreams"])) {
-						return Q.alert("Error: Payment is needed to access this.");
-					}
+					var canReadContent = stream.testReadLevel('content');
+					var teaser;
 
 					switch(streamType) {
 						case "Streams/video":
 							toolName = "Q/video";
-							toolOptions = {
-								url: stream.videoUrl() || stream.fileUrl(),
-								clipStart: stream.getAttribute('clipStart'),
-								clipEnd: stream.getAttribute('clipEnd'),
-								metrics: {
-									publisherId: stream.fields.publisherId,
-									streamName: stream.fields.name
-								}
-							};
 							break;
 						case "Streams/audio":
 							toolName = "Q/audio";
-							toolOptions = {
-								action: "implement",
-								url: stream.fileUrl(),
-								clipStart: stream.getAttribute('clipStart'),
-								clipEnd: stream.getAttribute('clipEnd'),
-								metrics: {
-									publisherId: stream.fields.publisherId,
-									streamName: stream.fields.name
-								}
-							};
 							break;
 						case "Streams/pdf":
 							toolName = "Q/pdf";
-							toolOptions = {
-								url: stream.fileUrl(),
-								clipStart: stream.getAttribute('clipStart'),
-								clipEnd: stream.getAttribute('clipEnd'),
-								metrics: {
-									publisherId: stream.fields.publisherId,
-									streamName: stream.fields.name
-								}
-							};
 							break;
 						case "Streams/topic":
 							toolName = "Streams/topic";
-							toolOptions = {};
 							break;
 						default:
 							throw new Q.Exception(streamType + " not recognised");
+					}
+
+					if (canReadContent) {
+						toolOptions = {
+							url: stream.videoUrl() || stream.fileUrl(),
+							clipStart: stream.getAttribute('clipStart'),
+							clipEnd: stream.getAttribute('clipEnd'),
+							metrics: {
+								publisherId: stream.fields.publisherId,
+								streamName: stream.fields.name
+							}
+						};
+					} else {
+						teaser = stream.getAttribute("teaser:Streams/" + streamType.split('/').pop());
+						if (teaser) {
+							toolOptions = {
+								url: teaser
+							};
+						} else {
+							return tool.payment(stream);
+						}
+					}
+
+					if (streamType === "Streams/topic") {
+						toolOptions = {
+							publisherId: stream.fields.publisherId,
+							streamName: stream.fields.name
+						};
 					}
 
 					Q.invoke({
@@ -122,7 +103,13 @@ Q.Tool.define("Streams/topic", function(options) {
 						className: "Streams_topic_" + Q.normalize(streamType),
 						trigger: tool.element,
 						onActivate: function (div) {
-							$("<div>").appendTo($(".Q_content_container", div)).tool(toolName, toolOptions).activate();
+							$("<div>").appendTo($(".Q_content_container", div)).tool(toolName, toolOptions).activate(function () {
+								if (teaser) {
+									var throttle = Q.throttle(tool.payment.bind(tool, stream), 300);
+									this.state.onEnded && this.state.onEnded.set(throttle, tool);
+									this.state.onPause && this.state.onPause.set(throttle, tool);
+								}
+							});
 						}
 					});
 				});
@@ -172,7 +159,7 @@ Q.Tool.define("Streams/topic", function(options) {
 		showSize: "200x",
 		fullSize: "1000x"
 	},
-	creatable: ["Streams/video", "Streams/audio", "Streams/pdf"] //TODO: make topics browser in topic preview tool and use it instead composer to select already created topic 'Streams/topic'
+	creatable: ["Streams/video", "Streams/audio", "Streams/pdf", "Streams/topic"] //TODO: make topics browser in topic preview tool and use it instead composer to select already created topic 'Streams/topic'
 
 },
 
@@ -202,16 +189,46 @@ Q.Tool.define("Streams/topic", function(options) {
 			});
 		}, tool);
 
+		var fullAccess = stream.testReadLevel(40);
+
+		$(tool.element).attr("data-fullAccess", fullAccess);
+
+		var content = fullAccess ? stream.fields.content : stream.getAttribute("teaser:Streams/description") || "";
+
 		Q.Template.render('Streams/topic/tool', {
-				src: stream.iconUrl(state.imagepicker.showSize),
-				title: stream.fields.title,
-				content: stream.fields.content
+			src: stream.iconUrl(state.imagepicker.showSize),
+			title: stream.fields.title,
+			content
 		}, function (err, html) {
 			if (err) {
 				return;
 			}
 
 			Q.replace(tool.element, html);
+
+			$(".Streams_topic_conversation", tool.element).on(Q.Pointer.fastclick, function () {
+				Q.invoke({
+					title: tool.text.topic.Conversation,
+					content: $("<div>").tool("Streams/chat", {
+						publisherId: state.publisherId,
+						streamName: state.streamName
+					}),
+					trigger: tool.element,
+					onActivate: function () {
+
+					}
+				});
+			});
+
+			var teaserVideoUrl = stream.getAttribute("teaser:Streams/video");
+			if (teaserVideoUrl) {
+				$("<div>").tool("Q/video", {
+					url: teaserVideoUrl,
+					autoplay: true,
+					controls: false,
+					loop: true
+				}).appendTo($(".Streams_topic_image", tool.element).attr("data-video", true)).activate();
+			}
 
 			// relations
 			$(".Streams_topic_relations", tool.element).tool("Streams/related", {
@@ -223,6 +240,9 @@ Q.Tool.define("Streams/topic", function(options) {
 					ascending: true
 				},
 				sortable: true,
+				specificOptions: {
+					teaser: true
+				},
 				creatable: (function () {
 					var creatable = {};
 					Q.each(state.creatable, function (i, streamType) {
@@ -232,16 +252,79 @@ Q.Tool.define("Streams/topic", function(options) {
 				})()
 			}).activate();
 		});
+	},
+	payment: function (stream) {
+		var tool = this;
+		var $toolElement = $(this.element);
+		var state = this.state;
+		var canPayForStreams = stream.fields["Assets/canPayForStreams"];
+
+		if (Q.isEmpty(canPayForStreams)) {
+			return Q.alert("Error: Not enough permissions to view this content.");
+		}
+
+		Q.Dialogs.push({
+			title: "Please subscribe",
+			className: "Streams_topic_subscribe",
+			onActivate: function (dialog) {
+				var $content = $(".Q_dialog_content", dialog);
+
+				Q.each(canPayForStreams, function (i, streamData) {
+					Q.Assets.Subscriptions.getPlansRelated(streamData, function (err, streams) {
+						if (err) {
+							return;
+						}
+
+						Q.each(streams, function (i, stream) {
+							$("<div>").tool("Streams/preview", {
+								publisherId: stream.fields.publisherId,
+								streamName: stream.fields.name
+							}).tool("Assets/plan/preview").appendTo($content).activate(function () {
+								var assetsPlanPreview = this;
+								this.state.onInvoke.set(function () {
+									Q.Dialogs.push({
+										title: "Please subscribe",
+										className: "Streams_topic_subscribe_plan",
+										content: $("<div>").tool("Assets/plan", {
+											publisherId: stream.fields.publisherId,
+											streamName: stream.fields.name
+										}),
+										onActivate: function (dialog) {
+											var assetsPlan = Q.Tool.from($(".Assets_plan_tool", dialog)[0], "Assets/plan");
+											assetsPlan.state.onSubscribe.set(function () {
+												Q.Dialogs.pop();
+												Q.Dialogs.pop();
+
+												var $column = $toolElement.closest('.Q_columns_column');
+												if ($column.length) {
+													var min = parseInt($column.data('index')) + 1;
+													var columns = Q.Tool.from($toolElement.closest(".Q_columns_tool"), "Q/columns");
+													columns.close({min: min}, null, {animation: {duration: 0}});
+												}
+
+												Q.Streams.get.force(state.publisherId, state.streamName, function (err) {
+													if (err) {
+														return;
+													}
+
+													tool.refresh(this);
+												});
+											}, assetsPlanPreview);
+										}
+									});
+								}, assetsPlanPreview);
+							});
+						});
+					});
+				});
+			}
+		});
 	}
 });
 
 Q.Template.set('Streams/topic/tool',
-`<div class="Streams_topic_bg">
-		<div class="Streams_topic_front">
-			<div class="Streams_topic_image" style="background-image: url({{src}})"></div>
-			<div class="Streams_topic_text">{{content}}</div>
-		</div>
-	</div>
+`<div class="Streams_topic_image" style="background-image: url({{src}})"></div>
+	<div class="Streams_topic_description">{{{content}}}</div>
 	<div class="Streams_topic_conversation"><h2>{{topic.Conversation}}</h2></div>
 	<div class="Streams_topic_relations"></div>`,
 	{text: ['Streams/content']}

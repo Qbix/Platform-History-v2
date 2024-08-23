@@ -38,7 +38,7 @@ abstract class Streams extends Base_Streams
 	 * @final
 	 */
 	/**
-	 * Can see Streams/teaser/.. attributes
+	 * Can see teaser:Streams/.. attributes
 	 * @property $READ_LEVEL['teaser']
 	 * @type integer
 	 * @default 15
@@ -96,7 +96,7 @@ abstract class Streams extends Base_Streams
 	public static $READ_LEVEL = array(
 		'none' => 0,				// can't see the stream
 		'see' => 10,				// can see icon and title
-		'teaser' => 15,				// can see Streams/teaser/.. attributes
+		'teaser' => 15,				// can see teaser:Streams/.. attributes
 		'relations' => 20,			// can see relations to other streams
 		'content' => 23,			// can see the stream's content
 		'fields' => 25,			// can see most of the stream's fields
@@ -5534,7 +5534,7 @@ abstract class Streams extends Base_Streams
 	 * @param {string} $imageURL - URL or path to image
 	 * @param {string} [$save] - name of config under Q/image/sizes
 	 */
-	static function importIcon($publisherId, $streamName, $imageURL, $save="Streams/image")
+	static function importIcon($publisherId, $streamName, $imageURL, $save="Streams/image", $skipAccess=false)
 	{
 		if (!Q_Valid::url($imageURL) && !file_exists($imageURL)) {
 			return false;
@@ -5552,7 +5552,8 @@ abstract class Streams extends Base_Streams
 			'data' => $icon, // these frills, with base64 and comma, to format image data for Q/image/post handler.
 			'path' => "Q/uploads/Streams",
 			'subpath' => Q_Utils::splitId($publisherId, 3, '/')."/".$streamName."/icon/".time(),
-			'save' => $save
+			'save' => $save,
+			'skipAccess' => $skipAccess
 		));
 		return true;
 	}
