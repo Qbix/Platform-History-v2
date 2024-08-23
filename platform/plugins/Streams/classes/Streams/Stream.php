@@ -790,9 +790,9 @@ class Streams_Stream extends Base_Streams_Stream
 			), 'before', false, $this);
 		}
 		
-		foreach ($this->fields as $name => $value) {
+		foreach ($modifiedFields as $name => $value) {
 			if (!empty($this->fieldsModified[$name])) {
-				$modifiedFields[$name] = $value;
+				$this->fields[$name] = $value;
 			}
 		}
 
@@ -2180,7 +2180,7 @@ class Streams_Stream extends Base_Streams_Stream
 			$a = Q::take($attributes, $canSeeAttributes);
 			if ($this->testReadLevel('teaser')) {
 				foreach ($attributes as $k => $v) {
-					if (Q::startsWith($k, 'Streams/teaser/')) {
+					if (Q::startsWith($k, 'teaser:')) {
 						$a[$k] = $v;
 					}
 				}

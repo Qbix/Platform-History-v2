@@ -72,7 +72,7 @@ while (1) {
 					continue;
 				}
 
-				if (Assets_Subscription::isUnsubscribe($subscriptionStream)) {
+				if (Assets_Subscription::isUnsubscribed($subscriptionStream)) {
 					echo "subscription stopped".PHP_EOL;
 
 					// if subscription outdated (!Assets_Subscription::isCurrent) remove permission for this plan

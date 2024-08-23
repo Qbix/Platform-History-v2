@@ -4,7 +4,8 @@
         "InplaceTypeMustBe": "inplaceType must be 'textarea' or 'text'"
     },
     "preview": {
-        "NewItemTitle": "New Item"
+        "NewItemTitle": "New Item",
+        "Teaser": "Teaser"
     },
     "avatar": {
         "firstName": "first name",
@@ -357,6 +358,11 @@
         "Streams\/answer": {
             "displayType": "Answer",
             "description": "answer stream"
+        },
+        "Streams\/topic": {
+            "displayType": "Topic",
+            "description": "topic stream",
+            "newItem": "Add Topic"
         }
     },
     "menu": {
@@ -381,9 +387,12 @@
         "invalidFile": "Invalid File",
         "errorNoSource": "No audio source",
         "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}",
+        "TeaserAudio": "Teaser Audio"
     },
     "video": {
+        "NewVideo": "New Video",
+        "EditVideo": "Edit Video",
         "reset": "Reset",
         "edit": "Edit",
         "title": "title",
@@ -399,7 +408,8 @@
         "errorNoSource": "No video source",
         "uploadLimit": "Max file size: {{size}}",
         "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}",
-        "errorNotAvailable": "Sorry, but video is unavailable yet. Please try again later."
+        "errorNotAvailable": "Sorry, but video is unavailable yet. Please try again later.",
+        "TeaserVideo": "Teaser Video"
     },
     "pdf": {
         "reset": "Reset",
@@ -415,7 +425,8 @@
         "invalidFile": "Invalid File",
         "errorNoSource": "No pdf source",
         "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}",
+        "TeaserPDF": "Teaser PDF"
     },
     "image": {
         "reset": "Reset",
@@ -433,7 +444,8 @@
         "invalidFile": "Invalid File",
         "errorNoSource": "No image source",
         "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}",
+        "TeaserImage": "Teaser Image"
     },
     "questions": {
         "Questions": "Questions",
@@ -498,7 +510,10 @@
         "TopicIcon": "Topic picture",
         "UploadIcon": "Upload Icon",
         "Conversation": "Conversation",
-        "Metrics": "Metrics"
+        "Metrics": "Metrics",
+        "Teaser": "Teaser",
+        "TeaserDescription": "teaser description...",
+        "TeaserVideo": "Teaser Video"
     },
     "animatedThumbnail": {
         "CreateAnimatedThumbnail": "Create animated thumbnail",

@@ -61,7 +61,8 @@
                     currency: 'USD'
                 }
             }),
-            subscribe: new Q.Method()
+            subscribe: new Q.Method(),
+			getPlansRelated: new Q.Method()
 		}, '{{Assets}}/js/methods/Assets/Subscriptions'),
 
 		/**

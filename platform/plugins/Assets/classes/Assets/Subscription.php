@@ -98,11 +98,11 @@ class Assets_Subscription {
 
 	/**
 	 * Check if subscription stopped
-	 * @method isUnsubscribe
+	 * @method isUnsubscribed
 	 * @static
 	 * @param {Streams_Stream} $stream
 	 */
-	static function isUnsubscribe($stream)
+	static function isUnsubscribed($stream)
 	{
 		return $stream->getAttribute('stopped');
 	}
@@ -222,11 +222,11 @@ class Assets_Subscription {
 
 	/**
 	 * Check if stream related to some subscription plans
-	 * @method checkStreamRelated
+	 * @method getPlansRelated
 	 * @param {Streams_Stream} $stream The stream need to check
 	 * @return {boolean|Array}
 	 */
-	static function checkStreamRelated ($stream) {
+	static function getPlansRelated ($stream) {
 		list($relations, $plans) = $stream->related(null, false, array(
 			'type' => self::$relationType,
 			'skipAccess' => true
@@ -244,7 +244,7 @@ class Assets_Subscription {
 	 * @throws Exception
 	 */
 	static function checkStreamPaid ($stream, $user, $throwIfNotPaid=false) {
-		$assetsPlans = self::checkStreamRelated($stream);
+		$assetsPlans = self::getPlansRelated($stream);
 		if (!(boolean)$assetsPlans) {
 			return true;
 		}
