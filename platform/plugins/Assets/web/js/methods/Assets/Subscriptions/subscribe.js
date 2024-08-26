@@ -11,6 +11,29 @@ Q.exports(function(){
     *  @param {Function} [callback] The function to call, receives (err, paymentSlot)
     */
     return function subscribe(payments, options, callback) {
+        var metadata = {
+            publisherId: options.planPublisherId,
+            streamName: options.planStreamName
+        };
+
+        if (!Q.Users.loggedInUserId()) {
+            return Q.Streams.get(options.planPublisherId, options.planStreamName, function (err) {
+                if (err) {
+                    return Q.handle(options.onFailure);
+                }
+
+                Q.Assets.Credits.buy({
+                    amount: this.getAttribute("amount"),
+                    currency: this.getAttribute("currency"),
+                    onSuccess: function () {
+                        Q.Assets.Subscriptions.subscribe(payments, options, callback);
+                    },
+                    onFailure: options.onFailure,
+                    metadata: metadata
+                });
+            });
+        }
+
         var fields = {
             payments: payments,
             planPublisherId: options.planPublisherId,
@@ -18,7 +41,6 @@ Q.exports(function(){
             immediatePayment: options.immediatePayment,
             token: options.token
         };
-
         Q.req('Assets/subscription', ['status', 'details', 'subscriptionStream'], function (err, response) {
             var msg = Q.firstErrorMessage(err, response && response.errors);
             if (msg) {
@@ -28,11 +50,6 @@ Q.exports(function(){
             // payment fail for some reason
             if (!response.slots.status) {
                 var details = response.slots.details;
-
-                var metadata = {
-                    publisherId: options.planPublisherId,
-                    streamName: options.planStreamName
-                };
 
                 Q.Assets.Credits.buy({
                     missing: true,
