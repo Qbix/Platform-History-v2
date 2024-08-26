@@ -26,7 +26,7 @@ class Assets_Payments_Stripe extends Assets_Payments implements Assets_Payments_
 	function __construct($options = array())
 	{
 		if (!isset($options['user'])) {
-			$options['user'] = Users::loggedInUser(true);
+			$options['user'] = Users::loggedInUser();
 		}
 		$this->options = array_merge(array(
 			'secret' => Q_Config::expect('Assets', 'payments', 'stripe', 'secret'),
@@ -149,33 +149,37 @@ class Assets_Payments_Stripe extends Assets_Payments implements Assets_Payments_
 	 */
 	function createPaymentIntent($amount, $currency = 'USD', $options = array())
 	{
+		$amount = $amount * 100; // in cents
+
 		$options = array_merge($this->options, $options);
 
 		$options['metadata'] = Q::ifset($options, 'metadata', array());
-		$options['metadata']['userId'] = $options['user']->id;
+		$customer = null;
+		if ($options['user']) {
+			$options['metadata']['userId'] = $options['user']->id;
 
-		$amount = $amount * 100; // in cents
-
-		// get or create stripe customer
-		$customer = new Assets_Customer();
-		$customer->userId = $options['user']->id;
-		$customer->payments = 'stripe';
-		$customer->hash = Assets_Customer::getHash();
-		if (!$customer->retrieve()) {
-			$stripeCustomer = self::createCustomer($options['user']);
-			$customer->customerId = $stripeCustomer->id;
-			$customer->save();
+			// get or create stripe customer
+			$customer = new Assets_Customer();
+			$customer->userId = $options['user']->id;
+			$customer->payments = 'stripe';
+			$customer->hash = Assets_Customer::getHash();
+			if (!$customer->retrieve() && $options['user']) {
+				$stripeCustomer = self::createCustomer($options['user']);
+				$customer->customerId = $stripeCustomer->id;
+				$customer->save();
+			}
 		}
 
-		Q_Valid::requireFields(array('user'), $options, true);
 		$params = array(
-			'customer' => $customer->customerId,
 			'setup_future_usage' => 'off_session',
 			'automatic_payment_methods' => array('enabled' => true),
 			'amount' => $amount,
 			'currency' => $currency,
 			'metadata' => !empty($options['metadata']) ? $options['metadata'] : null
 		);
+		if ($customer) {
+			$params['customer'] = $customer->customerId;
+		}
 
 		$intent = \Stripe\PaymentIntent::create($params); // can throw some exception
 

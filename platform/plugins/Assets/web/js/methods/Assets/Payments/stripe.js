@@ -24,14 +24,6 @@ Q.exports(function(priv){
             return Q.handle(callback, null, [err]);
         }
 
-        if (!Q.Users.loggedInUser) {
-            return Q.Users.login({
-                onSuccess: function () {
-                    Q.handle(window.location.href);
-                }
-            });
-        }
-
         options.userId = options.userId || Q.Users.loggedInUserId();
         options.currency = (options.currency || 'USD').toUpperCase();
 

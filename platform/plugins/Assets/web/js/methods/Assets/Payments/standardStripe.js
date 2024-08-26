@@ -176,15 +176,17 @@ Q.exports(function(priv){
                     throw new Q.Exception('token empty');
                 }
 
-                // listen Assets/credits stream for message
-                Q.Streams.Stream.onMessage(Q.Users.currentCommunityId, 'Assets/credits/' + Q.Users.loggedInUser.id, 'Assets/credits/bought')
-                    .set(function(message) {
-                        if (token !== message.getInstruction('token')) {
-                            return;
-                        }
+                if (Q.Users.loggedInUserId()) {
+                    // listen Assets/credits stream for message
+                    Q.Streams.Stream.onMessage(Q.Users.currentCommunityId, 'Assets/credits/' + Q.Users.loggedInUser.id, 'Assets/credits/bought')
+                        .set(function(message) {
+                            if (token !== message.getInstruction('token')) {
+                                return;
+                            }
 
-                        Q.handle(callback, null, [null]);
-                    }, token);
+                            Q.handle(callback, null, [null]);
+                        }, token);
+                }
 
                 pipeDialog.fill("paymentIntent")(clientSecret);
             }, {
