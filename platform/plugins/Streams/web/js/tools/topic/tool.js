@@ -224,9 +224,7 @@ Q.Tool.define("Streams/topic", function(options) {
 			if (teaserVideoUrl) {
 				$("<div>").tool("Q/video", {
 					url: teaserVideoUrl,
-					autoplay: true,
-					controls: false,
-					loop: true
+					autoplay: true
 				}).appendTo($(".Streams_topic_image", tool.element).attr("data-video", true)).activate();
 			}
 
