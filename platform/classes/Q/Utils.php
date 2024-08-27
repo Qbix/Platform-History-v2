@@ -608,13 +608,13 @@ class Q_Utils
 	/**
 	 * Does a diff similar to array_diff but recursive
 	 * Taken from https://stackoverflow.com/a/29526501/467460
-	 * @method diffRecursive
+	 * @method recursiveDiff
 	 * @static
 	 * @param {array} $arr1
 	 * @param {array} $arr2
 	 * @return {$array}
 	 */
-	function diffRecursive($arr1, $arr2)
+	function recursiveDiff($arr1, $arr2)
 	{
 		$outputDiff = array();
 		foreach ($arr1 as $key => $value) {
@@ -622,7 +622,7 @@ class Q_Utils
 			// if it is an array, otherwise check if the value is in arr2
 			if (array_key_exists($key, $arr2)) {
 				if (is_array($value)) {
-					$recursiveDiff = diffRecursive($value, $arr2[$key]);
+					$recursiveDiff = recursiveDiff($value, $arr2[$key]);
 					if (count($recursiveDiff)) {
 						$outputDiff[$key] = $recursiveDiff;
 					}
