@@ -43,6 +43,7 @@
 
 		onBeforeNotice: new Q.Event(),
 		onCreditsChanged: new Q.Event(),
+		preSubscribeLogin: new Q.Event(),
 
 		/**
 		 * Operates with subscriptions.
@@ -62,7 +63,9 @@
                 }
             }),
             subscribe: new Q.Method(),
-			getPlansRelated: new Q.Method()
+			getPlansRelated: new Q.Method(),
+			showPlansRelated: new Q.Method(),
+			onSubscribe: new Q.Event()
 		}, '{{Assets}}/js/methods/Assets/Subscriptions'),
 
 		/**

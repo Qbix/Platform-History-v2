@@ -197,7 +197,7 @@ Q.Tool.define("Assets/plan", function(options) {
 				editable: false
 			}).activate(function () {
 				var _formatPrice = function () {
-					this.$static.html(parseFloat(this.$static.html()).toFixed(2));
+					this.$static && this.$static.html(parseFloat(this.$static.html()).toFixed(2));
 				};
 				Q.handle(_formatPrice, this);
 				this.state.onUpdate.set(function () {
