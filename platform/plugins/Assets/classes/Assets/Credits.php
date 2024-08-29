@@ -432,7 +432,7 @@ class Assets_Credits extends Base_Assets_Credits
 		$text = Q_Text::get('Assets/content');
 		$type = 'Assets/credits/sent';
 		$content = Q::ifset($text, 'messages', $type, 'content', "Sent {{amount}} credits");
-		$from_stream->post($fromUserId, array(
+		$from_stream->post($communityId, array(
 			'type' => $type,
 			'content' => Q::interpolate($content, $instructions),
 			'instructions' => Q::json_encode($instructions)
@@ -448,7 +448,7 @@ class Assets_Credits extends Base_Assets_Credits
 		$text = Q_Text::get('Assets/content');
 		$type = 'Assets/credits/received';
 		$content = Q::ifset($text, 'messages', $type, 'content', "Received {{amount}} credits");
-		$to_stream->post($toUserId, array(
+		$to_stream->post($communityId, array(
 			'type' => $type,
 			'content' => Q::interpolate($content, $instructions),
 			'instructions' => Q::json_encode($instructions)
