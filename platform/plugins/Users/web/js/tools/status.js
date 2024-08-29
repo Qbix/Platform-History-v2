@@ -20,10 +20,8 @@ var Users = Q.Users;
  *   @param {String} [options.clickable=falser] Whether to apply Q/clickable effect
  */
 Q.Tool.define("Users/status", function(options) {
-	this.refresh(!!this.element.innerHTML);
-	Q.Users.onLogin
-	.and(Q.Users.onLogout)
-	.set(this.refresh.bind(this), this);
+	Q.Users.onLogin.set(this.refresh.bind(this), this);
+	Q.Users.onLogout.set(this.refresh.bind(this), this);
 },
 {
 	avatar: {
@@ -35,21 +33,18 @@ Q.Tool.define("Users/status", function(options) {
 	onInvoke: new Q.Event()
 },
 {
-	refresh: function (skipRefill) {
+	refresh: function () {
 		var tool = this;
 		var state = tool.state;
 		if (Q.Users.loggedInUser) {
-			if (skipRefill === false) {
-				var avatar = $('<div />').tool('Users/avatar', state.avatar);
-				$(tool.element).empty().append(
-					$('<div class="Users_whenLoggedIn Users_status_avatar" />')
-					.append(avatar)
-				).activate();
-			}
-			var $avatar = tool.$('.Users_status_avatar')
-			.on(Q.Pointer.click, tool, function () {
+			var avatar = $('<div />').tool('Users/avatar', state.avatar);
+			$(tool.element).empty().append(
+				$('<div class="Users_whenLoggedIn Users_status_avatar" />')
+				.append(avatar)
+			).on(Q.Pointer.click, tool, function () {
 				Q.handle(state.onInvoke);
-			});
+			}).activate();
+
 			if (state.clickable) {
 				$avatar.plugin('Q/clickable')
 			}
