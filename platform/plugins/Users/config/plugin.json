@@ -174,11 +174,6 @@
 				"*": {
 					"appIdForAuth": "all"
 				}
-			},
-			"telegram": {
-				"*": {
-					"appIdForAuth": "all"
-				}
 			}
 		},
 		"apps-private": {

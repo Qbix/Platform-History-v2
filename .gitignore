@@ -41,6 +41,7 @@ platform/plugins/Catalogs/
 platform/plugins/Media/
 platform/plugins/AI/
 platform/plugins/Metrics/
+platform/plugins/Telegram/
 platform/node_modules
 platform/vendor
 MyApp/local/*
