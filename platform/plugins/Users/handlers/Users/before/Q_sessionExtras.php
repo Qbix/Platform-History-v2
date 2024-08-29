@@ -13,7 +13,6 @@ function Users_before_Q_sessionExtras()
 	if ($user = Users::loggedInUser(false, false)) {
 		if (Q_Config::get('Users', 'showLoggedInUser', true)) {
 			$u = $user->exportArray();
-			$u['sessionCount'] = $user->sessionCount;
 			$u['email'] = $user->emailAddress;
 			$u['mobile'] = $user->mobileNumber;
 			$u['preferredLanguage'] = $user->preferredLanguage;
