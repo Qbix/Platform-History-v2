@@ -11,14 +11,33 @@ Q.exports(function(){
     *  @param {Function} [callback] The function to call, receives (err, paymentSlot)
     */
     return function subscribe(payments, options, callback) {
+        var metadata = {
+            publisherId: options.planPublisherId,
+            streamName: options.planStreamName
+        };
+
+        if (!Q.Users.loggedInUserId()) {
+            return Q.Users.login({
+                onSuccess: {'Users': function () {
+                    Q.handle(Q.Assets.preSubscribeLogin, this, [function () {
+                        options.skipAlreadySubscribed = true;
+                        Q.Assets.Subscriptions.subscribe(payments, options, callback);
+                    }]);
+                }},
+                onCancel: function () {
+                    Q.handle(callback, this, [true]);
+                }
+            });
+        }
+
         var fields = {
             payments: payments,
             planPublisherId: options.planPublisherId,
             planStreamName: options.planStreamName,
             immediatePayment: options.immediatePayment,
-            token: options.token
+            token: options.token,
+            skipAlreadySubscribed: options.skipAlreadySubscribed || false
         };
-
         Q.req('Assets/subscription', ['status', 'details', 'subscriptionStream'], function (err, response) {
             var msg = Q.firstErrorMessage(err, response && response.errors);
             if (msg) {
@@ -28,11 +47,6 @@ Q.exports(function(){
             // payment fail for some reason
             if (!response.slots.status) {
                 var details = response.slots.details;
-
-                var metadata = {
-                    publisherId: options.planPublisherId,
-                    streamName: options.planStreamName
-                };
 
                 Q.Assets.Credits.buy({
                     missing: true,
@@ -46,7 +60,9 @@ Q.exports(function(){
                 return;
             }
 
-            Q.handle(callback, this, [null, response.slots.status, response.slots.subscriptionStream]);
+            var args = [null, response.slots.status, response.slots.subscriptionStream];
+            Q.handle(callback, this, args);
+            Q.handle(Q.Assets.Subscriptions.onSubscribe, this, args);
         }, {
             method: 'post',
             fields: fields
