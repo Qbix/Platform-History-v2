@@ -41,7 +41,7 @@ function Assets_after_Assets_charge($params)
 	$communityId = Users::communityId();
 	$communityName = Users::communityName();
 	$communitySuffix = Users::communitySuffix();
-	$link = Q_Request::baseUrl('me/credits/charges');
+	$link = Q_Request::baseUrl().'/me/credits/charges';
 
 	$fields = @compact(
 		'user', 'publisher', 'publisherId', 'communityId', 'communityName', 'communitySuffix',

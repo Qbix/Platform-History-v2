@@ -1744,7 +1744,7 @@ abstract class Users extends Base_Users
 	 * @param {string} [$appId=Q::app()] Can be either an internal or external app id
 	 * @param {boolean} [$throwIfMissing=false] Whether to throw an exception if missing
 	 * @return {array} Returns array($appId, $appInfo) where $appId is internal app id
-	 * @throws Q_Exception_MissingConfig
+	 * @throws {Q_Exception_MissingConfig}
 	 */
 	static function appInfo($platform, $appId = null, $throwIfMissing = false)
 	{
