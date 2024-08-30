@@ -161,7 +161,6 @@ input[type=text], input[type=number], input[type=datetime-local], input[type=dat
 .Assets_subscriptions_showPlansRelated .Q_dialog_content {
 	display: flex;
 	flex-direction: row;
-	max-width: 350px;
 	overflow-y: hidden;
 	overflow-x: auto;
 }
@@ -171,4 +170,8 @@ input[type=text], input[type=number], input[type=datetime-local], input[type=dat
 }
 .Assets_subscriptions_showPlansRelated_plan .Q_dialog_content {
 	padding: 0 5px;
+}
+.Q_overlay.Assets_subscriptions_showPlansRelated {
+	min-width: 90% !important;
+	min-height: 90% !important;
 }
