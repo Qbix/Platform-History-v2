@@ -1,5 +1,6 @@
 .Assets_plan_preview_tool {
 	cursor: pointer;
+	min-width: 300px;
 	max-width: 300px;
 }
 .Assets_plan_preview_tool[data-interrupted=true] {
@@ -15,7 +16,7 @@
 	flex-grow: 1;
 }
 .Assets_plan_preview_tool:not(.Streams_preview_composer) .Streams_preview_icon {
-	width: 100%;
+	width: 50%;
 	height: auto;
 	margin: 0 auto;
 }
@@ -104,40 +105,65 @@
 .Assets_plan_preview_tool:not(.Streams_preview_composer) .Streams_preview_title {
 	font-size: 1.2em;
 	font-weight: bold;
+	text-align: center;
 	margin: 5px 0;
 }
 .Assets_plan_preview_tool .Assets_plan_preview_price,
 .Assets_plan_preview_tool .Assets_plan_preview_period,
 .Assets_plan_preview_tool .Assets_plan_preview_description {
 	display: block;
+	width: 100%;
+	text-align: center;
 }
 .Assets_plan_preview_tool .Assets_plan_preview_price {
 	font-size: 2em;
 	margin: 10px 0;
 }
-.Assets_plan_preview_tool .Assets_plan_preview_description {
+.Assets_plan_preview_tool .Assets_plan_preview_description,
+.Assets_plan_preview_tool .Assets_plan_related_streams {
 	position: relative;
 	margin-top: 10px;
 	white-space: normal;
 	text-align: left;
-	border-top: 1px solid silver;
+	width: 100%;
 }
 .Assets_plan_preview_tool .Assets_plan_preview_description span {
 	display: block;
 	text-align: left;
 	border-top: 1px solid silver;
 }
+.Assets_plan_preview_tool .Assets_plan_preview_description span:empty {
+	display: none;
+}
 .Assets_plan_preview_tool .Assets_plan_preview_description[data-state=minimised] span {
 	overflow: hidden;
 	display: -webkit-box;
 	-webkit-box-orient: vertical;
-	-webkit-line-clamp: 15;
+	-webkit-line-clamp: 5;
 	white-space: pre-wrap;
 }
 .Assets_plan_preview_tool .Assets_plan_preview_description span:empty {
 	display: none;
 }
-
+.Assets_plan_preview_tool .Assets_plan_related_streams {
+	padding: 5px 2px;
+	border-top: 1px solid silver;
+	overflow-x: hidden;
+	overflow-y: auto;
+}
+.Assets_plan_preview_tool .Assets_plan_related_streams:empty {
+	display: none;
+}
+.Assets_plan_preview_tool .Assets_plan_related_streams .Streams_preview_tool:not(:last-child) {
+	margin-bottom: 5px;
+}
+.Assets_plan_preview_tool .Assets_plan_related_streams .Streams_preview_tool,
+.Assets_plan_preview_tool .Assets_plan_related_streams .Streams_preview_tool > * {
+	height: 80px;
+}
+.Assets_plan_preview_tool .Assets_plan_related_streams .Streams_participants_tool {
+	display: none;
+}
 .Assets_plan_composer textarea {
 	width: 100%;
 }

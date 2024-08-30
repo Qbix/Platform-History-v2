@@ -225,7 +225,6 @@ Q.Tool.define("Assets/plan", function(options) {
 						return;
 					}
 
-					var thisPreview = this;
 					var $thisPreviewElement = $(this.element);
 					var thisStreamsPreview = Q.Tool.from(this.element, "Streams/preview");
 					if (!thisStreamsPreview) {

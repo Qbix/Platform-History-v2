@@ -5,6 +5,8 @@
  * @class Assets/plan/preview
  * @constructor
  * @param {Object} [options] options to pass besides the ones to Streams/preview tool
+ * @param {Boolean} [options.skipRelatedStreams] - if true skip loading and display streams related to this plan
+ *
  */
 Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, preview) {
 	var tool = this;
@@ -65,6 +67,7 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 		defaultSize: '1000x'
 	},
 	periods: ["annually", "monthly", "weekly", "daily"],
+	skipRelatedStreams: false,
 	onInvoke: new Q.Event()
 },
 
@@ -97,7 +100,8 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 			price: '$' + parseFloat(stream.getAttribute('amount')).toFixed(2),
 			periods: state.periods,
 			period: stream.getAttribute('period'),
-			isAdmin
+			isAdmin,
+			showRelatedStreams: !state.skipRelatedStreams
 		}, function (err, html) {
 			if (err) return;
 			Q.replace(tool.element, html);
@@ -172,6 +176,20 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 				};
 				tool.preview.actions();
 			}
+
+			$(".Assets_plan_related_streams", tool.element).tool("Streams/related", {
+				publisherId,
+				streamName,
+				relationType: Q.Assets.Subscriptions.plan.relationType,
+				editable: false,
+				closeable: false,
+				realtime: true,
+				sortable: false,
+				relatedOptions: {
+					withParticipant: false,
+					ascending: true
+				}
+			}).activate();
 		});
 	},
 	openDialog: function (saveCallback, closeCallback, fields) {
@@ -295,12 +313,13 @@ Q.Template.set('Assets/plan/preview',
 	{{#if isAdmin}}
 		<div class="Assets_plan_participants"></div>
 	{{/if}}
-	<div class="Streams_preview_contents">
-		<h3 class="Streams_preview_title Streams_preview_view">{{title}}</h3>
-		<span class="Assets_plan_preview_price">{{price}}</span>
-		<span class="Assets_plan_preview_period">{{period}}</span>
-		<div class="Assets_plan_preview_description" data-state="minimised"><span>{{{description}}}</span></div>
-	</div>
+	<h3 class="Streams_preview_title Streams_preview_view">{{title}}</h3>
+	<span class="Assets_plan_preview_price">{{price}}</span>
+	<span class="Assets_plan_preview_period">{{period}}</span>
+	<div class="Assets_plan_preview_description" data-state="minimised"><span>{{{description}}}</span></div>
+	{{#if showRelatedStreams}}
+	<div class="Assets_plan_related_streams"></div>
+	{{/if}}
 </div>`, {text:["Assets/content"]}
 );
 
