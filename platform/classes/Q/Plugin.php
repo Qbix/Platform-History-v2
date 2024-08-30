@@ -58,7 +58,7 @@ class Q_Plugin
 	 * @param {array} $options
 	 * @param {array} $options.extra The information to store in the extra field
 	 * @throws {Exception} If cannot connect to database
-	 * @return array List of installed stream names
+	 * @return {array} json-decoded contents of "extra" field in {{prefix}}Q_plugin table
 	 */
 	static function extra($name, $type, $conn_name, $options = array())
 	{

@@ -4,6 +4,10 @@
 	margin: auto;
 }
 
+.Streams_participants_tool {
+	flex-shrink: 0;
+}
+
 .Streams_participants_tool .Streams_invite_label {
 	font-weight: bold;
 }

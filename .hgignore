@@ -45,3 +45,5 @@ platform/plugins/Communities
 platform/plugins/Travel
 platform/plugins/AI
 platform/plugins/Metrics
+platform/plugins/Teaching
+platform/plugins/Telegram

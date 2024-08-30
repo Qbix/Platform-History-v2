@@ -101,7 +101,7 @@
 			}
 		},
 		"apps": {
-			"platforms": ["wallet", "facebook", "ios", "android"],
+			"platforms": ["wallet", "facebook", "telegram",  "ios", "android"],
 			"export": ["wallet", "facebook"],
 			/* TODO: set up your external apps on external services */
 			"wallet": {
@@ -120,6 +120,13 @@
 					"baseUrl": "https://myapp.local",
 					"paths": [""],
 					"domains": ["THE BASE DOMAINS YOU SET IN FACEBOOK, USED FOR AUTH COOKIE"]
+				}
+			},
+			"telegram": {
+				"MyApp": {
+					"token": "PUT TOKEN HERE",
+					"secret": "PUT SECRET HERE",
+					"cert": "/path/to/certificate.pem"
 				}
 			},
 			"ios": {

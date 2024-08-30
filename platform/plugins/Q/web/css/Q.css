@@ -529,8 +529,7 @@ div.Q_placeholder { pointer-events: none; }
 .Q_notTouchscreen .Q_clickable_container:active .Q_clickable_shadow
  { display: block; max-width: none !important; }
 .Q_inplace_tool { display: none; visibility: hidden; }
-.Q_textfill_resizing,
-.Q_textfill_resized {
+.Q_textfill_resizing {
 	line-height: 1.2;
 	left: 0 !important;
 	width: 100% !important;
