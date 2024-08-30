@@ -247,7 +247,7 @@
 }
 
 .Q_dialog_content > .Q_video_tool {
-    position: absolute;
+    position: relative;
     left: 0;
     top: 0;
     width: 100%;
