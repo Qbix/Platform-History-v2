@@ -36,6 +36,7 @@
             ignoreOnElements: [],
             snapToRects: [],
             activateOnElement: null,
+            keepRatio: true,
             keepRatioBasedOnElement: null,
             keepInitialSize: false,
             initialSize: {width:null, height:null},
@@ -675,7 +676,7 @@
                         if (_ratio == null) _ratio = elementRect.width / elementRect.height;
             
                         let width, height;
-                        if (!e.altKey && !e.shiftKey) {
+                        if (!e.altKey && !e.shiftKey && tool.state.keepRatio) {
                             if (_handlePosition == 'topleft') {
                                 let distToRightBorder = parseFloat(distance(elementRect.x, elementRect.y + (elementRect.height / 2), e.clientX, e.clientY).toFixed(0));
                                 let distToTopBorder = parseFloat(distance(elementRect.x + (elementRect.width / 2), elementRect.y, e.clientX, e.clientY).toFixed(0));
@@ -957,18 +958,12 @@
                                 if (containerRect.right - elementRect.right < 10 && containerRect.right - e.clientX < 10 && containerRect.right - e.clientX > -10) {
                                     width = elementRect.width + (containerRect.right - elementRect.right);
                                     snappedToRight = true;
-                                }            
-            
-                                let fullWidth = tool.state.initialSize.width;
-            
-                                let currentLeftCrop = tool.state.leftCrop != null ? tool.state.leftCrop : 0;
-                                let currentWidthOfFullWidth = (width * 100 / fullWidth)
-                                tool.state.rightCrop = 100 - (currentWidthOfFullWidth + currentLeftCrop);
-                        
-                                if (Math.sign(tool.state.rightCrop) === -1) {
-                                    tool.state.rightCrop = 0;
-                                    return
                                 }
+
+                                if(!sizeIsCorrect(width, null)){
+                                    return;
+                                }
+                                
                                 _elementToResize.style.width = width + 'px';
             
                                 tool.events.dispatch('resizing', {
@@ -995,20 +990,6 @@
                                 let snapToLeft = elementRect.left - containerRect.left < 10 && e.clientX - containerRect.left < 10 && e.clientX - containerRect.left > -10;
                                 if (snapToLeft) {
                                     width = elementRect.width + (elementRect.x - containerRect.x);
-                                }
-            
-                                let preLeftPos = originalX - (width - originalWidth);
-                                let leftPos = preLeftPos < originalX + originalWidth ? preLeftPos : originalX + originalWidth;
-            
-            
-                                let fullWidth = tool.state.initialSize.width;
-                                let currentRightCrop = tool.state.rightCrop != null ? tool.state.rightCrop : 0;
-                                let currentWidthOfFullWidth = (width * 100 / fullWidth)
-                                tool.state.leftCrop = 100 - (currentWidthOfFullWidth + currentRightCrop);
-            
-                                if (Math.sign(tool.state.leftCrop) === -1) {
-                                    tool.state.leftCrop = 0;
-                                    return
                                 }
 
                                 if(!sizeIsCorrect(width, null)){
