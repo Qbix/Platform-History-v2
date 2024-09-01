@@ -535,13 +535,11 @@ div.Q_placeholder { pointer-events: none; }
 	left: 0 !important;
 	width: 100% !important;
 	vertical-align: middle !important;
-	overflow: visible !important;
 	white-space: normal !important;
 }
 .Q_textfill_resizing {
+	overflow: visible !important;
 	width: auto !important;
-}
-.Q_textfill_resizing {
 	transform: none !important;
 	max-width: none !important;
 	max-height: none !important;
