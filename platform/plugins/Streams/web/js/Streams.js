@@ -1986,6 +1986,15 @@ var Stream = Streams.Stream = function (fields) {
 	priv.prepareStream(this, fields);
 };
 
+Stream.properties = {
+	access: true,
+	participant: true,
+	messageTotals: true,
+	relatedToTotals: true,
+	relatedFromTotals: true,
+	isRequired: true
+};
+
 Stream.construct = new Q.Method();
 
 Stream.join = new Q.Method({

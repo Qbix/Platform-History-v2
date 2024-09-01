@@ -1,4 +1,4 @@
-Q.exports(function(priv){
+Q.exports(function(priv, Streams, Stream){
     /**
     * This function is similar to _activateTools in Q.js
     * That one is to create "controllers" on the front end,
@@ -15,20 +15,18 @@ Q.exports(function(priv){
     */
     return function _Stream_construct(fields, extra, callback, updateCache) {
 
-       if (typeof extra === 'function') {
-           callback = extra;
-           extra = null;
-       }
+        if (typeof extra === 'function') {
+            callback = extra;
+            extra = null;
+        }
 
-       if (Q.typeOf(fields) === 'Q.Streams.Stream') {
-           fields = Q.extend({}, fields.fields, {
-               access: fields.access,
-               participant: fields.participant,
-               messageTotals: fields.messageTotals,
-               relatedToTotals: fields.relatedToTotals,
-               relatedFromTotals: fields.relatedFromTotals,
-               isRequired: fields.isRequired
-           });
+        if (Q.typeOf(fields) === 'Q.Streams.Stream') {
+            var s = fields;
+            s = Q.copy(fields.fields);
+            for (var p in Stream.properties) {
+                s[p] = fields.fields[p];
+            }
+            fields = s;
        }
 
        if (Q.isEmpty(fields)) {
@@ -44,13 +42,9 @@ Q.exports(function(priv){
                // Default constructor. Copy any additional fields.
                if (!fields) return;
                for (var k in fields) {
-                   if ((k in this.fields)
-                       || k === 'messageTotals'
-                       || k === 'relatedToTotals'
-                       || k === 'relatedFromTotals'
-                       || k === 'participant'
-                       || k === 'access'
-                       || k === 'isRequired') continue;
+                   if ((k in this.fields) || (k in Stream.properties)) {
+                        continue;
+                   }
                    this.fields[k] = Q.copy(fields[k]);
                }
            };

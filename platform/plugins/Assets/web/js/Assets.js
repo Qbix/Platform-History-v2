@@ -7,6 +7,8 @@
 
 	var Users = Q.Users;
 	var Streams = Q.Streams;
+
+	Streams.Stream.properties['Assets/canPayForStreams'] = true;
     
     var priv = {};
     
