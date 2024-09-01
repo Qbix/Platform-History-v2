@@ -1,3 +1,7 @@
+.Streams_pdf_composer_preview .Q_pdf_tool {
+	max-height: 400px;
+}
+
 .Streams_audio_preview_tool .Streams_preview_audio_player {
 	display: inline-block;
 	position: relative;
