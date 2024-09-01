@@ -545,6 +545,9 @@ div.Q_placeholder { pointer-events: none; }
 	max-height: none !important;
 	display: inline-block !important;
 }
+.Q_textfill_resized {
+	overflow: auto;
+}
 .Q_lazy_load { opacity: 0; }
 .Q_lazy_loaded { opacity: 1; }
 .Q_lazy_load.Q_lazy_loaded { transition: opacity 300ms; }
