@@ -157,3 +157,21 @@ input[type=text], input[type=number], input[type=datetime-local], input[type=dat
 	font-weight: bold;
 	color: green;
 }
+
+.Assets_subscriptions_showPlansRelated .Q_dialog_content {
+	display: flex;
+	flex-direction: row;
+	overflow-y: hidden;
+	overflow-x: auto;
+}
+.Assets_subscriptions_showPlansRelated .Q_dialog_content > * {
+	display: inline-block;
+	min-width: 250px;
+}
+.Assets_subscriptions_showPlansRelated_plan .Q_dialog_content {
+	padding: 0 5px;
+}
+.Q_overlay.Assets_subscriptions_showPlansRelated {
+	min-width: 90% !important;
+	min-height: 90% !important;
+}

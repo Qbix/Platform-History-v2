@@ -258,7 +258,7 @@
 			}
 		},
 		"exportFields": [
-			"id", "username", "signedUpWith", "icon", "url", "xids", "preferredLanguage"
+			"id", "username", "signedUpWith", "icon", "url", "xids", "preferredLanguage", "sessionCount"
 		],
 		"avatarFields": [
 			"id", "username", "icon", "url"

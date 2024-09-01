@@ -228,7 +228,7 @@ class Assets_Credits extends Base_Assets_Credits
 			return;
 		}
 
-		$stream = self::stream($communityId, $userId, $userId);
+		$stream = self::stream($communityId, $userId, $communityId);
 		$existing_amount = $stream->getAttribute('amount');
 		if ($existing_amount < $amount) {
 			throw new Assets_Exception_NotEnoughCredits(array(
@@ -306,9 +306,9 @@ class Assets_Credits extends Base_Assets_Credits
 
 		$userId = $userId ? $userId : Users::loggedInUser(true)->id;
 
-		$stream = self::stream($communityId, $userId, $userId);
+		$stream = self::stream($communityId, $userId, $communityId);
 		$stream->setAttribute('amount', $stream->getAttribute('amount') + $amount);
-		$stream->changed(Users::communityId(true));
+		$stream->changed($communityId);
 
 		$fromUserId = Q::ifset($more, 'fromUserId', Q::app());
 
@@ -385,7 +385,7 @@ class Assets_Credits extends Base_Assets_Credits
 		$more['amount'] = $amount;
 
 		$payments = Q::ifset($more, "payments", "stripe");
-		$from_stream = self::stream($communityId, $fromUserId, $fromUserId);
+		$from_stream = self::stream($communityId, $fromUserId, $communityId);
 		$existing_amount = $from_stream->getAttribute('amount');
 		if ($existing_amount < $amount) {
 			// if forcePayment true, try to charge more funds for credits
@@ -432,7 +432,7 @@ class Assets_Credits extends Base_Assets_Credits
 		$text = Q_Text::get('Assets/content');
 		$type = 'Assets/credits/sent';
 		$content = Q::ifset($text, 'messages', $type, 'content', "Sent {{amount}} credits");
-		$from_stream->post($fromUserId, array(
+		$from_stream->post($communityId, array(
 			'type' => $type,
 			'content' => Q::interpolate($content, $instructions),
 			'instructions' => Q::json_encode($instructions)
@@ -441,14 +441,14 @@ class Assets_Credits extends Base_Assets_Credits
 		// TODO: add journaling system
 		// Because if the following fails, then someone will lose credits
 		// without the other person getting them. For now we will rely on the user complaining.
-		$to_stream = self::stream($communityId, $toUserId, $toUserId, true);
+		$to_stream = self::stream($communityId, $toUserId, $communityId, true);
 		$to_stream->setAttribute('amount', $to_stream->getAttribute('amount') + $amount);
 		$to_stream->changed();
 		$instructions['operation'] = '+';
 		$text = Q_Text::get('Assets/content');
 		$type = 'Assets/credits/received';
 		$content = Q::ifset($text, 'messages', $type, 'content', "Received {{amount}} credits");
-		$to_stream->post($toUserId, array(
+		$to_stream->post($communityId, array(
 			'type' => $type,
 			'content' => Q::interpolate($content, $instructions),
 			'instructions' => Q::json_encode($instructions)

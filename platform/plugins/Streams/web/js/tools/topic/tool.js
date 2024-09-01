@@ -86,7 +86,7 @@ Q.Tool.define("Streams/topic", function(options) {
 								url: teaser
 							};
 						} else {
-							return tool.payment(stream);
+							return tool.subscribe(stream);
 						}
 					}
 
@@ -105,7 +105,7 @@ Q.Tool.define("Streams/topic", function(options) {
 						onActivate: function (div) {
 							$("<div>").appendTo($(".Q_content_container", div)).tool(toolName, toolOptions).activate(function () {
 								if (teaser) {
-									var throttle = Q.throttle(tool.payment.bind(tool, stream), 300);
+									var throttle = Q.throttle(tool.subscribe.bind(tool, stream), 300);
 									this.state.onEnded && this.state.onEnded.set(throttle, tool);
 									this.state.onPause && this.state.onPause.set(throttle, tool);
 								}
@@ -120,36 +120,58 @@ Q.Tool.define("Streams/topic", function(options) {
 				return;
 			}
 
-			Q.Streams.get(streamsPreviewTool.state.publisherId, streamsPreviewTool.state.streamName, function (err) {
+			Q.Streams.get(streamsPreviewTool.state.publisherId, streamsPreviewTool.state.streamName, function (err, stream) {
 				if (err) {
 					return;
 				}
 
 				// add metrics action to preview tools to open metrics column
 				if (["Streams/video", "Streams/audio", "Streams/pdf"].includes(streamType)) {
-					if (streamsPreviewTool.state.actions.actions.metrics) {
-						return;
+					if (!streamsPreviewTool.state.actions.actions.metrics && stream.testReadLevel(40)) {
+						streamsPreviewTool.state.actions.actions.metrics = function () {
+							Q.invoke({
+								title: tool.text.topic.Metrics,
+								content: "",
+								className: "Streams_topic_metrics",
+								trigger: tool.element,
+								onActivate: function (div) {
+									$("<div>").appendTo($(".Q_content_container", div)).tool("Streams/metrics", {
+										publisherId: streamsPreviewTool.state.publisherId,
+										streamName: streamsPreviewTool.state.streamName
+									}).activate();
+								}
+							});
+						};
+						streamsPreviewTool.actions();
 					}
-
-					streamsPreviewTool.state.actions.actions.metrics = function () {
-						Q.invoke({
-							title: tool.text.topic.Metrics,
-							content: "",
-							className: "Streams_topic_metrics",
-							trigger: tool.element,
-							onActivate: function (div) {
-								$("<div>").appendTo($(".Q_content_container", div)).tool("Streams/metrics", {
-									publisherId: streamsPreviewTool.state.publisherId,
-									streamName: streamsPreviewTool.state.streamName
-								}).activate();
-							}
-						});
-					};
-					streamsPreviewTool.actions();
+					if (!streamsPreviewTool.state.actions.actions.subscribe && !stream.testReadLevel(40)) {
+						streamsPreviewTool.state.actions.actions.subscribe = tool.subscribe.bind(tool, stream);
+						streamsPreviewTool.actions();
+					}
 				}
 			});
 		});
 	});
+
+	var _refreshOnLogin = function () {
+		var $column = $toolElement.closest('.Q_columns_column');
+		if ($column.length) {
+			var min = parseInt($column.data('index')) + 1;
+			var columns = Q.Tool.from($toolElement.closest(".Q_columns_tool"), "Q/columns");
+			columns.close({min: min}, null, {animation: {duration: 0}});
+		}
+
+		Q.Streams.get.force(state.publisherId, state.streamName, function (err) {
+			if (err) {
+				return;
+			}
+
+			tool.refresh(this);
+		});
+	};
+	Q.Users.onLogin.set(_refreshOnLogin, this);
+	Q.Users.onLogout.set(_refreshOnLogin, this);
+	Q.Assets.Subscriptions.onSubscribe.set(_refreshOnLogin, this);
 },
 
 {
@@ -182,7 +204,7 @@ Q.Tool.define("Streams/topic", function(options) {
 		stream.onFieldChanged("content").set(function (modFields, field) {
 			stream.refresh(function () {
 				stream = this;
-				Q.replace($(".Streams_topic_text", tool.element)[0], stream.fields.content);
+				Q.replace($(".Streams_topic_description", tool.element)[0], stream.fields.content);
 			}, {
 				messages: true,
 				evenIfNotRetained: true
@@ -253,72 +275,8 @@ Q.Tool.define("Streams/topic", function(options) {
 			}).activate();
 		});
 	},
-	payment: function (stream) {
-		var tool = this;
-		var $toolElement = $(this.element);
-		var state = this.state;
-		var canPayForStreams = stream.fields["Assets/canPayForStreams"];
-
-		if (Q.isEmpty(canPayForStreams)) {
-			return Q.alert("Error: Not enough permissions to view this content.");
-		}
-
-		Q.Dialogs.push({
-			title: "Please subscribe",
-			className: "Streams_topic_subscribe",
-			onActivate: function (dialog) {
-				var $content = $(".Q_dialog_content", dialog);
-
-				Q.each(canPayForStreams, function (i, streamData) {
-					Q.Assets.Subscriptions.getPlansRelated(streamData, function (err, streams) {
-						if (err) {
-							return;
-						}
-
-						Q.each(streams, function (i, stream) {
-							$("<div>").tool("Streams/preview", {
-								publisherId: stream.fields.publisherId,
-								streamName: stream.fields.name
-							}).tool("Assets/plan/preview").appendTo($content).activate(function () {
-								var assetsPlanPreview = this;
-								this.state.onInvoke.set(function () {
-									Q.Dialogs.push({
-										title: "Please subscribe",
-										className: "Streams_topic_subscribe_plan",
-										content: $("<div>").tool("Assets/plan", {
-											publisherId: stream.fields.publisherId,
-											streamName: stream.fields.name
-										}),
-										onActivate: function (dialog) {
-											var assetsPlan = Q.Tool.from($(".Assets_plan_tool", dialog)[0], "Assets/plan");
-											assetsPlan.state.onSubscribe.set(function () {
-												Q.Dialogs.pop();
-												Q.Dialogs.pop();
-
-												var $column = $toolElement.closest('.Q_columns_column');
-												if ($column.length) {
-													var min = parseInt($column.data('index')) + 1;
-													var columns = Q.Tool.from($toolElement.closest(".Q_columns_tool"), "Q/columns");
-													columns.close({min: min}, null, {animation: {duration: 0}});
-												}
-
-												Q.Streams.get.force(state.publisherId, state.streamName, function (err) {
-													if (err) {
-														return;
-													}
-
-													tool.refresh(this);
-												});
-											}, assetsPlanPreview);
-										}
-									});
-								}, assetsPlanPreview);
-							});
-						});
-					});
-				});
-			}
-		});
+	subscribe: function (stream) {
+		Q.Assets.Subscriptions.showPlansRelated(stream);
 	}
 });
 

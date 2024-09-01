@@ -28,6 +28,16 @@ function Assets_subscription_post($params = array())
 
 	// check if subscription already paid
 	if ($subscriptionStream && Assets_Subscription::isCurrent($subscriptionStream)) {
+		if (filter_var(Q::ifset($req, 'skipAlreadySubscribed', false), FILTER_VALIDATE_BOOLEAN)) {
+			Q_Response::setSlot("status", true);
+			Q_Response::setSlot("details", array());
+			Q_Response::setSlot("subscriptionStream", array(
+				"publisherId" => $subscriptionStream->publisherId,
+				"streamName" => $subscriptionStream->name
+			));
+			return;
+		}
+
 		throw new Exception($text["subscriptions"]["SubscriptionAlreadyPaid"]);
 	}
 
