@@ -24,7 +24,7 @@ Q.exports(function(priv, Streams, Stream){
 			var s = fields;
 			s = Q.copy(fields.fields);
 			for (var p in Stream.properties) {
-				s[p] = fields.fields[p];
+				s[p] = fields[p];
 			}
 			fields = s;
 	   }
