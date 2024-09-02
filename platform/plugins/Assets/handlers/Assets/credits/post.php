@@ -1,6 +1,13 @@
 <?php
 /**
+ * @module Assets
+ * @class HTTP Assets credits
+ */
+
+/**
  * HTTP method for sending funds to some user. Requires a user to be logged in.
+ * @method post
+ * @method Assets credits post
  * @param {array} $_REQUEST
  * @param {string|number} $_REQUEST.amount - amount to send
  * @param {String} $_REQUEST.currency - currency of funds

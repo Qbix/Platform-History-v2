@@ -102,38 +102,10 @@
 			var $toolElement = $(tool.element);
 			var inplace = null;
 
-			stream.retain(tool);
-
-			$toolElement.off([Q.Pointer.fastclick, 'Streams_video_preview']).on([Q.Pointer.fastclick, 'Streams_video_preview'], function () {
-				// if vimeo check status
-				if (stream.getAttribute("provider") === "vimeo" && !stream.getAttribute("available")) {
-					$toolElement.addClass("Q_working");
-					Q.req("Streams/vimeo", ["info"], function (err, response) {
-						$toolElement.removeClass("Q_working");
-						if (err) {
-							return;
-						}
-
-						var status = Q.getObject("slots.info.status", response);
-						if (status !== "available") {
-							return Q.alert(tool.text.video.errorNotAvailable);
-						}
-
-						Q.handle(state.onInvoke, tool, [stream]);
-					}, {
-						fields: {
-							videoId: stream.getAttribute("videoId"),
-							publisherId: stream.fields.publisherId,
-							streamName: stream.fields.name
-						}
-					});
-				} else {
-					Q.handle(state.onInvoke, tool, [stream]);
-				}
-			});
-
 			if (Q.Streams.isStream(stream)) {
 				tool.stream = stream;
+
+				stream.retain(tool);
 
 				stream.onAttribute().set(function (fields, k) {
 					stream.refresh(function () {
@@ -165,6 +137,34 @@
 					}
 					inplace = tool.setUpElementHTML('div', 'Streams/inplace', inplaceOptions);
 				}
+
+				$toolElement.off([Q.Pointer.fastclick, 'Streams_video_preview']).on([Q.Pointer.fastclick, 'Streams_video_preview'], function () {
+					// if vimeo check status
+					if (stream.getAttribute("provider") === "vimeo" && !stream.getAttribute("available")) {
+						$toolElement.addClass("Q_working");
+						Q.req("Streams/vimeo", ["info"], function (err, response) {
+							$toolElement.removeClass("Q_working");
+							if (err) {
+								return;
+							}
+	
+							var status = Q.getObject("slots.info.status", response);
+							if (status !== "available") {
+								return Q.alert(tool.text.video.errorNotAvailable);
+							}
+	
+							Q.handle(state.onInvoke, tool, [stream]);
+						}, {
+							fields: {
+								videoId: stream.getAttribute("videoId"),
+								publisherId: stream.fields.publisherId,
+								streamName: stream.fields.name
+							}
+						});
+					} else {
+						Q.handle(state.onInvoke, tool, [stream]);
+					}
+				});
 			} else {
 				inplace = state.title;
 			}
