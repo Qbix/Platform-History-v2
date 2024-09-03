@@ -37,6 +37,7 @@ Q.exports(function(priv, Streams, Stream){
 		var streamFunc = Q.Streams.defined[type];
 		if (!streamFunc) {
 			streamFunc = Q.Streams.defined[type] = function StreamConstructor(fields) {
+				streamFunc.constructors.apply(this, arguments);
 				// Default constructor. Copy any additional fields.
 				if (!fields) return;
 				for (var k in fields) {
@@ -45,7 +46,6 @@ Q.exports(function(priv, Streams, Stream){
 					}
 					this.fields[k] = Q.copy(fields[k]);
 				}
-				streamFunc.constructors.apply(this, arguments);
 			};
 		}
 		if (typeof streamFunc === 'function') {
