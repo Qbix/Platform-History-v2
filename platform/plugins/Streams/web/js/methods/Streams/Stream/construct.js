@@ -27,51 +27,51 @@ Q.exports(function(priv, Streams, Stream){
 				s[p] = fields[p];
 			}
 			fields = s;
-	   }
+		}
 
-	   if (Q.isEmpty(fields)) {
-		   Q.handle(callback, this, ["Streams.Stream constructor: fields are missing"]);
-		   return false;
-	   }
+		if (Q.isEmpty(fields)) {
+			Q.handle(callback, this, ["Streams.Stream constructor: fields are missing"]);
+			return false;
+		}
 
-	   var type = Q.normalize(fields.type);
-	   var streamFunc = Q.Streams.defined[type];
-	   if (!streamFunc) {
-		   streamFunc = Q.Streams.defined[type] = function StreamConstructor(fields) {
-		streamFunc.constructors.apply(this, arguments);
-			   // Default constructor. Copy any additional fields.
-			   if (!fields) return;
-			   for (var k in fields) {
-				   if ((k in this.fields) || (k in Stream.properties)) {
+		var type = Q.normalize(fields.type);
+		var streamFunc = Q.Streams.defined[type];
+		if (!streamFunc) {
+			streamFunc = Q.Streams.defined[type] = function StreamConstructor(fields) {
+				// Default constructor. Copy any additional fields.
+				if (!fields) return;
+				for (var k in fields) {
+					if ((k in this.fields) || (k in Stream.properties)) {
 						continue;
-				   }
-				   this.fields[k] = Q.copy(fields[k]);
-			   }
-		   };
-	   }
-	   if (typeof streamFunc === 'function') {
-		   return _doConstruct();
-	   } else if (typeof streamFunc === 'string') {
-		   Q.addScript(streamFunc, function () {
-			   streamFunc = Q.Streams.defined[type];
-			   if (typeof streamFunc !== 'function') {
-				   throw new Q.Error("Stream.construct: streamFunc cannot be " + typeof(streamFunc));
-			   }
-			   return _doConstruct();
-		   });
-		   return true;
-	   } else if (typeof streamFunc !== 'undefined') {
-		   throw new Q.Error("Stream.construct: streamFunc cannot be " + typeof(streamFunc));
-	   }
-	   function _doConstruct() {
-		   if (!streamFunc.streamConstructor) {
-			   streamFunc.streamConstructor = function Streams_Stream(fields) {
-				   // run any constructors
-				   streamFunc.streamConstructor.constructors.apply(this, arguments);
+					}
+					this.fields[k] = Q.copy(fields[k]);
+				}
+				streamFunc.constructors.apply(this, arguments);
+			};
+		}
+		if (typeof streamFunc === 'function') {
+			return _doConstruct();
+		} else if (typeof streamFunc === 'string') {
+			Q.addScript(streamFunc, function () {
+				streamFunc = Q.Streams.defined[type];
+				if (typeof streamFunc !== 'function') {
+					throw new Q.Error("Stream.construct: streamFunc cannot be " + typeof(streamFunc));
+				}
+				return _doConstruct();
+			});
+			return true;
+		} else if (typeof streamFunc !== 'undefined') {
+			throw new Q.Error("Stream.construct: streamFunc cannot be " + typeof(streamFunc));
+		}
+		function _doConstruct() {
+			if (!streamFunc.streamConstructor) {
+				streamFunc.streamConstructor = function Streams_Stream(fields) {
+					// run any constructors
+					streamFunc.streamConstructor.constructors.apply(this, arguments);
 
-				   var f = this.fields;
-				   if (updateCache) { // update the Streams.get cache
-					   if (f.publisherId && f.name) {
+					var f = this.fields;
+					if (updateCache) { // update the Streams.get cache
+						if (f.publisherId && f.name) {
 							// Trigger events such as onFieldChanged and onAttribute
 							var ps = Q.Streams.key(f.publisherId, f.name);
 							if (priv._retainedStreams[ps]) {
@@ -79,59 +79,59 @@ Q.exports(function(priv, Streams, Stream){
 							}
 
 							Q.Streams.get.cache
-							   .removeEach([f.publisherId, f.name])
-							   .set(
-								   [f.publisherId, f.name], 0,
-								   this, [null, this]
-							   );
-					   }
-				   }
+								.removeEach([f.publisherId, f.name])
+								.set(
+									[f.publisherId, f.name], 0,
+									this, [null, this]
+								);
+						}
+					}
 
-				   // call any onConstruct handlers
-				   Q.handle(priv._constructHandlers[f.type], this, []);
-				   Q.handle(priv._constructHandlers[''], this, []);
-				   if (f.publisherId && f.name) {
-					   Q.handle(Q.getObject([f.publisherId, f.name], priv._streamConstructHandlers), this, []);
-					   Q.handle(Q.getObject([f.publisherId, ''], priv._streamConstructHandlers), this, []);
-					   Q.handle(Q.getObject(['', f.name], priv._streamConstructHandlers), this, []);
-					   Q.handle(Q.getObject(['', ''], priv._streamConstructHandlers), this, []);
-				   }
-			   };
-			   Q.mixin(streamFunc, Q.Streams.Stream);
-			   Q.mixin(streamFunc.streamConstructor, streamFunc);
-			   streamFunc.streamConstructor.isConstructorOf = 'Q.Streams.Stream';
-		   }
-		   var stream = new streamFunc.streamConstructor(fields);
-		   var messages = {}, participants = {};
+					// call any onConstruct handlers
+					Q.handle(priv._constructHandlers[f.type], this, []);
+					Q.handle(priv._constructHandlers[''], this, []);
+					if (f.publisherId && f.name) {
+						Q.handle(Q.getObject([f.publisherId, f.name], priv._streamConstructHandlers), this, []);
+						Q.handle(Q.getObject([f.publisherId, ''], priv._streamConstructHandlers), this, []);
+						Q.handle(Q.getObject(['', f.name], priv._streamConstructHandlers), this, []);
+						Q.handle(Q.getObject(['', ''], priv._streamConstructHandlers), this, []);
+					}
+				};
+				Q.mixin(streamFunc, Q.Streams.Stream);
+				Q.mixin(streamFunc.streamConstructor, streamFunc);
+				streamFunc.streamConstructor.isConstructorOf = 'Q.Streams.Stream';
+			}
+			var stream = new streamFunc.streamConstructor(fields);
+			var messages = {}, participants = {};
 
-		   priv.updateMessageTotalsCache(fields.publisherId, fields.name, stream.messageTotals);
+			priv.updateMessageTotalsCache(fields.publisherId, fields.name, stream.messageTotals);
 
-		   if (extra && extra.messages) {
-			   Q.each(extra.messages, function (ordinal, message) {
-				   if (!(message instanceof Q.Streams.Message)) {
-					   message = Q.Streams.Message.construct(message, true);
-				   }
-				   messages[ordinal] = message;
-			   });
-		   }
-		   if (extra && extra.participants) {
-			   Q.each(extra.participants, function (userId, participant) {
-				   if (!(participant instanceof Q.Streams.Participant)) {
-					   participant = new Q.Streams.Participant(participant);
-				   }
-				   participants[userId] = participant;
-				   Q.Streams.Participant.get.cache.set(
-					   [fields.publisherId, fields.name, participant.userId], 0,
-					   participant, [null, participant]
-				   );
-			   });
-		   }
+			if (extra && extra.messages) {
+				Q.each(extra.messages, function (ordinal, message) {
+					if (!(message instanceof Q.Streams.Message)) {
+						message = Q.Streams.Message.construct(message, true);
+					}
+					messages[ordinal] = message;
+				});
+			}
+			if (extra && extra.participants) {
+				Q.each(extra.participants, function (userId, participant) {
+					if (!(participant instanceof Q.Streams.Participant)) {
+						participant = new Q.Streams.Participant(participant);
+					}
+					participants[userId] = participant;
+					Q.Streams.Participant.get.cache.set(
+						[fields.publisherId, fields.name, participant.userId], 0,
+						participant, [null, participant]
+					);
+				});
+			}
 
-		   Q.handle(callback, stream, [null, stream, {
-			   messages: messages,
-			   participants: participants
-		   }]);
-		   return stream;
-	   }
-   };
+			Q.handle(callback, stream, [null, stream, {
+				messages: messages,
+				participants: participants
+			}]);
+			return stream;
+		}
+	};
 })

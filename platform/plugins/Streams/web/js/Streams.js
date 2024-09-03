@@ -529,30 +529,12 @@ var priv = {
         if (stream.fields.messageCount) {
             stream.fields.messageCount = parseInt(stream.fields.messageCount);
         }
-        if ('access' in stream.fields) {
-            stream.access = Q.copy(stream.fields.access);
-            delete stream.fields.access;
-        }
-        if ('participant' in stream.fields) {
-            stream.participant = new Q.Streams.Participant(stream.fields.participant);
-            delete stream.fields.participant;
-        }
-        if ('messageTotals' in stream.fields) {
-            stream.messageTotals = stream.fields.messageTotals;
-            delete stream.fields.messageTotals;
-        }
-        if ('relatedToTotals' in stream.fields) {
-            stream.relatedToTotals = stream.fields.relatedToTotals;
-            delete stream.fields.relatedToTotals;
-        }
-        if ('relatedFromTotals' in stream.fields) {
-            stream.relatedFromTotals = stream.fields.relatedFromTotals;
-            delete stream.fields.relatedFromTotals;
-        }
-        if ('isRequired' in stream.fields) {
-            stream.isRequired = stream.fields.isRequired;
-            delete stream.fields.isRequired;
-        }
+		for (var k in Streams.Stream.properties) {
+			if (k in stream.fields) {
+				stream[k] = stream.fields[k];
+				delete stream.fields[k];
+			}
+		}
         try {
             stream.pendingAttributes = stream.attributes
                 = stream.fields.attributes ? JSON.parse(stream.fields.attributes) : {};
@@ -1966,8 +1948,11 @@ var Stream = Streams.Stream = function (fields) {
 		'icon',
 		'messageCount',
 		'invitedCount',
+		'arrivedCount',
 		'participatingCount',
 		'leftCount',
+		'arrivedRatio',
+		'joinedRatio',
 		'insertedTime',
 		'updatedTime',
 		'readLevel',
