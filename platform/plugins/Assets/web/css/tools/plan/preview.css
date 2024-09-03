@@ -92,13 +92,6 @@
 .Assets_plan_composer .Q_dialog_content .Assets_plan_endDate {
 	text-transform: capitalize;
 }
-.Assets_plan_composer .Q_dialog_content .Assets_plan_private {
-	display: inline-block;
-}
-.Assets_plan_composer .Q_dialog_content .Assets_plan_private input {
-	width: 40px;
-	vertical-align: middle;
-}
 .Assets_plan_composer .Q_dialog_content .Assets_plan_endDate input[name=endDate] {
 	width: auto;
 }
@@ -107,6 +100,7 @@
 	font-weight: bold;
 	text-align: center;
 	margin: 5px 0;
+	white-space: normal;
 }
 .Assets_plan_preview_tool .Assets_plan_preview_price,
 .Assets_plan_preview_tool .Assets_plan_preview_period,
