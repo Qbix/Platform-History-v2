@@ -1937,7 +1937,7 @@ var Stream = Streams.Stream = function (fields) {
 	priv.prepareStream(this, fields);
 	for (var k in Streams.Stream.properties) {
 		if (k in fields) {
-			stream[k] = fields[k];
+			this[k] = fields[k];
 		}
 	}
 };
