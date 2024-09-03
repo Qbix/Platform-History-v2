@@ -529,12 +529,6 @@ var priv = {
         if (stream.fields.messageCount) {
             stream.fields.messageCount = parseInt(stream.fields.messageCount);
         }
-		for (var k in Streams.Stream.properties) {
-			if (k in stream.fields) {
-				stream[k] = stream.fields[k];
-				delete stream.fields[k];
-			}
-		}
         try {
             stream.pendingAttributes = stream.attributes
                 = stream.fields.attributes ? JSON.parse(stream.fields.attributes) : {};
@@ -1938,38 +1932,45 @@ var Stream = Streams.Stream = function (fields) {
 		return;
 	}
 	this.constructed = true;
-	this.fields = Q.copy(fields, [
-		'publisherId',
-		'name',
-		'type',
-		'title',
-		'content',
-		'attributes',
-		'icon',
-		'messageCount',
-		'invitedCount',
-		'arrivedCount',
-		'participatingCount',
-		'leftCount',
-		'arrivedRatio',
-		'joinedRatio',
-		'insertedTime',
-		'updatedTime',
-		'readLevel',
-		'writeLevel',
-		'adminLevel',
-		'inheritAccess',
-		'closedTime',
-		'access',
-		'messageTotals',
-		'relatedToTotals',
-		'relatedFromTotals',
-		'isRequired',
-		'participant'
-	]);
+	this.fields = Q.copy(fields, Streams.Stream.fieldNames);
 	this.typename = 'Q.Streams.Stream';
 	priv.prepareStream(this, fields);
+	for (var k in Streams.Stream.properties) {
+		if (k in fields) {
+			stream[k] = fields[k];
+		}
+	}
 };
+
+Stream.fieldNames = [
+	'publisherId',
+	'name',
+	'type',
+	'title',
+	'content',
+	'attributes',
+	'icon',
+	'messageCount',
+	'invitedCount',
+	'arrivedCount',
+	'participatingCount',
+	'leftCount',
+	'arrivedRatio',
+	'joinedRatio',
+	'insertedTime',
+	'updatedTime',
+	'readLevel',
+	'writeLevel',
+	'adminLevel',
+	'inheritAccess',
+	'closedTime',
+	'access',
+	'messageTotals',
+	'relatedToTotals',
+	'relatedFromTotals',
+	'isRequired',
+	'participant'
+];
 
 Stream.properties = {
 	access: true,
