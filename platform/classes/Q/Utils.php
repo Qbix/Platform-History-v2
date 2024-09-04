@@ -1128,12 +1128,24 @@ class Q_Utils
 
 		// NOTE: this works for http(s) only
 		$headers = array("Host: ".$host);
-
-		if (is_array($data)) {
-			$dataContent = http_build_query($data, '', '&');
-		} else {
-			$dataContent = is_string($data) ? $data : '';
-		}
+        
+        $found = false;
+        foreach ($header as $h) {
+            if (Q::startsWith($h, 'Content-Type:') && $h == 'Content-Type: multipart/form-data') {
+                $found = true;
+                break;
+            }
+        }
+        if (isset($header) and is_array($header) and $found) {
+            // let curl build query
+            $dataContent = $data;
+        } else {
+            if (is_array($data)) {
+                $dataContent = http_build_query($data, '', '&');
+            } else {
+                $dataContent = is_string($data) ? $data : '';
+            }
+        }
 
 		if (is_array($header)) {
 			// try to guard against some injections
@@ -1212,8 +1224,8 @@ class Q_Utils
 				case 'POST':
 					curl_setopt_array($ch, array(
 						CURLOPT_URL => $url,
-						CURLOPT_POSTFIELDS => $dataContent,
-						CURLOPT_POST => true
+						CURLOPT_POST => true,
+						CURLOPT_POSTFIELDS => $dataContent
 					));
 					break;
 				case 'GET':
