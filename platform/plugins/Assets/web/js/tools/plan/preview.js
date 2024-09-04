@@ -31,9 +31,7 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 					endDate: endDate
 				}
 			};
-			if ($("input[name=private]", dialog)[0].checked) {
-				fields.readLevel = 0;
-			}
+			fields.readLevel = parseInt($("select[name=access]", dialog).val());
 			Q.handle(_proceed, preview, [fields]);
 		}, function () {
 			Q.handle(_proceed, preview, [false]);
@@ -150,7 +148,7 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 
 						stream.set('title', $("input[name=title]", dialog).val());
 						stream.set('content', $("textarea[name=description]", dialog).val());
-						stream.set('readLevel', $("input[name=private]", dialog)[0].checked ? 0 : Q.getObject("plan.defaults.readLevel", Q.Assets) || 40);
+						stream.set('readLevel', parseInt($("select[name=access]", dialog).val()));
 						stream.setAttribute("amount", $("input[name=amount]", dialog).val());
 						stream.setAttribute("period", $("select[name=period]", dialog).val());
 						stream.setAttribute("endDate", endDate);
@@ -203,7 +201,8 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 			template: {
 				name: "Assets/plan/composer",
 				fields: Q.extend({
-					periods: state.periods
+					periods: state.periods,
+					readLevel: fields.readLevel || Q.getObject("plan.defaults.readLevel", Q.Assets) || 40
 				}, fields)
 			},
 			className: "Assets_plan_composer",
@@ -336,7 +335,7 @@ Q.Template.set("Assets/plan/composer",
 	<label class="Assets_plan_endDate"><input name="endDate" type="date" value="{{endDate}}"> {{subscriptions.plan.EndDate}}</label>
 	<textarea name="description" placeholder="{{subscriptions.plan.DescriptionPlaceholder}}">{{description}}</textarea>
 	
-	<label class="Assets_plan_private"><input name="private" {{#ifEquals readLevel 0}}checked{{/ifEquals}} type="checkbox"> {{subscriptions.plan.InviteOnly}}</label>
+	<label class="Assets_plan_access"><select name="access"><option value="40" {{#ifEquals readLevel 40}}selected{{/ifEquals}}>{{subscriptions.plan.Available}}</option><option value="0" {{#ifEquals readLevel 0}}selected{{/ifEquals}}>{{subscriptions.plan.Hidden}}</option><option value="25" {{#ifEquals readLevel 25}}selected{{/ifEquals}}>{{subscriptions.plan.InviteOnly}}</option></select></label>
 	
 	<div class="Assets_plan_composer_buttons">
 		<button name="save" class="Q_button" type="button">{{subscriptions.plan.SavePlan}}</button>

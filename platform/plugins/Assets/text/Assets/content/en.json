@@ -172,7 +172,10 @@
             "NewPlan": "New Plan",
             "SelectDisplayType": "Select {{displayType}}",
             "EndDate": "end date",
-            "InviteOnly": "Invite-only"
+            "Available": "Available",
+            "Hidden": "Hidden",
+            "InviteOnly": "Invite-only",
+            "CantSubscribeUnlessInvited": "You can't subscribe to this plan unless you were invited"
         }
     },
     "payments": {

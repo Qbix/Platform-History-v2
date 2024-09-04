@@ -17,8 +17,6 @@ function Assets_subscription_put($params = array())
     $req = array_merge($_REQUEST, $params);
 	Q_Valid::requireFields(array('publisherId', 'streamName'), $req, true);
 
-	$text = Q_Text::get("Assets/content");
-
 	// to be safe, we only start subscriptions from existing plans
 	$planPublisherId = Q::ifset($req, 'publisherId', Users::communityId());
 	$plan = Streams::fetchOne(null, $planPublisherId, $req['streamName'], true);

@@ -7,7 +7,7 @@ Q.exports(function(priv){
     *  @param {function} [callback] - called after subscribed to a plan
     */
     return function showPlansRelated(stream, callback) {
-        var canPayForStreams = stream.fields["Assets/canPayForStreams"];
+        var canPayForStreams = stream["Assets/canPayForStreams"];
         if (Q.isEmpty(canPayForStreams)) {
             return Q.alert("Error: Not enough permissions to view this content.");
         }
