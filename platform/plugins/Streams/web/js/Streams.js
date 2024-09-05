@@ -1937,7 +1937,12 @@ var Stream = Streams.Stream = function (fields) {
 	priv.prepareStream(this, fields);
 	for (var k in Streams.Stream.properties) {
 		if (k in fields) {
-			this[k] = fields[k];
+			var v = this[k] = fields[k];
+			if (k === 'access') {
+				this.access = Q.copy(v);
+			} else if (k === 'participant') {
+				this.participant = new Q.Streams.Participant(v);
+			}
 		}
 	}
 };
