@@ -118,7 +118,7 @@ Q.Tool.define("Assets/plan", function(options) {
 			}, function (err, status, subscriptionStream) {
 				$button.removeClass("Q_working");
 				if (err) {
-					return;
+					return Q.alert(Q.firstErrorMessage(err));
 				}
 
 				if (status) {

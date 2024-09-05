@@ -22,6 +22,7 @@ var Users = Q.Users;
 Q.Tool.define("Users/status", function(options) {
 	Q.Users.onLogin.set(this.refresh.bind(this), this);
 	Q.Users.onLogout.set(this.refresh.bind(this), this);
+	this.refresh();
 },
 {
 	avatar: {
@@ -37,10 +38,10 @@ Q.Tool.define("Users/status", function(options) {
 		var tool = this;
 		var state = tool.state;
 		if (Q.Users.loggedInUser) {
-			var avatar = $('<div />').tool('Users/avatar', state.avatar);
+			var $avatar = $('<div />').tool('Users/avatar', state.avatar);
 			$(tool.element).empty().append(
 				$('<div class="Users_whenLoggedIn Users_status_avatar" />')
-				.append(avatar)
+				.append($avatar)
 			).on(Q.Pointer.click, tool, function () {
 				Q.handle(state.onInvoke);
 			}).activate();
@@ -51,11 +52,9 @@ Q.Tool.define("Users/status", function(options) {
 			_wireup();
 		} else {
 			Q.Text.get('Users/content', function (err, text) {
-				var $div = $('<div class="Users_status_login_title" />')
-					.html(text.actions.LogIn);
+				var $div = $('<div class="Users_status_login_title" />').html(text.actions.LogIn);
 				$(tool.element).empty().append(
-					$('<div class="Users_status_login" />')
-					.append($div)
+					$('<div class="Users_status_login" />').append($div)
 				);
 				_wireup();
 			});

@@ -22,7 +22,10 @@ function Assets_subscription_post($params = array())
 
 	// to be safe, we only start subscriptions from existing plans
 	$planPublisherId = Q::ifset($req, 'planPublisherId', Users::communityId());
-	$plan = Streams::fetchOne($planPublisherId, $planPublisherId, $req['planStreamName'], true);
+	$plan = Streams::fetchOne(null, $planPublisherId, $req['planStreamName'], true);
+	if (!$plan->testReadLevel(40)) {
+		throw new Exception($text['subscriptions']['plan']['CantSubscribeUnlessInvited']);
+	}
 
 	$subscriptionStream = Assets_Subscription::getStream($plan);
 
